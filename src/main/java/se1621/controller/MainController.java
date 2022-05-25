@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class MainController extends HttpServlet {
 
+    private static final String SIGNUP_CONTROLLER = "SignUpController";
+    private static final String SIGNUP = "Signup";
     private static final String ERROR = "error.jsp";
     private static final String LOGIN_CONTROLLER = "LoginController";
     private static final String LOGIN = "Login";
@@ -19,12 +21,17 @@ public class MainController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         String url = ERROR;
         try {
             String action = request.getParameter("action");
             if (LOGIN.equals(action)) {
                 url = LOGIN_CONTROLLER;
-            } 
+            } else if (SIGNUP.equals(action)) {
+                url = SIGNUP_CONTROLLER;
+            } else {
+                url = ERROR;
+            }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
         } finally {

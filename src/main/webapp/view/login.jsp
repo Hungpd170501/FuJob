@@ -28,7 +28,7 @@
                                         <div class="text-center">
                                             <h4 class="mb-4">Login</h4>  
                                         </div>
-                                        <form class="login-form" action="../MainController" method="post">
+                                        <form class="login-form" action="/FuJob/MainController" method="post">
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="form-group position-relative">

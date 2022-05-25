@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import se1621.dto.Role;
+
 import se1621.dto.User;
 import se1621.utils.DBUtils;
 
@@ -17,11 +19,73 @@ import se1621.utils.DBUtils;
  * @author ACER
  */
 public class UserDAO {
-
+    private static final String CHECK_DUPLICATE = "SELECT userID, userName, email, status FROM tblUser WHERE userName=? and status = 1";
+    private static final String SINGUP = "INSERT INTO tblUser(userName, fullName, email, password, phone, roleID) VALUES(?,?,?,?,?,?)";
+    
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
+    
+    public boolean checkDuplicate(String email) throws SQLException {
+        boolean check = false;
+         conn = null;
+         preStm = null;
+         rs = null;
+        try {
+            conn = DBUtils.getInstance().getConnection();;
+            if (conn != null) {
+                preStm = conn.prepareStatement(CHECK_DUPLICATE);
+                preStm.setString(1, email);
+                rs = preStm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    public boolean signup(User user) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+         conn = null;
+         preStm= null;
 
+        try {
+            conn = DBUtils.getInstance().getConnection();;
+            if (conn != null) {
+                preStm = conn.prepareStatement(SINGUP);
+                //preStm.setString(1, user.getUserID());
+                preStm.setString(1, user.getFullName());
+                preStm.setString(2, user.getFullName());
+                preStm.setString(3, user.getEmail());
+                preStm.setString(4, user.getPassword());
+                preStm.setString(5, "");
+                preStm.setString(6, user.getRole().getRoleID());
+                //preStm.setBoolean(5, user.isStatus());
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }   
     public User checkLogin(String email, String password) throws SQLException, Exception {
         User user = null;
         try {
@@ -114,5 +178,4 @@ public class UserDAO {
         }
         return user;
     }
-
 }
