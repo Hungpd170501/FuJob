@@ -15,9 +15,9 @@ public class DBUtils {
     	    private static Connection con;
 	  
 	    static {
-	        String url = "jdbc:sqlserver://localhost:1433;databaseName=VegetableManagement";
+	        String url = "jdbc:jtds:sqlserver://localhost:1433;databaseName=FreelanceManagement";
 	        String user = "sa";
-	        String pass = "sa";
+	        String pass = "Hngiabao2211";
 	        try {
 	            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	            con = DriverManager.getConnection(url, user, pass);

@@ -1,5 +1,6 @@
 se1621\dto\Resume.class
 se1621\dto\UserGoogle.class
+se1621\controller\SignUpController.class
 se1621\dao\UserDAO.class
 se1621\dao\CategoryDAO.class
 se1621\utils\DBUtils.class
