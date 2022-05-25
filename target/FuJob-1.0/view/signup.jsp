@@ -80,7 +80,7 @@
                                                 </ul><!--end icon-->
                                             </div>
                                             <div class="mx-auto">
-                                                <p class="mb-0 mt-3"><small class="text-dark mr-2">Already have an account ?</small> <a href="login.html" class="text-dark font-weight-bold">Sign in</a></p>
+                                                <p class="mb-0 mt-3"><small class="text-dark mr-2">Already have an account ?</small> <a href="../view/login.jsp" class="text-dark font-weight-bold">Sign in</a></p>
                                             </div>
                                         </div>
                                     </form>
