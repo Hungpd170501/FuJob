@@ -28,7 +28,7 @@
                                         <div class="text-center">
                                             <h4 class="mb-4">Login</h4>  
                                         </div>
-                                        <form class="login-form">
+                                        <form class="login-form" action="MainController" method ="POST" >
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="form-group position-relative">
@@ -40,7 +40,7 @@
                                                 <div class="col-lg-12">
                                                     <div class="form-group position-relative">
                                                         <label>Password <span class="text-danger">*</span></label>
-                                                        <input type="password" class="form-control" placeholder="Password" required="">
+                                                        <input type="password" class="form-control" placeholder="Password" name="password" required="">
                                                     </div>
                                                 </div>
 
@@ -53,8 +53,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                        <!-- Nut LOGIN -->
                                                 <div class="col-lg-12 mb-0">
-                                                    <button class="btn btn-primary w-100">Sign in</button>
+                                                    <input type="submit" name="action" class="btn btn-primary w-100" value="Login"/>
+<!--                                                    <button class="btn btn-primary w-100">Sign in</button>-->
                                                 </div>
                                                 <div class="col-lg-12 mt-4 text-center">
                                                     <h6>Or Login With</h6>

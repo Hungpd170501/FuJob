@@ -1,3 +1,4 @@
+<%@page import="se1621.dto.User"%>
 <%@page contentType="text/html" pageEncoding="windows-1258"%>
 <!DOCTYPE html>
 <html lang="en" class="no-js">

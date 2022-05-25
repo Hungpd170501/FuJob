@@ -4,6 +4,7 @@
  */
 package se1621.dto;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,12 +15,12 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User {
     private int userID;
     private String username;
     private String password;
-    private String fullName;
     private String email;
     private String phone;
-    private int role;
+    private Role role;
 }
