@@ -4,10 +4,6 @@
  */
 package se1621.dto;
 
-/**
- *
- * @author ACER
- */
 public class Resume {
     
 }

@@ -3,14 +3,17 @@ C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dao\ResumeDAO.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dto\User.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dao\JobDAO.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dto\Job.java
+C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\controller\LoginGoogleHandler.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\controller\MainController.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\controller\SignUpController.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dao\UserDAO.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dto\UserGoogle.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dao\AuthDAO.java
+C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dto\Role.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\utils\DBUtils.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dao\CompanyInfoDAO.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\Error\UserError.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dao\CategoryDAO.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dto\Resume.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dto\Category.java
+C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\controller\LoginController.java

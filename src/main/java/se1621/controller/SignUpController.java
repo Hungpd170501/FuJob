@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import se1621.dao.UserDAO;
+import se1621.dto.Role;
 import se1621.dto.User;
 
 /**
@@ -21,8 +22,8 @@ import se1621.dto.User;
 
 @WebServlet(name = "SignUpController", urlPatterns = {"/SignUpController"})
 public class SignUpController extends HttpServlet {
-    private static final String ERROR = "signup.jsp";
-    private static final String SUCCESS = "signup.jsp";
+    private static final String ERROR = "/view/error.jsp";
+    private static final String SUCCESS = "/view/login.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -44,7 +45,7 @@ public class SignUpController extends HttpServlet {
                 userError.setEmailError("Email duplicate");
             }
             if(checkValidation){
-                User user = new User("", password, fullName, email, roleID, status);
+                User user = new User(0, fullName, password, fullName, roleID, email, new Role(roleID, ""));
                 boolean checkSignup = dao.signup(user);
                 if(checkSignup){
                     request.setAttribute("MESSAGE","Insert Successfully!!");
@@ -97,5 +98,5 @@ public class SignUpController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
 }

@@ -28,7 +28,7 @@
                                         <div class="text-center">
                                             <h4 class="mb-4">Login</h4>  
                                         </div>
-                                        <form class="login-form">
+                                        <form class="login-form" action="/FuJob/MainController" method="post">
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="form-group position-relative">
@@ -40,7 +40,7 @@
                                                 <div class="col-lg-12">
                                                     <div class="form-group position-relative">
                                                         <label>Password <span class="text-danger">*</span></label>
-                                                        <input type="password" class="form-control" placeholder="Password" required="">
+                                                        <input type="password" name="password" class="form-control" placeholder="Password" required="">
                                                     </div>
                                                 </div>
 
@@ -53,19 +53,19 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <!-- Nut LOGIN -->
                                                 <div class="col-lg-12 mb-0">
-                                                    <button class="btn btn-primary w-100">Sign in</button>
+                                                    <input type="submit" name="action" class="btn btn-primary w-100" value="Login"/>
+<!--                                                    <button class="btn btn-primary w-100">Sign in</button>-->
                                                 </div>
                                                 <div class="col-lg-12 mt-4 text-center">
                                                     <h6>Or Login With</h6>
                                                     <ul class="list-unstyled social-icon mb-0 mt-3">
-                                                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i class="mdi mdi-facebook" title="Facebook"></i></a></li>
-                                                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i class="mdi mdi-google-plus" title="Google"></i></a></li>
-                                                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i class="mdi mdi-github-circle" title="Github"></i></a></li>
+                                                        <li class="list-inline-item"><a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/FuJob/LoginGoogleHandler&response_type=code&client_id=674216776597-dsnqcp414vcta1d1mi4aa5umrmakucjd.apps.googleusercontent.com&approval_prompt=force" class="rounded"><i class="mdi mdi-google-plus" title="Google"></i></a></li>
                                                     </ul><!--end icon-->
                                                 </div>
                                                 <div class="col-12 text-center">
-                                                    <p class="mb-0 mt-3"><small class="text-dark mr-2">Don't have an account ?</small> <a href="signup.html" class="text-dark font-weight-bold">Sign Up</a></p>
+                                                    <p class="mb-0 mt-3"><small class="text-dark mr-2">Don't have an account ?</small> <a href="../view/signup.jsp" class="text-dark font-weight-bold">Sign Up</a></p>
                                                 </div>
                                             </div>
                                         </form>
@@ -93,5 +93,14 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
+        
+        <script src="https://www.google.com/recaptcha/api.js?render=6LeCa7IeAAAAAFhlitWRqflibLyvju1K_P5U52dj"></script>
+        <script>
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6LeCa7IeAAAAAFhlitWRqflibLyvju1K_P5U52dj', {action: ''}).then(function (token) {
+                    document.getElementById('recaptToken').value = token;
+                });
+            });
+        </script>
     </body>
 </html>

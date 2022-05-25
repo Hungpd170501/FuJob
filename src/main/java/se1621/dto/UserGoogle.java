@@ -7,10 +7,7 @@ package se1621.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- *
- * @author ACER
- */
+
 @Getter
 @Setter
 public class UserGoogle {

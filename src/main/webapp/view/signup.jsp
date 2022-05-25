@@ -35,7 +35,7 @@
                                             userError = new UserError();
                                         }
                                     %>
-                                    <form action="MainController" method="POST" class="login-form" oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Password do not match!" : "")'>
+                                    <form action="../MainController" method="POST" class="login-form" oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Password do not match!" : "")'>
                                         <div class="row">
                                             <!--                                                <div class="col-md-12">
                                                                                                 <ul class="nav nav-pills nav nav-pills bg-white rounded nav-justified flex-column flex-sm-row" id="pills-tab" role="tablist">
@@ -86,13 +86,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group position-relative">                                               
                                                     <label>Job Seeker </label>
-                                                    <input type="radio" name="roleID" required="">
+                                                    <input type="radio" name="roleID" required="" value="US">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group position-relative">                                               
                                                     <label>Recruiter </label>
-                                                    <input type="radio" name="roleID" required="">
+                                                    <input type="radio" name="roleID" required="" value="US">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -105,7 +105,7 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <!--                                                    <button class="btn btn-primary w-100">Register</button>-->
-                                                <input class="btn btn-primary w-100" type="submit" name="action" value="Singup">
+                                                <input class="btn btn-primary w-100" type="submit" name="action" value="Signup">
                                             </div>
                                             <div class="col-lg-12 mt-4 text-center">
                                                 <h6>Or Signup With</h6>
@@ -116,7 +116,7 @@
                                                 </ul><!--end icon-->
                                             </div>
                                             <div class="mx-auto">
-                                                <p class="mb-0 mt-3"><small class="text-dark mr-2">Already have an account ?</small> <a href="login.html" class="text-dark font-weight-bold">Sign in</a></p>
+                                                <p class="mb-0 mt-3"><small class="text-dark mr-2">Already have an account ?</small> <a href="../view/login.jsp" class="text-dark font-weight-bold">Sign in</a></p>
                                             </div>
                                         </div>
                                     </form>
