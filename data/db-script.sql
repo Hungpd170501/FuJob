@@ -17,14 +17,15 @@ GO
 
 CREATE TABLE tblUser
 (
-	userId INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+	userID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
 	username varchar(50) NOT NULL,
 	password varchar(50) NOT NULL,
 	fullName varchar(50) NOT NULL,
 	phone varchar(20),
 	email varchar(50),
 	roleID varchar(50),
-	status tinyint
+	status tinyint,
+	companyID INT,
 );
 GO
 
@@ -54,4 +55,38 @@ VALUES(N'AD', N'Admin'),
       (N'US', N'User')
 GO
 
+IF OBJECT_ID('dbo.tblCompany', 'u') IS NOT NULL 
+   DROP TABLE dbo.tblCompany;  
+GO
 
+CREATE TABLE tblCompany
+(
+	companyID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+	companyName varchar(50),
+	address varchar(50),
+	website varchar(50),
+	gmail varchar(50),
+	phone varchar(20),
+	typeCompany varchar(30),
+	establishedYear varchar(30),
+	numberOfEmployee int,
+	companyOverview varchar(3000),
+	avatar varchar(2000)
+);
+GO
+IF OBJECT_ID('dbo.tblResume', 'u') IS NOT NULL 
+   DROP TABLE dbo.tblResume;  
+GO
+
+CREATE TABLE tblResume
+(
+	resumeID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+	userID INT NOT NULL,
+	fullName varchar(50),
+	gmail varchar(50),
+	datOfBirth date,
+	phone varchar(20),
+	website varchar(50),
+	skills varchar(50),
+);
+GO
