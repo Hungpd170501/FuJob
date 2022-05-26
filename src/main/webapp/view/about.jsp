@@ -22,7 +22,7 @@
                     </div>
                     <div class="email">
                         <a href="#">
-                            <i class="mdi mdi-email"></i> Support@mail.com
+                            <i class="mdi mdi-email"></i> FuJob@mail.com
                         </a>
                     </div>
                 </div>
@@ -160,19 +160,19 @@
     <section class="section">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-5 col-md-4">
-                    <img src="https://via.placeholder.com/800X800//88929f/5a6270C/O https://placeholder.com/" class="img-fluid rounded shadow" alt="">
+                <div class="col-lg-4 col-md-3">
+                    <img src="https://cpad.ask.fm/233/987/771/-59996973-1tm75bm-61lhsk0efc6o1fp/original/file.jpg" class="img-fluid rounded shadow" alt="">
                 </div>
 
                 <div class="col-lg-7 col-md-8">
                     <div class="about-desc ml-lg-4">
                         <h4 class="text-dark">About us</h4>
 
-                        <p class="text-muted">Aenean eros et nisl sagittis as vestibulum at Nullam nulla eros ultricies site amet nonummy id imperdiet feugiat pede as Sed lectuse Donec mollis hendrerit Phasellus at nec sem in at pellentesque facilisis at Praesent congue erat at massa Sed sit cursus turpis vitae tortor that a Donec posuere as vulputate arcu Phasellus accumsan velit.</p>
+                        <p class="text-muted">Matching the right people to the right jobs is a very difficult problem in Vietnam, a challenge for any recruitment platform. With the goal of applying technology to change the recruitment market and make human resources more efficient, in early 2022, the idea of FUJob was born.</p>
 
-                        <p class="text-muted">Maecenas tempus tellus eget as that condimentum rhoncus sem quam semper libero amete adipiscing sem neque sed ipsum Nam quam nunce blandit at luctus pulvinar hendrerit id lorem Maecenas nec et ante tincidunt tempus.</p>
+                        <p class="text-muted">Using technology, we create a platform that allows workers to find jobs, learn about companies and interact with employers.</p>
 
-                        <p class="text-muted">Sed consequat leo eget bibendum sodales augue at velit cursus nunc.</p>
+                        <p class="text-muted">Every day, we connect thousands of people with new job opportunities from reputable businesses.</p>
 
                         <a href="javascript:void(0)" class="btn btn-primary">Apply now</a>
                     </div>
@@ -190,7 +190,7 @@
                     <div class="col-md-3 col-6 border-right">
                         <div class="p-4">
                             <div class="blog-post counter-content text-center">
-                                <h1 class="counter-value font-weight-light text-dark mb-2" data-count="2030">0</h1>
+                                <h1 class="counter-value font-weight-light text-dark mb-2" data-count="150">0</h1>
                                 <p class="counter-name text-muted f-15 text-uppercase mb-2">Jobs</p>
                                 <i class="mdi mdi-account-multiple h3 text-muted"></i>
                             </div>
@@ -200,7 +200,7 @@
                     <div class="col-md-3 col-6 border-right">
                         <div class="p-4">
                             <div class="blog-post counter-content text-center">
-                                <h1 class="counter-value font-weight-light text-dark mb-2" data-count="3500">0</h1>
+                                <h1 class="counter-value font-weight-light text-dark mb-2" data-count="210">0</h1>
                                 <p class="counter-name text-muted f-15 text-uppercase mb-2">Applications</p>
                                 <i class="mdi mdi-file h3 text-muted"></i>
                             </div>
@@ -210,7 +210,7 @@
                     <div class="col-md-3 col-6 border-right">
                         <div class="p-4">
                             <div class="blog-post counter-content text-center">
-                                <h1 class="counter-value font-weight-light text-dark mb-2" data-count="1250">0</h1>
+                                <h1 class="counter-value font-weight-light text-dark mb-2" data-count="101">0</h1>
                                 <p class="counter-name text-muted f-15 text-uppercase mb-2">Companies</p>
                                 <i class="mdi mdi-bank h3 text-muted"></i>
                             </div>
@@ -219,7 +219,7 @@
                     <div class="col-md-3 col-6">
                         <div class="p-4">
                             <div class="blog-post counter-content text-center">
-                                <h1 class="counter-value font-weight-light text-dark mb-2" data-count="4000">0</h1>
+                                <h1 class="counter-value font-weight-light text-dark mb-2" data-count="300">0</h1>
                                 <p class="counter-name text-muted f-15 text-uppercase mb-2">Employers</p>
                                 <i class="mdi mdi-account-group h3 text-muted"></i>
                             </div>
@@ -236,29 +236,36 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5">
-                    <h4 class="text-dark font-weight-">Company Testimonial</h4>
+                    <h4 class="text-dark font-weight-">Group Menbers</h4>
                     <div class="blog-post-border mt-3 mb-3"></div>
-                    <h5 class="text-muted mb-1">Themes code Pvt.Ltd</h5>
-                    <p class="mb-4 f-16"><a href="" class="text-muted"><i class="mdi mdi-earth mr-2"></i>Themescodeltd.co.in</a></p>
-                    <p class="text-muted f-14">Maecenas tempus tellus et condimentum that as rhoncus sem quam semper adipiscing sem neque sed ipsum Nam quam nunc blandit at luctus at id lorem maecenas nec odio et ante tincidunt tempus Donec vitae venenatis faucibus quis ante.</p>
+                    <h5 class="text-muted mb-1">FuJob</h5>
+<!--                    <p class="mb-4 f-16"><a href="" class="text-muted"><i class="mdi mdi-earth mr-2"></i>FuJobltd.co.in</a></p>-->
+                    <p class="text-muted f-14">Members of group include:</p>
                     <div class="job-details-desc-item">
                         <div class="float-left mr-3">
                             <i class="mdi mdi-minus text-muted f-16"></i>
                         </div>
-                        <p class="text-muted f-14 mb-1">Aenean leo ligula porttitor eu consequat eleifend enim.</p>
+                        <p class="text-muted f-14 mb-1">Le Ha Duy</p>
                     </div>
                     <div class="job-details-desc-item">
                         <div class="float-left mr-3">
                             <i class="mdi mdi-minus text-muted f-16"></i>
                         </div>
-                        <p class="text-muted f-14 mb-1">Quisque rutrum Aenean imperdiet nisi vel augue.</p>
+                        <p class="text-muted f-14 mb-1">Huynh Ngo Gia Bao</p>
+                    </div>
+                    <div class="job-details-desc-item">
+                        <div class="float-left mr-3">
+                            <i class="mdi mdi-minus text-muted f-16"></i>
+                        </div>
+                        <p class="text-muted f-14 mb-1">Nguyen Quoc Binh</p>
                     </div>
                     <div class="job-details-desc-item mb-4">
                         <div class="float-left mr-3">
                             <i class="mdi mdi-minus text-muted f-16"></i>
                         </div>
-                        <p class="text-muted f-14 mb-1">Maecenas tempus tellus sem semper libero.</p>
+                        <p class="text-muted f-14 mb-1">Pham Duc Hung</p>
                     </div>
+                    <p class="text-muted f-14">We are always trying to be better</p>
                     
 
                     <ul class="list-inline pt-4 border-top mb-4">
@@ -283,7 +290,7 @@
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class="nav-link about-us active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
                                         <div class="blog-post-testi-img">
-                                            <img src="https://via.placeholder.com/800X800//88929f/5a6270C/O https://placeholder.com/" alt="" class="img-fluid mx-auto d-block rounded">
+                                            <img src="https://wefresher.com/wp-content/uploads/2019/08/vai-tro-cua-lam-viec-nhom.jpg" alt="" class="img-fluid mx-auto d-block rounded">
                                             <div class="blog-post-overlay">
                                                 <div class="blog-post-testi-icon text-center">
                                                     <i class="mdi mdi-plus-circle-outline text-white h4"></i>
@@ -294,7 +301,7 @@
 
                                     <a class="nav-link about-us" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
                                         <div class="blog-post-testi-img">
-                                            <img src="https://via.placeholder.com/800X800//88929f/5a6270C/O https://placeholder.com/" alt="" class="img-fluid mx-auto d-block rounded">
+                                            <img src="https://wiindi.net/DContent/Image/2021/01/Teamwork-la-gi-2.jpg" alt="" class="img-fluid mx-auto d-block rounded">
                                             <div class="blog-post-overlay">
                                                 <div class="blog-post-testi-icon text-center">
                                                     <i class="mdi mdi-plus-circle-outline text-white h4"></i>
@@ -305,7 +312,7 @@
 
                                     <a class="nav-link about-us" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
                                         <div class="blog-post-testi-img">
-                                            <img src="https://via.placeholder.com/800X800//88929f/5a6270C/O https://placeholder.com/" alt="" class="img-fluid mx-auto d-block rounded">
+                                            <img src="https://www.waltonswords.com.au/wp-content/uploads/2020/06/Teamwork.jpg" alt="" class="img-fluid mx-auto d-block rounded">
                                             <div class="blog-post-overlay">
                                                 <div class="blog-post-testi-icon text-center">
                                                     <i class="mdi mdi-plus-circle-outline text-white h4"></i>
@@ -316,7 +323,7 @@
 
                                     <a class="nav-link about-us" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
                                         <div class="blog-post-testi-img">
-                                            <img src="https://via.placeholder.com/800X800//88929f/5a6270C/O https://placeholder.com/" alt="" class="img-fluid mx-auto d-block rounded">
+                                            <img src="https://content.gallup.com/origin/gallupinc/GallupSpaces/Production/Cms/CSFCMSEN/0is3e-sptkgyxm1kkblkgq.jpg" alt="" class="img-fluid mx-auto d-block rounded">
                                             <div class="blog-post-overlay">
                                                 <div class="blog-post-testi-icon text-center">
                                                     <i class="mdi mdi-plus-circle-outline text-white h4"></i>
@@ -331,25 +338,25 @@
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                         <div>
-                                            <img src="https://via.placeholder.com/800X800//88929f/5a6270C/O https://placeholder.com/" alt="" class="img-fluid mx-auto d-block rounded">
+                                            <img src="https://wefresher.com/wp-content/uploads/2019/08/vai-tro-cua-lam-viec-nhom.jpg" alt="" class="img-fluid mx-auto d-block rounded">
                                         </div>
                                     </div>
 
                                     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                         <div>
-                                            <img src="https://via.placeholder.com/800X800//88929f/5a6270C/O https://placeholder.com/" alt="" class="img-fluid mx-auto d-block rounded">
+                                            <img src="https://wiindi.net/DContent/Image/2021/01/Teamwork-la-gi-2.jpg" alt="" class="img-fluid mx-auto d-block rounded">
                                         </div>
                                     </div>
 
                                     <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                                         <div>
-                                            <img src="https://via.placeholder.com/800X800//88929f/5a6270C/O https://placeholder.com/" alt="" class="img-fluid mx-auto d-block rounded">
+                                            <img src="https://www.waltonswords.com.au/wp-content/uploads/2020/06/Teamwork.jpg" alt="" class="img-fluid mx-auto d-block rounded">
                                         </div>
                                     </div>
 
                                     <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
                                         <div>
-                                            <img src="https://via.placeholder.com/800X800//88929f/5a6270C/O https://placeholder.com/" alt="" class="img-fluid mx-auto d-block rounded">
+                                            <img src="https://content.gallup.com/origin/gallupinc/GallupSpaces/Production/Cms/CSFCMSEN/0is3e-sptkgyxm1kkblkgq.jpg" alt="" class="img-fluid mx-auto d-block rounded">
                                         </div>
                                     </div>
                                 </div>
@@ -363,7 +370,7 @@
     <!-- COMPANY TESTIMONIAL START -->
 
     <!-- DOWNLOAD APP START -->
-    <section class="section pb-0" style="background: url('https://via.placeholder.com/2000X1333//88929f/5a6270C/O https://placeholder.com/') center center;">
+<!--    <section class="section pb-0" style="background: url('https://via.placeholder.com/2000X1333//88929f/5a6270C/O https://placeholder.com/') center center;">
         <div class="bg-overlay"></div>
         <div class="container">
             <div class="row align-items-center">
@@ -387,7 +394,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!-- DOWNLOAD APP END -->
 
     <!-- ABOUT CLIENTS START -->
@@ -404,22 +411,22 @@
 
             <div class="row align-items-center">
                 <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                    <img src="images/clients/1.png" height="50" alt="">
+                    <img src="${pageContext.request.contextPath}/asset/images/clients/1.png" height="50" alt="">
                 </div><!--end col-->
                 <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                    <img src="images/clients/2.png" height="50" alt="">
+                    <img src="${pageContext.request.contextPath}/asset/images/clients/2.png" height="50" alt="">
                 </div><!--end col-->
                 <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                    <img src="images/clients/3.png" height="50" alt="">
+                    <img src="${pageContext.request.contextPath}/asset/images/clients/3.png" height="50" alt="">
                 </div><!--end col-->
                 <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                    <img src="images/clients/4.png" height="50" alt="">
+                    <img src="${pageContext.request.contextPath}/asset/images/clients/4.png" height="50" alt="">
                 </div><!--end col-->
                 <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                    <img src="images/clients/1.png" height="50" alt="">
+                    <img src="${pageContext.request.contextPath}/asset/images/clients/1.png" height="50" alt="">
                 </div><!--end col-->
                 <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                    <img src="images/clients/2.png" height="50" alt="">
+                    <img src="${pageContext.request.contextPath}/asset/images/clients/2.png" height="50" alt="">
                 </div><!--end col-->
             </div>
         </div>

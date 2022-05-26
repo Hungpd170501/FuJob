@@ -35,7 +35,7 @@
                                             userError = new UserError();
                                         }
                                     %>
-                                    <form action="../MainController" method="POST" class="login-form" oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Password do not match!" : "")'>
+                                    <form action="/FuJob/MainController" method="POST" class="login-form" oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Password do not match!" : "")'>
                                         <div class="row">
                                             <!--                                                <div class="col-md-12">
                                                                                                 <ul class="nav nav-pills nav nav-pills bg-white rounded nav-justified flex-column flex-sm-row" id="pills-tab" role="tablist">
@@ -67,7 +67,8 @@
                                             <div class="col-md-12">
                                                 <div class="form-group position-relative">
                                                     <label>Your Email <span class="text-danger">*</span></label>
-                                                    <input type="email" class="form-control" placeholder="Email" name="email" required=""> <%= userError.getEmailError()%>
+                                                    <input type="email" class="form-control" placeholder="Email" name="email" required=""> 
+                                                    <%= userError.getEmailError()%>
                                                 </div>
                                             </div>
 

@@ -22,7 +22,7 @@ import se1621.dto.User;
 
 @WebServlet(name = "SignUpController", urlPatterns = {"/SignUpController"})
 public class SignUpController extends HttpServlet {
-    private static final String ERROR = "/view/error.jsp";
+    private static final String ERROR = "/view/signup.jsp";
     private static final String SUCCESS = "/view/login.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -98,5 +98,4 @@ public class SignUpController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
 }
