@@ -19,7 +19,7 @@ import se1621.utils.DBUtils;
  * @author ACER
  */
 public class UserDAO {
-    private static final String CHECK_DUPLICATE = "SELECT userID, userName, email, status FROM tblUser WHERE userName=? and status = 1";
+    private static final String CHECK_DUPLICATE = "SELECT userID FROM tblUser WHERE email=?";
     private static final String SINGUP = "INSERT INTO tblUser(userName, fullName, email, password, phone, roleID) VALUES(?,?,?,?,?,?)";
     
     Connection conn;
@@ -32,7 +32,7 @@ public class UserDAO {
          preStm = null;
          rs = null;
         try {
-            conn = DBUtils.getInstance().getConnection();;
+            conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(CHECK_DUPLICATE);
                 preStm.setString(1, email);
@@ -63,7 +63,7 @@ public class UserDAO {
          preStm= null;
 
         try {
-            conn = DBUtils.getInstance().getConnection();;
+            conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(SINGUP);
                 //preStm.setString(1, user.getUserID());
