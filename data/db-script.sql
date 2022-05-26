@@ -28,7 +28,7 @@ CREATE TABLE tblUser
 );
 GO
 
-INSERT INTO tblUser(username,password,fullName,email,phone,roleID) 
+INSERT INTO tblUser(username,password,fullName,email,phone,roleID,status) 
 VALUES(N'customer1', N'1', N'Nguyen Van A', N'abc1@gmail.com', N'0780780789', N'US',1),
       (N'customer2', N'1', N'Nguyen Van B', N'abc2@gmail.com', N'0780780790', N'US',1),
 	  (N'admin', N'1', N'Tao la Admin', N'admin@gmail.com', N'0780780791', N'AD',1),
