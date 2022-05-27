@@ -88,5 +88,6 @@ CREATE TABLE tblResume
 	phone varchar(20),
 	website varchar(50),
 	skills varchar(50),
+	overview varchar(3000),
 );
 GO
