@@ -1,8 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 
 <head>
+    <jsp:useBean id ="company" class="se1621.dao.CompanyInfoDAO" scope="request"></jsp:useBean>
     <jsp:include page="./include/header.jsp">
         <jsp:param name="title" value="FuJob | Company Detail"/>
     </jsp:include>
@@ -10,8 +12,7 @@
 
 <body>
     <jsp:include page="./components/loader.jsp"></jsp:include>
-
-
+    
     <!-- Navigation Bar-->
     <header id="topnav" class="defaultscroll scroll-active">
         <!-- Tagline STart -->
@@ -158,35 +159,39 @@
     </section>
     <!-- end home -->
 
-    <!-- EMPLOYERS DETAILS START -->
+<!-- EMPLOYERS DETAILS START -->
+    <c:forEach items="${company.listCompany}" var="i">
     <section class="section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-sm-center">
-                        <img src="images/featured-job/img-3.png" alt="" class="img-fluid mx-md-auto d-block">
-                        <h4 class="mt-3"><a href="#" class="text-dark">Themes code Pvt.Ltd</a></h4>
+                        <img src="${pageContext.request.contextPath}/asset/images/featured-job/img-3.png" alt="" class="img-fluid mx-md-auto d-block">
+                        
+                        <h4 class="mt-3"><a href="#" class="text-dark"> ${i.companyName} </a></h4>
+                        
                         <ul class="list-inline mb-0">
                             <li class="list-inline-item mr-3">
-                                <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i>4102 Aviation Way Los Angeles, CA 90017</p>
+                                <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i>${i.address}</p>
                             </li>
-
+                <!-- CHUA BIET LAM -->
                             <li class="list-inline-item">
                                 <p class="text-success mb-0"><i class="mdi mdi-bookmark-check mdi-18px mr-2"></i>Verified</p>
                             </li>
                         </ul>
-
+                <!-- CHUA BIET LAM -->
+                
                         <ul class="list-inline mb-2">
                             <li class="list-inline-item mr-3 ">
-                                <p class="text-muted"><i class="mdi mdi-earth mr-2"></i>Themescodeltd.co.in</p>
+                                <p class="text-muted"><i class="mdi mdi-earth mr-2"></i>${i.website}</p>
                             </li>
 
                             <li class="list-inline-item mr-3">
-                                <p class="text-muted"><i class="mdi mdi-email mr-2"></i>Themescodeltd2018@gmail.com</p>
+                                <p class="text-muted"><i class="mdi mdi-email mr-2"></i>${i.gmail}</p>
                             </li>
 
                             <li class="list-inline-item">
-                                <p class="text-muted"><i class="mdi mdi-cellphone-iphone mr-2"></i>123 456 7890</p>
+                                <p class="text-muted"><i class="mdi mdi-cellphone-iphone mr-2"></i>${i.phone}</p>
                             </li>
                         </ul>
                     </div>
@@ -200,21 +205,21 @@
                             <div class="col-lg-2 col-md-3 col-6">
                                 <div class="text-sm-center m-14">
                                     <h5 class="text-dark mb-2">Employer</h5>
-                                    <p class="text-muted mb-0">5540 +</p>
+                                    <p class="text-muted mb-0">${i.numberOfEmployee}</p>
                                 </div>
                             </div>
 
                             <div class="col-lg-2 col-md-3 col-6">
                                 <div class="text-sm-center m-14">
                                     <h5 class="text-dark mb-2">Type</h5>
-                                    <p class="text-muted mb-0">Create Website</p>
+                                    <p class="text-muted mb-0">${i.typeCompany}</p>
                                 </div>
                             </div>
 
                             <div class="col-lg-2 col-md-3 col-6">
                                 <div class="text-sm-center m-14">
-                                    <h5 class="text-dark mb-2">Experience</h5>
-                                    <p class="text-muted mb-0">4 Years + Exp.</p>
+                                    <h5 class="text-dark mb-2">Established Year</h5>
+                                    <p class="text-muted mb-0">${i.establishedYear} years</p>
                                 </div>
                             </div>
 
@@ -240,9 +245,10 @@
                 <div class="col-lg-12 mt-4 pt-2">
                     <h4>Company Overview :</h4>
                     <div class="rounded border p-4 mt-3">
-                        <p class="text-muted">At vero eos accusamus iusto odio dignissimos ducimus blanditiis praesentium voluptatum deleniti that is atque corrupti dolores et quas molestias excepturi sint occaecati cupiditate non at provident similique sunt in culpa qui officia deserunt mollitia animi id est laboru at dolorum fuga Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus quod maxime placeat facere possimus omnis voluptas assumenda est omnis dolor repellendus at enim ipsam voluptatem quia voluptas aut odit aut fugit Cum sociis natoque penatibus magnis dis parturient montes nascetur ridiculus mus donec quam felis ultricies nec pellentesque eu pretium quis sem that phasellus viverra nulla ut metus varius laoreet.</p>
+<!--                        <p class="text-muted">At vero eos accusamus iusto odio dignissimos ducimus blanditiis praesentium voluptatum deleniti that is atque corrupti dolores et quas molestias excepturi sint occaecati cupiditate non at provident similique sunt in culpa qui officia deserunt mollitia animi id est laboru at dolorum fuga Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus quod maxime placeat facere possimus omnis voluptas assumenda est omnis dolor repellendus at enim ipsam voluptatem quia voluptas aut odit aut fugit Cum sociis natoque penatibus magnis dis parturient montes nascetur ridiculus mus donec quam felis ultricies nec pellentesque eu pretium quis sem that phasellus viverra nulla ut metus varius laoreet.</p>
                         <p class="text-muted">Nobis est eligendi optio cumque nihil impedit quo minus quod maxime at placeat facere possimus omnis voluptas assumenda est omnis dolor repellendus at enim ipsam eligendi optio cumque nihil impedit quo minus quod maxime placeat voluptatem quia that voluptas aut odit aut fugit Cum sociis natoque penatibus magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec this pellentesque eu pretium quis sem hasellus viverra nulla ut metus varius laoreet uisque rutrum enean imperdie tiam ultricies nisi vel augue.</p>
-                        <p class="text-muted mb-0">Optio cumque nihil impedit quo minus quod maxime at placeate facere possimuse omnis voluptas assumenda est omnis dolor repellendus at enim ipsam voluptatem quia voluptas aut odit aut fugit um sociis natoque penatibus magnis dis parturient montes nascetur at ridiculus mus onec quam felis ultricies nec nihil impedit quo minus quod maxime at placeat facere possimuse omnis voluptas assumenda est omnis dolor repellendus at enime pellentesque eu pretium quis sem Phasellus viverra nulla ut metus varius laoreet uisque rutrum enean imperdiet tiam ultricies nisi vel augue Donec elit libero sodales nec volutpat a suscipit non turpis ullam sagittis Suspendisse pulvinar at augue ac venenatis condimentum sem libero volutpat nibh nec pellentesque velit pede quis nunc estibulum ante ipsum primis in faucibus orci luctus et ultrices as cubilia Curae usce id purus varius tincidunt libero Phasellus dolor.</p>
+                        <p class="text-muted mb-0">Optio cumque nihil impedit quo minus quod maxime at placeate facere possimuse omnis voluptas assumenda est omnis dolor repellendus at enim ipsam voluptatem quia voluptas aut odit aut fugit um sociis natoque penatibus magnis dis parturient montes nascetur at ridiculus mus onec quam felis ultricies nec nihil impedit quo minus quod maxime at placeat facere possimuse omnis voluptas assumenda est omnis dolor repellendus at enime pellentesque eu pretium quis sem Phasellus viverra nulla ut metus varius laoreet uisque rutrum enean imperdiet tiam ultricies nisi vel augue Donec elit libero sodales nec volutpat a suscipit non turpis ullam sagittis Suspendisse pulvinar at augue ac venenatis condimentum sem libero volutpat nibh nec pellentesque velit pede quis nunc estibulum ante ipsum primis in faucibus orci luctus et ultrices as cubilia Curae usce id purus varius tincidunt libero Phasellus dolor.</p>-->
+                        <p class="text-muted mb">${i.companyOverview}</p>
                     </div>
                 </div>
             </div>
@@ -360,6 +366,7 @@
             </div>
         </div>
     </section>
+    </c:forEach>
     <!-- EMPLOYERS DETAILS END -->
 
     <!-- subscribe start -->
@@ -389,7 +396,7 @@
         </div>
     </section>
     <!-- subscribe end -->
-
+    
     <jsp:include page="./include/footer.jsp"></jsp:include>
     <!-- javascript -->
     <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
@@ -406,6 +413,6 @@
 
     <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
     <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-
+    
 </body>
 </html>
