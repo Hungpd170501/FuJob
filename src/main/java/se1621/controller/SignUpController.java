@@ -34,8 +34,8 @@ public class SignUpController extends HttpServlet {
             String fullName = request.getParameter("fullName");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            String roleID = request.getParameter("roleID");
-            boolean status = Boolean.parseBoolean(request.getParameter("status"));
+            String roleID = request.getParameter("roleID"); 
+            //boolean status = Boolean.parseBoolean(request.getParameter("status"));
             UserDAO dao = new UserDAO();
             UserError userError = new UserError();
             boolean checkValidation= true;
@@ -49,14 +49,14 @@ public class SignUpController extends HttpServlet {
 //                User user = new User(0, fullName, password, fullName, roleID, email, new Role(roleID, ""));
                 User user = User.builder()
                         .fullName(fullName)
-                        .password("*****")
+                        .password(password)
                         .username(fullName)
                         .role(new Role(roleID, ""))
                         .email(email)
                         .build();
                 boolean checkSignup = dao.signup(user);
                 if(checkSignup){
-                    request.setAttribute("MESSAGE","Insert Successfully!!");
+                    request.setAttribute("MESSAGE","Signup Successfully!!");
                     url= SUCCESS;
                 }
             }else{

@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import se1621.dto.CompanyInfo;
 
 import se1621.dto.Role;
 
@@ -19,9 +20,9 @@ import se1621.utils.DBUtils;
  * @author ACER
  */
 public class UserDAO {
-    private static final String CHECK_DUPLICATE = "SELECT userID, userName, phone, email, status FROM tblUser WHERE email=? and status = 1";
+    private static final String CHECK_DUPLICATE = "SELECT userID FROM tblUser WHERE email=?";
     private static final String SINGUP = "INSERT INTO tblUser(userName, fullName, email, password, phone, roleID) VALUES(?,?,?,?,?,?)";
-    
+    private static final String UPDATECOMID = "UPDATE tblUser SET userName=?, fullName=?, email=?, phone=?, roleID=?, companyID=? WHERE userID=?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -179,5 +180,33 @@ public class UserDAO {
             }
         }
         return user;
+    }
+    
+    public boolean updateCompanyID(User user, int companyID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UPDATECOMID);
+                preStm.setString(1, user.getUsername());
+                preStm.setString(2, user.getFullName());
+                preStm.setString(3, user.getEmail());
+                preStm.setString(4, user.getPhone());
+                preStm.setString(5, user.getRole().getRoleID());
+                preStm.setInt(6, companyID);
+                preStm.setInt(7, user.getUserID());
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 }

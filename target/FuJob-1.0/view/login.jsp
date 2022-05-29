@@ -28,55 +28,66 @@
                                         <div class="text-center">
                                             <h4 class="mb-4">Login</h4>  
                                         </div>
-                                        <form class="login-form" action="/FuJob/MainController" method="post">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="form-group position-relative">
-                                                        <label>Your Email <span class="text-danger">*</span></label>
-                                                        <input type="email" class="form-control" placeholder="Email" name="email" required="">
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-lg-12">
-                                                    <div class="form-group position-relative">
-                                                        <label>Password <span class="text-danger">*</span></label>
-                                                        <input type="password" name="password" class="form-control" placeholder="Password" required="">
-                                                    </div>
-                                                </div>
+                                    <%
+                                        String message = (String) request.getAttribute("MESSAGE");
+                                        if (message == null) {
+                                            message = "";
+                                        }
+                                    %>
+                                    <h5 class="text-success"><%= message%></h5>    
+                                      
+                                    
 
-                                                <div class="col-lg-12">
-                                                    <p class="float-right forgot-pass"><a href="recovery_passward.html" class="text-dark font-weight-bold">Forgot password ?</a></p>
-                                                    <div class="form-group">
-                                                        <div class="custom-control m-0 custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                                            <label class="custom-control-label" for="customCheck1">Remember me</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Nut LOGIN -->
-                                                <div class="col-lg-12 mb-0">
-                                                    <input type="submit" name="action" class="btn btn-primary w-100" value="Login"/>
-<!--                                                    <button class="btn btn-primary w-100">Sign in</button>-->
-                                                </div>
-                                                <div class="col-lg-12 mt-4 text-center">
-                                                    <h6>Or Login With</h6>
-                                                    <ul class="list-unstyled social-icon mb-0 mt-3">
-                                                        <li class="list-inline-item"><a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/FuJob/LoginGoogleHandler&response_type=code&client_id=674216776597-dsnqcp414vcta1d1mi4aa5umrmakucjd.apps.googleusercontent.com&approval_prompt=force" class="rounded"><i class="mdi mdi-google-plus" title="Google"></i></a></li>
-                                                    </ul><!--end icon-->
-                                                </div>
-                                                <div class="col-12 text-center">
-                                                    <p class="mb-0 mt-3"><small class="text-dark mr-2">Don't have an account ?</small> <a href="../view/signup.jsp" class="text-dark font-weight-bold">Sign Up</a></p>
+                                    <form class="login-form" action="/FuJob/MainController" method="post">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group position-relative">
+                                                    <label>Your Email <span class="text-danger">*</span></label>
+                                                    <input type="email" class="form-control" placeholder="Email" name="email" required="">
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div><!---->
-                                </div> <!--end col-->
-                            </div><!--end row-->
-                        </div> <!--end container-->
-                    </div>
+
+                                            <div class="col-lg-12">
+                                                <div class="form-group position-relative">
+                                                    <label>Password <span class="text-danger">*</span></label>
+                                                    <input type="password" name="password" class="form-control" placeholder="Password" required="">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12">
+                                                <p class="float-right forgot-pass"><a href="recovery_passward.html" class="text-dark font-weight-bold">Forgot password ?</a></p>
+                                                <div class="form-group">
+                                                    <div class="custom-control m-0 custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                        <label class="custom-control-label" for="customCheck1">Remember me</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Nut LOGIN -->
+                                            <div class="col-lg-12 mb-0">
+                                                <input type="submit" name="action" class="btn btn-primary w-100" value="Login"/>
+                                                <!--                                                    <button class="btn btn-primary w-100">Sign in</button>-->
+                                            </div>
+                                            <div class="col-lg-12 mt-4 text-center">
+                                                <h6>Or Login With</h6>
+                                                <ul class="list-unstyled social-icon mb-0 mt-3">
+                                                    <li class="list-inline-item"><a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/FuJob/LoginGoogleHandler&response_type=code&client_id=674216776597-dsnqcp414vcta1d1mi4aa5umrmakucjd.apps.googleusercontent.com&approval_prompt=force" class="rounded"><i class="mdi mdi-google-plus" title="Google"></i></a></li>
+                                                </ul><!--end icon-->
+                                            </div>
+                                            <div class="col-12 text-center">
+                                                <p class="mb-0 mt-3"><small class="text-dark mr-2">Don't have an account ?</small> <a href="/FuJob/view/signup.jsp" class="text-dark font-weight-bold">Sign Up</a></p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div><!---->
+                            </div> <!--end col-->
+                        </div><!--end row-->
+                    </div> <!--end container-->
                 </div>
-            </section><!--end section-->
-            <!-- Hero End -->
+            </div>
+        </section><!--end section-->
+        <!-- Hero End -->
 
         <!-- javascript -->
         <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
@@ -93,7 +104,7 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-        
+
         <script src="https://www.google.com/recaptcha/api.js?render=6LeCa7IeAAAAAFhlitWRqflibLyvju1K_P5U52dj"></script>
         <script>
             grecaptcha.ready(function () {

@@ -7,8 +7,11 @@ C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\LoginControll
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Resume.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Role.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\User.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\ChooseCompanyController.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\CreateCompanyInfoController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\CompanyInfoDAO.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\SignUpController.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\Error\CompanyInfoError.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\ResumeDAO.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\CategoryDAO.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\JobDAO.java

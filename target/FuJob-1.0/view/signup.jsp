@@ -68,7 +68,7 @@
                                                 <div class="form-group position-relative">
                                                     <label>Your Email <span class="text-danger">*</span></label>
                                                     <input type="email" class="form-control" placeholder="Email" name="email" required=""> 
-                                                    <%= userError.getEmailError()%>
+                                                    <p class="text-danger text-right h6 small"><%= userError.getEmailError()%></p>
                                                 </div>
                                             </div>
 
@@ -92,7 +92,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group position-relative">                                               
-                                                    <label>Recruiter </label>
+                                                    <label>Human Resource </label>
                                                     <input type="radio" name="roleID" required="" value="US">
                                                 </div>
                                             </div>
@@ -108,27 +108,12 @@
                                                 <!--                                                    <button class="btn btn-primary w-100">Register</button>-->
                                                 <input class="btn btn-primary w-100" type="submit" name="action" value="Signup">
                                             </div>
-                                            <div class="col-lg-12 mt-4 text-center">
-                                                <h6>Or Signup With</h6>
-                                                <ul class="list-unstyled social-icon mb-0 mt-3">
-                                                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i class="mdi mdi-facebook" title="Facebook"></i></a></li>
-                                                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i class="mdi mdi-google-plus" title="Google"></i></a></li>
-                                                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i class="mdi mdi-github-circle" title="Github"></i></a></li>
-                                                </ul><!--end icon-->
-                                            </div>
+                                            
                                             <div class="mx-auto">
                                                 <p class="mb-0 mt-3"><small class="text-dark mr-2">Already have an account ?</small> <a href="../view/login.jsp" class="text-dark font-weight-bold">Sign in</a></p>
                                             </div>
                                         </div>
                                     </form>
-
-                                    <%
-                                        String message = (String) request.getAttribute("MESSAGE");
-                                        if (message == null) {
-                                            message = "";
-                                        }
-                                    %>
-                                    <h1><%= message%></h1>
                                 </div>   
 
                             </div>
