@@ -1,4 +1,9 @@
+<%@page import="Error.CompanyInfoError"%>
+<%@page import="se1621.dao.CompanyInfoDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="se1621.dto.CompanyInfo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 
@@ -12,7 +17,6 @@
         <jsp:include page="./components/loader.jsp"></jsp:include>
 
         <jsp:include page="./include/navbar.jsp"></jsp:include>
-
 
             <!-- Start home -->
             <section class="bg-half page-next-level"> 
@@ -47,89 +51,95 @@
 
                         <div class="col-12 mt-3">
                             <div class="custom-form p-4 border rounded">
-
-                                <form action="/FuJob/MainController" method="POST">
-                                    <div class="row mt-4">
-                                        <label class="col-md-12">
-                                            <input type="file" style="display:none">
-                                            <img style="cursor: pointer" src="https://via.placeholder.com/400X400//88929f/5a6270C/O https://placeholder.com/" class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill" alt="">
-                                        </label>
-                                        <div class="col-md-4">
-                                            <div class="form-group app-label">
-                                                <label class="text-muted">Company Name<span class="text-danger">*</span> :</label>
-                                                <input id="company-name" type="text" name="companyname" class="form-control resume" placeholder="Comapny Name :">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group app-label">
-                                                <label class="text-muted">Established Year<span class="text-danger">*</span> :</label>
-                                                <input id="EstablishedYear" name="establishedyear" type="date" class="form-control resume" placeholder="Established Year :">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group app-label">
-                                                <label class="text-muted">Address<span class="text-danger">*</span> :</label>
-                                                <input id="Address" name="address" type="text" class="form-control resume" placeholder="Address: ">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group app-label">
-                                                <label class="text-muted">Type Company<span class="text-danger">*</span> :</label>
-                                                <input id="TypeCompany" name="typecompany" type="text" class="form-control resume" placeholder="Type Company :">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group app-label">
-                                                <label class="text-muted">Website<span class="text-danger">*</span> :</label>
-                                                <input id="Website" name="website" type="text" class="form-control resume" placeholder="Website :">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group app-label">
-                                                <label class="text-muted">Gmail<span class="text-danger">*</span> :</label>
-                                                <input id="Gmail" name="gmail" type="email" class="form-control resume" placeholder="Gmail :">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group app-label">
-                                                <label class="text-muted">Phone<span class="text-danger">*</span> :</label>
-                                                <input id="Phone" name="phone" type="tel" pattern="[0-9]{10}" class="form-control resume" placeholder="Phone: ">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group app-label">
-                                                <label class="text-muted">Number of Employee<span class="text-danger">*</span> :</label>
-                                                <input id="Numberofemployee" name="numberofemployee" type="int" class="form-control resume" placeholder="Number of employee :">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <div class="form-group app-label">
-                                                <label class="text-muted">Company Overview<span class="text-danger">*</span> :</label>
-                                                <textarea id="Companyoverview" name="companyoverview" type="text" class="form-control resume" placeholder="Company Overview :"></textarea>
-                                            </div>
+                            <%
+                                CompanyInfoError comError = (CompanyInfoError) request.getAttribute("COM_ERROR");
+                                if (comError == null) {
+                                    comError = new CompanyInfoError();
+                                }
+                            %>
+                            <form action="/FuJob/MainController" method="POST">
+                                <div class="row mt-4">
+                                    <label class="col-md-12">
+                                        <input type="file" style="display: none" id="imageFile" name="avatar" >
+                                        <img style="cursor:  pointer" id="image"   src="https://via.placeholder.com/400X400//88929f/5a6270C/O https://placeholder.com/" class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill" alt="" >
+                                    </label>
+                                    <div class="col-md-4">
+                                        <div class="form-group app-label">
+                                            <label class="text-muted">Company Name<span class="text-danger">*</span> :</label>
+                                            <input id="company-name" type="text" name="companyname" class="form-control resume" required="" placeholder="Comapny Name :">
+                                            <p class="text-danger text-right h6 small"><%= comError.getCompanyNameError()%></p>
                                         </div>
                                     </div>
-                                    <div class="col-12 mt-4">
-                                        <input type="submit" id="submit" name="action" class="submitBnt btn btn-primary" value="Create CompanyInfo">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group app-label">
+                                            <label class="text-muted">Established Year<span class="text-danger">*</span> :</label>
+                                            <input id="EstablishedYear" name="establishedyear" type="date" class="form-control resume" required="" placeholder="Established Year :">
+                                        </div>
                                     </div>
-                                </form>
-                            </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group app-label">
+                                            <label class="text-muted">Address<span class="text-danger">*</span> :</label>
+                                            <input id="Address" name="address" type="text" class="form-control resume" required="" placeholder="Address: ">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group app-label">
+                                            <label class="text-muted">Type Company<span class="text-danger">*</span> :</label>
+                                            <input id="TypeCompany" name="typecompany" type="text" class="form-control resume" required="" placeholder="Type Company :">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group app-label">
+                                            <label class="text-muted">Website<span class="text-danger">*</span> :</label>
+                                            <input id="Website" name="website" type="text" class="form-control resume" required="" placeholder="Website :">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group app-label">
+                                            <label class="text-muted">Gmail<span class="text-danger">*</span> :</label>
+                                            <input id="Gmail" name="gmail" type="email" class="form-control resume" required="" placeholder="Gmail :">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group app-label">
+                                            <label class="text-muted">Phone<span class="text-danger">*</span> :</label>
+                                            <input id="Phone" name="phone" type="tel" class="form-control resume" required="" placeholder="Phone: ">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group app-label">
+                                            <label class="text-muted">Number of Employee<span class="text-danger">*</span> :</label>
+                                            <input id="Numberofemployee" name="numberofemployee" type="number" class="form-control resume" required="" placeholder="Number of employee :">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group app-label">
+                                            <label class="text-muted">Company Overview<span class="text-danger">*</span> :</label>
+                                            <textarea id="Companyoverview" name="companyoverview" type="text" class="form-control resume" required="" placeholder="Company Overview :"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <input type="submit" id="submit" name="action" class="submitBnt btn btn-primary" value="Create CompanyInfo">
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- CREATE RESUME END -->
+            </div>
+        </section>
+        <!-- CREATE RESUME END -->
 
 
-            <!-- subscribe end -->
+        <!-- subscribe end -->
 
         <jsp:include page="./include/footer.jsp"></jsp:include>
             <!-- javascript -->

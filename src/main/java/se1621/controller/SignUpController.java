@@ -45,7 +45,7 @@ public class SignUpController extends HttpServlet {
                 userError.setEmailError("Email duplicate");
             }
             if(checkValidation){
-                User user = new User(0, fullName, password, fullName, roleID, email, new Role(roleID, ""));
+                User user = new User(0, fullName, password, fullName, "", email, new Role(roleID, ""), 0);
                 boolean checkSignup = dao.signup(user);
                 if(checkSignup){
                     request.setAttribute("MESSAGE","Signup Successfully!!");
