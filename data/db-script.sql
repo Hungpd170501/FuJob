@@ -90,6 +90,7 @@ CREATE TABLE tblResume
 	address varchar(50),
 	schoolName varchar(50),
 	major varchar(50),
+	gpa varchar(15),
 	experienceYear varchar(50),
 	skills varchar(50),
 	website varchar(100),
