@@ -12,6 +12,8 @@ se1621\dao\AuthDAO.class
 se1621\controller\MainController.class
 se1621\dao\JobDAO.class
 se1621\controller\LoginGoogleHandler.class
+se1621\controller\SearchCompanyIDController.class
+se1621\dto\CompanyInfo$CompanyInfoBuilder.class
 Error\UserError.class
 se1621\dao\CompanyInfoDAO.class
 se1621\dto\User.class

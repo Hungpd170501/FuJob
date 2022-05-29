@@ -17,6 +17,9 @@ public class MainController extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private static final String LOGIN_CONTROLLER = "LoginController";
     private static final String LOGIN = "Login";
+    private static final String SEARCH_COMPANYID_CONTROLLER = "SearchCompanyIDController";
+    private static final String SEARCH = "Search";
+    
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,6 +32,8 @@ public class MainController extends HttpServlet {
                 url = LOGIN_CONTROLLER;
             } else if (SIGNUP.equals(action)) {
                 url = SIGNUP_CONTROLLER;
+            }else if (SEARCH.equals(action)) {
+                url = SEARCH_COMPANYID_CONTROLLER;
             } else {
                 url = ERROR;
             }

@@ -90,7 +90,7 @@ public class UserDAO {
         User user = null;
         try {
             Connection conn = DBUtils.getInstance().getConnection();
-            String sql = "SELECT userID, fullName, phone, username,tblUser.roleID, tblRole.roleName "
+            String sql = "SELECT userID, fullName, companyID, phone, username,tblUser.roleID, tblRole.roleName "
                     + "FROM tblUser LEFT JOIN tblRole ON tblRole.roleID = tblUser.roleID "
                     + "WHERE email=? AND password=?;";
             PreparedStatement preStm = conn.prepareStatement(sql);
@@ -101,6 +101,7 @@ public class UserDAO {
             if (rs.next()) {
                 int userID = rs.getInt("userID");
                 String fullName = rs.getString("fullName");
+                int companyID = rs.getInt("companyID");
                 String phone = rs.getString("phone");
                 String username = rs.getString("username");
                 String roleID = rs.getString("roleID");
@@ -110,6 +111,7 @@ public class UserDAO {
                         .userID(userID)
                         .username(username)
                         .fullName(fullName)
+                        .companyID(companyID)
                         .password("*****")
                         .phone(phone)
                         .email(email)

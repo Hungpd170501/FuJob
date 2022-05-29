@@ -98,7 +98,7 @@
                         <li class="has-submenu"><a href="javascript:void(0)"> Employers</a><span class="submenu-arrow"></span>
                             <ul class="submenu">
                                 <li><a href="/FuJob/view/employers-list.jsp">Employers List</a></li>
-                                <li><a href="/FuJob/view/company-detail.jsp">Company Detail</a></li>
+                                <li><a href="/FuJob/MainController?action=Search&search=${sessionScope.LOGIN_USER.companyID}">Company Detail</a></li>
                             </ul>  
                         </li>
                         <li class="has-submenu"><a href="javascript:void(0)"> User Pages</a><span class="submenu-arrow"></span>

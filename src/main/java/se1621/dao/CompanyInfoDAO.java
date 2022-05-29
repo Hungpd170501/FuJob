@@ -21,7 +21,7 @@ import se1621.utils.DBUtils;
 public class CompanyInfoDAO {
     
     private static final String CREATECOMINFO = "INSERT INTO tblCompany(companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar) VALUES(?,?,?,?,?,?,?,?,?,?)";
-    private static final String SEARCH = "SELECT companyID, companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar FROM tblCompany WHERE companyID like ?";
+    private static final String SEARCH = "SELECT companyID, companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar FROM tblCompany WHERE companyID = ?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -66,49 +66,64 @@ public class CompanyInfoDAO {
         return check;
     }
 
-//    public List<CompanyInfo> getListCompany() throws SQLException {
-//        List<CompanyInfo> listCompany = new ArrayList<>();
-//        Connection conn = null;
-//        PreparedStatement ptm = null;
-//        ResultSet rs = null;
-//        try {
-//            conn = DBUtils.getInstance().getConnection();
-//            if(conn != null){
-////                ptm = conn.prepareStatement(SEARCH);
-////                ptm.setString(1, "%" + search + "%");
-//                rs = ptm.executeQuery();
-//                while(rs.next()){
-//                    int companyID = rs.getInt("companyID");
-//                    String companyName = rs.getString("companyName");
-//                    String address = rs.getString("address");
-//                    String website = rs.getString("website");
-//                    String gmail = rs.getString("gmail");
-//                    String phone = rs.getString("phone");
-//                    String typeCompany = rs.getString("typeCompany");
-//                    Date establishedYear = rs.getDate("establishedYear");
-//                    int numberOfEmployee = rs.getInt("numberOfEmployee");
-//                    String companyOverview = rs.getString("companyOverview");
-//                    String avatar = rs.getString("avatar");
-//                    listCompany.add(new CompanyInfo(companyID, companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar));        
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (ptm != null) {
-//                ptm.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//        }
-//        return listCompany;
-//    }
-    public List<CompanyInfo> getListCompany() throws SQLException {
-        
+    public List<CompanyInfo> getListCompany(int search) throws SQLException {
+        List<CompanyInfo> listCompany = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if(conn != null){
+                ptm = conn.prepareStatement(SEARCH);
+//              ptm.setString(1, "%" + search + "%");
+                ptm.setInt(1, search );
+                rs = ptm.executeQuery();
+                while(rs.next()){
+                    int companyID = rs.getInt("companyID");
+                    String companyName = rs.getString("companyName");
+                    String address = rs.getString("address");
+                    String website = rs.getString("website");
+                    String gmail = rs.getString("gmail");
+                    String phone = rs.getString("phone");
+                    String typeCompany = rs.getString("typeCompany");
+                    String establishedYear = rs.getString("establishedYear");
+                    int numberOfEmployee = rs.getInt("numberOfEmployee");
+                    String companyOverview = rs.getString("companyOverview");
+                    String avatar = rs.getString("avatar");
+                    listCompany.add(new CompanyInfo(companyID, companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar));        
+//                  listCompany = (List<CompanyInfo>) CompanyInfo.builder()
+//                            .companyID(companyID)
+//                            .companyName(companyName)
+//                            .address(address)
+//                            .website(website)
+//                            .gmail(gmail)
+//                            .phone(phone)
+//                            .typeCompany(typeCompany)
+//                            .establishedYear(establishedYear)
+//                            .numberOfEmployee(numberOfEmployee)
+//                            .companyOverview(companyOverview)
+//                            .avatar(avatar)
+//                            .build();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listCompany;
+    }
+    
+    
+    public List<CompanyInfo> getListCompany_v2() throws SQLException {       
         try {
             String query = "SELECT* FROM tblCompany";
             conn = DBUtils.getInstance().getConnection();
