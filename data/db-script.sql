@@ -82,6 +82,7 @@ CREATE TABLE tblResume
 (
 	resumeID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
 	userID INT NOT NULL,
+	avartar varchar(2000)
 	fullName varchar(50),
 	gender varchar(10),
 	dateOfBirth date,
