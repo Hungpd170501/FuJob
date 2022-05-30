@@ -21,6 +21,8 @@ public class MainController extends HttpServlet {
     private static final String CREATECOM = "Create CompanyInfo";
     private static final String CHOOSECOMPANY_CONTROLLER = "ChooseCompanyController";
     private static final String CHOOSECOMPANY = "Choose Company";
+    private static final String CREATERESUME_CONTROLLER = "CreateResumeController";
+    private static final String CREATERESUME = "Submit Resume";
     
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -38,6 +40,8 @@ public class MainController extends HttpServlet {
                 url = CREATECOM_CONTROLLER;
             } else if (CHOOSECOMPANY.equals(action)) {
                 url = CHOOSECOMPANY_CONTROLLER;
+            } else if (CREATERESUME.equals(action)) {
+                url = CREATERESUME_CONTROLLER;
             } 
             else {
                 url = ERROR;
