@@ -125,6 +125,6 @@ IF OBJECT_ID('dbo.tblCategory', 'u') IS NOT NULL
 GO
 CREATE TABLE tblCategory (
 	categoryID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
-	categoryName NOT NULL;
+	categoryName varchar(50) NOT NULL;
 );
 GO
