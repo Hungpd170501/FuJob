@@ -98,3 +98,34 @@ CREATE TABLE tblResume
 	overview varchar(3000),
 );
 GO
+
+IF OBJECT_ID('dbo.tblJob', 'u') IS NOT NULL 
+   DROP TABLE dbo.tblJob;  
+GO
+CREATE TABLE tblJob (
+	jobID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+	userID INT NOT NULL,
+	jobTitle varchar(20),
+	ExperienceNeeded varchar(20),
+	jobCategoryID varchar(20),
+	skill varchar(20),
+	deadline date,
+	completionTime varchar(20),
+	salary varchar(20),
+	address varchar(50),
+	email varchar(255),
+	phone varchar(15),
+	description varchar(2000),
+	cvFile varchar(2000)
+	
+);
+GO
+
+IF OBJECT_ID('dbo.tblCategory', 'u') IS NOT NULL 
+   DROP TABLE dbo.tblCategory;  
+GO
+CREATE TABLE tblCategory (
+	categoryID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+	categoryName NOT NULL;
+);
+GO
