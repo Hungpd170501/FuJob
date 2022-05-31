@@ -1,4 +1,5 @@
 se1621\dto\Resume.class
+se1621\controller\SearchResumeIDController.class
 se1621\dto\UserGoogle.class
 se1621\dao\UserDAO.class
 se1621\dao\CategoryDAO.class
@@ -6,6 +7,7 @@ se1621\dto\User$UserBuilder.class
 se1621\dto\Job.class
 se1621\dao\JobDAO.class
 se1621\controller\LoginGoogleHandler.class
+se1621\dto\Resume$ResumeBuilder.class
 Error\UserError.class
 se1621\dao\CompanyInfoDAO.class
 se1621\controller\SignUpController.class

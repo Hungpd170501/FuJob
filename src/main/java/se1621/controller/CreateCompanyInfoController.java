@@ -28,7 +28,7 @@ import se1621.dto.User;
 public class CreateCompanyInfoController extends HttpServlet {
 
     private static final String ERROR = "/view/create-companyinfo.jsp";
-    private static final String SUCCESS = "/MainController?action=Search&search=";
+    private static final String SUCCESS = "/MainController?action=SearchCompanyID&searchCompanyID=";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -139,7 +139,7 @@
             </header><!--end header-->
             <!-- Navbar End -->
 
-            <!-- Start home -->
+            <!-- Start home -->           
             <section class="bg-half page-next-level"> 
                 <div class="bg-overlay"></div>
                 <div class="container">
@@ -165,9 +165,9 @@
             <!-- EMPLOYERS DETAILS START -->
 
 
-            <section class="section" name="action" value="Search">
+            <section class="section" name="action" value="SearchCompanyID">
             <%
-                String search = request.getParameter("search");
+                String search = request.getParameter("searchCompanyID");
                 if (search == null) {
                     search = "";
                 }
@@ -182,7 +182,6 @@
             <%
                 for (CompanyInfo company : listCompany) {
             %>
-            <form action="/FuJob/MainController">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
@@ -237,7 +236,7 @@
                                     <div class="col-lg-2 col-md-3 col-6">
                                         <div class="text-sm-center m-14">
                                             <h5 class="text-dark mb-2">Established Year</h5>
-                                            <p class="text-muted mb-0"><%= company.getEstablishedYear() %> years </p>
+                                            <p class="text-muted mb-0"><%= company.getEstablishedYear() %></p>
                                         </div>
                                     </div>
 
@@ -383,7 +382,6 @@
                         </div>
                     </div>
                 </div>-->
-            </form>
             <%
                 }
             %>

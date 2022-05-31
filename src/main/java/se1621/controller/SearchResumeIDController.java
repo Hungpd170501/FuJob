@@ -2,62 +2,50 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package se1621.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import se1621.dao.ResumeDAO;
+import se1621.dto.Resume;
 
-public class MainController extends HttpServlet {
-
-    private static final String SIGNUP_CONTROLLER = "SignUpController";
-    private static final String SIGNUP = "Signup";
-    private static final String ERROR = "error.jsp";
-    private static final String LOGIN_CONTROLLER = "LoginController";
-    private static final String LOGIN = "Login";
-    private static final String SEARCH_COMPANYID_CONTROLLER = "SearchCompanyIDController";
-    private static final String SEARCH_COMPANYID = "SearchCompanyID";
-    private static final String SEARCH_RESUMEID_CONTROLLER = "SearchResumeIDController";
-    private static final String SEARCH_RESUMEID = "SearchResumeID";
-    private static final String CREATECOM_CONTROLLER = "CreateCompanyInfoController";
-    private static final String CREATECOM = "Create CompanyInfo";
-    private static final String CHOOSECOMPANY_CONTROLLER = "ChooseCompanyController";
-    private static final String CHOOSECOMPANY = "Choose Company";
+/**
+ *
+ * @author lehad
+ */
+@WebServlet(name="SearchResumeIDController", urlPatterns={"/SearchResumeIDController"})
+public class SearchResumeIDController extends HttpServlet {
+   private static String ERROR = "/view/candidates-profile.jsp";
+   private static String SUCCESS = "/view/candidates-profile.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         String url = ERROR;
         try {
-            String action = request.getParameter("action");
-            if (LOGIN.equals(action)) {
-                url = LOGIN_CONTROLLER;
-            } else if (SIGNUP.equals(action)) {
-                url = SIGNUP_CONTROLLER;
-            }else if (SEARCH_COMPANYID.equals(action)) {
-                url = SEARCH_COMPANYID_CONTROLLER;
-            } else if (CREATECOM.equals(action)) {
-                url = CREATECOM_CONTROLLER;
-            } else if (CHOOSECOMPANY.equals(action)) {
-                url = CHOOSECOMPANY_CONTROLLER;
-            }else if(SEARCH_RESUMEID.equals(action)){
-                url = SEARCH_RESUMEID_CONTROLLER;
-            }else {
-                url = ERROR;
+            int search = Integer.parseInt(request.getParameter("searchResumeID"));
+            ResumeDAO dao = new ResumeDAO();
+            List<Resume> listResume = dao.getListResume(search);
+            if (!listResume.isEmpty()) {
+                request.setAttribute("LIST_RESUME", listResume);
+                url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at MainController: " + e.toString());
+            log("Error at SearchResumeIDController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -65,13 +53,12 @@ public class MainController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
-    }
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -79,13 +66,12 @@ public class MainController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

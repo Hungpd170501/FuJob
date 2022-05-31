@@ -84,7 +84,7 @@
                         <li class="has-submenu"><a href="javascript:void(0)"> Candidates</a><span class="submenu-arrow"></span>
                             <ul class="submenu">
                                 <li><a href="/FuJob/view/candidates-listing.jsp">Candidates Listing</a></li>
-                                <li><a href="/FuJob/view/candidates-profile.jsp">Candidates Profile</a></li>
+                                <li><a href="/FuJob/MainController?action=SearchResumeID&searchResumeID=${sessionScope.LOGIN_USER.userID}">Candidates Profile</a></li>
                                 <li><a href="/FuJob/view/create-resume.jsp">Create Resume</a></li>
                             </ul>  
                         </li>
@@ -98,7 +98,7 @@
                         <li class="has-submenu"><a href="javascript:void(0)"> Employers</a><span class="submenu-arrow"></span>
                             <ul class="submenu">
                                 <li><a href="/FuJob/view/employers-list.jsp">Employers List</a></li>
-                                <li><a href="/FuJob/MainController?action=Search&search=${sessionScope.LOGIN_USER.companyID}">Company Detail</a></li>
+                                <li><a href="/FuJob/MainController?action=SearchCompanyID&searchCompanyID=${sessionScope.LOGIN_USER.companyID}">Company Detail</a></li>
                             </ul>  
                         </li>
                         <li class="has-submenu"><a href="javascript:void(0)"> User Pages</a><span class="submenu-arrow"></span>
