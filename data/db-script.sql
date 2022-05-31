@@ -116,7 +116,6 @@ CREATE TABLE tblJob (
 	email varchar(255),
 	phone varchar(15),
 	description varchar(2000),
-	cvFile varchar(2000)
 	
 );
 GO
