@@ -11,7 +11,7 @@
     <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
 
-        <jsp:include page="./include/navbar.jsp"></jsp:include>
+        <jsp:include page="./include/navbarHr.jsp"></jsp:include>
 
 
             <!-- Start home -->

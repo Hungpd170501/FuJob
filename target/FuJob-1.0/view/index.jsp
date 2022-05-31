@@ -11,7 +11,7 @@
     <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
 
-        <jsp:include page="./include/navbar.jsp"></jsp:include>
+        <jsp:include page="./include/navbarHr.jsp"></jsp:include>
 
             <!-- Start Home -->
             <section class="bg-home" style="background: url('https://via.placeholder.com/2000X1333//88929f/5a6270C/O https://placeholder.com/') center center;">
