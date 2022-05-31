@@ -4,7 +4,7 @@
  */
 package se1621.controller;
 
-import Error.UserError;
+import se1621.dto.Error.UserError;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import se1621.dao.UserDAO;
 import se1621.dto.Role;
 import se1621.dto.User;
+import se1621.service.EmailServiceIml;
 
 /**
  *
@@ -38,17 +39,26 @@ public class SignUpController extends HttpServlet {
             UserDAO dao = new UserDAO();
             UserError userError = new UserError();
             boolean checkValidation= true;
-            boolean checkDuplicate= dao.checkDuplicate(email);
+            boolean checkDuplicate= dao.checkDuplicateEmail(email);
             
             if(checkDuplicate){
                 checkValidation= false;
                 userError.setEmailError("Email duplicate");
             }
             if(checkValidation){
-                User user = new User(0, fullName, password, fullName, roleID, email, new Role(roleID, ""));
+//                User user = new User(0, fullName, password, fullName, roleID, email, new Role(roleID, ""));
+                User user = User.builder()
+                            .username(fullName)
+                            .password(password)
+                            .fullName(fullName)
+                            .role(new Role(roleID, ""))
+                            .email(email)
+                            .build();
                 boolean checkSignup = dao.signup(user);
                 if(checkSignup){
-                    request.setAttribute("MESSAGE","Signup Successfully!!");
+                    request.setAttribute("LOGIN_MESSAGE","Signup Successfully!!");
+                    EmailServiceIml emailServiceIml =new EmailServiceIml();
+                    emailServiceIml.sendEmail(getServletContext(), user, "welcome");
                     url= SUCCESS;
                 }
             }else{

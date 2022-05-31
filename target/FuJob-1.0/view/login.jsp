@@ -1,3 +1,5 @@
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="windows-1258"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,52 +13,41 @@
 
     <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
+        <div class="back-to-home rounded d-none d-sm-block">
+            <a href="/FuJob/view/index.jsp" class="text-white rounded d-inline-block text-center"><i class="mdi mdi-home"></i></a>
+        </div>
 
-            <div class="back-to-home rounded d-none d-sm-block">
-                <a href="../view/index.jsp" class="text-white rounded d-inline-block text-center"><i class="mdi mdi-home"></i></a>
-            </div>
+        <!-- Hero Start -->
+        <section class="vh-100" style="background: url('https://via.placeholder.com/2000X1333//88929f/5a6270C/O https://placeholder.com/') center center;">
 
-            <!-- Hero Start -->
-            <section class="vh-100" style="background: url('https://via.placeholder.com/2000X1333//88929f/5a6270C/O https://placeholder.com/') center center;">
-
-                <div class="home-center">
-                    <div class="home-desc-center">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="login-page bg-white shadow rounded p-4">
-                                        <div class="text-center">
-                                            <h4 class="mb-4">Login</h4>  
-                                        </div>
-
-                                    <%
-                                        String message = (String) request.getAttribute("MESSAGE");
-                                        if (message == null) {
-                                            message = "";
-                                        }
-                                    %>
-                                    <h5 class="text-success"><%= message%></h5>    
-                                      
-                                    
-
+            <div class="home-center">
+                <div class="home-desc-center">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-4 col-md-6">
+                                <div class="alert shadow alert-light hide-if-empty text-center" role="alert">${requestScope.LOGIN_MESSAGE}</div>
+                                <div class="login-page bg-white shadow rounded p-4">
+                                    <div class="text-center">
+                                        <h4 class="mb-4">Login</h4>  
+                                    </div> 
                                     <form class="login-form" action="/FuJob/MainController" method="post">
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="form-group position-relative">
                                                     <label>Your Email <span class="text-danger">*</span></label>
-                                                    <input type="email" class="form-control" placeholder="Email" name="email" required="">
+                                                    <input type="email" class="form-control" placeholder="Your Email" value="${param.email}" name="email" required="">
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12">
                                                 <div class="form-group position-relative">
                                                     <label>Password <span class="text-danger">*</span></label>
-                                                    <input type="password" name="password" class="form-control" placeholder="Password" required="">
+                                                    <input type="password" name="password" placeholder="Password" class="form-control" value="${param.password}" required="">
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12">
-                                                <p class="float-right forgot-pass"><a href="recovery_passward.html" class="text-dark font-weight-bold">Forgot password ?</a></p>
+                                                <p class="float-right forgot-pass"><a href="/FuJob/view/recovery_password.jsp" class="text-dark font-weight-bold">Forgot password ?</a></p>
                                                 <div class="form-group">
                                                     <div class="custom-control m-0 custom-checkbox">
                                                         <input type="checkbox" class="custom-control-input" id="customCheck1">
@@ -88,6 +79,18 @@
             </div>
         </section><!--end section-->
         <!-- Hero End -->
+
+        <script>
+            let empty = document.querySelectorAll('.row > div');
+
+            empty.forEach(function (element) {
+
+                if (element.textContent === '') {
+                    element.previousElementSibling.style.display = 'none';
+                    element.style.display = 'none';
+                }
+            });
+        </script>
 
         <!-- javascript -->
         <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>

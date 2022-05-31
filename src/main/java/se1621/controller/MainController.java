@@ -13,10 +13,12 @@ import jakarta.servlet.http.HttpServletResponse;
 public class MainController extends HttpServlet {
 
     private static final String SIGNUP_CONTROLLER = "SignUpController";
-    private static final String SIGNUP = "Signup";
+    private static final String SIGNUP = "SignUp";
     private static final String ERROR = "error.jsp";
     private static final String LOGIN_CONTROLLER = "LoginController";
     private static final String LOGIN = "Login";
+    private static final String RECOVERY_PASSWORD_CONTROLLER = "RecoveryPasswordController";
+    private static final String RECOVERY_PASSWORD = "RecoveryPassword";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,6 +31,8 @@ public class MainController extends HttpServlet {
                 url = LOGIN_CONTROLLER;
             } else if (SIGNUP.equals(action)) {
                 url = SIGNUP_CONTROLLER;
+            } else if (RECOVERY_PASSWORD.equals(action)) {
+                url = RECOVERY_PASSWORD_CONTROLLER;
             } else {
                 url = ERROR;
             }
