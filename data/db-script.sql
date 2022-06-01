@@ -52,7 +52,8 @@ GO
 
 INSERT INTO tblRole(roleID, roleName) 
 VALUES(N'AD', N'Admin'),
-      (N'US', N'User')
+      (N'US', N'User'),
+	  (N'HR', N'Human Resource')
 GO
 
 IF OBJECT_ID('dbo.tblCompany', 'u') IS NOT NULL 
