@@ -17,14 +17,18 @@ public class MainController extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private static final String LOGIN_CONTROLLER = "LoginController";
     private static final String LOGIN = "Login";
+    private static final String SEARCH_COMPANYID_CONTROLLER = "SearchCompanyIDController";
+    private static final String SEARCH = "Search";
     private static final String CREATECOM_CONTROLLER = "CreateCompanyInfoController";
     private static final String CREATECOM = "Create CompanyInfo";
     private static final String CHOOSECOMPANY_CONTROLLER = "ChooseCompanyController";
     private static final String CHOOSECOMPANY = "Choose Company";
     private static final String CREATERESUME_CONTROLLER = "CreateResumeController";
     private static final String CREATERESUME = "Submit Resume";
-    
-    
+    private static final String POSTJOB_CONTROLLER = "PostJobController";
+    private static final String POSTJOB = "Post a Job";
+        
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -36,12 +40,17 @@ public class MainController extends HttpServlet {
                 url = LOGIN_CONTROLLER;
             } else if (SIGNUP.equals(action)) {
                 url = SIGNUP_CONTROLLER;
+
+            }else if (SEARCH.equals(action)) {
+                url = SEARCH_COMPANYID_CONTROLLER;
             } else if (CREATECOM.equals(action)) {
                 url = CREATECOM_CONTROLLER;
             } else if (CHOOSECOMPANY.equals(action)) {
                 url = CHOOSECOMPANY_CONTROLLER;
             } else if (CREATERESUME.equals(action)) {
                 url = CREATERESUME_CONTROLLER;
+            } else if (POSTJOB.equals(action)) {
+                url = POSTJOB_CONTROLLER;
             } 
             else {
                 url = ERROR;

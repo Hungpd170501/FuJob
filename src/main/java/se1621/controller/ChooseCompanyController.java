@@ -23,7 +23,7 @@ import se1621.dto.User;
 public class ChooseCompanyController extends HttpServlet {
 
     private static final String ERROR = "/view/choose-company.jsp";
-    private static final String SUCCESS = "/view/company-detail.jsp";
+    private static final String SUCCESS = "/MainController?action=Search&search=";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -43,7 +43,7 @@ public class ChooseCompanyController extends HttpServlet {
             UserDAO dao = new UserDAO();
             boolean check = dao.updateCompanyID(user, companyID);
             if (check) {
-                url = SUCCESS;
+                url = SUCCESS + companyID;
             }
         } catch (Exception e) {
             log("Error at UpdateController: " + e.toString());

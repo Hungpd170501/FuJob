@@ -5,7 +5,13 @@
 package se1621.dao;
 
 import java.sql.Connection;
-
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import se1621.dto.CompanyInfo;
+import se1621.utils.DBUtils;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +30,7 @@ public class CompanyInfoDAO {
     private static final String GETLISTCOMPANY = "SELECT * FROM tblCompany";
     private static final String GETCOMID = "SELECT companyID FROM tblCompany WHERE companyName=?";
     private static final String CHECK_DUPLICATE = "SELECT companyID FROM tblCompany WHERE companyName=?";
+    private static final String SEARCH = "SELECT companyID, companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar FROM tblCompany WHERE companyID = ?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -66,9 +73,7 @@ public class CompanyInfoDAO {
         }
         return check;
     }
-    
-    
-    
+
     public List<CompanyInfo> getListCompany() throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -89,7 +94,7 @@ public class CompanyInfoDAO {
                     String companyOverview = rs.getString("companyOverview");
                     String avatar = rs.getString("avatar");
                     CompanyInfo companyInfo = new CompanyInfo(companyID, companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar);
-                    
+
                     list.add(companyInfo);
                 }
                 return list;
@@ -110,12 +115,12 @@ public class CompanyInfoDAO {
         }
         return null;
     }
-    
+
     public boolean checkDuplicate(String companyName) throws SQLException {
         boolean check = false;
-         conn = null;
-         preStm = null;
-         rs = null;
+        conn = null;
+        preStm = null;
+        rs = null;
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
@@ -141,9 +146,9 @@ public class CompanyInfoDAO {
         }
         return check;
     }
-    
+
     public int getCompanyID(String companyName) throws SQLException {
-        int companyID=0;
+        int companyID = 0;
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
@@ -171,5 +176,90 @@ public class CompanyInfoDAO {
         }
         return companyID;
     }
-    
+
+    public List<CompanyInfo> getListCompany(int search) throws SQLException {
+        List<CompanyInfo> listCompany = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SEARCH);
+//              ptm.setString(1, "%" + search + "%");
+                ptm.setInt(1, search);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int companyID = rs.getInt("companyID");
+                    String companyName = rs.getString("companyName");
+                    String address = rs.getString("address");
+                    String website = rs.getString("website");
+                    String gmail = rs.getString("gmail");
+                    String phone = rs.getString("phone");
+                    String typeCompany = rs.getString("typeCompany");
+                    String establishedYear = rs.getString("establishedYear");
+                    int numberOfEmployee = rs.getInt("numberOfEmployee");
+                    String companyOverview = rs.getString("companyOverview");
+                    String avatar = rs.getString("avatar");
+                    listCompany.add(new CompanyInfo(companyID, companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listCompany;
+    }
+
+    public List<CompanyInfo> getListCompany_v2() throws SQLException {
+        try {
+            String query = "SELECT* FROM tblCompany";
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+
+            }
+            preStm = conn.prepareStatement(query);
+            rs = preStm.executeQuery();
+            List<CompanyInfo> listCompany = new ArrayList<>();
+            while (rs.next()) {
+                int companyID = rs.getInt("companyID");
+                String companyName = rs.getString("companyName");
+                String address = rs.getString("address");
+                String website = rs.getString("website");
+                String gmail = rs.getString("gmail");
+                String phone = rs.getString("phone");
+                String typeCompany = rs.getString("typeCompany");
+                String establishedYear = rs.getString("establishedYear");
+                int numberOfEmployee = rs.getInt("numberOfEmployee");
+                String companyOverview = rs.getString("companyOverview");
+                String avatar = rs.getString("avatar");
+                CompanyInfo company = new CompanyInfo(companyID, companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar);
+                listCompany.add(company);
+            }
+            return listCompany;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+
 }

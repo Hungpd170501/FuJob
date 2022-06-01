@@ -47,11 +47,12 @@
 
                         <div class="col-12 mt-3">
                             <div class="custom-form p-4 border rounded">
-                                <label class="col-md-12">
-                                    <input type="file" style="display: none" id="imageFile" name="avatar" >
-                                    <img style="cursor:  pointer" id="image"   src="https://via.placeholder.com/400X400//88929f/5a6270C/O https://placeholder.com/" class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill" alt="" >
-                                </label>
+
                                 <form action="/FuJob/MainController" method="POST">
+                                    <label class="col-md-12">
+                                        <input type="file" style="display: none" id="imageFile" name="avatar" >
+                                        <img style="cursor:  pointer" id="image"   src="https://via.placeholder.com/400X400//88929f/5a6270C/O https://placeholder.com/" class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill" alt="" >
+                                    </label>
                                     <div class="row mt-4">
                                         <div class="col-md-4">
                                             <div class="form-group app-label">
@@ -116,8 +117,8 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group app-label">
-                                                <label class="text-muted">GPA<span class="text-danger">*</span> :</label>
-                                                <input id="gpa" name="gpa" type="text" class="form-control resume" required="" placeholder="8/10 ">
+                                                <label class="text-muted">GPA:</label>
+                                                <input id="gpa" name="gpa" type="text" class="form-control resume" placeholder="8/10 ">
                                             </div>
                                         </div>
 
@@ -146,8 +147,8 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group app-label">
-                                                <label class="text-muted">Your Website<span class="text-danger">*</span> :</label>
-                                                <input id="website" name="website" type="text" class="form-control resume" required="" placeholder="website, github, facebook,... ">
+                                                <label class="text-muted">Your Website:</label>
+                                                <input id="website" name="website" type="text" class="form-control resume" placeholder="website, github, facebook,... ">
                                             </div>
                                         </div>
                                         <div class="col-md-12">

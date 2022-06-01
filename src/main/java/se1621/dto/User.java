@@ -27,4 +27,5 @@ public class User {
     private String email;
     Role role;
     private int companyID;
+        
 }

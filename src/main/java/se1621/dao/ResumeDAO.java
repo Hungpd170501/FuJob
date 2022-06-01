@@ -55,6 +55,8 @@ public class ResumeDAO {
 
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
+        }catch (Exception e) {
+            e.printStackTrace();
         } finally {
 
             if (preStm != null) {
