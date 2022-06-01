@@ -177,4 +177,4 @@ INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (1, N'Clerical 
 (47, N'Newspaper / Editor / Publishing'),
 (48, N'Telecommunications '),
  (49, N'Executive Management'),
- (50, N'Other'),
+ (50, N'Other')
