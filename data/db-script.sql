@@ -130,51 +130,51 @@ CREATE TABLE tblCategory (
 );
 GO
 
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (1, N'Clerical / Administrative')
- VALUES (4, N'Human Resources')
-(5, N'Interpreter / Translator')
-(6, N'Legal')
- (7, N'Customer Service')
-(8, N'Education')
-(9, N'Health Care')
- (10, N'Security')
- (11, N'Accounting / Audit')
- (12, N'Banking / Securities')
- (13, N'Finance / Investment')
- (14, N'Insurance ')
- (15, N'Advertising / Promotion / PR')
- (16, N'Consulting')
-(17, N'Fashion')
-(18, N'Household')
- (19, N'Marketing')
- (20, N'Sales')
-(21, N'Export / Import ')
- (22, N'Purchasing')
-(23, N'Transportation / Logistics / Warehouse')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (24, N'IT - Hardware')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (25, N'IT - Software')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (26, N'Travel ')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (27, N'Restaurant / Food Service')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (28, N'Hotel')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (29, N'Electrical / Electronics')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (30, N'Engineering / Mechanical')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (31, N'Environment / Waste Services')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (32, N'Maintenance ')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (33, N'Pharmaceutical / Biotech')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (34, N'Automotive ')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (35, N'Agriculture / Forestry')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (36, N'Chemical / Biochemical / Food Science ')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (37, N'Fishery ')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (38, N'Manufacturing / Operations ')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (39, N'Oil / Gas / Mineral ')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (40, N'Textiles / Garments')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (41, N'Wood ')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (42, N'Architecture')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (43, N'Construction')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (44, N'Interior / Exterior')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (45, N'Real Estate')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (46, N'Arts / Entertainment')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (47, N'Newspaper / Editor / Publishing')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (48, N'Telecommunications ')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (49, N'Executive Management')
-INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (50, N'Other')
+INSERT [dbo].[tblCategory] ([categoryID], [categoryName]) VALUES (1, N'Clerical / Administrative'),
+(4, N'Human Resources'),
+(5, N'Interpreter / Translator'),
+(6, N'Legal'),
+ (7, N'Customer Service'),
+(8, N'Education'),
+(9, N'Health Care'),
+ (10, N'Security'),
+ (11, N'Accounting / Audit'),
+ (12, N'Banking / Securities'),
+ (13, N'Finance / Investment'),
+ (14, N'Insurance '),
+ (15, N'Advertising / Promotion / PR'),
+ (16, N'Consulting'),
+(17, N'Fashion'),
+(18, N'Household'),
+ (19, N'Marketing'),
+ (20, N'Sales'),
+(21, N'Export / Import '),
+ (22, N'Purchasing'),
+(23, N'Transportation / Logistics / Warehouse'),
+ (24, N'IT - Hardware'),
+ (25, N'IT - Software'),
+ (26, N'Travel '),
+ (27, N'Restaurant / Food Service'),
+ (28, N'Hotel'),
+ (29, N'Electrical / Electronics'),
+ (30, N'Engineering / Mechanical'),
+(31, N'Environment / Waste Services'),
+(32, N'Maintenance '),
+(33, N'Pharmaceutical / Biotech'),
+(34, N'Automotive '),
+(35, N'Agriculture / Forestry'),
+36, N'Chemical / Biochemical / Food Science '),
+(37, N'Fishery '),
+ (38, N'Manufacturing / Operations '),
+(39, N'Oil / Gas / Mineral '),
+ (40, N'Textiles / Garments'),
+VALUES (41, N'Wood '),
+ VALUES (42, N'Architecture'),
+VALUES (43, N'Construction'),
+VALUES (44, N'Interior / Exterior'),
+(45, N'Real Estate'),
+ (46, N'Arts / Entertainment'),
+(47, N'Newspaper / Editor / Publishing'),
+(48, N'Telecommunications '),
+ (49, N'Executive Management'),
+ (50, N'Other')
