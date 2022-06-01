@@ -47,7 +47,7 @@ public class LoginGoogleHandler extends HttpServlet {
         String url = ERROR;
         try {
             String code = request.getParameter("code");
-            if (code != null || !"".equals(code)) {
+            if (code != null) {
                 URL obj = new URL(GOOGLE_LINK_GET_TOKEN);
                 HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
                 con.setRequestMethod("POST");
@@ -58,7 +58,7 @@ public class LoginGoogleHandler extends HttpServlet {
                         + "&redirect_uri=" + GOOGLE_REDIRECT_URI
                         + "&grant_type=" + GOOGLE_GRANT_TYPE;
                 con.setDoOutput(true);
-                try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                try ( DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
                     wr.writeBytes(postParams);
                     wr.flush();
                 }
@@ -66,7 +66,7 @@ public class LoginGoogleHandler extends HttpServlet {
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         con.getInputStream()));
                 String inputLine;
-                StringBuffer responseToken = new StringBuffer();
+                StringBuilder responseToken = new StringBuilder();
                 while ((inputLine = in.readLine()) != null) {
                     responseToken.append(inputLine);
                 }
@@ -83,36 +83,40 @@ public class LoginGoogleHandler extends HttpServlet {
                 if (user != null) {
                     switch (user.getStatus()) {
                         case 0:
-                            request.setAttribute("LOGIN_MESSEAGE", "Your account has been deactivated. Please contact to FuJob Admin to reactivate it!");
+                            request.setAttribute("LOGIN_MESSAGE", "Your account has been deactivated. Please contact to FuJob Admin to reactivate it!");
                             break;
                         case 2:
-                            request.setAttribute("LOGIN_MESSEAGE", "Making sure you are secure--it's what we do. Please check your email for a link to confirm you are you!!");
+                            request.setAttribute("LOGIN_MESSAGE", "Making sure you are secure--it's what we do. Please check your email for a link to confirm you are you!!");
                             break;
                         default:
                             session.setAttribute("LOGIN_USER", user);
-                            if (null == user.getRole().getRoleID()) {
-                                    request.setAttribute("LOGIN_MESSEAGE", "Your role is not allow!");
-                                    } else switch (user.getRole().getRoleID()) {
-                                            case "AD":
-                                            url = ADMIN_PAGE;
-                                            break;
-                                            case "US":
-                                            url = USER_PAGE;
-                                            break;
-                                            case "HR":
-                                            url = USER_PAGE;
-                                            break;
-                                            default:
-                                            request.setAttribute("LOGIN_MESSEAGE", "Your role is not allow!");
-                                            break;
-                                            }   break;
+                            if ((user.getRole().getRoleID()) != null) {
+                                switch (user.getRole().getRoleID()) {
+                                    case "AD":
+                                        url = ADMIN_PAGE;
+                                        break;
+                                    case "US":
+                                        url = USER_PAGE;
+                                        break;
+                                    case "HR":
+                                        url = USER_PAGE;
+                                        break;
+                                    default:
+                                        request.setAttribute("LOGIN_MESSAGE", "Your role is not allow!");
+                                        break;
+
+                                }
+                            } else {
+                                request.setAttribute("LOGIN_MESSAGE", "Your role is not allow!");
+                            }
                     }
                 } else {
-                    url=SIGNUP_PAGE+googlePojo.getEmail();
+                    url = SIGNUP_PAGE + googlePojo.getEmail();
                 }
+
             }
         } catch (Exception e) {
-            request.setAttribute("LOGIN_MESSEAGE", "Opp Something wrong!");
+            request.setAttribute("LOGIN_MESSAGE", "Opp Something wrong!");
             log("Error at LoginGoogleHandler: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

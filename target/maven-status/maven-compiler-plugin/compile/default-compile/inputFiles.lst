@@ -6,6 +6,7 @@ D:\SWP\Workspace\FuJob\src\main\java\se1621\dto\Role.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\dto\User.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\utils\EmailUtils.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\dao\AuthDAO.java
+D:\SWP\Workspace\FuJob\src\main\java\se1621\utils\GoogleRacaptcha.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\utils\JwtTokenUtils.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\controller\LoginController.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\dao\CategoryDAO.java

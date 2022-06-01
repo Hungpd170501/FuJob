@@ -60,6 +60,7 @@ se1621.utils
 'D:/SWP/Workspace/FuJob/src/main/java/se1621/service/EmailServiceIml.java'
 'D:/SWP/Workspace/FuJob/src/main/java/se1621/utils/DBUtils.java'
 'D:/SWP/Workspace/FuJob/src/main/java/se1621/utils/EmailUtils.java'
+'D:/SWP/Workspace/FuJob/src/main/java/se1621/utils/GoogleRacaptcha.java'
 'D:/SWP/Workspace/FuJob/src/main/java/se1621/utils/Helper.java'
 'D:/SWP/Workspace/FuJob/src/main/java/se1621/utils/JwtTokenUtils.java'
 C:\Users\ACER\.m2\repository\org\apache\commons\commons-lang3\3.12.0\commons-lang3-3.12.0.jar = 1653583907139
@@ -92,24 +93,24 @@ C:\Users\ACER\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api-parent\3.0.1\
 C:\Users\ACER\.m2\repository\javax\xml\bind\jaxb-api\2.3.0\jaxb-api-2.3.0.jar = 1653844278851
 D:\SWP\Workspace\FuJob\src\main\java = 1653744411839
 D:\SWP\Workspace\FuJob\target\generated-sources\annotations = 1654081180867
-D:\SWP\Workspace\FuJob\target\apidocs\allclasses-index.html = 1654081204586
-D:\SWP\Workspace\FuJob\target\apidocs\allclasses.html = 1654081204665
-D:\SWP\Workspace\FuJob\target\apidocs\allpackages-index.html = 1654081204594
-D:\SWP\Workspace\FuJob\target\apidocs\constant-values.html = 1654081203512
-D:\SWP\Workspace\FuJob\target\apidocs\deprecated-list.html = 1654081204659
-D:\SWP\Workspace\FuJob\target\apidocs\element-list = 1654081203216
-D:\SWP\Workspace\FuJob\target\apidocs\help-doc.html = 1654081204689
-D:\SWP\Workspace\FuJob\target\apidocs\index-all.html = 1654081204559
-D:\SWP\Workspace\FuJob\target\apidocs\index.html = 1654081204679
-D:\SWP\Workspace\FuJob\target\apidocs\member-search-index.js = 1654081204554
-D:\SWP\Workspace\FuJob\target\apidocs\member-search-index.zip = 1654081204556
-D:\SWP\Workspace\FuJob\target\apidocs\overview-summary.html = 1654081204684
-D:\SWP\Workspace\FuJob\target\apidocs\overview-tree.html = 1654081204393
-D:\SWP\Workspace\FuJob\target\apidocs\package-search-index.js = 1654081204467
-D:\SWP\Workspace\FuJob\target\apidocs\package-search-index.zip = 1654081204487
-D:\SWP\Workspace\FuJob\target\apidocs\script.js = 1654081204748
-D:\SWP\Workspace\FuJob\target\apidocs\search.js = 1654081204753
-D:\SWP\Workspace\FuJob\target\apidocs\serialized-form.html = 1654081203556
-D:\SWP\Workspace\FuJob\target\apidocs\stylesheet.css = 1654081204745
-D:\SWP\Workspace\FuJob\target\apidocs\type-search-index.js = 1654081204544
-D:\SWP\Workspace\FuJob\target\apidocs\type-search-index.zip = 1654081204552
+D:\SWP\Workspace\FuJob\target\apidocs\allclasses-index.html = 1654093544230
+D:\SWP\Workspace\FuJob\target\apidocs\allclasses.html = 1654093544260
+D:\SWP\Workspace\FuJob\target\apidocs\allpackages-index.html = 1654093544246
+D:\SWP\Workspace\FuJob\target\apidocs\constant-values.html = 1654093543147
+D:\SWP\Workspace\FuJob\target\apidocs\deprecated-list.html = 1654093544256
+D:\SWP\Workspace\FuJob\target\apidocs\element-list = 1654093542895
+D:\SWP\Workspace\FuJob\target\apidocs\help-doc.html = 1654093544376
+D:\SWP\Workspace\FuJob\target\apidocs\index-all.html = 1654093544109
+D:\SWP\Workspace\FuJob\target\apidocs\index.html = 1654093544268
+D:\SWP\Workspace\FuJob\target\apidocs\member-search-index.js = 1654093544103
+D:\SWP\Workspace\FuJob\target\apidocs\member-search-index.zip = 1654093544105
+D:\SWP\Workspace\FuJob\target\apidocs\overview-summary.html = 1654093544271
+D:\SWP\Workspace\FuJob\target\apidocs\overview-tree.html = 1654093543969
+D:\SWP\Workspace\FuJob\target\apidocs\package-search-index.js = 1654093544093
+D:\SWP\Workspace\FuJob\target\apidocs\package-search-index.zip = 1654093544097
+D:\SWP\Workspace\FuJob\target\apidocs\script.js = 1654093544394
+D:\SWP\Workspace\FuJob\target\apidocs\search.js = 1654093544398
+D:\SWP\Workspace\FuJob\target\apidocs\serialized-form.html = 1654093543197
+D:\SWP\Workspace\FuJob\target\apidocs\stylesheet.css = 1654093544391
+D:\SWP\Workspace\FuJob\target\apidocs\type-search-index.js = 1654093544099
+D:\SWP\Workspace\FuJob\target\apidocs\type-search-index.zip = 1654093544100
