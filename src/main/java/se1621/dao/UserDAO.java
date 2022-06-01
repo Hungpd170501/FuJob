@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import se1621.dto.CompanyInfo;
 import se1621.dto.Role;
 import se1621.dto.User;
 import se1621.utils.DBUtils;
@@ -16,7 +17,7 @@ public class UserDAO {
 
     private static final String CHECK_DUPLICATE = "SELECT userID FROM tblUser WHERE email=?";
     private static final String SINGUP = "INSERT INTO tblUser(userName, fullName, email, password, phone, roleID, status) VALUES(?,?,?,?,?,?,2)";
-
+    private static final String UPDATECOMID = "UPDATE tblUser SET userName=?, fullName=?, email=?, phone=?, roleID=?, companyID=? WHERE userID=?";
     private Connection conn;
     private PreparedStatement preStm;
     private ResultSet rs;
@@ -97,6 +98,7 @@ public class UserDAO {
             if (rs.next()) {
                 int userID = rs.getInt("userID");
                 String fullName = rs.getString("fullName");
+                int companyID = rs.getInt("companyID");
                 String phone = rs.getString("phone");
                 String username = rs.getString("username");
                 String roleID = rs.getString("roleID");
@@ -107,6 +109,7 @@ public class UserDAO {
                         .username(username)
                         .fullName(fullName)
                         .password(password)
+                        .companyID(companyID)
                         .phone(phone)
                         .email(email)
                         .role(role)
@@ -184,6 +187,33 @@ public class UserDAO {
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, userEmail);
             check = preStm.executeUpdate() > 0;
+        } catch (SQLException e) {
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    public boolean updateCompanyID(User user, int companyID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UPDATECOMID);
+                preStm.setString(1, user.getUsername());
+                preStm.setString(2, user.getFullName());
+                preStm.setString(3, user.getEmail());
+                preStm.setString(4, user.getPhone());
+                preStm.setString(5, user.getRole().getRoleID());
+                preStm.setInt(6, companyID);
+                preStm.setInt(7, user.getUserID());
+                check = preStm.executeUpdate() > 0;
+            }
         } catch (SQLException e) {
         } finally {
             if (preStm != null) {

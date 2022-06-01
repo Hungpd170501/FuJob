@@ -109,8 +109,8 @@
                     <ul class="submenu">
                         <li><a href="${pageContext.request.contextPath}/view/create-resume.jsp">Edit your resume</a></li>
                         <li><a href="${pageContext.request.contextPath}/view/candidates-profile.jsp">View your resume</a></li>
-                    </ul>
-                </li>                
+                            </ul>  
+                        </li>
                 <%
                 } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
                 %>

@@ -17,5 +17,5 @@ import lombok.ToString;
 @AllArgsConstructor
 public class Role {
     String roleID;
-    String roleName;   
+    String roleName; 
 }
