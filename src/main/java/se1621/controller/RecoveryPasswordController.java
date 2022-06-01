@@ -32,9 +32,11 @@ public class RecoveryPasswordController extends HttpServlet {
             String email = request.getParameter("email");
             UserDAO userDAO = new UserDAO();
             User user = userDAO.checkUserByEmail(email);
-            if (user != null) {
+            if (user == null||user.getStatus()!=1) {
+                request.setAttribute("RECOVERY_PASSWORD_MESSAGE", "Opp somthing wrong! Maybe the email you enter is incorrect or not verified!");
+            } else {
                 EmailServiceIml emailServiceIml = new EmailServiceIml();
-                emailServiceIml.sendEmail(getServletContext(), user, "forgot");
+                new Thread(() -> emailServiceIml.sendEmail(getServletContext(), user, "forgot")).start();
                 url = SUCCESS;
             }
         } catch (Exception e) {

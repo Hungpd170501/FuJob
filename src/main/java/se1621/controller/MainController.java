@@ -17,8 +17,12 @@ public class MainController extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private static final String LOGIN_CONTROLLER = "LoginController";
     private static final String LOGIN = "Login";
+    private static final String LOGOUT_CONTROLLER = "LogoutController";
+    private static final String LOGOUT = "Logout";
     private static final String RECOVERY_PASSWORD_CONTROLLER = "RecoveryPasswordController";
     private static final String RECOVERY_PASSWORD = "RecoveryPassword";
+    private static final String CHANGE_PASSWORD_CONTROLLER = "ChangePasswordController";
+    private static final String CHANGE_PASSWORD = "ChangePassword";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -33,6 +37,10 @@ public class MainController extends HttpServlet {
                 url = SIGNUP_CONTROLLER;
             } else if (RECOVERY_PASSWORD.equals(action)) {
                 url = RECOVERY_PASSWORD_CONTROLLER;
+            }else if (LOGOUT.equals(action)) {
+                url = LOGOUT_CONTROLLER;
+            }else if (CHANGE_PASSWORD.equals(action)) {
+                url = CHANGE_PASSWORD_CONTROLLER;
             } else {
                 url = ERROR;
             }

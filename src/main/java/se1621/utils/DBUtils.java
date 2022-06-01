@@ -22,10 +22,6 @@ public class DBUtils {
     private final String userID = "sa";
     private final String password = "sa";
 
-
-
-
-
     private DBUtils(){
         String url = "jdbc:jtds:sqlserver://"+serverName+":"+portNumber +"/"+dbName;
         try {

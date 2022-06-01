@@ -36,7 +36,7 @@
                             Sorry, an error has occured, Requested page not found!
                         </div>
                         <div class="error-actions">
-                            <a href="shopping.jsp" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                            <a href="${pageContext.request.contextPath}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
                                 Take Me Home </a>
                         </div>
                     </div>

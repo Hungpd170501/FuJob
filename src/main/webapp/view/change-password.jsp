@@ -26,11 +26,12 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-4 col-md-6">
-                                    <div class="login_page bg-white shadow rounded p-4">
-                                        <div class="text-center">
-                                            <h4 class="mb-4">Change password for @${sessionScope.LOGIN_USER.email}</h4>  
+                                    <div class="alert shadow alert-light hide-if-empty text-center" role="alert">${requestScope.CHANGE_PASSWORD_MESSAGE}</div>
+                                <div class="login_page bg-white shadow rounded p-4">
+                                    <div class="text-center">
+                                        <h4 class="mb-4">Change password for ${sessionScope.LOGIN_USER.email}</h4>  
                                     </div>
-                                    <form class="login-form" id="recovery-pasword-form" method="post" action="/FuJob/MainController">
+                                    <form class="login-form" id="recovery-pasword-form" method="post" action="/FuJob/MainController" oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Password do not match!" : "")'>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group position-relative">
@@ -58,6 +59,19 @@
             </div>
         </section><!--end section-->
         <!-- Hero End -->
+
+        <script>
+            let empty = document.querySelectorAll('.row > div');
+
+            empty.forEach(function (element) {
+
+                if (element.textContent === '') {
+                    element.previousElementSibling.style.display = 'none';
+                    element.style.display = 'none';
+                }
+            });
+        </script>
+
 
         <!-- javascript -->
         <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>

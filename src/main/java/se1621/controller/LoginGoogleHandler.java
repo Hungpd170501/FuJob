@@ -81,23 +81,31 @@ public class LoginGoogleHandler extends HttpServlet {
                 User user = dao.checkUserByEmail(googlePojo.getEmail());
                 HttpSession session = request.getSession();
                 if (user != null) {
-                    if (user.getStatus() == 0) {
-                        request.setAttribute("LOGIN_MESSEAGE", "Your account has been deactivated. Please contact to FuJob Admin to reactivate it!");
-                    } else {
-                        session.setAttribute("LOGIN_USER", user);
-                        if (null == user.getRole().getRoleID()) {
-                            request.setAttribute("LOGIN_MESSEAGE", "Your role is not allow!");
-                        } else switch (user.getRole().getRoleID()) {
-                            case "AD":
-                                url = ADMIN_PAGE;
-                                break;
-                            case "US":
-                                url = USER_PAGE;
-                                break;
-                            default:
-                                request.setAttribute("LOGIN_MESSEAGE", "Your role is not allow!");
-                                break;
-                        }
+                    switch (user.getStatus()) {
+                        case 0:
+                            request.setAttribute("LOGIN_MESSEAGE", "Your account has been deactivated. Please contact to FuJob Admin to reactivate it!");
+                            break;
+                        case 2:
+                            request.setAttribute("LOGIN_MESSEAGE", "Making sure you are secure--it's what we do. Please check your email for a link to confirm you are you!!");
+                            break;
+                        default:
+                            session.setAttribute("LOGIN_USER", user);
+                            if (null == user.getRole().getRoleID()) {
+                                    request.setAttribute("LOGIN_MESSEAGE", "Your role is not allow!");
+                                    } else switch (user.getRole().getRoleID()) {
+                                            case "AD":
+                                            url = ADMIN_PAGE;
+                                            break;
+                                            case "US":
+                                            url = USER_PAGE;
+                                            break;
+                                            case "HR":
+                                            url = USER_PAGE;
+                                            break;
+                                            default:
+                                            request.setAttribute("LOGIN_MESSEAGE", "Your role is not allow!");
+                                            break;
+                                            }   break;
                     }
                 } else {
                     url=SIGNUP_PAGE+googlePojo.getEmail();

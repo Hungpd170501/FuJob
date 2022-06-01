@@ -15,7 +15,7 @@ import se1621.utils.DBUtils;
 public class UserDAO {
 
     private static final String CHECK_DUPLICATE = "SELECT userID FROM tblUser WHERE email=?";
-    private static final String SINGUP = "INSERT INTO tblUser(userName, fullName, email, password, phone, roleID, status) VALUES(?,?,?,?,?,?,1)";
+    private static final String SINGUP = "INSERT INTO tblUser(userName, fullName, email, password, phone, roleID, status) VALUES(?,?,?,?,?,?,2)";
 
     private Connection conn;
     private PreparedStatement preStm;
@@ -154,5 +154,45 @@ public class UserDAO {
             this.closeConnection();;
         }
         return user;
+    }
+
+    public boolean updateUserPassword(String userEmail, String newPassword) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            String sql = "UPDATE tblUser SET password=? WHERE email=?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, newPassword);
+            preStm.setString(2, userEmail);
+            check = preStm.executeUpdate() > 0;
+        } catch (SQLException e) {
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    public boolean activeUserAccount(String userEmail) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            String sql = "UPDATE tblUser SET status=1 WHERE email=?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, userEmail);
+            check = preStm.executeUpdate() > 0;
+        } catch (SQLException e) {
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 }

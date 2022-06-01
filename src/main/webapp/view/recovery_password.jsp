@@ -26,36 +26,47 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-4 col-md-6">
-                                    <div class="login_page bg-white shadow rounded p-4">
-                                        <div class="text-center">
-                                            <h4 class="mb-4">Reset your password</h4>  
-                                        </div>
-                                        <form class="login-form" id="recovery-pasword-form" method="post" action="/FuJob/MainController">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <p class="text-muted">Enter your user account's verified email address and we will send you a password reset link.</p>
-                                                    <div class="form-group position-relative">
-                                                        <label>Email address <span class="text-danger">*</span></label>
-                                                        <input type="email" class="form-control" placeholder="Enter Your Email Address" name="email" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <input type="hidden" name="action" value="RecoveryPassword">
-                                                    <button class="btn btn-primary w-100"  type="submit" form="recovery-pasword-form">Send password reset email</button>
+                                    <div class="alert shadow alert-light hide-if-empty text-center" role="alert">${requestScope.RECOVERY_PASSWORD_MESSAGE}</div>
+                                <div class="login_page bg-white shadow rounded p-4">
+                                    <div class="text-center">
+                                        <h4 class="mb-4">Reset your password</h4>  
+                                    </div>
+                                    <form class="login-form" id="recovery-pasword-form" method="post" action="/FuJob/MainController">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <p class="text-muted">Enter your user account's verified email address and we will send you a password reset link.</p>
+                                                <div class="form-group position-relative">
+                                                    <label>Email address <span class="text-danger">*</span></label>
+                                                    <input type="email" class="form-control" placeholder="Enter Your Email Address" name="email" required="">
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
-                                </div> <!--end col-->
-                            </div><!--end row-->
-                        </div> <!--end container-->
-                    </div>
+                                            <div class="col-lg-12">
+                                                <input type="hidden" name="action" value="RecoveryPassword">
+                                                <button class="btn btn-primary w-100"  type="submit" form="recovery-pasword-form">Send password reset email</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div> <!--end col-->
+                        </div><!--end row-->
+                    </div> <!--end container-->
                 </div>
-            </section><!--end section-->
-            <!-- Hero End -->
+            </div>
+        </section><!--end section-->
+        <!-- Hero End -->
+        <script>
+            let empty = document.querySelectorAll('.row > div');
 
-            <!-- javascript -->
-            <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
+            empty.forEach(function (element) {
+
+                if (element.textContent === '') {
+                    element.previousElementSibling.style.display = 'none';
+                    element.style.display = 'none';
+                }
+            });
+        </script>
+        <!-- javascript -->
+        <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/bootstrap.bundle.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/jquery.easing.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/plugins.js"></script>

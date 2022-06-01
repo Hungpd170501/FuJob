@@ -12,12 +12,14 @@ D:\SWP\Workspace\FuJob\src\main\java\se1621\dao\CategoryDAO.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\service\EmailService.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\controller\MainController.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\dto\CompanyInfo.java
+D:\SWP\Workspace\FuJob\src\main\java\se1621\controller\ChangePasswordController.java
+D:\SWP\Workspace\FuJob\src\main\java\se1621\controller\EmailVerifyHandler.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\dto\UserGoogle.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\service\EmailServiceIml.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\utils\Helper.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\constant\Constant.java
-D:\SWP\Workspace\FuJob\src\main\java\se1621\test\JavaTest.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\dao\JobDAO.java
+D:\SWP\Workspace\FuJob\src\main\java\se1621\controller\LogoutController.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\dto\Category.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\dao\CompanyInfoDAO.java
 D:\SWP\Workspace\FuJob\src\main\java\se1621\controller\SignUpController.java

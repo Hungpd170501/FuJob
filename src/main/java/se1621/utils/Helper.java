@@ -12,11 +12,11 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class Helper {
 
-    private String hashPassword(String plainTextPassword) {
+    public static String hashPassword(String plainTextPassword) {
         return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
     }
 
-    private boolean checkPass(String plainPassword, String hashedPassword) {
+    public boolean checkPass(String plainPassword, String hashedPassword) {
         return (BCrypt.checkpw(plainPassword, hashedPassword));
     }
 }

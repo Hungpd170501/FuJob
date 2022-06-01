@@ -10,8 +10,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import org.apache.commons.lang3.StringUtils;
 import se1621.dao.UserDAO;
 import se1621.dto.User;
+import se1621.utils.Helper;
 import se1621.utils.JwtTokenUtils;
 
 @WebServlet(name = "RecoveryPasswordHandler", urlPatterns = {"/RecoveryPasswordHandler"})
@@ -32,11 +35,17 @@ public class RecoveryPasswordHandler extends HttpServlet {
                     if (!jwtTokenUtils.isTokenExpired(token)) {
                         UserDAO userDAO = new UserDAO();
                         User user = userDAO.checkUserByEmail(jwtTokenUtils.getEmailFromToken(token));
-                        if(user!=null){
-                            url=SUCCESS;
+                        Helper helper = new Helper();
+                        if (user != null && helper.checkPass(user.getPassword(), jwtTokenUtils.getPasswordFromToken(token))) {
+                            HttpSession session = request.getSession();
+                            session.setAttribute("LOGIN_USER", user);
+                            url = SUCCESS;
                         }
                     }
                 }
+            }
+            if(!StringUtils.equals(url, SUCCESS)){
+                request.setAttribute("RECOVERY_PASSWORD_MESSAGE", "It looks like you clicked on an invalid password reset link. Please try again!");
             }
         } catch (Exception e) {
             log("Error at RecoveryPasswordHandler: " + e.toString());

@@ -12,6 +12,10 @@
         <servlet-name>RecoveryPasswordHandler</servlet-name>
         <servlet-class>se1621.controller.RecoveryPasswordHandler</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EmailVerifyHandler</servlet-name>
+        <servlet-class>se1621.controller.EmailVerifyHandler</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -41,13 +45,17 @@
         <servlet-name>RecoveryPasswordHandler</servlet-name>
         <url-pattern>/RecoveryPasswordHandler</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmailVerifyHandler</servlet-name>
+        <url-pattern>/EmailVerifyHandler</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>/view/index.jsp</welcome-file>
+        <welcome-file>view/index.jsp</welcome-file>
     </welcome-file-list>
     <error-page>
         <location>/view/error.jsp</location>

@@ -36,7 +36,7 @@
                                             userError = new UserError();
                                         }
                                     %>
-                                    <form action="/FuJob/MainController" method="POST" class="login-form" oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Password do not match!" : "")'>
+                                    <form action="${pageContext.request.contextPath}/MainController" method="POST" class="login-form" oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Password do not match!" : "")'>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group position-relative">                                               
@@ -73,7 +73,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group position-relative">                                               
                                                     <label>Human Resource </label>
-                                                    <input type="radio" name="roleID" required="" value="US">
+                                                    <input type="radio" name="roleID" required="" value="HR">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -89,7 +89,7 @@
                                             </div>
 
                                             <div class="mx-auto">
-                                                <p class="mb-0 mt-3"><small class="text-dark mr-2">Already have an account ?</small> <a href="/FuJob/view/login.jsp" class="text-dark font-weight-bold">Sign in</a></p>
+                                                <p class="mb-0 mt-3"><small class="text-dark mr-2">Already have an account ?</small> <a href="${pageContext.request.contextPath}/view/login.jsp" class="text-dark font-weight-bold">Sign in</a></p>
                                             </div>
                                         </div>
                                     </form>

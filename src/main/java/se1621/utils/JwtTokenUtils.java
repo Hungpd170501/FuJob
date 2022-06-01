@@ -30,7 +30,8 @@ public class JwtTokenUtils {
     static final String CLAIM_KEY_PASSWORD = "password";
     static final String CLAIM_KEY_EMAIL = "email";
     private Long expiration = 900L;
-    private final String SECRET_KEY=Constant.TOKEN_SECRET_KEY;
+    private final String SECRET_KEY = Constant.TOKEN_SECRET_KEY;
+
     public String getUsernameFromToken(String token) {
         String username;
         try {
@@ -52,6 +53,7 @@ public class JwtTokenUtils {
         }
         return password;
     }
+
     public String getEmailFromToken(String token) {
         String password;
         try {
@@ -112,8 +114,17 @@ public class JwtTokenUtils {
 //    }
     public String generateToken(User userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
-        claims.put(CLAIM_KEY_PASSWORD, userDetails.getPassword());
+        claims.put(CLAIM_KEY_USERNAME, userDetails.getFullName());
+        claims.put(CLAIM_KEY_PASSWORD, Helper.hashPassword(userDetails.getPassword()));
+        claims.put(CLAIM_KEY_EMAIL, userDetails.getEmail());
+        claims.put(CLAIM_KEY_CREATED, new Date());
+        return generateToken(claims);
+    }
+
+    public String generateVerifyEmailToken(User userDetails) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(CLAIM_KEY_USERNAME, Helper.hashPassword(userDetails.getFullName()));
+        claims.put(CLAIM_KEY_PASSWORD, Helper.hashPassword(userDetails.getPassword()));
         claims.put(CLAIM_KEY_EMAIL, userDetails.getEmail());
         claims.put(CLAIM_KEY_CREATED, new Date());
         return generateToken(claims);
@@ -152,15 +163,15 @@ public class JwtTokenUtils {
                 && !isTokenExpired(token)
                 && StringUtils.equals(userDetails.getPassword(), token));
     }
-    
-    public Boolean canParseToken( final String compactToken ) {        
-        Boolean check=true;
-        try{
+
+    public Boolean canParseToken(final String compactToken) {
+        Boolean check = true;
+        try {
             Jwts.parser()
-                   .setSigningKey( SECRET_KEY )
-                   .parseClaimsJws(compactToken );
-        }catch(ExpiredJwtException | MalformedJwtException | SignatureException | UnsupportedJwtException | IllegalArgumentException e){
-            check=false;
+                    .setSigningKey(SECRET_KEY)
+                    .parseClaimsJws(compactToken);
+        } catch (ExpiredJwtException | MalformedJwtException | SignatureException | UnsupportedJwtException | IllegalArgumentException e) {
+            check = false;
         }
         return check;
     }
