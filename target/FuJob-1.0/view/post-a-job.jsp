@@ -138,23 +138,6 @@ What the job will do:
  ...."></textarea>
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-12">
-                                                <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item">
-                                                        <div class="input-group mt-2 mb-2">
-                                                            <div class="custom-file">
-                                                                <input type="file" name="cv" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                                                                <label class="custom-file-label rounded"><i class="mdi mdi-cloud-upload mr-1"></i> Upload Files</label>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-
-                                                    <li class="list-inline-item">
-                                                        <h6 class="text-muted mb-0">Upload Your CV</h6>
-                                                    </li>
-                                                </ul>
-                                            </div>
                                         </div>
 
                                         <div class="row">

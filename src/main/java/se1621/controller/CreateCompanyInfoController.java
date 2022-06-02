@@ -4,6 +4,7 @@
  */
 package se1621.controller;
 
+
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,7 +12,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import se1621.dao.CompanyInfoDAO;
 import se1621.dao.UserDAO;
 import se1621.dto.CompanyInfo;
@@ -27,10 +31,10 @@ import se1621.dto.User;
 public class CreateCompanyInfoController extends HttpServlet {
 
     private static final String ERROR = "/view/create-companyinfo.jsp";
-    private static final String SUCCESS = "/MainController?action=Search&search=";
+    private static final String SUCCESS = "/MainController?action=SearchCompanyID&searchCompanyID=";
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
@@ -115,7 +119,11 @@ public class CreateCompanyInfoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateCompanyInfoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -129,7 +137,11 @@ public class CreateCompanyInfoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateCompanyInfoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

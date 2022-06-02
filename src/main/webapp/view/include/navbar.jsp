@@ -108,7 +108,7 @@
                     </div>
                     <ul class="submenu">
                         <li><a href="${pageContext.request.contextPath}/view/create-resume.jsp">Edit your resume</a></li>
-                        <li><a href="${pageContext.request.contextPath}/view/candidates-profile.jsp">View your resume</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&searchResumeID=${sessionScope.LOGIN_USER.userID}">View your resume</a></li>
                             </ul>  
                         </li>
                 <%
@@ -116,17 +116,20 @@
                 %>
                 <li>
                     <div class="buy-button">
-                        <a href="post-a-job.jsp" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Post a Job</a>
+                        <a href="${pageContext.request.contextPath}/view/post-a-job.jsp" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Post a Job</a>
                     </div>
                 </li>
 
                 <li class="has-submenu">
+                    
                     <div class="buy-button">
-                        <div class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Your company info</div>
+                        <div class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Your company</div>
                     </div>
+                        
                     <ul class="submenu">
+                        <li><a href="${pageContext.request.contextPath}/view/choose-company.jsp">Your company info</a></li>
                         <li><a href="${pageContext.request.contextPath}/view/create-companyinfo.jsp">Edit your company info</a></li>
-                        <li><a href="${pageContext.request.contextPath}/view/company-detail.jsp">View your company info</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchCompanyID&searchCompanyID=${sessionScope.LOGIN_USER.companyID}">View your company info</a></li>
                     </ul>
                 </li>                
                 <%

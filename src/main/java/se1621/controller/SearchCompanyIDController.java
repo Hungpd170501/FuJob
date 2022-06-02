@@ -30,7 +30,7 @@ public class SearchCompanyIDController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            int search = Integer.parseInt(request.getParameter("search"));
+            int search = Integer.parseInt(request.getParameter("searchCompanyID"));
             CompanyInfoDAO dao = new CompanyInfoDAO();
             List<CompanyInfo> listCompany = dao.getListCompany(search);
             if (!listCompany.isEmpty()) {

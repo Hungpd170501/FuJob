@@ -24,7 +24,7 @@ import se1621.dto.User;
 public class CreateResumeController extends HttpServlet {
 
     private static final String ERROR = "/view/create-resume.jsp";
-    private static final String SUCCESS = "/view/candidates-profile.jsp";
+    private static final String SUCCESS = "/MainController?action=SearchResumeID&searchResumeID=";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -60,14 +60,14 @@ public class CreateResumeController extends HttpServlet {
                 boolean checkUpdateResume = resumedao.updateResume(resume, userID);
                 if (checkUpdateResume) {
                     request.setAttribute("MESSAGE", "Your Resume has been updated!");
-                    url = SUCCESS;
+                    url = SUCCESS + userID;
                 }
             }
             if (checkValidation) {
                 boolean checkCreateResume = resumedao.createResume(resume);
                 if (checkCreateResume) {
                     request.setAttribute("MESSAGE", "Create Resume Successfully!");
-                    url = SUCCESS;
+                    url = SUCCESS+ userID;
                 }
             }
 

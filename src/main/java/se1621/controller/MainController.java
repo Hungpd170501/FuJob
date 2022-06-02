@@ -24,7 +24,9 @@ public class MainController extends HttpServlet {
     private static final String CHANGE_PASSWORD_CONTROLLER = "ChangePasswordController";
     private static final String CHANGE_PASSWORD = "ChangePassword";
     private static final String SEARCH_COMPANYID_CONTROLLER = "SearchCompanyIDController";
-    private static final String SEARCH = "Search";
+    private static final String SEARCH_COMPANYID = "SearchCompanyID";
+    private static final String SEARCH_RESUMEID_CONTROLLER = "SearchResumeIDController";
+    private static final String SEARCH_RESUMEID = "SearchResumeID";
     private static final String CREATECOM_CONTROLLER = "CreateCompanyInfoController";
     private static final String CREATECOM = "Create CompanyInfo";
     private static final String CHOOSECOMPANY_CONTROLLER = "ChooseCompanyController";
@@ -51,9 +53,11 @@ public class MainController extends HttpServlet {
                 url = LOGOUT_CONTROLLER;
             } else if (CHANGE_PASSWORD.equals(action)) {
                 url = CHANGE_PASSWORD_CONTROLLER;
-            } else if (SEARCH.equals(action)) {
+            } else if (SEARCH_COMPANYID.equals(action)) {
                 url = SEARCH_COMPANYID_CONTROLLER;
-            } else if (CREATECOM.equals(action)) {
+            }else if(SEARCH_RESUMEID.equals(action)){
+                url = SEARCH_RESUMEID_CONTROLLER;
+            }else if (CREATECOM.equals(action)) {
                 url = CREATECOM_CONTROLLER;
             } else if (CHOOSECOMPANY.equals(action)) {
                 url = CHOOSECOMPANY_CONTROLLER;

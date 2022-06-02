@@ -87,7 +87,7 @@ public class UserDAO {
         User user = null;
         try {
             conn = DBUtils.getInstance().getConnection();
-            String sql = "SELECT userID, fullName, phone, username,tblUser.roleID, tblRole.roleName "
+            String sql = "SELECT userID, fullName, companyID, phone, username,tblUser.roleID, tblRole.roleName "
                     + "FROM tblUser LEFT JOIN tblRole ON tblRole.roleID = tblUser.roleID "
                     + "WHERE email=? AND password=?;";
             preStm = conn.prepareStatement(sql);
@@ -124,7 +124,7 @@ public class UserDAO {
         User user = null;
         try {
             conn = DBUtils.getInstance().getConnection();
-            String sql = "SELECT userID, password, username, fullName, phone, status, tblUser.roleID, tblRole.roleName "
+            String sql = "SELECT userID, password, username, companyID, fullName, phone, status, tblUser.roleID, tblRole.roleName "
                     + "FROM tblUser LEFT JOIN tblRole ON tblRole.roleID = tblUser.roleID "
                     + "WHERE email=?;";
             preStm = conn.prepareStatement(sql);
@@ -134,6 +134,7 @@ public class UserDAO {
             if (rs.next()) {
                 int userID = rs.getInt("userID");
                 String username = rs.getString("username");
+                int companyID = rs.getInt("companyID");
                 String fullName = rs.getString("fullName");
                 String phone = rs.getString("phone");
                 String roleID = rs.getString("roleID");
@@ -144,6 +145,7 @@ public class UserDAO {
                 user = User.builder()
                         .userID(userID)
                         .username(username)
+                        .companyID(companyID)
                         .fullName(fullName)
                         .password(password)
                         .phone(phone)
@@ -153,7 +155,7 @@ public class UserDAO {
                         .build();
             }
         } finally {
-            this.closeConnection();;
+            this.closeConnection();
         }
         return user;
     }

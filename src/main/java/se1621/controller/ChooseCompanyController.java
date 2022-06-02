@@ -12,7 +12,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import se1621.dao.CompanyInfoDAO;
 import se1621.dao.UserDAO;
+import se1621.dto.CompanyInfo;
 import se1621.dto.Role;
 import se1621.dto.User;
 
@@ -24,10 +29,10 @@ import se1621.dto.User;
 public class ChooseCompanyController extends HttpServlet {
 
     private static final String ERROR = "/view/choose-company.jsp";
-    private static final String SUCCESS = "/MainController?action=Search&search=";
+    private static final String SUCCESS = "/MainController?action=SearchCompanyID&searchCompanyID=";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
@@ -49,8 +54,9 @@ public class ChooseCompanyController extends HttpServlet {
                         .companyID(companyID)
                     .build();
             UserDAO dao = new UserDAO();
-            boolean check = dao.updateCompanyID(user, companyID);
-            if (check) {
+            boolean check = dao.updateCompanyID(user, companyID);  
+            if (user != null && check ) {               
+                session.setAttribute("LOGIN_USER", user);
                 url = SUCCESS + companyID;
             }
         } catch (NumberFormatException | SQLException e) {
@@ -60,7 +66,7 @@ public class ChooseCompanyController extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -72,7 +78,11 @@ public class ChooseCompanyController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ChooseCompanyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -86,7 +96,11 @@ public class ChooseCompanyController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ChooseCompanyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
