@@ -106,7 +106,7 @@ GO
 CREATE TABLE tblJob (
 	jobID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
 	userID INT NOT NULL,
-	jobTitle varchar(20),
+	jobTitle varchar(255),
 	ExperienceNeeded varchar(20),
 	jobCategoryID INT,
 	skill varchar(255),
