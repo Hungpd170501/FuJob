@@ -94,7 +94,7 @@ CREATE TABLE tblResume
 	major varchar(50),
 	gpa varchar(15),
 	experienceYear varchar(50),
-	skills varchar(50),
+	skills varchar(255),
 	website varchar ( 100 ),
 	overview varchar(3000),
 );
@@ -109,7 +109,7 @@ CREATE TABLE tblJob (
 	jobTitle varchar(20),
 	ExperienceNeeded varchar(20),
 	jobCategoryID INT,
-	skill varchar(20),
+	skill varchar(255),
 	deadline date,
 	completionTime varchar(20),
 	salary varchar(20),
@@ -120,6 +120,18 @@ CREATE TABLE tblJob (
 	
 );
 GO
+
+INSERT INTO tblJob(userID, jobTitle, experienceNeeded, jobCategoryID, skill, deadline, completionTime, salary, address, email, phone, description) 
+VALUES (
+'11', 'DESIGNER FREELANCE', 'Less than 1 year', '24', 'Adobe Illustrator, Photography, Adobe Premiere,...', '2022-08-11', '10 days', '100$', 'Distric 9, HCM city', 'designfpt@gmail.com', '123-65-485', 'Support, coordinate with main designer to design products for online advertising and communication channels: banner, cover photo, flash animation, infographic, email marketing, etc.
+ Support, coordinate with main designer Design products for offline communication: standee, banner, backdrop, bandroll, invitation, flyer, flyer, voucher, banners for office decoration, etc.
+ Edit photos after each Company event
+ Support, coordinate with the main designer to design online and offline registration forms
+ Design slides, brochures to introduce products for the Company
+ Contributing ideas to the Company''s events and Marketing campaigns'
+)
+GO
+
 
 IF OBJECT_ID('dbo.tblCategory', 'u') IS NOT NULL 
    DROP TABLE dbo.tblCategory;  
