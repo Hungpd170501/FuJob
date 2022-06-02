@@ -4,8 +4,7 @@
  */
 package se1621.controller;
 
-import Error.CompanyInfoError;
-import Error.UserError;
+
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,9 +13,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import se1621.dao.CompanyInfoDAO;
 import se1621.dao.UserDAO;
 import se1621.dto.CompanyInfo;
+import se1621.dto.Error.CompanyInfoError;
 import se1621.dto.Role;
 import se1621.dto.User;
 
@@ -30,8 +33,8 @@ public class CreateCompanyInfoController extends HttpServlet {
     private static final String ERROR = "/view/create-companyinfo.jsp";
     private static final String SUCCESS = "/MainController?action=SearchCompanyID&searchCompanyID=";
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
@@ -56,7 +59,18 @@ public class CreateCompanyInfoController extends HttpServlet {
                 comError.setCompanyNameError("Company Name already exists!");
             }
             if (checkValidation) {
-                CompanyInfo company = new CompanyInfo(0, companyName, address, website, gmail, phone, typecompany, establishedYear, numberOfEmployee, companyOverview, avatar);
+                CompanyInfo company = CompanyInfo.builder()
+                                        .companyName(companyName)
+                                        .address(address)
+                                        .website(website)
+                                       .gmail(gmail)
+                                       .phone(phone)
+                                       .typeCompany(typecompany)
+                                       .establishedYear(establishedYear)
+                                       .numberOfEmployee(numberOfEmployee)
+                                       .companyOverview(companyOverview)
+                                       .avatar(avatar)
+                                       .build();
                 boolean checkCreate = dao.createComInfo(company);
                 if (checkCreate) {
                     int companyID = dao.getCompanyID(companyName);
@@ -67,10 +81,18 @@ public class CreateCompanyInfoController extends HttpServlet {
                     String email = loginUser.getEmail();
                     String password = loginUser.getPassword();
                     String roleID = loginUser.getRole().getRoleID();
-                    User user = new User(userID, fullName, password, fullName, null, email, new Role(roleID, ""), companyID);
+                    User user = User.builder()
+                            .userID(userID)
+                            .fullName(fullName)
+                            .password(password)
+                            .username(fullName)
+                            .email(email)
+                            .role(new Role(roleID, ""))
+                            .companyID(companyID)
+                            .build();
                     UserDAO udao = new UserDAO();
                     boolean check = udao.updateCompanyID(user, companyID);
-                    if(check) {
+                    if (check) {
                         request.setAttribute("MESSAGE", "Create Company Successfully!!");
                         url = SUCCESS + companyID;
                     }
@@ -78,7 +100,7 @@ public class CreateCompanyInfoController extends HttpServlet {
             } else {
                 request.setAttribute("COM_ERROR", comError);
             }
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | NumberFormatException | SQLException e) {
             log(e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
@@ -97,7 +119,11 @@ public class CreateCompanyInfoController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateCompanyInfoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -111,7 +137,11 @@ public class CreateCompanyInfoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateCompanyInfoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

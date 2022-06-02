@@ -8,6 +8,14 @@
         <servlet-name>LoginGoogleHandler</servlet-name>
         <servlet-class>se1621.controller.LoginGoogleHandler</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RecoveryPasswordHandler</servlet-name>
+        <servlet-class>se1621.controller.RecoveryPasswordHandler</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmailVerifyHandler</servlet-name>
+        <servlet-class>se1621.controller.EmailVerifyHandler</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -15,6 +23,31 @@
     <servlet-mapping>
         <servlet-name>LoginGoogleHandler</servlet-name>
         <url-pattern>/LoginGoogleHandler</url-pattern>
+    </servlet-mapping>
+    <!-- SMTP settings -->
+    <context-param>
+        <param-name>host</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+    <context-param>
+        <param-name>user</param-name>
+        <param-value>no.reply.fujob@gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pass</param-name>
+        <param-value>FuJobSe1621</param-value>
+    </context-param>
+    <servlet-mapping>
+        <servlet-name>RecoveryPasswordHandler</servlet-name>
+        <url-pattern>/RecoveryPasswordHandler</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmailVerifyHandler</servlet-name>
+        <url-pattern>/EmailVerifyHandler</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

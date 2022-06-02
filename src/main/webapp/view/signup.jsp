@@ -1,4 +1,4 @@
-<%@page import="Error.UserError"%>
+<%@page import="se1621.dto.Error.UserError"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -12,6 +12,7 @@
     </head>
 
     <body>
+        
         <jsp:include page="./components/loader.jsp"></jsp:include>
 
             <div class="back-to-home rounded d-none d-sm-block">
@@ -35,39 +36,18 @@
                                             userError = new UserError();
                                         }
                                     %>
-                                    <form action="/FuJob/MainController" method="POST" class="login-form" oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Password do not match!" : "")'>
+                                    <form action="${pageContext.request.contextPath}/MainController" method="POST" class="login-form" oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Password do not match!" : "")'>
                                         <div class="row">
-                                            <!--                                                <div class="col-md-12">
-                                                                                                <ul class="nav nav-pills nav nav-pills bg-white rounded nav-justified flex-column flex-sm-row" id="pills-tab" role="tablist">
-                                                                                                    <li class="active nav-item">
-                                                                                                        <a class="nav-link rounded active" id="job-seeker-tab" role="tab" aria-controls="job-seeker" aria-selected="true" data-toggle="tab" href="#jobseeker">Job Seeker</a>
-                                                                                                    </li>
-                                                                                                    <li class="nav-item">
-                                                                                                        <a class="nav-link rounded" id="recruiter-tab" role="tab" aria-controls="job-seeker" aria-selected="true" data-toggle="tab" href="#recruiter">Recruiter</a>
-                                                                                                    </li>
-                                                                                                </ul>
-                                                                                            </div>-->
-                                            <!--                                                <div class="col-md-12 btn-group">
-                                                                                                <label class=" btn btn-primary active">
-                                                                                                    <input type="radio" name="options" id="option1" autocompelte="off">Job Seeker
-                                                                                                </label>
-                                                                                                <label class=" btn btn-primary">
-                                                                                                    <input type="radio" name="options" id="option2" autocompelte="off">Recruiter
-                                                                                                </label>
-                                            
-                                                                                            </div>-->
-
                                             <div class="col-md-12">
                                                 <div class="form-group position-relative">                                               
                                                     <label>Full Name <span class="text-danger">*</span></label>
                                                     <input type="text" class="form-control" placeholder="First Name" name="fullName" required="">
                                                 </div>
                                             </div>
-
                                             <div class="col-md-12">
                                                 <div class="form-group position-relative">
                                                     <label>Your Email <span class="text-danger">*</span></label>
-                                                    <input type="email" class="form-control" placeholder="Email" name="email" required=""> 
+                                                    <input type="email" class="form-control" placeholder="Email" name="email" value="${param.email}" required=""> 
                                                     <p class="text-danger text-right h6 small"><%= userError.getEmailError()%></p>
                                                 </div>
                                             </div>
@@ -93,7 +73,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group position-relative">                                               
                                                     <label>Human Resource </label>
-                                                    <input type="radio" name="roleID" required="" value="US">
+                                                    <input type="radio" name="roleID" required="" value="HR">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -105,12 +85,11 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
-                                                <!--                                                    <button class="btn btn-primary w-100">Register</button>-->
-                                                <input class="btn btn-primary w-100" type="submit" name="action" value="Signup">
+                                                <input class="btn btn-primary w-100" type="submit" name="action" value="SignUp">
                                             </div>
-                                            
+
                                             <div class="mx-auto">
-                                                <p class="mb-0 mt-3"><small class="text-dark mr-2">Already have an account ?</small> <a href="../view/login.jsp" class="text-dark font-weight-bold">Sign in</a></p>
+                                                <p class="mb-0 mt-3"><small class="text-dark mr-2">Already have an account ?</small> <a href="${pageContext.request.contextPath}/view/login.jsp" class="text-dark font-weight-bold">Sign in</a></p>
                                             </div>
                                         </div>
                                     </form>

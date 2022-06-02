@@ -16,4 +16,8 @@ import lombok.ToString;
 public class Category {
     public int categoryID;
     public String categoryName;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160

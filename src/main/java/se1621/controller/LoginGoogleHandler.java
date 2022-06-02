@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package se1621.controller;
 
 import com.google.gson.Gson;
@@ -33,6 +32,7 @@ public class LoginGoogleHandler extends HttpServlet {
 
     private final static String ADMIN_PAGE = "#";
     private final static String USER_PAGE = "/view/index.jsp";
+    private final static String SIGNUP_PAGE = "MainController?action=SignUp&email=";
     private final static String ERROR = "/view/login.jsp";
     public static String GOOGLE_CLIENT_ID = "674216776597-dsnqcp414vcta1d1mi4aa5umrmakucjd.apps.googleusercontent.com";
     public static String GOOGLE_CLIENT_SECRET = "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";
@@ -47,7 +47,7 @@ public class LoginGoogleHandler extends HttpServlet {
         String url = ERROR;
         try {
             String code = request.getParameter("code");
-            if (code != null || !"".equals(code)) {
+            if (code != null) {
                 URL obj = new URL(GOOGLE_LINK_GET_TOKEN);
                 HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
                 con.setRequestMethod("POST");
@@ -58,15 +58,15 @@ public class LoginGoogleHandler extends HttpServlet {
                         + "&redirect_uri=" + GOOGLE_REDIRECT_URI
                         + "&grant_type=" + GOOGLE_GRANT_TYPE;
                 con.setDoOutput(true);
-                DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-                wr.writeBytes(postParams);
-                wr.flush();
-                wr.close();
+                try ( DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+                    wr.writeBytes(postParams);
+                    wr.flush();
+                }
                 int responseCode = con.getResponseCode();
                 BufferedReader in = new BufferedReader(new InputStreamReader(
                         con.getInputStream()));
                 String inputLine;
-                StringBuffer responseToken = new StringBuffer();
+                StringBuilder responseToken = new StringBuilder();
                 while ((inputLine = in.readLine()) != null) {
                     responseToken.append(inputLine);
                 }
@@ -78,22 +78,45 @@ public class LoginGoogleHandler extends HttpServlet {
                 String responseDetail = Request.Get(link).execute().returnContent().asString();
                 UserGoogle googlePojo = new Gson().fromJson(responseDetail, UserGoogle.class);
                 UserDAO dao = new UserDAO();
-                User user = dao.checkLoginGoogle(googlePojo.getEmail());
+                User user = dao.checkUserByEmail(googlePojo.getEmail());
                 HttpSession session = request.getSession();
                 if (user != null) {
-                    session.setAttribute("LOGIN_USER", user);
-                    if ("AD".equals(user.getRole().getRoleID())) {
-                        url = ADMIN_PAGE;
-                    } else if ("US".equals(user.getRole().getRoleID())) {
-                        url = USER_PAGE;
-                    } else {
-                        session.setAttribute("ERROR_MESSAGE", "Your role is not allow!");
+                    switch (user.getStatus()) {
+                        case 0:
+                            request.setAttribute("LOGIN_MESSAGE", "Your account has been deactivated. Please contact to FuJob Admin to reactivate it!");
+                            break;
+                        case 2:
+                            request.setAttribute("LOGIN_MESSAGE", "Making sure you are secure--it's what we do. Please check your email for a link to confirm you are you!!");
+                            break;
+                        default:
+                            session.setAttribute("LOGIN_USER", user);
+                            if ((user.getRole().getRoleID()) != null) {
+                                switch (user.getRole().getRoleID()) {
+                                    case "AD":
+                                        url = ADMIN_PAGE;
+                                        break;
+                                    case "US":
+                                        url = USER_PAGE;
+                                        break;
+                                    case "HR":
+                                        url = USER_PAGE;
+                                        break;
+                                    default:
+                                        request.setAttribute("LOGIN_MESSAGE", "Your role is not allow!");
+                                        break;
+
+                                }
+                            } else {
+                                request.setAttribute("LOGIN_MESSAGE", "Your role is not allow!");
+                            }
                     }
                 } else {
-                    session.setAttribute("ERROR_MESSAGE", "Incorrect user ID or Password");
+                    url = SIGNUP_PAGE + googlePojo.getEmail();
                 }
+
             }
         } catch (Exception e) {
+            request.setAttribute("LOGIN_MESSAGE", "Opp Something wrong!");
             log("Error at LoginGoogleHandler: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
@@ -102,7 +125,6 @@ public class LoginGoogleHandler extends HttpServlet {
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

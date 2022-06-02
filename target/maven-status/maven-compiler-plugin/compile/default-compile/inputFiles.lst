@@ -1,25 +1,59 @@
+<<<<<<< HEAD
+=======
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\RecoveryPasswordHandler.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\utils\Helper.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\ViewalljobController.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Error\CompanyInfoError.java
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\UserDAO.java
-C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\Error\UserError.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\utils\JwtTokenUtils.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\LoginController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Resume.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Role.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\CreateCompanyInfoController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\CreateResumeController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\ResumeDAO.java
+<<<<<<< HEAD
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Job.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\SearchCompanyIDController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\utils\DBUtils.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\CompanyInfo.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\MainController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\AuthDAO.java
+=======
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\utils\GoogleRacaptcha.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Job.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\service\EmailService.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\SearchCompanyIDController.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\utils\DBUtils.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\CompanyInfo.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\utils\EmailUtils.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\MainController.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\AuthDAO.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\constant\Constant.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\ChangePasswordController.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\service\EmailServiceIml.java
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\User.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\ChooseCompanyController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\CompanyInfoDAO.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Error\UserError.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\EmailVerifyHandler.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\SignUpController.java
+<<<<<<< HEAD
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\Error\CompanyInfoError.java
+=======
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\CategoryDAO.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\JobDAO.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\LoginGoogleHandler.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Category.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\SearchResumeIDController.java
+<<<<<<< HEAD
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\UserGoogle.java
+=======
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\RecoveryPasswordController.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\LogoutController.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\UserGoogle.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\PostJobController.java
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160

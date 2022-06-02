@@ -8,30 +8,36 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import se1621.dto.CompanyInfo;
-
 import se1621.dto.Role;
-
 import se1621.dto.User;
 import se1621.utils.DBUtils;
 
-/**
- *
- * @author ACER
- */
 public class UserDAO {
+
     private static final String CHECK_DUPLICATE = "SELECT userID FROM tblUser WHERE email=?";
-    private static final String SINGUP = "INSERT INTO tblUser(userName, fullName, email, password, phone, roleID) VALUES(?,?,?,?,?,?)";
+    private static final String SINGUP = "INSERT INTO tblUser(userName, fullName, email, password, phone, roleID, status) VALUES(?,?,?,?,?,?,2)";
     private static final String UPDATECOMID = "UPDATE tblUser SET userName=?, fullName=?, email=?, phone=?, roleID=?, companyID=? WHERE userID=?";
-    Connection conn;
-    PreparedStatement preStm;
+    private Connection conn;
+    private PreparedStatement preStm;
     private ResultSet rs;
-    
-    public boolean checkDuplicate(String email) throws SQLException {
+
+    private void closeConnection() throws Exception {
+        if (rs != null) {
+            rs.close();
+        }
+        if (preStm != null) {
+            preStm.close();
+        }
+        if (conn != null) {
+            conn.close();
+        }
+    }
+
+    public boolean checkDuplicateEmail(String email) throws Exception {
         boolean check = false;
-         conn = null;
-         preStm = null;
-         rs = null;
+        conn = null;
+        preStm = null;
+        rs = null;
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
@@ -42,27 +48,16 @@ public class UserDAO {
                     check = true;
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (preStm != null) {
-                preStm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
+            this.closeConnection();
         }
         return check;
     }
-    
+
     public boolean signup(User user) throws SQLException, ClassNotFoundException {
         boolean check = false;
-         conn = null;
-         preStm= null;
-
+        conn = null;
+        preStm = null;
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
@@ -75,7 +70,7 @@ public class UserDAO {
                 preStm.setString(5, "");
                 preStm.setString(6, user.getRole().getRoleID());
                 //preStm.setBoolean(5, user.isStatus());
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } finally {
             if (preStm != null) {
@@ -86,19 +81,19 @@ public class UserDAO {
             }
         }
         return check;
-    }   
+    }
+
     public User checkLogin(String email, String password) throws SQLException, Exception {
         User user = null;
         try {
-            Connection conn = DBUtils.getInstance().getConnection();
+            conn = DBUtils.getInstance().getConnection();
             String sql = "SELECT userID, fullName, companyID, phone, username,tblUser.roleID, tblRole.roleName "
                     + "FROM tblUser LEFT JOIN tblRole ON tblRole.roleID = tblUser.roleID "
                     + "WHERE email=? AND password=?;";
-            PreparedStatement preStm = conn.prepareStatement(sql);
+            preStm = conn.prepareStatement(sql);
             preStm.setString(1, email);
             preStm.setString(2, password);
-            ResultSet rs = preStm.executeQuery();
-
+            rs = preStm.executeQuery();
             if (rs.next()) {
                 int userID = rs.getInt("userID");
                 String fullName = rs.getString("fullName");
@@ -112,74 +107,97 @@ public class UserDAO {
                         .userID(userID)
                         .username(username)
                         .fullName(fullName)
+                        .password(password)
                         .companyID(companyID)
-                        .password("*****")
                         .phone(phone)
                         .email(email)
                         .role(role)
                         .build();
             }
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-
-            if (preStm != null) {
-                preStm.close();
-            }
-
-            if (conn != null) {
-
-                conn.close();
-            }
+            this.closeConnection();
         }
         return user;
     }
 
-    public User checkLoginGoogle(String email) throws SQLException, Exception {
+    public User checkUserByEmail(String email) throws SQLException, Exception {
         User user = null;
         try {
-            Connection conn = DBUtils.getInstance().getConnection();
-            String sql = "SELECT userID, username, fullName, phone, tblUser.roleID, tblRole.roleName "
+            conn = DBUtils.getInstance().getConnection();
+            String sql = "SELECT userID, password, username, companyID, fullName, phone, status, tblUser.roleID, tblRole.roleName "
                     + "FROM tblUser LEFT JOIN tblRole ON tblRole.roleID = tblUser.roleID "
                     + "WHERE email=?;";
-            PreparedStatement preStm = conn.prepareStatement(sql);
+            preStm = conn.prepareStatement(sql);
             preStm.setString(1, email);
-            ResultSet rs = preStm.executeQuery();
+            rs = preStm.executeQuery();
 
             if (rs.next()) {
                 int userID = rs.getInt("userID");
                 String username = rs.getString("username");
+                int companyID = rs.getInt("companyID");
                 String fullName = rs.getString("fullName");
                 String phone = rs.getString("phone");
                 String roleID = rs.getString("roleID");
+                String password = rs.getString("password");
                 String roleName = rs.getString("roleName");
+                int status = rs.getInt("status");
                 Role role = new Role(roleID, roleName);
                 user = User.builder()
                         .userID(userID)
                         .username(username)
+                        .companyID(companyID)
                         .fullName(fullName)
-                        .password("*****")
+                        .password(password)
                         .phone(phone)
                         .email(email)
                         .role(role)
+                        .status(status)
                         .build();
             }
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
+            this.closeConnection();
+        }
+        return user;
+    }
 
+    public boolean updateUserPassword(String userEmail, String newPassword) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            String sql = "UPDATE tblUser SET password=? WHERE email=?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, newPassword);
+            preStm.setString(2, userEmail);
+            check = preStm.executeUpdate() > 0;
+        } catch (SQLException e) {
+        } finally {
             if (preStm != null) {
                 preStm.close();
             }
-
             if (conn != null) {
-
                 conn.close();
             }
         }
-        return user;
+        return check;
+    }
+    public boolean activeUserAccount(String userEmail) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            String sql = "UPDATE tblUser SET status=1 WHERE email=?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, userEmail);
+            check = preStm.executeUpdate() > 0;
+        } catch (SQLException e) {
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
     
     public boolean updateCompanyID(User user, int companyID) throws SQLException {
@@ -195,10 +213,9 @@ public class UserDAO {
                 preStm.setString(5, user.getRole().getRoleID());
                 preStm.setInt(6, companyID);
                 preStm.setInt(7, user.getUserID());
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
         } finally {
             if (preStm != null) {
                 preStm.close();

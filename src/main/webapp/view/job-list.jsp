@@ -1,3 +1,7 @@
+<%@page import="se1621.dto.Job"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -10,7 +14,10 @@
     </head>
     <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
+        <jsp:include page="./include/navbar.jsp"></jsp:include>
+        <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
 
+<<<<<<< HEAD
             <!-- Navigation Bar-->
             <header id="topnav" class="defaultscroll scroll-active">
                 <!-- Tagline STart -->
@@ -156,6 +163,30 @@
             </section>
             <!-- end home -->
 
+=======
+            <!-- Start home -->
+            <section class="bg-half page-next-level"> 
+                <div class="bg-overlay"></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="text-center text-white">
+                                <h4 class="text-uppercase title mb-4">Job List view</h4>
+                                <ul class="page-next d-inline-block mb-0">
+                                    <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
+                                    <li><a href="#" class="text-uppercase font-weight-bold">Jobs</a></li> 
+                                    <li>
+                                        <span class="text-uppercase text-white font-weight-bold">Job Listing</span> 
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- end home -->
+
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160
             <div class="container">
                 <div class="home-form-position">
                     <div class="row justify-content-center">
@@ -171,6 +202,7 @@
                                         </div>
                                         <div class="col-lg-3 col-md-6">
                                             <div class="registration-form-box">
+<<<<<<< HEAD
                                                 <i class="fa fa-location-arrow"></i>
                                                 <select id="select-country" class="demo-default">
                                                     <option value="">Location</option>
@@ -420,6 +452,16 @@
                                                     <option value="YE">Yemen</option>
                                                     <option value="ZM">Zambia</option>
                                                     <option value="ZW">Zimbabwe</option>
+=======
+                                                <i class="fa fa-archive"></i>
+                                                <select class="demo-default" id="select-category" name="chooseExY" required="">
+                                                    <option value="">Experience</option>
+                                                    <option value="Less than 1 year">Less than 1 year</option>
+                                                    <option value="1-3 years">1-3 years</option>
+                                                    <option value="3-5 years">3-5 years</option>
+                                                    <option value="5-10 years">5-10 years</option>
+                                                    <option value="More than 10 years">More than 10 years</option>
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160
                                                 </select>
                                             </div>
                                         </div>
@@ -428,10 +470,16 @@
                                                 <i class="fa fa-list-alt"></i>
                                                 <select id="select-category" class="demo-default">
                                                     <option value="">Categories...</option>
+<<<<<<< HEAD
                                                     <option value="4">Accounting</option>
                                                     <option value="1">IT & Software</option>
                                                     <option value="3">Marketing</option>
                                                     <option value="5">Banking</option>
+=======
+                                                    <c:forEach items="${chooseCategory.listCategory}" var="i">
+                                                            <option value="${i.categoryID}">${i.categoryName}</option>
+                                                        </c:forEach>
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160
                                                 </select>
                                             </div>
                                         </div>
@@ -461,6 +509,7 @@
                     </div>
 
                     <div class="row">
+<<<<<<< HEAD
                         <div class="col-lg-3">
                             <div class="left-sidebar">
                                 <div class="accordion" id="accordionExample">
@@ -603,10 +652,14 @@
                         </div>
 
                         <div class="col-lg-9 mt-4 pt-2">
+=======
+                        <div class="col-lg-12 mt-4 pt-2">
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160
                             <div class="row align-items-center">
                                 <div class="col-lg-12">
                                     <div class="show-results">
                                         <div class="float-left">
+<<<<<<< HEAD
                                             <h5 class="text-dark mb-0 pt-2 f-18">Showing results 0-20</h5>
                                         </div>
                                         <div class="sort-button float-right">
@@ -616,10 +669,14 @@
                                                 <option value="2">PHP Developer</option>
                                                 <option value="3">Web Designer</option>
                                             </select>
+=======
+                                            <h5 class="text-dark mb-0 pt-2 f-18">Showing result</h5>
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160
                                         </div>
                                     </div>
                                 </div>
                             </div>
+<<<<<<< HEAD
                         <c:forEach items="${job.listJob}" var="i">
                             <div class="row">
                                 <div class="col-lg-12 mt-4 pt-2">
@@ -656,6 +713,45 @@
                                                         <div class="mt-3">
                                                             <a href="#" class="btn btn-sm btn-primary">Apply</a>
                                                         </div>
+=======
+
+                            <div class="row"> 
+                            <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_ALLJOB");
+                                if (listJob != null) {
+                                    if (listJob.size() > 0) {
+                                        for(Job job: listJob ){                           
+                            %>
+                            <div class="col-lg-12 mt-4 pt-2">
+                                <div class="job-list-box border rounded">
+                                    <div class="p-3">
+                                        <div class="row align-items-center">
+                                            <div class="col-lg-2">
+                                                <div class="company-logo-img">
+                                                    <img src="images/featured-job/img-1.png" alt="" class="img-fluid mx-auto d-block">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-7 col-md-9">
+                                                <div class="job-list-desc">
+                                                    <h6 class="mb-2"><a href="#" class="text-dark"><%= job.getJobTitle() %></a></h6>
+                                                    <p class="text-muted mb-0"><i class="mdi mdi-bank mr-2"></i><%= job.getCompany().getCompanyName() %></p>
+                                                    <ul class="list-inline mb-0">
+                                                        <li class="list-inline-item mr-3">
+                                                            <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= job.getAddress() %></p>
+                                                        </li>
+
+                                                        <li class="list-inline-item">
+                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i>1 Minute ago</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3">
+                                                <div class="job-list-button-sm text-right">
+                                                    <span class="badge badge-success">Full-Time</span>
+
+                                                    <div class="mt-3">
+                                                        <a href="#" class="btn btn-sm btn-primary">Apply</a>
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160
                                                     </div>
                                                 </div>
                                             </div>
@@ -663,6 +759,7 @@
                                     </div>
                                 </div>
                             </div>
+<<<<<<< HEAD
                         </c:forEach>
                         <div class="col-lg-12 mt-4 pt-2">
                             <nav aria-label="Page navigation example">
@@ -751,6 +848,37 @@
                 <div class="col-12">
                     <div class="">
                         <p class="mb-0">© 2019 -2020 Jobya. Design with <i class="mdi mdi-heart text-danger"></i> by Themesdesign.</p>
+=======
+                            <%
+                        
+                                }        
+                                 
+                            }
+                        }
+                        
+                            %>
+                            <div class="col-lg-12 mt-4 pt-2">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination job-pagination mb-0 justify-content-center">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                                <i class="mdi mdi-chevron-double-left"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">
+                                                <i class="mdi mdi-chevron-double-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160
                     </div>
                 </div>
             </div>

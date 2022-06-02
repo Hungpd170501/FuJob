@@ -15,6 +15,7 @@
 
     <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
+<<<<<<< HEAD
 
             <!-- Navigation Bar-->
             <header id="topnav" class="defaultscroll scroll-active">
@@ -139,6 +140,9 @@
             </header><!--end header-->
             <!-- Navbar End -->
 
+=======
+        <jsp:include page="./include/navbar.jsp"></jsp:include>
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160
             <!-- Start home -->           
             <section class="bg-half page-next-level"> 
                 <div class="bg-overlay"></div>
@@ -167,6 +171,7 @@
 
             <section class="section" name="action" value="SearchCompanyID">
             <%
+<<<<<<< HEAD
                 String search = request.getParameter("searchCompanyID");
                 if (search == null) {
                     search = "";
@@ -182,15 +187,20 @@
             <%
                 for (CompanyInfo company : listCompany) {
             %>
+=======
+                CompanyInfo companyInfo = (CompanyInfo) request.getAttribute("COMPANYINFO");
+                if (companyInfo != null) {                 
+            %>
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="text-sm-center">
                                 <img src="images/featured-job/img-3.png" alt="" class="img-fluid mx-md-auto d-block">
-                                <h4 class="mt-3"><a href="#" class="text-dark"> <%= company.getCompanyName() %> </a></h4>
+                                <h4 class="mt-3"><a href="#" class="text-dark"> <%= companyInfo.getCompanyName() %> </a></h4>
                                 <ul class="list-inline mb-0">
                                     <li class="list-inline-item mr-3">
-                                        <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= company.getAddress() %></p>
+                                        <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= companyInfo.getAddress() %></p>
                                     </li>
 
                                     <li class="list-inline-item">
@@ -200,15 +210,15 @@
 
                                 <ul class="list-inline mb-2">
                                     <li class="list-inline-item mr-3 ">
-                                        <p class="text-muted"><i class="mdi mdi-earth mr-2"></i><%= company.getWebsite() %></p>
+                                        <p class="text-muted"><i class="mdi mdi-earth mr-2"></i><%= companyInfo.getWebsite() %></p>
                                     </li>
 
                                     <li class="list-inline-item mr-3">
-                                        <p class="text-muted"><i class="mdi mdi-email mr-2"></i><%= company.getGmail() %></p>
+                                        <p class="text-muted"><i class="mdi mdi-email mr-2"></i><%= companyInfo.getGmail() %></p>
                                     </li>
 
                                     <li class="list-inline-item">
-                                        <p class="text-muted"><i class="mdi mdi-cellphone-iphone mr-2"></i><%= company.getPhone() %></p>
+                                        <p class="text-muted"><i class="mdi mdi-cellphone-iphone mr-2"></i><%= companyInfo.getPhone() %></p>
                                     </li>
                                 </ul>
                             </div>
@@ -222,21 +232,25 @@
                                     <div class="col-lg-2 col-md-3 col-6">
                                         <div class="text-sm-center m-14">
                                             <h5 class="text-dark mb-2">Employer</h5>
-                                            <p class="text-muted mb-0"><%= company.getNumberOfEmployee() %></p>
+                                            <p class="text-muted mb-0"><%= companyInfo.getNumberOfEmployee() %></p>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-2 col-md-3 col-6">
                                         <div class="text-sm-center m-14">
                                             <h5 class="text-dark mb-2">Type</h5>
-                                            <p class="text-muted mb-0"><%= company.getTypeCompany() %></p>
+                                            <p class="text-muted mb-0"><%= companyInfo.getTypeCompany() %></p>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-2 col-md-3 col-6">
                                         <div class="text-sm-center m-14">
                                             <h5 class="text-dark mb-2">Established Year</h5>
+<<<<<<< HEAD
                                             <p class="text-muted mb-0"><%= company.getEstablishedYear() %></p>
+=======
+                                            <p class="text-muted mb-0"><%= companyInfo.getEstablishedYear() %></p>
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160
                                         </div>
                                     </div>
 
@@ -262,13 +276,11 @@
                         <div class="col-lg-12 mt-4 pt-2">
                             <h4>Company Overview :</h4>
                             <div class="rounded border p-4 mt-3">
-<!--                            <p class="text-muted">At vero eos accusamus iusto odio dignissimos ducimus blanditiis praesentium voluptatum deleniti that is atque corrupti dolores et quas molestias excepturi sint occaecati cupiditate non at provident similique sunt in culpa qui officia deserunt mollitia animi id est laboru at dolorum fuga Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus quod maxime placeat facere possimus omnis voluptas assumenda est omnis dolor repellendus at enim ipsam voluptatem quia voluptas aut odit aut fugit Cum sociis natoque penatibus magnis dis parturient montes nascetur ridiculus mus donec quam felis ultricies nec pellentesque eu pretium quis sem that phasellus viverra nulla ut metus varius laoreet.</p>
-                                <p class="text-muted">Nobis est eligendi optio cumque nihil impedit quo minus quod maxime at placeat facere possimus omnis voluptas assumenda est omnis dolor repellendus at enim ipsam eligendi optio cumque nihil impedit quo minus quod maxime placeat voluptatem quia that voluptas aut odit aut fugit Cum sociis natoque penatibus magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec this pellentesque eu pretium quis sem hasellus viverra nulla ut metus varius laoreet uisque rutrum enean imperdie tiam ultricies nisi vel augue.</p>
-                                <p class="text-muted mb-0">Optio cumque nihil impedit quo minus quod maxime at placeate facere possimuse omnis voluptas assumenda est omnis dolor repellendus at enim ipsam voluptatem quia voluptas aut odit aut fugit um sociis natoque penatibus magnis dis parturient montes nascetur at ridiculus mus onec quam felis ultricies nec nihil impedit quo minus quod maxime at placeat facere possimuse omnis voluptas assumenda est omnis dolor repellendus at enime pellentesque eu pretium quis sem Phasellus viverra nulla ut metus varius laoreet uisque rutrum enean imperdiet tiam ultricies nisi vel augue Donec elit libero sodales nec volutpat a suscipit non turpis ullam sagittis Suspendisse pulvinar at augue ac venenatis condimentum sem libero volutpat nibh nec pellentesque velit pede quis nunc estibulum ante ipsum primis in faucibus orci luctus et ultrices as cubilia Curae usce id purus varius tincidunt libero Phasellus dolor.</p>-->
-                                <p class="text-muted"> <%= company.getCompanyOverview() %> </p>
+                                <p class="text-muted"> <%= companyInfo.getCompanyOverview() %> </p>
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
 
 <!--                    <div class="row">
                         <div class="col-lg-12 mt-4 pt-2">
@@ -388,39 +400,14 @@
 
             <%
                     }
+=======
+            <%                    
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160
                 }
             %>
         </section>
 
         <!-- EMPLOYERS DETAILS END -->
-
-        <!-- subscribe start -->
-        <section class="section bg-light">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-5">
-                        <div class="float-left position-relative notification-icon mr-2">
-                            <i class="mdi mdi-bell-outline text-primary"></i>
-                            <span class="badge badge-pill badge-danger">1</span>
-                        </div>
-                        <h5 class="mt-2 mb-0">Your Job Notification</h5>
-                    </div>
-                    <div class="col-lg-8 col-md-7 mt-4 mt-sm-0">
-                        <form>
-                            <div class="form-group mb-0">
-                                <div class="input-group mb-0">
-                                    <input name="email" id="email" type="email" class="form-control" placeholder="Your email :" required="" aria-describedby="newssubscribebtn">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary submitBnt" type="submit" id="newssubscribebtn">Subscribe</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- subscribe end -->
 
         <jsp:include page="./include/footer.jsp"></jsp:include>
             <!-- javascript -->

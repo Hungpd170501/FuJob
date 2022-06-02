@@ -25,6 +25,12 @@ public class User {
     private String fullName;
     private String phone;
     private String email;
+    private int status;
     Role role;
+<<<<<<< HEAD
     private int companyID;        
 }
+=======
+    private int companyID;      
+}
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160

@@ -13,6 +13,7 @@
 
     <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
+<<<<<<< HEAD
 
 
             <!-- Navigation Bar-->
@@ -141,6 +142,15 @@
             String search = request.getParameter("searchResumeID");
             if (search == null) {
                 search = "";
+=======
+        <jsp:include page="./include/navbar.jsp"></jsp:include>
+
+            
+        <%
+            String search = request.getParameter("searchResumeID");
+            if (search == null) {
+                search = " ";
+>>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160
             }
         %>
 
