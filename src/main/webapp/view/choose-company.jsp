@@ -53,10 +53,10 @@
                                                                 <option value="${i.companyID}">${i.companyName}</option>
                                                             </c:forEach>
 
-                                                        </select>
+                                                            </select>
 
+                                                        </div>
                                                     </div>
-                                                </div>
                                                 <div class="col-lg-6 col-md-6">
                                                     <div class="registration-form-box">
                                                         <input type="submit" id="submit" name="action" class="submitBnt btn btn-primary btn-block" value="Choose Company">

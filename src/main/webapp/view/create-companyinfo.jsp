@@ -101,7 +101,7 @@
 
                                     <div class="col-md-4">
                                         <div class="form-group app-label">
-                                            <label class="text-muted">Gmail<span class="text-danger">*</span> :</label>
+                                            <label class="text-muted">Email<span class="text-danger">*</span> :</label>
                                             <input id="Gmail" name="gmail" type="email" class="form-control resume" required="" placeholder="Gmail :">
                                         </div>
                                     </div>

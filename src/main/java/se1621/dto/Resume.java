@@ -16,8 +16,8 @@ import lombok.ToString;
 public class Resume {
     private int resumeID;
     private int userID;
-    private String avatar;
-    private String fullName; 
+    private String avartar;
+    private String fullName;
     private String gender;
     private Date dateOfBirth;
     private String gmail;
@@ -31,3 +31,4 @@ public class Resume {
     private String website;
     private String overview;
 }
+

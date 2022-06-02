@@ -12,13 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import se1621.dto.CompanyInfo;
 import se1621.utils.DBUtils;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import se1621.dto.CompanyInfo;
-import se1621.utils.DBUtils;
 
 /**
  *

@@ -26,6 +26,5 @@ public class User {
     private String phone;
     private String email;
     Role role;
-    private int companyID;
-        
+    private int companyID;        
 }

@@ -194,7 +194,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h4 class="text-dark">Overview:</h4>
+                        <h4 class="text-dark">Overview</h4>
                     </div>
                 </div>
 
@@ -223,61 +223,55 @@
                         </div>
                     </div>
                 </div>
-                                
-                <div class="row">
-                    <div class="col-lg-12 mt-4 pt-2">
-                        <h4 class="text-dark">Education</h4>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-lg-3"></div>
-                    <div class="col-lg-6 mt-4 pt-5">
-                        <div class="border rounded candidates-profile-education text-center text-muted">
-                            <div class="profile-education-icon border rounded-pill bg-white text-primary">
-                                <i class="mdi mdi-36px mdi-school"></i>
+
+
+                <div class = "row">
+                    <div class ="col-lg-6">
+                        <div class="row">
+                            <div class="col-lg-12 mt-4 pt-2">
+                                <h4 class="text-dark text-center">Education</h4>
                             </div>
-                            <h6 class="text-uppercase f-17 text-muted font-weight-bold " style="letter-spacing: 5px"> <%= resume.getSchoolName()%> </p></h6>
-                            <p class="border-top"></p>
-                            <p class="f-14 mb-1"> <%= resume.getMajor()%> </p>
-                            <p class="pb-3 mb-0"> GPA: <%= resume.getGpa()%> </p>                               
                         </div>
-                    </div>
-                    <div class="col-lg-3"></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-12 mt-4 pt-2">
-                        <h4 class="text-dark">Experience</h4>
-                    </div>
-                </div>
-                        
-                <div class="row">
-                    <div class="col-md-3 mt-3 mt-md-0 pt-3">
-                    </div>
-                    <div class="col-md-6 mt-3 mt-md-0 pt-3">
-                        <div class="border rounded job-list-box p-4">
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="company-brand-logo text-center mb-4">
-                                        <img src="images/featured-job/img-5.png" alt="" class="img-fluid mx-auto d-block">
+                        <div class="row">
+                            <!--                    <div class="col-lg-3"></div>-->
+                            <div class="col-lg-12 mt-4 pt-5">
+                                <div class="border rounded candidates-profile-education text-center text-muted">
+                                    <div class="profile-education-icon border rounded-pill bg-white text-primary">
+                                        <i class="mdi mdi-36px mdi-school"></i>
                                     </div>
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class="job-list-desc candidates-profile-exp-desc">
-                                        <p class="text-muted mb-0 f-16">Experience: <%= resume.getExperienceYear() %></p>
-                                        <p class="text-muted mb-0 f-16">Skill: <%= resume.getSkills() %></p>
-                                        <p class="text-muted mb-0 f-16">Website: <%= resume.getWebsite() %></p>
-                                        </div>
+                                    <h6 class="text-uppercase f-17 text-muted font-weight-bold " style="letter-spacing: 5px"> <%= resume.getSchoolName()%> </p></h6>
+                                    <p class="border-top"></p>
+                                    <p class="f-14 mb-1"> <%= resume.getMajor()%> </p>
+                                    <p class="pb-3 mb-0"> GPA: <%= resume.getGpa()%> </p>                               
                                 </div>
                             </div>
+                            <!--                    <div class="col-lg-3"></div>-->
                         </div>
                     </div>
-                    <div class="col-md-3 mt-3 mt-md-0 pt-3"></div>
-                    <!--end process box-->
+                    <div class ="col-lg-6">
+                        <div class="row">
+                            <div class="col-lg-12 mt-4 pt-2">
+                                <h4 class="text-dark text-center">Experience</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!--                    <div class="col-lg-3"></div>-->
+                            <div class="col-lg-12 mt-4 pt-5">
+                                <div class="border rounded candidates-profile-education text-center text-muted">
+                                    <div class="profile-education-icon border rounded-pill bg-white text-primary">
+                                        <i class="mdi mdi-36px mdi-briefcase-check"></i>
+                                    </div>
+                                    <h6 class="pb-3 mb-0">Experience: <%= resume.getExperienceYear()%> </p></h6>
+                                    <p class="pb-3 mb-0">Skills:  <%= resume.getSkills()%> </p>
+                                    <p class="pb-3 mb-0">Website: <%= resume.getWebsite()%> </p>                               
+                                </div>
+                            </div>
+                            <!--                    <div class="col-lg-3"></div>-->
+                        </div>
                     </div>
-                </div>         
-            </div>
+                </div>
+            </div>         
 
         </section>  
         <%

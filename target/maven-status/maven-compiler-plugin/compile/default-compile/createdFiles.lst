@@ -1,9 +1,11 @@
 se1621\dto\Resume.class
 se1621\controller\SearchResumeIDController.class
 se1621\dto\UserGoogle.class
+se1621\controller\CreateResumeController.class
 se1621\dao\UserDAO.class
 se1621\dao\CategoryDAO.class
 se1621\dto\User$UserBuilder.class
+se1621\dto\Job$JobBuilder.class
 se1621\dto\Job.class
 se1621\dao\JobDAO.class
 se1621\controller\LoginGoogleHandler.class
@@ -20,6 +22,7 @@ se1621\controller\MainController.class
 se1621\controller\SearchCompanyIDController.class
 se1621\dto\CompanyInfo$CompanyInfoBuilder.class
 se1621\controller\ChooseCompanyController.class
+se1621\dto\Category$CategoryBuilder.class
 se1621\dto\User.class
 Error\CompanyInfoError.class
 se1621\dao\ResumeDAO.class

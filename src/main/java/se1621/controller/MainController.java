@@ -25,6 +25,9 @@ public class MainController extends HttpServlet {
     private static final String CREATECOM = "Create CompanyInfo";
     private static final String CHOOSECOMPANY_CONTROLLER = "ChooseCompanyController";
     private static final String CHOOSECOMPANY = "Choose Company";
+    private static final String CREATERESUME_CONTROLLER = "CreateResumeController";
+    private static final String CREATERESUME = "Submit Resume";
+ 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -44,7 +47,10 @@ public class MainController extends HttpServlet {
                 url = CHOOSECOMPANY_CONTROLLER;
             }else if(SEARCH_RESUMEID.equals(action)){
                 url = SEARCH_RESUMEID_CONTROLLER;
-            }else {
+            } else if (CREATERESUME.equals(action)) {
+                url = CREATERESUME_CONTROLLER;
+            } 
+            else {
                 url = ERROR;
             }
         } catch (Exception e) {
