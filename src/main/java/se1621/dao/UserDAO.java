@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import se1621.dto.CompanyInfo;
 import se1621.dto.Role;
 import se1621.dto.User;
 import se1621.utils.DBUtils;
