@@ -4,6 +4,7 @@ se1621\dto\UserGoogle.class
 se1621\controller\CreateResumeController.class
 se1621\dao\UserDAO.class
 se1621\utils\EmailUtils.class
+se1621\controller\ViewalljobController.class
 se1621\dao\CategoryDAO.class
 se1621\dto\User$UserBuilder.class
 se1621\controller\ChangePasswordController.class

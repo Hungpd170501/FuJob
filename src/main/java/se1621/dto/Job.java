@@ -25,6 +25,7 @@ public class Job {
     private int userID;
     private String jobTitle;
     private String ExperienceNeeded;
+    CompanyInfo company;
     Category category;
     private String skill;
     private Date deadline;

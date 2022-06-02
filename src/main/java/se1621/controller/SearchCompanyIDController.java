@@ -32,9 +32,9 @@ public class SearchCompanyIDController extends HttpServlet {
         try {
             int search = Integer.parseInt(request.getParameter("searchCompanyID"));
             CompanyInfoDAO dao = new CompanyInfoDAO();
-            List<CompanyInfo> listCompany = dao.getListCompany(search);
-            if (!listCompany.isEmpty()) {
-                request.setAttribute("LIST_COMPANY", listCompany);
+            CompanyInfo companyInfo = dao.getCompanyInfo(search);
+            if (companyInfo != null) {
+                request.setAttribute("COMPANYINFO", companyInfo);
                 url = SUCCESS;
             }
         } catch (Exception e) {
