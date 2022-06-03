@@ -194,3 +194,17 @@ VALUES (N'Clerical / Administrative'),
  	(N'Executive Management'),
  	(N'Other')
 GO
+
+IF OBJECT_ID('dbo.tblJobOrder', 'u') IS NOT NULL 
+   DROP TABLE dbo.tblJobOrder;  
+GO
+CREATE TABLE tblJobOrder (
+	jobOrderID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+	userID INT NOT NULL,
+	jobID INT NOT NULL,
+	cvFile varchar(MAX),
+	salaryDeal varchar(50),
+	message varchar(2000),
+);
+GO
+
