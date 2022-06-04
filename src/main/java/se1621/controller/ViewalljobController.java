@@ -27,8 +27,8 @@ import se1621.dto.User;
  *
  * @author lehad
  */
-@WebServlet(name = "ViewalljobController", urlPatterns = {"/ViewalljobController"})
-public class ViewalljobController extends HttpServlet {
+@WebServlet(name = "ViewAllJobController", urlPatterns = {"/ViewAllJobController"})
+public class ViewAllJobController extends HttpServlet {
 
     private static final String ERROR = "/view/job-list.jsp";
     private static final String SUCCESS = "/view/job-list.jsp";

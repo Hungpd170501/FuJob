@@ -35,7 +35,7 @@ public class MainController extends HttpServlet {
     private static final String CREATERESUME = "Submit Resume";
     private static final String POSTJOB_CONTROLLER = "PostJobController";
     private static final String POSTJOB = "Post a Job";
-    private static final String VIEWALLJOB_CONTROLLER = "ViewalljobController";
+    private static final String VIEWALLJOB_CONTROLLER = "ViewAllJobController";
     private static final String VIEWALLJOB = "SearchlistJob";
     private static final String SEARCHJOBTITLE_EXPER_CATE = "Search_title_exper_cate";
     private static final String SEARCHJOBTITLE_EXPER_CATE_CONTROLLER = "SearchJobTitle_Exper_CateController";
