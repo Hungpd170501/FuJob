@@ -4,7 +4,29 @@
  */
 package se1621.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CompanyInfo {
-    
+    private int companyID;
+    private String companyName;
+    private String address;
+    private String website;
+    private String gmail;
+    private String phone;
+    private String typeCompany;
+    private String establishedYear;
+    private int numberOfEmployee;
+    private String companyOverview;
+    private String avatar;
 }

@@ -20,11 +20,15 @@ File: main stylesheet
 14.contact
 15.post-a-job
 **********************/
+
 @import url("https://fonts.googleapis.com/css?family=Nunito:300,400,600,700&display=swap");
 .bg-primary {
   background-color: #2f55d4 !important;
 }
-
+.hide-if-empty:empty { 
+    grid-area: hide-if-empty; 
+    display: none;
+}
 .bg-secondary {
   background-color: #5a6d90 !important;
 }

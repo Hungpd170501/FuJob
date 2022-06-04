@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import se1621.dao.UserDAO;
 import se1621.dto.User;
+import se1621.utils.Helper;
 
 /**
  *
@@ -21,10 +22,12 @@ import se1621.dto.User;
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
 
-    private static final String ERROR = "/view/error.jsp";
+    private static final String ERROR = "/view/login.jsp";
     private static final String AD = "AD";
     private static final String US = "US";
+    private static final String HR = "HR";
     private static final String USER_PAGE = "/view/index.jsp";
+    private static final String ADMIN_PAGE = "#";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -34,19 +37,42 @@ public class LoginController extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             UserDAO dao = new UserDAO();
-            User loginUser = dao.checkLogin(email, password);
-            if (loginUser != null) {
+            User loginUser = dao.checkUserByEmail(email);
+            Helper helper = new Helper();
+            if (loginUser != null && helper.checkPass(password, loginUser.getPassword())) {
                 HttpSession session = request.getSession();
                 session.setAttribute("LOGIN_USER", loginUser);
-                if (US.equals(loginUser.getRole().getRoleID())) {
-                    url = USER_PAGE;
-                } else {
-                    request.setAttribute("ERROR", "Your role is not supported!");
+                switch (loginUser.getStatus()) {
+                    case 0:
+                        request.setAttribute("LOGIN_MESSAGE", "Your account has been deactivated. Please contact to FuJob Support to reactivate it!!");
+                        break;
+                    case 2:
+                        request.setAttribute("LOGIN_MESSAGE", "Your account hasn't been verified. Please check your acccount's email to activate it!!");
+                        break;
+                    case 1:
+                        switch (loginUser.getRole().getRoleID()) {
+                            case US:
+                                url = USER_PAGE;
+                                break;
+                            case HR:
+                                url = USER_PAGE;
+                                break;
+                            case AD:
+                                url = ADMIN_PAGE;
+                                break;
+                            default:
+                                request.setAttribute("LOGIN_MESSAGE", "Your role is not supported!");
+                                break;
+                        }
+                        break;
+                    default:
+                        break;
                 }
             } else {
-                request.setAttribute("ERROR", "Incorrect userID or password!");
+                request.setAttribute("LOGIN_MESSAGE", "Incorrect email or password!");
             }
         } catch (Exception e) {
+            request.setAttribute("LOGIN_MESSAGE", "Something wrong!!");
             log("Error at LoginController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);

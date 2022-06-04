@@ -4,16 +4,19 @@
  */
 package se1621.controller;
 
-import Error.UserError;
+import se1621.dto.Error.UserError;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import se1621.dao.CompanyInfoDAO;
 import se1621.dao.UserDAO;
 import se1621.dto.Role;
 import se1621.dto.User;
+import se1621.service.EmailServiceIml;
+import se1621.utils.Helper;
 
 /**
  *
@@ -23,7 +26,7 @@ import se1621.dto.User;
 @WebServlet(name = "SignUpController", urlPatterns = {"/SignUpController"})
 public class SignUpController extends HttpServlet {
     private static final String ERROR = "/view/signup.jsp";
-    private static final String SUCCESS = "/view/login.jsp";
+    private static final String SUCCESS = "/view/signup-detail.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -34,21 +37,28 @@ public class SignUpController extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             String roleID = request.getParameter("roleID"); 
-            //boolean status = Boolean.parseBoolean(request.getParameter("status"));
             UserDAO dao = new UserDAO();
             UserError userError = new UserError();
             boolean checkValidation= true;
-            boolean checkDuplicate= dao.checkDuplicate(email);
+            boolean checkDuplicate= dao.checkDuplicateEmail(email);
             
             if(checkDuplicate){
                 checkValidation= false;
-                userError.setEmailError("Email duplicate");
+                userError.setEmailError("Email duplicated!");
             }
             if(checkValidation){
-                User user = new User(0, fullName, password, fullName, roleID, email, new Role(roleID, ""));
+//                User user = new User(0, fullName, password, fullName, roleID, email, new Role(roleID, ""));
+                User user = User.builder()
+                            .username(fullName)
+                            .password(Helper.hashPassword(password))
+                            .fullName(fullName)
+                            .role(new Role(roleID, ""))
+                            .email(email)
+                            .build();
                 boolean checkSignup = dao.signup(user);
                 if(checkSignup){
-                    request.setAttribute("MESSAGE","Signup Successfully!!");
+                    EmailServiceIml emailServiceIml =new EmailServiceIml();
+                    new Thread(() -> emailServiceIml.sendEmail(getServletContext(), user, "verify")).start();
                     url= SUCCESS;
                 }
             }else{
@@ -98,5 +108,4 @@ public class SignUpController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
 }
