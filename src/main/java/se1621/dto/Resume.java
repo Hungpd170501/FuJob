@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 @Getter
 @Setter
 @ToString
@@ -18,6 +19,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class Resume {
+
     private int resumeID;
     private int userID;
     private String avartar;

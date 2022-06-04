@@ -44,18 +44,18 @@ public class ChooseCompanyController extends HttpServlet {
             String password = loginUser.getPassword();
             String roleID = loginUser.getRole().getRoleID();
             int companyID = Integer.parseInt(request.getParameter("choose-companyName"));
-            User user=User.builder()
-                        .userID(userID)
-                        .fullName(fullName)
-                        .password(password)
-                        .username(fullName)
-                        .email(email)
-                        .role(new Role(roleID, ""))
-                        .companyID(companyID)
+            User user = User.builder()
+                    .userID(userID)
+                    .fullName(fullName)
+                    .password(password)
+                    .username(fullName)
+                    .email(email)
+                    .role(new Role(roleID, ""))
+                    .companyID(companyID)
                     .build();
             UserDAO dao = new UserDAO();
-            boolean check = dao.updateCompanyID(user, companyID);  
-            if (user != null && check ) {               
+            boolean check = dao.updateCompanyID(user, companyID);
+            if (user != null && check) {
                 session.setAttribute("LOGIN_USER", user);
                 url = SUCCESS + companyID;
             }
@@ -66,7 +66,7 @@ public class ChooseCompanyController extends HttpServlet {
         }
     }
 
-        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

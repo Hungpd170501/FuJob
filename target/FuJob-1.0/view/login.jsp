@@ -13,8 +13,8 @@
 
     <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
-        <div class="back-to-home rounded d-none d-sm-block">
-            <a href="${pageContext.request.contextPath}" class="text-white rounded d-inline-block text-center"><i class="mdi mdi-home"></i></a>
+            <div class="back-to-home rounded d-none d-sm-block">
+                <a href="${pageContext.request.contextPath}" class="text-white rounded d-inline-block text-center"><i class="mdi mdi-home"></i></a>
         </div>
 
         <!-- Hero Start -->

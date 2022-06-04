@@ -45,40 +45,40 @@
 
                                 <!-- START SEARCH -->
                                 <form class="registration-form" action="${pageContext.request.contextPath}/MainController">
-<!--                                <form class="registration-form">-->
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="registration-form-box">
-                                                <i class="fa fa-briefcase"></i>
-                                                <input type="text" name="searchtitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Job title...">
-                                            </div>
+                                <!--                                <form class="registration-form">-->
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="registration-form-box">
+                                            <i class="fa fa-briefcase"></i>
+                                            <input type="text" name="searchtitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Job title...">
                                         </div>
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="registration-form-box">
-                                                <i class="fa fa-archive"></i>
-                                                <select class="demo-default" id="select-category" name="searchExper">
-<!--                                                <select class="demo-default" id="select-category" required="">-->
-                                                    <option value="">Experience</option>
-                                                    <option value="Less than 1 year">Less than 1 year</option>
-                                                    <option value="1-3 years">1-3 years</option>
-                                                    <option value="3-5 years">3-5 years</option>
-                                                    <option value="5-10 years">5-10 years</option>
-                                                    <option value="More than 10 years">More than 10 years</option>
-                                                </select>
-                                            </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="registration-form-box">
+                                            <i class="fa fa-archive"></i>
+                                            <select class="demo-default" id="select-category" name="searchExper">
+                                                <!--                                                <select class="demo-default" id="select-category" required="">-->
+                                                <option value="">Experience</option>
+                                                <option value="Less than 1 year">Less than 1 year</option>
+                                                <option value="1-3 years">1-3 years</option>
+                                                <option value="3-5 years">3-5 years</option>
+                                                <option value="5-10 years">5-10 years</option>
+                                                <option value="More than 10 years">More than 10 years</option>
+                                            </select>
                                         </div>
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="registration-form-box">
-                                                <i class="fa fa-list-alt"></i>
-                                                <select id="select-category" class="demo-default" name="searchCate">
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="registration-form-box">
+                                            <i class="fa fa-list-alt"></i>
+                                            <select id="select-category" class="demo-default" name="searchCate">
                                                 <!--<select id="select-category" class="demo-default">-->
-                                                    <option value="">Categories...</option>
-                                                        <c:forEach items="${chooseCategory.listCategory}" var="i">
-                                                            <option value="${i.categoryID}">${i.categoryName}</option>
-                                                        </c:forEach>
-                                                </select>
-                                            </div>
+                                                <option value="">Categories...</option>
+                                                <c:forEach items="${chooseCategory.listCategory}" var="i">
+                                                    <option value="${i.categoryID}">${i.categoryName}</option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
+                                    </div>
                                     <div class="col-lg-3 col-md-6">
                                         <div class="registration-form-box">
                                             <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Submit">
@@ -136,8 +136,10 @@
                                             </div>
                                             <div class="col-lg-7 col-md-9">
                                                 <div class="job-list-desc">
-                                                    <h6 class="mb-2"><a href="#" class="text-dark"><%= job.getJobTitle()%></a></h6>
-                                                    <p class="text-muted mb-0"><i class="mdi mdi-bank mr-2"></i><%= job.getCompany().getCompanyName() %></p>
+
+                                                    <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h6>
+
+                                                    <p class="text-muted mb-0"><i class="mdi mdi-bank mr-2"></i><%= job.getCompany().getCompanyName()%></p>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
                                                             <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= job.getAddress()%></p>
@@ -171,7 +173,7 @@
 
                             %>
 
-                            
+
                             <div class="col-lg-12 mt-4 pt-2 ">
                                 <c:set var = "searchtitle" value="${requestScope.searchtitle}"/>
                                 <c:set var = "searchExper" value="${requestScope.searchExper}"/>
@@ -181,7 +183,7 @@
                                     <ul class="pagination job-pagination mb-0 justify-content-center">
                                         <c:forEach begin="${1}" end="${requestScope.numberPage}" var="i">
                                             <li class="${i==pageJob?"page-item active":""}"><a class="page-link" href="MainController?action=SearchlistJob&pageJob=${i}&searchtitle=${i}&searchExper=${i}&searchCate=${i}">${i}</a></li>                                        
-                                        </c:forEach>
+                                            </c:forEach>
                                     </ul>
                                 </nav>
                             </div>

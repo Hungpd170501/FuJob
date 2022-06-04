@@ -42,7 +42,7 @@ public class ViewalljobController extends HttpServlet {
             UserDAO userDAO = new UserDAO();
             CompanyInfoDAO compnayDAO = new CompanyInfoDAO();
             List<Job> listJob = jobDAO.getListJob();
-            for(Job job: listJob){
+            for (Job job : listJob) {
                 int userID = job.getUserID();
                 User user = userDAO.getUser(userID);
                 CompanyInfo company = compnayDAO.getCompanyInfo(user.getCompanyID());

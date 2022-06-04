@@ -11,9 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import se1621.dto.Job;
 import se1621.utils.DBUtils;
 import se1621.dto.Category;
+import se1621.dto.Job;
 
 /**
  *
@@ -29,6 +29,9 @@ public class JobDAO {
 
     private String SEARCHALL_JOBTITLE_EXPERIENCE_CATEGORY = "SELECT jobID, userID, jobTitle, ExperienceNeeded, jobCategoryID, skill, "
             + "deadline, completionTime, salary, address, email, phone, description FROM tblJob ";
+
+    private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJob WHERE jobID = (SELECT MAX(jobID) FROM tblJob)";
+    private static final String SEARCHBYJOBID = "SELECT * FROM tblJOB where jobID = ?";
 
     Connection conn;
     PreparedStatement preStm;
@@ -130,49 +133,106 @@ public class JobDAO {
         return null;
     }
 
+    public Job getJob(int jobIDSearch) throws SQLException {
+        Job job = new Job();
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(SEARCHBYJOBID);
+                preStm.setInt(1, jobIDSearch);
+                rs = preStm.executeQuery();
+                if (rs.next()) {
+
+                    int jobID = rs.getInt("jobID");
+                    int userID = rs.getInt("userID");
+                    String jobTitle = rs.getString("jobTitle");
+                    String ExperienceNeeded = rs.getString("ExperienceNeeded");
+                    int jobCategoryID = rs.getInt("jobCategoryID");
+                    String skill = rs.getString("skill");
+                    Date deadline = rs.getDate("deadline");
+                    String completionTime = rs.getString("completionTime");
+                    String salary = rs.getString("salary");
+                    String address = rs.getString("address");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String description = rs.getString("description");
+                    job = Job.builder().jobID(jobID)
+                            .userID(userID)
+                            .jobTitle(jobTitle)
+                            .ExperienceNeeded(ExperienceNeeded)
+                            .category(Category.builder().categoryID(jobCategoryID).build())
+                            .skill(skill)
+                            .deadline(deadline)
+                            .completionTime(completionTime)
+                            .salary(salary)
+                            .address(address)
+                            .email(email)
+                            .phone(phone)
+                            .description(description)
+                            .build();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return job;
+    }
+
+    public int getJobIDJustCreate() throws SQLException {
+        int jobID = 0;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GETJOBIDJUSTCREATE);
+                rs = preStm.executeQuery();
+                if (rs.next()) {
+                    jobID = rs.getInt("jobID");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return jobID;
+    }
+
     public List<Job> searchAllJobTile_Experience_Category(String searchJobTitle, String searchExperienceNeeded, int searchJobCategoryID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 List<Job> listJob = new ArrayList<>();
                 String getDataSQL = this.SEARCHALL_JOBTITLE_EXPERIENCE_CATEGORY;
-                
-//                if (searchJobTitle != null && !searchJobTitle.isEmpty()) {
-//                    // nhap jobTile
-//                    getDataSQL = getDataSQL + " WHERE jobTitle like ?";
-//                } else if (searchExperienceNeeded != null && !searchExperienceNeeded.isEmpty()) {
-//                    // nhap Experience
-//                    getDataSQL = getDataSQL + " WHERE ExperienceNeeded like ?";
-//                } else if (searchJobCategoryID != 0) {
-//                    // nhap searchJobCategoryID
-//                    getDataSQL = getDataSQL + " WHERE jobCategoryID = ?";
-//                } else if (searchJobTitle != null && !searchJobTitle.isEmpty() && searchExperienceNeeded != null && !searchExperienceNeeded.isEmpty()) {
-//                    // nhap searchJobTitle + Experience
-//                    getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ?";
-//                } else if (searchJobTitle != null && !searchJobTitle.isEmpty() && searchJobCategoryID != 0) {
-//                    // nhap searchJobTitle + searchJobCategoryID
-//                    getDataSQL = getDataSQL + " WHERE jobTitle like ? and jobCategoryID = ?";
-//                } else if (searchExperienceNeeded != null && !searchExperienceNeeded.isEmpty() && searchJobCategoryID != 0) {
-//                    // nhap Experience + searchJobCategoryID
-//                    getDataSQL = getDataSQL + " WHERE ExperienceNeeded like ? and jobCategoryID = ?";
-//                } else if (searchJobTitle != null && !searchJobTitle.isEmpty() && searchExperienceNeeded != null && !searchExperienceNeeded.isEmpty() && searchJobCategoryID != 0) {
-//                    // nhap searchJobTitle + Experience + searchJobCategoryID
-//                    getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? and jobCategoryID = ?";
-//                } else {
-//                    getDataSQL = getDataSQL + "";
-//                }
                 boolean checkCateID = true;
-                if(searchJobCategoryID==0){
-                    getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? ";               
-                }else{
+                if (searchJobCategoryID == 0) {
+                    getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? ";
+                } else {
                     getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? and jobCategoryID = ?";
                     checkCateID = false;
                 }
                 preStm = conn.prepareStatement(getDataSQL);
                 preStm.setString(1, "%" + searchJobTitle + "%");
-                preStm.setString(2, "%" + searchExperienceNeeded + "%");                
-                if(!checkCateID){
-                   preStm.setInt(3, searchJobCategoryID); 
+                preStm.setString(2, "%" + searchExperienceNeeded + "%");
+                if (!checkCateID) {
+                    preStm.setInt(3, searchJobCategoryID);
                 }
                 rs = preStm.executeQuery();
                 while (rs.next()) {
@@ -230,12 +290,4 @@ public class JobDAO {
         return jobPage;
     }
 
-    public static void main(String[] args) throws SQLException {
-//        JobDAO dao = new JobDAO();
-//        List<Job> list = dao.searchAllJobTile_Experience_Category("d", "5", 0);
-//        System.out.println();
-//        JobDAO dao = new JobDAO();
-//        List<Job> list = dao.getListJob();
-//        System.out.println(list.get(1).getCategory());
-    }
 }

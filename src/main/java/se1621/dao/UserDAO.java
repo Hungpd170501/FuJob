@@ -181,6 +181,7 @@ public class UserDAO {
         }
         return check;
     }
+
     public boolean activeUserAccount(String userEmail) throws SQLException {
         boolean check = false;
         try {
@@ -200,7 +201,7 @@ public class UserDAO {
         }
         return check;
     }
-    
+
     public boolean updateCompanyID(User user, int companyID) throws SQLException {
         boolean check = false;
         try {
@@ -227,7 +228,7 @@ public class UserDAO {
         }
         return check;
     }
-    
+
     public User getUser(int userID) throws SQLException {
         User user = new User();
         Connection conn = null;
@@ -261,5 +262,4 @@ public class UserDAO {
         }
         return user;
     }
-    
 }

@@ -18,17 +18,17 @@ import se1621.utils.DBUtils;
  *
  * @author ACER
  */
-
 public class ResumeDAO {
+
     private static final String SEARCH = "SELECT resumeID, userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, schoolName, major, gpa, experienceYear, skills, website, overview FROM tblResume WHERE userID = ?";
     private static final String CREATERESUME = "INSERT INTO tblResume( userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address,"
-                                                + " schoolName, major, gpa,"
-                                                + " experienceYear, skills, website, overview) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    
+            + " schoolName, major, gpa,"
+            + " experienceYear, skills, website, overview) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
     private static final String CHECK_DUPLICATE = "SELECT resumeID FROM tblResume WHERE userID=?";
     private static final String UPDATERESUME = "UPDATE tblResume SET avatar=?, fullName=?, gender=?, dateOfBirth=?, gmail=?, "
-                                                + "phone=?, address=?, schoolName=?, major=?, gpa=?, experienceYear=?, skills=?, "
-                                                + "website=?, overview=? WHERE userID=?";
+            + "phone=?, address=?, schoolName=?, major=?, gpa=?, experienceYear=?, skills=?, "
+            + "website=?, overview=? WHERE userID=?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -37,27 +37,27 @@ public class ResumeDAO {
         List<Resume> listResume = new ArrayList<>();
         try {
             conn = DBUtils.getInstance().getConnection();
-            if(conn != null){
+            if (conn != null) {
                 preStm = conn.prepareStatement(SEARCH);
                 preStm.setInt(1, search);
                 rs = preStm.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
                     int resumeID = rs.getInt("resumeID");
-                    int userID = rs.getInt("userID"); 
+                    int userID = rs.getInt("userID");
                     String avatar = rs.getString("avatar");
                     String fullName = rs.getString("fullName");
-                    String gender = rs.getString("gender");     
-                    Date dateOfBirth = rs.getDate("dateOfBirth");       
-                    String gmail = rs.getString("gmail");       
-                    String phone = rs.getString("phone");       
-                    String address = rs.getString("address");       
-                    String schoolName = rs.getString("schoolName");       
-                    String major = rs.getString("major");      
-                    String gpa = rs.getString("gpa");       
-                    String experienceYear = rs.getString("experienceYear");       
-                    String skills = rs.getString("skills");       
-                    String website = rs.getString("website");       
-                    String overview = rs.getString("overview");      
+                    String gender = rs.getString("gender");
+                    Date dateOfBirth = rs.getDate("dateOfBirth");
+                    String gmail = rs.getString("gmail");
+                    String phone = rs.getString("phone");
+                    String address = rs.getString("address");
+                    String schoolName = rs.getString("schoolName");
+                    String major = rs.getString("major");
+                    String gpa = rs.getString("gpa");
+                    String experienceYear = rs.getString("experienceYear");
+                    String skills = rs.getString("skills");
+                    String website = rs.getString("website");
+                    String overview = rs.getString("overview");
                     listResume.add(new Resume(resumeID, userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, schoolName, major, gpa, experienceYear, skills, website, overview));
                 }
             }
@@ -77,8 +77,6 @@ public class ResumeDAO {
         return listResume;
     }
 
-    
- 
     public boolean createResume(Resume resume) throws SQLException, ClassNotFoundException {
         boolean check = false;
         conn = null;
@@ -121,12 +119,12 @@ public class ResumeDAO {
         }
         return check;
     }
-    
+
     public boolean checkDuplicate(int userID) throws SQLException {
         boolean check = false;
-         conn = null;
-         preStm = null;
-         rs = null;
+        conn = null;
+        preStm = null;
+        rs = null;
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
@@ -152,7 +150,7 @@ public class ResumeDAO {
         }
         return check;
     }
-    
+
     public boolean updateResume(Resume resume, int userID) throws SQLException {
         boolean check = false;
         try {

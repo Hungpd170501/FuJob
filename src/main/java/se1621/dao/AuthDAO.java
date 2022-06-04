@@ -9,5 +9,5 @@ package se1621.dao;
  * @author ACER
  */
 public class AuthDAO {
-    
+
 }

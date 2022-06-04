@@ -45,7 +45,7 @@ public class GoogleRacaptcha {
             response.append(inputLine);
         }
         in.close();
-        JSONParser  parser = new  JSONParser ();
+        JSONParser parser = new JSONParser();
         JSONObject json = (JSONObject) parser.parse(response.toString());
         Boolean success = (Boolean) json.get("success");
         Double score = (Double) json.get("score");

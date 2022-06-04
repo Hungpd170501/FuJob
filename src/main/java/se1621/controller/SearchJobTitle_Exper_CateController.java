@@ -25,10 +25,10 @@ import se1621.dto.User;
  */
 @WebServlet(name = "SearchJobTitle_Exper_CateController", urlPatterns = {"/SearchJobTitle_Exper_CateController"})
 public class SearchJobTitle_Exper_CateController extends HttpServlet {
-    
+
     private static final String ERROR = "/view/job-list.jsp";
     private static final String SUCCESS = "/view/job-list.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -38,7 +38,7 @@ public class SearchJobTitle_Exper_CateController extends HttpServlet {
             String searchExper = request.getParameter("searchExper");
             int searchCate = 0;
             try {
-                 searchCate = Integer.parseInt(request.getParameter("searchCate"));
+                searchCate = Integer.parseInt(request.getParameter("searchCate"));
             } catch (Exception e) {
             }
             JobDAO jobDAO = new JobDAO();
@@ -51,7 +51,7 @@ public class SearchJobTitle_Exper_CateController extends HttpServlet {
                 CompanyInfo company = compnayDAO.getCompanyInfo(user.getCompanyID());
                 job.setCompany(company);
             }
-            
+
             int pageJob;
             int numberPostJob = 5; // so post job trong 1 trang
             int sizeJob = listJob.size();
@@ -65,7 +65,7 @@ public class SearchJobTitle_Exper_CateController extends HttpServlet {
             int starPage, endPage; // page 1 va page cuoi
             starPage = (pageJob - 1) * numberPostJob; // lay 5 page dau
             endPage = Math.min(pageJob * numberPostJob, sizeJob); // page cuoi se con lai bao nhieu post
-            List<Job> listPageAllJob = jobDAO.getPaginateJobList(listJob, starPage, endPage);            
+            List<Job> listPageAllJob = jobDAO.getPaginateJobList(listJob, starPage, endPage);
             if (!listPageAllJob.isEmpty()) {
                 request.setAttribute("LIST_ALLJOB", listPageAllJob);
                 request.setAttribute("pageJob", pageJob);
