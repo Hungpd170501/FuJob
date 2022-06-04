@@ -100,6 +100,51 @@
 
                     </ul>
                 </li>
+                <<<<<<< HEAD
+                =======
+
+                <<<<<<< HEAD
+                <li class="has-submenu">
+                    <a href="javascript:void(0)">Pages</a><span class="menu-arrow"></span>
+                    <ul class="submenu">
+                        <li><a href="/FuJob/view/about.jsp">About us</a></li>
+                        <li><a href="/FuJob/view/services.html">Services</a></li>
+                        <li><a href="/FuJob/view/team.html">Team</a></li>
+                        <li><a href="/FuJob/view/faq.html">Faqs</a></li>
+                        <li><a href="/FuJob/view/pricing.html">Pricing plans</a></li>
+                        <li class="has-submenu"><a href="javascript:void(0)"> Candidates</a><span class="submenu-arrow"></span>
+                            <ul class="submenu">
+                                <li><a href="/FuJob/view/candidates-listing.jsp">Candidates Listing</a></li>
+                                <li><a href="/FuJob/MainController?action=SearchResumeID&searchResumeID=${sessionScope.LOGIN_USER.userID}">Candidates Profile</a></li>
+                                <li><a href="/FuJob/view/create-resume.jsp">Create Resume</a></li>
+                            </ul>  
+                        </li>
+                        <li class="has-submenu"><a href="javascript:void(0)"> Blog</a><span class="submenu-arrow"></span>
+                            <ul class="submenu">
+                                <li><a href="/FuJob/view/blog-grid.html">Blogs</a></li>
+                                <li><a href="/FuJob/view/blog-sidebar.html">Blog Sidebar</a></li>
+                                <li><a href="/FuJob/view/blog-details.html">Blog Details</a></li>
+                            </ul>  
+                        </li>
+                        <li class="has-submenu"><a href="javascript:void(0)"> Employers</a><span class="submenu-arrow"></span>
+                            <ul class="submenu">
+                                <li><a href="/FuJob/view/employers-list.jsp">Employers List</a></li>
+                                <li><a href="/FuJob/MainController?action=SearchCompanyID&searchCompanyID=${sessionScope.LOGIN_USER.companyID}">Company Detail</a></li>
+                            </ul>  
+                        </li>
+                        <li class="has-submenu"><a href="javascript:void(0)"> User Pages</a><span class="submenu-arrow"></span>
+                            <ul class="submenu">
+                                <li><a href="/FuJob/view/login.jsp">Login</a></li>
+                                <li><a href="/FuJob/view/signup.jsp">Signup</a></li>
+                                <li><a href="/FuJob/view/recovery_password.jsp">Forgot Password</a></li>
+                            </ul>  
+                        </li>
+                        <li><a href="components.html"> Components</a></li>
+                    </ul>
+                </li>
+                =======
+                >>>>>>> 128d229c6b685ed8cb04b26deeaa84d14ca38160
+                >>>>>>> 915f40cc1c78e1f1f9a2c9b2dc62bd6f07abdc45
                 <li>
                     <a href="${pageContext.request.contextPath}/view/about.jsp">contact</a>
                 </li>
