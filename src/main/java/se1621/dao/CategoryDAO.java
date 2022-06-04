@@ -18,7 +18,8 @@ import se1621.utils.DBUtils;
  * @author ACER
  */
 public class CategoryDAO {
-    private static final String GETLISTCATEGORY = "SELECT * FROM tblCategory";
+    private static final String GETLISTCATEGORY = "SELECT * FROM tblCategory ORDER BY categoryName";
+    private static final String GETCATEGORY = "SELECT categoryName FROM tblCategory WHERE categoryID = ?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -53,5 +54,35 @@ public class CategoryDAO {
             }
         }
         return null;
+    }
+    
+    public Category getCategory(int categoryID ) throws SQLException {
+        Category category = new Category();
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if(conn !=null) {
+                preStm = conn.prepareStatement(GETCATEGORY);
+                preStm.setInt(1, categoryID);
+                rs = preStm.executeQuery();
+                
+                if(rs.next()) {
+                    String categoryName = rs.getString("categoryName");
+                    category = Category.builder().categoryID(categoryID).categoryName(categoryName).build();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return category;
     }
 }

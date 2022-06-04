@@ -30,7 +30,7 @@ public class CompanyInfoDAO {
     private static final String GETLISTCOMPANY = "SELECT * FROM tblCompany";
     private static final String GETCOMID = "SELECT companyID FROM tblCompany WHERE companyName=?";
     private static final String CHECK_DUPLICATE = "SELECT companyID FROM tblCompany WHERE companyName=?";
-    private static final String SEARCH = "SELECT companyID, companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar FROM tblCompany WHERE companyID = ?";
+    private static final String SEARCH = "SELECT companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar FROM tblCompany WHERE companyID = ?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -177,7 +177,7 @@ public class CompanyInfoDAO {
         return companyID;
     }
 
-    public CompanyInfo getCompanyInfo(int search) throws SQLException {
+    public CompanyInfo getCompanyInfo(int companyID) throws SQLException {
         CompanyInfo companyInfo = new CompanyInfo();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -186,10 +186,10 @@ public class CompanyInfoDAO {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(SEARCH);
-                ptm.setInt(1, search);
+                ptm.setInt(1, companyID);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
-                    int companyID = rs.getInt("companyID");
+//                    int companyID = rs.getInt("companyID");
                     String companyName = rs.getString("companyName");
                     String address = rs.getString("address");
                     String website = rs.getString("website");

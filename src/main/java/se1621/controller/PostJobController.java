@@ -25,7 +25,7 @@ import se1621.dto.User;
 public class PostJobController extends HttpServlet {
 
     private static final String ERROR = "/view/post-a-job.jsp";
-    private static final String SUCCESS = "/view/job-details.jsp";
+    private static final String SUCCESS = "/MainController?action=SearchJobID&searchJobID=";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -64,8 +64,9 @@ public class PostJobController extends HttpServlet {
             JobDAO jobdao = new JobDAO();
             boolean check = jobdao.createJob(job);
             if (check) {
+                int jobID = jobdao.getJobIDJustCreate();
                 request.setAttribute("MESSAGE", "Create Job Successfully!");
-                url = SUCCESS;
+                url = SUCCESS + jobID;
             }
 
         } catch (Exception e) {

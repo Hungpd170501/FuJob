@@ -14,19 +14,22 @@ import java.util.List;
 import se1621.dto.Job;
 import se1621.utils.DBUtils;
 import se1621.dto.Category;
+
 /**
  *
  * @author ACER
  */
 public class JobDAO {
-    
-    
+
     private static final String CREATEJOB = "INSERT INTO tblJob(userID, jobTitle, experienceNeeded, jobCategoryID, skill, deadline,"
-                                            +"completionTime, salary, address, email, phone, description) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+            + "completionTime, salary, address, email, phone, description) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
     private static final String VIEWALLJOB = "SELECT* FROM tblJob";
+    private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJob WHERE jobID = (SELECT MAX(jobID) FROM tblJob)";
+    private static final String SEARCHBYJOBID = "SELECT * FROM tblJOB where jobID = ?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
+
     public boolean createJob(Job job) throws SQLException, ClassNotFoundException {
         boolean check = false;
         conn = null;
@@ -48,11 +51,10 @@ public class JobDAO {
                 preStm.setString(10, job.getEmail());
                 preStm.setString(11, job.getPhone());
                 preStm.setString(12, job.getDescription());
-                
 
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
 
@@ -67,9 +69,9 @@ public class JobDAO {
         }
         return check;
     }
-    
+
     public List<Job> getListJob() throws SQLException {
-        try { 
+        try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(VIEWALLJOB);
@@ -90,19 +92,19 @@ public class JobDAO {
                     String phone = rs.getString("phone");
                     String description = rs.getString("description");
                     listJob.add(Job.builder().jobID(jobID)
-                                              .userID(userID)
-                                              .jobTitle(jobTitle)
-                                              .ExperienceNeeded(ExperienceNeeded)
-                                              .category(Category.builder().categoryID(jobCategoryID).build())
-                                              .skill(skill)
-                                              .deadline(deadline)
-                                              .completionTime(completionTime)
-                                              .salary(salary)
-                                              .address(address)
-                                              .email(email)
-                                              .phone(phone)
-                                              .description(description)
-                                                .build());
+                            .userID(userID)
+                            .jobTitle(jobTitle)
+                            .ExperienceNeeded(ExperienceNeeded)
+                            .category(Category.builder().categoryID(jobCategoryID).build())
+                            .skill(skill)
+                            .deadline(deadline)
+                            .completionTime(completionTime)
+                            .salary(salary)
+                            .address(address)
+                            .email(email)
+                            .phone(phone)
+                            .description(description)
+                            .build());
                 }
                 return listJob;
             }
@@ -121,5 +123,87 @@ public class JobDAO {
         }
 
         return null;
+    }
+
+    public Job getJob(int jobIDSearch) throws SQLException {
+        Job job = new Job();
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(SEARCHBYJOBID);
+                preStm.setInt(1, jobIDSearch);
+                rs = preStm.executeQuery();
+                if (rs.next()) {
+
+                    int jobID = rs.getInt("jobID");
+                    int userID = rs.getInt("userID");
+                    String jobTitle = rs.getString("jobTitle");
+                    String ExperienceNeeded = rs.getString("ExperienceNeeded");
+                    int jobCategoryID = rs.getInt("jobCategoryID");
+                    String skill = rs.getString("skill");
+                    Date deadline = rs.getDate("deadline");
+                    String completionTime = rs.getString("completionTime");
+                    String salary = rs.getString("salary");
+                    String address = rs.getString("address");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String description = rs.getString("description");
+                    job = Job.builder().jobID(jobID)
+                            .userID(userID)
+                            .jobTitle(jobTitle)
+                            .ExperienceNeeded(ExperienceNeeded)
+                            .category(Category.builder().categoryID(jobCategoryID).build())
+                            .skill(skill)
+                            .deadline(deadline)
+                            .completionTime(completionTime)
+                            .salary(salary)
+                            .address(address)
+                            .email(email)
+                            .phone(phone)
+                            .description(description)
+                            .build();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return job;
+    }
+    
+    public int getJobIDJustCreate() throws SQLException {
+        int jobID = 0;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GETJOBIDJUSTCREATE);
+                rs = preStm.executeQuery();
+                if (rs.next()) {
+                    jobID = rs.getInt("jobID");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return jobID;
     }
 }

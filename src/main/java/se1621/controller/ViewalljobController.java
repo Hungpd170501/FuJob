@@ -19,8 +19,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import se1621.dao.CompanyInfoDAO;
 import se1621.dao.JobDAO;
+import se1621.dao.UserDAO;
 import se1621.dto.CompanyInfo;
 import se1621.dto.Job;
+import se1621.dto.User;
 
 /**
  *
@@ -38,16 +40,14 @@ public class ViewalljobController extends HttpServlet {
             List<Job> listJob = new ArrayList<>();
             JobDAO jobDAO = new JobDAO();
             listJob = jobDAO.getListJob();
-            listJob.forEach((jobItem)->{
+            UserDAO userDAO = new UserDAO();
             CompanyInfoDAO companyDAO = new CompanyInfoDAO();
-                try {
-                    CompanyInfo company = companyDAO.getCompanyInfo(jobItem.getUserID());
-                    jobItem.setCompany(company);
-                } catch (SQLException ex) {
-                    Logger.getLogger(ViewalljobController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-            
+            for (Job job : listJob)  {
+                int userID = job.getUserID();
+                User user = userDAO.getUser(userID);
+                CompanyInfo company = companyDAO.getCompanyInfo(user.getCompanyID());
+                job.setCompany(company);
+            }
             if(!listJob.isEmpty()){
                 request.setAttribute("LIST_ALLJOB", listJob);
                 url = SUCCESS;

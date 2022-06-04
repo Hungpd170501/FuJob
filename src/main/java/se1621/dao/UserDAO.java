@@ -17,6 +17,7 @@ public class UserDAO {
     private static final String CHECK_DUPLICATE = "SELECT userID FROM tblUser WHERE email=?";
     private static final String SINGUP = "INSERT INTO tblUser(userName, fullName, email, password, phone, roleID, status) VALUES(?,?,?,?,?,?,2)";
     private static final String UPDATECOMID = "UPDATE tblUser SET userName=?, fullName=?, email=?, phone=?, roleID=?, companyID=? WHERE userID=?";
+    private static final String GETUSER = "SELECT fullName, roleID, companyID FROM tblUser WHERE userID =?";
     private Connection conn;
     private PreparedStatement preStm;
     private ResultSet rs;
@@ -225,5 +226,39 @@ public class UserDAO {
             }
         }
         return check;
+    }
+    
+    public User getUser(int userID) throws SQLException {
+        User user = new User();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GETUSER);
+                ptm.setInt(1, userID);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    String fullName = rs.getString("fullName");
+                    String roleID = rs.getString("roleID");
+                    int companyID = rs.getInt("companyID");
+                    user = User.builder().fullName(fullName).role(new Role(roleID, "")).companyID(companyID).build();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return user;
     }
 }

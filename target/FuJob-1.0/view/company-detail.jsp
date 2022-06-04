@@ -105,19 +105,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-2 col-md-3 col-6">
-                                        <div class="text-sm-center m-14">
-                                            <h5 class="text-dark mb-2">Salary</h5>
-                                            <p class="text-muted mb-0">$700 - $2000/month</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-2 col-md-3 col-6">
-                                        <div class="text-sm-center m-14">
-                                            <h5 class="text-dark mb-2">Followers</h5>
-                                            <p class="text-muted mb-0">584230 +</p>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

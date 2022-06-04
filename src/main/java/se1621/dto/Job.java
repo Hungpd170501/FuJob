@@ -35,6 +35,7 @@ public class Job {
     private String email;
     private String phone;
     private String description;
-
+    
+    
     
 }
