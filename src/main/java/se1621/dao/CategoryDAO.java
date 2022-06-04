@@ -18,7 +18,7 @@ import se1621.utils.DBUtils;
  * @author ACER
  */
 public class CategoryDAO {
-    private static final String GETLISTCATEGORY = "SELECT * FROM tblCategory";
+    private static final String GETLISTCATEGORY = "SELECT * FROM tblCategory ORDER BY categoryName";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;

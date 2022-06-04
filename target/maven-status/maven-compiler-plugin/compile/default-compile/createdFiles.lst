@@ -27,6 +27,7 @@ se1621\controller\EmailVerifyHandler.class
 se1621\dto\Error\CompanyInfoError.class
 se1621\dto\Role.class
 se1621\utils\DBUtils.class
+se1621\controller\SearchJobTitle_Exper_CateController.class
 se1621\dto\Category.class
 se1621\constant\Constant.class
 se1621\controller\CreateCompanyInfoController.class

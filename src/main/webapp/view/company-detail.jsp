@@ -42,7 +42,7 @@
             <!-- EMPLOYERS DETAILS START -->
 
 
-            <section class="section" name="action" value="SearchCompanyID">
+            <section class="section">
             <%
                 CompanyInfo companyInfo = (CompanyInfo) request.getAttribute("COMPANYINFO");
                 if (companyInfo != null) {                 
@@ -84,38 +84,24 @@
                         <div class="col-lg-12">
                             <div class="border-top border-bottom pt-4 pb-4">
                                 <div class="row justify-content-sm-center">
-                                    <div class="col-lg-2 col-md-3 col-6">
+                                    <div class="col-lg-3 col-md-3 col-6">
                                         <div class="text-sm-center m-14">
                                             <h5 class="text-dark mb-2">Employer</h5>
                                             <p class="text-muted mb-0"><%= companyInfo.getNumberOfEmployee() %></p>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-2 col-md-3 col-6">
+                                    <div class="col-lg-3 col-md-3 col-6">
                                         <div class="text-sm-center m-14">
                                             <h5 class="text-dark mb-2">Type</h5>
                                             <p class="text-muted mb-0"><%= companyInfo.getTypeCompany() %></p>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-2 col-md-3 col-6">
+                                    <div class="col-lg-3 col-md-3 col-6">
                                         <div class="text-sm-center m-14">
                                             <h5 class="text-dark mb-2">Established Year</h5>
                                             <p class="text-muted mb-0"><%= companyInfo.getEstablishedYear() %></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-2 col-md-3 col-6">
-                                        <div class="text-sm-center m-14">
-                                            <h5 class="text-dark mb-2">Salary</h5>
-                                            <p class="text-muted mb-0">$700 - $2000/month</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-2 col-md-3 col-6">
-                                        <div class="text-sm-center m-14">
-                                            <h5 class="text-dark mb-2">Followers</h5>
-                                            <p class="text-muted mb-0">584230 +</p>
                                         </div>
                                     </div>
                                 </div>

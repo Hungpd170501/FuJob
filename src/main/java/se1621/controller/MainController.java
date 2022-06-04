@@ -37,6 +37,8 @@ public class MainController extends HttpServlet {
     private static final String POSTJOB = "Post a Job";
     private static final String VIEWALLJOB_CONTROLLER = "ViewalljobController";
     private static final String VIEWALLJOB = "SearchlistJob";
+    private static final String SEARCHJOBTITLE_EXPER_CATE = "Search_title_exper_cate";
+    private static final String SEARCHJOBTITLE_EXPER_CATE_CONTROLLER = "SearchJobTitle_Exper_CateController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -69,6 +71,8 @@ public class MainController extends HttpServlet {
                 url = POSTJOB_CONTROLLER;
             }else if(VIEWALLJOB.equals(action)){
                 url = VIEWALLJOB_CONTROLLER;
+            }else if(SEARCHJOBTITLE_EXPER_CATE.equals(action)){
+                url = SEARCHJOBTITLE_EXPER_CATE_CONTROLLER;
             }else {
                 url = ERROR;
             }
