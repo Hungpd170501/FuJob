@@ -13,6 +13,7 @@ import java.sql.SQLException;
  * @author ACER
  */
 public class DBUtils {
+
     private static DBUtils instance;
     private Connection connection;
 
@@ -22,14 +23,14 @@ public class DBUtils {
     private final String userID = "sa";
     private final String password = "1472580369";
 
-    private DBUtils(){
-        String url = "jdbc:jtds:sqlserver://"+serverName+":"+portNumber +"/"+dbName;
+    private DBUtils() {
+        String url = "jdbc:jtds:sqlserver://" + serverName + ":" + portNumber + "/" + dbName;
         try {
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
         } catch (ClassNotFoundException e) {
         }
         try {
-            this.connection=DriverManager.getConnection(url, userID, password);
+            this.connection = DriverManager.getConnection(url, userID, password);
         } catch (SQLException e) {
         }
     }
@@ -38,7 +39,7 @@ public class DBUtils {
         return connection;
     }
 
-    public static DBUtils getInstance(){
+    public static DBUtils getInstance() {
         if (instance == null) {
             instance = new DBUtils();
         } else {

@@ -94,7 +94,7 @@ CREATE TABLE tblResume
 	major varchar(50),
 	gpa varchar(15),
 	experienceYear varchar(50),
-	skills varchar(50),
+	skills varchar(255),
 	website varchar ( 100 ),
 	overview varchar(3000),
 );
@@ -106,10 +106,10 @@ GO
 CREATE TABLE tblJob (
 	jobID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
 	userID INT NOT NULL,
-	jobTitle varchar(20),
+	jobTitle varchar(255),
 	ExperienceNeeded varchar(20),
 	jobCategoryID INT,
-	skill varchar(20),
+	skill varchar(255),
 	deadline date,
 	completionTime varchar(20),
 	salary varchar(20),
@@ -121,6 +121,18 @@ CREATE TABLE tblJob (
 );
 GO
 
+INSERT INTO tblJob(userID, jobTitle, experienceNeeded, jobCategoryID, skill, deadline, completionTime, salary, address, email, phone, description) 
+VALUES (
+'11', 'DESIGNER FREELANCE', 'Less than 1 year', '24', 'Adobe Illustrator, Photography, Adobe Premiere,...', '2022-08-11', '10 days', '100$', 'Distric 9, HCM city', 'designfpt@gmail.com', '123-65-485', 'Support, coordinate with main designer to design products for online advertising and communication channels: banner, cover photo, flash animation, infographic, email marketing, etc.
+ Support, coordinate with main designer Design products for offline communication: standee, banner, backdrop, bandroll, invitation, flyer, flyer, voucher, banners for office decoration, etc.
+ Edit photos after each Company event
+ Support, coordinate with the main designer to design online and offline registration forms
+ Design slides, brochures to introduce products for the Company
+ Contributing ideas to the Company''s events and Marketing campaigns'
+)
+GO
+
+
 IF OBJECT_ID('dbo.tblCategory', 'u') IS NOT NULL 
    DROP TABLE dbo.tblCategory;  
 GO
@@ -130,55 +142,69 @@ CREATE TABLE tblCategory (
 );
 GO
 
-INSERT INTO tblCategory (categoryID, categoryName) 
-VALUES (1, N'Clerical / Administrative'),
-	(2, N'QA / QC'),
-	(3, N'HSE'),
-	(4, N'Human Resources'),
-	(5, N'Interpreter / Translator'),
-	(6, N'Legal'),
- 	(7, N'Customer Service'),
-	(8, N'Education'),
-	(9, N'Health Care'),
- 	(10, N'Security'),
- 	(11, N'Accounting / Audit'),
- 	(12, N'Banking / Securities'),
- 	(13, N'Finance / Investment'),
- 	(14, N'Insurance '),
- 	(15, N'Advertising / Promotion / PR'),
- 	(16, N'Consulting'),
-	(17, N'Fashion'),
-	(18, N'Household'),
- 	(19, N'Marketing'),
- 	(20, N'Sales'),
-	(21, N'Export / Import '),
- 	(22, N'Purchasing'),
-	(23, N'Transportation / Logistics / Warehouse'),
- 	(24, N'IT - Hardware'),
- 	(25, N'IT - Software'),
- 	(26, N'Travel '),
- 	(27, N'Restaurant / Food Service'),
- 	(28, N'Hotel'),
- 	(29, N'Electrical / Electronics'),
- 	(30, N'Engineering / Mechanical'),
-	(31, N'Environment / Waste Services'),
-	(32, N'Maintenance '),
-	(33, N'Pharmaceutical / Biotech'),
-	(34, N'Automotive '),
-	(35, N'Agriculture / Forestry'),
-	(36, N'Chemical / Biochemical / Food Science '),
-	(37, N'Fishery '),
- 	(38, N'Manufacturing / Operations '),
-	(39, N'Oil / Gas / Mineral '),
- 	(40, N'Textiles / Garments'),
- 	(41, N'Wood '),
-	(42, N'Architecture'),
- 	(43, N'Construction'),
-	(44, N'Interior / Exterior'),
-	(45, N'Real Estate'),
- 	(46, N'Arts / Entertainment'),
-	(47, N'Newspaper / Editor / Publishing'),
-	(48, N'Telecommunications '),
- 	(49, N'Executive Management'),
- 	(50, N'Other')
+INSERT INTO tblCategory ( categoryName) 
+VALUES (N'Clerical / Administrative'),
+	(N'QA / QC'),
+	(N'HSE'),
+	(N'Human Resources'),
+	(N'Interpreter / Translator'),
+	(N'Legal'),
+ 	(N'Customer Service'),
+	(N'Education'),
+	(N'Health Care'),
+ 	(N'Security'),
+ 	(N'Accounting / Audit'),
+ 	(N'Banking / Securities'),
+ 	(N'Finance / Investment'),
+ 	(N'Insurance '),
+ 	(N'Advertising / Promotion / PR'),
+ 	(N'Consulting'),
+	(N'Fashion'),
+	(N'Household'),
+ 	(N'Marketing'),
+ 	(N'Sales'),
+	(N'Export / Import '),
+ 	(N'Purchasing'),
+	(N'Transportation / Logistics / Warehouse'),
+ 	(N'IT - Hardware'),
+ 	(N'IT - Software'),
+ 	(N'Travel '),
+ 	(N'Restaurant / Food Service'),
+ 	(N'Hotel'),
+ 	(N'Electrical / Electronics'),
+ 	(N'Engineering / Mechanical'),
+	(N'Environment / Waste Services'),
+	(N'Maintenance '),
+	(N'Pharmaceutical / Biotech'),
+	(N'Automotive '),
+	(N'Agriculture / Forestry'),
+	(N'Chemical / Biochemical / Food Science '),
+	(N'Fishery '),
+ 	(N'Manufacturing / Operations '),
+	(N'Oil / Gas / Mineral '),
+ 	(N'Textiles / Garments'),
+ 	(N'Wood '),
+	(N'Architecture'),
+ 	(N'Construction'),
+	(N'Interior / Exterior'),
+	(N'Real Estate'),
+ 	(N'Arts / Entertainment'),
+	(N'Newspaper / Editor / Publishing'),
+	(N'Telecommunications '),
+ 	(N'Executive Management'),
+ 	(N'Other')
 GO
+
+IF OBJECT_ID('dbo.tblJobOrder', 'u') IS NOT NULL 
+   DROP TABLE dbo.tblJobOrder;  
+GO
+CREATE TABLE tblJobOrder (
+	jobOrderID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+	userID INT NOT NULL,
+	jobID INT NOT NULL,
+	cvFile varchar(MAX),
+	salaryDeal varchar(50),
+	message varchar(2000),
+);
+GO
+

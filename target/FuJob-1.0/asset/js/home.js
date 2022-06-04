@@ -1,7 +1,7 @@
 /* Theme Name: Jobya - Responsive Landing Page Template
-   Author: Themesdesign
-   Version: 1.0.0
-*/
+ Author: Themesdesign
+ Version: 1.0.0
+ */
 
 
 (function ($) {

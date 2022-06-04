@@ -44,7 +44,7 @@ public class RecoveryPasswordHandler extends HttpServlet {
                     }
                 }
             }
-            if(!StringUtils.equals(url, SUCCESS)){
+            if (!StringUtils.equals(url, SUCCESS)) {
                 request.setAttribute("RECOVERY_PASSWORD_MESSAGE", "It looks like you clicked on an invalid password reset link. Please try again!");
             }
         } catch (Exception e) {

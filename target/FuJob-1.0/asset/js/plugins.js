@@ -1,7 +1,7 @@
 /* Theme Name: Jobya - Responsive Landing Page Template
-   Author: Themesdesign
-   Version: 1.0.0
-*/
+ Author: Themesdesign
+ Version: 1.0.0
+ */
 
 
 (function ($) {
@@ -13,28 +13,28 @@
         $(this).toggleClass('open');
         $('#navigation').slideToggle(400);
     });
-    
+
     $('.navigation-menu>li').slice(-1).addClass('last-elements');
-    
+
     $('.menu-arrow,.submenu-arrow').on('click', function (e) {
         if ($(window).width() < 992) {
             e.preventDefault();
             $(this).parent('li').toggleClass('open').find('.submenu:first').toggleClass('open');
         }
     });
-    
+
     $(".navigation-menu a").each(function () {
         if (this.href == window.location.href) {
-            $(this).parent().addClass("active"); 
-            $(this).parent().parent().parent().addClass("active"); 
-            $(this).parent().parent().parent().parent().parent().addClass("active"); 
+            $(this).parent().addClass("active");
+            $(this).parent().parent().parent().addClass("active");
+            $(this).parent().parent().parent().parent().parent().addClass("active");
         }
     });
 
     // Clickable Menu
-    $(".has-submenu a").click(function() {
-        if(window.innerWidth < 992){
-            if($(this).parent().hasClass('open')){
+    $(".has-submenu a").click(function () {
+        if (window.innerWidth < 992) {
+            if ($(this).parent().hasClass('open')) {
                 $(this).siblings('.submenu').removeClass('open');
                 $(this).parent().removeClass('open');
             } else {
@@ -44,7 +44,7 @@
         }
     });
 
-    $('.mouse-down').on('click', function(event) {
+    $('.mouse-down').on('click', function (event) {
         var $anchor = $(this);
         $('html, body').stop().animate({
             scrollTop: $($anchor.attr('href')).offset().top - 0
@@ -53,7 +53,7 @@
     });
 
     //Sticky
-    $(window).scroll(function() {
+    $(window).scroll(function () {
         var scroll = $(window).scrollTop();
 
         if (scroll >= 80) {
@@ -63,5 +63,5 @@
         }
     });
 
-    
+
 })(jQuery)

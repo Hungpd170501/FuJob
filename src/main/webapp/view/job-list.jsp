@@ -42,80 +42,88 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
                             <div class="home-registration-form job-list-reg-form bg-light shadow p-4 mb-3">
-                                <form class="registration-form">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="registration-form-box">
-                                                <i class="fa fa-briefcase"></i>
-                                                <input type="text" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Job keybords...">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="registration-form-box">
-                                                <i class="fa fa-archive"></i>
-                                                <select class="demo-default" id="select-category" name="chooseExY" required="">
-                                                    <option value="">Experience</option>
-                                                    <option value="Less than 1 year">Less than 1 year</option>
-                                                    <option value="1-3 years">1-3 years</option>
-                                                    <option value="3-5 years">3-5 years</option>
-                                                    <option value="5-10 years">5-10 years</option>
-                                                    <option value="More than 10 years">More than 10 years</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="registration-form-box">
-                                                <i class="fa fa-list-alt"></i>
-                                                <select id="select-category" class="demo-default">
-                                                    <option value="">Categories...</option>
-                                                    <c:forEach items="${chooseCategory.listCategory}" var="i">
-                                                            <option value="${i.categoryID}">${i.categoryName}</option>
-                                                        </c:forEach>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="registration-form-box">
-                                                <input type="submit" id="submit" name="send" class="submitBnt btn btn-primary btn-block" value="Submit">
-                                            </div>
+
+                                <!-- START SEARCH -->
+                                <form class="registration-form" action="${pageContext.request.contextPath}/MainController">
+                                <!--                                <form class="registration-form">-->
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="registration-form-box">
+                                            <i class="fa fa-briefcase"></i>
+                                            <input type="text" name="searchtitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Job title...">
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="registration-form-box">
+                                            <i class="fa fa-archive"></i>
+                                            <select class="demo-default" id="select-category" name="searchExper">
+                                                <!--                                                <select class="demo-default" id="select-category" required="">-->
+                                                <option value="">Experience</option>
+                                                <option value="Less than 1 year">Less than 1 year</option>
+                                                <option value="1-3 years">1-3 years</option>
+                                                <option value="3-5 years">3-5 years</option>
+                                                <option value="5-10 years">5-10 years</option>
+                                                <option value="More than 10 years">More than 10 years</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="registration-form-box">
+                                            <i class="fa fa-list-alt"></i>
+                                            <select id="select-category" class="demo-default" name="searchCate">
+                                                <!--<select id="select-category" class="demo-default">-->
+                                                <option value="">Categories...</option>
+                                                <c:forEach items="${chooseCategory.listCategory}" var="i">
+                                                    <option value="${i.categoryID}">${i.categoryName}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="registration-form-box">
+                                            <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Submit">
+                                            <!-- name = action  -->
+                                            <input type="hidden" name ="action" value="Search_title_exper_cate">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- END SEARCH -->
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- JOB LIST START -->
-            <section class="section pt-0">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-12">
-                            <div class="section-title text-center mb-4 pb-2">
-                                <h4 class="title title-line pb-5">Available job for you</h4>
-                                <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
-                            </div>
+        <!-- JOB LIST START -->
+        <section class="section pt-0">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="section-title text-center mb-4 pb-2">
+                            <h4 class="title title-line pb-5">Available job for you</h4>
+                            <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
                         </div>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col-lg-12 mt-4 pt-2">
-                            <div class="row align-items-center">
-                                <div class="col-lg-12">
-                                    <div class="show-results">
-                                        <div class="float-left">
-                                            <h5 class="text-dark mb-0 pt-2 f-18">Showing result</h5>
-                                        </div>
+                <div class="row">
+                    <div class="col-lg-12 mt-4 pt-2">
+                        <div class="row align-items-center">
+                            <div class="col-lg-12">
+                                <div class="show-results">
+                                    <div class="float-left">
+                                        <h5 class="text-dark mb-0 pt-2 f-18">Showing result</h5>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="row"> 
+                        <div class="row"> 
                             <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_ALLJOB");
                                 if (listJob != null) {
                                     if (listJob.size() > 0) {
-                                        for(Job job: listJob ){                           
+                                        for (Job job : listJob) {
                             %>
                             <div class="col-lg-12 mt-4 pt-2">
                                 <div class="job-list-box border rounded">
@@ -128,11 +136,13 @@
                                             </div>
                                             <div class="col-lg-7 col-md-9">
                                                 <div class="job-list-desc">
-                                                    <h6 class="mb-2"><a href="#" class="text-dark"><%= job.getJobTitle() %></a></h6>
-                                                    <p class="text-muted mb-0"><i class="mdi mdi-bank mr-2"></i><%= job.getCompany().getCompanyName() %></p>
+
+                                                    <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h6>
+
+                                                    <p class="text-muted mb-0"><i class="mdi mdi-bank mr-2"></i><%= job.getCompany().getCompanyName()%></p>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= job.getAddress() %></p>
+                                                            <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= job.getAddress()%></p>
                                                         </li>
 
                                                         <li class="list-inline-item">
@@ -143,7 +153,7 @@
                                             </div>
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
-                                                    <span class="badge badge-success">Full-Time</span>
+                                                    <span class="badge badge-success">Part-Time</span>
 
                                                     <div class="mt-3">
                                                         <a href="#" class="btn btn-sm btn-primary">Apply</a>
@@ -155,30 +165,25 @@
                                 </div>
                             </div>
                             <%
-                        
-                                }        
-                                 
-                            }
-                        }
-                        
+
+                                        }
+
+                                    }
+                                }
+
                             %>
-                            <div class="col-lg-12 mt-4 pt-2">
+
+
+                            <div class="col-lg-12 mt-4 pt-2 ">
+                                <c:set var = "searchtitle" value="${requestScope.searchtitle}"/>
+                                <c:set var = "searchExper" value="${requestScope.searchExper}"/>
+                                <c:set var = "searchCate" value="${requestScope.searchCate}"/>
+                                <c:set var="pageJob" value="${requestScope.pageJob}"/>
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination job-pagination mb-0 justify-content-center">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                                                <i class="mdi mdi-chevron-double-left"></i>
-                                            </a>
-                                        </li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">
-                                                <i class="mdi mdi-chevron-double-right"></i>
-                                            </a>
-                                        </li>
+                                        <c:forEach begin="${1}" end="${requestScope.numberPage}" var="i">
+                                            <li class="${i==pageJob?"page-item active":""}"><a class="page-link" href="MainController?action=SearchlistJob&pageJob=${i}&searchtitle=${i}&searchExper=${i}&searchCate=${i}">${i}</a></li>                                        
+                                            </c:forEach>
                                     </ul>
                                 </nav>
                             </div>
@@ -188,34 +193,6 @@
             </div>
         </section>
         <!-- JOB LIST START -->
-
-        <!-- subscribe start -->
-        <section class="section bg-light">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-5">
-                        <div class="float-left position-relative notification-icon mr-2">
-                            <i class="mdi mdi-bell-outline text-primary"></i>
-                            <span class="badge badge-pill badge-danger">1</span>
-                        </div>
-                        <h5 class="mt-2 mb-0">Your Job Notification</h5>
-                    </div>
-                    <div class="col-lg-8 col-md-7 mt-4 mt-sm-0">
-                        <form>
-                            <div class="form-group mb-0">
-                                <div class="input-group mb-0">
-                                    <input name="email" id="email" type="email" class="form-control" placeholder="Your email :" required="" aria-describedby="newssubscribebtn">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary submitBnt" type="submit" id="newssubscribebtn">Subscribe</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- subscribe end -->
 
         <!-- footer start -->
         <footer class="footer">

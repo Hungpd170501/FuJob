@@ -5,7 +5,7 @@
 package se1621.dto.Error;
 
 public class CompanyInfoError {
-   
+
     private int companyIDError;
     private String companyNameError;
     private String addressError;
@@ -138,7 +138,5 @@ public class CompanyInfoError {
     public String toString() {
         return "CompanyInfoError{" + "companyIDError=" + companyIDError + ", companyNameError=" + companyNameError + ", addressError=" + addressError + ", websiteError=" + websiteError + ", gmailError=" + gmailError + ", phoneError=" + phoneError + ", typeCompanyError=" + typeCompanyError + ", establishedYearError=" + establishedYearError + ", numberOfEmployeeError=" + numberOfEmployeeError + ", companyOverviewError=" + companyOverviewError + ", avatarError=" + avatarError + '}';
     }
-    
-    
-    
+
 }

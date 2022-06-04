@@ -28,7 +28,7 @@
 
 .nav-link {
     &:hover,
-    &.active {
+        &.active {
         .blog-post-overlay {
             position: absolute;
             left: 0;
@@ -87,7 +87,7 @@
         top: 0;
         left: 0px;
         bottom: 0px;
-        right: 0px; 
+        right: 0px;
         opacity: 0;
         .service-info {
             position: absolute;
@@ -119,7 +119,7 @@
 
 /********************
         PRICING  
-*********************/ 
+*********************/
 .pricing-box {
     transition: all 0.5s ease;
     .pricing-plan-item {

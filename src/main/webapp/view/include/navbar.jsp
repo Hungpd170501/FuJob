@@ -28,7 +28,7 @@
                     <li class="list-inline-item"><a href="${pageContext.request.contextPath}/MainController?action=Logout"><i class="mdi mdi-logout"></i>Logout</a></li>
 
                     <%
-                            } else {%>
+                    } else {%>
                     <a href="${pageContext.request.contextPath}/view/login.jsp"><i class="mdi mdi-account mr-2"></i>Login</a></li>
                     <%
                         }
@@ -81,14 +81,25 @@
                 <li></li>
                 <li></li>
                 <li><a href="${pageContext.request.contextPath}">Home</a></li>
+
                 <li class="has-submenu">
                     <a href="javascript:void(0)">Jobs</a><span class="menu-arrow"></span>
                     <ul class="submenu">
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob">Job List</a></li>
-                        <li><a href="${pageContext.request.contextPath}/view/job-list.jsp">Your List Job</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&pageJob=${1}">Job List</a></li>
+                            <%
+                                if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "US")) {
+                            %>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>">Your Job Applied</a></li>   
+                            <%
+                            } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
+                            %>
+                        <li><a href="${pageContext.request.contextPath}/view/job-list.jsp">Your Job Posted</a></li>
+                            <%
+                                }
+                            %>        
+
                     </ul>
                 </li>
-
                 <li>
                     <a href="${pageContext.request.contextPath}/view/about.jsp">contact</a>
                 </li>
@@ -109,8 +120,8 @@
                     <ul class="submenu">
                         <li><a href="${pageContext.request.contextPath}/view/create-resume.jsp">Edit your resume</a></li>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&searchResumeID=${sessionScope.LOGIN_USER.userID}">View your resume</a></li>
-                            </ul>  
-                        </li>
+                    </ul>  
+                </li>
                 <%
                 } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
                 %>
@@ -121,11 +132,11 @@
                 </li>
 
                 <li class="has-submenu">
-                    
+
                     <div class="buy-button">
                         <div class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Your company</div>
                     </div>
-                        
+
                     <ul class="submenu">
                         <li><a href="${pageContext.request.contextPath}/view/choose-company.jsp">Your company info</a></li>
                         <li><a href="${pageContext.request.contextPath}/view/create-companyinfo.jsp">Edit your company info</a></li>
