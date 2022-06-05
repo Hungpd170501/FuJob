@@ -16,9 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import se1621.dao.CategoryDAO;
 import se1621.dao.CompanyInfoDAO;
 import se1621.dao.JobDAO;
 import se1621.dao.UserDAO;
+import se1621.dto.Category;
 import se1621.dto.CompanyInfo;
 import se1621.dto.Job;
 import se1621.dto.User;
@@ -41,8 +43,12 @@ public class ViewAllJobController extends HttpServlet {
             JobDAO jobDAO = new JobDAO();
             UserDAO userDAO = new UserDAO();
             CompanyInfoDAO compnayDAO = new CompanyInfoDAO();
+            CategoryDAO categoryDAO = new CategoryDAO();
             List<Job> listJob = jobDAO.getListJob();
             for (Job job : listJob) {
+                int categoryID = job.getCategory().getCategoryID();
+                Category category = categoryDAO.getCategory(categoryID);
+                job.setCategory(category);
                 int userID = job.getUserID();
                 User user = userDAO.getUser(userID);
                 CompanyInfo company = compnayDAO.getCompanyInfo(user.getCompanyID());
