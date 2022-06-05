@@ -147,17 +147,17 @@
                             if (loginUser != null && !StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
                                 JobOrderDAO jobOrderDAO = new JobOrderDAO();
                                 boolean checkDuplicateUserOrderJob = jobOrderDAO.checkDuplicateJobOrderByOneUser(loginUser.getUserID(), job.getJobID());
-                                if(checkDuplicateUserOrderJob){
+                                if (checkDuplicateUserOrderJob) {
                         %>
-                                    <div class="job-detail border rounded mt-4">
-                                        <button type="button" disabled class="btn btn-secondary btn-block">You Applied This Job</button>
-                                    </div>
-                        <%        
-                                }else{
+                        <div class="job-detail border rounded mt-4">
+                            <button type="button" disabled class="btn btn-secondary btn-block">You Applied This Job</button>
+                        </div>
+                        <%
+                        } else {
                         %>        
-                                    <div class="job-detail border rounded mt-4">
-                                        <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Aplly For Job</a>
-                                    </div>
+                        <div class="job-detail border rounded mt-4">
+                            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Aplly For Job</a>
+                        </div>
                         <%
                                 }
                             }

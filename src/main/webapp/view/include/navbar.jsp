@@ -85,18 +85,19 @@
                 <li class="has-submenu">
                     <a href="javascript:void(0)">Jobs</a><span class="menu-arrow"></span>
                     <ul class="submenu">
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob">Job List</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&pageJob=${1}">Job List</a></li>
                             <%
                                 if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "US")) {
                             %>
-                                    <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>">Your Job Applied</a></li>   
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>">Your Job Applied</a></li>   
                             <%
-                                } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
+                            } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
                             %>
-                                    <li><a href="${pageContext.request.contextPath}/view/job-list.jsp">Your Job Posted</a></li>
+                        <li><a href="${pageContext.request.contextPath}/view/job-list.jsp">Your Job Posted</a></li>
                             <%
                                 }
                             %>        
+
                     </ul>
                 </li>
                 <li>

@@ -67,7 +67,7 @@ public class CreateResumeController extends HttpServlet {
                 boolean checkCreateResume = resumedao.createResume(resume);
                 if (checkCreateResume) {
                     request.setAttribute("MESSAGE", "Create Resume Successfully!");
-                    url = SUCCESS+ userID;
+                    url = SUCCESS + userID;
                 }
             }
 

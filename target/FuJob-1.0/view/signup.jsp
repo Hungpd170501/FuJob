@@ -12,7 +12,7 @@
     </head>
 
     <body>
-        
+
         <jsp:include page="./components/loader.jsp"></jsp:include>
 
             <div class="back-to-home rounded d-none d-sm-block">

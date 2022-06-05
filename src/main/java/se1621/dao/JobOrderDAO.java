@@ -19,12 +19,14 @@ import se1621.utils.DBUtils;
  * @author HNGB
  */
 public class JobOrderDAO {
+
     private static final String ORDERJOB = "INSERT INTO tblJobOrder(userID, jobID, cvFile, salaryDeal, message) VALUES(?,?,?,?,?)";
     private static final String CHECKDUPLICATE = "SELECT jobOrderID FROM tblJobOrder WHERE userID=? and jobID=?";
     private static final String GETALLJOBAPPLIED = "SELECT jobOrderID, jobID FROM tblJobOrder WHERE userID=?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
+
     public boolean orderJob(JobOrder jobOrder) throws SQLException, ClassNotFoundException {
         boolean check = false;
         conn = null;
@@ -56,7 +58,7 @@ public class JobOrderDAO {
         }
         return check;
     }
-    
+
     public boolean checkDuplicateJobOrderByOneUser(int userID, int jobID) throws Exception {
         boolean check = false;
         conn = null;
@@ -86,7 +88,7 @@ public class JobOrderDAO {
         }
         return check;
     }
-    
+
     public List<JobOrder> getListJobApplied(int userID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();

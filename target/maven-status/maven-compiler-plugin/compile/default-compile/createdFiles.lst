@@ -18,6 +18,7 @@ se1621\controller\SignUpController.class
 se1621\dto\JobOrder.class
 se1621\dto\Role.class
 se1621\utils\DBUtils.class
+se1621\controller\SearchJobTitle_Exper_CateController.class
 se1621\controller\CreateCompanyInfoController.class
 se1621\utils\Helper.class
 se1621\dao\AuthDAO.class

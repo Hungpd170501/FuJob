@@ -212,7 +212,7 @@ public class CompanyInfoDAO {
                             .numberOfEmployee(numberOfEmployee)
                             .companyOverview(companyOverview)
                             .avatar(avatar)
-                            .build();                    
+                            .build();
                 }
             }
         } catch (Exception e) {

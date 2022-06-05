@@ -7,9 +7,9 @@
             <jsp:param name="title" value="FuJob | Post Job "/>
         </jsp:include>
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
-    </head>
+        </head>
 
-    <body>
+        <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
 
         <jsp:include page="./include/navbar.jsp"></jsp:include>
@@ -76,83 +76,83 @@
                                                         <c:forEach items="${chooseCategory.listCategory}" var="i">
                                                             <option value="${i.categoryID}">${i.categoryName}</option>
                                                         </c:forEach>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group app-label mt-2">
-                                                    <label class="text-muted">Skill Required<span class="text-danger">*</span></label>
-                                                    <input id="skillrequired" name="skill" type="text" class="form-control resume" required="" placeholder="JAVA, HTML, ....">
-                                                </div>
-                                            </div> 
-                                            <div class="col-md-4">
-                                                <div class="form-group app-label mt-2">
-                                                    <label class="text-muted">Deadline<span class="text-danger">*</span></label>
-                                                    <input id="deadline" name="deadline" type="date" class="form-control resume" required="" placeholder="">
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-md-4">
-                                                <div class="form-group app-label mt-2">
-                                                    <label class="text-muted">Estimated Completion Time <span class="text-danger">*</span></label>
-                                                    <input id="completiontime" name="completiontime" type="text" class="form-control resume" required="" placeholder="1day, 2day, ...">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <div class="form-group app-label mt-2">
-                                                    <label class="text-muted">Salary<span class="text-danger">*</span></label>
-                                                    <input id="salary" name="salary" type="text" class="form-control resume" required="" placeholder="100$">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <div class="form-group app-label mt-2">
-                                                    <label class="text-muted">Address<span class="text-danger">*</span></label>
-                                                    <input id="address" name="address" type="text" class="form-control resume" required="" placeholder="District 9, Ho Chi Minh City">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <div class="form-group app-label mt-2">
-                                                    <label class="text-muted">Email<span class="text-danger">*</span></label>
-                                                    <input id="email" name="email" type="tel" class="form-control resume" required="" placeholder="abc@gmail.com">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <div class="form-group app-label mt-2">
-                                                    <label class="text-muted">Phone<span class="text-danger">*</span></label>
-                                                    <input id="phone" name="phone" type="tel" class="form-control resume" required="" placeholder="0123456789">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-12">
-                                                <div class="form-group app-label">
-                                                    <label class="text-muted">Description<span class="text-danger">*</span> :</label>
-                                                    <textarea id="description" name="description" type="text" class="form-control resume" required="" placeholder="Things needed for the job:
- ....
-What the job will do:
- ...."></textarea>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-12 mt-2">
-                                                <input type="submit" id="submit" name="action" class="submitBnt btn btn-primary" value="Post a Job">
+                                        <div class="col-md-4">
+                                            <div class="form-group app-label mt-2">
+                                                <label class="text-muted">Skill Required<span class="text-danger">*</span></label>
+                                                <input id="skillrequired" name="skill" type="text" class="form-control resume" required="" placeholder="JAVA, HTML, ....">
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-4">
+                                            <div class="form-group app-label mt-2">
+                                                <label class="text-muted">Deadline<span class="text-danger">*</span></label>
+                                                <input id="deadline" name="deadline" type="date" class="form-control resume" required="" placeholder="">
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
+
+
+                                        <div class="col-md-4">
+                                            <div class="form-group app-label mt-2">
+                                                <label class="text-muted">Estimated Completion Time <span class="text-danger">*</span></label>
+                                                <input id="completiontime" name="completiontime" type="text" class="form-control resume" required="" placeholder="1day, 2day, ...">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group app-label mt-2">
+                                                <label class="text-muted">Salary<span class="text-danger">*</span></label>
+                                                <input id="salary" name="salary" type="text" class="form-control resume" required="" placeholder="100$">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group app-label mt-2">
+                                                <label class="text-muted">Address<span class="text-danger">*</span></label>
+                                                <input id="address" name="address" type="text" class="form-control resume" required="" placeholder="District 9, Ho Chi Minh City">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group app-label mt-2">
+                                                <label class="text-muted">Email<span class="text-danger">*</span></label>
+                                                <input id="email" name="email" type="tel" class="form-control resume" required="" placeholder="abc@gmail.com">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group app-label mt-2">
+                                                <label class="text-muted">Phone<span class="text-danger">*</span></label>
+                                                <input id="phone" name="phone" type="tel" class="form-control resume" required="" placeholder="0123456789">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group app-label">
+                                                <label class="text-muted">Description<span class="text-danger">*</span> :</label>
+                                                <textarea id="description" name="description" type="text" class="form-control resume" required="" placeholder="Things needed for the job:
+                                                          ....
+                                                          What the job will do:
+                                                          ...."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 mt-2">
+                                            <input type="submit" id="submit" name="action" class="submitBnt btn btn-primary" value="Post a Job">
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- POST A JOB END -->
+            </div>
+        </section>
+        <!-- POST A JOB END -->
 
         <jsp:include page="./include/footer.jsp"></jsp:include>
             <!-- javascript -->

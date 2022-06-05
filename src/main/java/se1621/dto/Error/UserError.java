@@ -9,14 +9,13 @@ package se1621.dto.Error;
  * @author HNGB
  */
 public class UserError {
+
     private String userIDError;
     private String passwordError;
     private String fullNameError;
     private String emailError;
     private String roleIDError;
     private boolean statusError;
-
-    
 
     public UserError(String userIDError, String passwordError, String fullNameError, String emailError, String roleIDError, boolean statusError) {
         this.userIDError = userIDError;
@@ -26,7 +25,7 @@ public class UserError {
         this.roleIDError = roleIDError;
         this.statusError = statusError;
     }
-    
+
     public UserError() {
         this.userIDError = "";
         this.passwordError = "";
@@ -88,5 +87,5 @@ public class UserError {
     public String toString() {
         return "UserError{" + "userIDError=" + userIDError + ", passwordError=" + passwordError + ", fullNameError=" + fullNameError + ", emailError=" + emailError + ", roleIDError=" + roleIDError + ", statusError=" + statusError + '}';
     }
-    
+
 }

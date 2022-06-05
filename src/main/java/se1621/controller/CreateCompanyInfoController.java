@@ -4,7 +4,6 @@
  */
 package se1621.controller;
 
-
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -33,7 +32,7 @@ public class CreateCompanyInfoController extends HttpServlet {
     private static final String ERROR = "/view/create-companyinfo.jsp";
     private static final String SUCCESS = "/MainController?action=SearchCompanyID&searchCompanyID=";
 
-protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
@@ -60,17 +59,17 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
             }
             if (checkValidation) {
                 CompanyInfo company = CompanyInfo.builder()
-                                        .companyName(companyName)
-                                        .address(address)
-                                        .website(website)
-                                       .gmail(gmail)
-                                       .phone(phone)
-                                       .typeCompany(typecompany)
-                                       .establishedYear(establishedYear)
-                                       .numberOfEmployee(numberOfEmployee)
-                                       .companyOverview(companyOverview)
-                                       .avatar(avatar)
-                                       .build();
+                        .companyName(companyName)
+                        .address(address)
+                        .website(website)
+                        .gmail(gmail)
+                        .phone(phone)
+                        .typeCompany(typecompany)
+                        .establishedYear(establishedYear)
+                        .numberOfEmployee(numberOfEmployee)
+                        .companyOverview(companyOverview)
+                        .avatar(avatar)
+                        .build();
                 boolean checkCreate = dao.createComInfo(company);
                 if (checkCreate) {
                     int companyID = dao.getCompanyID(companyName);

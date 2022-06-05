@@ -10,7 +10,7 @@
     </head>
 
     <body>
-        
+
         <jsp:include page="./components/loader.jsp"></jsp:include>
 
         <jsp:include page="./include/navbar.jsp"></jsp:include>
@@ -1725,7 +1725,7 @@
             </section>
             <!-- blog end -->
 
-           
+
 
 
         <jsp:include page="./include/footer.jsp"></jsp:include>

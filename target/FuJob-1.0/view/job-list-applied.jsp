@@ -69,53 +69,53 @@
                                                 <i class="fa fa-list-alt"></i>
                                                 <select id="select-category" class="demo-default">
                                                     <option value="">Categories...</option>
-                                                    <c:forEach items="${chooseCategory.listCategory}" var="i">
-                                                            <option value="${i.categoryID}">${i.categoryName}</option>
-                                                        </c:forEach>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="registration-form-box">
-                                                <input type="submit" id="submit" name="send" class="submitBnt btn btn-primary btn-block" value="Submit">
-                                            </div>
+                                                <c:forEach items="${chooseCategory.listCategory}" var="i">
+                                                    <option value="${i.categoryID}">${i.categoryName}</option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="registration-form-box">
+                                            <input type="submit" id="submit" name="send" class="submitBnt btn btn-primary btn-block" value="Submit">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- JOB LIST START -->
-            <section class="section pt-0">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-12">
-                            <div class="section-title text-center mb-4 pb-2">
-                                <h4 class="title title-line pb-5">All Job You've Applied</h4>
-                            </div>
+        <!-- JOB LIST START -->
+        <section class="section pt-0">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="section-title text-center mb-4 pb-2">
+                            <h4 class="title title-line pb-5">All Job You've Applied</h4>
                         </div>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col-lg-12 mt-4 pt-2">
-                            <div class="row align-items-center">
-                                <div class="col-lg-12">
-                                    <div class="show-results">
-                                        <div class="float-left">
-                                            <h5 class="text-dark mb-0 pt-2 f-18">Showing result</h5>
-                                        </div>
+                <div class="row">
+                    <div class="col-lg-12 mt-4 pt-2">
+                        <div class="row align-items-center">
+                            <div class="col-lg-12">
+                                <div class="show-results">
+                                    <div class="float-left">
+                                        <h5 class="text-dark mb-0 pt-2 f-18">Showing result</h5>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="row"> 
+                        <div class="row"> 
                             <% List<JobOrder> listJobOrder = (List<JobOrder>) request.getAttribute("LIST_JOBORDER");
                                 if (listJobOrder != null) {
                                     if (listJobOrder.size() > 0) {
-                                        for(JobOrder jobOrder: listJobOrder ){                           
+                                        for (JobOrder jobOrder : listJobOrder) {
                             %>
                             <div class="col-lg-12 mt-4 pt-2">
                                 <div class="job-list-box border rounded">
@@ -128,11 +128,11 @@
                                             </div>
                                             <div class="col-lg-7 col-md-9">
                                                 <div class="job-list-desc">
-                                                    <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID() %>" class="text-dark"><%= jobOrder.getJob().getJobTitle() %></a></h6>
-                                                    <p class="text-muted mb-0"><i class="mdi mdi-bank mr-2"></i><%= jobOrder.getJob().getCompany().getCompanyName() %></p>
+                                                    <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="text-dark"><%= jobOrder.getJob().getJobTitle()%></a></h6>
+                                                    <p class="text-muted mb-0"><i class="mdi mdi-bank mr-2"></i><%= jobOrder.getJob().getCompany().getCompanyName()%></p>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= jobOrder.getJob().getAddress() %></p>
+                                                            <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= jobOrder.getJob().getAddress()%></p>
                                                         </li>
 
                                                         <li class="list-inline-item">
@@ -145,7 +145,7 @@
                                                 <div class="job-list-button-sm text-right">
 
                                                     <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID() %>" class="btn btn-sm btn-primary">View Detail</a>
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -154,12 +154,12 @@
                                 </div>
                             </div>
                             <%
-                        
-                                }        
-                                 
-                            }
-                        }
-                        
+
+                                        }
+
+                                    }
+                                }
+
                             %>
                             <div class="col-lg-12 mt-4 pt-2">
                                 <nav aria-label="Page navigation example">
@@ -188,19 +188,19 @@
         </section>
         <!-- JOB LIST START -->
 
-      
+
 
         <!-- footer start -->
         <jsp:include page="./include/footer.jsp"></jsp:include>
 
-        <!-- Back to top -->
-        <a href="#" class="back-to-top rounded text-center" id="back-to-top"> 
-            <i class="mdi mdi-chevron-up d-block"> </i> 
-        </a>
-        <!-- Back to top -->
+            <!-- Back to top -->
+            <a href="#" class="back-to-top rounded text-center" id="back-to-top"> 
+                <i class="mdi mdi-chevron-up d-block"> </i> 
+            </a>
+            <!-- Back to top -->
 
-        <!-- javascript -->
-        <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
+            <!-- javascript -->
+            <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/bootstrap.bundle.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/jquery.easing.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/plugins.js"></script>

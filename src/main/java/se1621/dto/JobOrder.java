@@ -22,6 +22,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class JobOrder {
+
     private int jobOrderID;
     private int userID;
     Job job;

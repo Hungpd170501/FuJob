@@ -14,7 +14,6 @@ import se1621.dao.JobOrderDAO;
 import se1621.dto.Job;
 import se1621.dto.JobOrder;
 
-
 /**
  *
  * @author HNGB

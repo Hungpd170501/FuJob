@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Getter
 @Setter
 @ToString
@@ -19,6 +18,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class User {
+
     private int userID;
     private String username;
     private String password;
@@ -27,5 +27,5 @@ public class User {
     private String email;
     private int status;
     Role role;
-    private int companyID;      
+    private int companyID;
 }

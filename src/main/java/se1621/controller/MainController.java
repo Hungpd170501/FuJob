@@ -17,7 +17,7 @@ public class MainController extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private static final String LOGIN_CONTROLLER = "LoginController";
     private static final String LOGIN = "Login";
-    private static final String LOGOUT_CONTROLLER = "LogoutController";
+    private static final String LOGOUT_CONTROLLER = "LogoutController" ;
     private static final String LOGOUT = "Logout";
     private static final String RECOVERY_PASSWORD_CONTROLLER = "RecoveryPasswordController";
     private static final String RECOVERY_PASSWORD = "RecoveryPassword";
@@ -35,8 +35,10 @@ public class MainController extends HttpServlet {
     private static final String CREATERESUME = "Submit Resume";
     private static final String POSTJOB_CONTROLLER = "PostJobController";
     private static final String POSTJOB = "Post a Job";
-    private static final String VIEWALLJOB_CONTROLLER = "ViewalljobController";
+    private static final String VIEWALLJOB_CONTROLLER = "ViewAllJobController";
     private static final String VIEWALLJOB = "SearchlistJob";
+    private static final String SEARCHJOBTITLE_EXPER_CATE = "Search_title_exper_cate";
+    private static final String SEARCHJOBTITLE_EXPER_CATE_CONTROLLER = "SearchJobTitle_Exper_CateController";
     private static final String SEARCH_JOBID_CONTROLLER = "SearchJobIDController";
     private static final String SEARCH_JOBID = "SearchJobID";
     private static final String ORDERJOB_CONTROLLER = "OrderJobController";
@@ -75,12 +77,14 @@ public class MainController extends HttpServlet {
                 url = POSTJOB_CONTROLLER;
             } else if (VIEWALLJOB.equals(action)) {
                 url = VIEWALLJOB_CONTROLLER;
+            } else if (SEARCHJOBTITLE_EXPER_CATE.equals(action)) {
+                url = SEARCHJOBTITLE_EXPER_CATE_CONTROLLER;
             } else if (SEARCH_JOBID.equals(action)) {
                 url = SEARCH_JOBID_CONTROLLER;
             } else if (ORDERJOB.equals(action)) {
-                url = ORDERJOB_CONTROLLER;   
+                url = ORDERJOB_CONTROLLER;
             } else if (VIEWALLJOBORDER.equals(action)) {
-                url = VIEWALLJOBORDER_CONTROLLER;      
+                url = VIEWALLJOBORDER_CONTROLLER;
             } else {
                 url = ERROR;
             }
