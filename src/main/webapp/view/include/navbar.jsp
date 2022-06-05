@@ -85,7 +85,7 @@
                     <a href="javascript:void(0)">Jobs</a><span class="menu-arrow"></span>
                     <ul class="submenu">
                         <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob">Job List</a></li>
-                        <li><a href="${pageContext.request.contextPath}/view/job-list.jsp">Your List Job</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&searchJobID=${sessionScope.LOGIN_USER.userID}">Your List Job</a></li>
                     </ul>
                 </li>
 

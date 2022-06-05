@@ -37,6 +37,8 @@ public class MainController extends HttpServlet {
     private static final String POSTJOB = "Post a Job";
     private static final String VIEWALLJOB_CONTROLLER = "ViewalljobController";
     private static final String VIEWALLJOB = "SearchlistJob";
+    private static final String LISTJOBBYID_CONTROLLER = "ListJobByIDController";
+    private static final String LISTJOBBYID = "ListJobByID";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -57,9 +59,9 @@ public class MainController extends HttpServlet {
                 url = CHANGE_PASSWORD_CONTROLLER;
             } else if (SEARCH_COMPANYID.equals(action)) {
                 url = SEARCH_COMPANYID_CONTROLLER;
-            }else if(SEARCH_RESUMEID.equals(action)){
+            } else if (SEARCH_RESUMEID.equals(action)) {
                 url = SEARCH_RESUMEID_CONTROLLER;
-            }else if (CREATECOM.equals(action)) {
+            } else if (CREATECOM.equals(action)) {
                 url = CREATECOM_CONTROLLER;
             } else if (CHOOSECOMPANY.equals(action)) {
                 url = CHOOSECOMPANY_CONTROLLER;
@@ -67,9 +69,11 @@ public class MainController extends HttpServlet {
                 url = CREATERESUME_CONTROLLER;
             } else if (POSTJOB.equals(action)) {
                 url = POSTJOB_CONTROLLER;
-            }else if(VIEWALLJOB.equals(action)){
+            } else if (VIEWALLJOB.equals(action)) {
                 url = VIEWALLJOB_CONTROLLER;
-            }else {
+            } else if (LISTJOBBYID.equals(action)) {
+                url = LISTJOBBYID_CONTROLLER;
+            } else {
                 url = ERROR;
             }
         } catch (Exception e) {

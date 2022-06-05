@@ -17,10 +17,10 @@ public class DBUtils {
     private Connection connection;
 
     private final String serverName = "localhost";
-    private final String dbName = "FuJobDB_1";
+    private final String dbName = "FuJobDB_2";
     private final String portNumber = "1433";
     private final String userID = "sa";
-    private final String password = "1472580369";
+    private final String password = "1";
 
     private DBUtils(){
         String url = "jdbc:jtds:sqlserver://"+serverName+":"+portNumber +"/"+dbName;
@@ -50,5 +50,10 @@ public class DBUtils {
             }
         }
         return instance;
+    }
+    public static void main(String[] args) {
+  
+        System.out.println(DBUtils.getInstance().getConnection());
+        
     }
 }

@@ -24,6 +24,7 @@ se1621\controller\RecoveryPasswordHandler.class
 se1621\utils\EmailUtils$1.class
 se1621\controller\SignUpController.class
 se1621\controller\EmailVerifyHandler.class
+se1621\controller\ListJobByIDController.class
 se1621\dto\Error\CompanyInfoError.class
 se1621\dto\Role.class
 se1621\utils\DBUtils.class

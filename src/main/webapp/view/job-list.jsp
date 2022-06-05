@@ -144,7 +144,7 @@
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
                                                     <span class="badge badge-success">Full-Time</span>
-
+                                                    
                                                     <div class="mt-3">
                                                         <a href="#" class="btn btn-sm btn-primary">Apply</a>
                                                     </div>
