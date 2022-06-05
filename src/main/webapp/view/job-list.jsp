@@ -140,6 +140,7 @@
                                                     <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h6>
 
                                                     <p class="text-muted mb-0"><i class="mdi mdi-bank mr-2"></i><%= job.getCompany().getCompanyName()%></p>
+                                                    <p class="text-muted mb-0"><i class="fa fa-list-alt mr-2"></i><%= job.getCategory().getCategoryName()%></p>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
                                                             <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= job.getAddress()%></p>
