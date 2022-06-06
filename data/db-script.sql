@@ -205,6 +205,7 @@ CREATE TABLE tblJobOrder (
 	cvFile varchar(MAX),
 	salaryDeal varchar(50),
 	message varchar(2000),
+	jobOrderStatus tinyint NOT NULL,
 );
 GO
 
