@@ -7,10 +7,10 @@ package se1621.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 public class UserGoogle {
+
     private String id;
     private String email;
     private boolean verified_email;

@@ -12,8 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
-
 @Getter
 @Setter
 @ToString
@@ -21,6 +19,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class Job {
+
     private int jobID;
     private int userID;
     private String jobTitle;
@@ -36,5 +35,4 @@ public class Job {
     private String phone;
     private String description;
 
-    
 }

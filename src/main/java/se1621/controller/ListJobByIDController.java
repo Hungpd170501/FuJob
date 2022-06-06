@@ -18,8 +18,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.lang3.StringUtils;
+import se1621.dao.CategoryDAO;
 import se1621.dao.CompanyInfoDAO;
 import se1621.dao.JobDAO;
+import se1621.dao.UserDAO;
+import se1621.dto.Category;
 import se1621.dto.CompanyInfo;
 import se1621.dto.Job;
 import se1621.dto.User;
@@ -45,35 +48,46 @@ public class ListJobByIDController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+         String url = ERROR;
         try {
-            HttpSession session = request.getSession();
-            User loginUser = (User) session.getAttribute("LOGIN_USER");
-            List<Job> listJob = new ArrayList<>();
             JobDAO jobDAO = new JobDAO();
+            UserDAO userDAO = new UserDAO();
+            CompanyInfoDAO compnayDAO = new CompanyInfoDAO();
+            CategoryDAO categoryDAO = new CategoryDAO();
             int search = Integer.parseInt(request.getParameter("searchJobID"));
-            if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "US")) {
-                listJob = jobDAO.getListHrJob(search);
-            }else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
-                listJob = jobDAO.getListHrJob(search);
+            List<Job> listJob = jobDAO.getListHrJob(search);
+            for (Job job : listJob) {
+                int categoryID = job.getCategory().getCategoryID();
+                Category category = categoryDAO.getCategory(categoryID);
+                job.setCategory(category);
+                int userID = job.getUserID();
+                User user = userDAO.getUser(userID);
+                CompanyInfo company = compnayDAO.getCompanyInfo(user.getCompanyID());
+                job.setCompany(company);
             }
-            listJob.forEach((jobItem)->{
-            CompanyInfoDAO companyDAO = new CompanyInfoDAO();
-                try {
-                    CompanyInfo company = companyDAO.getCompanyInfo(jobItem.getUserID());
-                    jobItem.setCompany(company);
-                } catch (SQLException ex) {
-                    Logger.getLogger(ViewalljobController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-            
-            if(!listJob.isEmpty()){
-                request.setAttribute("LIST_JOB_BYID", listJob);
+            int pageJob;
+            int numberPostJob = 5; // so post job trong 1 trang
+            int sizeJob = listJob.size();
+            int numberPage = (sizeJob % 5 == 0 ? (sizeJob / 5) : ((sizeJob / 5)) + 1); // so trang dc tao sau khi dem so jobPost
+            String xPage = request.getParameter("pageJob");
+            if (xPage == null) {
+                pageJob = 1;
+            } else {
+                pageJob = Integer.parseInt(xPage);
+            }
+            int starPage, endPage; // page 1 va page cuoi
+            starPage = (pageJob - 1) * numberPostJob; // lay 5 page dau
+            endPage = Math.min(pageJob * numberPostJob, sizeJob); // page cuoi se con lai bao nhieu post
+            List<Job> listPageAllJob = jobDAO.getPaginateJobList(listJob, starPage, endPage);
+
+            if (!listPageAllJob.isEmpty()) {
+                request.setAttribute("LIST_JOBPOST", listPageAllJob);
+                request.setAttribute("pageJob", pageJob);
+                request.setAttribute("numberPage", numberPage);
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at List Job ByID Controller" + e.toString());
+            log("Error at View all job Controller" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

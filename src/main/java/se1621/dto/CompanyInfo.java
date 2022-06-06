@@ -18,6 +18,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class CompanyInfo {
+
     private int companyID;
     private String companyName;
     private String address;

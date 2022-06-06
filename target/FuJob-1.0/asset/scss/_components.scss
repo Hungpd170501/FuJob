@@ -29,16 +29,16 @@
     &.btn-lg{
         padding: 14px 30px;
         font-size: 16px;
-    } 
+    }
     &.searchbtn {
         padding: 6px 20px;
     }
-    &.btn-primary, 
-    &.btn-secondary, 
-    &.btn-success, 
-    &.btn-danger, 
-    &.btn-info, 
-    &.btn-warning, 
+    &.btn-primary,
+    &.btn-secondary,
+    &.btn-success,
+    &.btn-danger,
+    &.btn-info,
+    &.btn-warning,
     &.btn-dark {
         color: $white !important;
         &:hover, &:focus, &:active, &.active, &.focus {
@@ -46,15 +46,15 @@
         }
     }
 
-    &.btn-primary-outline, 
-    &.btn-secondary-outline, 
-    &.btn-success-outline, 
-    &.btn-danger-outline, 
-    &.btn-info-outline, 
+    &.btn-primary-outline,
+    &.btn-secondary-outline,
+    &.btn-success-outline,
+    &.btn-danger-outline,
+    &.btn-info-outline,
     &.btn-warning-outline,
     &.btn-dark-outline {
         &:hover, &:focus, &:active, &.active, &.focus {
-            color: $white !important;            
+            color: $white !important;
         }
     }
 
@@ -64,11 +64,11 @@
         &:hover, &:focus, &:active, &.active, &.focus{
             background-color: darken($primary, 10%) !important;
         }
-    }    
+    }
     &.btn-primary-outline {
         border: 1px solid $primary;
         color: $primary;
-        background-color: transparent;    
+        background-color: transparent;
         &:hover, &:focus, &:active, &.active, &.focus{
             background-color: $primary;
             border-color: $primary;
@@ -81,11 +81,11 @@
         &:hover, &:focus, &:active, &.active, &.focus{
             background-color: darken($secondary, 10%) !important;
         }
-    }    
+    }
     &.btn-secondary-outline {
         border: 1px solid $secondary;
         color: $secondary;
-        background-color: transparent;    
+        background-color: transparent;
         &:hover, &:focus, &:active, &.active, &.focus{
             background-color: $secondary;
             border-color: $secondary;
@@ -98,11 +98,11 @@
         &:hover, &:focus, &:active, &.active, &.focus{
             background-color: darken($success, 10%) !important;
         }
-    }    
+    }
     &.btn-success-outline {
         border: 1px solid $success;
         color: $success;
-        background-color: transparent;    
+        background-color: transparent;
         &:hover, &:focus, &:active, &.active, &.focus{
             background-color: $success;
             border-color: $success;
@@ -115,11 +115,11 @@
         &:hover, &:focus, &:active, &.active, &.focus{
             background-color: darken($danger, 10%) !important;
         }
-    }    
+    }
     &.btn-danger-outline {
         border: 1px solid $danger;
         color: $danger;
-        background-color: transparent;    
+        background-color: transparent;
         &:hover, &:focus, &:active, &.active, &.focus{
             background-color: $danger;
             border-color: $danger;
@@ -132,11 +132,11 @@
         &:hover, &:focus, &:active, &.active, &.focus{
             background-color: darken($info, 10%) !important;
         }
-    }    
+    }
     &.btn-info-outline {
         border: 1px solid $info;
         color: $info;
-        background-color: transparent;    
+        background-color: transparent;
         &:hover, &:focus, &:active, &.active, &.focus{
             background-color: $info;
             border-color: $info;
@@ -149,11 +149,11 @@
         &:hover, &:focus, &:active, &.active, &.focus{
             background-color: darken($warning, 10%) !important;
         }
-    }    
+    }
     &.btn-warning-outline {
         border: 1px solid $warning;
         color: $warning;
-        background-color: transparent;    
+        background-color: transparent;
         &:hover, &:focus, &:active, &.active, &.focus{
             background-color: $warning;
             border-color: $warning;
@@ -166,11 +166,11 @@
         &:hover, &:focus, &:active, &.active, &.focus{
             background-color: darken($dark, 10%) !important;
         }
-    }    
+    }
     &.btn-dark-outline {
         border: 1px solid $dark;
         color: $dark;
-        background-color: transparent;    
+        background-color: transparent;
         &:hover, &:focus, &:active, &.active, &.focus{
             background-color: $dark;
             border-color: $dark;
@@ -183,13 +183,13 @@
         border: 1px solid $gray-300;
         &:hover, &:focus, &:active, &.active, &.focus{
             background-color: darken($light, 10%) !important;
-            color: $dark; 
+            color: $dark;
         }
-    }    
+    }
     &.btn-light-outline {
         border: 1px solid $gray-300;
         color: $dark;
-        background-color: transparent;    
+        background-color: transparent;
         &:hover, &:focus, &:active, &.active, &.focus{
             background-color: $light;
         }
@@ -248,18 +248,18 @@ button:not(:disabled) {
             &:after {
                 content: "\f142";
                 font-size: 16px;
-                color: $light; 
+                color: $light;
                 font-family: 'Material Design Icons';
-            }     
+            }
             &:last-child {
                 margin-right: 0;
                 &:after {
                     display: none;
                 }
-            }       
-            a, span {        
+            }
+            a, span {
                 font-size: 13px;
-                padding-right: 8px;           
+                padding-right: 8px;
                 transition: all 0.5s ease;
                 color: $gray-400;
             }
@@ -386,7 +386,7 @@ button:not(:disabled) {
 
 .faq-content {
     .card {
-        .faq {           
+        .faq {
             .card-header {
                 padding-right: 40px !important;
                 &.card-header-2 {
@@ -396,7 +396,7 @@ button:not(:disabled) {
                     }
                 }
             }
-        }  
+        }
         a.faq[data-toggle=collapse]{
             background-color: $white;
             color: $primary;
@@ -462,14 +462,14 @@ button:not(:disabled) {
     .form-control {
         box-shadow: none;
         border: 1px solid $gray-300;
-        height: 42px; 
+        height: 42px;
         font-size: 13px;
         border-radius: 10px;
         transition: all 0.5s ease;
         &:focus, &.active {
             border-color: $primary;
         }
-    } 
+    }
     textarea {
         height: 120px !important;
         &.form-control {

@@ -35,10 +35,20 @@ public class MainController extends HttpServlet {
     private static final String CREATERESUME = "Submit Resume";
     private static final String POSTJOB_CONTROLLER = "PostJobController";
     private static final String POSTJOB = "Post a Job";
-    private static final String VIEWALLJOB_CONTROLLER = "ViewalljobController";
+    private static final String VIEWALLJOB_CONTROLLER = "ViewAllJobController";
     private static final String VIEWALLJOB = "SearchlistJob";
     private static final String LISTJOBBYID_CONTROLLER = "ListJobByIDController";
     private static final String LISTJOBBYID = "ListJobByID";
+    private static final String SEARCHJOBTITLE_EXPER_CATE = "Search_title_exper_cate";
+    private static final String SEARCHJOBTITLE_EXPER_CATE_CONTROLLER = "SearchJobTitle_Exper_CateController";
+    private static final String SEARCH_JOBID_CONTROLLER = "SearchJobIDController";
+    private static final String SEARCH_JOBID = "SearchJobID";
+    private static final String ORDERJOB_CONTROLLER = "OrderJobController";
+    private static final String ORDERJOB = "Send application";
+    private static final String VIEWALLJOBORDER_CONTROLLER = "ViewAllJobOrderController";
+    private static final String VIEWALLJOBORDER = "SearchlistJobOrder";
+    private static final String SEARCHCANDIDATEOFJOB = "SearchCandidateOfJob";
+    private static final String SEARCHCANDIDATEOFJOB_CONTROLLER = "ListCandidateOfJob";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -73,6 +83,16 @@ public class MainController extends HttpServlet {
                 url = VIEWALLJOB_CONTROLLER;
             } else if (LISTJOBBYID.equals(action)) {
                 url = LISTJOBBYID_CONTROLLER;
+            } else if (SEARCHJOBTITLE_EXPER_CATE.equals(action)) {
+                url = SEARCHJOBTITLE_EXPER_CATE_CONTROLLER;
+            } else if (SEARCH_JOBID.equals(action)) {
+                url = SEARCH_JOBID_CONTROLLER;
+            } else if (ORDERJOB.equals(action)) {
+                url = ORDERJOB_CONTROLLER;
+            } else if (VIEWALLJOBORDER.equals(action)) {
+                url = VIEWALLJOBORDER_CONTROLLER;
+            } else if (SEARCHCANDIDATEOFJOB.equals(action)) {
+                url = SEARCHCANDIDATEOFJOB_CONTROLLER;
             } else {
                 url = ERROR;
             }

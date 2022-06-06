@@ -12,5 +12,6 @@ import se1621.dto.User;
  * @author ACER
  */
 public interface EmailService {
+
     void sendEmail(ServletContext context, User repliient, String type);
 }
