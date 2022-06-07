@@ -55,9 +55,9 @@ public class ViewAllJobController extends HttpServlet {
                 job.setCompany(company);
             }
             int pageJob;
-            int numberPostJob = 5; // so post job trong 1 trang
+            int numberPostJob = 10; // so post job trong 1 trang
             int sizeJob = listJob.size();
-            int numberPage = (sizeJob % 5 == 0 ? (sizeJob / 5) : ((sizeJob / 5)) + 1); // so trang dc tao sau khi dem so jobPost
+            int numberPage = (sizeJob % numberPostJob == 0 ? (sizeJob / numberPostJob) : ((sizeJob /numberPostJob)) + 1); // so trang dc tao sau khi dem so jobPost
             String xPage = request.getParameter("pageJob");
             if (xPage == null) {
                 pageJob = 1;

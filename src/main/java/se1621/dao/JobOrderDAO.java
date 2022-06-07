@@ -121,4 +121,12 @@ public class JobOrderDAO {
         }
         return null;
     }
+    
+    public List<JobOrder> getPaginateJobOrderList(List<JobOrder> listPage, int startPage, int endPage) throws SQLException {
+        ArrayList<JobOrder> jobOrderPage = new ArrayList<>();
+        for (int i = startPage; i < endPage; i++) {
+            jobOrderPage.add(listPage.get(i));
+        }
+        return jobOrderPage;
+    }
 }

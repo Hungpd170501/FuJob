@@ -63,6 +63,10 @@ public class MainController extends HttpServlet {
                 url = LOGOUT_CONTROLLER;
             } else if (CHANGE_PASSWORD.equals(action)) {
                 url = CHANGE_PASSWORD_CONTROLLER;
+            }else if (VIEWALLJOB.equals(action)) {
+                url = VIEWALLJOB_CONTROLLER;
+            } else if (SEARCHJOBTITLE_EXPER_CATE.equals(action)) {
+                url = SEARCHJOBTITLE_EXPER_CATE_CONTROLLER;  
             } else if (SEARCH_COMPANYID.equals(action)) {
                 url = SEARCH_COMPANYID_CONTROLLER;
             } else if (SEARCH_RESUMEID.equals(action)) {
@@ -75,11 +79,7 @@ public class MainController extends HttpServlet {
                 url = CREATERESUME_CONTROLLER;
             } else if (POSTJOB.equals(action)) {
                 url = POSTJOB_CONTROLLER;
-            } else if (VIEWALLJOB.equals(action)) {
-                url = VIEWALLJOB_CONTROLLER;
-            } else if (SEARCHJOBTITLE_EXPER_CATE.equals(action)) {
-                url = SEARCHJOBTITLE_EXPER_CATE_CONTROLLER;
-            } else if (SEARCH_JOBID.equals(action)) {
+            }  else if (SEARCH_JOBID.equals(action)) {
                 url = SEARCH_JOBID_CONTROLLER;
             } else if (ORDERJOB.equals(action)) {
                 url = ORDERJOB_CONTROLLER;

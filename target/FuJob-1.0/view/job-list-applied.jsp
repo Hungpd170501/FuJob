@@ -112,7 +112,7 @@
                         </div>
 
                         <div class="row"> 
-                            <% List<JobOrder> listJobOrder = (List<JobOrder>) request.getAttribute("LIST_JOBORDER");
+                            <% List<JobOrder> listJobOrder = (List<JobOrder>) request.getAttribute("LIST_ALLJOBORDER");
                                 if (listJobOrder != null) {
                                     if (listJobOrder.size() > 0) {
                                         for (JobOrder jobOrder : listJobOrder) {
@@ -163,22 +163,12 @@
 
                             %>
                             <div class="col-lg-12 mt-4 pt-2">
+                                <c:set var="pageJobOrder" value="${requestScope.pageJobOrder}"/>
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination job-pagination mb-0 justify-content-center">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                                                <i class="mdi mdi-chevron-double-left"></i>
-                                            </a>
-                                        </li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">
-                                                <i class="mdi mdi-chevron-double-right"></i>
-                                            </a>
-                                        </li>
+                                        <c:forEach begin="${1}" end="${requestScope.numberPage}" var="i">
+                                            <li class="${i==pageJobOrder?"page-item active":""}"><a class="page-link" href="MainController?action=SearchlistJobOrder&pageJobOrder=${i}">${i}</a></li>
+                                        </c:forEach>
                                     </ul>
                                 </nav>
                             </div>

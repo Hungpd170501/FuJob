@@ -85,11 +85,12 @@
                 <li class="has-submenu">
                     <a href="javascript:void(0)">Jobs</a><span class="menu-arrow"></span>
                     <ul class="submenu">
+
                         <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&pageJob=${1}">Job List</a></li>
                             <%
                                 if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "US")) {
                             %>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>">Your Job Applied</a></li>   
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>&pageJobOrder=${1}">Your Job Applied</a></li>   
                             <%
                             } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
                             %>
@@ -152,7 +153,3 @@
     <!--end end-->
 </header><!--end header-->
 <!-- Navbar End -->
-
-
-
-

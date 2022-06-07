@@ -12,9 +12,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import se1621.dao.CategoryDAO;
 import se1621.dao.CompanyInfoDAO;
 import se1621.dao.JobDAO;
 import se1621.dao.UserDAO;
+import se1621.dto.Category;
 import se1621.dto.CompanyInfo;
 import se1621.dto.Job;
 import se1621.dto.User;
@@ -44,18 +46,22 @@ public class SearchJobTitle_Exper_CateController extends HttpServlet {
             JobDAO jobDAO = new JobDAO();
             UserDAO userDAO = new UserDAO();
             CompanyInfoDAO compnayDAO = new CompanyInfoDAO();
+            CategoryDAO categoryDAO = new CategoryDAO();
             List<Job> listJob = jobDAO.searchAllJobTile_Experience_Category(searchTitle, searchExper, searchCate);
             for (Job job : listJob) {
                 int userID = job.getUserID();
                 User user = userDAO.getUser(userID);
                 CompanyInfo company = compnayDAO.getCompanyInfo(user.getCompanyID());
                 job.setCompany(company);
+                int categoryID = job.getCategory().getCategoryID();
+                Category category = categoryDAO.getCategory(categoryID);
+                job.setCategory(category);
             }
 
             int pageJob;
-            int numberPostJob = 5; // so post job trong 1 trang
+            int numberPostJob = 10; // so post job trong 1 trang
             int sizeJob = listJob.size();
-            int numberPage = (sizeJob % 5 == 0 ? (sizeJob / 5) : ((sizeJob / 5)) + 1); // so trang dc tao sau khi dem so jobPost
+            int numberPage = (sizeJob % numberPostJob == 0 ? (sizeJob / numberPostJob) : ((sizeJob / numberPostJob)) + 1); // so trang dc tao sau khi dem so jobPost
             String xPage = request.getParameter("pageJob");
             if (xPage == null) {
                 pageJob = 1;
