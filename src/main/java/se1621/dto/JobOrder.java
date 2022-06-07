@@ -29,4 +29,5 @@ public class JobOrder {
     private String cvFile;
     private String salaryDeal;
     private String message;
+    private int jobOrderStatus;
 }
