@@ -117,9 +117,16 @@ CREATE TABLE tblJob (
 	email varchar(255),
 	phone varchar(15),
 	description varchar(2000),
-	
+	lastDateUpdate datetime NULL,
+	jobStatus tinyint NULL
 );
 GO
+
+CREATE TRIGGER lastUpdate on dbo.tblJob
+	FOR UPDATE, INSERT AS 
+	UPDATE dbo.tblJob
+SET lastDateUpdate = GetDate()
+WHERE jobID IN (SELECT jobID FROM inserted);
 
 INSERT INTO tblJob(userID, jobTitle, experienceNeeded, jobCategoryID, skill, deadline, completionTime, salary, address, email, phone, description) 
 VALUES (
@@ -218,6 +225,16 @@ CREATE TABLE tblSkill (
 	skillName varchar(50),
 );
 GO
+IF OBJECT_ID('dbo.tblUserSkill', 'u') IS NOT NULL 
+   DROP TABLE dbo.tblUserSkill;  
+GO
+
+CREATE TABLE tblUserSkill (
+	userSkillID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+	[userID] [int] NOT NULL,
+	[skillID] [int] NOT NULL
+);
+GO
 
 INSERT INTO tblSkill ( skillName) 
 VALUES ('.NET'),('2D'),('2D Animation'),('3D'),('3D Animation'),('3D CAD'),('A/B Testing'),
@@ -299,3 +316,5 @@ VALUES ('.NET'),('2D'),('2D Animation'),('3D'),('3D Animation'),('3D CAD'),('A/B
 	('Vray'),('Vue.js' ),('Vue.js and express.js'),('WCF'),('Web content'),('Websites Design'),('Web Scraping'),('Webbnc'),('Website Analytics'),('Websocket'),
 	('Wireframe'),('Woocommerce'),('Wordpress'),('Xamarin'),('Aviation Construction'),('Bookkeeping System Building'),( 'Salary Scale Building'), ('Other')
 GO
+
+
