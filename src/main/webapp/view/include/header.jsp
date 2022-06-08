@@ -23,6 +23,7 @@
 
 <!-- Custom  Css -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/asset/css/style.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/asset/css/select2.min.css" />
 
 <title>${param.title}</title>
 

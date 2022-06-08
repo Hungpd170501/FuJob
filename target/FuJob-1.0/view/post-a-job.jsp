@@ -7,6 +7,7 @@
             <jsp:param name="title" value="FuJob | Post Job "/>
         </jsp:include>
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
         </head>
 
         <body>
@@ -82,8 +83,16 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
-                                                <label class="text-muted">Skill Required<span class="text-danger">*</span></label>
-                                                <input id="skillrequired" name="skill" type="text" class="form-control resume" required="" placeholder="JAVA, HTML, ....">
+                                                <!--                                                <label class="text-muted">Skill Required<span class="text-danger">*</span></label>
+                                                                                                <input id="skillrequired" name="skill" type="text" class="form-control resume" required="" placeholder="JAVA, HTML, ....">-->
+                                                <label class="text-muted">Skill Required<span class="text-danger">*</span></label> 
+                                                <div class="form-button">
+                                                    <select class="form-control resume select2 select2-hidden-accessible" multiple="" data-placeholder="Select skill" style="width: 100%; border-color: #dee2e6" tabindex="-1" aria-hidden="true">
+                                                        <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                            <option value="${i.skillID}">${i.skillName}</option>
+                                                        </c:forEach>
+                                                    </select> 
+                                                </div>
                                             </div>
                                         </div> 
                                         <div class="col-md-4">
@@ -170,6 +179,15 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.select2').select2({
+                    closeOnSelect: false
+                });
+            });
+        </script>
 
     </body>
 </html>

@@ -26,7 +26,7 @@ public class Job {
     private String ExperienceNeeded;
     CompanyInfo company;
     Category category;
-    private String skill;
+    Skill skill;
     private Date deadline;
     private String completionTime;
     private String salary;
@@ -34,5 +34,6 @@ public class Job {
     private String email;
     private String phone;
     private String description;
-
+    private Date lastDateUpdate;
+    private int jobStatus;
 }
