@@ -221,7 +221,7 @@ GO
 
 INSERT INTO tblSkill ( skillName) 
 VALUES ('.NET'),('2D'),('2D Animation'),('3D'),('3D Animation'),('3D CAD'),('A/B Testing'),
-	('ABAP'),('Actionscript'),('Adobe Dreamweaver"),('Adobe Illustrator'),('Adobe InDesign'),('Adobe Photoshop'),
+	('ABAP'),('Actionscript'),('Adobe Dreamweaver'),('Adobe Illustrator'),('Adobe InDesign'),('Adobe Photoshop'),
 	('After Effect'),('AI'),('AJAX'),('Music'),('Amplitude'),('Android'),('Angular'),('Angular 2'),('Angular 5'),('Angular 6'),
 	('Angular 7'),('Angular 8'),('Angular Material Design'),('AngularJS'),('Photoionization'),('App development'),('Archicad'),
 	('ASP'),('ASP.NET'),('Aura'),('Aurelia.js'),('AutoCAD'),('Automation Testing'),('AWS'),('Babylon.js'),('Backbone.js'),
@@ -251,12 +251,12 @@ VALUES ('.NET'),('2D'),('2D Animation'),('3D'),('3D Animation'),('3D CAD'),('A/B
 	('Climate Science'),('Startup'),('Wireless'),('Geospatial'),('Technical'),('Structural Engineering'),('Mechanical Engineering'),('Industrial Engineering '),
 	('Civil Engineering'),('Petroleum Engineering'),('Textile Art'),('Genetic Engineering'),('Electrical Engineering'),('Chemical Engineering'),
 	('Material Engineering' ),('Telecommunications Engineering'),('Quality Assurance'),('Audit'),('Internal Audit'),('Automated Techn ical Testing'),
-	('Software Testing'),('Testing/QA'),('Software Architecture'),('Architectural Building'),('Kohana'),('Konakart'),('Jewelry' '),('Radio Engineering'),
+	('Software Testing'),('Testing/QA'),('Software Architecture'),('Architectural Building'),('Kohana'),('Konakart'),('Jewelry'),('Radio Engineering'),
 	('Video Techniques'),('Bookkeeping'),('LAMP'),('Landing Pages'),('Contracting'),('Project Planning'),( 'Event Planning'),('Photoshop Coding'),('Assemble'),
 	('Access Programming'),('Action-script Programming'),('C Programming'),('C# Programming'),( 'C++ Programming'),('Software Programming'),
 	('Application Programming'),('VBA Autocad Programming'),('Web Programming'),('Laravel'),('History'),('Liferay '),('Lightroom'),('Linux'),('Civil Law'),
 	('Criminal Law'),('Economic Law'),('Labor Law'),('Real estate Law') ,('Tax Law'),('Quantum'),('Magento'),('Magestore'),('Social Network'),('Viral Marketing'),
-	('Affiliate Marketing'),('Cipher' '),('Matlab'),('Mautic'),('Meteor'),('Meteor.js'),('Arts'),('Microsoft Office'),('Illustrations'),(' Mixpanel'),
+	('Affiliate Marketing'),('Cipher'),('Matlab'),('Mautic'),('Meteor'),('Meteor.js'),('Arts'),('Microsoft Office'),('Illustrations'),('Mixpanel'),
 	('Fashion Model'),('Product Description'),('Mobile application'),('Mocha & Chai'),('Mockup'), ('MongoDB'),('Moodle'),('Motion graphics'),('MS Excel'),
 	('MSSQL'),('Ads Planning'),('MVC'),('MySQL'),('Capture the psyche'),('Energy'),('Cooking and Recipes'),('Nette'),('Neural network'),('Research'),
 	('Scientific Research'),('Legal Research'),('Financial Research'),('Market Analysis'),('Nginx'),('Natural Language'),('Face Recognition'),('Brand Identity' ),
@@ -282,7 +282,7 @@ VALUES ('.NET'),('2D'),('2D Animation'),('3D'),('3D Animation'),('3D CAD'),('A/B
 	('Three.js'),('Recording'),('Crafts'),( 'Website Testing'),('Visa / Immigration Procedures'),('Algorithm'),('Tax'),('Presentation'),('Arabic'),
 	('Afrikaans'),('Albanian' ),('English'),('Polish'),('Basque'),('Bengali'),('Portuguese'),('Bosnian'), ('Bulgarian'),('Catalan'),('Croatian'),('Danish'),
 	('German'),('Dutch'),('Korean'),('Hebrew'),(' Hindi'),('Chinese Language'),('Hungarian'),('Greek'),('Indonesian'),('Kannada'),('Latvian'),('Lithuanian'),
-	('Macedonian' '),('Malayalam'),('Malaysian'),('Norwegian'),('Russian'),('Japanese'),('Finnish'),('French'),('Filipino') ,('Punjabi'),('Roumanian'),('Czech'),
+	('Macedonian'),('Malayalam'),('Malaysian'),('Norwegian'),('Russian'),('Japanese'),('Finnish'),('French'),('Filipino') ,('Punjabi'),('Roumanian'),('Czech'),
 	('Serbian'),('Slovak'),('Slovenian'),('Tamil'),('Spanish'),( 'Telugu'),('Thai'),('Turkish'),('Swedish'),('Chinese'),('Simplified Chinese'),
 	('Traditional Chinese'),('Urdu'),( 'Vietnamese'),('Welsh'),('Italian'),('Marketing'),('Mass Marketing'),('Mail Marketing'),('Network Marketing'),
 	('Telemarketing'), ('Web Search'),('Sourcing'),('Product Sourcing'),('Sourcing Buyers'),('Office Information'),('Event Organization'),('Math'),
@@ -295,7 +295,7 @@ VALUES ('.NET'),('2D'),('2D Animation'),('3D'),('3D Animation'),('3D CAD'),('A/B
 	('Blog Writing'),('Write Blog/Forum'),('Speech Writing'),('Travel Writing'),('Funding Proposal Writing'),('Proposal Writing'),('Academic Writing'),
 	('Technical Writing' ),('Script Writing'),('Video Script'),('Ads Script Writing'),('Essay Writing'),('Press Release Writing'),('Website Content Writing'),
 	('Ads Writing'),('Review Writing'),('Book Writing'),('Creative Writing'),('Stories Writing'),('Medical Writing'),
-	('Medical Writing Visual Basic for Applications'), ('Viral Content'),('Visual Basic for Applications'),('VPS'),('VR tour (create virtual reality tour like gg Streetview)'),
+	('Medical Writing Visual Basic for Applications'), ('Viral Content'),('Visual Basic for Applications'),('VPS'),('VR tour'),
 	('Vray'),('Vue.js' ),('Vue.js and express.js'),('WCF'),('Web content'),('Websites Design'),('Web Scraping'),('Webbnc'),('Website Analytics'),('Websocket'),
-	('Wireframe'),('Woocommerce'),('Wordpress'),('Xamarin'),('Aviation Construction'),('Bookkeeping System Building'),( 'Salary Scale Building'),
+	('Wireframe'),('Woocommerce'),('Wordpress'),('Xamarin'),('Aviation Construction'),('Bookkeeping System Building'),( 'Salary Scale Building')
 GO
