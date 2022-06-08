@@ -297,5 +297,5 @@ VALUES ('.NET'),('2D'),('2D Animation'),('3D'),('3D Animation'),('3D CAD'),('A/B
 	('Ads Writing'),('Review Writing'),('Book Writing'),('Creative Writing'),('Stories Writing'),('Medical Writing'),
 	('Medical Writing Visual Basic for Applications'), ('Viral Content'),('Visual Basic for Applications'),('VPS'),('VR tour'),
 	('Vray'),('Vue.js' ),('Vue.js and express.js'),('WCF'),('Web content'),('Websites Design'),('Web Scraping'),('Webbnc'),('Website Analytics'),('Websocket'),
-	('Wireframe'),('Woocommerce'),('Wordpress'),('Xamarin'),('Aviation Construction'),('Bookkeeping System Building'),( 'Salary Scale Building')
+	('Wireframe'),('Woocommerce'),('Wordpress'),('Xamarin'),('Aviation Construction'),('Bookkeeping System Building'),( 'Salary Scale Building'), ('Other')
 GO
