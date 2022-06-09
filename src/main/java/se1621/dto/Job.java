@@ -25,7 +25,6 @@ public class Job {
     private String ExperienceNeeded;
     CompanyInfo company;
     Category category;
-    Skill skill;
     private Date deadline;
     private String completionTime;
     private String salary;

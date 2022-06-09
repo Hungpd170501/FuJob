@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import se1621.dao.JobDAO;
 import se1621.dto.Category;
 import se1621.dto.Job;
@@ -36,7 +38,11 @@ public class PostJobController extends HttpServlet {
             String jobTitle = request.getParameter("jobtitle");
             String experienceNeeded = request.getParameter("chooseExY");
             int categoryID = Integer.parseInt(request.getParameter("categoryID"));
-            int skillID = Integer.parseInt(request.getParameter("skillID"));
+            String[] skillID = request.getParameterValues("skillID");
+            List<Integer> skillSet = new ArrayList<>();
+            for (String skill : skillID) {
+                skillSet.add(Integer.parseInt(skill));
+            }
             Date deadline = Date.valueOf(request.getParameter("deadline"));
             String completionTime = request.getParameter("completiontime");
             String salary = request.getParameter("salary");
@@ -51,7 +57,6 @@ public class PostJobController extends HttpServlet {
                     .jobTitle(jobTitle)
                     .ExperienceNeeded(experienceNeeded)
                     .category(Category.builder().categoryID(categoryID).build())
-                    .skill(Skill.builder().skillID(skillID).build())
                     .deadline(deadline)
                     .completionTime(completionTime)
                     .salary(salary)

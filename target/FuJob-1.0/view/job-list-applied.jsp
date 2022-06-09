@@ -43,32 +43,36 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
                             <div class="home-registration-form job-list-reg-form bg-light shadow p-4 mb-3">
-                                <form class="registration-form">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="registration-form-box">
-                                                <i class="fa fa-briefcase"></i>
-                                                <input type="text" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Job keybords...">
-                                            </div>
+                                <!-- START SEARCH -->
+                                <form class="registration-form" action="${pageContext.request.contextPath}/MainController">
+                                <!--                                <form class="registration-form">-->
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="registration-form-box">
+                                            <i class="fa fa-briefcase"></i>
+                                            <input type="text" name="searchtitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Job title...">
                                         </div>
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="registration-form-box">
-                                                <i class="fa fa-archive"></i>
-                                                <select class="demo-default" id="select-category" name="chooseExY" required="">
-                                                    <option value="">Experience</option>
-                                                    <option value="Less than 1 year">Less than 1 year</option>
-                                                    <option value="1-3 years">1-3 years</option>
-                                                    <option value="3-5 years">3-5 years</option>
-                                                    <option value="5-10 years">5-10 years</option>
-                                                    <option value="More than 10 years">More than 10 years</option>
-                                                </select>
-                                            </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="registration-form-box">
+                                            <i class="fa fa-archive"></i>
+                                            <select class="demo-default" id="select-category" name="searchExper">
+                                                <!--                                                <select class="demo-default" id="select-category" required="">-->
+                                                <option value="">Experience</option>
+                                                <option value="Less than 1 year">Less than 1 year</option>
+                                                <option value="1-3 years">1-3 years</option>
+                                                <option value="3-5 years">3-5 years</option>
+                                                <option value="5-10 years">5-10 years</option>
+                                                <option value="More than 10 years">More than 10 years</option>
+                                            </select>
                                         </div>
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="registration-form-box">
-                                                <i class="fa fa-list-alt"></i>
-                                                <select id="select-category" class="demo-default">
-                                                    <option value="">Categories...</option>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="registration-form-box">
+                                            <i class="fa fa-list-alt"></i>
+                                            <select id="select-category" class="demo-default" name="searchCate">
+                                                <!--<select id="select-category" class="demo-default">-->
+                                                <option value="">Categories...</option>
                                                 <c:forEach items="${chooseCategory.listCategory}" var="i">
                                                     <option value="${i.categoryID}">${i.categoryName}</option>
                                                 </c:forEach>
@@ -77,11 +81,14 @@
                                     </div>
                                     <div class="col-lg-3 col-md-6">
                                         <div class="registration-form-box">
-                                            <input type="submit" id="submit" name="send" class="submitBnt btn btn-primary btn-block" value="Submit">
+                                            <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Submit">
+                                            <!-- name = action  -->
+                                            <input type="hidden" name ="action" value="Search_title_exper_cate">
                                         </div>
                                     </div>
                                 </div>
                             </form>
+                            <!-- END SEARCH -->
                         </div>
                     </div>
                 </div>
