@@ -33,7 +33,8 @@ public class JobDAO {
             + "deadline, completionTime, salary, address, email, phone, description, lastDateUpdate FROM tblJob ";
 
     private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJob WHERE jobID = (SELECT MAX(jobID) FROM tblJob) and jobStatus = 1";
-    private static final String SEARCHBYJOBID = "SELECT * FROM tblJOB where jobID = ? and jobStatus";
+
+    private static final String SEARCHBYJOBID = "SELECT * FROM tblJOB where jobID = ? and jobStatus = 1";
 
     private static  final String VIEWJOBLIST = "SELECT j.jobID, j.userID, j.jobTitle, j.ExperienceNeeded, "
             + "com.companyID, com.companyName, com.address, com.website, com.gmail, com.phone, com.typeCompany, com.establishedYear, com.numberOfEmployee, com.companyOverview, com.avatar, "

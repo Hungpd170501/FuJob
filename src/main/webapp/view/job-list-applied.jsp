@@ -148,12 +148,35 @@
                                                     <div class="mt-3">
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
                                                     </div>
+
+                                                    <div class="mt-3">
+                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation">
+                                                            Cancel
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="confirmCancellation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-primary" id="exampleModalLongTitle">Do you want to cancel your application?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                            <a href="${pageContext.request.contextPath}/MainController?action=UnApply&jobOrderID=<%= jobOrder.getJobOrderID()%>&userID=<%= jobOrder.getUserID()%>"> <button type="button" class="btn btn-primary">Yes</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            
                             <%
 
                                         }
@@ -163,11 +186,12 @@
 
                             %>
                             <div class="col-lg-12 mt-4 pt-2">
-                                <c:set var="pageJobOrder" value="${requestScope.pageJobOrder}"/>
+                            <%--    <c:set var="pageJobOrder" value="${requestScope.pageJobOrder}"/> --%>
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination job-pagination mb-0 justify-content-center">
                                         <c:forEach begin="${1}" end="${requestScope.numberPage}" var="i">
-                                            <li class="${i==pageJobOrder?"page-item active":""}"><a class="page-link" href="MainController?action=SearchlistJobOrder&pageJobOrder=${i}">${i}</a></li>
+                                            <%--<li class="${i==pageJobOrder?"page-item active":""}"><a class="page-link" href="MainController?action=SearchlistJobOrder&userID=<%= listJobOrder.get(1).getUserID()%>&pageJobOrder=${i}">${i}</a></li>--%>
+                                            <li class="${i==pageJobOrder?"page-item active":""}"><a class="page-link" href="MainController?action=SearchlistJobOrder&userID=<%= listJobOrder.get(1).getUserID()%>"></a></li>
                                         </c:forEach>
                                     </ul>
                                 </nav>

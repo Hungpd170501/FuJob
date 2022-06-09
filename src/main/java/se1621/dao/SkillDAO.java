@@ -19,25 +19,25 @@ import se1621.utils.DBUtils;
  */
 public class SkillDAO {
 
-    private static final String GETLISTSKILL = "SELECT skillID, skillName FROM tblSkill ORDER BY SkillName";
+    private static final String GETLISTSKILL = "SELECT skillID, skillName FROM tblSkill ORDER BY skillName";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
-    
-    public List<Skill> getLisSkill() throws SQLException {
+
+    public List<Skill> getListSkill() throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(GETLISTSKILL);
                 rs = preStm.executeQuery();
-                List<Skill> list = new ArrayList<>();
+                List<Skill> listSkill = new ArrayList<>();
                 while (rs.next()) {
                     int skillID = rs.getInt("skillID");
                     String skillName = rs.getString("skillName");
                     Skill skill = new Skill(skillID, skillName);
-                    list.add(skill);
+                    listSkill.add(skill);
                 }
-                return list;
+                return listSkill;
 
             }
 

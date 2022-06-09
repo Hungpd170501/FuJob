@@ -35,5 +35,4 @@ public class Job {
     private String description;
     private Date lastDateUpdate;
     private int jobStatus;
-    
 }

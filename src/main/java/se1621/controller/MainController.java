@@ -45,6 +45,8 @@ public class MainController extends HttpServlet {
     private static final String ORDERJOB = "Send application";
     private static final String VIEWALLJOBORDER_CONTROLLER = "ViewAllJobOrderController";
     private static final String VIEWALLJOBORDER = "SearchlistJobOrder";
+    private static final String UNAPPLY_CONTROLLER = "UnApplyController";
+    private static final String UNAPPLY = "UnApply";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -85,6 +87,8 @@ public class MainController extends HttpServlet {
                 url = ORDERJOB_CONTROLLER;
             } else if (VIEWALLJOBORDER.equals(action)) {
                 url = VIEWALLJOBORDER_CONTROLLER;
+            } else if (UNAPPLY.equals(action)) {
+                url = UNAPPLY_CONTROLLER;
             } else {
                 url = ERROR;
             }

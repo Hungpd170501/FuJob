@@ -22,7 +22,8 @@ public class JobOrderDAO {
 
     private static final String ORDERJOB = "INSERT INTO tblJobOrder(userID, jobID, cvFile, salaryDeal, message) VALUES(?,?,?,?,?)";
     private static final String CHECKDUPLICATE = "SELECT jobOrderID FROM tblJobOrder WHERE userID=? and jobID=?";
-    private static final String GETALLJOBAPPLIED = "SELECT jobOrderID, jobID FROM tblJobOrder WHERE userID=?";
+    private static final String GETALLJOBAPPLIED = "SELECT jobOrderID, jobID FROM tblJobOrder WHERE userID=? and jobOrderStatus = 1";
+    private static final String DELETE = "UPDATE tblJobOrder SET jobOrderStatus = 0 WHERE jobOrderID = ? ";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -100,7 +101,7 @@ public class JobOrderDAO {
                 while (rs.next()) {
                     int jobOrderID = rs.getInt("jobOrderID");
                     int jobID = rs.getInt("jobID");
-                    JobOrder listJobOrder = JobOrder.builder().jobOrderID(jobOrderID).job(Job.builder().jobID(jobID).build()).build();
+                    JobOrder listJobOrder = JobOrder.builder().jobOrderID(jobOrderID).userID(userID).job(Job.builder().jobID(jobID).build()).build();
 
                     list.add(listJobOrder);
                 }
@@ -128,5 +129,28 @@ public class JobOrderDAO {
             jobOrderPage.add(listPage.get(i));
         }
         return jobOrderPage;
+    }
+
+    
+    public boolean delete(String jobOrderID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(DELETE);
+                preStm.setString(1, jobOrderID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 }

@@ -12,6 +12,7 @@ se1621\dao\JobDAO.class
 se1621\controller\LogoutController.class
 se1621\dto\Resume$ResumeBuilder.class
 se1621\dao\CompanyInfoDAO.class
+se1621\controller\UnApplyController.class
 se1621\utils\JwtTokenUtils.class
 se1621\controller\PostJobController.class
 se1621\utils\EmailUtils$1.class

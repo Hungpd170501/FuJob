@@ -16,7 +16,7 @@
         <jsp:include page="./include/navbar.jsp"></jsp:include>
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
             <!-- Start Home -->
-            <section class="bg-home" style="background: url('https://wallup.net/wp-content/uploads/2017/03/28/339213-cityscape-train-street-Chicago-metro-vehicle-vignette.jpg') center center;">
+            <section class="bg-home" style="background: url('${pageContext.request.contextPath}/asset/images/background-index.jpg') center center;">
                 <div class="bg-overlay"></div>
                 <div class="home-center">
                     <div class="home-desc-center">
