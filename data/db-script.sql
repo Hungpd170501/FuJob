@@ -94,7 +94,6 @@ CREATE TABLE tblResume
 	major varchar(50),
 	gpa varchar(15),
 	experienceYear varchar(50),
-	skills varchar(255),
 	website varchar ( 100 ),
 	overview varchar(3000),
 );
