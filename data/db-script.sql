@@ -225,13 +225,24 @@ CREATE TABLE tblSkill (
 	skillName varchar(50),
 );
 GO
-IF OBJECT_ID('dbo.tblUserSkill', 'u') IS NOT NULL 
-   DROP TABLE dbo.tblUserSkill;  
+IF OBJECT_ID('dbo.tblSkillRequire', 'u') IS NOT NULL 
+   DROP TABLE dbo.tblSkillRequire;  
 GO
 
-CREATE TABLE tblUserSkill (
-	userSkillID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
-	[userID] [int] NOT NULL,
+CREATE TABLE tblSkillRequire (
+	SkillRequireID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+	[hrID] [int] NOT NULL,
+	[skillID] [int] NOT NULL
+);
+GO
+
+IF OBJECT_ID('dbo.tblStudentSkill', 'u') IS NOT NULL 
+   DROP TABLE dbo.tblStudentSkill;  
+GO
+
+CREATE TABLE tblStudentSkill (
+	StudentSkillID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+	[StudentID] [int] NOT NULL,
 	[skillID] [int] NOT NULL
 );
 GO
