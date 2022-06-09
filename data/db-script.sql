@@ -109,7 +109,6 @@ CREATE TABLE tblJob (
 	jobTitle varchar(255),
 	ExperienceNeeded varchar(20),
 	jobCategoryID INT,
-	skill varchar(255),
 	deadline date,
 	completionTime varchar(20),
 	salary varchar(20),
