@@ -47,7 +47,6 @@ public class SignUpController extends HttpServlet {
                 userError.setEmailError("Email duplicated!");
             }
             if (checkValidation) {
-//                User user = new User(0, fullName, password, fullName, roleID, email, new Role(roleID, ""));
                 User user = User.builder()
                         .username(fullName)
                         .password(Helper.hashPassword(password))

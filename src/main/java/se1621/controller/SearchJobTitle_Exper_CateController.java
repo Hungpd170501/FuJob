@@ -57,13 +57,8 @@ public class SearchJobTitle_Exper_CateController extends HttpServlet {
                 Category category = categoryDAO.getCategory(categoryID);
                 job.setCategory(category);
             }
-
-//            endPage = Math.min(pageJob * numberPostJob, sizeJob); // page cuoi se con lai bao nhieu post
-//            List<Job> listPageAllJob = jobDAO.getPaginateJobList(listJob, starPage, endPage);
             if (!listJob.isEmpty()) {
                 request.setAttribute("LIST_ALLJOB", listJob);
-//                request.setAttribute("pageJob", pageJob);
-//                request.setAttribute("numberPage", numberPage);
                 request.setAttribute("searchTitle", searchTitle);
                 request.setAttribute("searchExper", searchExper);
                 request.setAttribute("searchCate", searchCate);
