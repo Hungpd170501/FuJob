@@ -126,9 +126,9 @@ CREATE TRIGGER lastUpdate on dbo.tblJob
 SET lastDateUpdate = GetDate()
 WHERE jobID IN (SELECT jobID FROM inserted);
 
-INSERT INTO tblJob(userID, jobTitle, experienceNeeded, jobCategoryID, skill, deadline, completionTime, salary, address, email, phone, description) 
+INSERT INTO tblJob(userID, jobTitle, experienceNeeded, jobCategoryID, deadline, completionTime, salary, address, email, phone, description) 
 VALUES (
-'11', 'DESIGNER FREELANCE', 'Less than 1 year', '24', 'Adobe Illustrator, Photography, Adobe Premiere,...', '2022-08-11', '10 days', '100$', 'Distric 9, HCM city', 'designfpt@gmail.com', '123-65-485', 'Support, coordinate with main designer to design products for online advertising and communication channels: banner, cover photo, flash animation, infographic, email marketing, etc.
+'11', 'DESIGNER FREELANCE', 'Less than 1 year', '24', '2022-08-11', '10 days', '100$', 'Distric 9, HCM city', 'designfpt@gmail.com', '123-65-485', 'Support, coordinate with main designer to design products for online advertising and communication channels: banner, cover photo, flash animation, infographic, email marketing, etc.
  Support, coordinate with main designer Design products for offline communication: standee, banner, backdrop, bandroll, invitation, flyer, flyer, voucher, banners for office decoration, etc.
  Edit photos after each Company event
  Support, coordinate with the main designer to design online and offline registration forms
