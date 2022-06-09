@@ -17,7 +17,7 @@ public class MainController extends HttpServlet {
     private static final String ERROR = "error.jsp";
     private static final String LOGIN_CONTROLLER = "LoginController";
     private static final String LOGIN = "Login";
-    private static final String LOGOUT_CONTROLLER = "LogoutController" ;
+    private static final String LOGOUT_CONTROLLER = "LogoutController";
     private static final String LOGOUT = "Logout";
     private static final String RECOVERY_PASSWORD_CONTROLLER = "RecoveryPasswordController";
     private static final String RECOVERY_PASSWORD = "RecoveryPassword";
@@ -37,6 +37,8 @@ public class MainController extends HttpServlet {
     private static final String POSTJOB = "Post a Job";
     private static final String VIEWALLJOB_CONTROLLER = "ViewAllJobController";
     private static final String VIEWALLJOB = "SearchlistJob";
+    private static final String LISTJOBBYID_CONTROLLER = "ListJobByIDController";
+    private static final String LISTJOBBYID = "ListJobByID";
     private static final String SEARCHJOBTITLE_EXPER_CATE = "Search_title_exper_cate";
     private static final String SEARCHJOBTITLE_EXPER_CATE_CONTROLLER = "SearchJobTitle_Exper_CateController";
     private static final String SEARCH_JOBID_CONTROLLER = "SearchJobIDController";
@@ -47,7 +49,8 @@ public class MainController extends HttpServlet {
     private static final String VIEWALLJOBORDER = "SearchlistJobOrder";
     private static final String UNAPPLY_CONTROLLER = "UnApplyController";
     private static final String UNAPPLY = "UnApply";
-
+    private static final String SEARCHCANDIDATEOFJOB = "SearchCandidateOfJob";
+    private static final String SEARCHCANDIDATEOFJOB_CONTROLLER = "ListCandidateOfJob";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -80,8 +83,10 @@ public class MainController extends HttpServlet {
             } else if (CREATERESUME.equals(action)) {
                 url = CREATERESUME_CONTROLLER;
             } else if (POSTJOB.equals(action)) {
-                url = POSTJOB_CONTROLLER;
-            }  else if (SEARCH_JOBID.equals(action)) {
+                url = POSTJOB_CONTROLLER;       
+            } else if (LISTJOBBYID.equals(action)) {
+                url = LISTJOBBYID_CONTROLLER;
+            } else if (SEARCH_JOBID.equals(action)) {
                 url = SEARCH_JOBID_CONTROLLER;
             } else if (ORDERJOB.equals(action)) {
                 url = ORDERJOB_CONTROLLER;
@@ -89,6 +94,8 @@ public class MainController extends HttpServlet {
                 url = VIEWALLJOBORDER_CONTROLLER;
             } else if (UNAPPLY.equals(action)) {
                 url = UNAPPLY_CONTROLLER;
+            } else if (SEARCHCANDIDATEOFJOB.equals(action)) {
+                url = SEARCHCANDIDATEOFJOB_CONTROLLER;
             } else {
                 url = ERROR;
             }

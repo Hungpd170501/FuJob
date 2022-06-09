@@ -14,6 +14,7 @@ import se1621.dao.JobOrderDAO;
 import se1621.dto.Job;
 import se1621.dto.JobOrder;
 
+
 /**
  *
  * @author HNGB
@@ -39,6 +40,7 @@ public class OrderJobController extends HttpServlet {
                     .userID(userID)
                     .job(Job.builder().jobID(jobID).build())
                     .cvFile(cvFile)
+                    .salaryDeal(salaryDeal)
                     .message(message)
                     .build();
             JobOrderDAO jobOrderDAO = new JobOrderDAO();

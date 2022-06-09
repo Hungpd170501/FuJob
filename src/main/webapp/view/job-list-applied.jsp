@@ -8,7 +8,7 @@
 <html lang="en" class="no-js">
     <head>
         <jsp:include page="./include/header.jsp">
-            <jsp:param name="title" value="FuJob | Job List"/>
+            <jsp:param name="title" value="FuJob | Job List Apply"/>
         </jsp:include>
     </head>
     <body>
@@ -150,9 +150,11 @@
                                                     </div>
 
                                                     <div class="mt-3">
-                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation">
+                                                        
+                                                        <button onclick="getJobOrderID(<%= jobOrder.getJobOrderID()%>, <%= jobOrder.getUserID()%>)" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation">
                                                             Cancel
                                                         </button>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -172,7 +174,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                            <a href="${pageContext.request.contextPath}/MainController?action=UnApply&jobOrderID=<%= jobOrder.getJobOrderID()%>&userID=<%= jobOrder.getUserID()%>"> <button type="button" class="btn btn-primary">Yes</button></a>
+                                            <a id="yesOption" href=""><button type="button" class="btn btn-primary">Yes</button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -229,5 +231,10 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
+        <script> 
+            function getJobOrderID(id, userID){
+                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=UnApply&jobOrderID='+id+'&userID='+userID);
+            }
+        </script>
     </body>
 </html>

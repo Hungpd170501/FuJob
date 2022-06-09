@@ -25,25 +25,21 @@ public class JobDAO {
 
     private static final String CREATEJOB = "INSERT INTO tblJob(userID, jobTitle, experienceNeeded, jobCategoryID, skillID, deadline,"
             + "completionTime, salary, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,1)";
-
     private static final String VIEWALLJOB = "SELECT jobID, userID, jobTitle, ExperienceNeeded, jobCategoryID, skillID, "
             + "deadline, completionTime, salary, address, email, phone, description, lastDateUpdate FROM tblJob WHERE jobStatus = 1";
-
     private String SEARCHALL_JOBTITLE_EXPERIENCE_CATEGORY = "SELECT jobID, userID, jobTitle, ExperienceNeeded, jobCategoryID, skillID, "
             + "deadline, completionTime, salary, address, email, phone, description, lastDateUpdate FROM tblJob ";
-
     private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJob WHERE jobID = (SELECT MAX(jobID) FROM tblJob) and jobStatus = 1";
-
+    private static final String VIEWHRJOB = "SELECT * FROM tblJob WHERE userID = ?";
     private static final String SEARCHBYJOBID = "SELECT * FROM tblJOB where jobID = ? and jobStatus = 1";
-
-    private static  final String VIEWJOBLIST = "SELECT j.jobID, j.userID, j.jobTitle, j.ExperienceNeeded, "
+    private static final String VIEWJOBLIST = "SELECT j.jobID, j.userID, j.jobTitle, j.ExperienceNeeded, "
             + "com.companyID, com.companyName, com.address, com.website, com.gmail, com.phone, com.typeCompany, com.establishedYear, com.numberOfEmployee, com.companyOverview, com.avatar, "
             + "c.categoryID, c.categoryName, "
             + "j.skill, j.deadline, j.completionTime, j.salary, j.address, j.email, j.phone, j.description FROM (((tblJob j "
             + "INNER JOIN tblCategory c on j.jobCategoryID = c.categoryID) "
             + "INNER JOIN tblUser us on j.userID = us.userID) "
             + "INNER JOIN tblCompany com on us.companyID = com.companyID)";
-    
+
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -202,7 +198,7 @@ public class JobDAO {
         }
         return job;
     }
-    
+
     public int getJobIDJustCreate() throws SQLException {
         int jobID = 0;
         try {
@@ -307,8 +303,66 @@ public class JobDAO {
         return jobPage;
     }
 
+    public List<Job> getListHrJob(int search) throws SQLException {
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(VIEWHRJOB);
+                preStm.setInt(1, search);
+                rs = preStm.executeQuery();
+                List<Job> listJob = new ArrayList<>();
+                while (rs.next()) {
+                    int jobID = rs.getInt("jobID");
+                    int userID = rs.getInt("userID");
+                    String jobTitle = rs.getString("jobTitle");
+                    String ExperienceNeeded = rs.getString("ExperienceNeeded");
+                    int jobCategoryID = rs.getInt("jobCategoryID");
+                    int skillID = rs.getInt("skillID");
+                    Date deadline = rs.getDate("deadline");
+                    String completionTime = rs.getString("completionTime");
+                    String salary = rs.getString("salary");
+                    String address = rs.getString("address");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String description = rs.getString("description");
+                    Date lastDateUpdate = rs.getDate("lastDateUpdate");
+                    listJob.add(Job.builder().jobID(jobID)
+                            .userID(userID)
+                            .jobTitle(jobTitle)
+                            .ExperienceNeeded(ExperienceNeeded)
+                            .category(Category.builder().categoryID(jobCategoryID).build())
+                            .skill(Skill.builder().skillID(skillID).build())
+                            .deadline(deadline)
+                            .completionTime(completionTime)
+                            .salary(salary)
+                            .address(address)
+                            .email(email)
+                            .phone(phone)
+                            .description(description)
+                            .lastDateUpdate(lastDateUpdate)
+                            .build());
+                }
+                return listJob;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+    
 
-    public List<Job> getAllJob () throws SQLException{
+    
+public List<Job> getAllJob() throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
@@ -364,6 +418,4 @@ public class JobDAO {
 
         return null;
     }
-
 }
-

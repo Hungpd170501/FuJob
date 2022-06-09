@@ -39,11 +39,13 @@ se1621\service\EmailService.class
 se1621\controller\RecoveryPasswordController.class
 se1621\utils\GoogleRacaptcha.class
 se1621\controller\ViewAllJobOrderController.class
+se1621\controller\ListCandidateOfJob.class
 se1621\controller\LoginGoogleHandler.class
 se1621\dto\Skill.class
 se1621\dao\JobOrderDAO.class
 se1621\controller\RecoveryPasswordHandler.class
 se1621\controller\EmailVerifyHandler.class
+se1621\controller\ListJobByIDController.class
 se1621\dto\Error\CompanyInfoError.class
 se1621\dto\Category.class
 se1621\constant\Constant.class

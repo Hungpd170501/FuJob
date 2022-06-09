@@ -58,28 +58,9 @@ public class ViewAllJobOrderController extends HttpServlet {
                 CompanyInfo company = companyDAO.getCompanyInfo(companyID);
                 job.setCompany(company);
                 jobOrder.setJob(job);
-            }
-            
-//            int pageJobOrder;
-//            int numberPostJobOrder = 5; // so post job trong 1 trang
-//            int sizeJobOrder = listJobOrder.size();
-//            int numberPage = (sizeJobOrder % 5 == 0 ? (sizeJobOrder / 5) : ((sizeJobOrder / 5)) + 1); // so trang dc tao sau khi dem so jobPost
-//            String xPage = request.getParameter("pageJobOrder");
-//            if (xPage == null) {
-//                pageJobOrder = 1;
-//            } else {
-//                pageJobOrder = Integer.parseInt(xPage);
-//            }
-//            int starPage, endPage; // page 1 va page cuoi
-//            starPage = (pageJobOrder - 1) * numberPostJobOrder; // lay 5 page dau
-//            endPage = Math.min(pageJobOrder * numberPostJobOrder, sizeJobOrder); // page cuoi se con lai bao nhieu post
-//            List<JobOrder> listPageAllJobOrder =  jobOrderDAO.getPaginateJobOrderList(listJobOrder, starPage, endPage);
-            
-            
+            }            
             if (!listJobOrder.isEmpty()) {
                 request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
-//                request.setAttribute("pageJobOrder", pageJobOrder);
-//                request.setAttribute("numberPage", numberPage);
                 url = SUCCESS;
             }
         } catch (Exception e) {

@@ -77,6 +77,50 @@ public class ResumeDAO {
         return listResume;
     }
 
+    public Resume getResumeByID(int search) throws SQLException {
+        Resume resume = new Resume();
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(SEARCH);
+                preStm.setInt(1, search);
+                rs = preStm.executeQuery();
+                if (rs.next()) {
+                    int resumeID = rs.getInt("resumeID");
+                    int userID = rs.getInt("userID");
+                    String avatar = rs.getString("avatar");
+                    String fullName = rs.getString("fullName");
+                    String gender = rs.getString("gender");
+                    Date dateOfBirth = rs.getDate("dateOfBirth");
+                    String gmail = rs.getString("gmail");
+                    String phone = rs.getString("phone");
+                    String address = rs.getString("address");
+                    String schoolName = rs.getString("schoolName");
+                    String major = rs.getString("major");
+                    String gpa = rs.getString("gpa");
+                    String experienceYear = rs.getString("experienceYear");
+                    String skills = rs.getString("skills");
+                    String website = rs.getString("website");
+                    String overview = rs.getString("overview");
+                    resume = new Resume(resumeID, userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, schoolName, major, gpa, experienceYear, skills, website, overview);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return resume;
+    }
+
     public boolean createResume(Resume resume) throws SQLException, ClassNotFoundException {
         boolean check = false;
         conn = null;
@@ -187,4 +231,11 @@ public class ResumeDAO {
         return check;
     }
 
+    public List<Resume> getPaginateJobList(List<Resume> listPage, int startPage, int endPage) throws SQLException {
+        ArrayList<Resume> jobPage = new ArrayList<>();
+        for (int i = startPage; i < endPage; i++) {
+            jobPage.add(listPage.get(i));
+        }
+        return jobPage;
+    }
 }

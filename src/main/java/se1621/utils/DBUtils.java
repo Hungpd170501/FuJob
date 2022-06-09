@@ -52,4 +52,5 @@ public class DBUtils {
         }
         return instance;
     }
+
 }

@@ -20,10 +20,11 @@ import se1621.utils.DBUtils;
  */
 public class JobOrderDAO {
 
-    private static final String ORDERJOB = "INSERT INTO tblJobOrder(userID, jobID, cvFile, salaryDeal, message) VALUES(?,?,?,?,?)";
+    private static final String ORDERJOB = "INSERT INTO tblJobOrder(userID, jobID, cvFile, salaryDeal, message, jobOrderStatus) VALUES(?,?,?,?,?,1)";
     private static final String CHECKDUPLICATE = "SELECT jobOrderID FROM tblJobOrder WHERE userID=? and jobID=?";
     private static final String GETALLJOBAPPLIED = "SELECT jobOrderID, jobID FROM tblJobOrder WHERE userID=? and jobOrderStatus = 1";
     private static final String DELETE = "UPDATE tblJobOrder SET jobOrderStatus = 0 WHERE jobOrderID = ? ";
+    private static final String GETTALLUSERIDOFJOB = "SELECT userID FROM tblJobOrder WHERE jobID = ?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -102,7 +103,6 @@ public class JobOrderDAO {
                     int jobOrderID = rs.getInt("jobOrderID");
                     int jobID = rs.getInt("jobID");
                     JobOrder listJobOrder = JobOrder.builder().jobOrderID(jobOrderID).userID(userID).job(Job.builder().jobID(jobID).build()).build();
-
                     list.add(listJobOrder);
                 }
                 return list;
@@ -122,7 +122,7 @@ public class JobOrderDAO {
         }
         return null;
     }
-    
+
     public List<JobOrder> getPaginateJobOrderList(List<JobOrder> listPage, int startPage, int endPage) throws SQLException {
         ArrayList<JobOrder> jobOrderPage = new ArrayList<>();
         for (int i = startPage; i < endPage; i++) {
@@ -131,7 +131,6 @@ public class JobOrderDAO {
         return jobOrderPage;
     }
 
-    
     public boolean delete(String jobOrderID) throws SQLException {
         boolean check = false;
         try {
@@ -152,5 +151,35 @@ public class JobOrderDAO {
             }
         }
         return check;
+    }
+
+    public List<Integer> getListUserIDOfJob(int jobID) throws SQLException {
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GETTALLUSERIDOFJOB);
+                preStm.setInt(1, jobID);
+                rs = preStm.executeQuery();
+                List<Integer> list = new ArrayList<>();
+                while (rs.next()) {
+                    int userID = rs.getInt("userID");
+                    list.add(userID);
+                }
+                return list;
+            }
+
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
     }
 }

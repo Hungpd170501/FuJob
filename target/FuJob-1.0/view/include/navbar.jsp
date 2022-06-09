@@ -91,15 +91,14 @@
                             <%
                                 if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "US")) {
                             %>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>&pageJobOrder=${1}">Your Job Applied</a></li>   
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>">Your Job Applied</a></li>   
                             <%
                             } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
                             %>
-                        <li><a href="${pageContext.request.contextPath}/view/job-list.jsp">Your Job Posted</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&searchJobID=${sessionScope.LOGIN_USER.userID}">Your Job Posted</a></li>
                             <%
                                 }
                             %>        
-
                     </ul>
                 </li>
                 <li>

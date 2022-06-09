@@ -154,6 +154,7 @@
                                             </div>
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
+
                                                     <span class="badge badge-success">Part-Time</span>
 
                                                     <div class="mt-3">

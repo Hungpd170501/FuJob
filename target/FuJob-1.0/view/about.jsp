@@ -11,9 +11,6 @@
     <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
-
-
-
             <!-- Start home -->
             <section class="bg-half page-next-level"> 
                 <div class="bg-overlay"></div>
