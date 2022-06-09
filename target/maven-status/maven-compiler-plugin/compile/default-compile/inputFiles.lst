@@ -31,6 +31,7 @@ C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\ChooseCompany
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\CompanyInfoDAO.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Error\UserError.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\JobOrderDAO.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Skill.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\EmailVerifyHandler.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\SignUpController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\CategoryDAO.java
@@ -43,3 +44,4 @@ C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\LogoutControl
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\UserGoogle.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\PostJobController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\SearchJobTitle_Exper_CateController.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\SkillDAO.java

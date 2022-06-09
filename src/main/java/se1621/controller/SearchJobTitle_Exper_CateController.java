@@ -58,24 +58,12 @@ public class SearchJobTitle_Exper_CateController extends HttpServlet {
                 job.setCategory(category);
             }
 
-            int pageJob;
-            int numberPostJob = 10; // so post job trong 1 trang
-            int sizeJob = listJob.size();
-            int numberPage = (sizeJob % numberPostJob == 0 ? (sizeJob / numberPostJob) : ((sizeJob / numberPostJob)) + 1); // so trang dc tao sau khi dem so jobPost
-            String xPage = request.getParameter("pageJob");
-            if (xPage == null) {
-                pageJob = 1;
-            } else {
-                pageJob = Integer.parseInt(xPage);
-            }
-            int starPage, endPage; // page 1 va page cuoi
-            starPage = (pageJob - 1) * numberPostJob; // lay 5 page dau
-            endPage = Math.min(pageJob * numberPostJob, sizeJob); // page cuoi se con lai bao nhieu post
-            List<Job> listPageAllJob = jobDAO.getPaginateJobList(listJob, starPage, endPage);
-            if (!listPageAllJob.isEmpty()) {
-                request.setAttribute("LIST_ALLJOB", listPageAllJob);
-                request.setAttribute("pageJob", pageJob);
-                request.setAttribute("numberPage", numberPage);
+//            endPage = Math.min(pageJob * numberPostJob, sizeJob); // page cuoi se con lai bao nhieu post
+//            List<Job> listPageAllJob = jobDAO.getPaginateJobList(listJob, starPage, endPage);
+            if (!listJob.isEmpty()) {
+                request.setAttribute("LIST_ALLJOB", listJob);
+//                request.setAttribute("pageJob", pageJob);
+//                request.setAttribute("numberPage", numberPage);
                 request.setAttribute("searchTitle", searchTitle);
                 request.setAttribute("searchExper", searchExper);
                 request.setAttribute("searchCate", searchCate);

@@ -146,8 +146,8 @@
                                                             <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= job.getAddress()%></p>
                                                         </li>
 
-                                                        <li class="list-inline-item">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i>1 Minute ago</p>
+                                                        <li class="list-inline-item mr-3">
+                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"><%= job.getDeadline() %></i></p>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -179,12 +179,13 @@
                                 <c:set var = "searchtitle" value="${requestScope.searchtitle}"/>
                                 <c:set var = "searchExper" value="${requestScope.searchExper}"/>
                                 <c:set var = "searchCate" value="${requestScope.searchCate}"/>
-                                <c:set var="pageJob" value="${requestScope.pageJob}"/>
+                                <%--<c:set var="pageJob" value="${requestScope.pageJob}"/>--%>
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination job-pagination mb-0 justify-content-center">
                                         <c:forEach begin="${1}" end="${requestScope.numberPage}" var="i">
-                                            <li class="${i==pageJob?"page-item active":""}"><a class="page-link" href="MainController?action=SearchlistJob&pageJob=${i}&searchtitle=${i}&searchExper=${i}&searchCate=${i}">${i}</a></li>                                        
-                                            </c:forEach>
+                                            <%--<li class="${i==pageJob?"page-item active":""}"><a class="page-link" href="MainController?action=SearchlistJob&pageJob=${i}&searchtitle=${i}&searchExper=${i}&searchCate=${i}">${i}</a></li> --%>                                        
+                                            <li class="${i==pageJob?"page-item active":""}"><a class="page-link" href="MainController?action=SearchlistJob&Search_title_exper_catesearchtitle=${i}&searchExper=${i}&searchCate=${i}">${i}</a></li>                                        
+                                         </c:forEach>
                                     </ul>
                                 </nav>
                             </div>

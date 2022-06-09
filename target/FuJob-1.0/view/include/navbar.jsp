@@ -86,7 +86,8 @@
                     <a href="javascript:void(0)">Jobs</a><span class="menu-arrow"></span>
                     <ul class="submenu">
 
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&pageJob=${1}">Job List</a></li>
+                        <%--<li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&pageJob=${1}">Job List</a></li>--%>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&Search_title_exper_cate">Job List</a></li>
                             <%
                                 if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "US")) {
                             %>

@@ -19,14 +19,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class Job {
-
     private int jobID;
     private int userID;
     private String jobTitle;
     private String ExperienceNeeded;
     CompanyInfo company;
     Category category;
-    private String skill;
+    Skill skill;
     private Date deadline;
     private String completionTime;
     private String salary;
@@ -34,5 +33,7 @@ public class Job {
     private String email;
     private String phone;
     private String description;
-
+    private Date lastDateUpdate;
+    private int jobStatus;
+    
 }

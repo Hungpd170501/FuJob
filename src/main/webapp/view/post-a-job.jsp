@@ -7,6 +7,7 @@
             <jsp:param name="title" value="FuJob | Post Job "/>
         </jsp:include>
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
         </head>
 
         <body>
@@ -76,16 +77,22 @@
                                                         <c:forEach items="${chooseCategory.listCategory}" var="i">
                                                             <option value="${i.categoryID}">${i.categoryName}</option>
                                                         </c:forEach>
-                                                    </select>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group app-label mt-2">
-                                                <label class="text-muted">Skill Required<span class="text-danger">*</span></label>
-                                                <input id="skillrequired" name="skill" type="text" class="form-control resume" required="" placeholder="JAVA, HTML, ....">
+                                            <div class="col-md-4">
+                                                <div class="form-group app-label mt-2">
+                                                    <label class="text-muted">Skill require</label>
+                                                    <div class="form-button">
+                                                        <select class="form-control resume" name="categoryID" required="">
+                                                        <c:forEach items="${chooseSkill.lisSkill}" var="i">
+                                                            <option value="${i.skillID}">${i.skillName}</option>
+                                                        </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div> 
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
                                                 <label class="text-muted">Deadline<span class="text-danger">*</span></label>

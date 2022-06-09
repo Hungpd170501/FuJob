@@ -1,5 +1,6 @@
 <%@page import="se1621.dto.User"%>
 <%@page contentType="text/html" pageEncoding="windows-1258"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 
@@ -12,9 +13,8 @@
     <body>
 
         <jsp:include page="./components/loader.jsp"></jsp:include>
-
         <jsp:include page="./include/navbar.jsp"></jsp:include>
-
+        <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
             <!-- Start Home -->
             <section class="bg-home" style="background: url('https://wallup.net/wp-content/uploads/2017/03/28/339213-cityscape-train-street-Chicago-metro-vehicle-vignette.jpg') center center;">
                 <div class="bg-overlay"></div>

@@ -15,6 +15,7 @@ import java.sql.Date;
 import se1621.dao.JobDAO;
 import se1621.dto.Category;
 import se1621.dto.Job;
+import se1621.dto.Skill;
 import se1621.dto.User;
 
 /**
@@ -35,7 +36,7 @@ public class PostJobController extends HttpServlet {
             String jobTitle = request.getParameter("jobtitle");
             String experienceNeeded = request.getParameter("chooseExY");
             int categoryID = Integer.parseInt(request.getParameter("categoryID"));
-            String skill = request.getParameter("skill");
+            int skillID = Integer.parseInt(request.getParameter("skillID"));
             Date deadline = Date.valueOf(request.getParameter("deadline"));
             String completionTime = request.getParameter("completiontime");
             String salary = request.getParameter("salary");
@@ -43,16 +44,14 @@ public class PostJobController extends HttpServlet {
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             String description = request.getParameter("description");
-
             HttpSession session = request.getSession();
             User loginUser = (User) session.getAttribute("LOGIN_USER");
             int userID = loginUser.getUserID();
-
             Job job = Job.builder().userID(userID)
                     .jobTitle(jobTitle)
                     .ExperienceNeeded(experienceNeeded)
                     .category(Category.builder().categoryID(categoryID).build())
-                    .skill(skill)
+                    .skill(Skill.builder().skillID(skillID).build())
                     .deadline(deadline)
                     .completionTime(completionTime)
                     .salary(salary)
