@@ -88,7 +88,7 @@
                                                                                                 <input id="skillrequired" name="skill" type="text" class="form-control resume" required="" placeholder="JAVA, HTML, ....">-->
                                                 <label class="text-muted">Skill Required<span class="text-danger">*</span></label> 
                                                 <div class="form-button">
-                                                    <select class="form-control resume select2 select2-hidden-accessible" multiple="" data-placeholder="Select skill" style="width: 100%; border-color: #dee2e6" tabindex="-1" aria-hidden="true">
+                                                    <select class="form-control resume select2 select2-hidden-accessible" name="skillID" multiple="" data-placeholder="Select skill" style="width: 100%; border-color: #dee2e6" tabindex="-1" aria-hidden="true">
                                                         <c:forEach items="${chooseSkill.listSkill}" var="i">
                                                             <option value="${i.skillID}">${i.skillName}</option>
                                                         </c:forEach>

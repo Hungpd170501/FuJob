@@ -142,7 +142,7 @@
                                         <i class="mdi mdi-36px mdi-briefcase-check"></i>
                                     </div>
                                     <h6 class="pb-3 mb-0">Experience: <%= resume.getExperienceYear()%> </p></h6>
-                                    <p class="pb-3 mb-0">Skills:  <%= resume.getSkills()%> </p>
+                                    <p class="pb-3 mb-0">Skills: </p>
                                     <p class="pb-3 mb-0">Website: <%= resume.getWebsite()%> </p>                               
                                 </div>
                             </div>

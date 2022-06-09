@@ -42,7 +42,6 @@ public class CreateResumeController extends HttpServlet {
             String major = request.getParameter("major");
             String gpa = request.getParameter("gpa");
             String chooseExY = request.getParameter("chooseExY");
-            String skills = request.getParameter("skills");
             String website = request.getParameter("website");
             String seflintro = request.getParameter("seflintro");
 
@@ -50,7 +49,7 @@ public class CreateResumeController extends HttpServlet {
             User loginUser = (User) session.getAttribute("LOGIN_USER");
             int userID = loginUser.getUserID();
             Resume resume = new Resume(0, userID, avatar, fullName, gender, dateOfBirth,
-                    gmail, phone, address, shoolName, major, gpa, chooseExY, skills, website, seflintro);
+                    gmail, phone, address, shoolName, major, gpa, chooseExY, website, seflintro);
 
             ResumeDAO resumedao = new ResumeDAO();
             boolean checkValidation = true;

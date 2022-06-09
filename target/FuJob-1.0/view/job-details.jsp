@@ -72,7 +72,7 @@
                             <div class="job-detail-desc mt-4">
                                 <p class="text-muted mb-3">Estimated Completion Time: <%= job.getCompletionTime()%></p>
 
-                                <p class="text-muted mb-0">Skill: <%= job.getSkill()%></p>
+                                <p class="text-muted mb-0">Skill: </p>
                             </div>    
                         </div>
 
