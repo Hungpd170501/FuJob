@@ -147,7 +147,7 @@
                                                         <li class="text-muted"><i class="mdi mdi-map-marker mr-1"></i><%= resume.getGender()%></li>
                                                         <li class="text-muted"><i class="mdi mdi-currency-usd mr-1"></i> </li>
                                                     </ul>
-                                                    <p class="text-muted mt-1 mb-0">Skills : <%= resume.getSkills()%></p>
+                                                    <p class="text-muted mt-1 mb-0">Skills :</p>
                                                 </div>
                                             </div>
 

@@ -48,8 +48,6 @@
                                 <p class="text-muted">Using technology, we create a platform that allows workers to find jobs, learn about companies and interact with employers.</p>
 
                                 <p class="text-muted">Every day, we connect thousands of people with new job opportunities from reputable businesses.</p>
-
-                                <a href="javascript:void(0)" class="btn btn-primary">Apply now</a>
                             </div>
                         </div>
                     </div>

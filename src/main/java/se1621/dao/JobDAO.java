@@ -16,7 +16,6 @@ import se1621.dto.Category;
 import se1621.dto.CompanyInfo;
 import se1621.dto.Job;
 import se1621.dto.Skill;
-
 /**
  *
  * @author ACER
