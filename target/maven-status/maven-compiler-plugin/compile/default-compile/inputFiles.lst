@@ -7,6 +7,7 @@ C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Resume.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Role.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\ResumeDAO.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\JobOrder.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\SkillRequire.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\service\EmailService.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\utils\DBUtils.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\CompanyInfo.java
@@ -33,6 +34,7 @@ C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\SkillDAO.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\RecoveryPasswordHandler.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\utils\Helper.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\OrderJobController.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\StudentSkill.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\CreateCompanyInfoController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\CreateResumeController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\utils\GoogleRacaptcha.java

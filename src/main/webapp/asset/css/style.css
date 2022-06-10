@@ -22,6 +22,7 @@ File: main stylesheet
 **********************/
 
 @import url("https://fonts.googleapis.com/css?family=Nunito:300,400,600,700&display=swap");
+
 .bg-primary {
     background-color: #2f55d4 !important;
 }
