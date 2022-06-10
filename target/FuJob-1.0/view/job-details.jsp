@@ -60,20 +60,19 @@
 
                 <div class="row">
                     <div class="col-lg-8 col-md-7">
-                        <div class="job-detail border rounded p-4">
-                            <div class="job-detail-content">
-                                <img src="images/featured-job/img-4.png" alt="" class="img-fluid float-left mr-md-3 mr-2 mx-auto d-block">
+                        <div class="job-detail border rounded p-4 row">
+                            <div class="col-lg-4">
+                                <img src="<%= job.getCategory().getImg() %>" alt="" class="img-fluid float-left mr-md-3 mr-2 mx-auto d-block">
+                            </div>
+                            <div class="col-lg-8">
                                 <div class="job-detail-com-desc overflow-hidden d-block">
                                     <h4 class="mb-2"><a href="#" class="text-dark"></a>JOB: <%= job.getJobTitle()%></h4>
                                     <p class="text-muted mb-0"><i class="mdi mdi-bank text-muted"></i> <%= job.getCompany().getCompanyName()%></p>
                                     <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= job.getAddress()%></p>
+                                    <p class="text-muted mb-3">Estimated Completion Time: <%= job.getCompletionTime()%></p>
+                                    <p class="text-muted mb-0">Skill: </p>
                                 </div>
-                            </div>
-                            <div class="job-detail-desc mt-4">
-                                <p class="text-muted mb-3">Estimated Completion Time: <%= job.getCompletionTime()%></p>
-
-                                <p class="text-muted mb-0">Skill: </p>
-                            </div>    
+                            </div>   
                         </div>
 
                         <div class="row">

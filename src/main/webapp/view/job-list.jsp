@@ -133,7 +133,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-lg-2">
                                                 <div class="company-logo-img">
-                                                    <img src="images/featured-job/img-1.png" alt="" class="img-fluid mx-auto d-block">
+                                                    <img src="<%= job.getCategory().getImg() %>" alt="" class="img-fluid mx-auto d-block">
                                                 </div>
                                             </div>
                                             <div class="col-lg-7 col-md-9">
@@ -157,7 +157,9 @@
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
 
-                                                    <span class="badge badge-success">Part-Time</span>
+                                                    <div class="mt-3">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
+                                                    </div>
 
                                                 </div>
                                             </div>

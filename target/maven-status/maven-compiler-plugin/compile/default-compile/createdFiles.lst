@@ -14,7 +14,9 @@ se1621\dto\Resume$ResumeBuilder.class
 se1621\dao\CompanyInfoDAO.class
 se1621\controller\UnApplyController.class
 se1621\utils\JwtTokenUtils.class
+se1621\dto\StudentSkill.class
 se1621\controller\PostJobController.class
+se1621\dto\SkillRequire.class
 se1621\utils\EmailUtils$1.class
 se1621\controller\SignUpController.class
 se1621\dto\Skill$SkillBuilder.class
@@ -37,6 +39,7 @@ se1621\controller\ViewAllJobController.class
 se1621\controller\ChangePasswordController.class
 se1621\service\EmailService.class
 se1621\controller\RecoveryPasswordController.class
+se1621\dto\StudentSkill$StudentSkillBuilder.class
 se1621\utils\GoogleRacaptcha.class
 se1621\controller\ViewAllJobOrderController.class
 se1621\controller\ListCandidateOfJob.class
@@ -51,6 +54,7 @@ se1621\dto\Category.class
 se1621\constant\Constant.class
 se1621\controller\OrderJobController.class
 se1621\dto\JobOrder$JobOrderBuilder.class
+se1621\dto\SkillRequire$SkillRequireBuilder.class
 se1621\controller\MainController.class
 se1621\dto\Error\UserError.class
 se1621\controller\SearchCompanyIDController.class

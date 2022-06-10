@@ -130,7 +130,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-lg-2">
                                                 <div class="company-logo-img">
-                                                    <img src="images/featured-job/img-1.png" alt="" class="img-fluid mx-auto d-block">
+                                                    <img src="<%= jobOrder.getJob().getCategory().getImg() %>" alt="" class="img-fluid mx-auto d-block">
                                                 </div>
                                             </div>
                                             <div class="col-lg-7 col-md-9">
