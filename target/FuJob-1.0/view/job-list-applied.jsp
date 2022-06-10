@@ -194,9 +194,15 @@
                                 }
 
                             %>
+                            <%
+                                    if (listJobOrder.size() > 10) {
+                            %>
                             <div class="smj col-12 text-center mt-4 pt-2">
                                 <a class="btn btn-primary-outline">Show more</a>
                             </div>
+                            <%
+                                }
+                            %>
                         </div>
                     </div>
                 </div>

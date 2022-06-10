@@ -23,5 +23,5 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class SkillRequire {
-        private Map<Job, Skill> skillRequire;
+        private Map<Job, Skill> skillRequires;
 }

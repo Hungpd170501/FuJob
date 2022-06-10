@@ -12,7 +12,6 @@
 
         <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
-
         <jsp:include page="./include/navbar.jsp"></jsp:include>
 
             <!-- Start home -->
@@ -81,7 +80,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+              
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
                                                 <!--                                                <label class="text-muted">Skill Required<span class="text-danger">*</span></label>
@@ -95,6 +94,7 @@
                                                     </select> 
                                                 </div>
                                             </div>
+                                        </div>
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
                                                 <label class="text-muted">Deadline<span class="text-danger">*</span></label>

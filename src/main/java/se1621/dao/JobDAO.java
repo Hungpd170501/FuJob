@@ -351,7 +351,7 @@ public class JobDAO {
     }
     
 
-    
+// Duy viet ma chua sai
 public List<Job> getAllJob() throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
