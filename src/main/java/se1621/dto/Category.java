@@ -21,4 +21,5 @@ public class Category {
 
     public int categoryID;
     public String categoryName;
+    public String img;
 }

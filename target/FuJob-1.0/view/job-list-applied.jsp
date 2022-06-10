@@ -124,13 +124,13 @@
                                     if (listJobOrder.size() > 0) {
                                         for (JobOrder jobOrder : listJobOrder) {
                             %>
-                            <div class="col-lg-12 mt-4 pt-2">
+                            <div class="job-display col-lg-12 mt-4 pt-2"style="display: none">
                                 <div class="job-list-box border rounded">
                                     <div class="p-3">
                                         <div class="row align-items-center">
                                             <div class="col-lg-2">
                                                 <div class="company-logo-img">
-                                                    <img src="images/featured-job/img-1.png" alt="" class="img-fluid mx-auto d-block">
+                                                    <img src="<%= jobOrder.getJob().getCategory().getImg() %>" alt="" class="img-fluid mx-auto d-block">
                                                 </div>
                                             </div>
                                             <div class="col-lg-7 col-md-9">
@@ -194,16 +194,8 @@
                                 }
 
                             %>
-                            <div class="col-lg-12 mt-4 pt-2">
-                            <%--    <c:set var="pageJobOrder" value="${requestScope.pageJobOrder}"/> --%>
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination job-pagination mb-0 justify-content-center">
-                                        <c:forEach begin="${1}" end="${requestScope.numberPage}" var="i">
-                                            <%--<li class="${i==pageJobOrder?"page-item active":""}"><a class="page-link" href="MainController?action=SearchlistJobOrder&userID=<%= listJobOrder.get(1).getUserID()%>&pageJobOrder=${i}">${i}</a></li>--%>
-                                            <li class="${i==pageJobOrder?"page-item active":""}"><a class="page-link" href="MainController?action=SearchlistJobOrder&userID=<%= listJobOrder.get(1).getUserID()%>"></a></li>
-                                        </c:forEach>
-                                    </ul>
-                                </nav>
+                            <div class="smj col-12 text-center mt-4 pt-2">
+                                <a class="btn btn-primary-outline">Show more</a>
                             </div>
                         </div>
                     </div>
@@ -242,6 +234,16 @@
             function getJobOrderID(id, userID){
                 $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=UnApply&jobOrderID='+id+'&userID='+userID);
             }
+        </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(".job-display").slice(0, 10).show();
+            $(".smj").on("click", function () {
+                $(".job-display:hidden").slice(0, 5).slideDown();
+                if ($(".job-display:hidden").length == 0) {
+                    $(".smj").fadeOut('slow');
+                }
+            });
         </script>
     </body>
 </html>

@@ -125,7 +125,7 @@
                                     if (listJob.size() > 0) {
                                         for (Job job : listJob) {
                             %>
-                            <div class="col-lg-12 mt-4 pt-2">
+                            <div class="job-display col-lg-12 mt-4 pt-2"style="display: none">
                                 <div class="job-list-box border rounded">
                                     <div class="p-3">
                                         <div class="row align-items-center">
@@ -177,21 +177,16 @@
                                 }
 
                             %>
-
-
-                            <div class="col-lg-12 mt-4 pt-2 ">
-                                <c:set var = "searchtitle" value="${requestScope.searchtitle}"/>
-                                <c:set var = "searchExper" value="${requestScope.searchExper}"/>
-                                <c:set var = "searchCate" value="${requestScope.searchCate}"/>
-                                
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination job-pagination mb-0 justify-content-center">
-                                        <c:forEach begin="${1}" end="${requestScope.numberPage}" var="i">
-                                            <li class="${i==pageJob?"page-item active":""}"><a class="page-link" href="MainController?action=SearchlistJob&searchtitle=${i}&searchExper=${i}&searchCate=${i}">${i}</a></li>                                        
-                                            </c:forEach>
-                                    </ul>
-                                </nav>
+                            
+                            <%
+                                    if (listJob.size() > 10) {
+                            %>
+                            <div class="smj col-12 text-center mt-4 pt-2">
+                                <a class="btn btn-primary-outline">Show more</a>
                             </div>
+                            <%
+                                }
+                            %>
                         </div>
                     </div>
                 </div>
@@ -286,5 +281,15 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(".job-display").slice(0, 10).show();
+            $(".smj").on("click", function () {
+                $(".job-display:hidden").slice(0, 5).slideDown();
+                if ($(".job-display:hidden").length == 0) {
+                    $(".smj").fadeOut('slow');
+                }
+            });
+        </script>
     </body>
 </html>

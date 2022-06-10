@@ -20,7 +20,7 @@ import se1621.utils.DBUtils;
 public class CategoryDAO {
 
     private static final String GETLISTCATEGORY = "SELECT * FROM tblCategory ORDER BY categoryName";
-    private static final String GETCATEGORY = "SELECT categoryName FROM tblCategory WHERE categoryID = ?";
+    private static final String GETCATEGORY = "SELECT categoryName, img FROM tblCategory WHERE categoryID = ?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -35,7 +35,8 @@ public class CategoryDAO {
                 while (rs.next()) {
                     int categoryID = rs.getInt("categoryID");
                     String categoryName = rs.getString("categoryName");
-                    Category category = new Category(categoryID, categoryName);
+                    String img = rs.getString("img");
+                    Category category = new Category(categoryID, categoryName, img);
                     list.add(category);
                 }
                 return list;
@@ -68,7 +69,8 @@ public class CategoryDAO {
 
                 if (rs.next()) {
                     String categoryName = rs.getString("categoryName");
-                    category = Category.builder().categoryID(categoryID).categoryName(categoryName).build();
+                    String img = rs.getString("img");
+                    category = Category.builder().categoryID(categoryID).categoryName(categoryName).img(img).build();
                 }
             }
         } catch (Exception e) {
