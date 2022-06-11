@@ -5,7 +5,6 @@
 package se1621.dto;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -144,7 +144,7 @@
                                                         </li>
 
                                                         <li class="list-inline-item">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i>1 Minute ago</p>
+                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i><%= jobOrder.getDateApplied() %></p>
                                                         </li>
                                                     </ul>
                                                 </div>

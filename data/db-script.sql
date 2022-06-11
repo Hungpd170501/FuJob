@@ -115,8 +115,8 @@ CREATE TABLE tblJob (
 	email varchar(255),
 	phone varchar(15),
 	description varchar(2000),
-	lastDateUpdate datetime NULL,
-	jobStatus tinyint NULL
+	lastDateUpdate datetime,
+	jobStatus tinyint NOT NULL
 );
 GO
 
@@ -158,9 +158,16 @@ CREATE TABLE tblJobOrder (
 	cvFile varchar(MAX),
 	salaryDeal varchar(50),
 	message varchar(2000),
+	dateApplied datetime,
 	jobOrderStatus tinyint NOT NULL,
 );
 GO
+
+CREATE TRIGGER lastApplied on dbo.tblJobOrder
+	FOR UPDATE, INSERT AS 
+	UPDATE dbo.tblJobOrder
+SET dateApplied = GetDate()
+WHERE jobOrderID IN (SELECT jobOrderID FROM inserted);
 
 IF OBJECT_ID('dbo.tblSkill', 'u') IS NOT NULL 
    DROP TABLE dbo.tblSkill;  
