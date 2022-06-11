@@ -136,7 +136,7 @@
                                             <div class="col-lg-7 col-md-9">
                                                 <div class="job-list-desc">
                                                     <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="text-dark"><%= jobOrder.getJob().getJobTitle()%></a></h6>
-                                                    <p class="text-muted mb-0"><i class="mdi mdi-bank mr-2"></i><%= jobOrder.getJob().getCompany().getCompanyName()%></p>
+                                                    <p class="text-muted mb-0"><i class="fa fa-archive mr-2"></i><%= jobOrder.getJob().getExperienceNeeded() %></p>
                                                     <p class="text-muted mb-0"><i class="fa fa-list-alt mr-2"></i><%= jobOrder.getJob().getCategory().getCategoryName()%></p>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
