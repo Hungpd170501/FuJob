@@ -95,7 +95,7 @@
                                     <p href="" class="text-muted f-15 mb-0"><i class="mdi mdi-email mr-2"></i><%= resume.getGmail()%></p>
                                 </li>
 
-                                <li class="list-inline-item mr-3" col-md-3>
+                                <li class="list-inline-item mr-3">
                                     <p href="" class="text-muted f-15 mb-0"><i class="mdi mdi-cellphone-iphone mr-2"></i><%= resume.getPhone()%></p>
                                 </li>
                             </ul>
