@@ -125,13 +125,13 @@
                                     if (listJob.size() > 0) {
                                         for (Job job : listJob) {
                             %>
-                            <div class="col-lg-12 mt-4 pt-2">
+                            <div class="job-display col-lg-12 mt-4 pt-2"style="display: none">
                                 <div class="job-list-box border rounded">
                                     <div class="p-3">
                                         <div class="row align-items-center">
                                             <div class="col-lg-2">
                                                 <div class="company-logo-img">
-                                                    <img src="images/featured-job/img-1.png" alt="" class="img-fluid mx-auto d-block">
+                                                    <img src="<%= job.getCategory().getImg() %>" alt="" class="img-fluid mx-auto d-block">
                                                 </div>
                                             </div>
                                             <div class="col-lg-7 col-md-9">
@@ -139,7 +139,7 @@
 
                                                     <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h6>
 
-                                                    <p class="text-muted mb-0"><i class="mdi mdi-bank mr-2"></i><%= job.getCompany().getCompanyName()%></p>
+                                                    <p class="text-muted mb-0"><i class="fa fa-archive mr-2"></i><%= job.getExperienceNeeded() %></p>
                                                     <p class="text-muted mb-0"><i class="fa fa-list-alt mr-2"></i><%= job.getCategory().getCategoryName()%></p>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
@@ -147,7 +147,7 @@
                                                         </li>
 
                                                         <li class="list-inline-item">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i>1 Minute ago</p>
+                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i><%= job.getLastDateUpdate() %></p>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -155,7 +155,9 @@
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
 
-                                                    <span class="badge badge-success">Part-Time</span>
+                                                    <div class="mt-3">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary">Detail</a>
+                                                    </div>
 
                                                     <div class="mt-3">
                                                         <a href="#" class="btn btn-sm btn-primary">Delete</a>
@@ -177,21 +179,16 @@
                                 }
 
                             %>
-
-
-                            <div class="col-lg-12 mt-4 pt-2 ">
-                                <c:set var = "searchtitle" value="${requestScope.searchtitle}"/>
-                                <c:set var = "searchExper" value="${requestScope.searchExper}"/>
-                                <c:set var = "searchCate" value="${requestScope.searchCate}"/>
-                                
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination job-pagination mb-0 justify-content-center">
-                                        <c:forEach begin="${1}" end="${requestScope.numberPage}" var="i">
-                                            <li class="${i==pageJob?"page-item active":""}"><a class="page-link" href="MainController?action=SearchlistJob&searchtitle=${i}&searchExper=${i}&searchCate=${i}">${i}</a></li>                                        
-                                            </c:forEach>
-                                    </ul>
-                                </nav>
+                            
+                            <%
+                                    if (listJob.size() > 10) {
+                            %>
+                            <div class="smj col-12 text-center mt-4 pt-2">
+                                <a class="btn btn-primary-outline">Show more</a>
                             </div>
+                            <%
+                                }
+                            %>
                         </div>
                     </div>
                 </div>
@@ -286,5 +283,15 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(".job-display").slice(0, 10).show();
+            $(".smj").on("click", function () {
+                $(".job-display:hidden").slice(0, 5).slideDown();
+                if ($(".job-display:hidden").length == 0) {
+                    $(".smj").fadeOut('slow');
+                }
+            });
+        </script>
     </body>
 </html>

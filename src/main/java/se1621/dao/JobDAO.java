@@ -13,9 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import se1621.utils.DBUtils;
 import se1621.dto.Category;
-import se1621.dto.CompanyInfo;
 import se1621.dto.Job;
-import se1621.dto.Skill;
 /**
  *
  * @author ACER
@@ -24,21 +22,20 @@ public class JobDAO {
 
     private static final String CREATEJOB = "INSERT INTO tblJob(userID, jobTitle, experienceNeeded, jobCategoryID, deadline,"
             + "completionTime, salary, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,1)";
-    private static final String VIEWALLJOB = "SELECT jobID, userID, jobTitle, ExperienceNeeded, jobCategoryID, "
-            + "deadline, completionTime, salary, address, email, phone, description, lastDateUpdate FROM tblJob WHERE jobStatus = 1";
     private String SEARCHALL_JOBTITLE_EXPERIENCE_CATEGORY = "SELECT jobID, userID, jobTitle, ExperienceNeeded, jobCategoryID, "
             + "deadline, completionTime, salary, address, email, phone, description, lastDateUpdate FROM tblJob ";
     private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJob WHERE jobID = (SELECT MAX(jobID) FROM tblJob) and jobStatus = 1";
-    private static final String VIEWHRJOB = "SELECT * FROM tblJob WHERE userID = ?";
     private static final String SEARCHBYJOBID = "SELECT * FROM tblJOB where jobID = ? and jobStatus = 1";
-    private static final String VIEWJOBLIST = "SELECT j.jobID, j.userID, j.jobTitle, j.ExperienceNeeded, "
-            + "com.companyID, com.companyName, com.address, com.website, com.gmail, com.phone, com.typeCompany, com.establishedYear, com.numberOfEmployee, com.companyOverview, com.avatar, "
-            + "c.categoryID, c.categoryName, "
-            + "j.skill, j.deadline, j.completionTime, j.salary, j.address, j.email, j.phone, j.description FROM (((tblJob j "
-            + "INNER JOIN tblCategory c on j.jobCategoryID = c.categoryID) "
-            + "INNER JOIN tblUser us on j.userID = us.userID) "
-            + "INNER JOIN tblCompany com on us.companyID = com.companyID)";
-
+    private static final String VIEWALLJOB = "SELECT j.jobID, j.jobTitle, j.lastDateUpdate, j.address, c.categoryName, c.img, j.ExperienceNeeded " +
+"FROM (((tblJob j left join tblCategory c on j.jobCategoryID = c.categoryID) left join tblUser u on j.userID = u.userID) " +
+"left join tblCompany com on u.companyID = com.companyID) " +
+"WHERE j.jobStatus = 1";
+    
+    private static final String VIEWHRJOB = "SELECT j.jobID, j.jobTitle, j.lastDateUpdate, j.address, c.categoryName, c.img, j.ExperienceNeeded " +
+"FROM (((tblJob j left join tblCategory c on j.jobCategoryID = c.categoryID) left join tblUser u on j.userID = u.userID) " +
+"left join tblCompany com on u.companyID = com.companyID) " +
+"WHERE j.jobStatus = 1 and j.userID = ?";
+    
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -82,7 +79,7 @@ public class JobDAO {
         return check;
     }
 
-    // View all job in job-list.jsp
+    // View all job in job-list.jsp  
     public List<Job> getListJob() throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -92,32 +89,22 @@ public class JobDAO {
                 List<Job> listJob = new ArrayList<>();
                 while (rs.next()) {
                     int jobID = rs.getInt("jobID");
-                    int userID = rs.getInt("userID");
                     String jobTitle = rs.getString("jobTitle");
                     String ExperienceNeeded = rs.getString("ExperienceNeeded");
-                    int jobCategoryID = rs.getInt("jobCategoryID");
-                    Date deadline = rs.getDate("deadline");
-                    String completionTime = rs.getString("completionTime");
-                    String salary = rs.getString("salary");
+                    String categoryName = rs.getString("categoryName");
                     String address = rs.getString("address");
-                    String email = rs.getString("email");
-                    String phone = rs.getString("phone");
-                    String description = rs.getString("description");
+                    String img = rs.getString("img");
                     Date lastDateUpdate = rs.getDate("lastDateUpdate");
-                    listJob.add(Job.builder().jobID(jobID)
-                            .userID(userID)
+                    Category category = Category.builder().categoryName(categoryName).img(img).build();
+                    Job job = Job.builder()
+                            .jobID(jobID)
                             .jobTitle(jobTitle)
-                            .ExperienceNeeded(ExperienceNeeded)
-                            .category(Category.builder().categoryID(jobCategoryID).build())
-                            .deadline(deadline)
-                            .completionTime(completionTime)
-                            .salary(salary)
                             .address(address)
-                            .email(email)
-                            .phone(phone)
-                            .description(description)
                             .lastDateUpdate(lastDateUpdate)
-                            .build());
+                            .ExperienceNeeded(ExperienceNeeded)
+                            .category(category)
+                            .build();
+                    listJob.add(job);
                 }
                 return listJob;
             }
@@ -285,54 +272,35 @@ public class JobDAO {
         }
         return null;
     }
-
-    // Tao page for job in view-all-job controller
-    public List<Job> getPaginateJobList(List<Job> listPage, int startPage, int endPage) throws SQLException {
-        ArrayList<Job> jobPage = new ArrayList<>();
-        for (int i = startPage; i < endPage; i++) {
-            jobPage.add(listPage.get(i));
-        }
-        return jobPage;
-    }
-
-    public List<Job> getListHrJob(int search) throws SQLException {
+    
+    public List<Job> getListHrJob(int userID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(VIEWHRJOB);
-                preStm.setInt(1, search);
+                preStm.setInt(1, userID);
                 rs = preStm.executeQuery();
-                List<Job> listJob = new ArrayList<>();
+                List<Job> listHrJob = new ArrayList<>();
                 while (rs.next()) {
                     int jobID = rs.getInt("jobID");
-                    int userID = rs.getInt("userID");
                     String jobTitle = rs.getString("jobTitle");
                     String ExperienceNeeded = rs.getString("ExperienceNeeded");
-                    int jobCategoryID = rs.getInt("jobCategoryID");
-                    Date deadline = rs.getDate("deadline");
-                    String completionTime = rs.getString("completionTime");
-                    String salary = rs.getString("salary");
+                    String categoryName = rs.getString("categoryName");
                     String address = rs.getString("address");
-                    String email = rs.getString("email");
-                    String phone = rs.getString("phone");
-                    String description = rs.getString("description");
+                    String img = rs.getString("img");
                     Date lastDateUpdate = rs.getDate("lastDateUpdate");
-                    listJob.add(Job.builder().jobID(jobID)
-                            .userID(userID)
+                    Category category = Category.builder().categoryName(categoryName).img(img).build();
+                    Job job = Job.builder()
+                            .jobID(jobID)
                             .jobTitle(jobTitle)
-                            .ExperienceNeeded(ExperienceNeeded)
-                            .category(Category.builder().categoryID(jobCategoryID).build())
-                            .deadline(deadline)
-                            .completionTime(completionTime)
-                            .salary(salary)
                             .address(address)
-                            .email(email)
-                            .phone(phone)
-                            .description(description)
                             .lastDateUpdate(lastDateUpdate)
-                            .build());
+                            .ExperienceNeeded(ExperienceNeeded)
+                            .category(category)
+                            .build();
+                    listHrJob.add(job);
                 }
-                return listJob;
+                return listHrJob;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -350,60 +318,4 @@ public class JobDAO {
         return null;
     }
     
-
-    
-public List<Job> getAllJob() throws SQLException {
-        try {
-            conn = DBUtils.getInstance().getConnection();
-            if (conn != null) {
-                preStm = conn.prepareStatement(VIEWJOBLIST);
-                rs = preStm.executeQuery();
-                List<Job> listJob = new ArrayList<>();
-                while (rs.next()) {
-                    int jobID = rs.getInt("jobID");
-                    int userID = rs.getInt("userID");
-                    String jobTitle = rs.getString("jobTitle");
-                    String ExperienceNeeded = rs.getString("ExperienceNeeded");
-                    int jobCategoryID = rs.getInt("jobCategoryID");
-                    Date deadline = rs.getDate("deadline");
-                    String completionTime = rs.getString("completionTime");
-                    String salary = rs.getString("salary");
-                    String address = rs.getString("address");
-                    String email = rs.getString("email");
-                    String phone = rs.getString("phone");
-                    String description = rs.getString("description");
-                    Date lastDateUpdate = rs.getDate("lastDateUpdate");
-                    listJob.add(Job.builder().jobID(jobID)
-                            .userID(userID)
-                            .jobTitle(jobTitle)
-                            .ExperienceNeeded(ExperienceNeeded)
-                            .category(Category.builder().categoryID(jobCategoryID).build())
-                            .deadline(deadline)
-                            .completionTime(completionTime)
-                            .salary(salary)
-                            .address(address)
-                            .email(email)
-                            .phone(phone)
-                            .description(description)
-                            .lastDateUpdate(lastDateUpdate)
-                            .build());
-                }
-                return listJob;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (preStm != null) {
-                preStm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-
-        return null;
-    }
 }

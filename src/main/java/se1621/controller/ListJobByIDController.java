@@ -5,27 +5,14 @@
 package se1621.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.commons.lang3.StringUtils;
-import se1621.dao.CategoryDAO;
-import se1621.dao.CompanyInfoDAO;
 import se1621.dao.JobDAO;
-import se1621.dao.UserDAO;
-import se1621.dto.Category;
-import se1621.dto.CompanyInfo;
 import se1621.dto.Job;
-import se1621.dto.User;
 
 /**
  *
@@ -51,20 +38,8 @@ public class ListJobByIDController extends HttpServlet {
          String url = ERROR;
         try {
             JobDAO jobDAO = new JobDAO();
-            UserDAO userDAO = new UserDAO();
-            CompanyInfoDAO compnayDAO = new CompanyInfoDAO();
-            CategoryDAO categoryDAO = new CategoryDAO();
-            int search = Integer.parseInt(request.getParameter("searchJobID"));
-            List<Job> listJob = jobDAO.getListHrJob(search);
-            for (Job job : listJob) {
-                int categoryID = job.getCategory().getCategoryID();
-                Category category = categoryDAO.getCategory(categoryID);
-                job.setCategory(category);
-                int userID = job.getUserID();
-                User user = userDAO.getUser(userID);
-                CompanyInfo company = compnayDAO.getCompanyInfo(user.getCompanyID());
-                job.setCompany(company);
-            }
+            int userID = Integer.parseInt(request.getParameter("userID"));
+            List<Job> listJob = jobDAO.getListHrJob(userID);
             if (!listJob.isEmpty()) {
                 request.setAttribute("LIST_JOBPOST", listJob);
                 url = SUCCESS;

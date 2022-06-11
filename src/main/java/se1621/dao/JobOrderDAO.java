@@ -5,11 +5,14 @@
 package se1621.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import se1621.dto.Category;
+import se1621.dto.CompanyInfo;
 import se1621.dto.Job;
 import se1621.dto.JobOrder;
 import se1621.utils.DBUtils;
@@ -22,9 +25,14 @@ public class JobOrderDAO {
 
     private static final String ORDERJOB = "INSERT INTO tblJobOrder(userID, jobID, cvFile, salaryDeal, message, jobOrderStatus) VALUES(?,?,?,?,?,1)";
     private static final String CHECKDUPLICATE = "SELECT jobOrderID FROM tblJobOrder WHERE userID=? and jobID=?";
-    private static final String GETALLJOBAPPLIED = "SELECT jobOrderID, jobID FROM tblJobOrder WHERE userID=? and jobOrderStatus = 1";
     private static final String DELETE = "UPDATE tblJobOrder SET jobOrderStatus = 0 WHERE jobOrderID = ? ";
     private static final String GETTALLUSERIDOFJOB = "SELECT userID FROM tblJobOrder WHERE jobID = ?";
+    private static final String GETALLJOBAPPLIED1 = "SELECT jo.jobOrderID, j.jobID, j.jobTitle, j.ExperienceNeeded, j.jobCategoryID, jo.cvFile, jo.salaryDeal, jo.message," +
+" c.categoryName, c.img, com.companyName," +
+"j.deadline, j.completionTime, j.salary, j.address, j.email, j.phone, j.description, j.lastDateUpdate" +
+" FROM (((tblJobOrder jo left join (tblJob j left join tblCategory  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID )" +
+"        left join tblUser us on us.userID = j.userID ) left join tblCompany com on com.companyID = us.companyID)" +
+"WHERE jo.userID=? and jo.jobOrderStatus = 1 ";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -90,19 +98,48 @@ public class JobOrderDAO {
         }
         return check;
     }
-
+    
     public List<JobOrder> getListJobApplied(int userID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
-                preStm = conn.prepareStatement(GETALLJOBAPPLIED);
+                preStm = conn.prepareStatement(GETALLJOBAPPLIED1);
                 preStm.setInt(1, userID);
                 rs = preStm.executeQuery();
                 List<JobOrder> list = new ArrayList<>();
                 while (rs.next()) {
                     int jobOrderID = rs.getInt("jobOrderID");
                     int jobID = rs.getInt("jobID");
-                    JobOrder listJobOrder = JobOrder.builder().jobOrderID(jobOrderID).userID(userID).job(Job.builder().jobID(jobID).build()).build();
+                    String jobTitle = rs.getString("jobTitle");
+                    String ExperienceNeeded = rs.getString("ExperienceNeeded");
+                    Date deadline = rs.getDate("deadline");
+                    String completionTime = rs.getString("completionTime");
+                    String salary = rs.getString("salary");
+                    String address = rs.getString("address");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String description = rs.getString("description");
+                    Date lastDateUpdate = rs.getDate("lastDateUpdate");
+                    int categoryID = rs.getInt("jobCategoryID");
+                    String categoryName = rs.getString("categoryName");
+                    String img = rs.getString("img");
+                    String companyName = rs.getString("companyName");
+                   Job job = Job.builder().jobID(jobID)
+                            .userID(userID)
+                            .jobTitle(jobTitle)
+                            .ExperienceNeeded(ExperienceNeeded)
+                            .category(Category.builder().categoryID(categoryID).categoryName(categoryName).img(img).build())
+                            .company(CompanyInfo.builder().companyName(companyName).build())
+                            .deadline(deadline)
+                            .completionTime(completionTime)
+                            .salary(salary)
+                            .address(address)
+                            .email(email)
+                            .phone(phone)
+                            .description(description)
+                            .lastDateUpdate(lastDateUpdate)
+                            .build();
+                    JobOrder listJobOrder = JobOrder.builder().jobOrderID(jobOrderID).userID(userID).job(job).build();
                     list.add(listJobOrder);
                 }
                 return list;

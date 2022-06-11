@@ -12,16 +12,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import se1621.dao.CategoryDAO;
-import se1621.dao.CompanyInfoDAO;
-import se1621.dao.JobDAO;
 import se1621.dao.JobOrderDAO;
-import se1621.dao.UserDAO;
-import se1621.dto.Category;
-import se1621.dto.CompanyInfo;
-import se1621.dto.Job;
 import se1621.dto.JobOrder;
-import se1621.dto.User;
 
 /**
  *
@@ -41,24 +33,7 @@ public class ViewAllJobOrderController extends HttpServlet {
             int userID = Integer.parseInt(request.getParameter("userID"));
             List<JobOrder> listJobOrder = new ArrayList<>();
             JobOrderDAO jobOrderDAO = new JobOrderDAO();
-            JobDAO jobDAO = new JobDAO();
-            UserDAO userDAO = new UserDAO();
-            CompanyInfoDAO companyDAO = new CompanyInfoDAO();
-            CategoryDAO categoryDAO = new CategoryDAO();
             listJobOrder = jobOrderDAO.getListJobApplied(userID);
-            for (JobOrder jobOrder : listJobOrder) {
-                int jobID = jobOrder.getJob().getJobID();
-                Job job = jobDAO.getJob(jobID);
-                int categoryID = job.getCategory().getCategoryID();
-                Category category = categoryDAO.getCategory(categoryID);
-                job.setCategory(category);
-                int humanResouceID = job.getUserID();
-                User humanResource = userDAO.getUser(humanResouceID);
-                int companyID = humanResource.getCompanyID();
-                CompanyInfo company = companyDAO.getCompanyInfo(companyID);
-                job.setCompany(company);
-                jobOrder.setJob(job);
-            }            
             if (!listJobOrder.isEmpty()) {
                 request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
                 url = SUCCESS;

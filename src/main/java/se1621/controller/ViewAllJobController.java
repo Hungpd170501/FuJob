@@ -41,19 +41,7 @@ public class ViewAllJobController extends HttpServlet {
         String url = ERROR;
         try {
             JobDAO jobDAO = new JobDAO();
-            UserDAO userDAO = new UserDAO();
-            CompanyInfoDAO compnayDAO = new CompanyInfoDAO();
-            CategoryDAO categoryDAO = new CategoryDAO();
             List<Job> listJob = jobDAO.getListJob();
-            for (Job job : listJob) {
-                int categoryID = job.getCategory().getCategoryID();
-                Category category = categoryDAO.getCategory(categoryID);
-                job.setCategory(category);
-                int userID = job.getUserID();
-                User user = userDAO.getUser(userID);
-                CompanyInfo company = compnayDAO.getCompanyInfo(user.getCompanyID());
-                job.setCompany(company);
-            }
             if (!listJob.isEmpty()) {
                 request.setAttribute("LIST_ALLJOB", listJob);
                 url = SUCCESS;

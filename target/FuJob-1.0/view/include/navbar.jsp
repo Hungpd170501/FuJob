@@ -95,7 +95,7 @@
                             <%
                             } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
                             %>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&searchJobID=${sessionScope.LOGIN_USER.userID}">Your Job Posted</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Job Posted</a></li>
                             <%
                                 }
                             %>        
