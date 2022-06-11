@@ -14,7 +14,6 @@ import se1621.dao.JobOrderDAO;
 import se1621.dto.Job;
 import se1621.dto.JobOrder;
 
-
 /**
  *
  * @author HNGB
@@ -35,7 +34,6 @@ public class OrderJobController extends HttpServlet {
             String cvFile = request.getParameter("cvFile");
             String salaryDeal = request.getParameter("salaryDeal");
             String message = request.getParameter("message");
-
             JobOrder jobOrder = JobOrder.builder()
                     .userID(userID)
                     .job(Job.builder().jobID(jobID).build())
@@ -44,11 +42,21 @@ public class OrderJobController extends HttpServlet {
                     .message(message)
                     .build();
             JobOrderDAO jobOrderDAO = new JobOrderDAO();
-            boolean check = jobOrderDAO.orderJob(jobOrder);
-            if (check) {
-                request.setAttribute("MESSAGE", "Send application successfully!");
-                url = SUCCESS + userID;
+            int jobOrderID = jobOrderDAO.getJobOrderID(userID, jobID); // neu user da apply ma huy chua
+            if (jobOrderID > 0) { // tien hanh re apply (update)
+                boolean reApply = jobOrderDAO.reApply(jobOrder, jobOrderID);
+                if (reApply) {
+                    request.setAttribute("MESSAGE", "Send application successfully!");
+                    url = SUCCESS + userID;
+                }
+            } else { // neu chua apply
+                boolean apply = jobOrderDAO.orderJob(jobOrder);
+                if (apply) {// cho apply cai moi
+                    request.setAttribute("MESSAGE", "Send application successfully!");
+                    url = SUCCESS + userID;
+                }
             }
+
         } catch (Exception e) {
             log(e.getMessage());
         } finally {
