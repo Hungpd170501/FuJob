@@ -4,6 +4,7 @@
  */
 package se1621.dto;
 
+import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,5 +30,6 @@ public class JobOrder {
     private String cvFile;
     private String salaryDeal;
     private String message;
+    private Date dateApplied;
     private int jobOrderStatus;
 }

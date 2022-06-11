@@ -27,9 +27,9 @@ public class JobOrderDAO {
     private static final String CHECKDUPLICATE = "SELECT jobOrderID FROM tblJobOrder WHERE userID=? and jobID=?";
     private static final String DELETE = "UPDATE tblJobOrder SET jobOrderStatus = 0 WHERE jobOrderID = ? ";
     private static final String GETTALLUSERIDOFJOB = "SELECT userID FROM tblJobOrder WHERE jobID = ?";
-    private static final String GETALLJOBAPPLIED1 = "SELECT jo.jobOrderID, j.jobID, j.jobTitle, j.ExperienceNeeded, j.jobCategoryID, jo.cvFile, jo.salaryDeal, jo.message," +
-" c.categoryName, c.img, com.companyName," +
-"j.deadline, j.completionTime, j.salary, j.address, j.email, j.phone, j.description, j.lastDateUpdate" +
+    private static final String GETALLJOBAPPLIED = "SELECT jo.jobOrderID, j.jobID, j.jobTitle, j.ExperienceNeeded, j.jobCategoryID, jo.cvFile, jo.salaryDeal, jo.message," +
+"jo.dateApplied, c.categoryName, c.img, com.companyName," +
+"j.deadline, j.completionTime, j.salary, j.address, j.email, j.phone, j.description" +
 " FROM (((tblJobOrder jo left join (tblJob j left join tblCategory  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID )" +
 "        left join tblUser us on us.userID = j.userID ) left join tblCompany com on com.companyID = us.companyID)" +
 "WHERE jo.userID=? and jo.jobOrderStatus = 1 ";
@@ -103,7 +103,7 @@ public class JobOrderDAO {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
-                preStm = conn.prepareStatement(GETALLJOBAPPLIED1);
+                preStm = conn.prepareStatement(GETALLJOBAPPLIED);
                 preStm.setInt(1, userID);
                 rs = preStm.executeQuery();
                 List<JobOrder> list = new ArrayList<>();
@@ -119,7 +119,7 @@ public class JobOrderDAO {
                     String email = rs.getString("email");
                     String phone = rs.getString("phone");
                     String description = rs.getString("description");
-                    Date lastDateUpdate = rs.getDate("lastDateUpdate");
+                    Date dateApplied = rs.getDate("dateApplied");
                     int categoryID = rs.getInt("jobCategoryID");
                     String categoryName = rs.getString("categoryName");
                     String img = rs.getString("img");
@@ -137,9 +137,8 @@ public class JobOrderDAO {
                             .email(email)
                             .phone(phone)
                             .description(description)
-                            .lastDateUpdate(lastDateUpdate)
                             .build();
-                    JobOrder listJobOrder = JobOrder.builder().jobOrderID(jobOrderID).userID(userID).job(job).build();
+                    JobOrder listJobOrder = JobOrder.builder().jobOrderID(jobOrderID).userID(userID).job(job).dateApplied(dateApplied).build();
                     list.add(listJobOrder);
                 }
                 return list;
@@ -158,14 +157,6 @@ public class JobOrderDAO {
             }
         }
         return null;
-    }
-
-    public List<JobOrder> getPaginateJobOrderList(List<JobOrder> listPage, int startPage, int endPage) throws SQLException {
-        ArrayList<JobOrder> jobOrderPage = new ArrayList<>();
-        for (int i = startPage; i < endPage; i++) {
-            jobOrderPage.add(listPage.get(i));
-        }
-        return jobOrderPage;
     }
 
     public boolean delete(String jobOrderID) throws SQLException {
