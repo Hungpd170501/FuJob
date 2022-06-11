@@ -24,7 +24,8 @@ import se1621.utils.DBUtils;
 public class JobOrderDAO {
 
     private static final String ORDERJOB = "INSERT INTO tblJobOrder(userID, jobID, cvFile, salaryDeal, message, jobOrderStatus) VALUES(?,?,?,?,?,1)";
-    private static final String CHECKDUPLICATE = "SELECT jobOrderID FROM tblJobOrder WHERE userID=? and jobID=?";
+    private static final String CHECKDUPLICATE = "SELECT jobOrderID FROM tblJobOrder WHERE userID=? and jobID=? and jobOrderStatus = 1";
+    private static final String CHECKDUPLICATE_NONSTATUS = "SELECT jobOrderID FROM tblJobOrder WHERE userID = ? and jobID = ? and jobOrderStatus = 0";
     private static final String DELETE = "UPDATE tblJobOrder SET jobOrderStatus = 0 WHERE jobOrderID = ? ";
     private static final String GETTALLUSERIDOFJOB = "SELECT userID FROM tblJobOrder WHERE jobID = ?";
     private static final String GETALLJOBAPPLIED = "SELECT jo.jobOrderID, j.jobID, j.jobTitle, j.ExperienceNeeded, j.jobCategoryID, jo.cvFile, jo.salaryDeal, jo.message," +
@@ -33,6 +34,7 @@ public class JobOrderDAO {
 " FROM (((tblJobOrder jo left join (tblJob j left join tblCategory  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID )" +
 "        left join tblUser us on us.userID = j.userID ) left join tblCompany com on com.companyID = us.companyID)" +
 "WHERE jo.userID=? and jo.jobOrderStatus = 1 ";
+    private static final String UPDATE_STATUS = "UPDATE tblJobOrder SET cvFile = ?, salaryDeal = ?, message = ?, jobOrderStatus = 1 WHERE jobOrderID = ? and userID = ? and jobID = ?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -51,6 +53,39 @@ public class JobOrderDAO {
                 preStm.setString(3, jobOrder.getCvFile());
                 preStm.setString(4, jobOrder.getSalaryDeal());
                 preStm.setString(5, jobOrder.getMessage());
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (preStm != null) {
+                preStm.close();
+            }
+
+            if (conn != null) {
+
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    public boolean reApply(JobOrder jobOrder, int jobOrderID) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        conn = null;
+        preStm = null;
+
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UPDATE_STATUS);
+                preStm.setString(1, jobOrder.getCvFile());
+                preStm.setString(2, jobOrder.getSalaryDeal());
+                preStm.setString(3, jobOrder.getMessage());
+                preStm.setInt(4, jobOrderID);
+                preStm.setInt(5, jobOrder.getUserID());
+                preStm.setInt(6, jobOrder.getJob().getJobID());
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -98,6 +133,38 @@ public class JobOrderDAO {
         }
         return check;
     }
+    
+    public int getJobOrderID(int userID, int jobID) throws Exception {
+        conn = null;
+        preStm = null;
+        rs = null;
+        int jobOrderID = 0;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(CHECKDUPLICATE_NONSTATUS);
+                preStm.setInt(1, userID);
+                preStm.setInt(2, jobID);
+                rs = preStm.executeQuery();
+                if (rs.next()) {
+                    jobOrderID = rs.getInt("jobOrderID");
+                }
+                return jobOrderID;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return jobOrderID;
+    }
+    
     
     public List<JobOrder> getListJobApplied(int userID) throws SQLException {
         try {
