@@ -163,6 +163,12 @@ CREATE TABLE tblJobOrder (
 );
 GO
 
+CREATE TRIGGER lastApplied on dbo.tblJobOrder
+	FOR UPDATE, INSERT AS 
+	UPDATE dbo.tblJobOrder
+SET dateApplied = GetDate()
+WHERE jobOrderID IN (SELECT jobOrderID FROM inserted);
+
 IF OBJECT_ID('dbo.tblSkill', 'u') IS NOT NULL 
    DROP TABLE dbo.tblSkill;  
 GO
