@@ -131,7 +131,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-lg-2">
                                                 <div class="company-logo-img">
-                                                    <img src="<%= job.getCategory().getImg() %>" alt="" class="img-fluid mx-auto d-block">
+                                                    <img src="<%= job.getCategory().getImg() %>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:150px;height:150px">
                                                 </div>
                                             </div>
                                             <div class="col-lg-7 col-md-9">
@@ -263,9 +263,11 @@
         <!-- Footer End -->
 
         <!-- Back to top -->
-        <a href="#" class="back-to-top rounded text-center" id="back-to-top"> 
-            <i class="mdi mdi-chevron-up d-block"> </i> 
-        </a>
+        <!-- Back to top -->
+            <a href="#" class="back-to-top rounded text-center" id="back-to-top" style="display: inline"> 
+                <i class="mdi mdi-chevron-up d-block"></i> 
+            </a>
+            <!-- Back to top -->
         <!-- Back to top -->
 
         <!-- javascript -->

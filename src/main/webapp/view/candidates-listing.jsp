@@ -136,7 +136,7 @@
                                         <div class="row">
                                             <div class="col-md-9">
                                                 <div class="float-left mr-4">
-                                                    <img src="" alt="" class="d-block rounded" height="90">
+                                                    <img src="" alt="" class="img-fluid d-block rounded" height="50" style="width:120px;height:120px">
                                                 </div>
                                                 <div class="candidates-list-desc overflow-hidden job-single-meta  pt-2">
                                                     <h5 class="mb-2"><a href="#" class="text-dark"><%= resume.getFullName()%></a></h5>
