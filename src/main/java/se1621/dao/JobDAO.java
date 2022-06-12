@@ -26,6 +26,7 @@ public class JobDAO {
             + "deadline, completionTime, salary, address, email, phone, description, lastDateUpdate FROM tblJob ";
     private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJob WHERE jobID = (SELECT MAX(jobID) FROM tblJob) and jobStatus = 1";
     private static final String SEARCHBYJOBID = "SELECT * FROM tblJOB where jobID = ? and jobStatus = 1";
+    
     private static final String VIEWALLJOB = "SELECT j.jobID, j.jobTitle, j.lastDateUpdate, j.address, c.categoryName, c.img, j.ExperienceNeeded " +
 "FROM (((tblJob j left join tblCategory c on j.jobCategoryID = c.categoryID) left join tblUser u on j.userID = u.userID) " +
 "left join tblCompany com on u.companyID = com.companyID) " +
@@ -218,6 +219,73 @@ public class JobDAO {
                     getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? and jobStatus = 1";
                 } else {
                     getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? and jobCategoryID = ? and jobStatus = 1";
+                    checkCateID = false;
+                }
+                preStm = conn.prepareStatement(getDataSQL);
+                preStm.setString(1, "%" + searchJobTitle + "%");
+                preStm.setString(2, "%" + searchExperienceNeeded + "%");
+                if (!checkCateID) {
+                    preStm.setInt(3, searchJobCategoryID);
+                }
+                rs = preStm.executeQuery();
+                while (rs.next()) {
+                    int jobID = rs.getInt("jobID");
+                    int userID = rs.getInt("userID");
+                    String jobTitle = rs.getString("jobTitle");
+                    int jobCategoryID = rs.getInt("jobCategoryID");
+                    String experienceNeeded = rs.getString("experienceNeeded");
+                    Date deadline = rs.getDate("deadline");
+                    String completionTime = rs.getString("completionTime");
+                    String salary = rs.getString("salary");
+                    String address = rs.getString("address");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String description = rs.getString("description");
+                    Date lastDateUpdate = rs.getDate("lastDateUpdate");
+                    listJob.add(Job.builder().jobID(jobID)
+                            .userID(userID)
+                            .jobTitle(jobTitle)
+                            .ExperienceNeeded(experienceNeeded)
+                            .category(Category.builder().categoryID(jobCategoryID).build())
+                            .deadline(deadline)
+                            .completionTime(completionTime)
+                            .salary(salary)
+                            .address(address)
+                            .email(email)
+                            .phone(phone)
+                            .description(description)
+                            .lastDateUpdate(lastDateUpdate)
+                            .build());
+                }
+                return listJob;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+    
+    public List<Job> searchJobPost(String searchJobTitle, String searchExperienceNeeded, int searchJobCategoryID, int HRID) throws SQLException {
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                List<Job> listJob = new ArrayList<>();
+                String getDataSQL = this.SEARCHALL_JOBTITLE_EXPERIENCE_CATEGORY;
+                boolean checkCateID = true;
+                if (searchJobCategoryID == 0) {
+                    getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? and jobStatus = 1 and userID = " + HRID;
+                } else {
+                    getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? and jobCategoryID = ? and jobStatus = 1 and userID = " + HRID;
                     checkCateID = false;
                 }
                 preStm = conn.prepareStatement(getDataSQL);

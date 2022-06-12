@@ -62,7 +62,7 @@
                     <div class="col-lg-8 col-md-7">
                         <div class="job-detail border rounded p-4 row">
                             <div class="col-lg-4">
-                                <img src="<%= job.getCategory().getImg() %>" alt="" class="img-fluid float-left mr-md-3 mr-2 mx-auto d-block">
+                                <img src="<%= job.getCategory().getImg() %>" alt="" class="img-fluid img-thumbnail float-left mr-md-3 mr-2 mx-auto d-block" style="width:500px;height:250px">
                             </div>
                             <div class="col-lg-8">
                                 <div class="job-detail-com-desc overflow-hidden d-block">

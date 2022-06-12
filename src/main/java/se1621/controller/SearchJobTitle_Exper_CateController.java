@@ -63,6 +63,8 @@ public class SearchJobTitle_Exper_CateController extends HttpServlet {
                 request.setAttribute("searchExper", searchExper);
                 request.setAttribute("searchCate", searchCate);
                 url = SUCCESS;
+            }else{
+                
             }
         } catch (Exception e) {
             log("Error at View all job Controller" + e.toString());
