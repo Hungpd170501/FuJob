@@ -22,7 +22,7 @@ import se1621.dto.JobOrder;
 @WebServlet(name = "ViewAllJobOrderController", urlPatterns = {"/ViewAllJobOrderController"})
 public class ViewAllJobOrderController extends HttpServlet {
 
-    private static final String ERROR = "/view/job-details.jsp";
+    private static final String ERROR = "/view/job-list-applied.jsp";
     private static final String SUCCESS = "/view/job-list-applied.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -37,6 +37,9 @@ public class ViewAllJobOrderController extends HttpServlet {
             if (!listJobOrder.isEmpty()) {
                 request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
                 url = SUCCESS;
+            }else{
+                request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
+                request.setAttribute("MESSAGE", "YOU HAVEN'T APPLIED FOR ANY JOB");
             }
         } catch (Exception e) {
             log("Error at View all job Controller" + e.toString());

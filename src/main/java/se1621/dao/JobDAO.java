@@ -40,7 +40,7 @@ public class JobDAO {
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
-
+    
     public boolean createJob(Job job) throws SQLException, ClassNotFoundException {
         boolean check = false;
         conn = null;
@@ -79,7 +79,6 @@ public class JobDAO {
         }
         return check;
     }
-
     // View all job in job-list.jsp  
     public List<Job> getListJob() throws SQLException {
         try {
@@ -274,8 +273,8 @@ public class JobDAO {
         }
         return null;
     }
-    
-    public List<Job> searchJobPost(String searchJobTitle, String searchExperienceNeeded, int searchJobCategoryID, int HRID) throws SQLException {
+    // search for all page
+    public List<Job> getJobPosted(String searchJobTitle, String searchExperienceNeeded, int searchJobCategoryID, int hrID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
@@ -283,9 +282,9 @@ public class JobDAO {
                 String getDataSQL = this.SEARCHALL_JOBTITLE_EXPERIENCE_CATEGORY;
                 boolean checkCateID = true;
                 if (searchJobCategoryID == 0) {
-                    getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? and jobStatus = 1 and userID = " + HRID;
+                    getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? and jobStatus = 1 and userID = " + hrID;
                 } else {
-                    getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? and jobCategoryID = ? and jobStatus = 1 and userID = " + HRID;
+                    getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? and jobCategoryID = ? and jobStatus = 1 and userID = " + hrID;
                     checkCateID = false;
                 }
                 preStm = conn.prepareStatement(getDataSQL);
@@ -300,6 +299,7 @@ public class JobDAO {
                     int userID = rs.getInt("userID");
                     String jobTitle = rs.getString("jobTitle");
                     int jobCategoryID = rs.getInt("jobCategoryID");
+                    String experienceNeeded = rs.getString("experienceNeeded");
                     Date deadline = rs.getDate("deadline");
                     String completionTime = rs.getString("completionTime");
                     String salary = rs.getString("salary");
@@ -311,7 +311,7 @@ public class JobDAO {
                     listJob.add(Job.builder().jobID(jobID)
                             .userID(userID)
                             .jobTitle(jobTitle)
-                            .ExperienceNeeded(searchExperienceNeeded)
+                            .ExperienceNeeded(experienceNeeded)
                             .category(Category.builder().categoryID(jobCategoryID).build())
                             .deadline(deadline)
                             .completionTime(completionTime)
@@ -339,8 +339,7 @@ public class JobDAO {
             }
         }
         return null;
-    }
-    
+    }    
     public List<Job> getListHrJob(int userID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();

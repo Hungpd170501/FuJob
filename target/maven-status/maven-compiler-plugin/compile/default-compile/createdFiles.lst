@@ -32,12 +32,14 @@ se1621\service\EmailServiceIml.class
 se1621\controller\ChooseCompanyController.class
 se1621\dto\Category$CategoryBuilder.class
 se1621\dto\User.class
+se1621\controller\SearchInJobOrderController.class
 se1621\dao\ResumeDAO.class
 se1621\dto\UserGoogle.class
 se1621\dao\UserDAO.class
 se1621\controller\ViewAllJobController.class
 se1621\controller\ChangePasswordController.class
 se1621\service\EmailService.class
+se1621\controller\SearchInJobPostedController.class
 se1621\controller\RecoveryPasswordController.class
 se1621\dto\StudentSkill$StudentSkillBuilder.class
 se1621\utils\GoogleRacaptcha.class
