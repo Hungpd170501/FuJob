@@ -28,7 +28,7 @@ public class UnApplyController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String jobOrderID = request.getParameter("jobOrderID");
+            int jobOrderID = Integer.parseInt(request.getParameter("jobOrderID"));
             int userID = Integer.parseInt(request.getParameter("userID"));
             JobOrderDAO jobOrderDAO = new JobOrderDAO();
             boolean check = jobOrderDAO.delete(jobOrderID);
