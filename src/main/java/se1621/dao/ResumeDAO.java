@@ -226,12 +226,4 @@ public class ResumeDAO {
         }
         return check;
     }
-
-    public List<Resume> getPaginateJobList(List<Resume> listPage, int startPage, int endPage) throws SQLException {
-        ArrayList<Resume> jobPage = new ArrayList<>();
-        for (int i = startPage; i < endPage; i++) {
-            jobPage.add(listPage.get(i));
-        }
-        return jobPage;
-    }
 }

@@ -5,12 +5,12 @@
 package se1621.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import se1621.dao.CategoryDAO;
 import se1621.dao.CompanyInfoDAO;
@@ -39,14 +39,17 @@ public class SearchJobTitle_Exper_CateController extends HttpServlet {
             String searchTitle = request.getParameter("searchtitle");
             String searchExper = request.getParameter("searchExper");
             int searchCate = 0;
+            int hrID = 0;
             try {
                 searchCate = Integer.parseInt(request.getParameter("searchCate"));
+                hrID = Integer.parseInt(request.getParameter("hrID"));
             } catch (Exception e) {
             }
             JobDAO jobDAO = new JobDAO();
             UserDAO userDAO = new UserDAO();
             CompanyInfoDAO compnayDAO = new CompanyInfoDAO();
             CategoryDAO categoryDAO = new CategoryDAO();
+            
             List<Job> listJob = jobDAO.searchAllJobTile_Experience_Category(searchTitle, searchExper, searchCate);
             for (Job job : listJob) {
                 int userID = job.getUserID();
@@ -59,12 +62,10 @@ public class SearchJobTitle_Exper_CateController extends HttpServlet {
             }
             if (!listJob.isEmpty()) {
                 request.setAttribute("LIST_ALLJOB", listJob);
-                request.setAttribute("searchTitle", searchTitle);
-                request.setAttribute("searchExper", searchExper);
-                request.setAttribute("searchCate", searchCate);
                 url = SUCCESS;
-            }else{
-                
+            } else {
+                request.setAttribute("LIST_ALLJOB", listJob);
+                request.setAttribute("MESSAGE", "NO JOB TO DISPLAY");
             }
         } catch (Exception e) {
             log("Error at View all job Controller" + e.toString());

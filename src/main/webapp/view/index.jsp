@@ -116,8 +116,8 @@
                     </div>
                     </c:forEach>
                 </div>
-                <div class="row justify-content-center" style="display: none">
-                    <div class="col-12 text-center mt-4 pt-2">
+                <div class="row justify-content-center">
+                    <div class="smj col-12 text-center mt-4 pt-2">
                         <a class="btn btn-primary-outline">Show more</a>
                     </div>
                 </div>
@@ -347,7 +347,7 @@
         <script>
             $(".job-display").slice(0, 8).show();
             $(".smj").on("click", function () {
-                $(".job-display:hidden").slice(0, 5).slideDown();
+                $(".job-display:hidden").slice(0, 8).slideDown();
                 if ($(".job-display:hidden").length == 0) {
                     $(".smj").fadeOut('slow');
                 }

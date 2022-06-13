@@ -86,7 +86,6 @@
                                             <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Submit">
                                             <!-- name = action  -->
                                             <input type="hidden" name ="action" value="Search_title_exper_cate">
-                                            <input type="hidden" name ="HRID" value="${0}">
                                         </div>
                                     </div>
                                 </div>
@@ -125,7 +124,7 @@
                         <div class="row" > 
                             <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_ALLJOB");
                                 if (listJob.isEmpty()) {
-                                    String message = (String) request.getAttribute("SEARCH_MESSAGE");
+                                    String message = (String) request.getAttribute("MESSAGE");
                             %>
                             <div class="col-lg-12 text-warning text-center">
                                 <h3> <%=message%> </h3>
