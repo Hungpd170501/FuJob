@@ -24,7 +24,7 @@ public class JobDAO {
             + "completionTime, salary, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,1)";
     private String SEARCHALL_JOBTITLE_EXPERIENCE_CATEGORY = "SELECT jobID, userID, jobTitle, ExperienceNeeded, jobCategoryID, "
             + "deadline, completionTime, salary, address, email, phone, description, lastDateUpdate FROM tblJob ";
-    private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJob WHERE jobID = (SELECT MAX(jobID) FROM tblJob) and jobStatus = 1";
+    private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJob WHERE jobID = (SELECT MAX(jobID) FROM tblJob) and jobStatus = 1 and userID = ?";
     private static final String SEARCHBYJOBID = "SELECT * FROM tblJOB where jobID = ? and jobStatus = 1";
     
     private static final String VIEWALLJOB = "SELECT j.jobID, j.jobTitle, j.lastDateUpdate, j.address, c.categoryName, c.img, j.ExperienceNeeded " +
@@ -180,12 +180,13 @@ public class JobDAO {
         return job;
     }
 
-    public int getJobIDJustCreate() throws SQLException {
+    public int getJobIDJustCreate(int userID) throws SQLException {
         int jobID = 0;
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(GETJOBIDJUSTCREATE);
+                preStm.setInt(1, userID);
                 rs = preStm.executeQuery();
                 if (rs.next()) {
                     jobID = rs.getInt("jobID");

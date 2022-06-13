@@ -17,24 +17,24 @@
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
             <!-- Start Home -->
             <section class="bg-home" style="background: url('${pageContext.request.contextPath}/asset/images/background-index.jpg') center center;">
-                <div class="bg-overlay"></div>
-                <div class="home-center">
-                    <div class="home-desc-center">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-12">
-                                    <div class="title-heading text-center text-white">
-                                        <h6 class="small-title text-uppercase text-light mb-3">Find jobs, create trackable resumes and enrich your applications.</h6>
-                                        <h1 class="heading font-weight-bold mb-4">The Easiest Way to Get Your New Job</h1>
-                                    </div>
+            <div class="bg-overlay"></div>
+            <div class="home-center">
+                <div class="home-desc-center">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="title-heading text-center text-white">
+                                    <h6 class="small-title text-uppercase text-light mb-3">Find jobs, create trackable resumes and enrich your applications.</h6>
+                                    <h1 class="heading font-weight-bold mb-4">The Easiest Way to Get Your New Job</h1>
                                 </div>
                             </div>
-                            <div class="home-form-position">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="home-registration-form p-4 mb-3">
-                                            <!-- SEARCH -->
-                                            <form class="registration-form" action="${pageContext.request.contextPath}/MainController">
+                        </div>
+                        <div class="home-form-position">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="home-registration-form p-4 mb-3">
+                                        <!-- SEARCH -->
+                                        <form class="registration-form" action="${pageContext.request.contextPath}/MainController">
                                             <!--<form class="registration-form">-->
                                             <div class="row">
                                                 <div class="col-lg-3 col-md-6">
@@ -99,27 +99,29 @@
                         </div>
                     </div>
                 </div>
+                <div></div>
                 <div class="row">
                     <c:forEach items="${chooseCategory.listCategory_nonOrderBy}" var="c">
                         <div class="job-display col-lg-3 col-md-6 mt-4 pt-2" style="display: none">
-                        <a href="${pageContext.request.contextPath}/MainController?action=Search_title_exper_cate&searchtitle=${""}&searchExper=${""}&searchCate=${c.categoryID}">
-                            <div class="popu-category-box bg-light rounded text-center p-4">
-                                <div class="popu-category-icon mb-3">
-                                    <img src="${c.img}" alt="" class="img-fluid img-thumbnail d-inline-block rounded-pill h3 text-primary" style="width:100px;height:100px">
+                            <a href="${pageContext.request.contextPath}/MainController?action=Search_title_exper_cate&searchtitle=${""}&searchExper=${""}&searchCate=${c.categoryID}">
+                                <div class="popu-category-box bg-light rounded text-center p-4">
+                                    <div class="popu-category-icon mb-3">
+                                        <img src="${c.img}" alt="" class="img-fluid img-thumbnail d-inline-block rounded-pill h3 text-primary" style="width:100px;height:100px">
+                                    </div>
+                                    <div class="popu-category-content">
+                                        <h5 class="mb-2 text-dark title">${c.categoryName}</h5>
+                                        <!--                                    <p class="text-success mb-0 rounded">1270 Jobs</p>-->
+                                    </div>
                                 </div>
-                                <div class="popu-category-content">
-                                    <h5 class="mb-2 text-dark title">${c.categoryName}</h5>
-<!--                                    <p class="text-success mb-0 rounded">1270 Jobs</p>-->
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div>
                     </c:forEach>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="smj col-12 text-center mt-4 pt-2">
-                        <a class="btn btn-primary-outline">Show more</a>
-                    </div>
+                <div id="smj" class="row justify-content-center col-12 text-center mt-4 pt-2">
+                    <a class="smj btn btn-primary-outline">Show more</a>
+                </div>
+                <div id="slj" class="row justify-content-center col-12 text-center mt-4 pt-2" style="display: none">
+                    <a class="slj btn btn-danger-outline">Show less</a>
                 </div>
             </div>
         </section>
@@ -144,7 +146,7 @@
                             <div>
                                 <h5>Register an account</h5>
                                 <p class="text-muted">You only need an email then we will send you the login link and you will have an account for yourself or for your company.</p>
-<!--                                <a href="#" class="text-primary">Read more <i class="mdi mdi-chevron-right"></i></a>-->
+                                <!--<a href="#" class="text-primary">Read more <i class="mdi mdi-chevron-right"></i></a>-->
                             </div>
                         </div>
                     </div>
@@ -293,43 +295,43 @@
                 </div>
             </div>
 
-<!--            <div class="container mt-100 mt-60">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <div class="section-title text-center mb-4 pb-2">
-                            <h4 class="title title-line pb-5">Our Client's</h4>
-                            <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row align-items-center">
-                    <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                        <img src="${pageContext.request.contextPath}/asset/images/clients/1.png" height="50" alt="">
-                    </div>end col
-                    <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                        <img src="${pageContext.request.contextPath}/asset/images/clients/2.png" height="50" alt="">
-                    </div>end col
-                    <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                        <img src="${pageContext.request.contextPath}/asset/images/clients/3.png" height="50" alt="">
-                    </div>end col
-                    <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                        <img src="${pageContext.request.contextPath}/asset/images/clients/4.png" height="50" alt="">
-                    </div>end col
-                    <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                        <img src="${pageContext.request.contextPath}/asset/images/clients/1.png" height="50" alt="">
-                    </div>end col
-                    <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                        <img src="${pageContext.request.contextPath}/asset/images/clients/2.png" height="50" alt="">
-                    </div>end col
-                </div>
-            </div>-->
+            <!--            <div class="container mt-100 mt-60">
+                            <div class="row justify-content-center">
+                                <div class="col-12">
+                                    <div class="section-title text-center mb-4 pb-2">
+                                        <h4 class="title title-line pb-5">Our Client's</h4>
+                                        <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="row align-items-center">
+                                <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
+                                    <img src="${pageContext.request.contextPath}/asset/images/clients/1.png" height="50" alt="">
+                                </div>end col
+                                <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
+                                    <img src="${pageContext.request.contextPath}/asset/images/clients/2.png" height="50" alt="">
+                                </div>end col
+                                <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
+                                    <img src="${pageContext.request.contextPath}/asset/images/clients/3.png" height="50" alt="">
+                                </div>end col
+                                <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
+                                    <img src="${pageContext.request.contextPath}/asset/images/clients/4.png" height="50" alt="">
+                                </div>end col
+                                <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
+                                    <img src="${pageContext.request.contextPath}/asset/images/clients/1.png" height="50" alt="">
+                                </div>end col
+                                <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
+                                    <img src="${pageContext.request.contextPath}/asset/images/clients/2.png" height="50" alt="">
+                                </div>end col
+                            </div>
+                        </div>-->
         </section>
         <!-- testimonial end -->
 
         <jsp:include page="./include/footer.jsp"></jsp:include>
             <!-- javascript -->
-        <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
+            <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/bootstrap.bundle.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/jquery.easing.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/plugins.js"></script>
@@ -343,15 +345,25 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
             $(".job-display").slice(0, 8).show();
-            $(".smj").on("click", function () {
+            $(".smj").on('click', function () {
                 $(".job-display:hidden").slice(0, 8).slideDown();
                 if ($(".job-display:hidden").length == 0) {
-                    $(".smj").fadeOut('slow');
+                    $(".smj").css("display","none");
+                    document.getElementById("slj").style.display = "inline-block";
                 }
             });
+            $(".slj").on('click',function (){
+               $(".job-display").slice(8, 50).slideUp();
+               if($(".job-display").length > 0){
+                   document.getElementById("slj").style.display = "none";
+                   $(".smj").css("display","inline-block");
+               }
+            });
+
         </script>
     </body>
 </html>
