@@ -1,6 +1,7 @@
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="se1621.dto.User"%>
 <%@ page pageEncoding="UTF-8" %>
+
 <%
     User loginUser = (User) session.getAttribute("LOGIN_USER");
 %>

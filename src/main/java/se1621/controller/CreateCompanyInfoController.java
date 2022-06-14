@@ -91,8 +91,10 @@ public class CreateCompanyInfoController extends HttpServlet {
                             .build();
                     UserDAO udao = new UserDAO();
                     boolean check = udao.updateCompanyID(user, companyID);
+                    session.setAttribute("LOGIN_USER",user);
                     if (check) {
                         request.setAttribute("MESSAGE", "Create Company Successfully!!");
+                        
                         url = SUCCESS + companyID;
                     }
                 }
