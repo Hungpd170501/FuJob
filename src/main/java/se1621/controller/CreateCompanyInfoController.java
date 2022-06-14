@@ -55,7 +55,7 @@ public class CreateCompanyInfoController extends HttpServlet {
 
             if (checkDuplicate) {
                 checkValidation = false;
-                comError.setCompanyNameError("Company Name already exists!");
+                comError.setCompanyNameError("Company name already exists!");
             }
             if (checkValidation) {
                 CompanyInfo company = CompanyInfo.builder()

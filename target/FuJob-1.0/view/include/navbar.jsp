@@ -83,19 +83,19 @@
                 <li><a href="${pageContext.request.contextPath}">Home</a></li>
 
                 <li class="has-submenu">
-                    <a href="javascript:void(0)">Jobs</a><span class="menu-arrow"></span>
+                    <a href="javascript:void(0)">Project</a><span class="menu-arrow"></span>
                     <ul class="submenu">
 
                         <%--<li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&pageJob=${1}">Job List</a></li>--%>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&Search_title_exper_cate">Job List</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&Search_title_exper_cate">Project List</a></li>
                             <%
                                 if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "US")) {
                             %>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>">Your Job Applied</a></li>   
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>">Your Project Applied</a></li>   
                             <%
                             } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
                             %>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Job Posted</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Posted</a></li>
                             <%
                                 }
                             %>        
@@ -128,7 +128,7 @@
                 %>
                 <li>
                     <div class="buy-button">
-                        <a href="${pageContext.request.contextPath}/view/post-a-job.jsp" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Post a Job</a>
+                        <a href="${pageContext.request.contextPath}/view/post-a-job.jsp" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Post a Project</a>
                     </div>
                 </li>
 

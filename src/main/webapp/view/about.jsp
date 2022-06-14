@@ -43,11 +43,11 @@
                             <div class="about-desc ml-lg-4">
                                 <h4 class="text-dark">About us</h4>
 
-                                <p class="text-muted">Matching the right people to the right jobs is a very difficult problem in Vietnam, a challenge for any recruitment platform. With the goal of applying technology to change the recruitment market and make human resources more efficient, in early 2022, the idea of FUJob was born.</p>
+                                <p class="text-muted">Matching the right people to the right projects is a very difficult problem in Vietnam, a challenge for any recruitment platform. With the goal of applying technology to change the recruitment market and make human resources more efficient, in early 2022, the idea of FUJob was born.</p>
 
-                                <p class="text-muted">Using technology, we create a platform that allows workers to find jobs, learn about companies and interact with employers.</p>
+                                <p class="text-muted">Using technology, we create a platform that allows workers to find projects, learn about companies and interact with employers.</p>
 
-                                <p class="text-muted">Every day, we connect thousands of people with new job opportunities from reputable businesses.</p>
+                                <p class="text-muted">Every day, we connect thousands of people with new project opportunities from reputable businesses.</p>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                                 <div class="p-4">
                                     <div class="blog-post counter-content text-center">
                                         <h1 class="counter-value font-weight-light text-dark mb-2" data-count="150">0</h1>
-                                        <p class="counter-name text-muted f-15 text-uppercase mb-2">Jobs</p>
+                                        <p class="counter-name text-muted f-15 text-uppercase mb-2">Project</p>
                                         <i class="mdi mdi-account-multiple h3 text-muted"></i>
                                     </div>
                                 </div>
@@ -274,7 +274,7 @@
                         <div class="col-12">
                             <div class="section-title text-center mb-4 pb-2">
                                 <h4 class="title title-line pb-5">Our Client's</h4>
-                                <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
+                                <p class="text-muted para-desc mx-auto mb-1">Post a projects to tell us about your project. We'll quickly match you with the right freelancers.</p>
                             </div>
                         </div>
                     </div>

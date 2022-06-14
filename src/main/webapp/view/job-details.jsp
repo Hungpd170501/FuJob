@@ -30,12 +30,12 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="text-center text-white">
-                                <h4 class="text-uppercase title mb-4">Job Detail</h4>
+                                <h4 class="text-uppercase title mb-4">Projects Detail</h4>
                                 <ul class="page-next d-inline-block mb-0">
                                     <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
-                                    <li><a href="#" class="text-uppercase font-weight-bold">Jobs</a></li> 
+                                    <li><a href="#" class="text-uppercase font-weight-bold">Projects</a></li> 
                                     <li>
-                                        <span class="text-uppercase text-white font-weight-bold">Job Detail</span> 
+                                        <span class="text-uppercase text-white font-weight-bold">Projects Detail</span> 
                                     </li> 
                                 </ul>
                             </div>
@@ -77,7 +77,7 @@
 
                         <div class="row">
                             <div class="col-lg-12">
-                                <h5 class="text-dark mt-4">Job Description :</h5>
+                                <h5 class="text-dark mt-4">Projects Description :</h5>
                             </div>
                         </div>
 
@@ -149,13 +149,13 @@
                                 if (checkDuplicateUserOrderJob) {
                         %>
                         <div class="job-detail border rounded mt-4">
-                            <button type="button" disabled class="btn btn-secondary btn-block">You Applied This Job</button>
+                            <button type="button" disabled class="btn btn-secondary btn-block">You Applied This Project</button>
                         </div>
                         <%
                         } else {
                         %>        
                         <div class="job-detail border rounded mt-4">
-                            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Aplly For Job</a>
+                            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Aplly For Projects</a>
                         </div>
                         <%
                                 }

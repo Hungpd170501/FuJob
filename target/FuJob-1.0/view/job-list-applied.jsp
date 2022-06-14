@@ -23,12 +23,12 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="text-center text-white">
-                                <h4 class="text-uppercase title mb-4">Job List view</h4>
+                                <h4 class="text-uppercase title mb-4">Projects List view</h4>
                                 <ul class="page-next d-inline-block mb-0">
                                     <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
-                                    <li><a href="#" class="text-uppercase font-weight-bold">Jobs</a></li> 
+                                    <li><a href="#" class="text-uppercase font-weight-bold">Projects</a></li> 
                                     <li>
-                                        <span class="text-uppercase text-white font-weight-bold">Jobs Applied</span> 
+                                        <span class="text-uppercase text-white font-weight-bold">Your Projects Applied</span> 
                                     </li>
                                 </ul>
                             </div>
@@ -50,7 +50,7 @@
                                     <div class="col-lg-3 col-md-6">
                                         <div class="registration-form-box">
                                             <i class="fa fa-briefcase"></i>
-                                            <input type="text" name="searchtitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Job title...">
+                                            <input type="text" name="searchtitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-6">
@@ -102,7 +102,7 @@
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <div class="section-title text-center mb-4 pb-2">
-                            <h4 class="title title-line pb-5">All Job You've Applied</h4>
+                            <h4 class="title title-line pb-5">All Projects You've Applied</h4>
                         </div>
                     </div>
                 </div>

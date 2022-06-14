@@ -19,8 +19,8 @@
                 <form method="POST" action="/FuJob/MainController">
                     <div class="modal-body">
                         <div class="form-group text-dark">
-                            <label>Deal Salary</label>
-                            <input type="text" class="form-control" name="salaryDeal" placeholder="Enter salary you want to deal">
+                            <label>Deal Price</label>
+                            <input type="text" class="form-control" name="salaryDeal" placeholder="Enter price you want to deal">
                         </div>
                         <div class="form-group text-dark">
                             <label>Message</label>

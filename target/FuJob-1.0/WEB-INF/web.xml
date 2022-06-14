@@ -39,7 +39,7 @@
     </context-param>
     <context-param>
         <param-name>pass</param-name>
-        <param-value>FuJobSe1621</param-value>
+        <param-value>FuJobSe1621z</param-value>
     </context-param>
     <servlet-mapping>
         <servlet-name>RecoveryPasswordHandler</servlet-name>

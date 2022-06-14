@@ -69,7 +69,7 @@ public class PostJobController extends HttpServlet {
             boolean check = jobdao.createJob(job);
             if (check) {
                 int jobID = jobdao.getJobIDJustCreate(userID);
-                request.setAttribute("MESSAGE", "Create Job Successfully!");
+                request.setAttribute("MESSAGE", "Create Project Successfully!");
                 url = SUCCESS + jobID;
             }
 
