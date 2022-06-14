@@ -1,5 +1,6 @@
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\utils\GoogleRacaptcha.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dto\CompanyInfo.java
+C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dao\StudentSkillDAO.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dto\User.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\controller\PostJobController.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dao\UserDAO.java
@@ -28,6 +29,7 @@ C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\controller\LogoutContr
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\controller\ListCandidateOfJob.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dto\Job.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\controller\RecoveryPasswordController.java
+C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\dao\SkillRequireDAO.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\controller\EmailVerifyHandler.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\controller\ChooseCompanyController.java
 C:\Users\DELL\OneDrive\Desktop\FuJob\src\main\java\se1621\controller\ViewAllJobOrderController.java

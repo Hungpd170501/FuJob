@@ -11,13 +11,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import se1621.dao.CategoryDAO;
 import se1621.dao.CompanyInfoDAO;
 import se1621.dao.JobDAO;
+import se1621.dao.SkillRequireDAO;
 import se1621.dao.UserDAO;
 import se1621.dto.Category;
 import se1621.dto.CompanyInfo;
 import se1621.dto.Job;
+import se1621.dto.SkillRequire;
 import se1621.dto.User;
 
 /**
@@ -41,6 +44,8 @@ public class SearchJobIDController extends HttpServlet {
             CompanyInfoDAO companyDAO = new CompanyInfoDAO();
             CategoryDAO categoryDAO = new CategoryDAO();
             UserDAO userDAO = new UserDAO();
+            SkillRequireDAO skillRequireDAO = new SkillRequireDAO();
+            List<SkillRequire> listSkillRequire = skillRequireDAO.getSkillRequire(jobIDSearch);
             if (job != null) {
                 int userID = job.getUserID();
                 User user = userDAO.getUser(userID);
@@ -49,6 +54,7 @@ public class SearchJobIDController extends HttpServlet {
                 Category category = categoryDAO.getCategory(job.getCategory().getCategoryID());
                 job.setCategory(category);
                 request.setAttribute("JOB", job);
+                request.setAttribute("LIST_SKILLREQUIRE", listSkillRequire);
                 url = SUCCESS;
             }
         } catch (Exception e) {

@@ -3,6 +3,8 @@
     Created on : Jun 1, 2022, 7:52:12 AM
     Author     : HNGB
 --%>
+<%@page import="java.util.List"%>
+<%@page import="se1621.dto.SkillRequire"%>
 <%@page import="se1621.dao.JobOrderDAO"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="se1621.dto.User"%>
@@ -67,10 +69,20 @@
                             <div class="col-lg-8">
                                 <div class="job-detail-com-desc overflow-hidden d-block">
                                     <h4 class="mb-2"><a href="#" class="text-dark"></a>JOB: <%= job.getJobTitle()%></h4>
-                                    <p class="text-muted mb-0"><i class="mdi mdi-bank text-muted"></i> <%= job.getCompany().getCompanyName()%></p>
-                                    <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= job.getAddress()%></p>
+                                    <p class="text-muted mb-3"><i class="mdi mdi-bank text-muted"></i> <%= job.getCompany().getCompanyName()%></p>
+                                    <p class="text-muted mb-3"><i class="mdi mdi-map-marker mr-2"></i><%= job.getAddress()%></p>
                                     <p class="text-muted mb-3">Estimated Completion Time: <%= job.getCompletionTime()%></p>
-                                    <p class="text-muted mb-0">Skill: </p>
+                                    <p class="text-muted mb-3">Skill: 
+                                        <%
+                                            List<SkillRequire> listStudentSkill = (List<SkillRequire>) request.getAttribute("LIST_SKILLREQUIRE");
+                                            for(int i = 0; i< listStudentSkill.size()-1; i++){ 
+                                        %>
+                                        <%= listStudentSkill.get(i).getSkill().getSkillName()%>,
+                                        <%
+                                            }
+                                        %>
+                                        <%= listStudentSkill.get(listStudentSkill.size()-1).getSkill().getSkillName() %>
+                                    </p>
                                 </div>
                             </div>   
                         </div>

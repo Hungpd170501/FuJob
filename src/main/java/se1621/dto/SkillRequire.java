@@ -23,6 +23,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class SkillRequire {
+    int skillRequireID;
     int jobID;
-    int skillID;
+    Skill skill;
 }
