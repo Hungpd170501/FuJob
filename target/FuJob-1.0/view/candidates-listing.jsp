@@ -46,8 +46,8 @@
                     <div class="row justify-content-center" style="margin-top: 70px">
                         <div class="col-12">
                             <div class="section-title text-center mb-4 pb-2">
-                                <h4 class="title title-line pb-5">All Candidates Apply This Job</h4>
-                                <!--                                <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>-->
+                                <h4 class="title title-line pb-5">All Candidates Apply This Projects</h4>
+<!--                                <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>-->
                             </div>
                         </div>
                     </div>

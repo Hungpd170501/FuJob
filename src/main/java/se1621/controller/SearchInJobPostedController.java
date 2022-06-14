@@ -64,7 +64,7 @@ public class SearchInJobPostedController extends HttpServlet {
                 url = SUCCESS;
             } else {
                 request.setAttribute("LIST_JOBPOST", listJob);
-                request.setAttribute("MESSAGE", "NO JOB TO DISPLAY");
+                request.setAttribute("MESSAGE", "NO PROJECT TO DISPLAY");
             }
         } catch (Exception e) {
             log("Error at Search JobPostedController" + toString());

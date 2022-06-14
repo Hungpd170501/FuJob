@@ -24,8 +24,8 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-12">
                                 <div class="title-heading text-center text-white">
-                                    <h6 class="small-title text-uppercase text-light mb-3">Find jobs, create trackable resumes and enrich your applications.</h6>
-                                    <h1 class="heading font-weight-bold mb-4">The Easiest Way to Get Your New Job</h1>
+                                    <h6 class="small-title text-uppercase text-light mb-3">Create trackable resumes and enrich your applications.</h6>
+                                    <h1 class="heading font-weight-bold mb-4">Find the perfect freelance services for your business</h1>
                                 </div>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                                                 <div class="col-lg-3 col-md-6">
                                                     <div class="registration-form-box">
                                                         <i class="fa fa-briefcase"></i>
-                                                        <input type="text" name="searchtitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Job title...">
+                                                        <input type="text" name="searchtitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
@@ -95,7 +95,7 @@
                     <div class="col-12">
                         <div class="section-title text-center mb-4 pb-2">
                             <h4 class="title title-line pb-5">Popular Category</h4>
-                            <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
+                            <p class="text-muted para-desc mx-auto mb-1">Tell us about your project. We'll quickly match you with the right freelancers.</p>
                         </div>
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                     <div class="col-12">
                         <div class="section-title text-center mb-4 pb-2">
                             <h4 class="title title-line pb-5">How It Work</h4>
-                            <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
+                            <p class="text-muted para-desc mx-auto mb-1">Tell us about your project. We'll quickly match you with the right freelancers.</p>
                         </div>
                     </div>
                 </div>
@@ -156,8 +156,8 @@
                                 <img src="${pageContext.request.contextPath}/asset/images/how-it-work/img-2.png" alt="" class="mx-auto d-block" height="50">
                             </div>
                             <div>
-                                <h5>Search your job</h5>
-                                <p class="text-muted">You can easily search for a job for yourself by going to the job list and applying for the job you want.</p>
+                                <h5>Search your project</h5>
+                                <p class="text-muted">You can easily search for a project for yourself by going to the project list and applying for the project you want.</p>
                             </div>
                         </div>
                     </div>
@@ -167,8 +167,8 @@
                                 <img src="${pageContext.request.contextPath}/asset/images/how-it-work/img-3.png" alt="" class="mx-auto d-block" height="50">
                             </div>
                             <div>
-                                <h5>Apply for job</h5>
-                                <p class="text-muted">After choosing the job you like and submitting your application, you will be considered by the job posting company.</p>
+                                <h5>Apply for project</h5>
+                                <p class="text-muted">Choosing the project you like and submitting your application, you will be considered by the project posting.</p>
                             </div>
                         </div>
                     </div>
@@ -213,7 +213,7 @@
                             </div>
                             <div class="counter-content overflow-hidden">
                                 <h1 class="counter-value text-white mb-1" data-count="120">10</h1>
-                                <p class="counter-name text-white text-uppercase mb-0">Job Posted</p>
+                                <p class="counter-name text-white text-uppercase mb-0">Project Posted</p>
                             </div>
                         </div>
                     </div>
@@ -241,7 +241,7 @@
                     <div class="col-12">
                         <div class="section-title text-center mb-4 pb-2">
                             <h4 class="title title-line pb-5">Our Success Stories</h4>
-                            <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
+                            <p class="text-muted para-desc mx-auto mb-1">Post a project to tell us about your project. We'll quickly match you with the right freelancers.</p>
                         </div>
                     </div>
                 </div>
