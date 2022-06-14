@@ -27,7 +27,7 @@ public class LoginController extends HttpServlet {
     private static final String US = "US";
     private static final String HR = "HR";
     private static final String USER_PAGE = "/view/index.jsp";
-    private static final String ADMIN_PAGE = "#";
+    private static final String ADMIN_PAGE = "/AdminIndexController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
