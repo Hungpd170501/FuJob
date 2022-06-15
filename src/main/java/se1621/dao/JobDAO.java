@@ -37,6 +37,7 @@ public class JobDAO {
 "left join tblCompany com on u.companyID = com.companyID) " +
 "WHERE j.jobStatus = 1 and j.userID = ?";
     
+    private static final String DELETEJOBPOST = "UPDATE tblJob SET jobStatus=0 WHERE jobID=?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -385,4 +386,28 @@ public class JobDAO {
         }
         return null;
     }
+    
+    public boolean deleteJobPost(int jobPostID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(DELETEJOBPOST);
+                preStm.setInt(1, jobPostID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    
 }

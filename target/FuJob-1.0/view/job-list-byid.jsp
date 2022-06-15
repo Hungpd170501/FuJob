@@ -122,7 +122,7 @@
 
                         <div class="row"> 
                             <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_JOBPOST");
-                                 if (listJob.isEmpty()) {
+                                if (listJob.isEmpty()) {
                                     String message = (String) request.getAttribute("MESSAGE");
                             %>
                             <div class="col-lg-12 text-warning text-center">
@@ -140,7 +140,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-lg-2">
                                                 <div class="company-logo-img">
-                                                    <img src="<%= job.getCategory().getImg() %>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:150px;height:150px">
+                                                    <img src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:150px;height:150px">
                                                 </div>
                                             </div>
                                             <div class="col-lg-7 col-md-9">
@@ -148,7 +148,7 @@
 
                                                     <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h6>
 
-                                                    <p class="text-muted mb-0"><i class="fa fa-archive mr-2"></i><%= job.getExperienceNeeded() %></p>
+                                                    <p class="text-muted mb-0"><i class="fa fa-archive mr-2"></i><%= job.getExperienceNeeded()%></p>
                                                     <p class="text-muted mb-0"><i class="fa fa-list-alt mr-2"></i><%= job.getCategory().getCategoryName()%></p>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
@@ -156,7 +156,7 @@
                                                         </li>
 
                                                         <li class="list-inline-item">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i><%= job.getLastDateUpdate() %></p>
+                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i><%= job.getLastDateUpdate()%></p>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -169,10 +169,14 @@
                                                     </div>
 
                                                     <div class="mt-3">
-                                                        <a href="#" class="btn btn-sm btn-primary">Delete</a>
+
+                                                        <button onclick="getJobPostID(<%= job.getJobID()%>, <%= job.getUserID()%>)" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation">
+                                                            Cancel
+                                                        </button>
+
                                                     </div>
                                                     <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchCandidateOfJob&JobIDCandidate=<%= job.getJobID() %>" class="btn btn-sm btn-primary">List candidate</a>
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchCandidateOfJob&JobIDCandidate=<%= job.getJobID()%>" class="btn btn-sm btn-primary">List candidate</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -180,6 +184,22 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal fade" id="confirmCancellation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-primary" id="exampleModalLongTitle">Do you want to cancel your application?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                            <a id="yesOption" href=""><button type="button" class="btn btn-primary">Yes</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  
                             <%
 
                                         }
@@ -188,9 +208,8 @@
                                 }
 
                             %>
-                            
-                            <%
-                                    if (listJob.size() > 10) {
+
+                            <%                                if (listJob.size() > 10) {
                             %>
                             <div class="smj col-12 text-center mt-4 pt-2">
                                 <a class="btn btn-primary-outline">Show more</a>
@@ -205,82 +224,18 @@
         </section>
         <!-- JOB LIST START -->
 
-        <!-- footer start -->
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-12 mb-0 mb-md-4 pb-0 pb-md-2">
-                        <a href="javascript:void(0)"><img src="images/logo-light.png" height="20" alt=""></a>
-                        <p class="mt-4">At vero eos et accusamus et iusto odio dignissim os ducimus qui blanditiis praesentium</p>
-                        <ul class="social-icon social list-inline mb-0">
-                            <li class="list-inline-item"><a href="#" class="rounded"><i class="mdi mdi-facebook"></i></a></li>
-                            <li class="list-inline-item"><a href="#" class="rounded"><i class="mdi mdi-twitter"></i></a></li>
-                            <li class="list-inline-item"><a href="#" class="rounded"><i class="mdi mdi-instagram"></i></a></li>
-                            <li class="list-inline-item"><a href="#" class="rounded"><i class="mdi mdi-google"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                        <p class="text-white mb-4 footer-list-title">Company</p>
-                        <ul class="list-unstyled footer-list">
-                            <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right"></i> About Us</a></li>
-                            <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Media & Press</a></li>
-                            <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Career</a></li>
-                            <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Blog</a></li>
-                            <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Pricing</a></li>
-                            <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Marketing</a></li>
-                            <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right"></i> CEOs </a></li>
-                            <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Agencies</a></li>
-                            <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Our Apps</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                        <p class="text-white mb-4 footer-list-title">Resources</p>
-                        <ul class="list-unstyled footer-list">
-                            <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Support</a></li>
-                            <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Privacy Policy</a></li>
-                            <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Terms</a></li>
-                            <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Accounting </a></li>
-                            <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Billing</a></li>
-                            <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right"></i> F.A.Q.</a></li>
-                        </ul>
-                    </div>
+        <jsp:include page="./include/footer.jsp"></jsp:include>
 
-                    <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                        <p class="text-white mb-4 footer-list-title f-17">Business Hours</p>
-                        <ul class="list-unstyled text-foot mt-4 mb-0">
-                            <li>Monday - Friday : 9:00 to 17:00</li>
-                            <li class="mt-2">Saturday : 10:00 to 15:00</li>
-                            <li class="mt-2">Sunday : Day Off (Holiday)</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- footer end -->
-        <hr>
-        <footer class="footer footer-bar">
-            <div class="container text-center">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <div class="">
-                            <p class="mb-0">© 2019 -2020 Jobya. Design with <i class="mdi mdi-heart text-danger"></i> by Themesdesign.</p>
-                        </div>
-                    </div>
-                </div>
-            </div><!--end container-->
-        </footer><!--end footer-->
-        <!-- Footer End -->
-
-        <!-- Back to top -->
-        <!-- Back to top -->
+            <!-- Back to top -->
+            <!-- Back to top -->
             <a href="#" class="back-to-top rounded text-center" id="back-to-top" style="display: inline"> 
                 <i class="mdi mdi-chevron-up d-block"></i> 
             </a>
             <!-- Back to top -->
-        <!-- Back to top -->
+            <!-- Back to top -->
 
-        <!-- javascript -->
-        <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
+            <!-- javascript -->
+            <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/bootstrap.bundle.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/jquery.easing.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/plugins.js"></script>
@@ -294,15 +249,20 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
+        <script>
+                                                            function getJobPostID(id, userID) {
+                                                                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=DeleteJobPost&jobPostID=' + id + '&userID=${sessionScope.LOGIN_USER.userID}');
+                                                            }
+        </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-            $(".job-display").slice(0, 10).show();
-            $(".smj").on("click", function () {
-                $(".job-display:hidden").slice(0, 5).slideDown();
-                if ($(".job-display:hidden").length == 0) {
-                    $(".smj").fadeOut('slow');
-                }
-            });
+                                                            $(".job-display").slice(0, 10).show();
+                                                            $(".smj").on("click", function () {
+                                                                $(".job-display:hidden").slice(0, 5).slideDown();
+                                                                if ($(".job-display:hidden").length == 0) {
+                                                                    $(".smj").fadeOut('slow');
+                                                                }
+                                                            });
         </script>
     </body>
 </html>

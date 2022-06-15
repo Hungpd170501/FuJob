@@ -46,7 +46,7 @@
                         <div class="col-12">
                             <div class="section-title text-center mb-4 pb-2">
                                 <h4 class="title title-line pb-5">All Candidates Apply This Job</h4>
-<!--                                <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>-->
+                                <!--                                <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>-->
                             </div>
                         </div>
                     </div>
@@ -105,6 +105,12 @@
                                                 <div class="candidates-listing-btn mt-4">
                                                     <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&searchResumeID=<%= resume.getUserID()%>" class="btn btn-primary-outline btn-sm">View Profile</a>
                                                 </div>
+                                                <div class="mt-3">
+
+                                                    <button onclick="getJobPostID()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation">
+                                                        Deny
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -153,13 +159,13 @@
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-            $(".job-display").slice(0, 10).show();
-            $(".smj").on("click", function () {
-                $(".job-display:hidden").slice(0, 5).slideDown();
-                if ($(".job-display:hidden").length == 0) {
-                    $(".smj").fadeOut('slow');
-                }
-            });
+                                                        $(".job-display").slice(0, 10).show();
+                                                        $(".smj").on("click", function () {
+                                                            $(".job-display:hidden").slice(0, 5).slideDown();
+                                                            if ($(".job-display:hidden").length == 0) {
+                                                                $(".smj").fadeOut('slow');
+                                                            }
+                                                        });
         </script>
     </body>
 </html>
