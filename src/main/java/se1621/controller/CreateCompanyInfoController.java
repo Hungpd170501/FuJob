@@ -55,7 +55,7 @@ public class CreateCompanyInfoController extends HttpServlet {
 
             if (checkDuplicate) {
                 checkValidation = false;
-                comError.setCompanyNameError("Company Name already exists!");
+                comError.setCompanyNameError("Company name already exists!");
             }
             if (checkValidation) {
                 CompanyInfo company = CompanyInfo.builder()
@@ -91,8 +91,10 @@ public class CreateCompanyInfoController extends HttpServlet {
                             .build();
                     UserDAO udao = new UserDAO();
                     boolean check = udao.updateCompanyID(user, companyID);
+                    session.setAttribute("LOGIN_USER",user);
                     if (check) {
                         request.setAttribute("MESSAGE", "Create Company Successfully!!");
+                        
                         url = SUCCESS + companyID;
                     }
                 }

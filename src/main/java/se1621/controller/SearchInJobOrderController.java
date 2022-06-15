@@ -45,7 +45,7 @@ public class SearchInJobOrderController extends HttpServlet {
                 url = SUCCESS;
             } else {
                 request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
-                request.setAttribute("MESSAGE", "NO JOB TO DISPLAY");
+                request.setAttribute("MESSAGE", "NO PROJECT TO DISPLAY");
             }
         } catch (Exception e) {
             log("Error at Search JobOrderController" + toString());

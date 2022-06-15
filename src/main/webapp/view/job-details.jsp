@@ -3,6 +3,8 @@
     Created on : Jun 1, 2022, 7:52:12 AM
     Author     : HNGB
 --%>
+<%@page import="java.util.List"%>
+<%@page import="se1621.dto.SkillRequire"%>
 <%@page import="se1621.dao.JobOrderDAO"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="se1621.dto.User"%>
@@ -30,12 +32,12 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="text-center text-white">
-                                <h4 class="text-uppercase title mb-4">Job Detail</h4>
+                                <h4 class="text-uppercase title mb-4">Projects Detail</h4>
                                 <ul class="page-next d-inline-block mb-0">
                                     <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
-                                    <li><a href="#" class="text-uppercase font-weight-bold">Jobs</a></li> 
+                                    <li><a href="#" class="text-uppercase font-weight-bold">Projects</a></li> 
                                     <li>
-                                        <span class="text-uppercase text-white font-weight-bold">Job Detail</span> 
+                                        <span class="text-uppercase text-white font-weight-bold">Projects Detail</span> 
                                     </li> 
                                 </ul>
                             </div>
@@ -54,38 +56,53 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h4 class="text-dark mb-3"><%= job.getCategory().getCategoryName()%></h4>
+                        <h2 class="text-dark mb-3" style="font-weight: 700"><%= job.getCategory().getCategoryName()%></h2>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-8 col-md-7">
                         <div class="job-detail border rounded p-4 row">
-                            <div class="col-lg-4">
-                                <img src="<%= job.getCategory().getImg() %>" alt="" class="img-fluid img-thumbnail float-left mr-md-3 mr-2 mx-auto d-block" style="width:500px;height:250px">
+                            <div class="col-lg-5">
+                                <img src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail float-left mr-md-3 mr-2 mx-auto d-block" style="width:800px;height:250px">
                             </div>
-                            <div class="col-lg-8">
+                            <div class="col-lg-7">
                                 <div class="job-detail-com-desc overflow-hidden d-block">
-                                    <h4 class="mb-2"><a href="#" class="text-dark"></a>JOB: <%= job.getJobTitle()%></h4>
-                                    <p class="text-muted mb-0"><i class="mdi mdi-bank text-muted"></i> <%= job.getCompany().getCompanyName()%></p>
-                                    <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= job.getAddress()%></p>
-                                    <p class="text-muted mb-3">Estimated Completion Time: <%= job.getCompletionTime()%></p>
-                                    <p class="text-muted mb-0">Skill: </p>
+                                    <h3 class="mb-2" style="font-weight: 700"><a href="#" class="text-dark"></a><%= job.getJobTitle()%></h3>
+                                    <p class=" mb-3"><h7  style="font-weight: 700"> Time work: </h7><%= job.getCompletionTime()%></p>
+                                    <p class=" mb-3"><h7 style="font-weight: 700">Skill: </h7> 
+                                        <%
+                                            List<SkillRequire> listStudentSkill = (List<SkillRequire>) request.getAttribute("LIST_SKILLREQUIRE");
+                                            for (int i = 0; i < listStudentSkill.size() - 1; i++) {
+                                        %>
+                                        <%= listStudentSkill.get(i).getSkill().getSkillName()%>,
+                                    <%
+                                        }
+                                    %>
+                                    <%= listStudentSkill.get(listStudentSkill.size() - 1).getSkill().getSkillName()%>
+                                    </p>
+                                    <p class=" mb-3"><h7 style="font-weight: 700"> Experience: </h7><%= job.getExperienceNeeded()%></p>
+                                    <p class=" mb-3"><h7 style="font-weight: 700"> Remuneration: </h7><%= job.getSalary()%></p>
+                                    <p class=" mb-3"><h7 style="font-weight: 700"> Deadline: </h7><%= job.getDeadline()%></p>
                                 </div>
-                            </div>   
+                            </div> 
                         </div>
 
-                        <div class="row">
+                        <!--                        <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <h5 class="text-dark mt-4" style="font-weight: 700">Projects Description </h5>
+                                                    </div>
+                                                </div>-->
+                        <div class="row" style="margin-top: 10px">
                             <div class="col-lg-12">
-                                <h5 class="text-dark mt-4">Job Description :</h5>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="job-detail border rounded mt-2 p-4">
-                                    <div class="job-detail-desc">
-                                        <p class="text-muted mb-3"><%= job.getDescription()%></p>
+                                <div class="job-detail border rounded mt-2 p-4"> 
+                                    <div>
+                                        <h5 class="text-dark"  style="font-weight: 700">Projects Description </h5>
+                                    </div>
+                                    <div class="job-detail-location pt-4 border-top">
+                                        <div class="job-detail-desc">
+                                            <p class="mb-3"><%= job.getDescription()%></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -95,51 +112,26 @@
 
                     <div class="col-lg-4 col-md-5 mt-4 mt-sm-0">
                         <div class="job-detail border rounded p-4">
-                            <h5 class="text-muted text-center pb-2"><i class="mdi mdi-map-marker mr-2"></i>Location</h5>
-
+                            <h5 class="text-center pb-2" style="font-weight: 700">Contact me</h5>
                             <div class="job-detail-location pt-4 border-top">
                                 <div class="job-details-desc-item">
                                     <div class="float-left mr-2">
-                                        <i class="mdi mdi-bank text-muted"></i>
+                                        <i class="mdi mdi-map-marker" style="color: red" ></i>
                                     </div>
-                                    <p class="text-muted mb-2">:  ${requestScope.JOB.company.companyName}</p>
+                                    <p class="mb-2"><%= job.getAddress()%></p>
                                 </div>
-
                                 <div class="job-details-desc-item">
                                     <div class="float-left mr-2">
-                                        <i class="mdi mdi-email text-muted"></i>
+                                        <i class="mdi mdi-email" style="color: #008fd8"></i>
                                     </div>
-                                    <p class="text-muted mb-2">: <%= job.getEmail()%></p>
+                                    <p class="mb-2"><%= job.getEmail()%></p>
                                 </div>
-
                                 <div class="job-details-desc-item">
                                     <div class="float-left mr-2">
-                                        <i class="mdi mdi-web text-muted"></i>
+                                        <i class="mdi mdi-cellphone-iphone" style="color: #079992"></i>
                                     </div>
-                                    <p class="text-muted mb-2">:  ${requestScope.JOB.company.website}</p>
+                                    <p class="mb-2"><%= job.getPhone()%></p>
                                 </div>
-
-                                <div class="job-details-desc-item">
-                                    <div class="float-left mr-2">
-                                        <i class="mdi mdi-cellphone-iphone text-muted"></i>
-                                    </div>
-                                    <p class="text-muted mb-2">: <%= job.getPhone()%></p>
-                                </div>
-
-                                <div class="job-details-desc-item">
-                                    <div class="float-left mr-2">
-                                        <i class="mdi mdi-currency-usd text-muted"></i>
-                                    </div>
-                                    <p class="text-muted mb-2">: <%= job.getSalary()%></p>
-                                </div>
-
-                                <div class="job-details-desc-item">
-                                    <div class="float-left mr-2">
-                                        <i class="mdi mdi-security text-muted"></i>
-                                    </div>
-                                    <p class="text-muted mb-2">: <%= job.getExperienceNeeded()%></p>
-                                </div>
-
                             </div>
                         </div>
                         <%
@@ -149,13 +141,13 @@
                                 if (checkDuplicateUserOrderJob) {
                         %>
                         <div class="job-detail border rounded mt-4">
-                            <button type="button" disabled class="btn btn-secondary btn-block">You Applied This Job</button>
+                            <button type="button" disabled class="btn btn-secondary btn-block">You Applied This Project</button>
                         </div>
                         <%
                         } else {
                         %>        
                         <div class="job-detail border rounded mt-4">
-                            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Aplly For Job</a>
+                            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Aplly For Projects</a>
                         </div>
                         <%
                                 }

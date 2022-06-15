@@ -41,6 +41,7 @@ se1621\dto\User.class
 se1621\dao\v2\BaseDAOImpl.class
 se1621\controller\SearchInJobOrderController.class
 se1621\dao\ResumeDAO.class
+se1621\dao\StudentSkillDAO.class
 se1621\dto\UserGoogle.class
 se1621\dao\UserDAO.class
 se1621\dao\v2\BaseDAO.class
@@ -57,6 +58,7 @@ se1621\controller\ListCandidateOfJob.class
 se1621\controller\admin\UpdateJobCategoryController.class
 se1621\controller\LoginGoogleHandler.class
 se1621\dto\Skill.class
+se1621\dao\SkillRequireDAO.class
 se1621\dao\JobOrderDAO.class
 se1621\controller\RecoveryPasswordHandler.class
 se1621\controller\EmailVerifyHandler.class

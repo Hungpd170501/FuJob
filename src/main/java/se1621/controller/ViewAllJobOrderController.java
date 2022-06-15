@@ -39,7 +39,7 @@ public class ViewAllJobOrderController extends HttpServlet {
                 url = SUCCESS;
             }else{
                 request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
-                request.setAttribute("MESSAGE", "YOU HAVEN'T APPLIED FOR ANY JOB");
+                request.setAttribute("MESSAGE", "YOU HAVEN'T APPLIED FOR ANY PROJECT");
             }
         } catch (Exception e) {
             log("Error at View all job Controller" + e.toString());

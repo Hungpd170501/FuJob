@@ -15,9 +15,11 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import se1621.dao.JobDAO;
+import se1621.dao.SkillRequireDAO;
 import se1621.dto.Category;
 import se1621.dto.Job;
 import se1621.dto.Skill;
+import se1621.dto.SkillRequire;
 import se1621.dto.User;
 
 /**
@@ -66,11 +68,25 @@ public class PostJobController extends HttpServlet {
                     .description(description)
                     .build();
             JobDAO jobdao = new JobDAO();
-            boolean check = jobdao.createJob(job);
-            if (check) {
+            boolean checkCreateJob = jobdao.createJob(job);
+            if (checkCreateJob) {
                 int jobID = jobdao.getJobIDJustCreate(userID);
-                request.setAttribute("MESSAGE", "Create Job Successfully!");
-                url = SUCCESS + jobID;
+                SkillRequireDAO skillRequireDAO = new SkillRequireDAO();
+                List<SkillRequire> listSkillRequire = new ArrayList<>();
+                for (Integer skill : skillSet) {
+                    SkillRequire skillRequire = SkillRequire.builder().jobID(jobID).skill(Skill.builder().skillID(skill).build()).build();
+                    listSkillRequire.add(skillRequire);
+                }
+                List<Boolean> listCheckCreateSkillRequire = new  ArrayList<>();
+                for (SkillRequire skillRequire : listSkillRequire) {
+                    boolean checkCreateSkillRequire = skillRequireDAO.createSkillRequire(skillRequire);
+                    if(checkCreateSkillRequire)
+                        listCheckCreateSkillRequire.add(checkCreateSkillRequire);
+                }
+                if(!listCheckCreateSkillRequire.contains(false)){
+                    request.setAttribute("MESSAGE", "Create Job Successfully!");
+                    url = SUCCESS + jobID;
+                }
             }
 
         } catch (Exception e) {

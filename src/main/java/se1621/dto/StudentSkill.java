@@ -23,5 +23,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class StudentSkill {
-    Map<Resume, Skill> studentSkill;
+    private int studentSkillID;
+    private int studentID;
+//    private int skillID;
+    Skill skill;
 }
