@@ -33,8 +33,10 @@ D:\SWP\Final\FuJob\src\main\java\se1621\dto\SkillRequire.java
 D:\SWP\Final\FuJob\src\main\java\se1621\utils\GoogleRacaptcha.java
 D:\SWP\Final\FuJob\src\main\java\se1621\controller\PostJobController.java
 D:\SWP\Final\FuJob\src\main\java\se1621\utils\DBUtils.java
+D:\SWP\Final\FuJob\src\main\java\se1621\controller\SearchInJobOrderController.java
 D:\SWP\Final\FuJob\src\main\java\se1621\dao\v2\CategoryDAO.java
 D:\SWP\Final\FuJob\src\main\java\se1621\utils\HibernateDriver.java
+D:\SWP\Final\FuJob\src\main\java\se1621\controller\SearchInJobPostedController.java
 D:\SWP\Final\FuJob\src\main\java\se1621\controller\CreateCompanyInfoController.java
 D:\SWP\Final\FuJob\src\main\java\se1621\controller\MainController.java
 D:\SWP\Final\FuJob\src\main\java\se1621\dao\SkillDAO.java

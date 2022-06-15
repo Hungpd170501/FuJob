@@ -20,7 +20,6 @@ se1621\utils\JwtTokenUtils.class
 se1621\dto\StudentSkill.class
 se1621\controller\PostJobController.class
 se1621\dto\SkillRequire.class
-se1621\model\CategoryEntity$CategoryEntityBuilder.class
 se1621\utils\EmailUtils$1.class
 se1621\controller\SignUpController.class
 se1621\dto\Skill$SkillBuilder.class
@@ -40,6 +39,7 @@ se1621\controller\ChooseCompanyController.class
 se1621\dto\Category$CategoryBuilder.class
 se1621\dto\User.class
 se1621\dao\v2\BaseDAOImpl.class
+se1621\controller\SearchInJobOrderController.class
 se1621\dao\ResumeDAO.class
 se1621\dto\UserGoogle.class
 se1621\dao\UserDAO.class
@@ -47,6 +47,7 @@ se1621\dao\v2\BaseDAO.class
 se1621\controller\ViewAllJobController.class
 se1621\controller\ChangePasswordController.class
 se1621\service\EmailService.class
+se1621\controller\SearchInJobPostedController.class
 se1621\utils\HibernateUtil.class
 se1621\controller\RecoveryPasswordController.class
 se1621\dto\StudentSkill$StudentSkillBuilder.class

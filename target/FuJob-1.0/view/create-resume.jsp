@@ -24,7 +24,7 @@
                                     <li><a href="#" class="text-uppercase font-weight-bold">Pages</a></li> 
                                     <li><a href="#" class="text-uppercase font-weight-bold">Candidates</a></li> 
                                     <li>
-                                        <span class="text-uppercase text-white font-weight-bold">Creat Resume</span> 
+                                        <span class="text-uppercase text-white font-weight-bold">Create Resume</span> 
                                     </li> 
                                 </ul>
                             </div>

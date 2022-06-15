@@ -83,7 +83,8 @@
                                         <div class="registration-form-box">
                                             <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Submit">
                                             <!-- name = action  -->
-                                            <input type="hidden" name ="action" value="Search_title_exper_cate">
+                                            <input type="hidden" name ="action" value="SearchJobOrder">
+                                            <input type="hidden" name ="studentID" value="${sessionScope.LOGIN_USER.userID}">
                                         </div>
                                     </div>
                                 </div>
@@ -120,17 +121,25 @@
 
                         <div class="row"> 
                             <% List<JobOrder> listJobOrder = (List<JobOrder>) request.getAttribute("LIST_ALLJOBORDER");
+                                 if (listJobOrder.isEmpty()) {
+                                    String message = (String) request.getAttribute("MESSAGE");
+                            %>
+                            <div class="col-lg-12 text-warning text-center">
+                                <h3> <%=message%> </h3>
+                            </div>
+                            <%
+                                }
                                 if (listJobOrder != null) {
                                     if (listJobOrder.size() > 0) {
                                         for (JobOrder jobOrder : listJobOrder) {
                             %>
-                            <div class="job-display col-lg-12 mt-4 pt-2"style="display: none">
+                            <div class="job-display col-lg-12 mt-4 pt-2" style="display: none">
                                 <div class="job-list-box border rounded">
                                     <div class="p-3">
                                         <div class="row align-items-center">
                                             <div class="col-lg-2">
                                                 <div class="company-logo-img">
-                                                    <img src="<%= jobOrder.getJob().getCategory().getImg() %>" alt="" class="img-fluid mx-auto d-block">
+                                                    <img src="<%= jobOrder.getJob().getCategory().getImg() %>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:150px;height:150px">
                                                 </div>
                                             </div>
                                             <div class="col-lg-7 col-md-9">

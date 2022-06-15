@@ -57,6 +57,10 @@ public class MainController extends HttpServlet {
     private static final String JOB_CATEGORY = "JobCategory";
     private static final String ADMIN_INDEX = "AdminIndex";
     private static final String ADMIN_INDEX_CONTROLLER = "AdminIndexController";
+    private static final String SEARCHJOBPOSTED = "searchJobPost";
+    private static final String SEARCHJOBPOSTED_CONTROLLER = "SearchInJobPostedController";
+    private static final String SEARCHJOBORDER = "SearchJobOrder";
+    private static final String SEARCHJOBORDER_CONTROLLER = "SearchInJobOrderController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -108,7 +112,11 @@ public class MainController extends HttpServlet {
                 url = JOB_CATEGORY_CONTROLLER;
             }else if (ADMIN_INDEX.equals(action)) {
                 url = ADMIN_INDEX_CONTROLLER;
-            }else {
+            } else if (SEARCHJOBPOSTED.equals(action)) {
+                url = SEARCHJOBPOSTED_CONTROLLER;
+            } else if (SEARCHJOBORDER.equals(action)) {
+                url = SEARCHJOBORDER_CONTROLLER;
+            } else {
                 url = ERROR;
             }
         } catch (Exception e) {

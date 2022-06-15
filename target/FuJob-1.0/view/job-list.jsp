@@ -123,17 +123,25 @@
                         <!-- them display -->
                         <div class="row" > 
                             <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_ALLJOB");
+                                if (listJob.isEmpty()) {
+                                    String message = (String) request.getAttribute("MESSAGE");
+                            %>
+                            <div class="col-lg-12 text-warning text-center">
+                                <h3> <%=message%> </h3>
+                            </div>
+                            <%
+                                }
                                 if (listJob != null) {
                                     if (listJob.size() > 0) {
                                         for (Job job : listJob) {
                             %>
-                            <div class="job-display col-lg-12 mt-4 pt-2"style="display: none">
+                            <div class="job-display col-lg-12 mt-4 pt-2" style="display: none">
                                 <div class="job-list-box border rounded" >
                                     <div class="p-3">
                                         <div class="row align-items-center">
                                             <div class="col-lg-2">
                                                 <div class="company-logo-img">
-                                                    <img src="<%= job.getCategory().getImg() %>" alt="" class="img-fluid mx-auto d-block">
+                                                    <img src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:150px;height:150px">
                                                 </div>
                                             </div>
                                             <div class="col-lg-7 col-md-9">
@@ -141,7 +149,7 @@
 
                                                     <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h6>
 
-                                                    <p class="text-muted mb-0"><i class="fa fa-archive mr-2"></i><%= job.getExperienceNeeded() %></p>
+                                                    <p class="text-muted mb-0"><i class="fa fa-archive mr-2"></i><%= job.getExperienceNeeded()%></p>
                                                     <p class="text-muted mb-0"><i class="fa fa-list-alt mr-2"></i><%= job.getCategory().getCategoryName()%></p>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
@@ -149,7 +157,7 @@
                                                         </li>
 
                                                         <li class="list-inline-item mr-3">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"><%= job.getLastDateUpdate() %></i></p>
+                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"><%= job.getLastDateUpdate()%></i></p>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -175,9 +183,8 @@
                                 }
 
                             %>
-                            
-                            <%
-                                    if (listJob.size() > 10) {
+
+                            <%                                if (listJob.size() > 10) {
                             %>
                             <div class="smj col-12 text-center mt-4 pt-2">
                                 <a class="btn btn-primary-outline">Show more</a>
@@ -189,19 +196,12 @@
                     </div>
                 </div>
         </section>
-        <!-- JOB LIST START -->
-
-        <!-- footer start -->
+        <!-- Back to top -->
+        <a href="#" class="back-to-top rounded text-center" id="back-to-top" style="display: inline"> 
+            <i class="mdi mdi-chevron-up d-block"></i> 
+        </a>
+        <!-- Back to top -->
         <jsp:include page="./include/footer.jsp"></jsp:include>
-
-            <!--end footer-->
-            <!-- Footer End -->
-            <!-- Back to top -->
-            <a href="#" class="back-to-top rounded text-center" id="back-to-top"> 
-                <i class="mdi mdi-chevron-up d-block"> </i> 
-            </a>
-            <!-- Back to top -->
-
             <!-- javascript -->
             <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/bootstrap.bundle.min.js"></script>

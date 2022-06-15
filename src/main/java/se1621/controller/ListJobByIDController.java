@@ -43,6 +43,9 @@ public class ListJobByIDController extends HttpServlet {
             if (!listJob.isEmpty()) {
                 request.setAttribute("LIST_JOBPOST", listJob);
                 url = SUCCESS;
+            }else{
+                request.setAttribute("LIST_JOBPOST", listJob);
+                request.setAttribute("MESSAGE", "NO JOB TO DISPLAY");
             }
         } catch (Exception e) {
             log("Error at View all job Controller" + e.toString());

@@ -36,6 +36,9 @@ public class SearchResumeIDController extends HttpServlet {
             if (!listResume.isEmpty()) {
                 request.setAttribute("LIST_RESUME", listResume);
                 url = SUCCESS;
+            } else {
+                request.setAttribute("LIST_RESUME", listResume);
+                request.setAttribute("MESSAGE", "YOU'VE NOT CREATED YOUR RESUME");
             }
         } catch (Exception e) {
             log("Error at SearchResumeIDController: " + e.toString());

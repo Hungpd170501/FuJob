@@ -14,7 +14,7 @@
     <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
-        
+
 
         <%
             String search = request.getParameter("searchResumeID");
@@ -25,6 +25,18 @@
 
         <%
             List<Resume> listResume = (List<Resume>) request.getAttribute("LIST_RESUME");
+            if (listResume.isEmpty()) {
+                String message = (String) request.getAttribute("MESSAGE");
+        %>
+         <section class="bg-half page-next-level"> 
+             <div class="bg-overlay"></div>
+         </section>
+        <section class="section text-center" name="action">
+            <h3 class="text-warning "><%=message%></h3>
+            <a href="${pageContext.request.contextPath}/view/create-resume.jsp"><p class="h5" style="text-decoration: underline">Create Your Resume Now</p></a>
+        </section>
+        <%
+            }
             if (listResume != null) {
                 if (listResume.size() > 0) {
         %>

@@ -22,12 +22,12 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="text-center text-white">
-                                <h4 class="text-uppercase title mb-4">Job List view</h4>
+                                <h4 class="text-uppercase title mb-4">Job posted view</h4>
                                 <ul class="page-next d-inline-block mb-0">
                                     <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
                                     <li><a href="#" class="text-uppercase font-weight-bold">Jobs</a></li> 
                                     <li>
-                                        <span class="text-uppercase text-white font-weight-bold">Job Listing</span> 
+                                        <span class="text-uppercase text-white font-weight-bold">Job Posted Listing</span> 
                                     </li>
                                 </ul>
                             </div>
@@ -83,7 +83,8 @@
                                         <div class="registration-form-box">
                                             <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Submit">
                                             <!-- name = action  -->
-                                            <input type="hidden" name ="action" value="Search_title_exper_cate">
+                                            <input type="hidden" name ="action" value="searchJobPost">
+                                            <input type="hidden" name ="hrID" value="${sessionScope.LOGIN_USER.userID}">
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +102,7 @@
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <div class="section-title text-center mb-4 pb-2">
-                            <h4 class="title title-line pb-5">Available job for you</h4>
+                            <h4 class="title title-line pb-5">All Your Job Posted</h4>
                             <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
                         </div>
                     </div>
@@ -121,6 +122,14 @@
 
                         <div class="row"> 
                             <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_JOBPOST");
+                                 if (listJob.isEmpty()) {
+                                    String message = (String) request.getAttribute("MESSAGE");
+                            %>
+                            <div class="col-lg-12 text-warning text-center">
+                                <h3> <%=message%> </h3>
+                            </div>
+                            <%
+                                }
                                 if (listJob != null) {
                                     if (listJob.size() > 0) {
                                         for (Job job : listJob) {
@@ -131,7 +140,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-lg-2">
                                                 <div class="company-logo-img">
-                                                    <img src="<%= job.getCategory().getImg() %>" alt="" class="img-fluid mx-auto d-block">
+                                                    <img src="<%= job.getCategory().getImg() %>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:150px;height:150px">
                                                 </div>
                                             </div>
                                             <div class="col-lg-7 col-md-9">
@@ -263,9 +272,11 @@
         <!-- Footer End -->
 
         <!-- Back to top -->
-        <a href="#" class="back-to-top rounded text-center" id="back-to-top"> 
-            <i class="mdi mdi-chevron-up d-block"> </i> 
-        </a>
+        <!-- Back to top -->
+            <a href="#" class="back-to-top rounded text-center" id="back-to-top" style="display: inline"> 
+                <i class="mdi mdi-chevron-up d-block"></i> 
+            </a>
+            <!-- Back to top -->
         <!-- Back to top -->
 
         <!-- javascript -->

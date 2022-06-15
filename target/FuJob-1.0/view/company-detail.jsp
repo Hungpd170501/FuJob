@@ -45,6 +45,13 @@
             <section class="section">
             <%
                 CompanyInfo companyInfo = (CompanyInfo) request.getAttribute("COMPANYINFO");
+                if(companyInfo == null) {
+                    String message = (String) request.getAttribute("MESSAGE");
+            %>
+            <h3 class="text-center text-warning"><%= message %></h3>
+            <a href="${pageContext.request.contextPath}/view/create-companyinfo.jsp"><p class="h5 text-center" style="text-decoration: underline">Create Your Company Information Now</p></a>
+            <%
+                }
                 if (companyInfo != null) {
             %>
             <div class="container">
