@@ -141,7 +141,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-lg-2">
                                                 <div class="company-logo-img">
-                                                    <img src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:150px;height:150px">
+                                                    <img loading="lazy" src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:150px;height:150px">
                                                 </div>
                                             </div>
                                             <div class="col-lg-7 col-md-9">

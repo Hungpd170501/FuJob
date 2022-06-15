@@ -39,9 +39,40 @@ public class JobOrderDAO {
             + "j.jobTitle, j.ExperienceNeeded, j.jobCategoryID, c.categoryName, c.img, j.deadline, j.completionTime, j.salary, "
             + "j.address, j.email, j.phone, j.description, j.lastDateUpdate "
             + "FROM ((tblJobOrder jo LEFT JOIN tblJob j ON jo.jobID = j.jobID)LEFT JOIN tblCategory c ON j.jobCategoryID = c.categoryID)";
+    
+    private static final String GETALLNUMBEROFJOBORDER = "SELECT COUNT (*) AS totalJobOrder FROM tblJobOrder";
+    
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
+    
+    // tong so job da order
+    public int getAllTotalJobOrder() throws SQLException {
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GETALLNUMBEROFJOBORDER);
+                rs = preStm.executeQuery();
+                while(rs.next()){
+                    return rs.getInt("totalJobOrder");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return 0;
+    }
 
     public boolean orderJob(JobOrder jobOrder) throws SQLException, ClassNotFoundException {
         boolean check = false;

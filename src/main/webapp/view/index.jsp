@@ -15,6 +15,11 @@
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="totalJobPost" class="se1621.dao.JobDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="totalJobOrder" class="se1621.dao.JobOrderDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="totalUserNonAD" class="se1621.dao.UserDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="getTop10Job" class="se1621.dao.JobDAO" scope="request"></jsp:useBean>
+
             <!-- Start Home -->
             <section class="bg-home" style="background: url('${pageContext.request.contextPath}/asset/images/background-index.jpg') center center;">
             <div class="bg-overlay"></div>
@@ -106,7 +111,7 @@
                             <a href="${pageContext.request.contextPath}/MainController?action=Search_title_exper_cate&searchtitle=${""}&searchExper=${""}&searchCate=${c.categoryID}">
                                 <div class="popu-category-box bg-light rounded text-center p-4">
                                     <div class="popu-category-icon mb-3">
-                                        <img src="${c.img}" alt="" class="img-fluid img-thumbnail d-inline-block rounded-pill h3 text-primary" style="width:100px;height:100px">
+                                        <img loading="lazy" src="${c.img}" alt="" class="img-fluid img-thumbnail d-inline-block rounded-pill h3 text-primary" style="width:100px;height:100px">
                                     </div>
                                     <div class="popu-category-content">
                                         <h5 class="mb-2 text-dark title">${c.categoryName}</h5>
@@ -182,57 +187,146 @@
             <div class="bg-overlay bg-overlay-gradient"></div>
             <div class="container">
                 <div class="row" id="counter">
-                    <div class="col-md-3 col-6">
-                        <div class="home-counter pt-4 pb-4">
-                            <div class="float-left counter-icon mr-3">
-                                <i class="mdi mdi-bank h1 text-white"></i>
-                            </div>
+                    <div class="col-md-4 col-6">
+                        <div class="home-counter pt-4 pb-4" style="margin-left: 35%">
                             <div class="counter-content overflow-hidden">
-                                <h1 class="counter-value text-white mb-1" data-count="120">10</h1>
-                                <p class="counter-name text-white text-uppercase mb-0">Companies</p>
+                                <div class="float-left counter-icon mr-3">
+                                    <i class="mdi mdi-file-document-box h1 text-white"></i>
+                                </div>
+                                <h1 class="counter-value text-white mb-1" data-count="${totalJobOrder.allTotalJobOrder}">0</h1>
+                                <p class="counter-name text-white text-uppercase mb-0">Project Order</p>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-3 col-6">
-                        <div class="home-counter pt-4 pb-4">
-                            <div class="float-left counter-icon mr-3">
-                                <i class="mdi mdi-file-document-box h1 text-white"></i>
-                            </div>
+                    <div class="col-md-4 col-6">
+                        <div class="home-counter pt-4 pb-4" style="margin-left: 35%">
                             <div class="counter-content overflow-hidden">
-                                <h1 class="counter-value text-white mb-1" data-count="480">80</h1>
-                                <p class="counter-name text-white text-uppercase mb-0">Applications</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-6">
-                        <div class="home-counter pt-4 pb-4">
-                            <div class="float-left counter-icon mr-3">
-                                <i class="mdi mdi-calendar-multiple-check h1 text-white"></i>
-                            </div>
-                            <div class="counter-content overflow-hidden">
-                                <h1 class="counter-value text-white mb-1" data-count="120">10</h1>
+                                <div class="float-left counter-icon mr-3">
+                                    <i class="mdi mdi-calendar-multiple-check h1 text-white"></i>
+                                </div>
+                                <h1 class="counter-value text-white mb-1" data-count="${totalJobPost.allTotalJobPost}">0</h1>
                                 <p class="counter-name text-white text-uppercase mb-0">Project Posted</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-6">
-                        <div class="home-counter pt-4 pb-4">
-                            <div class="float-left counter-icon mr-3">
-                                <i class="mdi mdi-account-multiple-plus h1 text-white"></i>
-                            </div>
+                    <div class="col-md-4 col-6">
+                        <div class="home-counter pt-4 pb-4" style="margin-left: 35%">
                             <div class="counter-content overflow-hidden">
-                                <h1 class="counter-value text-white mb-1" data-count="200">10</h1>
+                                <div class="float-left counter-icon mr-3">
+                                    <i class="mdi mdi-account-multiple-plus h1 text-white"></i>
+                                </div>
+                                <h1 class="counter-value text-white mb-1" data-count="${totalUserNonAD.allTotalUser_NonAD}">0</h1>
                                 <p class="counter-name text-white text-uppercase mb-0">Member</p>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
         <!-- counter end -->
+
+        <!-- all jobs start -->
+        <section class="section bg-light">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12" style="margin-top: 20px">
+                        <div class="section-title text-center mb-4 pb-2">
+                            <h4 class="title title-line pb-5">Top 05 Recent Projects</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <c:forEach items="${getTop10Job.top10JobPosted}" var="t10">
+                                <div class="col-lg-12">
+                                    <div class="job-box bg-white overflow-hidden border rounded mt-4 position-relative overflow-hidden">
+                                        <div class="lable text-center pt-2 pb-2">
+                                            <ul class="list-unstyled best text-white mb-0 text-uppercase">
+                                                <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                            </ul>
+                                        </div>
+                                        <div class="p-4">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-2">
+                                                    <div class="mo-mb-2">
+                                                        <img loading="lazy" src="${t10.category.img}" alt="" class="img-fluid img-thumbnail mx-auto d-block">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div>
+                                                        <h5 class="f-18"><a href="#" class="text-dark">${t10.jobTitle}</a></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div>
+                                                        <p class="text-muted mb-0"><i class="mdi mdi-map-marker text-primary mr-2"></i>${t10.address}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div>
+                                                        <p class="text-muted mb-0 mo-mb-2"><span class="text-primary">Price </span>${t10.salary}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-3 bg-light">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div>
+                                                        <p class="text-muted mb-0 mo-mb-2"><span class="text-dark">Experience :</span> ${t10.experienceNeeded} </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="text-muted mb-0 mo-mb-2"><span class="text-dark">Category :</span> ${t10.category.categoryName} </p>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div>
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=${t10.jobID}" class="text-primary">View detail <i class="mdi mdi-chevron-double-right"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center col-12 text-center mt-4 pt-2" style="margin-top: 60px">
+                    <div>
+                        <a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&Search_title_exper_cate" class="btn btn-primary-outline">View all projects</a>
+                    </div>
+                </div>
+                <!-- end row -->
+
+                <!-- end row -->
+                <!--                <div class="row">
+                                    <div class="col-lg-12 mt-4 pt-2">
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination job-pagination mb-0 justify-content-center">
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                                        <i class="mdi mdi-chevron-double-left f-15"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#">
+                                                        <i class="mdi mdi-chevron-double-right f-15"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>-->
+            </div>
+            <!-- end containar -->
+        </section>
+        <!-- all jobs end -->
 
         <!-- testimonial start -->
         <section class="section">
@@ -345,23 +439,24 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-        
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
             $(".job-display").slice(0, 8).show();
             $(".smj").on('click', function () {
                 $(".job-display:hidden").slice(0, 8).slideDown();
                 if ($(".job-display:hidden").length == 0) {
-                    $(".smj").css("display","none");
+                    $(".smj").css("display", "none");
                     document.getElementById("slj").style.display = "inline-block";
                 }
             });
-            $(".slj").on('click',function (){
-               $(".job-display").slice(8, 50).slideUp();
-               if($(".job-display").length > 0){
-                   document.getElementById("slj").style.display = "none";
-                   $(".smj").css("display","inline-block");
-               }
+            $(".slj").on('click', function () {
+                $(".job-display").slice(8, 50).slideUp("slow");
+                $("html, body").animate({scrollTop: 800}, "slow");
+                if ($(".job-display").length > 0) {
+                    document.getElementById("slj").style.display = "none";
+                    $(".smj").css("display", "inline-block");
+                }
             });
 
         </script>

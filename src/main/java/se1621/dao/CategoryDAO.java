@@ -41,9 +41,7 @@ public class CategoryDAO {
                     list.add(category);
                 }
                 return list;
-
             }
-
         } catch (Exception e) {
         } finally {
             if (rs != null) {

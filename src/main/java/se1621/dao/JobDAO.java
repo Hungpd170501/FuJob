@@ -14,6 +14,7 @@ import java.util.List;
 import se1621.utils.DBUtils;
 import se1621.dto.Category;
 import se1621.dto.Job;
+
 /**
  *
  * @author ACER
@@ -26,21 +27,104 @@ public class JobDAO {
             + "deadline, completionTime, salary, address, email, phone, description, lastDateUpdate FROM tblJob ";
     private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJob WHERE jobID = (SELECT MAX(jobID) FROM tblJob) and jobStatus = 1 and userID = ?";
     private static final String SEARCHBYJOBID = "SELECT * FROM tblJOB where jobID = ? and jobStatus = 1";
-    
-    private static final String VIEWALLJOB = "SELECT j.jobID, j.jobTitle, j.lastDateUpdate, j.address, c.categoryName, c.img, j.ExperienceNeeded " +
-"FROM (((tblJob j left join tblCategory c on j.jobCategoryID = c.categoryID) left join tblUser u on j.userID = u.userID) " +
-"left join tblCompany com on u.companyID = com.companyID) " +
-"WHERE j.jobStatus = 1";
-    
-    private static final String VIEWHRJOB = "SELECT j.jobID, j.jobTitle, j.lastDateUpdate, j.address, c.categoryName, c.img, j.ExperienceNeeded " +
-"FROM (((tblJob j left join tblCategory c on j.jobCategoryID = c.categoryID) left join tblUser u on j.userID = u.userID) " +
-"left join tblCompany com on u.companyID = com.companyID) " +
-"WHERE j.jobStatus = 1 and j.userID = ?";
-    
+
+    private static final String VIEWALLJOB = "SELECT j.jobID, j.jobTitle, j.lastDateUpdate, j.address, c.categoryName, c.img, j.ExperienceNeeded "
+            + "FROM (((tblJob j left join tblCategory c on j.jobCategoryID = c.categoryID) left join tblUser u on j.userID = u.userID) "
+            + "left join tblCompany com on u.companyID = com.companyID) "
+            + "WHERE j.jobStatus = 1";
+
+    private static final String VIEWHRJOB = "SELECT j.jobID, j.jobTitle, j.lastDateUpdate, j.address, c.categoryName, c.img, j.ExperienceNeeded "
+            + "FROM (((tblJob j left join tblCategory c on j.jobCategoryID = c.categoryID) left join tblUser u on j.userID = u.userID) "
+            + "left join tblCompany com on u.companyID = com.companyID) "
+            + "WHERE j.jobStatus = 1 and j.userID = ?";
+    private static final String GETALLNUMBEROFJOBPOST = "SELECT COUNT (*) AS totalJob FROM tblJob";
+    private static final String GETVIEWTOP5JOB = "SELECT TOP(5) j.jobID, j.jobTitle, j.lastDateUpdate, j.address, j.salary, c.categoryName, c.img, j.completionTime, j.deadline,  j.ExperienceNeeded"
+            + "            FROM (((tblJob j left join tblCategory c on j.jobCategoryID = c.categoryID) left join tblUser u on j.userID = u.userID)"
+            + "            left join tblCompany com on u.companyID = com.companyID)"
+            + "            WHERE j.jobStatus = 1 ORDER BY lastDateUpdate DESC";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
-    
+
+    // top 10 job in index.jsp
+    public List<Job> getTop10JobPosted() throws SQLException {
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GETVIEWTOP5JOB);
+                rs = preStm.executeQuery();
+                List<Job> listJob = new ArrayList<>();
+                while (rs.next()) {
+                    int jobID = rs.getInt("jobID");
+                    String jobTitle = rs.getString("jobTitle");
+                    String ExperienceNeeded = rs.getString("ExperienceNeeded");
+                    String categoryName = rs.getString("categoryName");
+                    String address = rs.getString("address");
+                    String img = rs.getString("img");
+                    String salary = rs.getString("salary");
+                    Date deadline = rs.getDate("deadline");
+                    String completionTime = rs.getString("completionTime");
+                    Date lastDateUpdate = rs.getDate("lastDateUpdate");
+                    Category category = Category.builder().categoryName(categoryName).img(img).build();
+                    Job job = Job.builder()
+                            .jobID(jobID)
+                            .jobTitle(jobTitle)
+                            .address(address)
+                            .lastDateUpdate(lastDateUpdate)
+                            .ExperienceNeeded(ExperienceNeeded)
+                            .category(category)
+                            .salary(salary)
+                            .deadline(deadline)
+                            .completionTime(completionTime)
+                            .build();
+                    listJob.add(job);
+                }
+                return listJob;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return null;
+    }
+    // tong so job da post
+    public int getAllTotalJobPost() throws SQLException {
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GETALLNUMBEROFJOBPOST);
+                rs = preStm.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt("totalJob");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return 0;
+    }
+
     public boolean createJob(Job job) throws SQLException, ClassNotFoundException {
         boolean check = false;
         conn = null;
@@ -79,6 +163,7 @@ public class JobDAO {
         }
         return check;
     }
+
     // View all job in job-list.jsp  
     public List<Job> getListJob() throws SQLException {
         try {
@@ -274,6 +359,7 @@ public class JobDAO {
         }
         return null;
     }
+
     // search for all page
     public List<Job> getJobPosted(String searchJobTitle, String searchExperienceNeeded, int searchJobCategoryID, int hrID) throws SQLException {
         try {
@@ -340,7 +426,8 @@ public class JobDAO {
             }
         }
         return null;
-    }    
+    }
+
     public List<Job> getListHrJob(int userID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -385,4 +472,11 @@ public class JobDAO {
         }
         return null;
     }
+
+//    public static void main(String[] args) throws SQLException {
+//        int count;
+//        JobDAO dao = new JobDAO();
+//        count = dao.getAllTotalJobPost();
+//        System.out.println(count);
+//    }
 }
