@@ -7,6 +7,7 @@ C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Resume.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Role.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\SearchInJobOrderController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\ResumeDAO.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\StudentSkillDAO.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\JobOrder.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\SkillRequire.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\service\EmailService.java
@@ -50,5 +51,6 @@ C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\ListCandidate
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\ChooseCompanyController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\SignUpController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\LoginGoogleHandler.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\SkillRequireDAO.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\UserGoogle.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\PostJobController.java

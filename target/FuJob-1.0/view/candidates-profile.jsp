@@ -1,3 +1,4 @@
+<%@page import="se1621.dto.StudentSkill"%>
 <%@page import="se1621.dto.Resume"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -8,7 +9,6 @@
         <jsp:include page="./include/header.jsp">
             <jsp:param name="title" value="FuJob | Candidate Profile"/>
         </jsp:include>
-
     </head>
 
     <body>
@@ -28,9 +28,9 @@
             if (listResume.isEmpty()) {
                 String message = (String) request.getAttribute("MESSAGE");
         %>
-         <section class="bg-half page-next-level"> 
-             <div class="bg-overlay"></div>
-         </section>
+        <section class="bg-half page-next-level"> 
+            <div class="bg-overlay"></div>
+        </section>
         <section class="section text-center" name="action">
             <h3 class="text-warning "><%=message%></h3>
             <a href="${pageContext.request.contextPath}/view/create-resume.jsp"><p class="h5" style="text-decoration: underline">Create Your Resume Now</p></a>
@@ -43,6 +43,7 @@
 
         <%
             for (Resume resume : listResume) {
+                int studentID = resume.getUserID();
         %>
         <!-- Start home -->
         <section class="bg-half page-next-level"> 
@@ -154,7 +155,17 @@
                                         <i class="mdi mdi-36px mdi-briefcase-check"></i>
                                     </div>
                                     <h6 class="pb-3 mb-0">Experience: <%= resume.getExperienceYear()%> </p></h6>
-                                    <p class="pb-3 mb-0">Skills: </p>
+                                    <p class="pb-3 mb-0">Skills:
+                                        <%
+                                            List<StudentSkill> listStudentSkill = (List<StudentSkill>) request.getAttribute("LIST_STUDENTSKILL");
+                                            for(int i = 0; i< listStudentSkill.size()-1; i++){ 
+                                        %>
+                                        <%= listStudentSkill.get(i).getSkill().getSkillName()%>,
+                                        <%
+                                            }
+                                        %>
+                                        <%= listStudentSkill.get(listStudentSkill.size()-1).getSkill().getSkillName() %>
+                                    </p>
                                     <p class="pb-3 mb-0">Website: <%= resume.getWebsite()%> </p>                               
                                 </div>
                             </div>

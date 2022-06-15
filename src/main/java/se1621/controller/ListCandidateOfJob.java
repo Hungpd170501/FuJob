@@ -12,17 +12,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import se1621.dao.CategoryDAO;
-import se1621.dao.CompanyInfoDAO;
-import se1621.dao.JobDAO;
 import se1621.dao.JobOrderDAO;
 import se1621.dao.ResumeDAO;
-import se1621.dao.UserDAO;
-import se1621.dto.Category;
-import se1621.dto.CompanyInfo;
-import se1621.dto.Job;
+import se1621.dao.StudentSkillDAO;
 import se1621.dto.Resume;
-import se1621.dto.User;
+import se1621.dto.StudentSkill;
 
 /**
  *
@@ -53,15 +47,21 @@ public class ListCandidateOfJob extends HttpServlet {
             int search = Integer.parseInt(request.getParameter("JobIDCandidate"));
             List<Integer> listUserID = jobOrderDAO.getListUserIDOfJob(search);
             List<Resume> listResume = new ArrayList<Resume>();
+            List<StudentSkill> listStudentSkill = new ArrayList<>();
             for (Integer integer : listUserID) {
                 listResume.add(resumeDAO.getResumeByID(integer));
+                StudentSkillDAO studentSkillDAO = new StudentSkillDAO();
+                listStudentSkill = studentSkillDAO.getStudentSkill(integer);
+
             }
             if (!listResume.isEmpty()) {
                 request.setAttribute("LIST_CANDIDATEOFJOB", listResume);
+                request.setAttribute("LIST_STUDENTSKILL", listStudentSkill);
                 url = SUCCESS;
             } else {
                 request.setAttribute("LIST_CANDIDATEOFJOB", listResume);
-                request.setAttribute("MESSAGE", "NO CANDICATES APPLY THIS PROJECT");
+                request.setAttribute("LIST_STUDENTSKILL", listStudentSkill);
+                request.setAttribute("MESSAGE", "NO CANDICATES APPLY THIS JOB");
             }
         } catch (Exception e) {
             log("Error at View all job Controller" + e.toString());

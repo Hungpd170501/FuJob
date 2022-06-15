@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 
@@ -6,9 +7,10 @@
         <jsp:include page="./include/header.jsp">
             <jsp:param name="title" value="FuJob | Create Resume"/>
         </jsp:include>
-    </head>
+        <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
+        </head>
 
-    <body>
+        <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
             <!-- Start home -->
@@ -41,7 +43,6 @@
                         <div class="col-lg-12">
                             <h5 class="text-dark">General Information :</h5>
                         </div>
-
                         <div class="col-12 mt-3">
                             <div class="custom-form p-4 border rounded">
 
@@ -137,36 +138,43 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group app-label">
-                                                <label class="text-muted">Skills<span class="text-danger">*</span> :</label>
-                                                <input id="skills" name="skills" type="text" class="form-control resume" required="" placeholder="Skill: ">
+                                                <!--                                                <label class="text-muted">Skill Required<span class="text-danger">*</span></label>
+                                                                                                <input id="skillrequired" name="skill" type="text" class="form-control resume" required="" placeholder="JAVA, HTML, ....">-->
+                                                <label class="text-muted">Skill Required<span class="text-danger">*</span></label> 
+                                                <div class="form-button">
+                                                    <select class="form-control resume select2 select2-hidden-accessible" name="skillID" multiple="" data-placeholder="Select skill" style="width: 100%; border-color: #dee2e6" tabindex="-1" aria-hidden="true">
+                                                    <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                        <option value="${i.skillID}">${i.skillName}</option>
+                                                    </c:forEach>
+                                                </select> 
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="col-md-4">
-                                            <div class="form-group app-label">
-                                                <label class="text-muted">Your Website:</label>
-                                                <input id="website" name="website" type="text" class="form-control resume" placeholder="website, github, facebook,... ">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group app-label">
-                                                <label class="text-muted">Self-Introduction<span class="text-danger">*</span> :</label>
-                                                <textarea id="seflintro" name="seflintro" type="text" class="form-control resume" required="" placeholder="Self-Introduction :"></textarea>
-                                            </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group app-label">
+                                            <label class="text-muted">Your Website:</label>
+                                            <input id="website" name="website" type="text" class="form-control resume" placeholder="website, github, facebook,... ">
                                         </div>
                                     </div>
-                                    <div class="col-12 mt-4">
-                                        <input type="submit" id="submit" name="action" class="submitBnt btn btn-primary" value="Submit Resume">
+                                    <div class="col-md-12">
+                                        <div class="form-group app-label">
+                                            <label class="text-muted">Self-Introduction<span class="text-danger">*</span> :</label>
+                                            <textarea id="seflintro" name="seflintro" type="text" class="form-control resume" required="" placeholder="Self-Introduction :"></textarea>
+                                        </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <input type="submit" id="submit" name="action" class="submitBnt btn btn-primary" value="Submit Resume">
+                                </div>
+                            </form>
                         </div>
                     </div>
-
                 </div>
-            </section>
-            <!-- CREATE RESUME END -->
 
+            </div>
+        </section>
+        <!-- CREATE RESUME END -->
 
 
         <jsp:include page="./include/footer.jsp"></jsp:include>
@@ -185,6 +193,18 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
+        <<<<<<< HEAD
 
+        =======
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.select2').select2({
+                    closeOnSelect: false
+                });
+            });
+        </script>
+        >>>>>>> e862741a469a1c8ef5776b87f1b3feba638eb207
     </body>
 </html>

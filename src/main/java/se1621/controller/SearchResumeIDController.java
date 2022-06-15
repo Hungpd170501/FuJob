@@ -13,7 +13,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import se1621.dao.ResumeDAO;
+import se1621.dao.StudentSkillDAO;
 import se1621.dto.Resume;
+import se1621.dto.StudentSkill;
 
 /**
  *
@@ -33,11 +35,15 @@ public class SearchResumeIDController extends HttpServlet {
             int search = Integer.parseInt(request.getParameter("searchResumeID"));
             ResumeDAO dao = new ResumeDAO();
             List<Resume> listResume = dao.getListResume(search);
+            StudentSkillDAO studentSkillDAO = new StudentSkillDAO();
+            List<StudentSkill> listStudentSkill = studentSkillDAO.getStudentSkill(search);
             if (!listResume.isEmpty()) {
                 request.setAttribute("LIST_RESUME", listResume);
+                request.setAttribute("LIST_STUDENTSKILL", listStudentSkill);
                 url = SUCCESS;
             } else {
                 request.setAttribute("LIST_RESUME", listResume);
+                request.setAttribute("LIST_STUDENTSKILL", listStudentSkill);
                 request.setAttribute("MESSAGE", "YOU'VE NOT CREATED YOUR RESUME");
             }
         } catch (Exception e) {
