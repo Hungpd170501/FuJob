@@ -374,7 +374,21 @@ VALUES (N'Clerical / Administrative', N'https://thumbs.dreamstime.com/b/data-ent
  	(N'Newspaper / Editor / Publishing', N'https://png.pngtree.com/element_our/md/20180516/md_5afc4cd0dcaca.jpg?fbclid=IwAR0lXJCcbngyMb47JrdmJhcL1aU-4NAnZ6c-hyGcTgAKxBg7WzNSnyO7GQQ'),
  	(N'Telecommunications ', N'https://www.pngitem.com/pimgs/m/634-6342219_media-signal-tower-signal-tower-icon-hd-png.png?fbclid=IwAR0kFVPVHGNkIWm4XdI4n53jsicCrJFbkeVjpHcPta8k5d4IRPFvq28BOco'),
  	(N'Executive Management', N'https://www.kindpng.com/picc/m/80-803498_if-vector-65-02-47377820170731-7640-1two28t-board.png'),
- 	(N'Other', N'${pageContext.request.contextPath}/asset/images/Logo/Logo/Untitled-1.png')
+ 	(N'Other', N'${pageContext.request.contextPath}/asset/images/Logo/Logo/Untitled-1.png'),
+	('International Business', 'https://cdn.dribbble.com/users/7031637/screenshots/15591230/gig-8_4x.jpg'),
+	('Software Engineering', 'https://www.logopik.com/wp-content/uploads/edd/2018/10/Software-Engineering-Vector-Logo.png'),
+	('Information Assurance', 'https://media.istockphoto.com/vectors/quick-key-logo-design-template-vector-id1013496226?b=1&k=20&m=1013496226&s=612x612&w=0&h=sywpjBFewebZRb7U9LbpfuNRChgg0oPXHUrWhEkAubE='),
+	('Multimedia Communication', 'https://i.pinimg.com/736x/77/7f/3e/777f3e9f89ac6e127882d31199faee20.jpg'),
+	('Graphic Design', 'https://cdn.dribbble.com/users/5246557/screenshots/12263175/media/f9210e3bf7a485987a931a3a54c8b70c.jpg?compress=1&resize=400x300&vertical=top'),
+	('Hotel Management', 'https://www.pngkey.com/png/detail/376-3765477_hospitality-management-icon-logo-hospitality-management.png'),
+	('Tourism service and Travel Management', 'https://www.nicepng.com/png/detail/370-3705541_gtifavi2-travel-insurance-logo-png.png'),
+	('English language', 'https://w7.pngwing.com/pngs/230/768/png-transparent-english-world-foreign-language-colloquialism-england-miscellaneous-blue-text.png'),
+	('Japanese language', 'https://upload.wikimedia.org/wikipedia/commons/a/a2/Japanese-language.jpg'),
+	('Digital Marketing', 'https://banner2.cleanpng.com/20181210/jsb/kisspng-digital-marketing-marketing-strategy-social-media-internet-png-images-png-mart-5c0e7c2c9723e1.5757274415444531646191.jpg'),
+	('Information System', 'https://www.logolynx.com/images/logolynx/s_7b/7bd3f19896635439f5d9f4cc08086934.gif'),
+	('Artificial Intelligence', 'https://i.pinimg.com/736x/f6/fa/4e/f6fa4e259c05252ba32cd12e98061b11.jpg'),
+	('Korean Language', 'https://charuzu.files.wordpress.com/2015/09/korea_south_640.png'),
+	('Internet of Things', 'https://lumihaiphong.vn/Data/images/IOT_Internet_of_Things_2017.jpg')
 GO
 
 INSERT INTO tblJob(userID, jobTitle, experienceNeeded, jobCategoryID, deadline, completionTime, salary, address, email, phone, description, jobStatus) 
