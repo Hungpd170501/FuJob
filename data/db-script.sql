@@ -169,6 +169,14 @@ CREATE TRIGGER lastUpdate on dbo.tblJob
 SET lastDateUpdate = GetDate()
 WHERE jobID IN (SELECT jobID FROM inserted);
 GO
+
+CREATE TRIGGER createdDate on dbo.tblJob
+	FOR INSERT  AS 
+	UPDATE dbo.tblJob
+SET createdDate = GetDate()
+WHERE jobID IN (SELECT jobID FROM inserted);
+GO
+
 CREATE TRIGGER lastApplied on dbo.tblJobOrder
 	FOR  UPDATE , INSERT  AS 
 	UPDATE dbo.tblJobOrder
