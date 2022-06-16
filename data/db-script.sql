@@ -84,10 +84,8 @@ CREATE TABLE tblResume
 	gmail varchar(50),
 	phone varchar(20),
 	address varchar(50),
-	schoolName varchar(50),
 	major varchar(50),
 	gpa varchar(15),
-	experienceYear varchar(50),
 	website varchar ( 100 ),
 	overview varchar(3000),
 );
@@ -110,16 +108,16 @@ CREATE TABLE tblJob (
 	jobID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
 	userID INT NOT NULL,
 	jobTitle varchar(255),
-	ExperienceNeeded varchar(20),
 	jobCategoryID INT,
 	deadline date,
-	completionTime varchar(20),
-	salary varchar(20),
+	budged float,
 	address varchar(50),
 	email varchar(255),
 	phone varchar(15),
 	description varchar(2000),
+	createdDate datetime,
 	lastDateUpdate datetime,
+	expiriedDate datetime,
 	jobStatus tinyint NOT NULL
 );
 GO
