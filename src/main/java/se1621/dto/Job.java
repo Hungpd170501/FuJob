@@ -5,6 +5,8 @@
 package se1621.dto;
 
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,4 +36,5 @@ public class Job {
     private String description;
     private Date lastDateUpdate;
     private int jobStatus;
+    Map<String, Skill> skillSet=new HashMap<>();
 }

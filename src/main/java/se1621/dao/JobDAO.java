@@ -28,7 +28,7 @@ public class JobDAO {
     private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJob WHERE jobID = (SELECT MAX(jobID) FROM tblJob) and jobStatus = 1 and userID = ?";
     private static final String SEARCHBYJOBID = "SELECT * FROM tblJOB where jobID = ? and jobStatus = 1";
 
-    private static final String VIEWALLJOB = "SELECT j.jobID, j.jobTitle, j.lastDateUpdate, j.address, c.categoryName, c.img, j.ExperienceNeeded "
+    private static final String VIEWALLJOB = "SELECT j.jobID, j.jobTitle, j.lastDateUpdate, j.address, c.categoryName, c.img, j.ExperienceNeeded, j.description "
             + "FROM (((tblJob j left join tblCategory c on j.jobCategoryID = c.categoryID) left join tblUser u on j.userID = u.userID) "
             + "left join tblCompany com on u.companyID = com.companyID) "
             + "WHERE j.jobStatus = 1 ORDER BY lastDateUpdate DESC";
@@ -38,7 +38,7 @@ public class JobDAO {
             + "left join tblCompany com on u.companyID = com.companyID) "
             + "WHERE j.jobStatus = 1 and j.userID = ?";
     private static final String GETALLNUMBEROFJOBPOST = "SELECT COUNT (*) AS totalJob FROM tblJob";
-    private static final String GETVIEWTOP5JOB = "SELECT TOP(5) j.jobID, j.jobTitle, j.lastDateUpdate, j.address, j.salary, c.categoryName, c.img, j.completionTime, j.deadline,  j.ExperienceNeeded"
+    private static final String GETVIEWTOP5JOB = "SELECT TOP(5) j.jobID, j.jobTitle, j.lastDateUpdate, j.address, j.salary, c.categoryName, c.img, j.completionTime, j.deadline,  j.ExperienceNeeded, j.description"
             + "            FROM (((tblJob j left join tblCategory c on j.jobCategoryID = c.categoryID) left join tblUser u on j.userID = u.userID)"
             + "            left join tblCompany com on u.companyID = com.companyID)"
             + "            WHERE j.jobStatus = 1 ORDER BY lastDateUpdate DESC";
@@ -62,6 +62,7 @@ public class JobDAO {
                     String address = rs.getString("address");
                     String img = rs.getString("img");
                     String salary = rs.getString("salary");
+                    String description = rs.getString("description");
                     Date deadline = rs.getDate("deadline");
                     String completionTime = rs.getString("completionTime");
                     Date lastDateUpdate = rs.getDate("lastDateUpdate");
@@ -72,6 +73,7 @@ public class JobDAO {
                             .address(address)
                             .lastDateUpdate(lastDateUpdate)
                             .ExperienceNeeded(ExperienceNeeded)
+                            .description(description)
                             .category(category)
                             .salary(salary)
                             .deadline(deadline)
@@ -179,6 +181,7 @@ public class JobDAO {
                     String categoryName = rs.getString("categoryName");
                     String address = rs.getString("address");
                     String img = rs.getString("img");
+                    String description = rs.getString("description");
                     Date lastDateUpdate = rs.getDate("lastDateUpdate");
                     Category category = Category.builder().categoryName(categoryName).img(img).build();
                     Job job = Job.builder()
@@ -188,6 +191,7 @@ public class JobDAO {
                             .lastDateUpdate(lastDateUpdate)
                             .ExperienceNeeded(ExperienceNeeded)
                             .category(category)
+                            .description(description)
                             .build();
                     listJob.add(job);
                 }

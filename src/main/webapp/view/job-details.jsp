@@ -55,21 +55,21 @@
             %>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h2 class="text-dark mb-3" style="font-weight: 700"><%= job.getCategory().getCategoryName()%></h2>
+                    <div class="col-lg-12 text-center" style="margin-bottom: 50px">
+                        <h1 class="mb-2" style="font-weight: 700"><a href="#" class="text-dark"></a><%= job.getJobTitle()%></h1>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-8 col-md-7">
-                        <div class="job-detail border rounded p-4 row">
+                        <div class="row job-detail border rounded p-4 row">
                             <div class="col-lg-5">
                                 <img src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail float-left mr-md-3 mr-2 mx-auto d-block" style="width:800px;height:250px">
                             </div>
-                            <div class="col-lg-7">
+                            <div class="col-lg-7" style="margin-top: 30px">
                                 <div class="job-detail-com-desc overflow-hidden d-block">
-                                    <h3 class="mb-2" style="font-weight: 700"><a href="#" class="text-dark"></a><%= job.getJobTitle()%></h3>
-                                    <p class=" mb-3"><h7  style="font-weight: 700"> Time work: </h7><%= job.getCompletionTime()%></p>
+                                    <p class=" mb-3"><h7 style="font-weight: 700">Company: </h7> <a href="#"> FPT University</a></p>
+                                    <p class=" mb-3"><h7  style="font-weight: 700"> Category: </h7><%= job.getCategory().getCategoryName()%></p>
                                     <p class=" mb-3"><h7 style="font-weight: 700">Skill: </h7> 
                                         <%
                                             List<SkillRequire> listStudentSkill = (List<SkillRequire>) request.getAttribute("LIST_SKILLREQUIRE");
@@ -81,18 +81,11 @@
                                     %>
                                     <%= listStudentSkill.get(listStudentSkill.size() - 1).getSkill().getSkillName()%>
                                     </p>
-                                    <p class=" mb-3"><h7 style="font-weight: 700"> Experience: </h7><%= job.getExperienceNeeded()%></p>
-                                    <p class=" mb-3"><h7 style="font-weight: 700"> Remuneration: </h7><%= job.getSalary()%></p>
-                                    <p class=" mb-3"><h7 style="font-weight: 700"> Deadline: </h7><%= job.getDeadline()%></p>
+                                    <p class=" mb-3"><h7 style="font-weight: 700"> Budget: </h7><%= job.getSalary()%> / hour</p>
+<!--                                    <p class=" mb-3"><h7 style="font-weight: 700"> Deadline: </h7><%= job.getDeadline()%></p>-->
                                 </div>
                             </div> 
                         </div>
-
-                        <!--                        <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <h5 class="text-dark mt-4" style="font-weight: 700">Projects Description </h5>
-                                                    </div>
-                                                </div>-->
                         <div class="row" style="margin-top: 10px">
                             <div class="col-lg-12">
                                 <div class="job-detail border rounded mt-2 p-4"> 
@@ -134,11 +127,18 @@
                                 </div>
                             </div>
                         </div>
+
                         <%
-                            if (loginUser != null && !StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
-                                JobOrderDAO jobOrderDAO = new JobOrderDAO();
-                                boolean checkDuplicateUserOrderJob = jobOrderDAO.checkDuplicateJobOrderByOneUser(loginUser.getUserID(), job.getJobID());
-                                if (checkDuplicateUserOrderJob) {
+                            if (loginUser == null) {
+                        %>
+                        <div class="job-detail border rounded mt-4">
+                            <a href="${pageContext.request.contextPath}/view/login.jsp" class="btn btn-primary btn-block">Apply For Projects</a>
+                        </div>
+                        <%
+                        } else if (loginUser != null && !StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
+                            JobOrderDAO jobOrderDAO = new JobOrderDAO();
+                            boolean checkDuplicateUserOrderJob = jobOrderDAO.checkDuplicateJobOrderByOneUser(loginUser.getUserID(), job.getJobID());
+                            if (checkDuplicateUserOrderJob) {
                         %>
                         <div class="job-detail border rounded mt-4">
                             <button type="button" disabled class="btn btn-secondary btn-block">You Applied This Project</button>
@@ -147,7 +147,7 @@
                         } else {
                         %>        
                         <div class="job-detail border rounded mt-4">
-                            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Aplly For Projects</a>
+                            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Apply For Projects</a>
                         </div>
                         <%
                                 }

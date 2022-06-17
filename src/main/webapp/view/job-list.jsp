@@ -146,29 +146,26 @@
                                             </div>
                                             <div class="col-lg-7 col-md-9">
                                                 <div class="job-list-desc">
-
-                                                    <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h6>
-
-                                                    <p class="text-muted mb-0"><i class="fa fa-archive mr-2"></i><%= job.getExperienceNeeded()%></p>
-                                                    <p class="text-muted mb-0"><i class="fa fa-list-alt mr-2"></i><%= job.getCategory().getCategoryName()%></p>
+                                                    <h4 class="mb-1" style="font-weight: 700"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h4>
+                                                    <p class="text-muted">6 days left, 5 birds</p>
+                                                    <h6 class="mb-2"><i class="fa fa-archive mr-2"></i>  <%= job.getDescription()%> </h6>
+                                                    <p>Skills: html, css, js, java, .NET, 3D Animation, 3D Design </p>
+                                                    
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= job.getAddress()%></p>
-                                                        </li>
-
-                                                        <li class="list-inline-item mr-3">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"><%= job.getLastDateUpdate()%></i></p>
+                                                            
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
-
+                                                    <div>
+                                                        <p class=" mb-0"><i class="mr-2"></i> 100$ / hour</p>
+                                                    </div>
                                                     <div class="mt-3">
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
