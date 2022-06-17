@@ -38,7 +38,9 @@ public class DeleteJobPostController extends HttpServlet {
             List<Integer> listJobOrderID = jobOrderDao.getListJobOrderOfJob(jobPostID);
             boolean check = jobDao.deleteJobPost(jobPostID);
             if(check){
-               jobOrderDao.deleteJobOrder(listJobOrderID);
+                for (Integer jobOrderID : listJobOrderID) {
+                    jobOrderDao.delete(jobOrderID);
+                }
                url = SUCCESS + userID;
             }
         }catch(Exception ex){

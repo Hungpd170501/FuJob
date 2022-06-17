@@ -1,3 +1,4 @@
+<%@page import="se1621.dto.StudentSkill"%>
 <%@page import="se1621.dto.Resume"%>
 <%@page import="se1621.dto.Job"%>
 <%@page import="java.util.List"%>
@@ -45,8 +46,10 @@
                     <div class="row justify-content-center" style="margin-top: 70px">
                         <div class="col-12">
                             <div class="section-title text-center mb-4 pb-2">
-                                <h4 class="title title-line pb-5">All Candidates Apply This Job</h4>
-                                <!--                                <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>-->
+
+                                <h4 class="title title-line pb-5">All Candidates Apply This Projects</h4>
+<!--                                <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>-->
+
                             </div>
                         </div>
                     </div>
@@ -93,15 +96,22 @@
                                                     <li class="text-muted"><i class="mdi mdi-map-marker mr-1"></i><%= resume.getGender()%></li>
                                                     <li class="text-muted"><i class="mdi mdi-currency-usd mr-1"></i> </li>
                                                 </ul>
-                                                <p class="text-muted mt-1 mb-0">Skills :</p>
+                                                <p class="text-muted mt-1 mb-0">Skills:
+                                                    <%
+                                                        List<StudentSkill> listStudentSkill = (List<StudentSkill>) request.getAttribute("LIST_STUDENTSKILL");
+                                                        for (int i = 0; i < listStudentSkill.size() - 1; i++) {
+                                                    %>
+                                                    <%= listStudentSkill.get(i).getSkill().getSkillName()%>,
+                                                    <%
+                                                        }
+                                                    %>
+                                                    <%= listStudentSkill.get(listStudentSkill.size() - 1).getSkill().getSkillName()%>
+                                                </p>
                                             </div>
                                         </div>
 
                                         <div class="col-md-3">
-                                            <div class="candidates-list-fav-btn text-right">
-                                                <div class="fav-icon">
-                                                    <i class="mdi mdi-heart"></i>
-                                                </div>
+                                            <div class="candidates-list-fav-btn text-right">        
                                                 <div class="candidates-listing-btn mt-4">
                                                     <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&searchResumeID=<%= resume.getUserID()%>" class="btn btn-primary-outline btn-sm">View Profile</a>
                                                 </div>
@@ -111,6 +121,7 @@
                                                         Deny
                                                     </button>
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                     </div>

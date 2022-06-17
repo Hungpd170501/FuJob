@@ -26,6 +26,7 @@ public class LoginController extends HttpServlet {
     private static final String AD = "AD";
     private static final String US = "US";
     private static final String HR = "HR";
+    private static final String MNHR = "MNHR";
     private static final String USER_PAGE = "/view/index.jsp";
     private static final String ADMIN_PAGE = "#";
 
@@ -59,6 +60,9 @@ public class LoginController extends HttpServlet {
                                 break;
                             case AD:
                                 url = ADMIN_PAGE;
+                                break;
+                            case MNHR:
+                                url = USER_PAGE;
                                 break;
                             default:
                                 request.setAttribute("LOGIN_MESSAGE", "Your role is not supported!");

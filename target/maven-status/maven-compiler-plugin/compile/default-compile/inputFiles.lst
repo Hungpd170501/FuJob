@@ -4,6 +4,7 @@ D:\SWP\FuJob\src\main\java\se1621\dto\StudentSkill.java
 D:\SWP\FuJob\src\main\java\se1621\utils\JwtTokenUtils.java
 D:\SWP\FuJob\src\main\java\se1621\dto\Resume.java
 D:\SWP\FuJob\src\main\java\se1621\controller\DeleteJobPostController.java
+D:\SWP\FuJob\src\main\java\se1621\dao\SkillRequireDAO.java
 D:\SWP\FuJob\src\main\java\se1621\controller\SearchCompanyIDController.java
 D:\SWP\FuJob\src\main\java\se1621\dao\ResumeDAO.java
 D:\SWP\FuJob\src\main\java\se1621\dto\JobOrder.java
@@ -50,6 +51,7 @@ D:\SWP\FuJob\src\main\java\se1621\controller\RecoveryPasswordController.java
 D:\SWP\FuJob\src\main\java\se1621\dao\UserDAO.java
 D:\SWP\FuJob\src\main\java\se1621\dao\CategoryDAO.java
 D:\SWP\FuJob\src\main\java\se1621\controller\SearchResumeIDController.java
+D:\SWP\FuJob\src\main\java\se1621\dao\StudentSkillDAO.java
 D:\SWP\FuJob\src\main\java\se1621\dto\CompanyInfo.java
 D:\SWP\FuJob\src\main\java\se1621\dto\UserGoogle.java
 D:\SWP\FuJob\src\main\java\se1621\controller\EmailVerifyHandler.java

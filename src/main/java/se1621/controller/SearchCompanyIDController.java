@@ -11,7 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+import jakarta.servlet.http.HttpSession;
 import se1621.dao.CompanyInfoDAO;
 import se1621.dto.CompanyInfo;
 
@@ -33,9 +33,13 @@ public class SearchCompanyIDController extends HttpServlet {
             int search = Integer.parseInt(request.getParameter("searchCompanyID"));
             CompanyInfoDAO dao = new CompanyInfoDAO();
             CompanyInfo companyInfo = dao.getCompanyInfo(search);
-            if (companyInfo != null) {
+            HttpSession session = request.getSession();
+            if (companyInfo != null && search > 0) {
                 request.setAttribute("COMPANYINFO", companyInfo);
+                session.setAttribute("LOGIN_USER.companyID",companyInfo.getCompanyID());
                 url = SUCCESS;
+            } else {
+                request.setAttribute("MESSAGE", "YOU'VE NOT CREATED YOUR COMPANY INFORMATION");
             }
         } catch (Exception e) {
             log("Error at SearchCompanyIDController: " + e.toString());

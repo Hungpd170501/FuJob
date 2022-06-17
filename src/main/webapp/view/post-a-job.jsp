@@ -21,11 +21,11 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="text-center text-white">
-                                <h4 class="text-uppercase title mb-4">Create A new Job</h4>
+                                <h4 class="text-uppercase title mb-4">Create A new Project</h4>
                                 <ul class="page-next d-inline-block mb-0">
                                     <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
                                     <li>
-                                        <span class="text-uppercase text-white font-weight-bold">Post A Job</span> 
+                                        <span class="text-uppercase text-white font-weight-bold">Post A Project</span> 
                                     </li> 
                                 </ul>
                             </div>
@@ -44,16 +44,16 @@
                                 <div class="custom-form">
                                     <div id="message3"></div>
                                     <form action="/FuJob/MainController" method="POST">
-                                        <h4 class="text-dark mb-3">Post a New Job :</h4>
+                                        <h4 class="text-dark mb-3">Post a New Project :</h4>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group app-label mt-2">
-                                                    <label class="text-muted">Job Title<span class="text-danger">*</span></label>
+                                                    <label class="text-muted">Project Title<span class="text-danger">*</span></label>
                                                     <input id="jobtitle" name="jobtitle" type="text" class="form-control resume" required="" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
-                                                <div class="form-group app-label">
+                                                <div class="form-group app-label mt-2">
                                                     <label class="text-muted">Experience Needed<span class="text-danger">*</span> :</label>
                                                     <div class="form-button">
                                                         <select class="form-control resume" name="chooseExY" required="">
@@ -70,7 +70,7 @@
 
                                             <div class="col-md-4">
                                                 <div class="form-group app-label mt-2">
-                                                    <label class="text-muted">Job Category</label>
+                                                    <label class="text-muted">Project Category</label>
                                                     <div class="form-button">
                                                         <select class="form-control resume" name="categoryID" required="">
                                                         <c:forEach items="${chooseCategory.listCategory}" var="i">
@@ -112,7 +112,7 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
-                                                <label class="text-muted">Salary<span class="text-danger">*</span></label>
+                                                <label class="text-muted">Price<span class="text-danger">*</span></label>
                                                 <input id="salary" name="salary" type="text" class="form-control resume" required="" placeholder="100$">
                                             </div>
                                         </div>
@@ -151,7 +151,8 @@
 
                                     <div class="row">
                                         <div class="col-lg-12 mt-2">
-                                            <input type="submit" id="submit" name="action" class="submitBnt btn btn-primary" value="Post a Job">
+                                            <input type="submit" id="submit" name="" class="submitBnt btn btn-primary" value="Post a Project">
+                                            <input type="hidden" id="submit" name="action" class="submitBnt btn btn-primary" value="Post a Job">
                                         </div>
                                     </div>
                                 </form>

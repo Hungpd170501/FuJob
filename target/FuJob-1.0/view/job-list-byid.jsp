@@ -22,12 +22,12 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="text-center text-white">
-                                <h4 class="text-uppercase title mb-4">Job posted view</h4>
+                                <h4 class="text-uppercase title mb-4">Projects posted view</h4>
                                 <ul class="page-next d-inline-block mb-0">
                                     <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
-                                    <li><a href="#" class="text-uppercase font-weight-bold">Jobs</a></li> 
+                                    <li><a href="#" class="text-uppercase font-weight-bold">Projects</a></li> 
                                     <li>
-                                        <span class="text-uppercase text-white font-weight-bold">Job Posted Listing</span> 
+                                        <span class="text-uppercase text-white font-weight-bold">Projects Posted Listing</span> 
                                     </li>
                                 </ul>
                             </div>
@@ -50,7 +50,7 @@
                                     <div class="col-lg-3 col-md-6">
                                         <div class="registration-form-box">
                                             <i class="fa fa-briefcase"></i>
-                                            <input type="text" name="searchtitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Job title...">
+                                            <input type="text" name="searchtitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-6">
@@ -102,8 +102,8 @@
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <div class="section-title text-center mb-4 pb-2">
-                            <h4 class="title title-line pb-5">All Your Job Posted</h4>
-                            <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
+                            <h4 class="title title-line pb-5">All Your Projects Posted</h4>
+                            <p class="text-muted para-desc mx-auto mb-1">Tell us about your project. We'll quickly match you with the right freelancers.</p>
                         </div>
                     </div>
                 </div>

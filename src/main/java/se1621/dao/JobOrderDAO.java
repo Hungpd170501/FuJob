@@ -230,13 +230,13 @@ public class JobOrderDAO {
         return null;
     }
 
-    public boolean delete(String jobOrderID) throws SQLException {
+    public boolean delete(int jobOrderID) throws SQLException {
         boolean check = false;
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(DELETE);
-                preStm.setString(1, jobOrderID);
+                preStm.setInt(1, jobOrderID);
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -252,28 +252,7 @@ public class JobOrderDAO {
         return check;
     }
 
-    public void deleteJobOrder(List<Integer> listJobOrderID) throws SQLException {
-        boolean check = false;
-        try {
-            conn = DBUtils.getInstance().getConnection();
-            if (conn != null) {
-                for (Integer jobOrderID : listJobOrderID) {
-                preStm = conn.prepareStatement(DELETE);
-                preStm.setInt(1, jobOrderID);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (preStm != null) {
-                preStm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-
-    }
+    
     public List<Integer> getListUserIDOfJob(int jobID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -307,7 +286,7 @@ public class JobOrderDAO {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
-                preStm = conn.prepareStatement(GETTALLUSERIDOFJOB);
+                preStm = conn.prepareStatement(GETTALLJOBORDERIDOFJOB);
                 preStm.setInt(1, jobID);
                 rs = preStm.executeQuery();
                 List<Integer> list = new ArrayList<>();
