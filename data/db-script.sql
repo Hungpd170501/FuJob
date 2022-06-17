@@ -401,3 +401,92 @@ VALUES (
  Contributing ideas to the Company''s events and Marketing campaigns',1
 )
 GO
+
+
+INSERT INTO tblUser(username,password,fullName,email,phone,roleID,status, companyID) 
+VALUES (N'admin', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW' , N'Tao la Admin' , N'admin@gmail.com' , N'0780780791' ,N'AD', 1, NULL),
+	--Student
+	(N'customer1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Van A', N'abc1@gmail.com', N'0780780789', N'US',1, NULL),
+     	(N'dev1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'dev1', N'hungpdse150222@fpt.edu.vn', N'0780780792', N'US',1, NULL),
+	(N'dev2', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'dev2', N'baohngse150260@fpt.edu.vn', N'0780780793', N'US',1, NULL),
+      	(N'dev3', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'dev3', N'duylhse150233@fpt.edu.vn', N'0780780794', N'US',1, NULL),
+	(N'dev4', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'dev4', N'binhlqse150199@fpt.edu.vn', N'0780780795', N'US',1, NULL),
+	--HRM 7
+	(N'HRManagement1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Tran Van Tot', N'hrm1@gmail.com', N'0780780790', N'HRM',1, 1),
+	(N'HRManagement1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Lai Van Huynh', N'hrm2@gmail.com', N'0780785790', N'HRM',1, 2),
+	(N'HRManagement1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Quoc Sang', N'hrm3@gmail.com', N'0783780790', N'HRM',1, 3),
+	(N'HRManagement1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Tuan Tu', N'hrm4@gmail.com', N'0780788790', N'HRM',1, 4),
+	(N'HRManagement1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Huu Tai', N'hrm5@gmail.com', N'0780083790', N'HRM',1, 5),
+	--HR 12
+	(N'HumanResource1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Tran Van Van', N'hr1@gmail.com', N'0707554123', N'HR',1, 1),
+	(N'HumanResource2', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Huynh Tu Van', N'hr2@gmail.com', N'0707654123', N'HR',1, 1),
+	(N'HumanResource3', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Cao Gia Tuan', N'hr3@gmail.com', N'0777554123', N'HR',1, 1),
+	(N'HumanResource4', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Tran Duc Hung', N'hr4@gmail.com', N'0707534123', N'HR',1, 1),
+	(N'HumanResource5', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Anh Hoang', N'hr5@gmail.com', N'0707551123', N'HR',1, 1),
+	
+	(N'HumanResource6', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Quach Tran Phong', N'hr6@gmail.com', N'0707514123', N'HR',1, 2),
+	(N'HumanResource7', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Dang Tra Quang', N'hr7@gmail.com', N'0797554123', N'HR',1, 2),
+	(N'HumanResource8', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Hai Phong', N'hr8@gmail.com', N'0707514123', N'HR',1, 2),
+	(N'HumanResource9', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Quang Hai', N'hr9@gmail.com', N'0707554623', N'HR',1, 2),
+	(N'HumanResource10', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Quach Thanh Van', N'hr10@gmail.com', N'0708554123', N'HR',1, 2),
+	
+	(N'HumanResource11', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Quach Tran Sang', N'hr11@gmail.com', N'0707554823', N'HR',1, 3),
+	(N'HumanResource12', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Quach Hoai Niem', N'hr12@gmail.com', N'0707554523', N'HR',1, 3),
+	(N'HumanResource13', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Quach Giong Cao', N'hr13@gmail.com', N'0707552323', N'HR',1, 3),
+	(N'HumanResource14', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Quach Tran Phu', N'hr14@gmail.com', N'0707551223', N'HR',1, 3),
+	(N'HumanResource15', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Tran Van Phong', N'hr15@gmail.com', N'0701254123', N'HR',1, 3),
+	
+	(N'HumanResource16', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Huynh Tran Nen', N'hr16@gmail.com', N'0703454823', N'HR',1, 4),
+	(N'HumanResource17', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Luong Xuan Truong ', N'hr17@gmail.com', N'0907554523', N'HR',1, 4),
+	(N'HumanResource18', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Do Duy Manh', N'hr18@gmail.com', N'0707552233', N'HR',1, 4),
+	(N'HumanResource19', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Cao Tien Dung', N'hr19@gmail.com', N'0707598223', N'HR',1, 4),
+	(N'HumanResource20', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Bui Tan Truong', N'hr20@gmail.com', N'0701454123', N'HR',1, 4),
+	
+	(N'HumanResource21', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Tuan Anh', N'hr21@gmail.com', N'0233454823', N'HR',1, 5),
+	(N'HumanResource22', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Luong Hoang Duc', N'hr22@gmail.com', N'0945554523', N'HR',1, 5),
+	(N'HumanResource23', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Do Hung Dung', N'hr23@gmail.com', N'0707511233', N'HR',1, 5),
+	(N'HumanResource24', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Tran Dinh Trong', N'hr24@gmail.com', N'0733598223', N'HR',1, 5),
+	(N'HumanResource25', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Vu Van Thanh', N'hr25@gmail.com', N'0701456123', N'HR',1, 5),
+GO
+
+INSERT INTO tblCategory ( categoryName,img) 
+VALUES  
+	('International Business', 'https://cdn.dribbble.com/users/7031637/screenshots/15591230/gig-8_4x.jpg'),
+	('Software Engineering', 'https://www.logopik.com/wp-content/uploads/edd/2018/10/Software-Engineering-Vector-Logo.png'),
+	('Information Assurance', 'https://media.istockphoto.com/vectors/quick-key-logo-design-template-vector-id1013496226?b=1&k=20&m=1013496226&s=612x612&w=0&h=sywpjBFewebZRb7U9LbpfuNRChgg0oPXHUrWhEkAubE='),
+	('Multimedia Communication', 'https://i.pinimg.com/736x/77/7f/3e/777f3e9f89ac6e127882d31199faee20.jpg'),
+	('Graphic Design', 'https://cdn.dribbble.com/users/5246557/screenshots/12263175/media/f9210e3bf7a485987a931a3a54c8b70c.jpg?compress=1&resize=400x300&vertical=top'),
+	('Hotel Management', 'https://www.pngkey.com/png/detail/376-3765477_hospitality-management-icon-logo-hospitality-management.png'),
+	('Tourism service and Travel Management', 'https://www.nicepng.com/png/detail/370-3705541_gtifavi2-travel-insurance-logo-png.png'),
+	('English language', 'https://w7.pngwing.com/pngs/230/768/png-transparent-english-world-foreign-language-colloquialism-england-miscellaneous-blue-text.png'),
+	('Japanese language', 'https://upload.wikimedia.org/wikipedia/commons/a/a2/Japanese-language.jpg'),
+	('Digital Marketing', 'https://banner2.cleanpng.com/20181210/jsb/kisspng-digital-marketing-marketing-strategy-social-media-internet-png-images-png-mart-5c0e7c2c9723e1.5757274415444531646191.jpg'),
+	('Information System', 'https://www.logolynx.com/images/logolynx/s_7b/7bd3f19896635439f5d9f4cc08086934.gif'),
+	('Artificial Intelligence', 'https://i.pinimg.com/736x/f6/fa/4e/f6fa4e259c05252ba32cd12e98061b11.jpg'),
+	('Korean Language', 'https://charuzu.files.wordpress.com/2015/09/korea_south_640.png'),
+	('Internet of Things', 'https://lumihaiphong.vn/Data/images/IOT_Internet_of_Things_2017.jpg'),
+	(N'Other', 'https://seeklogo.com/images/U/undefined-logo-FE82D12763-seeklogo.com.gif')
+GO
+
+
+insert into tblJobs (userID, jobTitle, jobCategoryID, budged, address, email, phone, description, expiriedDate, jobStatus)
+VALUES ('7', 'International situation analysis', 1, 2000, 'Ho Chi Minh', 'timkinhdoanhquocte@gmail.com', '0988234654', 'Use All Source Intelligence to analysis international conflict/trade/business/affair/relation.', '2022-08-17', 1),
+	('7', 'Need Facebook Live Veiw Increase Bot', 2, 20, 'Da Nang', 'timsw@gmail.com', '0988214454', 'Need Facebook Live View Increase Bot simple tool easy to use', '2022-09-17', 1)
+	('7', 'Cyber security expert needed for a database application analysis', 3, 20, 'Ho Chi Minh City', 'timia@gmail.com', '0988215654', 'I need a person to look at my issue to resolve it in a timely manner, Please let me know if you are available to handle this. I am very excited to work with you guys. Please contact me and I would love to provide you with more context about the task.', 1)
+	('7', 'Graphic Design', 5, 20, 'Ha Noi City', 'timgd@gmail.com', '0988219654', 'We are needing someone to create social media graphics in various sizes. The output will be in PNG files saved with transparency.  We will need square format and story format images.  We will be able to give complete direction with sample work to be modified and created.  We will be available via email and zoom to give direction. This project is more redesigning existing collateral media with direction than creating content from scratch.', '2022-09-10', 1),
+	('7', 'Sales Staff (Selling Tickets at Counters/ Stations, Concierge)', 6, 1, 'Ho Chi Minh', 'timhm@gmail.com', '0982314454', 'Ticket sales, customer support at the counter at the Independence Palace in District 1: shifts 8am to 3pm every day; and/or: assisting customers at Hop on Hop off double-decker bus (stops at pedestrian street 92 Nguyen Hue, District 1 and at City Post Office No. 2 Paris Commune District 1): shift 8:30am - 4:00pm or 15:30-22:30', '2022-09-17', 1),
+	
+	('8', 'jobTitle',10 , budged, 'Toan Quoc', 'timdm@gmail.com', '0703309128', 'description', 2022-08-23, 1),
+	
+	('8', 'Multimedia Coordinator', 4, 20, 'Ha Noi', 'timmc@gmail.com', '0988212254', 'The Multimedia Coordinator will work under the direction of the Associate Athletic Director, External Affairs, in preparing video packages for the Athletics Department’s website and LED video boards. This position is responsible for generating social media content and assisting the administrative staff with special projects. There are currently two openings available for this position.', '2022-09-15', 1),
+	('8', 'Tour Operator', 7, 20, 'Hoi An', 'timtour@gmail.com', '0988212254', 'Find someone who can lead the delegation to visit Hoi An. Required to be agile, energetic, funny, understand the characteristics needed for the tour. Able to control, manage the delegation, handle unexpected incidents. The trip lasts 3 days and 3 nights, with accommodation and food allowance available.', '2022-09-15', 1),
+	('8', 'blog article Englishr', 8, 100, 'Toan Quoc', 'timta@gmail.com', '098821254', 'I need to find a freelancer who can write English well for long-term cooperation. Especially good at copywriting in English to write blog articles (about 1000 words). The job will be writing a blog article for a website about student life, job seeking experience, how to get high scores...You are encouraged to bid for the project: You have studied abroad in English speaking countries, IELTS 7.5-8.0 or higher or similar TOEFL, You are teaching English', '2022-10-15', 1),
+	('8', 'write articles in Japanese', 9, 200, 'Toan Quoc', 'timtn@gmail.com', '0934212254', 'Writing Japanese articles for IT companies based on ideas and available information will be provided. Various topics: internal company events, product introduction, articles related to IT a bit (if you have IT knowledge),...', '2022-09-15', 1),
+	('8', 'Google Ads Optimization for Selling AI Book',10 , 50, 'Toan Quoc', 'timdm@gmail.com', '0703309128', 'Our AI book has sold more than 1000 copies using another ad platform. The point is the product is surely saleable. We have started using Google Ads. We need some optimizations of our Google Ads to give good conversion. We take care of the ads budget for sure. If with your optimized google ads we succeed to sell 5 copies, within the agreed ads budget, 5 STAR is guaranteed', 2022-08-23, 1),
+	
+	('9', 'Business Analyst For A Mini Project',11 , 30, 'Can Tho', 'timba@gmail.com', '0703308333', 'Working as a BA for a group of students, meeting, analyzing and understanding the software requirements for a small project at school. Ability to speak both English and Vietnamese fluently. Ability to conduct general desk research activities. Have a "can do" attitude, agile, and resilient. Does not afraid to ask questions when necessary', 2022-09-23, 1),
+	('9', 'Clothes Customization Software For Ecommerce', 12, 2500, 'Ho Chi Minh', 'timai@gmail.com', '0703239128', 'A web application developed in either Python Django or Ruby on Rails  that will be mainly for customization of the clothes in an e-commerce for example suit, shirts, pants etc... the admin user should be able to scan fabric, sleeve, collar, cuff, placket etc... so that the end user will be able to customize the clothes he want as he likes, will send similar websites for the developer that will be working on this project, the candidate should have an experience in developing such websites.', 2022-09-23, 1),
+	('9', 'Korean translation collaborator, in the fields of Automotive',13, 200, 'Ha Noi', 'timth@gmail.com', '0890309128', 'Need someone to translate some car sales contracts in Korean. Requires final year Korean language students or TOPIK 5 or higher, know some automotive terms. Fun, sociable, agile, good appearance is an advantage.It is possible to give extra tips if the contract is smooth and favorable.', 2022-10-23, 1),
+	('9', 'configure IOT Project', 14, 100, 'Ben Tre', 'timiot@gmail.com', '0703345128', 'Dear we are looking for someone with hands on experience in IOT to configure and run this project. The basis architecture is to have one Nodemcu that connect multiple   devices together that are connect to wireless connection and to measure the stability of the network. The task is to help on how to configure and run the projects and we will buy all necessary hardware.', 2022-11-23, 1),
+	('9', 'IoT Developerr', 14, 1000, 'Ha Noi', 'tỉmesd@gmail.com', '0234409128', 'Participating in programming of pic, arm, esp, family of microcontrollers..Developing Desktop applications, managing production for customer projects. Requires proficiency in programming languages C#, DotNet, MSSQL Server database. Knowledge of industry communication standards. Need to be smart, industrious, cheerful, sociable.', 2022-08-23, 1),
+GO
