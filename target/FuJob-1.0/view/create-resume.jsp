@@ -100,12 +100,12 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+<!--                                        <div class="col-md-4">
                                             <div class="form-group app-label">
                                                 <label class="text-muted">School Name<span class="text-danger">*</span> :</label>
                                                 <input id="schoolName" name="shoolName" type="text" class="form-control resume" required="" placeholder="Job University ">
                                             </div>
-                                        </div>
+                                        </div>-->
 
                                         <div class="col-md-4">
                                             <div class="form-group app-label">
@@ -121,7 +121,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+<!--                                        <div class="col-md-4">
                                             <div class="form-group app-label">
                                                 <label class="text-muted">Experience in your major<span class="text-danger">*</span> :</label>
                                                 <div class="form-button">
@@ -135,7 +135,7 @@
 
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>-->
 
                                         <div class="col-md-4">
                                             <div class="form-group app-label">
@@ -155,7 +155,19 @@
                                     <div class="col-md-4">
                                         <div class="form-group app-label">
                                             <label class="text-muted">Your Website:</label>
-                                            <input id="website" name="website" type="text" class="form-control resume" placeholder="website, github, facebook,... ">
+                                            <input id="website" name="website" type="text" class="form-control resume" placeholder="If u have a website of yourself, fill in here">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group app-label">
+                                            <label class="text-muted">Your GitHub</label>
+                                            <input id="" name="" type="text" class="form-control resume" placeholder="If u have a github, fill in here ">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group app-label">
+                                            <label class="text-muted">Your Linkedin</label>
+                                            <input id="" name="" type="text" class="form-control resume" placeholder="If u have a linkedin, fill in here ">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
