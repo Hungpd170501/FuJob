@@ -18,7 +18,6 @@ GO
 CREATE TABLE tblUsers
 (
 	userID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
-	username varchar(50) NOT NULL,
 	password varchar(500) NOT NULL,
 	fullName varchar(50) NOT NULL,
 	phone varchar(20),
@@ -358,7 +357,7 @@ VALUES	('1', N'Pay fixed Price'),
       	('2', N'Pay by Hour')
 GO
 
-INSERT INTO tblUsers(username,password,fullName,email,phone,roleID,userStatus, companyID) 
+INSERT INTO tblUsers(password,fullName,email,phone,roleID,userStatus, companyID) 
 VALUES (N'admin', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW' , N'Tao la Admin' , N'admin@gmail.com' , N'0780780791' ,N'AD', 1, NULL),
 	--Student
 	(N'customer1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Van A', N'abc1@gmail.com', N'0780780789', N'US',1, NULL),
