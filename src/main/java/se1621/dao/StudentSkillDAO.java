@@ -23,6 +23,8 @@ public class StudentSkillDAO {
     private static final String GETSTUDENTSKILL = "SELECT stskill.StudentSkillID, stskill.StudentID, stskill.skillID, skill.skillName "
             + "FROM (tblStudentSkill stskill left join tblSkill skill on stskill.skillID = skill.skillID) "
             + "WHERE stskill.StudentID = ?";
+    private  static final String DELETESKILL = "DELETE FROM tblStudentSkill WHERE StudentID = ? ";
+    private  static final String CHECKSTUDENTHAVESKILL = "SELECT StudentSkillID FROM tblStudentSkill WHERE StudentID = ? ";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -85,5 +87,58 @@ public class StudentSkillDAO {
             }
         }
         return listStudentSkill;
+    }
+    
+    public boolean deleteStudetnSkill(int studentID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(DELETESKILL);
+                preStm.setInt(1, studentID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    public boolean checkStudentHaveSkill(int studentID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(CHECKSTUDENTHAVESKILL);
+                preStm.setInt(1, studentID);
+                rs = preStm.executeQuery();
+                while (rs.next()) {
+                   check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 }

@@ -33,7 +33,7 @@
         </section>
         <section class="section text-center" name="action">
             <h3 class="text-warning "><%=message%></h3>
-            <a href="${pageContext.request.contextPath}/view/create-resume.jsp"><p class="h5" style="text-decoration: underline">Create Your Resume Now</p></a>
+            <a href="${pageContext.request.contextPath}/MainController?action=CheckCreateResume&studentID=${sessionScope.LOGIN_USER.userID}"><p class="h5" style="text-decoration: underline">Create Your Resume Now</p></a>
         </section>
         <%
             }

@@ -57,14 +57,19 @@ public class CreateResumeController extends HttpServlet {
 
             HttpSession session = request.getSession();
             User loginUser = (User) session.getAttribute("LOGIN_USER");
-            int userID = loginUser.getUserID();
-            Resume resume = new Resume(0, userID, avatar, fullName, gender, dateOfBirth,
-                    gmail, phone, address, shoolName, major, gpa, chooseExY, website, seflintro);
+            int studentID = loginUser.getUserID();
+            Resume resume = Resume.builder().avartar(avatar).fullName(fullName).gender(gender).dateOfBirth(dateOfBirth)
+                                    .gmail(gmail).phone(phone).address(address).schoolName(shoolName).major(major)
+                                    .gpa(gpa).experienceYear(chooseExY).website(website).overview(seflintro).build();
 
             StudentSkillDAO studentSkillDAO = new StudentSkillDAO();
             List<StudentSkill> listStudentSkill = new ArrayList<>();
+            
+            if(studentSkillDAO.checkStudentHaveSkill(studentID)) {
+                studentSkillDAO.deleteStudetnSkill(studentID);
+            }
             for (Integer skill : skillSet) {
-                StudentSkill studentSkill = StudentSkill.builder().studentID(userID).skill(Skill.builder().skillID(skill).build()).build();
+                StudentSkill studentSkill = StudentSkill.builder().studentID(studentID).skill(Skill.builder().skillID(skill).build()).build();
                 listStudentSkill.add(studentSkill);
             }
             List<Boolean> listCheckCreateStudentSkill = new ArrayList<>();
@@ -78,20 +83,20 @@ public class CreateResumeController extends HttpServlet {
 
                 ResumeDAO resumedao = new ResumeDAO();
                 boolean checkValidation = true;
-                boolean checkDuplicate = resumedao.checkDuplicate(userID);
+                boolean checkDuplicate = resumedao.checkDuplicate(studentID);
                 if (checkDuplicate) {
                     checkValidation = false;
-                    boolean checkUpdateResume = resumedao.updateResume(resume, userID);
+                    boolean checkUpdateResume = resumedao.updateResume(resume, studentID);
                     if (checkUpdateResume) {
                         request.setAttribute("MESSAGE", "Your Resume has been updated!");
-                        url = SUCCESS + userID;
+                        url = SUCCESS + studentID;
                     }
                 }
                 if (checkValidation) {
                     boolean checkCreateResume = resumedao.createResume(resume);
                     if (checkCreateResume) {
                         request.setAttribute("MESSAGE", "Create Resume Successfully!");
-                        url = SUCCESS + userID;
+                        url = SUCCESS + studentID;
                     }
                 }
 

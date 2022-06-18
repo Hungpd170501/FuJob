@@ -19,6 +19,7 @@ se1621\controller\PostJobController.class
 se1621\dto\SkillRequire.class
 se1621\utils\EmailUtils$1.class
 se1621\controller\SignUpController.class
+se1621\controller\CheckCreateResumeController.class
 se1621\dto\Skill$SkillBuilder.class
 se1621\dto\JobOrder.class
 se1621\dto\Role.class

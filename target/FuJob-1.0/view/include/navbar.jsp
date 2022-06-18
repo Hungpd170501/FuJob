@@ -119,7 +119,7 @@
                         <div class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Your Resume</div>
                     </div>
                     <ul class="submenu">
-                        <li><a href="${pageContext.request.contextPath}/view/create-resume.jsp">Edit your resume</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=CheckCreateResume&studentID=${sessionScope.LOGIN_USER.userID}">Edit your resume</a></li>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&searchResumeID=${sessionScope.LOGIN_USER.userID}">View your resume</a></li>
                     </ul>  
                 </li>

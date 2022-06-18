@@ -55,6 +55,8 @@ public class MainController extends HttpServlet {
     private static final String SEARCHJOBPOSTED_CONTROLLER = "SearchInJobPostedController";
     private static final String SEARCHJOBORDER = "SearchJobOrder";
     private static final String SEARCHJOBORDER_CONTROLLER = "SearchInJobOrderController";
+    private static final String CHECKCREATERESUME = "CheckCreateResume";
+    private static final String CHECKCREATERESUME_CONTROLLER = "CheckCreateResumeController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -104,6 +106,8 @@ public class MainController extends HttpServlet {
                 url = SEARCHJOBPOSTED_CONTROLLER;
             } else if (SEARCHJOBORDER.equals(action)) {
                 url = SEARCHJOBORDER_CONTROLLER;
+            } else if (CHECKCREATERESUME.equals(action)) {
+                url = CHECKCREATERESUME_CONTROLLER;    
             } else {
                 url = ERROR;
             }
