@@ -97,6 +97,8 @@ CREATE TABLE tblResumes
 	major varchar(50),
 	gpa varchar(15),
 	website varchar ( 100 ),
+	gitHub varchar(3000),
+	linkedIn varchar(3000),
 	overview Nvarchar(3000),
 	createdDate datetime,
 	lastModifiedDate datetime,
