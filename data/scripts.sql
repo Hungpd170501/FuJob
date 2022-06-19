@@ -158,8 +158,8 @@ CREATE TABLE tblJobApplications (
 );
 GO
 
-IF OBJECT_ID('dbo.tblJobsSkills', 'u') IS NOT NULL 
-   DROP TABLE dbo.tblJobsSkills;  
+IF OBJECT_ID('dbo.tblJobSkills', 'u') IS NOT NULL 
+   DROP TABLE dbo.tblJobSkills;  
 GO
 
 CREATE TABLE tblJobSkills(
@@ -169,8 +169,8 @@ CREATE TABLE tblJobSkills(
 );
 GO
 
-IF OBJECT_ID('dbo.tblResumesSkills', 'u') IS NOT NULL 
-   DROP TABLE dbo.tblResumesSkills;  
+IF OBJECT_ID('dbo.tblResumeSkills', 'u') IS NOT NULL 
+   DROP TABLE dbo.tblResumeSkills;  
 GO
 
 CREATE TABLE tblResumeSkills (
@@ -180,6 +180,9 @@ CREATE TABLE tblResumeSkills (
 );
 GO
 
+IF OBJECT_ID('dbo.tblPaymentMethods', 'u') IS NOT NULL 
+   DROP TABLE dbo.tblPaymentMethods;  
+GO
 CREATE TABLE tblPaymentMethods (
 	paymentMethodID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
 	paymentMethodName nvarchar(50) NOT NULL
