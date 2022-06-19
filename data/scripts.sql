@@ -8,7 +8,7 @@ END;
 CREATE DATABASE FuJobDB_1;
 GO
 
-USE FuJobDB
+USE FuJobDB_1
 GO
 
 IF OBJECT_ID('dbo.tblUsers', 'u') IS NOT NULL 
@@ -212,16 +212,16 @@ GO
 ALTER TABLE tblJobApplications ADD CONSTRAINT fk_JobApplications_jobID
 FOREIGN KEY(jobID) REFERENCES tblJobs(jobID)
 GO
-ALTER TABLE tblJobsSkills ADD CONSTRAINT fk_JobsSkills_jobID
+ALTER TABLE tblJobSkills ADD CONSTRAINT fk_JobSkills_jobID
 FOREIGN KEY(jobID) REFERENCES tblJobs(jobID)
 GO
-ALTER TABLE tblJobsSkills ADD CONSTRAINT fk_JobsSkills_skillID
+ALTER TABLE tblJobSkills ADD CONSTRAINT fk_JobSkills_skillID
 FOREIGN KEY(skillID) REFERENCES tblSkills(skillID)
 GO
-ALTER TABLE tblResumesSkills ADD CONSTRAINT fk_ResumesSkills_resumeID
+ALTER TABLE tblResumeSkills ADD CONSTRAINT fk_ResumeSkills_resumeID
 FOREIGN KEY(resumeID) REFERENCES tblResumes(resumeID)
 GO
-ALTER TABLE tblResumesSkills ADD CONSTRAINT fk_ResumesSkills_skillID
+ALTER TABLE tblResumeSkills ADD CONSTRAINT fk_ResumeSkills_skillID
 FOREIGN KEY(skillID) REFERENCES tblSkills(skillID)
 GO
 
