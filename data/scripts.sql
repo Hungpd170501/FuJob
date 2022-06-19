@@ -190,7 +190,7 @@ GO
 
 --Referential Integrity Constraints
 ALTER TABLE tblJobs ADD CONSTRAINT fk_Jobs_paymentMethodID
-FOREIGN KEY(paymentMethodIDID) REFERENCES tblPaymentMethods(paymentMethodID)
+FOREIGN KEY(paymentMethodID) REFERENCES tblPaymentMethods(paymentMethodID)
 GO
 ALTER TABLE tblJobs ADD CONSTRAINT fk_Jobs_jobCategoryID
 FOREIGN KEY(jobCategoryID) REFERENCES tblCategories(categoryID)
