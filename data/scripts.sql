@@ -128,7 +128,6 @@ CREATE TABLE tblJobs(
 	userID INT NOT NULL,
 	jobTitle varchar(255),
 	jobCategoryID INT,
-	deadline date,
 	budget float,
 	paymentMethodID INT,
 	address varchar(100),
