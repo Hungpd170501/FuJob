@@ -4,6 +4,7 @@
  */
 package se1621.dto;
 
+import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,12 +21,13 @@ import lombok.ToString;
 public class User {
 
     private int userID;
-    private String username;
     private String password;
     private String fullName;
-    private String phone;
     private String email;
-    private int status;
+    private Date createdDate;
+    private Date lastModifiedDate;
+    private int userStatus;
     Role role;
+    private int projectPosted;
     private int companyID;
 }

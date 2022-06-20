@@ -11,7 +11,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import se1621.dao.CompanyInfoDAO;
 import se1621.dao.UserDAO;
 import se1621.dto.Role;
 import se1621.dto.User;
@@ -37,6 +36,7 @@ public class SignUpController extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             String roleID = request.getParameter("roleID");
+            int companyID = Integer.parseInt(request.getParameter("companyID"));
             UserDAO dao = new UserDAO();
             UserError userError = new UserError();
             boolean checkValidation = true;
@@ -48,11 +48,11 @@ public class SignUpController extends HttpServlet {
             }
             if (checkValidation) {
                 User user = User.builder()
-                        .username(fullName)
                         .password(Helper.hashPassword(password))
                         .fullName(fullName)
                         .role(new Role(roleID, ""))
                         .email(email)
+                        .companyID(companyID)
                         .build();
                 boolean checkSignup = dao.signup(user);
                 if (checkSignup) {

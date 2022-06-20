@@ -16,7 +16,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="/FuJob/MainController">
+                <form method="POST" action="${pageContext.request.contextPath}/MainController">
                     <div class="modal-body">
                         <div class="form-group text-dark">
                             <label>Deal Price</label>

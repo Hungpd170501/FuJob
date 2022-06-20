@@ -109,13 +109,17 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <div class="candidates-list-fav-btn text-right">
-                                                <div class="fav-icon">
-                                                    <i class="mdi mdi-heart"></i>
-                                                </div>
+                                            <div class="candidates-list-fav-btn text-right">        
                                                 <div class="candidates-listing-btn mt-4">
                                                     <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&searchResumeID=<%= resume.getUserID()%>" class="btn btn-primary-outline btn-sm">View Profile</a>
                                                 </div>
+                                                <div class="mt-3">
+
+                                                    <button onclick="getJobPostID()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation">
+                                                        Deny
+                                                    </button>
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -164,13 +168,13 @@
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-            $(".job-display").slice(0, 10).show();
-            $(".smj").on("click", function () {
-                $(".job-display:hidden").slice(0, 5).slideDown();
-                if ($(".job-display:hidden").length == 0) {
-                    $(".smj").fadeOut('slow');
-                }
-            });
+                                                        $(".job-display").slice(0, 10).show();
+                                                        $(".smj").on("click", function () {
+                                                            $(".job-display:hidden").slice(0, 5).slideDown();
+                                                            if ($(".job-display:hidden").length == 0) {
+                                                                $(".smj").fadeOut('slow');
+                                                            }
+                                                        });
         </script>
     </body>
 </html>

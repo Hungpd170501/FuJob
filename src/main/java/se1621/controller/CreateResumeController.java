@@ -64,7 +64,6 @@ public class CreateResumeController extends HttpServlet {
 
             StudentSkillDAO studentSkillDAO = new StudentSkillDAO();
             List<StudentSkill> listStudentSkill = new ArrayList<>();
-            
             if(studentSkillDAO.checkStudentHaveSkill(studentID)) {
                 studentSkillDAO.deleteStudetnSkill(studentID);
             }

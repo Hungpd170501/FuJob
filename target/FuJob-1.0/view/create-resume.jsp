@@ -12,7 +12,6 @@
         </jsp:include>
         <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
         </head>
-
         <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
@@ -67,7 +66,7 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <div class="form-group app-label">
+                                        <div class="form-group app-label">D
                                             <label class="text-muted">Gender<span class="text-danger">*</span> :</label>
                                             <div class="form-button">
                                                 <select class="form-control resume" name="gender" required="">
@@ -133,13 +132,6 @@
 
                                     <div class="col-md-4">
                                         <div class="form-group app-label">
-                                            <label class="text-muted">School Name<span class="text-danger">*</span> :</label>
-                                            <input id="schoolName" name="shoolName" type="text" class="form-control resume" required="" placeholder="Job University " value="<%= resume.getSchoolName()%>">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="form-group app-label">
                                             <label class="text-muted">Major<span class="text-danger">*</span> :</label>
                                             <input id="major" name="major" type="text" class="form-control resume" required="" placeholder="Major: " value="<%= resume.getMajor()%>">
                                         </div>
@@ -152,81 +144,9 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
-                                        <div class="form-group app-label">
-                                            <label class="text-muted">Experience in your major<span class="text-danger">*</span> :</label>
-                                            <div class="form-button">
-                                                <select class="form-control resume" name="chooseExY" required="">
-                                                    <%
-                                                        if (resume.getExperienceYear() != "") {
-                                                            switch (resume.getExperienceYear()) {
-                                                                case "Less than 1 year":
-                                                    %>                  
-                                                    <option selected="selected" value="Less than 1 year">Less than 1 year</option>
-                                                    <option value="1-3 years">1-3 years</option>
-                                                    <option value="3-5 years">3-5 years</option>
-                                                    <option value="5-10 years">5-10 years</option>
-                                                    <option value="More than 10 years">More than 10 years</option>
-                                                    <%
-                                                            break;
-                                                        case "1-3 years":
-                                                    %>
-                                                    <option value="Less than 1 year">Less than 1 year</option>
-                                                    <option selected="selected" value="1-3 years">1-3 years</option>
-                                                    <option value="3-5 years">3-5 years</option>
-                                                    <option value="5-10 years">5-10 years</option>
-                                                    <option value="More than 10 years">More than 10 years</option>
-                                                    <%
-                                                            break;
-                                                        case "3-5 years":
-                                                    %>
-                                                    <option value="Less than 1 year">Less than 1 year</option>
-                                                    <option value="1-3 years">1-3 years</option>
-                                                    <option selected="selected" value="3-5 years">3-5 years</option>
-                                                    <option value="5-10 years">5-10 years</option>
-                                                    <option value="More than 10 years">More than 10 years</option>
-                                                    <%
-                                                            break;
-                                                        case "5-10 years":
-                                                    %>
-                                                    <option value="Less than 1 year">Less than 1 year</option>
-                                                    <option value="1-3 years">1-3 years</option>
-                                                    <option value="3-5 years">3-5 years</option>
-                                                    <option selected="selected" value="5-10 years">5-10 years</option>
-                                                    <option value="More than 10 years">More than 10 years</option>
-                                                    <%
-                                                            break;
-                                                        case "More than 10 years":
-                                                    %>      
-                                                    <option value="Less than 1 year">Less than 1 year</option>
-                                                    <option value="1-3 years">1-3 years</option>
-                                                    <option value="3-5 years">3-5 years</option>
-                                                    <option value="5-10 years">5-10 years</option>
-                                                    <option selected="selected" value="More than 10 years">More than 10 years</option>
-                                                    <%
-                                                                    break;
-                                                            }
-                                                        } else {
-                                                    %>
-                                                    <option value="Less than 1 year">Less than 1 year</option>
-                                                    <option value="1-3 years">1-3 years</option>
-                                                    <option value="3-5 years">3-5 years</option>
-                                                    <option value="5-10 years">5-10 years</option>
-                                                    <option value="More than 10 years">More than 10 years</option>
-                                                    <%
-                                                        }
-                                                    %>
-                                                    
-                                                </select>
-
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <div class="col-md-4">
                                         <div class="form-group app-label">
-                                            <!--                                                <label class="text-muted">Skill Required<span class="text-danger">*</span></label>
-                                                                                            <input id="skillrequired" name="skill" type="text" class="form-control resume" required="" placeholder="JAVA, HTML, ....">-->
                                             <label class="text-muted">Skill Required<span class="text-danger">*</span></label> 
                                             <div class="form-button">
                                                 <select class="form-control resume select2 select2-hidden-accessible" name="skillID" multiple="" data-placeholder="Select skill" style="width: 100%; border-color: #dee2e6" tabindex="-1" aria-hidden="true">
@@ -240,8 +160,8 @@
                                                         <option value="${i.skillID}">${i.skillName}</option>
                                                     </c:forEach>
                                                     <%
-                                                            }
-                                                        }else{
+                                                        }
+                                                    } else {
                                                     %>
                                                     <c:forEach items="${chooseSkill.listSkill}" var="i">
                                                         <option value="${i.skillID}">${i.skillName}</option>
@@ -249,17 +169,26 @@
                                                     <%
                                                         }
                                                     %>                         
-
-                                                    
                                                 </select> 
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-4">
                                         <div class="form-group app-label">
                                             <label class="text-muted">Your Website:</label>
-                                            <input id="website" name="website" type="text" class="form-control resume" placeholder="website, github, facebook,... " value="<%= resume.getWebsite()%>">
+                                            <input id="website" name="website" type="text" class="form-control resume" placeholder="If u have a website of yourself, fill in here" value="<%= resume.getWebsite()%>">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group app-label">
+                                            <label class="text-muted">Your GitHub</label>
+                                            <input id="" name="" type="text" class="form-control resume" placeholder="If u have a github, fill in here ">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group app-label">
+                                            <label class="text-muted">Your Linkedin</label>
+                                            <input id="" name="" type="text" class="form-control resume" placeholder="If u have a linkedin, fill in here ">
                                         </div>
                                     </div>
                                     <div class="col-md-12">

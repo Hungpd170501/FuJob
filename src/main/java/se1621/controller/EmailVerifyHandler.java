@@ -39,7 +39,7 @@ public class EmailVerifyHandler extends HttpServlet {
                     User user = userDAO.checkUserByEmail(jwtTokenUtils.getEmailFromToken(token));
                     Helper helper = new Helper();
                     if ((user == null || !helper.checkPass(user.getPassword(), jwtTokenUtils.getPasswordFromToken(token)))
-                            || !helper.checkPass(user.getFullName(), jwtTokenUtils.getUsernameFromToken(token)) || user.getStatus() == 0) {
+                            || !helper.checkPass(user.getFullName(), jwtTokenUtils.getUsernameFromToken(token)) || user.getUserStatus() == 0) {
                     } else {
                         HttpSession session = request.getSession();
                         userDAO.activeUserAccount(jwtTokenUtils.getEmailFromToken(token));

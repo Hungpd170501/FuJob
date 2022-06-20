@@ -119,8 +119,12 @@ CREATE TABLE tblJob (
 	email varchar(255),
 	phone varchar(15),
 	description varchar(2000),
+<<<<<<< HEAD
 	lastDateUpdate datetime,
 	jobStatus tinyint NOT NULL
+=======
+	jobStatus tinyint,
+>>>>>>> 7c28cec8d5972d8cdffda1be1d19855e4b5c7244
 );
 GO
 
@@ -134,8 +138,12 @@ CREATE TABLE tblJobOrder (
 	cvFile varchar(MAX),
 	salaryDeal varchar(50),
 	message varchar(2000),
+<<<<<<< HEAD
 	dateApplied datetime,
 	jobOrderStatus tinyint NOT NULL,
+=======
+	jobOrderStatus tinyint,
+>>>>>>> 7c28cec8d5972d8cdffda1be1d19855e4b5c7244
 );
 GO
 

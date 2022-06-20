@@ -155,14 +155,14 @@ public class JwtTokenUtils {
         return refreshedToken;
     }
 
-    public Boolean validateToken(String token, User userDetails) {
-        final String username = getUsernameFromToken(token);
-        final Date created = getCreatedDateFromToken(token);
-        final Date expiration = getExpirationDateFromToken(token);
-        return (username.equals(userDetails.getUsername())
-                && !isTokenExpired(token)
-                && StringUtils.equals(userDetails.getPassword(), token));
-    }
+//    public Boolean validateToken(String token, User userDetails) {
+//        final String username = getUsernameFromToken(token);
+//        final Date created = getCreatedDateFromToken(token);
+//        final Date expiration = getExpirationDateFromToken(token);
+//        return (username.equals(userDetails.getUsername())
+//                && !isTokenExpired(token)
+//                && StringUtils.equals(userDetails.getPassword(), token));
+//    }
 
     public Boolean canParseToken(final String compactToken) {
         Boolean check = true;

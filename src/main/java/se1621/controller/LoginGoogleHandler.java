@@ -81,7 +81,7 @@ public class LoginGoogleHandler extends HttpServlet {
                 User user = dao.checkUserByEmail(googlePojo.getEmail());
                 HttpSession session = request.getSession();
                 if (user != null) {
-                    switch (user.getStatus()) {
+                    switch (user.getUserStatus()) {
                         case 0:
                             request.setAttribute("LOGIN_MESSAGE", "Your account has been deactivated. Please contact to FuJob Admin to reactivate it!");
                             break;
@@ -99,6 +99,9 @@ public class LoginGoogleHandler extends HttpServlet {
                                         url = USER_PAGE;
                                         break;
                                     case "HR":
+                                        url = USER_PAGE;
+                                        break;
+                                        case "HRM":
                                         url = USER_PAGE;
                                         break;
                                     default:

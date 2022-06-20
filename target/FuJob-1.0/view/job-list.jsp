@@ -195,6 +195,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </section>
         <!-- Back to top -->
         <a href="#" class="back-to-top rounded text-center" id="back-to-top" style="display: inline"> 

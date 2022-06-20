@@ -81,18 +81,10 @@
                                     %>
                                     <%= listStudentSkill.get(listStudentSkill.size() - 1).getSkill().getSkillName()%>
                                     </p>
-                                    <p class=" mb-3"><h7 style="font-weight: 700"> Experience: </h7><%= job.getExperienceNeeded()%></p>
                                     <p class=" mb-3"><h7 style="font-weight: 700"> Remuneration: </h7><%= job.getSalary()%></p>
-                                    <p class=" mb-3"><h7 style="font-weight: 700"> Deadline: </h7><%= job.getDeadline()%></p>
                                 </div>
                             </div> 
                         </div>
-
-                        <!--                        <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <h5 class="text-dark mt-4" style="font-weight: 700">Projects Description </h5>
-                                                    </div>
-                                                </div>-->
                         <div class="row" style="margin-top: 10px">
                             <div class="col-lg-12">
                                 <div class="job-detail border rounded mt-2 p-4"> 
@@ -108,8 +100,6 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="col-lg-4 col-md-5 mt-4 mt-sm-0">
                         <div class="job-detail border rounded p-4">
                             <h5 class="text-center pb-2" style="font-weight: 700">Contact me</h5>
@@ -147,7 +137,7 @@
                         } else {
                         %>        
                         <div class="job-detail border rounded mt-4">
-                            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Aplly For Projects</a>
+                            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Apply For Projects</a>
                         </div>
                         <%
                                 }

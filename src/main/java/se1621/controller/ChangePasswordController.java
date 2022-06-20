@@ -26,6 +26,7 @@ public class ChangePasswordController extends HttpServlet {
     private static final String AD = "AD";
     private static final String US = "US";
     private static final String HR = "HR";
+    private static final String HRM = "HRM";
     private static final String USER_PAGE = "/view/index.jsp";
     private static final String ADMIN_PAGE = "#";
 
@@ -39,7 +40,7 @@ public class ChangePasswordController extends HttpServlet {
             String password = request.getParameter("password");
             UserDAO userDAO = new UserDAO();
             if (userDAO.updateUserPassword(loginUser.getEmail(), Helper.hashPassword(password))) {
-                switch (loginUser.getStatus()) {
+                switch (loginUser.getUserStatus()) {
                     case 0:
                         request.setAttribute("LOGIN_MESSAGE", "Your account has been deactivated. Please contact to FuJob Support to reactivate it!!");
                         break;
@@ -56,6 +57,9 @@ public class ChangePasswordController extends HttpServlet {
                                 break;
                             case AD:
                                 url = ADMIN_PAGE;
+                                break;
+                            case HRM:
+                                url = USER_PAGE;
                                 break;
                             default:
                                 request.setAttribute("LOGIN_MESSAGE", "Your role is not supported!");

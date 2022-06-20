@@ -25,6 +25,7 @@ public class StudentSkillDAO {
             + "WHERE stskill.StudentID = ?";
     private  static final String DELETESKILL = "DELETE FROM tblStudentSkill WHERE StudentID = ? ";
     private  static final String CHECKSTUDENTHAVESKILL = "SELECT StudentSkillID FROM tblStudentSkill WHERE StudentID = ? ";
+
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -88,7 +89,6 @@ public class StudentSkillDAO {
         }
         return listStudentSkill;
     }
-    
     public boolean deleteStudetnSkill(int studentID) throws SQLException {
         boolean check = false;
         try {

@@ -28,6 +28,7 @@ public class JobOrderDAO {
     private static final String CHECKDUPLICATE_NONSTATUS = "SELECT jobOrderID FROM tblJobOrder WHERE userID = ? and jobID = ? and jobOrderStatus = 0";
     private static final String DELETE = "UPDATE tblJobOrder SET jobOrderStatus = 0 WHERE jobOrderID = ? ";
     private static final String GETTALLUSERIDOFJOB = "SELECT userID FROM tblJobOrder WHERE jobID = ?";
+    private static final String GETTALLJOBORDERIDOFJOB = "SELECT jobOrderID FROM tblJobOrder WHERE jobID = ?";
     private static final String GETALLJOBAPPLIED = "SELECT jo.jobOrderID, j.jobID, j.jobTitle, j.ExperienceNeeded, j.jobCategoryID, jo.cvFile, jo.salaryDeal, jo.message,"
             + "jo.dateApplied, c.categoryName, c.img, com.companyName,"
             + "j.deadline, j.completionTime, j.salary, j.address, j.email, j.phone, j.description"
@@ -282,6 +283,7 @@ public class JobOrderDAO {
         return check;
     }
 
+    
     public List<Integer> getListUserIDOfJob(int jobID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -311,6 +313,36 @@ public class JobOrderDAO {
         }
         return null;
     }
+    public List<Integer> getListJobOrderOfJob(int jobID) throws SQLException {
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GETTALLJOBORDERIDOFJOB);
+                preStm.setInt(1, jobID);
+                rs = preStm.executeQuery();
+                List<Integer> list = new ArrayList<>();
+                while (rs.next()) {
+                    int jobOrderID = rs.getInt("jobOrderID");
+                    list.add(jobOrderID);
+                }
+                return list;
+            }
+
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+
 
     public List<JobOrder> getJobOrder(String searchJobTitle, String searchExperienceNeeded, int searchJobCategoryID, int studentID) throws SQLException {
         try {

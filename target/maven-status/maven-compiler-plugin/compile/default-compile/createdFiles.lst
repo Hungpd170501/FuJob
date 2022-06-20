@@ -8,6 +8,7 @@ se1621\dto\User$UserBuilder.class
 se1621\dto\Job$JobBuilder.class
 se1621\dao\SkillDAO.class
 se1621\dto\Job.class
+se1621\controller\DeleteJobPostController.class
 se1621\dao\JobDAO.class
 se1621\controller\LogoutController.class
 se1621\dto\Resume$ResumeBuilder.class
@@ -55,6 +56,7 @@ se1621\controller\RecoveryPasswordHandler.class
 se1621\controller\EmailVerifyHandler.class
 se1621\controller\ListJobByIDController.class
 se1621\dto\Error\CompanyInfoError.class
+se1621\controller\ViewAllHRController.class
 se1621\dto\Category.class
 se1621\constant\Constant.class
 se1621\controller\OrderJobController.class
