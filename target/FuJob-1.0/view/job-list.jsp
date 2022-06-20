@@ -1,3 +1,6 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.sql.Date"%>
 <%@page import="se1621.dto.User"%>
 <%@page import="se1621.dto.Job"%>
 <%@page import="java.util.List"%>
@@ -148,10 +151,14 @@
                                             <div class="col-lg-6 col-md-9">
                                                 <div class="job-list-desc">
                                                     <h4 class="mb-1" style="font-weight: 700"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h4>
-                                                    <p class="mb-2 text-muted">6 days left</p>
+                                                        <%
+                                                            Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                                                            long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
+                                                            long resultDate = exDate / (24 * 60 * 60 * 1000);
+                                                        %>
+                                                    <p class="mb-2 text-muted"> <%= resultDate %> days left</p>
                                                     <p class="mb-4">    <%= job.getDescription()%> </p>
-                                                    <h6>Skills: html, css, js, java, .NET, 3D Animation, 3D Design </h6>
-
+                                                    <h6>Skills Require: </h6>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
 
@@ -165,11 +172,11 @@
                                                         <p class=" mb-5"><i class="mr-2"></i>5 birds</p>
                                                     </div>
                                                     <div>
-                                                        <h5 class=" mb-5"><i class="mr-2"></i> <%= job.getBudget()%>$ <% if(job.getPaymentMethodID() == 2){ 
+                                                        <h5 class=" mb-5"><i class="mr-2"></i> <%= job.getBudget()%>$ <% if (job.getPaymentMethodID() == 2) {
                                                             %>
                                                             / hour
                                                             <%
-                                                            } 
+                                                                }
                                                             %> </h5>
                                                     </div>
                                                     <div class="mt-3">

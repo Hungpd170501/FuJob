@@ -3,6 +3,10 @@
     Created on : Jun 1, 2022, 7:52:12 AM
     Author     : HNGB
 --%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.sql.Date"%>
+<%@page import="se1621.dto.JobSkills"%>
 <%@page import="java.util.List"%>
 <%@page import="se1621.dto.SkillRequire"%>
 <%@page import="se1621.dao.JobOrderDAO"%>
@@ -68,24 +72,29 @@
                             </div>
                             <div class="col-lg-7" style="margin-top: 30px">
                                 <div class="job-detail-com-desc overflow-hidden d-block">
-                            <%--    <p class=" mb-3"><h7 style="font-weight: 700">Company: </h7> <a href="#"> <%= job.getCompany().getCompanyName() %></a></p> --%> 
+                            <%--    <p class=" mb-3"><h7 style="font-weight: 700">Company: </h7> <a href="#"> <%= job.getCompany().getCompanyName() %></a></p> --%>
                                     <p class=" mb-3"><h7  style="font-weight: 700"> Category: </h7><%= job.getCategory().getCategoryName()%></p>
-                                    <p class=" mb-3"><h7 style="font-weight: 700">Skill: </h7> 
-                                <%--         <%
-                                            List<SkillRequire> listStudentSkill = (List<SkillRequire>) request.getAttribute("LIST_SKILLREQUIRE");
+                                    <p class=" mb-3"><h7 style="font-weight: 700">Skill require: </h7> 
+                                        <%
+                                            List<JobSkills> listStudentSkill = (List<JobSkills>) request.getAttribute("LIST_SKILLREQUIRE");
                                             for (int i = 0; i < listStudentSkill.size() - 1; i++) {
                                         %>
                                         <%= listStudentSkill.get(i).getSkill().getSkillName()%>,
                                     <%
                                         }
                                     %>
-                                    <%= listStudentSkill.get(listStudentSkill.size() - 1).getSkill().getSkillName()%> --%>
+                                    <%= listStudentSkill.get(listStudentSkill.size() - 1).getSkill().getSkillName()%>
                                     </p>
-                                    <p class=" mb-3"><h7 style="font-weight: 700"> Budget: </h7><%= job.getBudget()%> <% if(job.getPaymentMethodID() == 2)
+                                    <p class=" mb-3"><h7 style="font-weight: 700"> Budget: </h7><%= job.getBudget()%> $ <% if(job.getPaymentMethodID() == 2)
                                     { %> 
                                         / hour
                                     <% } %></p>
-<%--                                    <p class=" mb-3"><h7 style="font-weight: 700"> Deadline: </h7><%= job.getDeadline()%></p>--%>
+                                <%  
+                                    Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                                    long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
+                                    long resultDate = exDate/(24*60*60*1000);
+                                %>
+                                    <p class=" mb-3"><h7 style="font-weight: 700"> Expiry Date: </h7><%= resultDate %> days left</p>
                                 </div>
                             </div> 
                         </div>

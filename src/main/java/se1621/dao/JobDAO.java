@@ -93,7 +93,6 @@ public class JobDAO {
                 conn.close();
             }
         }
-
         return null;
     }
 

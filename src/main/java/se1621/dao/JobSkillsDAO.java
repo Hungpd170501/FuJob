@@ -20,7 +20,7 @@ import se1621.utils.DBUtils;
  */
 public class JobSkillsDAO {
     private static final String CREATEOBSKILLS= "INSERT INTO tblJobSkills (jobID, skillID) VALUES (?, ?)";
-    private static final String GETJOBSKILLS = "SELECT jk.jobSkillID, jk.jobID, jk.skillID, skill.skillName FROM (tblJobSkills jk left join tblSkills skill on jk.jobSkillID = skill.skillID)"
+    private static final String GETJOBSKILLS = "SELECT jk.jobSkillID, jk.jobID, jk.skillID, skill.skillName FROM (tblJobSkills jk left join tblSkills skill on jk.SkillID = skill.skillID)"
             +"WHERE jk.jobID = ?";
     Connection conn;
     PreparedStatement preStm;
