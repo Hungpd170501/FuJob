@@ -662,6 +662,13 @@ VALUES 	(2, "https://static.vecteezy.com/system/resources/thumbnails/004/773/280
 	(5, "https://image.shutterstock.com/image-vector/cute-white-boy-asian-vector-260nw-1758651497.jpg", "Le Ha Duy", "Male", "2001-11-11", "duylhse150233@fpt.edu.vn", "0983434237", "District 9, Ho Chi Minh City", "Software Engineering", "8/10", NULL, "https://github.com/HuDery", NULL, "I want to become a back-end development", 1),
 	(6, "https://static.vecteezy.com/system/resources/previews/004/059/941/non_2x/young-man-wearing-glasses-free-vector.jpg", "Le Quoc Binh", "Male", "2001-19-11", "binhlqse150199@fpt.edu.vn", "0983436757", "District 9, Ho Chi Minh City", "Software Engineering", "8/10", NULL, "https://github.com/BinhJim", NULL, "I want to become a back-end development", 1)
 GO	
+
+INSERT INTO tblResumeSkills(resumeID, skillID)
+VALUES 	(1, 220), (1, 212), (2, 105),
+	(2, 220), (2, 212), (2, 105), (2, 176),
+	(3, 220), (3, 212), (3, 105), (3, 62),
+	(4, 220), (4, 212), (4, 105), (4, 221),
+	(5, 220), (5, 212), (5, 105), (5, 436)
 	
 	
 	
