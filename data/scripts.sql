@@ -421,7 +421,7 @@ VALUES	('FPT SOFTWARE', ' District 9, Ho Chi Minh City', 'https://www.fpt-softwa
 INSERT INTO tblUsers(password,fullName,email,roleID,userStatus, companyID) 
 VALUES (N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW' , N'Tao la Admin' , N'admin@gmail.com',N'AD', 1, NULL),
 	--Student
-	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Van A', N'abc1@gmail.com', N'US',1, NULL),
+	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Van A', N'abc@fpt.edu.vn', N'US',1, NULL),
      	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Pham Duc Hung', N'hungpdse150222@fpt.edu.vn', N'US',1, NULL),
 	(N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Huynh Ngo Gia Bao', N'baohngse150260@fpt.edu.vn', N'US',1, NULL),
       	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Le Ha Duy', N'duylhse150233@fpt.edu.vn', N'US',1, NULL),
@@ -477,6 +477,11 @@ VALUES (N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW' , N'Tao 
 	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Do Hung Dung', N'hr23@gmail.com', N'HR',1, 5),
 	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Tran Dinh Trong', N'hr24@gmail.com', N'HR',1, 5),
 	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Vu Van Thanh', N'hr25@gmail.com', N'HR',1, 5)
+	--52 student
+	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Bao Toan', N'toannbse150270@fpt.edu.vn', N'US',1, NULL),
+	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Le Thai Phong', N'phonglt150407@fpt.edu.vn', N'US',1, NULL),
+	
+	
 GO
 
 INSERT  INTO tblSkills (skillName, skillStatus)
