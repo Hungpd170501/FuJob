@@ -1,3 +1,6 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.sql.Date"%>
 <%@page import="se1621.dto.User"%>
 <%@page import="se1621.dto.Job"%>
 <%@page import="java.util.List"%>
@@ -75,9 +78,10 @@
                                             <select id="select-category" class="demo-default" name="searchCate">
                                                 <!--<select id="select-category" class="demo-default">-->
                                                 <option value="">Categories...</option>
-                                                <c:forEach items="${chooseCategory.listCategory}" var="i">
+                                                <%--    <c:forEach items="${chooseCategory.listCategory}" var="i">
                                                     <option value="${i.categoryID}">${i.categoryName}</option>
                                                 </c:forEach>
+                                                --%>
                                             </select>
                                         </div>
                                     </div>
@@ -135,40 +139,49 @@
                                     if (listJob.size() > 0) {
                                         for (Job job : listJob) {
                             %>
-                            <div class="job-display col-lg-12 mt-4 pt-2" style="display: none">
+                            <div class="job-display col-lg-12 mt-4 pt-1" style="display: none">
                                 <div class="job-list-box border rounded" >
                                     <div class="p-3">
                                         <div class="row align-items-center">
-                                            <div class="col-lg-2">
+                                            <div class="col-lg-3">
                                                 <div class="company-logo-img">
-                                                    <img loading="lazy" src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:150px;height:150px">
+                                                    <img loading="lazy" src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:250px;height:250px">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-7 col-md-9">
+                                            <div class="col-lg-6 col-md-9">
                                                 <div class="job-list-desc">
-
-                                                    <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h6>
-
-                                                    <p class="text-muted mb-0"><i class="fa fa-archive mr-2"></i><%= job.getExperienceNeeded()%></p>
-                                                    <p class="text-muted mb-0"><i class="fa fa-list-alt mr-2"></i><%= job.getCategory().getCategoryName()%></p>
+                                                    <h4 class="mb-1" style="font-weight: 700"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h4>
+                                                        <%
+                                                            Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                                                            long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
+                                                            long resultDate = exDate / (24 * 60 * 60 * 1000);
+                                                        %>
+                                                    <p class="mb-2 text-muted"> <%= resultDate %> days left</p>
+                                                    <p class="mb-4">    <%= job.getDescription()%> </p>
+                                                    <h6>Skills Require: </h6>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= job.getAddress()%></p>
-                                                        </li>
 
-                                                        <li class="list-inline-item mr-3">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"><%= job.getLastDateUpdate()%></i></p>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
-
+                                                    <div>
+                                                        <p class=" mb-5"><i class="mr-2"></i>5 birds</p>
+                                                    </div>
+                                                    <div>
+                                                        <h5 class=" mb-5"><i class="mr-2"></i> <%= job.getBudget()%>$ <% if (job.getPaymentMethodID() == 2) {
+                                                            %>
+                                                            / hour
+                                                            <%
+                                                                }
+                                                            %> </h5>
+                                                    </div>
                                                     <div class="mt-3">
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>

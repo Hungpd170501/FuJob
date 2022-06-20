@@ -84,10 +84,8 @@ CREATE TABLE tblResume
 	gmail varchar(50),
 	phone varchar(20),
 	address varchar(50),
-	schoolName varchar(50),
 	major varchar(50),
 	gpa varchar(15),
-	experienceYear varchar(50),
 	website varchar ( 100 ),
 	overview varchar(3000),
 );
@@ -110,17 +108,20 @@ CREATE TABLE tblJob (
 	jobID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
 	userID INT NOT NULL,
 	jobTitle varchar(255),
-	ExperienceNeeded varchar(20),
 	jobCategoryID INT,
 	deadline date,
-	completionTime varchar(20),
-	salary varchar(20),
+	budged float,
 	address varchar(50),
 	email varchar(255),
 	phone varchar(15),
 	description varchar(2000),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	createdDate datetime,
+>>>>>>> f5f2249fe951ec19ba4c039c78ff75f5c65b63ed
 	lastDateUpdate datetime,
+	expiriedDate datetime,
 	jobStatus tinyint NOT NULL
 =======
 	jobStatus tinyint,
@@ -179,6 +180,14 @@ CREATE TRIGGER lastUpdate on dbo.tblJob
 SET lastDateUpdate = GetDate()
 WHERE jobID IN (SELECT jobID FROM inserted);
 GO
+
+CREATE TRIGGER createdDate on dbo.tblJob
+	FOR INSERT  AS 
+	UPDATE dbo.tblJob
+SET createdDate = GetDate()
+WHERE jobID IN (SELECT jobID FROM inserted);
+GO
+
 CREATE TRIGGER lastApplied on dbo.tblJobOrder
 	FOR  UPDATE , INSERT  AS 
 	UPDATE dbo.tblJobOrder
@@ -376,7 +385,21 @@ VALUES (N'Clerical / Administrative', N'https://thumbs.dreamstime.com/b/data-ent
  	(N'Newspaper / Editor / Publishing', N'https://png.pngtree.com/element_our/md/20180516/md_5afc4cd0dcaca.jpg?fbclid=IwAR0lXJCcbngyMb47JrdmJhcL1aU-4NAnZ6c-hyGcTgAKxBg7WzNSnyO7GQQ'),
  	(N'Telecommunications ', N'https://www.pngitem.com/pimgs/m/634-6342219_media-signal-tower-signal-tower-icon-hd-png.png?fbclid=IwAR0kFVPVHGNkIWm4XdI4n53jsicCrJFbkeVjpHcPta8k5d4IRPFvq28BOco'),
  	(N'Executive Management', N'https://www.kindpng.com/picc/m/80-803498_if-vector-65-02-47377820170731-7640-1two28t-board.png'),
- 	(N'Other', N'${pageContext.request.contextPath}/asset/images/Logo/Logo/Untitled-1.png')
+ 	(N'Other', N'${pageContext.request.contextPath}/asset/images/Logo/Logo/Untitled-1.png'),
+	('International Business', 'https://cdn.dribbble.com/users/7031637/screenshots/15591230/gig-8_4x.jpg'),
+	('Software Engineering', 'https://www.logopik.com/wp-content/uploads/edd/2018/10/Software-Engineering-Vector-Logo.png'),
+	('Information Assurance', 'https://media.istockphoto.com/vectors/quick-key-logo-design-template-vector-id1013496226?b=1&k=20&m=1013496226&s=612x612&w=0&h=sywpjBFewebZRb7U9LbpfuNRChgg0oPXHUrWhEkAubE='),
+	('Multimedia Communication', 'https://i.pinimg.com/736x/77/7f/3e/777f3e9f89ac6e127882d31199faee20.jpg'),
+	('Graphic Design', 'https://cdn.dribbble.com/users/5246557/screenshots/12263175/media/f9210e3bf7a485987a931a3a54c8b70c.jpg?compress=1&resize=400x300&vertical=top'),
+	('Hotel Management', 'https://www.pngkey.com/png/detail/376-3765477_hospitality-management-icon-logo-hospitality-management.png'),
+	('Tourism service and Travel Management', 'https://www.nicepng.com/png/detail/370-3705541_gtifavi2-travel-insurance-logo-png.png'),
+	('English language', 'https://w7.pngwing.com/pngs/230/768/png-transparent-english-world-foreign-language-colloquialism-england-miscellaneous-blue-text.png'),
+	('Japanese language', 'https://upload.wikimedia.org/wikipedia/commons/a/a2/Japanese-language.jpg'),
+	('Digital Marketing', 'https://banner2.cleanpng.com/20181210/jsb/kisspng-digital-marketing-marketing-strategy-social-media-internet-png-images-png-mart-5c0e7c2c9723e1.5757274415444531646191.jpg'),
+	('Information System', 'https://www.logolynx.com/images/logolynx/s_7b/7bd3f19896635439f5d9f4cc08086934.gif'),
+	('Artificial Intelligence', 'https://i.pinimg.com/736x/f6/fa/4e/f6fa4e259c05252ba32cd12e98061b11.jpg'),
+	('Korean Language', 'https://charuzu.files.wordpress.com/2015/09/korea_south_640.png'),
+	('Internet of Things', 'https://lumihaiphong.vn/Data/images/IOT_Internet_of_Things_2017.jpg')
 GO
 
 INSERT INTO tblJob(userID, jobTitle, experienceNeeded, jobCategoryID, deadline, completionTime, salary, address, email, phone, description, jobStatus) 
@@ -388,4 +411,110 @@ VALUES (
  Design slides, brochures to introduce products for the Company
  Contributing ideas to the Company''s events and Marketing campaigns',1
 )
+GO
+
+
+INSERT INTO tblUser(username,password,fullName,email,phone,roleID,status, companyID) 
+VALUES (N'admin', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW' , N'Tao la Admin' , N'admin@gmail.com' , N'0780780791' ,N'AD', 1, NULL),
+	--Student
+	(N'customer1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Van A', N'abc1@gmail.com', N'0780780789', N'US',1, NULL),
+     	(N'dev1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'dev1', N'hungpdse150222@fpt.edu.vn', N'0780780792', N'US',1, NULL),
+	(N'dev2', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'dev2', N'baohngse150260@fpt.edu.vn', N'0780780793', N'US',1, NULL),
+      	(N'dev3', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'dev3', N'duylhse150233@fpt.edu.vn', N'0780780794', N'US',1, NULL),
+	(N'dev4', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'dev4', N'binhlqse150199@fpt.edu.vn', N'0780780795', N'US',1, NULL),
+	--HRM 7
+	(N'HRManagement1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Tran Van Tot', N'hrm1@gmail.com', N'0780780790', N'HRM',1, 1),
+	(N'HRManagement1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Lai Van Huynh', N'hrm2@gmail.com', N'0780785790', N'HRM',1, 2),
+	(N'HRManagement1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Quoc Sang', N'hrm3@gmail.com', N'0783780790', N'HRM',1, 3),
+	(N'HRManagement1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Tuan Tu', N'hrm4@gmail.com', N'0780788790', N'HRM',1, 4),
+	(N'HRManagement1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Huu Tai', N'hrm5@gmail.com', N'0780083790', N'HRM',1, 5),
+	--HR 12
+	(N'HumanResource1', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Tran Van Van', N'hr1@gmail.com', N'0707554123', N'HR',1, 1),
+	(N'HumanResource2', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Huynh Tu Van', N'hr2@gmail.com', N'0707654123', N'HR',1, 1),
+	(N'HumanResource3', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Cao Gia Tuan', N'hr3@gmail.com', N'0777554123', N'HR',1, 1),
+	(N'HumanResource4', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Tran Duc Hung', N'hr4@gmail.com', N'0707534123', N'HR',1, 1),
+	(N'HumanResource5', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Anh Hoang', N'hr5@gmail.com', N'0707551123', N'HR',1, 1),
+	
+	(N'HumanResource6', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Quach Tran Phong', N'hr6@gmail.com', N'0707514123', N'HR',1, 2),
+	(N'HumanResource7', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Dang Tra Quang', N'hr7@gmail.com', N'0797554123', N'HR',1, 2),
+	(N'HumanResource8', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Hai Phong', N'hr8@gmail.com', N'0707514123', N'HR',1, 2),
+	(N'HumanResource9', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Quang Hai', N'hr9@gmail.com', N'0707554623', N'HR',1, 2),
+	(N'HumanResource10', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Quach Thanh Van', N'hr10@gmail.com', N'0708554123', N'HR',1, 2),
+	
+	(N'HumanResource11', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Quach Tran Sang', N'hr11@gmail.com', N'0707554823', N'HR',1, 3),
+	(N'HumanResource12', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Quach Hoai Niem', N'hr12@gmail.com', N'0707554523', N'HR',1, 3),
+	(N'HumanResource13', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Quach Giong Cao', N'hr13@gmail.com', N'0707552323', N'HR',1, 3),
+	(N'HumanResource14', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Quach Tran Phu', N'hr14@gmail.com', N'0707551223', N'HR',1, 3),
+	(N'HumanResource15', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Tran Van Phong', N'hr15@gmail.com', N'0701254123', N'HR',1, 3),
+	
+	(N'HumanResource16', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Huynh Tran Nen', N'hr16@gmail.com', N'0703454823', N'HR',1, 4),
+	(N'HumanResource17', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Luong Xuan Truong ', N'hr17@gmail.com', N'0907554523', N'HR',1, 4),
+	(N'HumanResource18', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Do Duy Manh', N'hr18@gmail.com', N'0707552233', N'HR',1, 4),
+	(N'HumanResource19', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Cao Tien Dung', N'hr19@gmail.com', N'0707598223', N'HR',1, 4),
+	(N'HumanResource20', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Bui Tan Truong', N'hr20@gmail.com', N'0701454123', N'HR',1, 4),
+	
+	(N'HumanResource21', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Tuan Anh', N'hr21@gmail.com', N'0233454823', N'HR',1, 5),
+	(N'HumanResource22', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Luong Hoang Duc', N'hr22@gmail.com', N'0945554523', N'HR',1, 5),
+	(N'HumanResource23', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Do Hung Dung', N'hr23@gmail.com', N'0707511233', N'HR',1, 5),
+	(N'HumanResource24', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Tran Dinh Trong', N'hr24@gmail.com', N'0733598223', N'HR',1, 5),
+	(N'HumanResource25', N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Vu Van Thanh', N'hr25@gmail.com', N'0701456123', N'HR',1, 5),
+GO
+
+INSERT INTO tblCategory ( categoryName,img) 
+VALUES  
+	('International Business', 'https://cdn.dribbble.com/users/7031637/screenshots/15591230/gig-8_4x.jpg'),
+	('Software Engineering', 'https://www.logopik.com/wp-content/uploads/edd/2018/10/Software-Engineering-Vector-Logo.png'),
+	('Information Assurance', 'https://media.istockphoto.com/vectors/quick-key-logo-design-template-vector-id1013496226?b=1&k=20&m=1013496226&s=612x612&w=0&h=sywpjBFewebZRb7U9LbpfuNRChgg0oPXHUrWhEkAubE='),
+	('Multimedia Communication', 'https://i.pinimg.com/736x/77/7f/3e/777f3e9f89ac6e127882d31199faee20.jpg'),
+	('Graphic Design', 'https://cdn.dribbble.com/users/5246557/screenshots/12263175/media/f9210e3bf7a485987a931a3a54c8b70c.jpg?compress=1&resize=400x300&vertical=top'),
+	('Hotel Management', 'https://www.pngkey.com/png/detail/376-3765477_hospitality-management-icon-logo-hospitality-management.png'),
+	('Tourism service and Travel Management', 'https://www.nicepng.com/png/detail/370-3705541_gtifavi2-travel-insurance-logo-png.png'),
+	('English language', 'https://w7.pngwing.com/pngs/230/768/png-transparent-english-world-foreign-language-colloquialism-england-miscellaneous-blue-text.png'),
+	('Japanese language', 'https://upload.wikimedia.org/wikipedia/commons/a/a2/Japanese-language.jpg'),
+	('Digital Marketing', 'https://banner2.cleanpng.com/20181210/jsb/kisspng-digital-marketing-marketing-strategy-social-media-internet-png-images-png-mart-5c0e7c2c9723e1.5757274415444531646191.jpg'),
+	('Information System', 'https://www.logolynx.com/images/logolynx/s_7b/7bd3f19896635439f5d9f4cc08086934.gif'),
+	('Artificial Intelligence', 'https://i.pinimg.com/736x/f6/fa/4e/f6fa4e259c05252ba32cd12e98061b11.jpg'),
+	('Korean Language', 'https://charuzu.files.wordpress.com/2015/09/korea_south_640.png'),
+	('Internet of Things', 'https://lumihaiphong.vn/Data/images/IOT_Internet_of_Things_2017.jpg'),
+	(N'Other', 'https://seeklogo.com/images/U/undefined-logo-FE82D12763-seeklogo.com.gif')
+GO
+
+
+insert into tblJobs (userID, jobTitle, jobCategoryID, budged, address, email, phone, description, expiriedDate, jobStatus)
+VALUES ('7', 'International situation analysis', 1, 2000, 'Ho Chi Minh', 'timkinhdoanhquocte@gmail.com', '0988234654', 'Use All Source Intelligence to analysis international conflict/trade/business/affair/relation.', '2022-08-17', 1),
+	('7', 'Need Facebook Live Veiw Increase Bot', 2, 20, 'Da Nang', 'timsw@gmail.com', '0988214454', 'Need Facebook Live View Increase Bot simple tool easy to use', '2022-09-17', 1)
+	('7', 'Cyber security expert needed for a database application analysis', 3, 20, 'Ho Chi Minh City', 'timia@gmail.com', '0988215654', 'I need a person to look at my issue to resolve it in a timely manner, Please let me know if you are available to handle this. I am very excited to work with you guys. Please contact me and I would love to provide you with more context about the task.', 1)
+	('7', 'Graphic Design', 5, 20, 'Ha Noi City', 'timgd@gmail.com', '0988219654', 'We are needing someone to create social media graphics in various sizes. The output will be in PNG files saved with transparency.  We will need square format and story format images.  We will be able to give complete direction with sample work to be modified and created.  We will be available via email and zoom to give direction. This project is more redesigning existing collateral media with direction than creating content from scratch.', '2022-09-10', 1),
+	('7', 'Sales Staff (Selling Tickets at Counters/ Stations, Concierge)', 6, 1, 'Ho Chi Minh', 'timhm@gmail.com', '0982314454', 'Ticket sales, customer support at the counter at the Independence Palace in District 1: shifts 8am to 3pm every day; and/or: assisting customers at Hop on Hop off double-decker bus (stops at pedestrian street 92 Nguyen Hue, District 1 and at City Post Office No. 2 Paris Commune District 1): shift 8:30am - 4:00pm or 15:30-22:30', '2022-09-17', 1),
+	
+	('8', 'jobTitle',10 , budged, 'Toan Quoc', 'timdm@gmail.com', '0703309128', 'description', 2022-08-23, 1),
+	
+	('12', 'Multimedia Coordinator', 4, 20, 'Ha Noi', 'timmc@gmail.com', '0988212254', 'The Multimedia Coordinator will work under the direction of the Associate Athletic Director, External Affairs, in preparing video packages for the Athletics Department’s website and LED video boards. This position is responsible for generating social media content and assisting the administrative staff with special projects. There are currently two openings available for this position.', '2022-09-15', 1),
+	('12', 'Tour Operator', 7, 20, 'Hoi An', 'timtour@gmail.com', '0988212254', 'Find someone who can lead the delegation to visit Hoi An. Required to be agile, energetic, funny, understand the characteristics needed for the tour. Able to control, manage the delegation, handle unexpected incidents. The trip lasts 3 days and 3 nights, with accommodation and food allowance available.', '2022-09-15', 1),
+	('12', 'blog article Englishr', 8, 100, 'Toan Quoc', 'timta@gmail.com', '098821254', 'I need to find a freelancer who can write English well for long-term cooperation. Especially good at copywriting in English to write blog articles (about 1000 words). The job will be writing a blog article for a website about student life, job seeking experience, how to get high scores...You are encouraged to bid for the project: You have studied abroad in English speaking countries, IELTS 7.5-8.0 or higher or similar TOEFL, You are teaching English', '2022-10-15', 1),
+	('12', 'write articles in Japanese', 9, 200, 'Toan Quoc', 'timtn@gmail.com', '0934212254', 'Writing Japanese articles for IT companies based on ideas and available information will be provided. Various topics: internal company events, product introduction, articles related to IT a bit (if you have IT knowledge),...', '2022-09-15', 1),
+	('12', 'Google Ads Optimization for Selling AI Book',10 , 50, 'Toan Quoc', 'timdm@gmail.com', '0703309128', 'Our AI book has sold more than 1000 copies using another ad platform. The point is the product is surely saleable. We have started using Google Ads. We need some optimizations of our Google Ads to give good conversion. We take care of the ads budget for sure. If with your optimized google ads we succeed to sell 5 copies, within the agreed ads budget, 5 STAR is guaranteed', 2022-08-23, 1),
+	
+	('17', 'Business Analyst For A Mini Project',11 , 30, 'Can Tho', 'timba@gmail.com', '0703308333', 'Working as a BA for a group of students, meeting, analyzing and understanding the software requirements for a small project at school. Ability to speak both English and Vietnamese fluently. Ability to conduct general desk research activities. Have a "can do" attitude, agile, and resilient. Does not afraid to ask questions when necessary', 2022-09-23, 1),
+	('17', 'Clothes Customization Software For Ecommerce', 12, 2500, 'Ho Chi Minh', 'timai@gmail.com', '0703239128', 'A web application developed in either Python Django or Ruby on Rails  that will be mainly for customization of the clothes in an e-commerce for example suit, shirts, pants etc... the admin user should be able to scan fabric, sleeve, collar, cuff, placket etc... so that the end user will be able to customize the clothes he want as he likes, will send similar websites for the developer that will be working on this project, the candidate should have an experience in developing such websites.', 2022-09-23, 1),
+	('17', 'Korean translation collaborator, in the fields of Automotive',13, 200, 'Ha Noi', 'timth@gmail.com', '0890309128', 'Need someone to translate some car sales contracts in Korean. Requires final year Korean language students or TOPIK 5 or higher, know some automotive terms. Fun, sociable, agile, good appearance is an advantage.It is possible to give extra tips if the contract is smooth and favorable.', 2022-10-23, 1),
+	('17', 'configure IOT Project', 14, 100, 'Ben Tre', 'timiot@gmail.com', '0703345128', 'Dear we are looking for someone with hands on experience in IOT to configure and run this project. The basis architecture is to have one Nodemcu that connect multiple   devices together that are connect to wireless connection and to measure the stability of the network. The task is to help on how to configure and run the projects and we will buy all necessary hardware.', 2022-11-23, 1),
+	('17', 'IoT Developerr', 14, 1000, 'Ha Noi', 'tỉmesd@gmail.com', '0234409128', 'Participating in programming of pic, arm, esp, family of microcontrollers..Developing Desktop applications, managing production for customer projects. Requires proficiency in programming languages C#, DotNet, MSSQL Server database. Knowledge of industry communication standards. Need to be smart, industrious, cheerful, sociable.', 2022-08-23, 1),
+	
+	('22', ‘Japanese teacher’,9 , 1000, 'Toan Quoc', 'timrr@gmail.com', '0703309128', ' If you are a person who is passionate about teaching, loves Japanese language and Japanese culture, wants to pass on knowledge, experience, and passion for Japanese to students through effective teaching methods. of KaizenYoshidaSchool, you will definitely succeed in your "teaching career" in Esuhai. ', 2022-08-23, 1),
+	('22', 'Japanese interviewer',9, 1200, 'Ha Noi', 'namnd@gmail.com', '0703309128', ' Assistant Translator for Japanese - Vietnamese, Vietnamese - Japanese for Japanese Managers, Translating documents, reports, meetings, seminars... according to work requirements. Create a bridge between the Japanese Management level and the personnel in the Department, Departments/Branches and the Company. Support reception, work contact with customers, partners inside and outside the company. Participate in meetings with Senior Managers, receptions. Grasp the Manager's working schedule; Organize and support work reasonably and effectively. Perform other duties as assigned by the department manager. ', 2022-08-23, 1),
+	('22', 'Merchandising Garment Industry',9, 1000, 'Da Nang’, 'hungld@gmail.com', '0703309128', ' Process customer orders. Receive orders from existing customers. Track order progress from sample to delivery. Other tasks as required by the department head. Sample development process, working with related departments. Control and solve all problems related to order progress. Track customer deliveries and payments', 2022-08-23, 1),
+	('22', 'Men Recruitment consulting',9, 500, ‘Ho Chi Minh’, 'kiencv@gmail.com', '0703309128', ' Create a source of candidates for foreign recruitment applications (Writing articles, editing, posting job ads, interviewing candidates). Takecare candidates during the CV interview process, exchange questions about the job), set up the interview. Data management, data entry, instructions for making records, medical examination. Support interview translation. Projects to develop overseas customers (contact by mail or in person) ', 2022-08-23, 1),
+	('22', 'Japanese business assistance',9, 700, 'Can Tho', 'tottd@gmail.com', '0703309128', 'Dealing with customers and partners, from receiving orders to completing deliveries (Confront with customers and partners, from handle order to delivery). Handling problems arising on orders (Handle in order). Follow up and plan delivery on schedule (Follow arrange devilery on time as requirement). Prepare a list of liabilities and report at the end of the month (Preparing specified list and monthly report). Daily Japanese communication via email with the Japanese side (Daily Japanese communication with Japan side). Support team members if needed or other task from Director', 2022-08-23, 1),
+	('22', 'Editor Japanese',9, 600, ‘Ca Mau’, 'ngocttm@gmail.com', '0703309128', 'Plan content and write content for the entire website and other communication channels of the company (fanpage,...). Manage all social networking sites. Seeding groups on social networks. Writing content for media publications such as advertising pages, leaflets, online and offline documents for marketing activities, branding, external communication marketing, etc. Writing PR articles. Support team in video projects. Working and building relationships with the media', 2022-08-23, 1),
+	('22', 'Programmer (JavaScript, Jquery)',9, 2000, ‘Binh Duong’, 'vantt@gmail.com', '0703309128', 'Develop Web Application, using Intra-mart(IM-FormaDesigner、IM-LogicDesigner). Intra-mart is a product package providing IT solutions for businesses, built on the Java programming language with the support of Java frameworks such as seasar, terasoluna global. Before participating in development, there will be training support', 2022-08-23, 1),
+	('22', ‘Japanese Nursing N2’,9, 1200, ‘Nghe An’, 'phongvt@gmail.com', '0703309128', 'Support doctors such as taking blood, injecting, giving fluids,...', 2022-08-23, 1),
+	('22', 'N2 . Bridge Engineer',9, 2500, ‘Quang Tri’, 'hoangnt@gmail.com', '0703309128', 'Support Japanese PM to design the system, write detailed design documents and communicate to the project team in Vietnam. Solve problems arising in the project, and problems after handover. Technical support for team members. Check the quality of the project's output products before handing over to customers.Manage project implementation progress, coordinate with customers and CEO in project management.', 2022-08-23, 1),
+	('22', 'Staff',9, 300, ‘Da Lat’, 'longnn@gmail.com', '0703309128', 'Customer reception. Arrange for seating for customers. Place orders for customers. Serve food and drinks to guests. Support customer payments. Other tasks as assigned by management', 2022-08-23, 1),
+
+	('27', 'Make Video Introduction of Educational Products (Korea)', 13, 300, 'Toan Quoc', 'timsrdm@gmail.com', '0703309238', 'Hello everyone, my company is currently looking to hire a freelancer for video design for an educational product introduction project in Korea. The video is 5 minutes long. Required to edit clips, voiceover, edit effects, be a Korean language student or have TOPIK 4 certificate (The plan is sent in Korean). You can work from home online.', 2022-09-23, 1),
+	('27', 'AI Machine Leaning App for Android', 12, 30, 'Toan Quoc', 'timqqdm@gmail.com', '0703309238', 'I need an object detection app that allows me to take a picture with my phone camera and the app detects the desired object, crops the detected image/object using the bounding boxes coordinates and then , save the cropped image. I've got a well trained dataset. Requires a person with good AI skills, progressive spirit, fun sociable, responsible. If you are interested in the project, please contact me, we will discuss more.', 2022-11-23, 1),
+	('27', 'Google APP developer', 2, 2000, 'Ho Chi Minh', 'timdm22d@gmail.com', '0703908128', ' To sync the order details (Oderid,Email,Mobile number, quantity, price, skuid, Customer name, payment method, city, province) from shopify store and update it on google sheet. Update the order status of the courier (Despatch date, tracking id, courier name, delivery status, delivery date) in the same google sheet by getting the details from picked with the help of shopify order id and pickrr tracking number', 2022-09-25, 1),
+	('27', 'Logo design for new brand', 5, 50, 'Toan Quoc', 's1123imdm@gmail.com', '0703342428', 'I am looking for a designer to help create a logo for a new brand. We are launching a sustainable golf brand. We will be targeting the premium end of the marketing with the most sustainable, natural materials and processes. Our initial product offering will be very small, with subtle, memorable branding. We need a logo that can adorn products and marketing materials.', 2022-10-25, 1),
+	('27', 'Primary school English tutor', 8, 300, 'Ha Noi', 'timdm3232@gmail.com', '0709009128', 'Teaching English online 1 on 1 or 1 on 2 for elementary students through Class-In software. Teaching according to the company's documents and textbooks. Encourage teachers to contribute ideas and adjust the curriculum to suit students. Length of 1 class: 25 minutes/class. Teachers need to meet a minimum of 5 classes / week and commit to accompany students to the end of the course cycle (3 or 6 months). Briefly comment on the student's learning situation after each lesson. Report the work situation to the Quality Manager as required & when required.', 2022-9-23, 1),
 GO

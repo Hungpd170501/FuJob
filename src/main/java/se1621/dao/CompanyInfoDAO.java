@@ -5,13 +5,7 @@
 package se1621.dao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import se1621.dto.CompanyInfo;
-import se1621.utils.DBUtils;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,11 +20,11 @@ import se1621.utils.DBUtils;
  */
 public class CompanyInfoDAO {
 
-    private static final String CREATECOMINFO = "INSERT INTO tblCompany(companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar) VALUES(?,?,?,?,?,?,?,?,?,?)";
-    private static final String GETLISTCOMPANY = "SELECT * FROM tblCompany";
-    private static final String GETCOMID = "SELECT companyID FROM tblCompany WHERE companyName=?";
-    private static final String CHECK_DUPLICATE = "SELECT companyID FROM tblCompany WHERE companyName=?";
-    private static final String SEARCH = "SELECT companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar FROM tblCompany WHERE companyID = ?";
+    private static final String CREATECOMINFO = "INSERT INTO tblCompanies(companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar) VALUES(?,?,?,?,?,?,?,?,?,?)";
+    private static final String GETLISTCOMPANY = "SELECT * FROM tblCompanies and companyStatus = 1";
+    private static final String GETCOMID = "SELECT companyID FROM tblCompanies WHERE companyName=?";
+    private static final String CHECK_DUPLICATE = "SELECT companyID FROM tblCompanies WHERE companyName=?";
+    private static final String SEARCH = "SELECT companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar, createdDate, lastModifiedDate FROM tblCompanies WHERE companyID = 1 and companyStatus = 1";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -80,7 +74,7 @@ public class CompanyInfoDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(GETLISTCOMPANY);
                 rs = preStm.executeQuery();
-                List<CompanyInfo> list = new ArrayList<>();
+                List<CompanyInfo> listCompany = new ArrayList<>();
                 while (rs.next()) {
                     int companyID = rs.getInt("companyID");
                     String companyName = rs.getString("companyName");
@@ -93,14 +87,27 @@ public class CompanyInfoDAO {
                     int numberOfEmployee = rs.getInt("numberOfEmployee");
                     String companyOverview = rs.getString("companyOverview");
                     String avatar = rs.getString("avatar");
-                    CompanyInfo companyInfo = new CompanyInfo(companyID, companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar);
-
-                    list.add(companyInfo);
+                    Date createdDate = rs.getDate("createdDate");
+                    Date lastModifiedDate = rs.getDate("lastModifiedDate");
+                    CompanyInfo company = CompanyInfo.builder()
+                            .companyID(companyID)
+                            .companyName(companyName)
+                            .address(address)
+                            .website(website)
+                            .gmail(gmail)
+                            .phone(phone)
+                            .typeCompany(typeCompany)
+                            .establishedYear(establishedYear)
+                            .numberOfEmployee(numberOfEmployee)
+                            .companyOverview(companyOverview)
+                            .avatar(avatar)
+                            .createdDate(createdDate)
+                            .lastModifiedDate(lastModifiedDate)
+                            .build();
+                    listCompany.add(company);
                 }
-                return list;
-
+                return listCompany;
             }
-
         } catch (Exception e) {
         } finally {
             if (rs != null) {
@@ -179,17 +186,16 @@ public class CompanyInfoDAO {
 
     public CompanyInfo getCompanyInfo(int companyID) throws SQLException {
         CompanyInfo companyInfo = new CompanyInfo();
-        Connection conn = null;
-        PreparedStatement ptm = null;
-        ResultSet rs = null;
+         conn = null;
+         preStm = null;
+         rs = null;
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(SEARCH);
-                ptm.setInt(1, companyID);
-                rs = ptm.executeQuery();
+                preStm = conn.prepareStatement(SEARCH);
+                preStm.setInt(1, companyID);
+                rs = preStm.executeQuery();
                 if (rs.next()) {
-//                    int companyID = rs.getInt("companyID");
                     String companyName = rs.getString("companyName");
                     String address = rs.getString("address");
                     String website = rs.getString("website");
@@ -200,6 +206,8 @@ public class CompanyInfoDAO {
                     int numberOfEmployee = rs.getInt("numberOfEmployee");
                     String companyOverview = rs.getString("companyOverview");
                     String avatar = rs.getString("avatar");
+                    Date createdDate = rs.getDate("createdDate");
+                    Date lastModifiedDate = rs.getDate("lastModifiedDate");
                     companyInfo = CompanyInfo.builder()
                             .companyID(companyID)
                             .companyName(companyName)
@@ -212,6 +220,8 @@ public class CompanyInfoDAO {
                             .numberOfEmployee(numberOfEmployee)
                             .companyOverview(companyOverview)
                             .avatar(avatar)
+                            .createdDate(createdDate)
+                            .lastModifiedDate(lastModifiedDate)
                             .build();
                 }
             }
@@ -221,8 +231,8 @@ public class CompanyInfoDAO {
             if (rs != null) {
                 rs.close();
             }
-            if (ptm != null) {
-                ptm.close();
+            if (preStm != null) {
+                preStm.close();
             }
             if (conn != null) {
                 conn.close();
