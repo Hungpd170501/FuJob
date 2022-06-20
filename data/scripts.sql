@@ -579,7 +579,7 @@ VALUES
 	(N'Other', 'https://seeklogo.com/images/U/undefined-logo-FE82D12763-seeklogo.com.gif',1)
 GO
 
-INSERT INTO tblJobSkills (jobID, skilID)
+INSERT INTO tblJobSkills (jobID, skillID)
 VALUES 	(1, 65), (1, 66), 
 	(2, 173), (2, 1), (2, 54),
 	(3, 200), (3, 396),
@@ -590,7 +590,7 @@ VALUES 	(1, 65), (1, 66),
 	(8, 512), (8, 625), (8, 622),
 	(9, 539), (9, 625), (9,622),
 	(10, 401), (10, 324),
-	(11, 65), (11, 658)
+	(11, 65), (11, 658),
 	(12, 15), (12, 385), (12, 287),
 	(13, 524), (13, 123),
 	(14, 667), (14, 67), (14, 668),
