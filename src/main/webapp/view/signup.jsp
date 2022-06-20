@@ -66,7 +66,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group position-relative">                                               
-                                                    <label>Job Seeker </label>
+                                                    <label>Freelancer </label>
                                                     <input type="radio" name="roleID" required="" value="US">
                                                 </div>
                                             </div>

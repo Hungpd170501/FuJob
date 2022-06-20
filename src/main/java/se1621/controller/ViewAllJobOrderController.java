@@ -12,14 +12,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import se1621.dao.CompanyInfoDAO;
-import se1621.dao.JobDAO;
 import se1621.dao.JobOrderDAO;
-import se1621.dao.UserDAO;
-import se1621.dto.CompanyInfo;
-import se1621.dto.Job;
 import se1621.dto.JobOrder;
-import se1621.dto.User;
 
 /**
  *
@@ -28,7 +22,7 @@ import se1621.dto.User;
 @WebServlet(name = "ViewAllJobOrderController", urlPatterns = {"/ViewAllJobOrderController"})
 public class ViewAllJobOrderController extends HttpServlet {
 
-    private static final String ERROR = "/view/job-details.jsp";
+    private static final String ERROR = "/view/job-list-applied.jsp";
     private static final String SUCCESS = "/view/job-list-applied.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -39,24 +33,13 @@ public class ViewAllJobOrderController extends HttpServlet {
             int userID = Integer.parseInt(request.getParameter("userID"));
             List<JobOrder> listJobOrder = new ArrayList<>();
             JobOrderDAO jobOrderDAO = new JobOrderDAO();
-            JobDAO jobDAO = new JobDAO();
-            UserDAO userDAO = new UserDAO();
-            CompanyInfoDAO companyDAO = new CompanyInfoDAO();
             listJobOrder = jobOrderDAO.getListJobApplied(userID);
-            for (JobOrder jobOrder : listJobOrder) {
-                int jobID = jobOrder.getJob().getJobID();
-                Job job = jobDAO.getJob(jobID);
-                int humanResouceID = job.getUserID();
-                User humanResource = userDAO.getUser(humanResouceID);
-                int companyID = humanResource.getCompanyID();
-                CompanyInfo company = companyDAO.getCompanyInfo(companyID);
-                job.setCompany(company);
-                jobOrder.setJob(job);
-            }
-
             if (!listJobOrder.isEmpty()) {
-                request.setAttribute("LIST_JOBORDER", listJobOrder);
+                request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
                 url = SUCCESS;
+            }else{
+                request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
+                request.setAttribute("MESSAGE", "YOU HAVEN'T APPLIED FOR ANY PROJECT");
             }
         } catch (Exception e) {
             log("Error at View all job Controller" + e.toString());

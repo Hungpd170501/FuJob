@@ -4,7 +4,7 @@
 <meta name="keywords" content="" />
 <meta name="author" content="Themesdesign" />
 
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/asset/images/favicon.ico">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/asset/images/Logo/Logo/Untitled-2.png">
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/asset/css/bootstrap.min.css" type="text/css">
 
@@ -23,6 +23,7 @@
 
 <!-- Custom  Css -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/asset/css/style.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/asset/css/select2.min.css" />
 
 <title>${param.title}</title>
 

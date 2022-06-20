@@ -16,9 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import se1621.dao.CategoryDAO;
 import se1621.dao.CompanyInfoDAO;
 import se1621.dao.JobDAO;
 import se1621.dao.UserDAO;
+import se1621.dto.Category;
 import se1621.dto.CompanyInfo;
 import se1621.dto.Job;
 import se1621.dto.User;
@@ -39,34 +41,9 @@ public class ViewAllJobController extends HttpServlet {
         String url = ERROR;
         try {
             JobDAO jobDAO = new JobDAO();
-            UserDAO userDAO = new UserDAO();
-            CompanyInfoDAO compnayDAO = new CompanyInfoDAO();
             List<Job> listJob = jobDAO.getListJob();
-            for (Job job : listJob) {
-                int userID = job.getUserID();
-                User user = userDAO.getUser(userID);
-                CompanyInfo company = compnayDAO.getCompanyInfo(user.getCompanyID());
-                job.setCompany(company);
-            }
-            int pageJob;
-            int numberPostJob = 5; // so post job trong 1 trang
-            int sizeJob = listJob.size();
-            int numberPage = (sizeJob % 5 == 0 ? (sizeJob / 5) : ((sizeJob / 5)) + 1); // so trang dc tao sau khi dem so jobPost
-            String xPage = request.getParameter("pageJob");
-            if (xPage == null) {
-                pageJob = 1;
-            } else {
-                pageJob = Integer.parseInt(xPage);
-            }
-            int starPage, endPage; // page 1 va page cuoi
-            starPage = (pageJob - 1) * numberPostJob; // lay 5 page dau
-            endPage = Math.min(pageJob * numberPostJob, sizeJob); // page cuoi se con lai bao nhieu post
-            List<Job> listPageAllJob = jobDAO.getPaginateJobList(listJob, starPage, endPage);
-
-            if (!listPageAllJob.isEmpty()) {
-                request.setAttribute("LIST_ALLJOB", listPageAllJob);
-                request.setAttribute("pageJob", pageJob);
-                request.setAttribute("numberPage", numberPage);
+            if (!listJob.isEmpty()) {
+                request.setAttribute("LIST_ALLJOB", listJob);
                 url = SUCCESS;
             }
         } catch (Exception e) {

@@ -12,9 +12,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import se1621.dao.JobDAO;
+import se1621.dao.SkillRequireDAO;
 import se1621.dto.Category;
 import se1621.dto.Job;
+import se1621.dto.Skill;
+import se1621.dto.SkillRequire;
 import se1621.dto.User;
 
 /**
@@ -35,7 +40,11 @@ public class PostJobController extends HttpServlet {
             String jobTitle = request.getParameter("jobtitle");
             String experienceNeeded = request.getParameter("chooseExY");
             int categoryID = Integer.parseInt(request.getParameter("categoryID"));
-            String skill = request.getParameter("skill");
+            String[] skillID = request.getParameterValues("skillID");
+            List<Integer> skillSet = new ArrayList<>();
+            for (String skill : skillID) {
+                skillSet.add(Integer.parseInt(skill));
+            }
             Date deadline = Date.valueOf(request.getParameter("deadline"));
             String completionTime = request.getParameter("completiontime");
             String salary = request.getParameter("salary");
@@ -43,30 +52,37 @@ public class PostJobController extends HttpServlet {
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             String description = request.getParameter("description");
-
             HttpSession session = request.getSession();
             User loginUser = (User) session.getAttribute("LOGIN_USER");
             int userID = loginUser.getUserID();
-
             Job job = Job.builder().userID(userID)
                     .jobTitle(jobTitle)
-                    .ExperienceNeeded(experienceNeeded)
                     .category(Category.builder().categoryID(categoryID).build())
-                    .skill(skill)
-                    .deadline(deadline)
-                    .completionTime(completionTime)
-                    .salary(salary)
                     .address(address)
                     .email(email)
                     .phone(phone)
                     .description(description)
                     .build();
             JobDAO jobdao = new JobDAO();
-            boolean check = jobdao.createJob(job);
-            if (check) {
-                int jobID = jobdao.getJobIDJustCreate();
-                request.setAttribute("MESSAGE", "Create Job Successfully!");
-                url = SUCCESS + jobID;
+            boolean checkCreateJob = jobdao.createJob(job);
+            if (checkCreateJob) {
+                int jobID = jobdao.getJobIDJustCreate(userID);
+                SkillRequireDAO skillRequireDAO = new SkillRequireDAO();
+                List<SkillRequire> listSkillRequire = new ArrayList<>();
+                for (Integer skill : skillSet) {
+                    SkillRequire skillRequire = SkillRequire.builder().jobID(jobID).skill(Skill.builder().skillID(skill).build()).build();
+                    listSkillRequire.add(skillRequire);
+                }
+                List<Boolean> listCheckCreateSkillRequire = new  ArrayList<>();
+                for (SkillRequire skillRequire : listSkillRequire) {
+                    boolean checkCreateSkillRequire = skillRequireDAO.createSkillRequire(skillRequire);
+                    if(checkCreateSkillRequire)
+                        listCheckCreateSkillRequire.add(checkCreateSkillRequire);
+                }
+                if(!listCheckCreateSkillRequire.contains(false)){
+                    request.setAttribute("MESSAGE", "Create Job Successfully!");
+                    url = SUCCESS + jobID;
+                }
             }
 
         } catch (Exception e) {

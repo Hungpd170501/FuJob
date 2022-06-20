@@ -18,7 +18,7 @@
         </div>
 
         <!-- Hero Start -->
-        <section class="vh-100" style="background: url('https://via.placeholder.com/2000X1333//88929f/5a6270C/O https://placeholder.com/') center center;">
+        <section class="vh-100" style="background: url('${pageContext.request.contextPath}/asset/images/background-index.jpg') center center;">
 
             <div class="home-center">
                 <div class="home-desc-center">

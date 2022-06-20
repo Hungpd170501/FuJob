@@ -1,6 +1,7 @@
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="se1621.dto.User"%>
 <%@ page pageEncoding="UTF-8" %>
+
 <%
     User loginUser = (User) session.getAttribute("LOGIN_USER");
 %>
@@ -83,59 +84,21 @@
                 <li><a href="${pageContext.request.contextPath}">Home</a></li>
 
                 <li class="has-submenu">
-                    <a href="javascript:void(0)">Jobs</a><span class="menu-arrow"></span>
+                    <a href="javascript:void(0)">Project</a><span class="menu-arrow"></span>
                     <ul class="submenu">
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&pageJob=${1}">Job List</a></li>
+
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&Search_title_exper_cate">Project List</a></li>
                             <%
                                 if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "US")) {
                             %>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>">Your Job Applied</a></li>   
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>">Your Project Applied</a></li>   
                             <%
                             } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
                             %>
-                        <li><a href="${pageContext.request.contextPath}/view/job-list.jsp">Your Job Posted</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Posted</a></li>
                             <%
                                 }
                             %>        
-
-                    </ul>
-                </li>
-                <li class="has-submenu">
-                    <a href="javascript:void(0)">Pages</a><span class="menu-arrow"></span>
-                    <ul class="submenu">
-                        <li><a href="/FuJob/view/about.jsp">About us</a></li>
-                        <li><a href="/FuJob/view/services.html">Services</a></li>
-                        <li><a href="/FuJob/view/team.html">Team</a></li>
-                        <li><a href="/FuJob/view/faq.html">Faqs</a></li>
-                        <li><a href="/FuJob/view/pricing.html">Pricing plans</a></li>
-                        <li class="has-submenu"><a href="javascript:void(0)"> Candidates</a><span class="submenu-arrow"></span>
-                            <ul class="submenu">
-                                <li><a href="/FuJob/view/candidates-listing.jsp">Candidates Listing</a></li>
-                                <li><a href="/FuJob/MainController?action=SearchResumeID&searchResumeID=${sessionScope.LOGIN_USER.userID}">Candidates Profile</a></li>
-                                <li><a href="/FuJob/view/create-resume.jsp">Create Resume</a></li>
-                            </ul>  
-                        </li>
-                        <li class="has-submenu"><a href="javascript:void(0)"> Blog</a><span class="submenu-arrow"></span>
-                            <ul class="submenu">
-                                <li><a href="/FuJob/view/blog-grid.html">Blogs</a></li>
-                                <li><a href="/FuJob/view/blog-sidebar.html">Blog Sidebar</a></li>
-                                <li><a href="/FuJob/view/blog-details.html">Blog Details</a></li>
-                            </ul>  
-                        </li>
-                        <li class="has-submenu"><a href="javascript:void(0)"> Employers</a><span class="submenu-arrow"></span>
-                            <ul class="submenu">
-                                <li><a href="/FuJob/view/employers-list.jsp">Employers List</a></li>
-                                <li><a href="/FuJob/MainController?action=SearchCompanyID&searchCompanyID=${sessionScope.LOGIN_USER.companyID}">Company Detail</a></li>
-                            </ul>  
-                        </li>
-                        <li class="has-submenu"><a href="javascript:void(0)"> User Pages</a><span class="submenu-arrow"></span>
-                            <ul class="submenu">
-                                <li><a href="/FuJob/view/login.jsp">Login</a></li>
-                                <li><a href="/FuJob/view/signup.jsp">Signup</a></li>
-                                <li><a href="/FuJob/view/recovery_password.jsp">Forgot Password</a></li>
-                            </ul>  
-                        </li>
-                        <li><a href="components.html"> Components</a></li>
                     </ul>
                 </li>
                 <li>
@@ -165,7 +128,7 @@
                 %>
                 <li>
                     <div class="buy-button">
-                        <a href="${pageContext.request.contextPath}/view/post-a-job.jsp" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Post a Job</a>
+                        <a href="${pageContext.request.contextPath}/view/post-a-job.jsp" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Post a Project</a>
                     </div>
                 </li>
 
@@ -190,7 +153,3 @@
     <!--end end-->
 </header><!--end header-->
 <!-- Navbar End -->
-
-
-
-

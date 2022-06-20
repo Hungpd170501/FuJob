@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-12 mb-0 mb-md-4 pb-0 pb-md-2">
-                <a href="javascript:void(0)"><img src="../asset/images/logo-light.png" height="20" alt=""></a>
+                <a href="javascript:void(0)"><img src="${pageContext.request.contextPath}/asset/images/Logo/Logo/Untitled-1.png" height="50" alt=""></a>
                 <p class="mt-4">At vero eos et accusamus et iusto odio dignissim os ducimus qui blanditiis praesentium</p>
                 <ul class="social-icon social list-inline mb-0">
                     <li class="list-inline-item"><a href="#" class="rounded"><i class="mdi mdi-facebook"></i></a></li>
@@ -56,7 +56,7 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <div class="">
-                    <p class="mb-0">© 2019 -2020 Jobya. Design with <i class="mdi mdi-heart text-danger"></i> by Themesdesign.</p>
+                    <p class="mb-0">© 2022 FuJob Design with <i class="mdi mdi-heart text-danger"></i> by FuJobteam.</p>
                 </div>
             </div>
         </div>

@@ -11,132 +11,6 @@
     <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
-
-            <!-- Navigation Bar-->
-            <header id="topnav" class="defaultscroll scroll-active">
-                <!-- Tagline STart -->
-                <div class="tagline">
-                    <div class="container">
-                        <div class="float-left">
-                            <div class="phone">
-                                <i class="mdi mdi-phone-classic"></i> +84 367482513
-                            </div>
-                            <div class="email">
-                                <a href="#">
-                                    <i class="mdi mdi-email"></i> FuJob@mail.com
-                                </a>
-                            </div>
-                        </div>
-                        <div class="float-right">
-                            <ul class="topbar-list list-unstyled d-flex" style="margin: 11px 0px;">
-                                <li class="list-inline-item"><a href="javascript:void(0);"><i class="mdi mdi-account mr-2"></i>Benny Simpson</a></li>
-                                <li class="list-inline-item">
-                                    <select id="select-lang" class="demo-default">
-                                        <option value="">Language</option>
-                                        <option value="4">English</option>
-                                        <option value="1">Spanish</option>
-                                        <option value="3">French</option>
-                                        <option value="5">Hindi</option>
-                                    </select>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <!-- Tagline End -->
-
-                <!-- Menu Start -->
-                <div class="container">
-                    <!-- Logo container-->
-                    <div>
-                        <a href="index.html" class="logo">
-                            <img src="images/logo-light.png" alt="" class="logo-light" height="18" />
-                            <img src="images/logo-dark.png" alt="" class="logo-dark" height="18" />
-                        </a>
-                    </div>                 
-                    <div class="buy-button">
-                        <a href="post-a-job.html" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Post a Job</a>
-                    </div><!--end login button-->
-                    <!-- End Logo container-->
-                    <div class="menu-extras">
-                        <div class="menu-item">
-                            <!-- Mobile menu toggle-->
-                            <a class="navbar-toggle">
-                                <div class="lines">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            </a>
-                            <!-- End mobile menu toggle-->
-                        </div>
-                    </div>
-
-                    <div id="navigation">
-                        <!-- Navigation Menu-->   
-                        <ul class="navigation-menu">
-                            <li><a href="index.html">Home</a></li>
-                            <li class="has-submenu">
-                                <a href="javascript:void(0)">Jobs</a><span class="menu-arrow"></span>
-                                <ul class="submenu">
-                                    <li><a href="job-list.html">Job List</a></li>
-                                    <li><a href="job-grid.html">Job Grid</a></li>
-                                    <li><a href="job-details.html">Job Details</a></li>
-                                    <li><a href="job-details-2.html">Job Details-2</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="has-submenu">
-                                <a href="javascript:void(0)">Pages</a><span class="menu-arrow"></span>
-                                <ul class="submenu">
-                                    <li><a href="about.html">About us</a></li>
-                                    <li><a href="services.html">Services</a></li>
-                                    <li><a href="team.html">Team</a></li>
-                                    <li><a href="faq.html">Faqs</a></li>
-                                    <li><a href="pricing.html">Pricing plans</a></li>
-                                    <li class="has-submenu"><a href="javascript:void(0)"> Candidates</a><span class="submenu-arrow"></span>
-                                        <ul class="submenu">
-                                            <li><a href="candidates-listing.html">Candidates Listing</a></li>
-                                            <li><a href="candidates-profile.html">Candidates Profile</a></li>
-                                            <li><a href="create-resume.html">Create Resume</a></li>
-                                        </ul>  
-                                    </li>
-                                    <li class="has-submenu"><a href="javascript:void(0)"> Blog</a><span class="submenu-arrow"></span>
-                                        <ul class="submenu">
-                                            <li><a href="blog-grid.html">Blogs</a></li>
-                                            <li><a href="blog-sidebar.html">Blog Sidebar</a></li>
-                                            <li><a href="blog-details.html">Blog Details</a></li>
-                                        </ul>  
-                                    </li>
-                                    <li class="has-submenu"><a href="javascript:void(0)"> Employers</a><span class="submenu-arrow"></span>
-                                        <ul class="submenu">
-                                            <li><a href="employers-list.html">Employers List</a></li>
-                                            <li><a href="company-detail.html">Company Detail</a></li>
-                                        </ul>  
-                                    </li>
-                                    <li class="has-submenu"><a href="javascript:void(0)"> User Pages</a><span class="submenu-arrow"></span>
-                                        <ul class="submenu">
-                                            <li><a href="login.html">Login</a></li>
-                                            <li><a href="signup.html">Signup</a></li>
-                                            <li><a href="recovery_passward.html">Forgot Password</a></li>
-                                        </ul>  
-                                    </li>
-                                    <li><a href="components.html"> Components</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="contact.html">contact</a>
-                            </li>
-                        </ul><!--end navigation menu-->
-                    </div><!--end navigation-->
-                </div><!--end container-->
-                <!--end end-->
-            </header><!--end header-->
-            <!-- Navbar End -->
-
-            =======
-            >>>>>>> f10208ba2d394cc80a0851e1508e85b1bb39ddc7
             <!-- Start home -->
             <section class="bg-half page-next-level"> 
                 <div class="bg-overlay"></div>
@@ -158,7 +32,6 @@
                 </div>
             </section>
             <!-- end home -->
-
             <!-- ABOUT US START -->
             <section class="section">
                 <div class="container">
@@ -166,21 +39,15 @@
                         <div class="col-lg-4 col-md-3">
                             <img src="https://cpad.ask.fm/233/987/771/-59996973-1tm75bm-61lhsk0efc6o1fp/original/file.jpg" class="img-fluid rounded shadow" alt="">
                         </div>
-
                         <div class="col-lg-7 col-md-8">
                             <div class="about-desc ml-lg-4">
                                 <h4 class="text-dark">About us</h4>
 
-                                <p class="text-muted">Matching the right people to the right jobs is a very difficult problem in Vietnam, a challenge for any recruitment platform. With the goal of applying technology to change the recruitment market and make human resources more efficient, in early 2022, the idea of FUJob was born.</p>
+                                <p class="text-muted">Matching the right people to the right projects is a very difficult problem in Vietnam, a challenge for any recruitment platform. With the goal of applying technology to change the recruitment market and make human resources more efficient, in early 2022, the idea of FUJob was born.</p>
 
-                                <p class="text-muted">Using technology, we create a platform that allows workers to find jobs, learn about companies and interact with employers.</p>
+                                <p class="text-muted">Using technology, we create a platform that allows workers to find projects, learn about companies and interact with employers.</p>
 
-                                <p class="text-muted">Every day, we connect thousands of people with new job opportunities from reputable businesses.</p>
-                                <<<<<<< HEAD
-
-                                <a href="javascript:void(0)" class="btn btn-primary">Apply now</a>
-                                =======
-                                >>>>>>> f10208ba2d394cc80a0851e1508e85b1bb39ddc7
+                                <p class="text-muted">Every day, we connect thousands of people with new project opportunities from reputable businesses.</p>
                             </div>
                         </div>
                     </div>
@@ -197,7 +64,7 @@
                                 <div class="p-4">
                                     <div class="blog-post counter-content text-center">
                                         <h1 class="counter-value font-weight-light text-dark mb-2" data-count="150">0</h1>
-                                        <p class="counter-name text-muted f-15 text-uppercase mb-2">Jobs</p>
+                                        <p class="counter-name text-muted f-15 text-uppercase mb-2">Project</p>
                                         <i class="mdi mdi-account-multiple h3 text-muted"></i>
                                     </div>
                                 </div>
@@ -407,7 +274,7 @@
                         <div class="col-12">
                             <div class="section-title text-center mb-4 pb-2">
                                 <h4 class="title title-line pb-5">Our Client's</h4>
-                                <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
+                                <p class="text-muted para-desc mx-auto mb-1">Post a projects to tell us about your project. We'll quickly match you with the right freelancers.</p>
                             </div>
                         </div>
                     </div>

@@ -5,16 +5,18 @@
 package se1621.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
+import se1621.dao.CategoryDAO;
 import se1621.dao.CompanyInfoDAO;
 import se1621.dao.JobDAO;
 import se1621.dao.UserDAO;
+import se1621.dto.Category;
 import se1621.dto.CompanyInfo;
 import se1621.dto.Job;
 import se1621.dto.User;
@@ -37,43 +39,33 @@ public class SearchJobTitle_Exper_CateController extends HttpServlet {
             String searchTitle = request.getParameter("searchtitle");
             String searchExper = request.getParameter("searchExper");
             int searchCate = 0;
+            int hrID = 0;
             try {
                 searchCate = Integer.parseInt(request.getParameter("searchCate"));
+                hrID = Integer.parseInt(request.getParameter("hrID"));
             } catch (Exception e) {
             }
             JobDAO jobDAO = new JobDAO();
             UserDAO userDAO = new UserDAO();
             CompanyInfoDAO compnayDAO = new CompanyInfoDAO();
+            CategoryDAO categoryDAO = new CategoryDAO();
+            
             List<Job> listJob = jobDAO.searchAllJobTile_Experience_Category(searchTitle, searchExper, searchCate);
             for (Job job : listJob) {
                 int userID = job.getUserID();
                 User user = userDAO.getUser(userID);
                 CompanyInfo company = compnayDAO.getCompanyInfo(user.getCompanyID());
                 job.setCompany(company);
+                int categoryID = job.getCategory().getCategoryID();
+                Category category = categoryDAO.getCategory(categoryID);
+                job.setCategory(category);
             }
-
-            int pageJob;
-            int numberPostJob = 5; // so post job trong 1 trang
-            int sizeJob = listJob.size();
-            int numberPage = (sizeJob % 5 == 0 ? (sizeJob / 5) : ((sizeJob / 5)) + 1); // so trang dc tao sau khi dem so jobPost
-            String xPage = request.getParameter("pageJob");
-            if (xPage == null) {
-                pageJob = 1;
-            } else {
-                pageJob = Integer.parseInt(xPage);
-            }
-            int starPage, endPage; // page 1 va page cuoi
-            starPage = (pageJob - 1) * numberPostJob; // lay 5 page dau
-            endPage = Math.min(pageJob * numberPostJob, sizeJob); // page cuoi se con lai bao nhieu post
-            List<Job> listPageAllJob = jobDAO.getPaginateJobList(listJob, starPage, endPage);
-            if (!listPageAllJob.isEmpty()) {
-                request.setAttribute("LIST_ALLJOB", listPageAllJob);
-                request.setAttribute("pageJob", pageJob);
-                request.setAttribute("numberPage", numberPage);
-                request.setAttribute("searchTitle", searchTitle);
-                request.setAttribute("searchExper", searchExper);
-                request.setAttribute("searchCate", searchCate);
+            if (!listJob.isEmpty()) {
+                request.setAttribute("LIST_ALLJOB", listJob);
                 url = SUCCESS;
+            } else {
+                request.setAttribute("LIST_ALLJOB", listJob);
+                request.setAttribute("MESSAGE", "NO PROJECT TO DISPLAY");
             }
         } catch (Exception e) {
             log("Error at View all job Controller" + e.toString());

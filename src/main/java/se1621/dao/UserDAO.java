@@ -18,10 +18,39 @@ public class UserDAO {
     private static final String SINGUP = "INSERT INTO tblUser(userName, fullName, email, password, phone, roleID, status) VALUES(?,?,?,?,?,?,2)";
     private static final String UPDATECOMID = "UPDATE tblUser SET userName=?, fullName=?, email=?, phone=?, roleID=?, companyID=? WHERE userID=?";
     private static final String GETUSER = "SELECT fullName, roleID, companyID FROM tblUser WHERE userID =?";
+    private static final String GETALLTOTALUSER_NONAD = "SELECT COUNT (*) AS totalUser FROM tblUser WHERE roleID = 'US' or roleID = 'HR' ";
     private Connection conn;
     private PreparedStatement preStm;
     private ResultSet rs;
 
+    // tong so job da order
+    public int getAllTotalUser_NonAD() throws SQLException {
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GETALLTOTALUSER_NONAD);
+                rs = preStm.executeQuery();
+                while(rs.next()){
+                    return rs.getInt("totalUser");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return 0;
+    }
+    
     private void closeConnection() throws Exception {
         if (rs != null) {
             rs.close();
@@ -262,4 +291,11 @@ public class UserDAO {
         }
         return user;
     }
+    
+//    public static void main(String[] args) throws SQLException {
+//        int count;
+//        UserDAO dao = new UserDAO();
+//        count = dao.getAllTotalUser_NonAD();
+//        System.out.println(count);
+//    }
 }

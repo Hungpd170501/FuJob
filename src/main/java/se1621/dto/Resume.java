@@ -29,7 +29,6 @@ public class Resume {
     private String major;
     private String gpa;
     private String experienceYear;
-    private String skills;
     private String website;
     private String overview;
 }

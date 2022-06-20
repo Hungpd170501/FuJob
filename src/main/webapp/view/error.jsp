@@ -42,6 +42,21 @@
                     </div>
                 </div>
             </div>
-        </div>    
+        </div>  
+                                <!-- javascript -->
+        <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/bootstrap.bundle.min.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/jquery.easing.min.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/plugins.js"></script>
+
+        <!-- selectize js -->
+        <script src="${pageContext.request.contextPath}/asset/js/selectize.min.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/jquery.nice-select.min.js"></script>
+
+        <script src="${pageContext.request.contextPath}/asset/js/owl.carousel.min.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/counter.int.js"></script>
+
+        <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
     </body>
 </html>

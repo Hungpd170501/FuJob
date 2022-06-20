@@ -37,6 +37,8 @@ public class MainController extends HttpServlet {
     private static final String POSTJOB = "Post a Job";
     private static final String VIEWALLJOB_CONTROLLER = "ViewAllJobController";
     private static final String VIEWALLJOB = "SearchlistJob";
+    private static final String LISTJOBBYID_CONTROLLER = "ListJobByIDController";
+    private static final String LISTJOBBYID = "ListJobByID";
     private static final String SEARCHJOBTITLE_EXPER_CATE = "Search_title_exper_cate";
     private static final String SEARCHJOBTITLE_EXPER_CATE_CONTROLLER = "SearchJobTitle_Exper_CateController";
     private static final String SEARCH_JOBID_CONTROLLER = "SearchJobIDController";
@@ -45,7 +47,14 @@ public class MainController extends HttpServlet {
     private static final String ORDERJOB = "Send application";
     private static final String VIEWALLJOBORDER_CONTROLLER = "ViewAllJobOrderController";
     private static final String VIEWALLJOBORDER = "SearchlistJobOrder";
-
+    private static final String UNAPPLY_CONTROLLER = "UnApplyController";
+    private static final String UNAPPLY = "UnApply";
+    private static final String SEARCHCANDIDATEOFJOB = "SearchCandidateOfJob";
+    private static final String SEARCHCANDIDATEOFJOB_CONTROLLER = "ListCandidateOfJob";
+    private static final String SEARCHJOBPOSTED = "searchJobPost";
+    private static final String SEARCHJOBPOSTED_CONTROLLER = "SearchInJobPostedController";
+    private static final String SEARCHJOBORDER = "SearchJobOrder";
+    private static final String SEARCHJOBORDER_CONTROLLER = "SearchInJobOrderController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -63,6 +72,10 @@ public class MainController extends HttpServlet {
                 url = LOGOUT_CONTROLLER;
             } else if (CHANGE_PASSWORD.equals(action)) {
                 url = CHANGE_PASSWORD_CONTROLLER;
+            }else if (VIEWALLJOB.equals(action)) {
+                url = VIEWALLJOB_CONTROLLER;
+            } else if (SEARCHJOBTITLE_EXPER_CATE.equals(action)) {
+                url = SEARCHJOBTITLE_EXPER_CATE_CONTROLLER;  
             } else if (SEARCH_COMPANYID.equals(action)) {
                 url = SEARCH_COMPANYID_CONTROLLER;
             } else if (SEARCH_RESUMEID.equals(action)) {
@@ -74,17 +87,23 @@ public class MainController extends HttpServlet {
             } else if (CREATERESUME.equals(action)) {
                 url = CREATERESUME_CONTROLLER;
             } else if (POSTJOB.equals(action)) {
-                url = POSTJOB_CONTROLLER;
-            } else if (VIEWALLJOB.equals(action)) {
-                url = VIEWALLJOB_CONTROLLER;
-            } else if (SEARCHJOBTITLE_EXPER_CATE.equals(action)) {
-                url = SEARCHJOBTITLE_EXPER_CATE_CONTROLLER;
+                url = POSTJOB_CONTROLLER;       
+            } else if (LISTJOBBYID.equals(action)) {
+                url = LISTJOBBYID_CONTROLLER;
             } else if (SEARCH_JOBID.equals(action)) {
                 url = SEARCH_JOBID_CONTROLLER;
             } else if (ORDERJOB.equals(action)) {
                 url = ORDERJOB_CONTROLLER;
             } else if (VIEWALLJOBORDER.equals(action)) {
                 url = VIEWALLJOBORDER_CONTROLLER;
+            } else if (UNAPPLY.equals(action)) {
+                url = UNAPPLY_CONTROLLER;
+            } else if (SEARCHCANDIDATEOFJOB.equals(action)) {
+                url = SEARCHCANDIDATEOFJOB_CONTROLLER;
+            } else if (SEARCHJOBPOSTED.equals(action)) {
+                url = SEARCHJOBPOSTED_CONTROLLER;
+            } else if (SEARCHJOBORDER.equals(action)) {
+                url = SEARCHJOBORDER_CONTROLLER;
             } else {
                 url = ERROR;
             }

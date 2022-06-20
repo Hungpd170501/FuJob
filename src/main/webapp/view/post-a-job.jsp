@@ -7,11 +7,11 @@
             <jsp:param name="title" value="FuJob | Post Job "/>
         </jsp:include>
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
         </head>
 
         <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
-
         <jsp:include page="./include/navbar.jsp"></jsp:include>
 
             <!-- Start home -->
@@ -21,11 +21,11 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="text-center text-white">
-                                <h4 class="text-uppercase title mb-4">Create A new Job</h4>
+                                <h4 class="text-uppercase title mb-4">Create A new Project</h4>
                                 <ul class="page-next d-inline-block mb-0">
                                     <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
                                     <li>
-                                        <span class="text-uppercase text-white font-weight-bold">Post A Job</span> 
+                                        <span class="text-uppercase text-white font-weight-bold">Post A Project</span> 
                                     </li> 
                                 </ul>
                             </div>
@@ -44,33 +44,17 @@
                                 <div class="custom-form">
                                     <div id="message3"></div>
                                     <form action="/FuJob/MainController" method="POST">
-                                        <h4 class="text-dark mb-3">Post a New Job :</h4>
+                                        <h4 class="text-dark mb-3" style="font-weight: 700">Post a New Project :</h4>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group app-label mt-2">
-                                                    <label class="text-muted">Job Title<span class="text-danger">*</span></label>
+                                                    <label>Project Name<span class="text-danger">*</span></label>
                                                     <input id="jobtitle" name="jobtitle" type="text" class="form-control resume" required="" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
-                                                <div class="form-group app-label">
-                                                    <label class="text-muted">Experience Needed<span class="text-danger">*</span> :</label>
-                                                    <div class="form-button">
-                                                        <select class="form-control resume" name="chooseExY" required="">
-                                                            <option value="Less than 1 year">Less than 1 year</option>
-                                                            <option value="1-3 years">1-3 years</option>
-                                                            <option value="3-5 years">3-5 years</option>
-                                                            <option value="5-10 years">5-10 years</option>
-                                                            <option value="More than 10 years">More than 10 years</option>
-                                                        </select>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4">
                                                 <div class="form-group app-label mt-2">
-                                                    <label class="text-muted">Job Category</label>
+                                                    <label>Project Category</label>
                                                     <div class="form-button">
                                                         <select class="form-control resume" name="categoryID" required="">
                                                         <c:forEach items="${chooseCategory.listCategory}" var="i">
@@ -80,58 +64,63 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group app-label mt-2">
-                                                <label class="text-muted">Skill Required<span class="text-danger">*</span></label>
-                                                <input id="skillrequired" name="skill" type="text" class="form-control resume" required="" placeholder="JAVA, HTML, ....">
-                                            </div>
-                                        </div> 
-                                        <div class="col-md-4">
-                                            <div class="form-group app-label mt-2">
-                                                <label class="text-muted">Deadline<span class="text-danger">*</span></label>
-                                                <input id="deadline" name="deadline" type="date" class="form-control resume" required="" placeholder="">
-                                            </div>
-                                        </div>
+
 
 
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
-                                                <label class="text-muted">Estimated Completion Time <span class="text-danger">*</span></label>
-                                                <input id="completiontime" name="completiontime" type="text" class="form-control resume" required="" placeholder="1day, 2day, ...">
+                                                <label>Skill Required<span class="text-danger">*</span></label> 
+                                                <div class="form-button">
+                                                    <select class="form-control resume select2 select2-hidden-accessible" name="skillID" multiple="" data-placeholder="Select skill" style="width: 100%; border-color: #dee2e6" tabindex="-1" aria-hidden="true">
+                                                        <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                            <option value="${i.skillID}">${i.skillName}</option>
+                                                        </c:forEach>
+                                                    </select> 
+                                                </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
-                                                <label class="text-muted">Salary<span class="text-danger">*</span></label>
-                                                <input id="salary" name="salary" type="text" class="form-control resume" required="" placeholder="100$">
+                                                <label>How do you want to pay?<span class="text-danger">*</span></label>
+                                                <div class="row">
+                                                    <div class="col-lg-7 p-1">
+                                                        <select class="form-control resume">
+                                                            <option value="Pay by the hour">Pay by the hour</option>
+                                                            <option value="Pay fixed price">Pay fixed price</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-5 p-1" >
+                                                        <input id="salary" name="salary" type="text" class="form-control resume" required="" placeholder="100$">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
-                                                <label class="text-muted">Address<span class="text-danger">*</span></label>
+                                                <label>Address<span class="text-danger">*</span></label>
                                                 <input id="address" name="address" type="text" class="form-control resume" required="" placeholder="District 9, Ho Chi Minh City">
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
-                                                <label class="text-muted">Email<span class="text-danger">*</span></label>
+                                                <label>Email<span class="text-danger">*</span></label>
                                                 <input id="email" name="email" type="tel" class="form-control resume" required="" placeholder="abc@gmail.com">
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
-                                                <label class="text-muted">Phone<span class="text-danger">*</span></label>
+                                                <label>Phone<span class="text-danger">*</span></label>
                                                 <input id="phone" name="phone" type="tel" class="form-control resume" required="" placeholder="0123456789">
                                             </div>
                                         </div>
 
                                         <div class="col-md-12">
                                             <div class="form-group app-label">
-                                                <label class="text-muted">Description<span class="text-danger">*</span> :</label>
+                                                <label>Description<span class="text-danger">*</span> :</label>
                                                 <textarea id="description" name="description" type="text" class="form-control resume" required="" placeholder="Things needed for the job:
                                                           ....
                                                           What the job will do:
@@ -142,7 +131,8 @@
 
                                     <div class="row">
                                         <div class="col-lg-12 mt-2">
-                                            <input type="submit" id="submit" name="action" class="submitBnt btn btn-primary" value="Post a Job">
+                                            <input type="submit" id="submit" name="" class="submitBnt btn btn-primary" value="Post a Project">
+                                            <input type="hidden" id="submit" name="action" class="submitBnt btn btn-primary" value="Post a Job">
                                         </div>
                                     </div>
                                 </form>
@@ -170,6 +160,15 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.select2').select2({
+                    closeOnSelect: false
+                });
+            });
+        </script>
 
     </body>
 </html>

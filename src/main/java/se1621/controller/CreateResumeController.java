@@ -12,8 +12,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import se1621.dao.ResumeDAO;
+import se1621.dao.StudentSkillDAO;
 import se1621.dto.Resume;
+import se1621.dto.Skill;
+import se1621.dto.StudentSkill;
 import se1621.dto.User;
 
 /**
@@ -42,7 +47,11 @@ public class CreateResumeController extends HttpServlet {
             String major = request.getParameter("major");
             String gpa = request.getParameter("gpa");
             String chooseExY = request.getParameter("chooseExY");
-            String skills = request.getParameter("skills");
+            String[] skillID = request.getParameterValues("skillID");
+            List<Integer> skillSet = new ArrayList<>();
+            for (String skill : skillID) {
+                skillSet.add(Integer.parseInt(skill));
+            }
             String website = request.getParameter("website");
             String seflintro = request.getParameter("seflintro");
 
@@ -50,25 +59,42 @@ public class CreateResumeController extends HttpServlet {
             User loginUser = (User) session.getAttribute("LOGIN_USER");
             int userID = loginUser.getUserID();
             Resume resume = new Resume(0, userID, avatar, fullName, gender, dateOfBirth,
-                    gmail, phone, address, shoolName, major, gpa, chooseExY, skills, website, seflintro);
+                    gmail, phone, address, shoolName, major, gpa, chooseExY, website, seflintro);
 
-            ResumeDAO resumedao = new ResumeDAO();
-            boolean checkValidation = true;
-            boolean checkDuplicate = resumedao.checkDuplicate(userID);
-            if (checkDuplicate) {
-                checkValidation = false;
-                boolean checkUpdateResume = resumedao.updateResume(resume, userID);
-                if (checkUpdateResume) {
-                    request.setAttribute("MESSAGE", "Your Resume has been updated!");
-                    url = SUCCESS + userID;
+            StudentSkillDAO studentSkillDAO = new StudentSkillDAO();
+            List<StudentSkill> listStudentSkill = new ArrayList<>();
+            for (Integer skill : skillSet) {
+                StudentSkill studentSkill = StudentSkill.builder().studentID(userID).skill(Skill.builder().skillID(skill).build()).build();
+                listStudentSkill.add(studentSkill);
+            }
+            List<Boolean> listCheckCreateStudentSkill = new ArrayList<>();
+            for (StudentSkill studentSkill : listStudentSkill) {
+                boolean checkCreateStudentSkill = studentSkillDAO.createStudetnSkill(studentSkill);
+                if (checkCreateStudentSkill) {
+                    listCheckCreateStudentSkill.add(checkCreateStudentSkill);
                 }
             }
-            if (checkValidation) {
-                boolean checkCreateResume = resumedao.createResume(resume);
-                if (checkCreateResume) {
-                    request.setAttribute("MESSAGE", "Create Resume Successfully!");
-                    url = SUCCESS + userID;
+            if (!listCheckCreateStudentSkill.contains(false)) {
+
+                ResumeDAO resumedao = new ResumeDAO();
+                boolean checkValidation = true;
+                boolean checkDuplicate = resumedao.checkDuplicate(userID);
+                if (checkDuplicate) {
+                    checkValidation = false;
+                    boolean checkUpdateResume = resumedao.updateResume(resume, userID);
+                    if (checkUpdateResume) {
+                        request.setAttribute("MESSAGE", "Your Resume has been updated!");
+                        url = SUCCESS + userID;
+                    }
                 }
+                if (checkValidation) {
+                    boolean checkCreateResume = resumedao.createResume(resume);
+                    if (checkCreateResume) {
+                        request.setAttribute("MESSAGE", "Create Resume Successfully!");
+                        url = SUCCESS + userID;
+                    }
+                }
+
             }
 
         } catch (Exception e) {

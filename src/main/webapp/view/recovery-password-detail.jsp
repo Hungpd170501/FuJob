@@ -15,7 +15,7 @@
 
 
             <div class="back-to-home rounded d-none d-sm-block">
-                <a href="../view/index.jsp" class="text-white rounded d-inline-block text-center"><i class="mdi mdi-home"></i></a>
+                <a href="${pageContext.request.contextPath}/view/index.jsp" class="text-white rounded d-inline-block text-center"><i class="mdi mdi-home"></i></a>
             </div>
 
             <!-- Hero Start -->
