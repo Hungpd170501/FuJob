@@ -476,10 +476,10 @@ VALUES (N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW' , N'Tao 
 	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Luong Hoang Duc', N'hr22@gmail.com', N'HR',1, 5),
 	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Do Hung Dung', N'hr23@gmail.com', N'HR',1, 5),
 	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Tran Dinh Trong', N'hr24@gmail.com', N'HR',1, 5),
-	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Vu Van Thanh', N'hr25@gmail.com', N'HR',1, 5)
+	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Vu Van Thanh', N'hr25@gmail.com', N'HR',1, 5),
 	--52 student
 	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Nguyen Bao Toan', N'toannbse150270@fpt.edu.vn', N'US',1, NULL),
-	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Le Thai Phong', N'phonglt150407@fpt.edu.vn', N'US',1, NULL),
+	( N'$2a$10$83AJjXb7xGqD6LhpEQRSkeQcq25CbSFONzvlBw5Dj2GRr5VhXs4kW', N'Le Thai Phong', N'phonglt150407@fpt.edu.vn', N'US',1, NULL)
 	
 	
 GO
@@ -621,7 +621,7 @@ VALUES
 	(47, 'Logo design for new brand', 5, 50, 1, 'Toan Quoc', 's1123imdm@gmail.com', '0703342428', 'I am looking for a designer to help create a logo for a new brand. We are launching a sustainable golf brand. We will be targeting the premium end of the marketing with the most sustainable, natural materials and processes. Our initial product offering will be very small, with subtle, memorable branding. We need a logo that can adorn products and marketing materials.', '2022-10-25', 1),
 	(47, 'Primary school English tutor', 8, 3, 2, 'Ha Noi Capital', 'timdm3232@gmail.com', '0709009128', 'Teaching English online 1 on 1 or 1 on 2 for elementary students through Class-In software. Teaching according to the company''s documents and textbooks. Encourage teachers to contribute ideas and adjust the curriculum to suit students. Length of 1 class: 25 minutes/class. Teachers need to meet a minimum of 5 classes / week and commit to accompany students to the end of the course cycle (3 or 6 months). Briefly comment on the student''s learning situation after each lesson. Report the work situation to the Quality Manager as required & when required.', '2022-9-23', 1)
 GO
-
+	
 INSERT INTO tblJobSkills (jobID, skillID)
 VALUES 	(1, 65), (1, 66), 
 	(2, 173), (2, 1), (2, 54),
@@ -656,11 +656,11 @@ VALUES 	(1, 65), (1, 66),
 GO
 
 INSERT INTO tblResumes (userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, major, gpa, website, gitHub, linkedIn, overview, resumeStatus)
-VALUES 	(2, "https://static.vecteezy.com/system/resources/thumbnails/004/773/280/small/the-happy-girl-laughs-human-emotions-avatar-with-a-happy-woman-vector.jpg", "Nguyen Van A", "Female", "2000-01-01", "anvse140222@fpt.edu.vn", "0987789987", "District 6, Ho Chi Minh City", "Software Engineering", "8/10", NULL, NULL, NULL, "I am Nguyen Van A. I come from Nghe An, I want to become a full-stack development", 1),
-	(3, "https://media.istockphoto.com/vectors/portrait-of-an-asian-boy-the-face-of-an-asian-child-avatar-of-a-vector-id1222359540?k=20&m=1222359540&s=612x612&w=0&h=G8qwIjQmbCq3hbg0ny9i0Hx5zoS1bIB5U3vEb7RVWZE=", "Pham Duc Hung", "Male", "2001-06-02", "hungpdse150222@fpt.edu.vn", "0987534987", "District 9, Ho Chi Minh City", "Software Engineering", "8/10", NULL, "https://github.com/Hungpd170501", NULL, "I want to become a back-end development", 1),
-	(4, "https://cdn5.vectorstock.com/i/thumb-large/69/94/smiling-boy-portrait-in-casual-clothing-in-cartoon-vector-36386994.jpg", "Huynh Ngo Gia Bao", "Male", "2000-22-11", "baohngse150260@fpt.edu.vn", "0987534237", "District 9, Ho Chi Minh City", "Software Engineering", "8/10", NULL, "https://github.com/HNGB", NULL, "I want to become a back-end development", 1),
-	(5, "https://image.shutterstock.com/image-vector/cute-white-boy-asian-vector-260nw-1758651497.jpg", "Le Ha Duy", "Male", "2001-11-11", "duylhse150233@fpt.edu.vn", "0983434237", "District 9, Ho Chi Minh City", "Software Engineering", "8/10", NULL, "https://github.com/HuDery", NULL, "I want to become a back-end development", 1),
-	(6, "https://static.vecteezy.com/system/resources/previews/004/059/941/non_2x/young-man-wearing-glasses-free-vector.jpg", "Le Quoc Binh", "Male", "2001-19-11", "binhlqse150199@fpt.edu.vn", "0983436757", "District 9, Ho Chi Minh City", "Software Engineering", "8/10", NULL, "https://github.com/BinhJim", NULL, "I want to become a back-end development", 1)
+VALUES 	(2, 'https://static.vecteezy.com/system/resources/thumbnails/004/773/280/small/the-happy-girl-laughs-human-emotions-avatar-with-a-happy-woman-vector.jpg', 'Nguyen Van A', 'Female', '2000-01-01', 'anvse140222@fpt.edu.vn', '0987789987', 'District 6, Ho Chi Minh City', 'Software Engineering', '8/10', NULL, NULL, NULL, 'I am Nguyen Van A. I come from Nghe An, I want to become a full-stack development', 1),
+	(3, 'https://media.istockphoto.com/vectors/portrait-of-an-asian-boy-the-face-of-an-asian-child-avatar-of-a-vector-id1222359540?k=20&m=1222359540&s=612x612&w=0&h=G8qwIjQmbCq3hbg0ny9i0Hx5zoS1bIB5U3vEb7RVWZE=', 'Pham Duc Hung', 'Male', '2001-06-02', 'hungpdse150222@fpt.edu.vn', '0987534987', 'District 9, Ho Chi Minh City', 'Software Engineering', '8/10', NULL, 'https://github.com/Hungpd170501', NULL, 'I want to become a back-end development', 1),
+	(4, 'https://cdn5.vectorstock.com/i/thumb-large/69/94/smiling-boy-portrait-in-casual-clothing-in-cartoon-vector-36386994.jpg', 'Huynh Ngo Gia Bao', 'Male', '2001-11-22', 'baohngse150260@fpt.edu.vn', '0987534237', 'District 9, Ho Chi Minh City', 'Software Engineering', '8/10', NULL, 'https://github.com/HNGB', NULL, 'I want to become a back-end development', 1),
+	(5, 'https://image.shutterstock.com/image-vector/cute-white-boy-asian-vector-260nw-1758651497.jpg', 'Le Ha Duy', 'Male', '2001-11-11', 'duylhse150233@fpt.edu.vn', '0983434237', 'District 9, Ho Chi Minh City', 'Software Engineering', '8/10', NULL, 'https://github.com/HuDery', NULL, 'I want to become a back-end development', 1),
+	(6, 'https://static.vecteezy.com/system/resources/previews/004/059/941/non_2x/young-man-wearing-glasses-free-vector.jpg', 'Le Quoc Binh', 'Male', '2001-11-19', 'binhlqse150199@fpt.edu.vn', '0983436757', 'District 9, Ho Chi Minh City', 'Software Engineering', '8/10', NULL, 'https://github.com/BinhJim', NULL, 'I want to become a back-end development', 1)
 GO	
 
 INSERT INTO tblResumeSkills(resumeID, skillID)
@@ -669,7 +669,3 @@ VALUES 	(1, 220), (1, 212), (2, 105),
 	(3, 220), (3, 212), (3, 105), (3, 62),
 	(4, 220), (4, 212), (4, 105), (4, 221),
 	(5, 220), (5, 212), (5, 105), (5, 436)
-	
-	
-	
-
