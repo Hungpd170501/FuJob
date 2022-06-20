@@ -557,7 +557,7 @@ VALUES ('.NET', 1),('2D', 1),('2D Animation',1),('3D',1),('3D Animation',1),('3D
 	('Ads Writing',1),('Review Writing',1),('Book Writing',1),('Creative Writing',1),('Stories Writing',1),('Medical Writing',1),
 	('Medical Writing Visual Basic for Applications',1), ('Viral Content',1),('Visual Basic for Applications',1),('VPS',1),('VR tour',1),
 	('Vray',1),('Vue.js',1),('Vue.js and express.js',1),('WCF',1),('Web content',1),('Websites Design',1),('Web Scraping',1),('Webbnc',1),('Website Analytics',1),('Websocket',1),
-	('Wireframe',1),('Woocommerce',1),('Wordpress',1),('Xamarin',1),('Aviation Construction',1),('Bookkeeping System Building',1),( 'Salary Scale Building',1)
+	('Wireframe',1),('Woocommerce',1),('Wordpress',1),('Xamarin',1),('Aviation Construction',1),('Bookkeeping System Building',1),( 'Salary Scale Building',1),('IoT', 1),('Arduino',1)
 GO
 
 INSERT INTO tblCategories ( categoryName,img, categoryStatus) 
@@ -579,6 +579,41 @@ VALUES
 	(N'Other', 'https://seeklogo.com/images/U/undefined-logo-FE82D12763-seeklogo.com.gif',1)
 GO
 
+INSERT INTO tblJobSkills (jobID, skilID)
+VALUES 	(1, 65), (1, 66), 
+	(2, 173), (2, 1), (2, 54),
+	(3, 200), (3, 396),
+	(4, 198), (4, 302), (4, 456),
+	(5, 41),
+	(6, 388), (6, 644), (6,100),
+	(7, 146),
+	(8, 512), (8, 625), (8, 622),
+	(9, 539), (9, 625), (9,622),
+	(10, 401), (10, 324),
+	(11, 65), (11, 658)
+	(12, 15), (12, 385), (12, 287),
+	(13, 524), (13, 123),
+	(14, 667), (14, 67), (14, 668),
+	(15, 667), (15, 67),
+	(16, 539), (16, 189),
+	(17, 539), (17, 123),
+	(18, 539), (18, 123),
+	(19, 539), (19, 123),
+	(20, 539), (20, 123), (20, 230), (20, 65),
+	(21, 539), (21, 123), (21, 51), (21, 584),
+	(22, 539), (22, 221), (22, 225), (22, 287),
+	(23, 539), (22, 123),
+	(24, 539), (24, 123), (24, 284),
+	(25, 539), (25, 123), (25, 146),
+	(26, 524), (26, 123), (26, 618), 
+	(27, 15), (27, 19),
+	(28, 193), (28, 194), (28, 29),
+	(29, 476), (29, 456),
+	(30, 512), (30, 189)
+	
+	
+GO
+
 INSERT INTO tblJobs (userID, jobTitle, jobCategoryID, budget, paymentMethodID, address, email, phone, description, expiriedDate, jobStatus)
 VALUES 
 	(7, 'International situation analysis', 1, 2000, 1, 'Ho Chi Minh City', 'timkinhdoanhquocte@gmail.com', '0988234654', 'Use All Source Intelligence to analysis international conflict/trade/business/affair/relation.', '2022-08-17', 1),
@@ -590,13 +625,13 @@ VALUES
 	(12, 'Multimedia Coordinator', 4, 20, 1, 'Ha Noi Capital', 'timmc@gmail.com', '0988212254', 'The Multimedia Coordinator will work under the direction of the Associate Athletic Director, External Affairs, in preparing video packages for the Athletics Department’s website and LED video boards. This position is responsible for generating social media content and assisting the administrative staff with special projects. There are currently two openings available for this position.', '2022-09-15', 1),
 	(12, 'Tour Operator', 7, 20, 1, 'Hoi An City', 'timtour@gmail.com', '0988212254', 'Find someone who can lead the delegation to visit Hoi An. Required to be agile, energetic, funny, understand the characteristics needed for the tour. Able to control, manage the delegation, handle unexpected incidents. The trip lasts 3 days and 3 nights, with accommodation and food allowance available.', '2022-09-15', 1),
 	(12, 'Blog article Englishr', 8, 100, 1, 'Toan Quoc', 'timta@gmail.com', '098821254', 'I need to find a freelancer who can write English well for long-term cooperation. Especially good at copywriting in English to write blog articles (about 1000 words). The job will be writing a blog article for a website about student life, job seeking experience, how to get high scores...You are encouraged to bid for the project: You have studied abroad in English speaking countries, IELTS 7.5-8.0 or higher or similar TOEFL, You are teaching English', '2022-10-15', 1),
-	(12, 'write articles in Japanese', 9, 200, 1, 'Toan Quoc', 'timtn@gmail.com', '0934212254', 'Writing Japanese articles for IT companies based on ideas and available information will be provided. Various topics: internal company events, product introduction, articles related to IT a bit (if you have IT knowledge),...', '2022-09-15', 1),
+	(12, 'Write articles in Japanese', 9, 200, 1, 'Toan Quoc', 'timtn@gmail.com', '0934212254', 'Writing Japanese articles for IT companies based on ideas and available information will be provided. Various topics: internal company events, product introduction, articles related to IT a bit (if you have IT knowledge),...', '2022-09-15', 1),
 	(12, 'Google Ads Optimization for Selling AI Book',10 , 50, 1, 'Toan Quoc', 'timdm@gmail.com', '0703309128', 'Our AI book has sold more than 1000 copies using another ad platform. The point is the product is surely saleable. We have started using Google Ads. We need some optimizations of our Google Ads to give good conversion. We take care of the ads budget for sure. If with your optimized google ads we succeed to sell 5 copies, within the agreed ads budget, 5 STAR is guaranteed', '2022-08-23', 1),
 	
 	(17, 'Business Analyst For A Mini Project',11 , 30, 1, 'Can Tho City', 'timba@gmail.com', '0703308333', 'Working as a BA for a group of students, meeting, analyzing and understanding the software requirements for a small project at school. Ability to speak both English and Vietnamese fluently. Ability to conduct general desk research activities. Have a "can do" attitude, agile, and resilient. Does not afraid to ask questions when necessary', '2022-09-23', 1),
 	(17, 'Clothes Customization Software For Ecommerce', 12, 2500, 1, 'Ho Chi Minh City', 'timai@gmail.com', '0703239128', 'A web application developed in either Python Django or Ruby on Rails  that will be mainly for customization of the clothes in an e-commerce for example suit, shirts, pants etc... the admin user should be able to scan fabric, sleeve, collar, cuff, placket etc... so that the end user will be able to customize the clothes he want as he likes, will send similar websites for the developer that will be working on this project, the candidate should have an experience in developing such websites.', '2022-09-23', 1),
 	(17, 'Korean translation collaborator, in the fields of Automotive',13, 200, 1, 'Ha Noi Capital', 'timth@gmail.com', '0890309128', 'Need someone to translate some car sales contracts in Korean. Requires final year Korean language students or TOPIK 5 or higher, know some automotive terms. Fun, sociable, agile, good appearance is an advantage.It is possible to give extra tips if the contract is smooth and favorable.', '2022-10-23', 1),
-	(17, 'configure IOT Project', 14, 100, 1,'Ben Tre City', 'timiot@gmail.com', '0703345128', 'Dear we are looking for someone with hands on experience in IOT to configure and run this project. The basis architecture is to have one Nodemcu that connect multiple   devices together that are connect to wireless connection and to measure the stability of the network. The task is to help on how to configure and run the projects and we will buy all necessary hardware.', '2022-11-23', 1),
+	(17, 'Configure IOT Project', 14, 100, 1,'Ben Tre City', 'timiot@gmail.com', '0703345128', 'Dear we are looking for someone with hands on experience in IOT to configure and run this project. The basis architecture is to have one Nodemcu that connect multiple   devices together that are connect to wireless connection and to measure the stability of the network. The task is to help on how to configure and run the projects and we will buy all necessary hardware.', '2022-11-23', 1),
 	(17, 'IoT Developerr', 14, 1000, 1,'Ha Noi Capital', 'tỉmesd@gmail.com', '0234409128', 'Participating in programming of pic, arm, esp, family of microcontrollers..Developing Desktop applications, managing production for customer projects. Requires proficiency in programming languages C#, DotNet, MSSQL Server database. Knowledge of industry communication standards. Need to be smart, industrious, cheerful, sociable.', '2022-08-23', 1),
 	
 	(22, 'Japanese teacher',9 , 1000, 1,'Toan Quoc', 'timrr@gmail.com', '0703309128', ' If you are a person who is passionate about teaching, loves Japanese language and Japanese culture, wants to pass on knowledge, experience, and passion for Japanese to students through effective teaching methods. of KaizenYoshidaSchool, you will definitely succeed in your "teaching career" in Esuhai. ', '2022-08-23', 1),
@@ -607,8 +642,9 @@ VALUES
 	(22, 'Editor Japanese',9, 600, 1, 'Ca Mau City', 'ngocttm@gmail.com', '0703309128', 'Plan content and write content for the entire website and other communication channels of the company (fanpage,...). Manage all social networking sites. Seeding groups on social networks. Writing content for media publications such as advertising pages, leaflets, online and offline documents for marketing activities, branding, external communication marketing, etc. Writing PR articles. Support team in video projects. Working and building relationships with the media', '2022-08-23', 1),
 	(22, 'Programmer (JavaScript, Jquery)',9, 2000, 1, 'Binh Duong City', 'vantt@gmail.com', '0703309128', 'Develop Web Application, using Intra-mart(IM-FormaDesigner、IM-LogicDesigner). Intra-mart is a product package providing IT solutions for businesses, built on the Java programming language with the support of Java frameworks such as seasar, terasoluna global. Before participating in development, there will be training support', '2022-08-23', 1),
 	(22, 'Japanese Nursing N2',9, 1200, 1, 'Nghe An City', 'phongvt@gmail.com', '0703309128', 'Support doctors such as taking blood, injecting, giving fluids,...', '2022-08-23', 1),
-	(22, 'N2 . Bridge Engineer',9, 2500, 1, 'Quang Tri City', 'hoangnt@gmail.com', '0703309128', 'Support Japanese PM to design the system, write detailed design documents and communicate to the project team in Vietnam. Solve problems arising in the project, and problems after handover. Technical support for team members. Check the quality of the project''s output products before handing over to customers.Manage project implementation progress, coordinate with customers and CEO in project management.', '2022-08-23', 1),
+	(22, 'N2 - Bridge Engineer',9, 2500, 1, 'Quang Tri City', 'hoangnt@gmail.com', '0703309128', 'Support Japanese PM to design the system, write detailed design documents and communicate to the project team in Vietnam. Solve problems arising in the project, and problems after handover. Technical support for team members. Check the quality of the project''s output products before handing over to customers.Manage project implementation progress, coordinate with customers and CEO in project management.', '2022-08-23', 1),
 	(22, 'Staff',9, 300, 1, 'Da Lat City', 'longnn@gmail.com', '0703309128', 'Customer reception. Arrange for seating for customers. Place orders for customers. Serve food and drinks to guests. Support customer payments. Other tasks as assigned by management', '2022-08-23', 1),
+	
 	(27, 'Make Video Introduction of Educational Products (Korea)', 13, 300, 1, 'Toan Quoc', 'timsrdm@gmail.com', '0703309238', 'Hello everyone, my company is currently looking to hire a freelancer for video design for an educational product introduction project in Korea. The video is 5 minutes long. Required to edit clips, voiceover, edit effects, be a Korean language student or have TOPIK 4 certificate (The plan is sent in Korean). You can work from home online.', '2022-09-23', 1),
 	(27, 'AI Machine Leaning App for Android', 12, 30, 1, 'Toan Quoc', 'timqqdm@gmail.com', '0703309238', 'I need an object detection app that allows me to take a picture with my phone camera and the app detects the desired object, crops the detected image/object using the bounding boxes coordinates and then , save the cropped image. I''ve got a well trained dataset. Requires a person with good AI skills, progressive spirit, fun sociable, responsible. If you are interested in the project, please contact me, we will discuss more.', '2022-11-23', 1),
 	(27, 'Google APP developer', 2, 2000, 1,'Ho Chi Minh City', 'timdm22d@gmail.com', '0703908128', ' To sync the order details (Oderid,Email,Mobile number, quantity, price, skuid, Customer name, payment method, city, province) from shopify store and update it on google sheet. Update the order status of the courier (Despatch date, tracking id, courier name, delivery status, delivery date) in the same google sheet by getting the details from picked with the help of shopify order id and pickrr tracking number', '2022-09-25', 1),
