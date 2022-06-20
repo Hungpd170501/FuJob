@@ -579,41 +579,6 @@ VALUES
 	(N'Other', 'https://seeklogo.com/images/U/undefined-logo-FE82D12763-seeklogo.com.gif',1)
 GO
 
-INSERT INTO tblJobSkills (jobID, skillID)
-VALUES 	(1, 65), (1, 66), 
-	(2, 173), (2, 1), (2, 54),
-	(3, 200), (3, 396),
-	(4, 198), (4, 302), (4, 456),
-	(5, 41),
-	(6, 388), (6, 644), (6,100),
-	(7, 146),
-	(8, 512), (8, 625), (8, 622),
-	(9, 539), (9, 625), (9,622),
-	(10, 401), (10, 324),
-	(11, 65), (11, 658),
-	(12, 15), (12, 385), (12, 287),
-	(13, 524), (13, 123),
-	(14, 667), (14, 67), (14, 668),
-	(15, 667), (15, 67),
-	(16, 539), (16, 189),
-	(17, 539), (17, 123),
-	(18, 539), (18, 123),
-	(19, 539), (19, 123),
-	(20, 539), (20, 123), (20, 230), (20, 65),
-	(21, 539), (21, 123), (21, 51), (21, 584),
-	(22, 539), (22, 221), (22, 225), (22, 287),
-	(23, 539), (22, 123),
-	(24, 539), (24, 123), (24, 284),
-	(25, 539), (25, 123), (25, 146),
-	(26, 524), (26, 123), (26, 618), 
-	(27, 15), (27, 19),
-	(28, 193), (28, 194), (28, 29),
-	(29, 476), (29, 456),
-	(30, 512), (30, 189)
-	
-	
-GO
-
 INSERT INTO tblJobs (userID, jobTitle, jobCategoryID, budget, paymentMethodID, address, email, phone, description, expiriedDate, jobStatus)
 VALUES 
 	(7, 'International situation analysis', 1, 2000, 1, 'Ho Chi Minh City', 'timkinhdoanhquocte@gmail.com', '0988234654', 'Use All Source Intelligence to analysis international conflict/trade/business/affair/relation.', '2022-08-17', 1),
@@ -651,3 +616,38 @@ VALUES
 	(27, 'Logo design for new brand', 5, 50, 1, 'Toan Quoc', 's1123imdm@gmail.com', '0703342428', 'I am looking for a designer to help create a logo for a new brand. We are launching a sustainable golf brand. We will be targeting the premium end of the marketing with the most sustainable, natural materials and processes. Our initial product offering will be very small, with subtle, memorable branding. We need a logo that can adorn products and marketing materials.', '2022-10-25', 1),
 	(27, 'Primary school English tutor', 8, 3, 2, 'Ha Noi Capital', 'timdm3232@gmail.com', '0709009128', 'Teaching English online 1 on 1 or 1 on 2 for elementary students through Class-In software. Teaching according to the company''s documents and textbooks. Encourage teachers to contribute ideas and adjust the curriculum to suit students. Length of 1 class: 25 minutes/class. Teachers need to meet a minimum of 5 classes / week and commit to accompany students to the end of the course cycle (3 or 6 months). Briefly comment on the student''s learning situation after each lesson. Report the work situation to the Quality Manager as required & when required.', '2022-9-23', 1)
 GO
+
+INSERT INTO tblJobSkills (jobID, skillID)
+VALUES 	(1, 65), (1, 66), 
+	(2, 173), (2, 1), (2, 54),
+	(3, 200), (3, 396),
+	(4, 198), (4, 302), (4, 456),
+	(5, 41),
+	(6, 388), (6, 644), (6,100),
+	(7, 146),
+	(8, 512), (8, 625), (8, 622),
+	(9, 539), (9, 625), (9,622),
+	(10, 401), (10, 324),
+	(11, 65), (11, 658),
+	(12, 15), (12, 385), (12, 287),
+	(13, 524), (13, 123),
+	(14, 667), (14, 67), (14, 668),
+	(15, 667), (15, 67),
+	(16, 539), (16, 189),
+	(17, 539), (17, 123),
+	(18, 539), (18, 123),
+	(19, 539), (19, 123),
+	(20, 539), (20, 123), (20, 230), (20, 65),
+	(21, 539), (21, 123), (21, 51), (21, 584),
+	(22, 539), (22, 221), (22, 225), (22, 287),
+	(23, 539), (22, 123),
+	(24, 539), (24, 123), (24, 284),
+	(25, 539), (25, 123), (25, 146),
+	(26, 524), (26, 123), (26, 618), 
+	(27, 15), (27, 19),
+	(28, 193), (28, 194), (28, 29),
+	(29, 476), (29, 456),
+	(30, 512), (30, 189)	
+GO
+
+
