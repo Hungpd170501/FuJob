@@ -20,13 +20,11 @@ import se1621.utils.DBUtils;
  */
 public class ResumeDAO {
 
-    private static final String SEARCH = "SELECT resumeID, userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, schoolName, major, gpa, experienceYear, website, overview FROM tblResume WHERE userID = ?";
-    private static final String CREATERESUME = "INSERT INTO tblResume( userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address,"
-            + " schoolName, major, gpa,"
-            + " experienceYear, website, overview) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String SEARCH = "SELECT resumeID, userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, major, gpa, website, gitHub, linkedIn, overview, createdDate, lastModifiedDate FROM tblResumes WHERE userID = ? and resumeStatus = 1";
+    private static final String CREATERESUME = "INSERT INTO tblResumes( userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, major, gpa, website, gitHub, linkedIn, overview, createdDate, lastModifiedDate, resumeStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1)";
 
-    private static final String CHECK_DUPLICATE = "SELECT resumeID FROM tblResume WHERE userID=?";
-    private static final String UPDATERESUME = "UPDATE tblResume SET avatar=?, fullName=?, gender=?, dateOfBirth=?, gmail=?, "
+    private static final String CHECK_DUPLICATE = "SELECT resumeID FROM tblResumes WHERE userID=?";
+    private static final String UPDATERESUME = "UPDATE tblResumes SET avatar=?, fullName=?, gender=?, dateOfBirth=?, gmail=?, "
             + "phone=?, address=?, schoolName=?, major=?, gpa=?, experienceYear=?, "
             + "website=?, overview=? WHERE userID=?";
     Connection conn;
@@ -51,13 +49,33 @@ public class ResumeDAO {
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
                     String address = rs.getString("address");
-                    String schoolName = rs.getString("schoolName");
                     String major = rs.getString("major");
                     String gpa = rs.getString("gpa");
-                    String experienceYear = rs.getString("experienceYear");
                     String website = rs.getString("website");
+                    String gitHub = rs.getString("gitHub");
+                    String linkedIn = rs.getString("linkedIn");
                     String overview = rs.getString("overview");
-                    listResume.add(new Resume(resumeID, userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, schoolName, major, gpa, experienceYear, website, overview));
+                    Date createdDate = rs.getDate("createdDate");
+                    Date lastModifiedDate = rs.getDate("lastModifiedDate");
+                    Resume resume = Resume.builder()
+                                          .resumeID(resumeID)
+                                          .avatar(avatar)
+                                          .fullName(fullName)
+                                          .gender(gender)
+                                          .dateOfBirth(dateOfBirth)
+                                          .gmail(gmail)
+                                          .phone(phone)
+                                          .address(address)
+                                          .major(major)
+                                          .gpa(gpa)
+                                          .website(website)
+                                          .gitHub(gitHub)
+                                          .linkedIn(linkedIn)
+                                          .overview(overview)
+                                          .createdDate(createdDate)
+                                          .lastModifiedDate(lastModifiedDate)
+                                          .build();
+                    listResume.add(resume);
                 }
             }
         } catch (Exception e) {
@@ -85,7 +103,7 @@ public class ResumeDAO {
                 preStm.setInt(1, search);
                 rs = preStm.executeQuery();
                 if (rs.next()) {
-                    int resumeID = rs.getInt("resumeID");
+                   int resumeID = rs.getInt("resumeID");
                     int userID = rs.getInt("userID");
                     String avatar = rs.getString("avatar");
                     String fullName = rs.getString("fullName");
@@ -94,13 +112,33 @@ public class ResumeDAO {
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
                     String address = rs.getString("address");
-                    String schoolName = rs.getString("schoolName");
                     String major = rs.getString("major");
                     String gpa = rs.getString("gpa");
-                    String experienceYear = rs.getString("experienceYear");
                     String website = rs.getString("website");
+                    String gitHub = rs.getString("gitHub");
+                    String linkedIn = rs.getString("linkedIn");
                     String overview = rs.getString("overview");
-                    resume = new Resume(resumeID, userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, schoolName, major, gpa, experienceYear, website, overview);
+                    Date createdDate = rs.getDate("createdDate");
+                    Date lastModifiedDate = rs.getDate("lastModifiedDate");
+                    resume = Resume.builder()
+                                          .resumeID(resumeID)
+                                          .userID(userID)
+                                          .avatar(avatar)
+                                          .fullName(fullName)
+                                          .gender(gender)
+                                          .dateOfBirth(dateOfBirth)
+                                          .gmail(gmail)
+                                          .phone(phone)
+                                          .address(address)
+                                          .major(major)
+                                          .gpa(gpa)
+                                          .website(website)
+                                          .gitHub(gitHub)
+                                          .linkedIn(linkedIn)
+                                          .overview(overview)
+                                          .createdDate(createdDate)
+                                          .lastModifiedDate(lastModifiedDate)
+                                          .build();
                 }
             }
         } catch (Exception e) {
@@ -129,17 +167,17 @@ public class ResumeDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(CREATERESUME);
                 preStm.setInt(1, resume.getUserID());
-                preStm.setString(2, resume.getAvartar());
+                preStm.setString(2, resume.getAvatar());
                 preStm.setString(3, resume.getFullName());
                 preStm.setString(4, resume.getGender());
                 preStm.setDate(5, resume.getDateOfBirth());
                 preStm.setString(6, resume.getGmail());
                 preStm.setString(7, resume.getPhone());
                 preStm.setString(8, resume.getAddress());
-                preStm.setString(9, resume.getSchoolName());
+                preStm.setString(9, resume.getGitHub());
                 preStm.setString(10, resume.getMajor());
                 preStm.setString(11, resume.getGpa());
-                preStm.setString(12, resume.getExperienceYear());
+                preStm.setString(12, resume.getLinkedIn());
                 preStm.setString(13, resume.getWebsite());
                 preStm.setString(14, resume.getOverview());
 
@@ -198,17 +236,17 @@ public class ResumeDAO {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(UPDATERESUME);
-                preStm.setString(1, resume.getAvartar());
+                preStm.setString(1, resume.getAvatar());
                 preStm.setString(2, resume.getFullName());
                 preStm.setString(3, resume.getGender());
                 preStm.setDate(4, resume.getDateOfBirth());
                 preStm.setString(5, resume.getGmail());
                 preStm.setString(6, resume.getPhone());
                 preStm.setString(7, resume.getAddress());
-                preStm.setString(8, resume.getSchoolName());
+                preStm.setString(8, resume.getGitHub());
                 preStm.setString(9, resume.getMajor());
                 preStm.setString(10, resume.getGpa());
-                preStm.setString(11, resume.getExperienceYear());
+                preStm.setString(11, resume.getLinkedIn());
                 preStm.setString(12, resume.getWebsite());
                 preStm.setString(13, resume.getOverview());
                 preStm.setInt(14, userID);

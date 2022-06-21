@@ -24,12 +24,13 @@ import lombok.ToString;
 @Builder
 public class JobOrder {
 
-    private int jobOrderID;
-    private int userID;
+    private int jobApplicationID;
+    private int resumeID;
     Job job;
     private String cvFile;
-    private String salaryDeal;
+    private String priceDeal;
     private String message;
-    private Date dateApplied;
-    private int jobOrderStatus;
+    private Date createdDate;
+    private Date lastModifiedDate;
+    private int jobApplicationStatus;
 }

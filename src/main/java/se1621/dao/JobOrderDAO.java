@@ -23,30 +23,30 @@ import se1621.utils.DBUtils;
  */
 public class JobOrderDAO {
 
-    private static final String ORDERJOB = "INSERT INTO tblJobOrder(userID, jobID, cvFile, salaryDeal, message, jobOrderStatus) VALUES(?,?,?,?,?,1)";
-    private static final String CHECKDUPLICATE = "SELECT jobOrderID FROM tblJobOrder WHERE userID=? and jobID=? and jobOrderStatus = 1";
-    private static final String CHECKDUPLICATE_NONSTATUS = "SELECT jobOrderID FROM tblJobOrder WHERE userID = ? and jobID = ? and jobOrderStatus = 0";
-    private static final String DELETE = "UPDATE tblJobOrder SET jobOrderStatus = 0 WHERE jobOrderID = ? ";
-    private static final String GETTALLUSERIDOFJOB = "SELECT userID FROM tblJobOrder WHERE jobID = ?";
-    private static final String GETTALLJOBORDERIDOFJOB = "SELECT jobOrderID FROM tblJobOrder WHERE jobID = ?";
-    private static final String GETALLJOBAPPLIED = "SELECT jo.jobOrderID, j.jobID, j.jobTitle, j.ExperienceNeeded, j.jobCategoryID, jo.cvFile, jo.salaryDeal, jo.message,"
-            + "jo.dateApplied, c.categoryName, c.img, com.companyName,"
-            + "j.deadline, j.completionTime, j.salary, j.address, j.email, j.phone, j.description"
-            + " FROM (((tblJobOrder jo left join (tblJob j left join tblCategory  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID )"
-            + "        left join tblUser us on us.userID = j.userID ) left join tblCompany com on com.companyID = us.companyID)"
-            + "WHERE jo.userID=? and jo.jobOrderStatus = 1 ";
-    private static final String UPDATE_STATUS = "UPDATE tblJobOrder SET cvFile = ?, salaryDeal = ?, message = ?, jobOrderStatus = 1 WHERE jobOrderID = ? and userID = ? and jobID = ?";
-    private String SEARCHJOBORDER = "SELECT jo.jobOrderID, jo.userID, jo.cvFile, jo.dateApplied, jo.message, jo.salaryDeal, jo.jobID, "
-            + "j.jobTitle, j.ExperienceNeeded, j.jobCategoryID, c.categoryName, c.img, j.deadline, j.completionTime, j.salary, "
-            + "j.address, j.email, j.phone, j.description, j.lastDateUpdate "
-            + "FROM ((tblJobOrder jo LEFT JOIN tblJob j ON jo.jobID = j.jobID)LEFT JOIN tblCategory c ON j.jobCategoryID = c.categoryID)";
-    
-    private static final String GETALLNUMBEROFJOBORDER = "SELECT COUNT (*) AS totalJobOrder FROM tblJobOrder";
-    
+    private static final String ORDERJOB = "INSERT INTO tblJobApplications(resumeID, jobID, cvFile, priceDeal, message, jobApplicationStatus) VALUES(?,?,?,?,?,1)";
+    private static final String CHECKDUPLICATE = "SELECT jobApplicationID FROM tbljobApplications WHERE resumeID=? and jobID=? and jobApplicationStatus = 1";
+    private static final String CHECKDUPLICATE_NONSTATUS = "SELECT jobApplicationID FROM tblJobApplications WHERE resumeID = ? and jobID = ? and jobApplicationStatus = 0";
+    private static final String DELETE = "UPDATE tblJobApplications SET jobApplicationStatus = 0 WHERE jobApplicationID = ? ";
+    private static final String GETTALLUSERIDOFJOB = "SELECT resumeID FROM tblJobApplications WHERE jobID = ?";
+    private static final String GETTALLJOBORDERIDOFJOB = "SELECT jobApplicationID FROM tblJobApplications WHERE jobID = ?";
+    private static final String GETALLJOBAPPLIED = "SELECT jo.jobApplicationID, j.jobID, j.jobTitle, j.jobCategoryID, jo.cvFile, jo.priceDeal, jo.message,"
+            + "            jo.createdDate, c.categoryName, c.img, com.companyName,"
+            + "            j.createdDate, j.expiriedDate, j.lastModifiedDate, j.budget, j.address, j.email, j.phone, j.description"
+            + "            FROM (((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID )"
+            + "            left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)"
+            + "            WHERE jo.resumeID=? and jo.jobApplicationStatus = 1";
+    private static final String UPDATE_STATUS = "UPDATE tblJobApplications SET cvFile = ?, priceDeal = ?, message = ?, jobApplicationStatus = 1 WHERE jobApplicationID = ? and resumeID = ? and jobID = ?";
+    private String SEARCHJOBORDER = "SELECT jo.jobApplicationID, jo.resumeID, jo.cvFile, jo.createdDate, jo.message, jo.priceDeal, jo.jobID,"
+            + "            j.jobTitle, j.jobCategoryID, c.categoryName, c.img, j.createdDate, j.expiriedDate, j.budget,"
+            + "            j.address, j.email, j.phone, j.description, j.lastModifiedDate"
+            + "            FROM ((tblJobApplications jo LEFT JOIN tblJobs j ON jo.jobID = j.jobID)LEFT JOIN tblCategories c ON j.jobCategoryID = c.categoryID)";
+
+    private static final String GETALLNUMBEROFJOBORDER = "SELECT COUNT (*) AS totalJobOrder FROM tblJobApplications";
+
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
-    
+
     // tong so job da order
     public int getAllTotalJobOrder() throws SQLException {
         try {
@@ -54,7 +54,7 @@ public class JobOrderDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(GETALLNUMBEROFJOBORDER);
                 rs = preStm.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
                     return rs.getInt("totalJobOrder");
                 }
             }
@@ -84,10 +84,10 @@ public class JobOrderDAO {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(ORDERJOB);
-                preStm.setInt(1, jobOrder.getUserID());
+                preStm.setInt(1, jobOrder.getResumeID());
                 preStm.setInt(2, jobOrder.getJob().getJobID());
                 preStm.setString(3, jobOrder.getCvFile());
-                preStm.setString(4, jobOrder.getSalaryDeal());
+                preStm.setString(4, jobOrder.getPriceDeal());
                 preStm.setString(5, jobOrder.getMessage());
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
@@ -117,10 +117,10 @@ public class JobOrderDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(UPDATE_STATUS);
                 preStm.setString(1, jobOrder.getCvFile());
-                preStm.setString(2, jobOrder.getSalaryDeal());
+                preStm.setString(2, jobOrder.getPriceDeal());
                 preStm.setString(3, jobOrder.getMessage());
                 preStm.setInt(4, jobOrderID);
-                preStm.setInt(5, jobOrder.getUserID());
+                preStm.setInt(5, jobOrder.getResumeID());
                 preStm.setInt(6, jobOrder.getJob().getJobID());
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
@@ -140,7 +140,7 @@ public class JobOrderDAO {
         return check;
     }
 
-    public boolean checkDuplicateJobOrderByOneUser(int userID, int jobID) throws Exception {
+    public boolean checkDuplicateJobOrderByOneUser(int resumeID, int jobID) throws Exception {
         boolean check = false;
         conn = null;
         preStm = null;
@@ -149,7 +149,7 @@ public class JobOrderDAO {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(CHECKDUPLICATE);
-                preStm.setInt(1, userID);
+                preStm.setInt(1, resumeID);
                 preStm.setInt(2, jobID);
                 rs = preStm.executeQuery();
                 if (rs.next()) {
@@ -210,18 +210,16 @@ public class JobOrderDAO {
                 rs = preStm.executeQuery();
                 List<JobOrder> list = new ArrayList<>();
                 while (rs.next()) {
-                    int jobOrderID = rs.getInt("jobOrderID");
+                    int jobApplicationID = rs.getInt("jobApplicationID");
                     int jobID = rs.getInt("jobID");
                     String jobTitle = rs.getString("jobTitle");
-                    String ExperienceNeeded = rs.getString("ExperienceNeeded");
-                    Date deadline = rs.getDate("deadline");
-                    String completionTime = rs.getString("completionTime");
-                    String salary = rs.getString("salary");
+                    Date createdDate = rs.getDate("createdDate");
+                    Date expiriedDate = rs.getDate("expiriedDate");
+                    int budget = rs.getInt("budget");
                     String address = rs.getString("address");
                     String email = rs.getString("email");
                     String phone = rs.getString("phone");
                     String description = rs.getString("description");
-                    Date dateApplied = rs.getDate("dateApplied");
                     int categoryID = rs.getInt("jobCategoryID");
                     String categoryName = rs.getString("categoryName");
                     String img = rs.getString("img");
@@ -233,10 +231,17 @@ public class JobOrderDAO {
                             .company(CompanyInfo.builder().companyName(companyName).build())
                             .address(address)
                             .email(email)
+                            .budget(budget)
                             .phone(phone)
+                            .expiriedDate(expiriedDate)
                             .description(description)
                             .build();
-                    JobOrder listJobOrder = JobOrder.builder().jobOrderID(jobOrderID).userID(userID).job(job).dateApplied(dateApplied).build();
+                    JobOrder listJobOrder = JobOrder.builder()
+                            .jobApplicationID(jobApplicationID)
+                            .resumeID(userID).job(job)
+                            .createdDate(createdDate)
+                            .lastModifiedDate(createdDate)
+                            .build();
                     list.add(listJobOrder);
                 }
                 return list;
@@ -279,7 +284,6 @@ public class JobOrderDAO {
         return check;
     }
 
-    
     public List<Integer> getListUserIDOfJob(int jobID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -309,6 +313,7 @@ public class JobOrderDAO {
         }
         return null;
     }
+
     public List<Integer> getListJobOrderOfJob(int jobID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -339,7 +344,6 @@ public class JobOrderDAO {
         return null;
     }
 
-
     public List<JobOrder> getJobOrder(String searchJobTitle, String searchExperienceNeeded, int searchJobCategoryID, int studentID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -361,22 +365,19 @@ public class JobOrderDAO {
                 }
                 rs = preStm.executeQuery();
                 while (rs.next()) {
-                    int jobOrderID = rs.getInt("jobOrderID");
+                    int jobApplicationID = rs.getInt("jobApplicationID");
                     int jobID = rs.getInt("jobID");
                     String cvFile = rs.getString("cvFile");
                     String message = rs.getString("message");
-                    String salaryDeal = rs.getString("salaryDeal");
+                    String priceDeal = rs.getString("priceDeal");
                     String jobTitle = rs.getString("jobTitle");
-                    String ExperienceNeeded = rs.getString("ExperienceNeeded");
-                    Date deadline = rs.getDate("deadline");
-                    String completionTime = rs.getString("completionTime");
-                    String salary = rs.getString("salary");
+                    int budget = rs.getInt("budget");
                     String address = rs.getString("address");
                     String email = rs.getString("email");
                     String phone = rs.getString("phone");
                     String description = rs.getString("description");
-                    Date lastDateUpdate = rs.getDate("lastDateUpdate");
-                    Date dateApplied = rs.getDate("dateApplied");
+                    Date lastModifiedDate = rs.getDate("lastModifiedDate");
+                    Date createdDate = rs.getDate("createdDate");
                     int categoryID = rs.getInt("jobCategoryID");
                     String categoryName = rs.getString("categoryName");
                     String img = rs.getString("img");
@@ -388,15 +389,17 @@ public class JobOrderDAO {
                             .email(email)
                             .phone(phone)
                             .description(description)
+                            .budget(budget)
                             .build();
                     JobOrder jobOrder = JobOrder.builder()
-                            .jobOrderID(jobOrderID)
+                            .jobApplicationID(jobApplicationID)
                             .cvFile(cvFile)
                             .message(message)
-                            .salaryDeal(salaryDeal)
-                            .userID(studentID)
+                            .priceDeal(priceDeal)
+                            .resumeID(studentID)
                             .job(job)
-                            .dateApplied(dateApplied)
+                            .createdDate(createdDate)
+                            .lastModifiedDate(lastModifiedDate)
                             .build();
                     listJobOrder.add(jobOrder);
                 }

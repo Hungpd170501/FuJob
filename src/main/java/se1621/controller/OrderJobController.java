@@ -35,10 +35,10 @@ public class OrderJobController extends HttpServlet {
             String salaryDeal = request.getParameter("salaryDeal");
             String message = request.getParameter("message");
             JobOrder jobOrder = JobOrder.builder()
-                    .userID(userID)
+                    .resumeID(userID)
                     .job(Job.builder().jobID(jobID).build())
                     .cvFile(cvFile)
-                    .salaryDeal(salaryDeal)
+                    .priceDeal(salaryDeal)
                     .message(message)
                     .build();
             JobOrderDAO jobOrderDAO = new JobOrderDAO();

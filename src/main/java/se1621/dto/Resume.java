@@ -18,17 +18,20 @@ public class Resume {
 
     private int resumeID;
     private int userID;
-    private String avartar;
+    private String avatar;
     private String fullName;
     private String gender;
     private Date dateOfBirth;
     private String gmail;
     private String phone;
     private String address;
-    private String schoolName;
     private String major;
     private String gpa;
-    private String experienceYear;
     private String website;
+    private String gitHub;
+    private String linkedIn;
     private String overview;
+    private Date createdDate;
+    private Date lastModifiedDate;
+    private int resumeStatus;
 }

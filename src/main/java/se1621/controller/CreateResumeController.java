@@ -58,9 +58,9 @@ public class CreateResumeController extends HttpServlet {
             HttpSession session = request.getSession();
             User loginUser = (User) session.getAttribute("LOGIN_USER");
             int studentID = loginUser.getUserID();
-            Resume resume = Resume.builder().avartar(avatar).fullName(fullName).gender(gender).dateOfBirth(dateOfBirth)
-                                    .gmail(gmail).phone(phone).address(address).schoolName(shoolName).major(major)
-                                    .gpa(gpa).experienceYear(chooseExY).website(website).overview(seflintro).build();
+            Resume resume = Resume.builder().avatar(avatar).fullName(fullName).gender(gender).dateOfBirth(dateOfBirth)
+                                    .gmail(gmail).phone(phone).address(address).major(major)
+                                    .gpa(gpa).website(website).overview(seflintro).build();
 
             StudentSkillDAO studentSkillDAO = new StudentSkillDAO();
             List<StudentSkill> listStudentSkill = new ArrayList<>();
