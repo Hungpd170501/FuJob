@@ -24,7 +24,7 @@ import se1621.utils.DBUtils;
 public class JobOrderDAO {
 
     private static final String ORDERJOB = "INSERT INTO tblJobOrder(userID, jobID, cvFile, salaryDeal, message, jobOrderStatus) VALUES(?,?,?,?,?,1)";
-    private static final String CHECKDUPLICATE = "SELECT jobOrderID FROM tblJobOrder WHERE userID=? and jobID=? and jobOrderStatus = 1";
+    private static final String CHECKDUPLICATE = "SELECT jobApplicationID FROM tblJobApplications WHERE resumeID=? and jobID=? and jobApplicationStatus = 1";
     private static final String CHECKDUPLICATE_NONSTATUS = "SELECT jobOrderID FROM tblJobOrder WHERE userID = ? and jobID = ? and jobOrderStatus = 0";
     private static final String DELETE = "UPDATE tblJobOrder SET jobOrderStatus = 0 WHERE jobOrderID = ? ";
     private static final String GETTALLUSERIDOFJOB = "SELECT userID FROM tblJobOrder WHERE jobID = ?";
@@ -140,7 +140,7 @@ public class JobOrderDAO {
         return check;
     }
 
-    public boolean checkDuplicateJobOrderByOneUser(int userID, int jobID) throws Exception {
+    public boolean checkDuplicateJobOrderByOneUser(int resumeID, int jobID) throws Exception {
         boolean check = false;
         conn = null;
         preStm = null;
@@ -149,7 +149,7 @@ public class JobOrderDAO {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(CHECKDUPLICATE);
-                preStm.setInt(1, userID);
+                preStm.setInt(1, resumeID);
                 preStm.setInt(2, jobID);
                 rs = preStm.executeQuery();
                 if (rs.next()) {

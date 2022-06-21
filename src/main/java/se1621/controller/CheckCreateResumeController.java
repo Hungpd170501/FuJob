@@ -5,7 +5,6 @@
 package se1621.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -42,9 +41,9 @@ public class CheckCreateResumeController extends HttpServlet {
                 request.setAttribute("LIST_STUDENTSKILL", listStudentSkill);
                 url = SUCCESS;
             } else {
-                Resume resume = Resume.builder().address("").avartar("").dateOfBirth(null)
-                        .experienceYear("").fullName("").gender("").gmail("").gpa("")
-                        .major("").overview("").phone("").schoolName("").website("").build();
+                Resume resume = Resume.builder().address("").avatar("").dateOfBirth(null)
+                        .fullName("").gender("").gmail("").gpa("")
+                        .major("").overview("").phone("").website("").build();
                 listResume.add(resume);
                 request.setAttribute("LIST_RESUME", listResume);
                 request.setAttribute("LIST_STUDENTSKILL", listStudentSkill);

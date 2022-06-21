@@ -43,24 +43,36 @@ public class CreateResumeController extends HttpServlet {
             String gmail = request.getParameter("email");
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
-            String shoolName = request.getParameter("shoolName");
             String major = request.getParameter("major");
             String gpa = request.getParameter("gpa");
-            String chooseExY = request.getParameter("chooseExY");
+            String website = request.getParameter("website");
+            String gitHub = request.getParameter("github");
+            String linkedIn = request.getParameter("linkedIn");
             String[] skillID = request.getParameterValues("skillID");
             List<Integer> skillSet = new ArrayList<>();
             for (String skill : skillID) {
                 skillSet.add(Integer.parseInt(skill));
             }
-            String website = request.getParameter("website");
-            String seflintro = request.getParameter("seflintro");
+            String overview = request.getParameter("seflintro");
 
             HttpSession session = request.getSession();
             User loginUser = (User) session.getAttribute("LOGIN_USER");
             int studentID = loginUser.getUserID();
-            Resume resume = Resume.builder().avartar(avatar).fullName(fullName).gender(gender).dateOfBirth(dateOfBirth)
-                                    .gmail(gmail).phone(phone).address(address).schoolName(shoolName).major(major)
-                                    .gpa(gpa).experienceYear(chooseExY).website(website).overview(seflintro).build();
+            Resume resume = Resume.builder()
+                                          .avatar(avatar)
+                                          .fullName(fullName)
+                                          .gender(gender)
+                                          .dateOfBirth(dateOfBirth)
+                                          .gmail(gmail)
+                                          .phone(phone)
+                                          .address(address)
+                                          .major(major)
+                                          .gpa(gpa)
+                                          .website(website)
+                                          .gitHub(gitHub)
+                                          .linkedIn(linkedIn)
+                                          .overview(overview)
+                                          .build();
 
             StudentSkillDAO studentSkillDAO = new StudentSkillDAO();
             List<StudentSkill> listStudentSkill = new ArrayList<>();
@@ -82,8 +94,8 @@ public class CreateResumeController extends HttpServlet {
 
                 ResumeDAO resumedao = new ResumeDAO();
                 boolean checkValidation = true;
-                boolean checkDuplicate = resumedao.checkDuplicate(studentID);
-                if (checkDuplicate) {
+                int resumeID = resumedao.getResumeID(studentID);
+                if (resumeID!=0) {
                     checkValidation = false;
                     boolean checkUpdateResume = resumedao.updateResume(resume, studentID);
                     if (checkUpdateResume) {
