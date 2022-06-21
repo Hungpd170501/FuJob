@@ -42,7 +42,6 @@ public class JobOrderDAO {
             + "            FROM ((tblJobApplications jo LEFT JOIN tblJobs j ON jo.jobID = j.jobID)LEFT JOIN tblCategories c ON j.jobCategoryID = c.categoryID)";
 
     private static final String GETALLNUMBEROFJOBORDER = "SELECT COUNT (*) AS totalJobOrder FROM tblJobApplications";
-
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;

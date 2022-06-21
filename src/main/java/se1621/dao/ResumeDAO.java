@@ -22,7 +22,6 @@ public class ResumeDAO {
 
     private static final String SEARCH = "SELECT resumeID, userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, major, gpa, website, gitHub, linkedIn, overview, createdDate, lastModifiedDate FROM tblResumes WHERE userID = ? and resumeStatus = 1";
     private static final String CREATERESUME = "INSERT INTO tblResumes( userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, major, gpa, website, gitHub, linkedIn, overview, createdDate, lastModifiedDate, resumeStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1)";
-
     private static final String CHECK_DUPLICATE = "SELECT resumeID FROM tblResumes WHERE userID=?";
     private static final String UPDATERESUME = "UPDATE tblResumes SET avatar=?, fullName=?, gender=?, dateOfBirth=?, gmail=?, "
             + "phone=?, address=?, schoolName=?, major=?, gpa=?, experienceYear=?, "
@@ -199,8 +198,8 @@ public class ResumeDAO {
         return check;
     }
 
-    public boolean checkDuplicate(int userID) throws SQLException {
-        boolean check = false;
+    public int getResumeID(int userID) throws SQLException {
+        int resumeID = 0;
         conn = null;
         preStm = null;
         rs = null;
@@ -211,7 +210,7 @@ public class ResumeDAO {
                 preStm.setInt(1, userID);
                 rs = preStm.executeQuery();
                 if (rs.next()) {
-                    check = true;
+                    resumeID = rs.getInt("resumeID");
                 }
             }
         } catch (Exception e) {
@@ -227,7 +226,7 @@ public class ResumeDAO {
                 conn.close();
             }
         }
-        return check;
+        return resumeID;
     }
 
     public boolean updateResume(Resume resume, int userID) throws SQLException {

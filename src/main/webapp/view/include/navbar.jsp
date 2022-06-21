@@ -78,6 +78,8 @@
                 <li></li>
                 <li><a href="${pageContext.request.contextPath}">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&Search_title_exper_cate">Project List</a></li>
+                    <% if (loginUser != null) {
+                    %>
                 <li class="has-submenu">
                     <a href="javascript:void(0)">Your Project</a><span class="menu-arrow"></span>
                     <ul class="submenu">
@@ -88,20 +90,27 @@
                         %>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>">Your Project Applied</a></li>   
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Posted</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Ongoing</a></li>
+                        
                             <%
                             } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
                             %>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Posted</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Ongoing</a></li>
+                        
                             <%
                             } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HRM")) {
                             %>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Posted</a></li>
-                         
-                            <%
-                                }
-                            %>        
+
+                        <%
+                            }
+                        %>        
                     </ul>
                 </li>
+                <%
+                    }
+                %>
 
                 <li>
                     <a href="${pageContext.request.contextPath}/view/about.jsp">contact</a>
@@ -124,7 +133,7 @@
                         <div class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Your Resume</div>
                     </div>
                     <ul class="submenu">
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=CheckCreateResume&studentID=${sessionScope.LOGIN_USER.userID}">Edit your resume</a></li>
+                        <li><a href="${pageContext.request.contextPath}/view/create-resume.jsp">Edit your resume</a></li>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&searchResumeID=${sessionScope.LOGIN_USER.userID}">View your resume</a></li>
                     </ul>  
                 </li>
@@ -138,9 +147,13 @@
                 </li>
 
                 <li class="has-submenu">
+
                     <div class="buy-button">
                         <a href="${pageContext.request.contextPath}/MainController?action=SearchCompanyID&searchCompanyID=${sessionScope.LOGIN_USER.companyID}" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Your Company Info</a>
+
                     </div>
+
+
                 </li>   
                 <%
                 } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HRM")) {
@@ -150,14 +163,17 @@
                         <a href="${pageContext.request.contextPath}/view/post-a-job.jsp" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Post a Project</a>
                     </div>
                 </li>
+
                 <li class="has-submenu">
+
                     <div class="buy-button">
                         <div class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Your company</div>
                     </div>
+
                     <ul class="submenu">
                         <li><a href="${pageContext.request.contextPath}/view/create-companyinfo.jsp">Edit your company info</a></li>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=SearchCompanyID&searchCompanyID=${sessionScope.LOGIN_USER.companyID}">View your company info</a></li>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=ViewAllHR&companyID=${sessionScope.LOGIN_USER.companyID}">Your human resource </a></li>
+                        <li><a href="#">Your human resource </a></li>
                     </ul>
                 </li>
                 <%
