@@ -119,7 +119,7 @@
                                 <h5 class="text-dark mb-0 pt-2 f-18">Showing projects</h5>
                             </div>
                             <div class="registration-form-box float-right">
-                                <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-name', 'asc')"> Sort name project </button>
+                                <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-name', 'asc')"> Sort projects name </button>
                                 <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-price', 'asc')"> Lowest budget first </button>
                                 <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-price', 'desc')"> Highest budget first </button>
                                 <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-id', 'desc')"> Newest </button>
@@ -140,10 +140,10 @@
                          data-show-pagination="true"
                          data-items="10"
                          data-items-steps="all, 3, 10"
-
+                         
+                         data-show-list-info="true"
                          >
-<!--                         data-show-items-steps="true"
-                         data-show-list-info="true"-->
+
                         <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_ALLJOB");
                             if (listJob.isEmpty()) {
                                 String message = (String) request.getAttribute("MESSAGE");
@@ -164,7 +164,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-lg-3">
                                                 <div class="company-logo-img">
-                                                    <img loading="lazy" src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:250px;height:250px">
+                                                    <img loading="lazy" src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:250px;height:266px">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-9">
@@ -269,19 +269,19 @@
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/metro.min.js"></script>
 
-<%--        <script>
-                                        $(".job-display").slice(0, 30).show();
-                                        $(".smj").on("click", function () {
-                                            $(".job-display:hidden").slice(0, 5).slideDown();
-                                            if ($(".job-display:hidden").length == 0) {
-                                                $(".smj").fadeOut('slow');
-                                            }
-                                        });
-        </script> --%>
+        <%--        <script>
+                                                $(".job-display").slice(0, 30).show();
+                                                $(".smj").on("click", function () {
+                                                    $(".job-display:hidden").slice(0, 5).slideDown();
+                                                    if ($(".job-display:hidden").length == 0) {
+                                                        $(".smj").fadeOut('slow');
+                                                    }
+                                                });
+                </script> --%>
         <script>
-            function sortList(col, dir) {
-                $('#paintings').data('list').sorting(col, dir, true);
-            }
+                                    function sortList(col, dir) {
+                                        $('#paintings').data('list').sorting(col, dir, true);
+                                    }
         </script>
     </body>
 </html>

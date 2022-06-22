@@ -15,9 +15,11 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import se1621.dao.JobDAO;
+import se1621.dao.JobSkillsDAO;
 import se1621.dao.SkillRequireDAO;
 import se1621.dto.Category;
 import se1621.dto.Job;
+import se1621.dto.JobSkills;
 import se1621.dto.Skill;
 import se1621.dto.SkillRequire;
 import se1621.dto.User;
@@ -37,17 +39,16 @@ public class PostJobController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String jobTitle = request.getParameter("jobtitle");
-            String experienceNeeded = request.getParameter("chooseExY");
+            String jobTitle = request.getParameter("jobTitle");
             int categoryID = Integer.parseInt(request.getParameter("categoryID"));
             String[] skillID = request.getParameterValues("skillID");
+            int paymentMethodID = Integer.parseInt(request.getParameter("paymentMethodID"));
             List<Integer> skillSet = new ArrayList<>();
             for (String skill : skillID) {
                 skillSet.add(Integer.parseInt(skill));
             }
-            Date deadline = Date.valueOf(request.getParameter("deadline"));
-            String completionTime = request.getParameter("completiontime");
-            String salary = request.getParameter("salary");
+            Date expiriedDate = Date.valueOf(request.getParameter("expiriedDate"));
+            int budget = Integer.parseInt(request.getParameter("budget"));
             String address = request.getParameter("address");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
@@ -59,23 +60,26 @@ public class PostJobController extends HttpServlet {
                     .jobTitle(jobTitle)
                     .category(Category.builder().categoryID(categoryID).build())
                     .address(address)
+                    .paymentMethodID(paymentMethodID)
                     .email(email)
+                    .expiriedDate(expiriedDate)
                     .phone(phone)
+                    .budget(budget)
                     .description(description)
                     .build();
             JobDAO jobdao = new JobDAO();
             boolean checkCreateJob = jobdao.createJob(job);
             if (checkCreateJob) {
                 int jobID = jobdao.getJobIDJustCreate(userID);
-                SkillRequireDAO skillRequireDAO = new SkillRequireDAO();
-                List<SkillRequire> listSkillRequire = new ArrayList<>();
+                JobSkillsDAO jobSkillsDAO = new JobSkillsDAO();
+                List<JobSkills> listSkillRequire = new ArrayList<>();
                 for (Integer skill : skillSet) {
-                    SkillRequire skillRequire = SkillRequire.builder().jobID(jobID).skill(Skill.builder().skillID(skill).build()).build();
+                    JobSkills skillRequire = JobSkills.builder().jobID(jobID).skill(Skill.builder().skillID(skill).build()).build();
                     listSkillRequire.add(skillRequire);
                 }
                 List<Boolean> listCheckCreateSkillRequire = new  ArrayList<>();
-                for (SkillRequire skillRequire : listSkillRequire) {
-                    boolean checkCreateSkillRequire = skillRequireDAO.createSkillRequire(skillRequire);
+                for (JobSkills skillRequire : listSkillRequire) {
+                    boolean checkCreateSkillRequire = jobSkillsDAO.createSkillRequire(skillRequire);
                     if(checkCreateSkillRequire)
                         listCheckCreateSkillRequire.add(checkCreateSkillRequire);
                 }

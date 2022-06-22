@@ -22,7 +22,7 @@ import se1621.dto.Job;
 public class JobDAO {
 
     private static final String CREATEJOB = "INSERT INTO tblJobs(userID, jobTitle, jobCategoryID,"
-            + " budget, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,1)";
+            + " budget, paymentMethodID, expiriedDate, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,1)";
     private String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.address, j.budget, j.paymentMethodID, "
             + "j.email, j.phone, j.description, j.createdDate, j.lastModifiedDate, j.expiriedDate, j.jobStatus, "
             + "j.jobCategoryID, cate.categoryName, cate.img, js.skillID "
@@ -133,7 +133,6 @@ public class JobDAO {
         boolean check = false;
         conn = null;
         preStm = null;
-
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
@@ -142,11 +141,12 @@ public class JobDAO {
                 preStm.setString(2, job.getJobTitle());
                 preStm.setInt(3, job.getCategory().getCategoryID());
                 preStm.setInt(4, job.getBudget());
-                preStm.setString(6, job.getAddress());
-                preStm.setString(7, job.getEmail());
-                preStm.setString(8, job.getPhone());
-                preStm.setString(9, job.getDescription());
-
+                preStm.setInt(5, job.getPaymentMethodID());
+                preStm.setDate(6, job.getExpiriedDate());
+                preStm.setString(7, job.getAddress());
+                preStm.setString(8, job.getEmail());
+                preStm.setString(9, job.getPhone());
+                preStm.setString(10, job.getDescription());
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
