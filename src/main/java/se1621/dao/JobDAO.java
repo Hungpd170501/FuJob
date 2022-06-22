@@ -30,7 +30,7 @@ public class JobDAO {
     private static final String VIEWALLJOB = "SELECT j.jobID, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate"
             + "            FROM (((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) left join tblUsers u on j.userID = u.userID)"
             + "            left join tblCompanies com on u.companyID = com.companyID)"
-            + "            WHERE j.jobStatus = 1 ORDER BY createdDate DESC";
+            + "            WHERE j.jobStatus = 1";
 
     private static final String VIEWHRJOB = "SELECT j.jobID, j.jobTitle, j.lastDateUpdate, j.address, c.categoryName, c.img, j.ExperienceNeeded "
             + "FROM (((tblJob j left join tblCategory c on j.jobCategoryID = c.categoryID) left join tblUser u on j.userID = u.userID) "

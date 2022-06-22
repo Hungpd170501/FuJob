@@ -78,10 +78,9 @@
                                             <select id="select-category" class="demo-default" name="searchCate">
                                                 <!--<select id="select-category" class="demo-default">-->
                                                 <option value="">Categories...</option>
-                                                <%--    <c:forEach items="${chooseCategory.listCategory}" var="i">
+                                                <c:forEach items="${chooseCategory.listCategory}" var="i">
                                                     <option value="${i.categoryID}">${i.categoryName}</option>
                                                 </c:forEach>
-                                                --%>
                                             </select>
                                         </div>
                                     </div>
@@ -112,33 +111,42 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-lg-12 mt-4 pt-2">
-                        <div class="row align-items-center">
-                            <div class="col-lg-12">
-                                <div class="show-results">
-                                    <div class="float-left">
-                                        <h5 class="text-dark mb-0 pt-2 f-18">Showing result</h5>
-                                    </div>
-                                </div>
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <div class="show-results">
+                            <div class="float-left">
+                                <h5 class="text-dark mb-0 pt-2 f-18">Showing projects</h5>
+                            </div>
+                            <div class="registration-form-box float-right">
+                                <button onclick="sortList('painting-price', 'asc')" value="Lowest budget first"> Price up </button>
+                                <button onclick="sortList('painting-price', 'desc')" value="Lowest budget first"> Price dow</button>
                             </div>
                         </div>
-                        <!-- them display -->
-                        <div class="row" > 
-                            <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_ALLJOB");
-                                if (listJob.isEmpty()) {
-                                    String message = (String) request.getAttribute("MESSAGE");
-                            %>
-                            <div class="col-lg-12 text-warning text-center">
-                                <h3> <%=message%> </h3>
-                            </div>
-                            <%
-                                }
-                                if (listJob != null) {
-                                    if (listJob.size() > 0) {
-                                        for (Job job : listJob) {
-                            %>
+                    </div>
+                </div>
+                <!-- them display -->
+                <div class="row">
+                    <ul  id="paintings"
+                         data-role="list"
+                         data-sort-class="painting-price"
+                         data-sort-dir="desc"
+                         data-cls-list="unstyled-list row flex-justify-center mt-4"
+                         data-cls-list-item="cell-sm-6 cell-md-4">
+
+                        <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_ALLJOB");
+                            if (listJob.isEmpty()) {
+                                String message = (String) request.getAttribute("MESSAGE");
+                        %>
+                        <div class="col-lg-12 text-warning text-center">
+                            <h3> <%=message%> </h3>
+                        </div>
+                        <%
+                            }
+                            if (listJob != null) {
+                                if (listJob.size() > 0) {
+                                    for (Job job : listJob) {
+                        %>
+                        <li style="list-style: none"> 
                             <div class="job-display col-lg-12 mt-4 pt-1" style="display: none">
                                 <div class="job-list-box border rounded" >
                                     <div class="p-3">
@@ -156,12 +164,11 @@
                                                             long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
                                                             long resultDate = exDate / (24 * 60 * 60 * 1000);
                                                         %>
-                                                    <p class="mb-2 text-muted"> <%= resultDate %> days left</p>
+                                                    <p class="mb-2 text-muted"> <%= resultDate%> days left</p>
                                                     <p class="mb-4">    <%= job.getDescription()%> </p>
                                                     <h6>Skills Require: </h6>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
-
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -169,15 +176,16 @@
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
                                                     <div>
-                                                        <p class=" mb-5"><i class="mr-2"></i>5 birds</p>
+                                                        <p class=" mb-5"><i class="mr-2"></i>5 bids</p>
                                                     </div>
                                                     <div>
-                                                        <h5 class=" mb-5"><i class="mr-2"></i> <%= job.getBudget()%>$ <% if (job.getPaymentMethodID() == 2) {
+                                                        <h5 class="painting-price mb-5" data-format="money">  <i class="mr-2"></i> <%= job.getBudget()%>$ <% if (job.getPaymentMethodID() == 2) {
                                                             %>
                                                             / hour
                                                             <%
                                                                 }
-                                                            %> </h5>
+                                                            %> 
+                                                        </h5>
                                                     </div>
                                                     <div class="mt-3">
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
@@ -188,58 +196,66 @@
                                     </div>
                                 </div>
                             </div>
-                            <%
-
-                                        }
+                        </li>
+                        <%
 
                                     }
-                                }
 
-                            %>
-
-                            <%                                if (listJob.size() > 10) {
-                            %>
-                            <div class="smj col-12 text-center mt-4 pt-2">
-                                <a class="btn btn-primary-outline">Show more</a>
-                            </div>
-                            <%
                                 }
-                            %>
-                        </div>
-                    </div>
+                            }
+
+                        %>
+
+                        <%                                if (listJob.size() > 10) {
+                        %>
+                    <!--    <div class="smj col-12 text-center mt-4 pt-2">
+                            <a class="btn btn-primary-outline">Show more</a>
+                        </div> -->
+                        <%
+                            }
+                        %>
+                    </ul>
+
                 </div>
             </div>
-        </section>
-        <!-- Back to top -->
-        <a href="#" class="back-to-top rounded text-center" id="back-to-top" style="display: inline"> 
-            <i class="mdi mdi-chevron-up d-block"></i> 
-        </a>
-        <!-- Back to top -->
-        <jsp:include page="./include/footer.jsp"></jsp:include>
-            <!-- javascript -->
-            <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
-        <script src="${pageContext.request.contextPath}/asset/js/bootstrap.bundle.min.js"></script>
-        <script src="${pageContext.request.contextPath}/asset/js/jquery.easing.min.js"></script>
-        <script src="${pageContext.request.contextPath}/asset/js/plugins.js"></script>
+        </div>
+    </section>
+    <!-- Back to top -->
+    <a href="#" class="back-to-top rounded text-center" id="back-to-top" style="display: inline"> 
+        <i class="mdi mdi-chevron-up d-block"></i> 
+    </a>
+    <!-- Back to top -->
+    <jsp:include page="./include/footer.jsp"></jsp:include>
+        <!-- javascript -->
+        <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/asset/js/bootstrap.bundle.min.js"></script>
+    <script src="${pageContext.request.contextPath}/asset/js/jquery.easing.min.js"></script>
+    <script src="${pageContext.request.contextPath}/asset/js/plugins.js"></script>
 
-        <!-- selectize js -->
-        <script src="${pageContext.request.contextPath}/asset/js/selectize.min.js"></script>
-        <script src="${pageContext.request.contextPath}/asset/js/jquery.nice-select.min.js"></script>
+    <!-- selectize js -->
+    <script src="${pageContext.request.contextPath}/asset/js/selectize.min.js"></script>
+    <script src="${pageContext.request.contextPath}/asset/js/jquery.nice-select.min.js"></script>
 
-        <script src="${pageContext.request.contextPath}/asset/js/owl.carousel.min.js"></script>
-        <script src="${pageContext.request.contextPath}/asset/js/counter.int.js"></script>
+    <script src="${pageContext.request.contextPath}/asset/js/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath}/asset/js/counter.int.js"></script>
 
-        <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
-        <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(".job-display").slice(0, 10).show();
-            $(".smj").on("click", function () {
-                $(".job-display:hidden").slice(0, 5).slideDown();
-                if ($(".job-display:hidden").length == 0) {
-                    $(".smj").fadeOut('slow');
-                }
-            });
-        </script>
-    </body>
+    <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
+    <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
+    <script src="${pageContext.request.contextPath}/asset/js/metro.min.js"></script>
+
+    <script>
+                                    $(".job-display").slice(0, 30).show();
+                                    $(".smj").on("click", function () {
+                                        $(".job-display:hidden").slice(0, 5).slideDown();
+                                        if ($(".job-display:hidden").length == 0) {
+                                            $(".smj").fadeOut('slow');
+                                        }
+                                    });
+    </script>
+    <script>
+        function sortList(col, dir) {
+            $('#paintings').data('list').sorting(col, dir, true);
+        }
+    </script>
+</body>
 </html>

@@ -22,6 +22,7 @@
         <jsp:useBean id="totalJobOrder" class="se1621.dao.JobOrderDAO" scope="request"></jsp:useBean>
         <jsp:useBean id="totalUserNonAD" class="se1621.dao.UserDAO" scope="request"></jsp:useBean>
         <jsp:useBean id="RecentJob" class="se1621.dao.JobDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
 
             <!-- Start Home -->
             <section class="bg-home" style="background: url('${pageContext.request.contextPath}/asset/images/background-index.jpg') center center;">
@@ -54,14 +55,11 @@
                                                 <div class="col-lg-3 col-md-6">
                                                     <div class="registration-form-box">
                                                         <i class="fa fa-archive"></i>
-                                                        <select class="demo-default" id="select-category" name="searchExper">
-                                                            <!--                                                <select class="demo-default" id="select-category" required="">-->
-                                                            <option value="">Experience</option>
-                                                            <option value="Less than 1 year">Less than 1 year</option>
-                                                            <option value="1-3 years">1-3 years</option>
-                                                            <option value="3-5 years">3-5 years</option>
-                                                            <option value="5-10 years">5-10 years</option>
-                                                            <option value="More than 10 years">More than 10 years</option>
+                                                        <select class="demo-default" id="select-category" name="searchExper" >
+                                                            <option value="">Skill...</option>
+                                                            <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                                <option value="${i.skillID}">${i.skillName}</option>
+                                                            </c:forEach>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -71,10 +69,9 @@
                                                         <select id="select-category" class="demo-default" name="searchCate">
                                                             <!--<select id="select-category" class="demo-default">-->
                                                             <option value="">Categories...</option>
-                                                            <%--    <c:forEach items="${chooseCategory.listCategory}" var="i">
-                                                                    <option value="${i.categoryID}">${i.categoryName}</option>
-                                                                </c:forEach>
-                                                            --%>
+                                                            <c:forEach items="${chooseCategory.listCategory}" var="i">
+                                                                <option value="${i.categoryID}">${i.categoryName}</option>
+                                                            </c:forEach>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -155,7 +152,7 @@
                         </div>
                     </div>
                 </div>
-                <div></div>
+                
                 <div class="row">
                     <c:forEach items="${chooseCategory.listCategory}" var="c">
                         <div class="job-display col-lg-3 col-md-6 mt-4 pt-2" style="display: none">
