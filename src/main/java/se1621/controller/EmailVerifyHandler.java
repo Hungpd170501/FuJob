@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import se1621.dao.UserDAO;
 import se1621.dto.User;
-import se1621.service.EmailServiceIml;
+import se1621.service.EmailServiceImpl;
 import se1621.utils.Helper;
 import se1621.utils.JwtTokenUtils;
 
@@ -45,7 +45,7 @@ public class EmailVerifyHandler extends HttpServlet {
                         userDAO.activeUserAccount(jwtTokenUtils.getEmailFromToken(token));
                         session.setAttribute("LOGIN_USER", user);
                         url = SUCCESS;
-                        EmailServiceIml emailServiceIml = new EmailServiceIml();
+                        EmailServiceImpl emailServiceIml = new EmailServiceImpl();
                         new Thread(() -> emailServiceIml.sendEmail(getServletContext(), user, "welcome")).start();
                     }
                 }

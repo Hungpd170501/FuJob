@@ -16,6 +16,10 @@
         <servlet-name>EmailVerifyHandler</servlet-name>
         <servlet-class>se1621.controller.EmailVerifyHandler</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>uploadServlet</servlet-name>
+        <servlet-class>se1621.controller.uploadServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -39,7 +43,7 @@
     </context-param>
     <context-param>
         <param-name>pass</param-name>
-        <param-value>FuJobSe1621z</param-value>
+        <param-value>jmpemldekukpuual</param-value>
     </context-param>
     <servlet-mapping>
         <servlet-name>RecoveryPasswordHandler</servlet-name>
@@ -48,6 +52,10 @@
     <servlet-mapping>
         <servlet-name>EmailVerifyHandler</servlet-name>
         <url-pattern>/EmailVerifyHandler</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>uploadServlet</servlet-name>
+        <url-pattern>/uploadServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

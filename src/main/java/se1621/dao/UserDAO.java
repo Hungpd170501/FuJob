@@ -14,11 +14,11 @@ import se1621.utils.DBUtils;
 
 public class UserDAO {
 
-    private static final String CHECK_DUPLICATE = "SELECT userID FROM tblUser WHERE email=?";
-    private static final String SINGUP = "INSERT INTO tblUser(userName, fullName, email, password, phone, roleID, status) VALUES(?,?,?,?,?,?,2)";
-    private static final String UPDATECOMID = "UPDATE tblUser SET userName=?, fullName=?, email=?, phone=?, roleID=?, companyID=? WHERE userID=?";
-    private static final String GETUSER = "SELECT fullName, roleID, companyID FROM tblUser WHERE userID =?";
-    private static final String GETALLTOTALUSER_NONAD = "SELECT COUNT (*) AS totalUser FROM tblUser WHERE roleID = 'US' or roleID = 'HR' ";
+    private static final String CHECK_DUPLICATE = "SELECT userID FROM tblUsers WHERE email=?";
+    private static final String SINGUP = "INSERT INTO tblUsers(fullName, email, password, phone, roleID, userStatus) VALUES(?,?,?,?,?,2)";
+    private static final String UPDATECOMID = "UPDATE tblUsers SET fullName=?, email=?, phone=?, roleID=?, companyID=? WHERE userID=?";
+    private static final String GETUSER = "SELECT fullName, roleID, companyID FROM tblUsers WHERE userID =?";
+    private static final String GETALLTOTALUSER_NONAD = "SELECT COUNT (*) AS totalUser FROM tblUsers WHERE roleID = 'US' or roleID = 'HR' ";
     private Connection conn;
     private PreparedStatement preStm;
     private ResultSet rs;
@@ -92,14 +92,11 @@ public class UserDAO {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(SINGUP);
-                //preStm.setString(1, user.getUserID());
                 preStm.setString(1, user.getFullName());
-                preStm.setString(2, user.getFullName());
-                preStm.setString(3, user.getEmail());
-                preStm.setString(4, user.getPassword());
-                preStm.setString(5, "");
-                preStm.setString(6, user.getRole().getRoleID());
-                //preStm.setBoolean(5, user.isStatus());
+                preStm.setString(2, user.getEmail());
+                preStm.setString(3, user.getPassword());
+                preStm.setString(4, "");
+                preStm.setString(5, user.getRole().getRoleID());
                 check = preStm.executeUpdate() > 0;
             }
         } finally {
@@ -117,8 +114,8 @@ public class UserDAO {
         User user = null;
         try {
             conn = DBUtils.getInstance().getConnection();
-            String sql = "SELECT userID, fullName, companyID, phone, username,tblUser.roleID, tblRole.roleName "
-                    + "FROM tblUser LEFT JOIN tblRole ON tblRole.roleID = tblUser.roleID "
+            String sql = "SELECT userID, fullName, companyID, phone,tblUsers.roleID, tblRoles.roleName "
+                    + "FROM tblUser LEFT JOIN tblRole ON tblRoles.roleID = tblUsers.roleID "
                     + "WHERE email=? AND password=?;";
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, email);
@@ -129,13 +126,11 @@ public class UserDAO {
                 String fullName = rs.getString("fullName");
                 int companyID = rs.getInt("companyID");
                 String phone = rs.getString("phone");
-                String username = rs.getString("username");
                 String roleID = rs.getString("roleID");
                 String roleName = rs.getString("roleName");
                 Role role = new Role(roleID, roleName);
                 user = User.builder()
                         .userID(userID)
-                        .username(username)
                         .fullName(fullName)
                         .password(password)
                         .companyID(companyID)
@@ -154,8 +149,8 @@ public class UserDAO {
         User user = null;
         try {
             conn = DBUtils.getInstance().getConnection();
-            String sql = "SELECT userID, password, username, companyID, fullName, phone, status, tblUser.roleID, tblRole.roleName "
-                    + "FROM tblUser LEFT JOIN tblRole ON tblRole.roleID = tblUser.roleID "
+            String sql = "SELECT userID, password, companyID, fullName, phone, userStatus, tblUsers.roleID, tblRoles.roleName "
+                    + "FROM tblUsers LEFT JOIN tblRoles ON tblRoles.roleID = tblUsers.roleID "
                     + "WHERE email=?;";
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, email);
@@ -163,18 +158,16 @@ public class UserDAO {
 
             if (rs.next()) {
                 int userID = rs.getInt("userID");
-                String username = rs.getString("username");
                 int companyID = rs.getInt("companyID");
                 String fullName = rs.getString("fullName");
                 String phone = rs.getString("phone");
                 String roleID = rs.getString("roleID");
                 String password = rs.getString("password");
                 String roleName = rs.getString("roleName");
-                int status = rs.getInt("status");
+                int status = rs.getInt("userStatus");
                 Role role = new Role(roleID, roleName);
                 user = User.builder()
                         .userID(userID)
-                        .username(username)
                         .companyID(companyID)
                         .fullName(fullName)
                         .password(password)
@@ -194,7 +187,7 @@ public class UserDAO {
         boolean check = false;
         try {
             conn = DBUtils.getInstance().getConnection();
-            String sql = "UPDATE tblUser SET password=? WHERE email=?";
+            String sql = "UPDATE tblUsers SET password=? WHERE email=?";
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, newPassword);
             preStm.setString(2, userEmail);
@@ -215,7 +208,7 @@ public class UserDAO {
         boolean check = false;
         try {
             conn = DBUtils.getInstance().getConnection();
-            String sql = "UPDATE tblUser SET status=1 WHERE email=?";
+            String sql = "UPDATE tblUsers SET userStatus=1 WHERE email=?";
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, userEmail);
             check = preStm.executeUpdate() > 0;
@@ -237,13 +230,12 @@ public class UserDAO {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(UPDATECOMID);
-                preStm.setString(1, user.getUsername());
-                preStm.setString(2, user.getFullName());
-                preStm.setString(3, user.getEmail());
-                preStm.setString(4, user.getPhone());
-                preStm.setString(5, user.getRole().getRoleID());
-                preStm.setInt(6, companyID);
-                preStm.setInt(7, user.getUserID());
+                preStm.setString(1, user.getFullName());
+                preStm.setString(2, user.getEmail());
+                preStm.setString(3, user.getPhone());
+                preStm.setString(4, user.getRole().getRoleID());
+                preStm.setInt(5, companyID);
+                preStm.setInt(6, user.getUserID());
                 check = preStm.executeUpdate() > 0;
             }
         } catch (SQLException e) {

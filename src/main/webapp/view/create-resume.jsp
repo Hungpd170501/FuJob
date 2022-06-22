@@ -8,6 +8,9 @@
             <jsp:param name="title" value="FuJob | Create Resume"/>
         </jsp:include>
         <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
+<link rel="stylesheet" href="https://unpkg.com/filepond@^4/dist/filepond.css" type="text/css"/>
+<link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" type="text/css"/>
+<link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css" type="text/css"/>
         </head>
 
         <body>
@@ -45,12 +48,10 @@
                         </div>
                         <div class="col-12 mt-3">
                             <div class="custom-form p-4 border rounded">
-
                                 <form action="/FuJob/MainController" method="POST">
-                                    <label class="col-md-12">
-                                        <input type="file" style="display: none" id="imageFile" name="avatar" >
-                                        <img style="cursor:  pointer" id="image"   src="https://via.placeholder.com/400X400//88929f/5a6270C/O https://placeholder.com/" class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill" alt="" >
-                                    </label>
+                                    <div class="col-md-2 align-content-md-center">
+                                        <input type="file" id="imageFile" class="filepond img-fluid avatar avatar-medium d-block mx-auto rounded-pill" name="avatar" style="width:170px;"  accept="image/png, image/jpeg, image/gif">
+                                    </div>
                                     <div class="row mt-4">
                                         <div class="col-md-4">
                                             <div class="form-group app-label">
@@ -193,11 +194,63 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-        <<<<<<< HEAD
-
-        =======
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+        <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+<!-- add before </body> -->
+<script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+        <script>/*
+We need to register the required plugins to do image manipulation and previewing.
+*/
+FilePond.registerPlugin(
+	// encodes the file as base64 data
+  FilePondPluginFileEncode,
+	
+	// validates files based on input type
+  FilePondPluginFileValidateType,
+	
+	// corrects mobile image orientation
+  FilePondPluginImageExifOrientation,
+	
+	// previews the image
+  FilePondPluginImagePreview,
+	
+	// crops the image to a certain aspect ratio
+  FilePondPluginImageCrop,
+	
+	// resizes the image to fit a certain size
+  FilePondPluginImageResize,
+	
+	// applies crop and resize information on the client
+  FilePondPluginImageTransform
+);
+
+// Select the file input and use create() to turn it into a pond
+// in this example we pass properties along with the create method
+// we could have also put these on the file input element itself
+FilePond.create(
+	document.querySelector('input[type="file"]'),
+	{
+		labelIdle: `Drag & Drop your picture or Browse</span>`,
+    imagePreviewHeight: 170,
+    imageCropAspectRatio: '1:1',
+    imageResizeTargetWidth: 200,
+    imageResizeTargetHeight: 200,
+    stylePanelLayout: 'compact circle',
+    styleLoadIndicatorPosition: 'center bottom',
+    styleButtonRemoveItemPosition: 'center bottom'
+	}
+);</script>
         <script>
             $(document).ready(function () {
                 $('.select2').select2({
@@ -205,6 +258,5 @@
                 });
             });
         </script>
-        >>>>>>> e862741a469a1c8ef5776b87f1b3feba638eb207
     </body>
 </html>

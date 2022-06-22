@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import se1621.dao.UserDAO;
 import se1621.dto.User;
-import se1621.service.EmailServiceIml;
+import se1621.service.EmailServiceImpl;
 
 /**
  *
@@ -35,7 +35,7 @@ public class RecoveryPasswordController extends HttpServlet {
             if (user == null || user.getStatus() != 1) {
                 request.setAttribute("RECOVERY_PASSWORD_MESSAGE", "Opp somthing wrong! Maybe the email you enter is incorrect or not verified!");
             } else {
-                EmailServiceIml emailServiceIml = new EmailServiceIml();
+                EmailServiceImpl emailServiceIml = new EmailServiceImpl();
                 new Thread(() -> emailServiceIml.sendEmail(getServletContext(), user, "forgot")).start();
                 url = SUCCESS;
             }

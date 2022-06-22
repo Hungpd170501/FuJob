@@ -1,4 +1,5 @@
 se1621\dto\Resume.class
+se1621\service\FirebaseStoreService.class
 se1621\controller\SearchResumeIDController.class
 se1621\controller\CreateResumeController.class
 se1621\controller\SearchJobIDController.class
@@ -34,7 +35,6 @@ se1621\utils\Helper.class
 se1621\dao\AuthDAO.class
 se1621\dao\v2\CategoryDAOImpl.class
 se1621\dto\CompanyInfo$CompanyInfoBuilder.class
-se1621\service\EmailServiceIml.class
 se1621\controller\ChooseCompanyController.class
 se1621\dto\Category$CategoryBuilder.class
 se1621\dto\User.class
@@ -60,6 +60,7 @@ se1621\controller\LoginGoogleHandler.class
 se1621\dto\Skill.class
 se1621\dao\SkillRequireDAO.class
 se1621\dao\JobOrderDAO.class
+se1621\controller\uploadServlet.class
 se1621\controller\RecoveryPasswordHandler.class
 se1621\controller\EmailVerifyHandler.class
 se1621\controller\ListJobByIDController.class
@@ -73,5 +74,7 @@ se1621\dto\SkillRequire$SkillRequireBuilder.class
 se1621\controller\MainController.class
 se1621\dto\Error\UserError.class
 se1621\controller\SearchCompanyIDController.class
+se1621\utils\FirebaseUtils.class
+se1621\service\FirebaseStoreServiceImpl.class
 se1621\controller\LoginController.class
 se1621\dto\CompanyInfo.class

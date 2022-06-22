@@ -18,14 +18,10 @@ public class DBUtils {
     private Connection connection;
 
     private final String serverName = "localhost";
-    private final String dbName = "FuJobDB";
+    private final String dbName = "FuJobDB_1";
     private final String portNumber = "1433";
     private final String userID = "sa";
-<<<<<<< HEAD
     private final String password = "sa";
-=======
-    private final String password = "1472580369";
->>>>>>> 3f2e58ed3028234b088c6cb043f68d40f0cf2dc2
 
     private DBUtils() {
         String url = "jdbc:jtds:sqlserver://" + serverName + ":" + portNumber + "/" + dbName;
