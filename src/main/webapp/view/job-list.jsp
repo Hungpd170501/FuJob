@@ -1,3 +1,5 @@
+<%@page import="se1621.dao.JobSkillsDAO"%>
+<%@page import="se1621.dto.JobSkills"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.sql.Date"%>
@@ -19,6 +21,7 @@
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
 
             <!-- Start home -->
             <section class="bg-half page-next-level"> 
@@ -63,12 +66,10 @@
                                             <i class="fa fa-archive"></i>
                                             <select class="demo-default" id="select-category" name="searchExper">
                                                 <!--                                                <select class="demo-default" id="select-category" required="">-->
-                                                <option value="">Experience</option>
-                                                <option value="Less than 1 year">Less than 1 year</option>
-                                                <option value="1-3 years">1-3 years</option>
-                                                <option value="3-5 years">3-5 years</option>
-                                                <option value="5-10 years">5-10 years</option>
-                                                <option value="More than 10 years">More than 10 years</option>
+                                                <option value="">Skill</option>
+                                                <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                    <option value="${i.skillID}">${i.skillName}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
@@ -78,10 +79,9 @@
                                             <select id="select-category" class="demo-default" name="searchCate">
                                                 <!--<select id="select-category" class="demo-default">-->
                                                 <option value="">Categories...</option>
-                                                <%--    <c:forEach items="${chooseCategory.listCategory}" var="i">
+                                                <c:forEach items="${chooseCategory.listCategory}" var="i">
                                                     <option value="${i.categoryID}">${i.categoryName}</option>
                                                 </c:forEach>
-                                                --%>
                                             </select>
                                         </div>
                                     </div>
@@ -156,9 +156,25 @@
                                                             long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
                                                             long resultDate = exDate / (24 * 60 * 60 * 1000);
                                                         %>
-                                                    <p class="mb-2 text-muted"> <%= resultDate %> days left</p>
-                                                    <p class="mb-4">    <%= job.getDescription()%> </p>
-                                                    <h6>Skills Require: </h6>
+                                                    <p class="mb-2 text-muted"> <%= resultDate%> days left</p>
+                                                    <%
+                                                        String description = job.getDescription();
+                                                        if (description.length() > 200) {
+                                                            description = description.substring(0, 197) + ". . .";
+                                                        }
+                                                    %>
+                                                    <p class="mb-4"><%= description%></p>
+                                                    <h6>Skills Require: 
+                                                        <%
+                                                            List<JobSkills> listJobSkills = job.getListJobSkills();
+                                                            for (int i = 0; i < listJobSkills.size() - 1; i++) {
+                                                        %>
+                                                        <%= listJobSkills.get(i).getSkill().getSkillName()%>,
+                                                        <%
+                                                            }
+                                                        %>
+                                                        <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
+                                                    </h6>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
 
@@ -169,7 +185,7 @@
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
                                                     <div>
-                                                        <p class=" mb-5"><i class="mr-2"></i>5 birds</p>
+                                                        <p class=" mb-5"><i class="mr-2"></i>5 bids</p>
                                                     </div>
                                                     <div>
                                                         <h5 class=" mb-5"><i class="mr-2"></i> <%= job.getBudget()%>$ <% if (job.getPaymentMethodID() == 2) {

@@ -77,7 +77,7 @@
 
                 <li></li>
                 <li><a href="${pageContext.request.contextPath}">Home</a></li>
-                <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&Search_title_exper_cate">Project List</a></li>
+                <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob">Project List</a></li>
                     <% if (loginUser != null) {
                     %>
                 <li class="has-submenu">

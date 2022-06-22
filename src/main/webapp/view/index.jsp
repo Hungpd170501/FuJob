@@ -18,6 +18,7 @@
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
         <jsp:useBean id="totalJobPost" class="se1621.dao.JobDAO" scope="request"></jsp:useBean>
         <jsp:useBean id="totalJobOrder" class="se1621.dao.JobOrderDAO" scope="request"></jsp:useBean>
         <jsp:useBean id="totalUserNonAD" class="se1621.dao.UserDAO" scope="request"></jsp:useBean>
@@ -54,14 +55,11 @@
                                                 <div class="col-lg-3 col-md-6">
                                                     <div class="registration-form-box">
                                                         <i class="fa fa-archive"></i>
-                                                        <select class="demo-default" id="select-category" name="searchExper">
-                                                            <!--                                                <select class="demo-default" id="select-category" required="">-->
-                                                            <option value="">Experience</option>
-                                                            <option value="Less than 1 year">Less than 1 year</option>
-                                                            <option value="1-3 years">1-3 years</option>
-                                                            <option value="3-5 years">3-5 years</option>
-                                                            <option value="5-10 years">5-10 years</option>
-                                                            <option value="More than 10 years">More than 10 years</option>
+                                                        <select class="demo-default" id="select-category" name="searchSkill">
+                                                            <option value="">Skill</option>
+                                                            <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                                <option value="${i.skillID}">${i.skillName}</option>
+                                                            </c:forEach>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -69,18 +67,16 @@
                                                     <div class="registration-form-box">
                                                         <i class="fa fa-list-alt"></i>
                                                         <select id="select-category" class="demo-default" name="searchCate">
-                                                            <!--<select id="select-category" class="demo-default">-->
                                                             <option value="">Categories...</option>
-                                                            <%--    <c:forEach items="${chooseCategory.listCategory}" var="i">
-                                                                    <option value="${i.categoryID}">${i.categoryName}</option>
-                                                                </c:forEach>
-                                                            --%>
+                                                            <c:forEach items="${chooseCategory.listCategory}" var="i">
+                                                                <option value="${i.categoryID}">${i.categoryName}</option>
+                                                            </c:forEach>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
                                                     <div class="registration-form-box">
-                                                        <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Submit">
+                                                        <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Find">
                                                         <!-- name = action  -->
                                                         <input type="hidden" name ="action" value="Search_title_exper_cate">
                                                     </div>
@@ -136,7 +132,7 @@
                 </div>
                 <div class="row justify-content-center col-12 text-center mt-4 pt-2" >
                     <div>
-                        <a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&Search_title_exper_cate" class="btn btn-primary-outline">View all projects</a>
+                        <a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob" class="btn btn-primary-outline">View all projects</a>
                     </div>
                 </div>
             </div>
@@ -159,7 +155,7 @@
                 <div class="row">
                     <c:forEach items="${chooseCategory.listCategory}" var="c">
                         <div class="job-display col-lg-3 col-md-6 mt-4 pt-2" style="display: none">
-                            <a href="${pageContext.request.contextPath}/MainController?action=Search_title_exper_cate&searchtitle=${""}&searchExper=${""}&searchCate=${c.categoryID}">
+                            <a href="${pageContext.request.contextPath}/MainController?action=Search_title_exper_cate&searchtitle=${""}&searchSkill=${""}&searchCate=${c.categoryID}">
                                 <div class="popu-category-box bg-light rounded text-center p-4">
                                     <div class="popu-category-icon mb-3">
                                         <img loading="lazy" src="${c.img}" alt="" class="img-fluid img-thumbnail d-inline-block rounded-pill h3 text-primary" style="width:100px;height:100px">

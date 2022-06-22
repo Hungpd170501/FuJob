@@ -121,10 +121,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group app-label">
                                                 <label>Description<span class="text-danger">*</span> :</label>
-                                                <textarea id="description" name="description" type="text" class="form-control resume" required="" placeholder="Things needed for the job:
-                                                          ....
-                                                          What the job will do:
-                                                          ...."></textarea>
+                                                <textarea id="description" name="description" type="text" class="form-control resume" required="" placeholder="Things needed for the job:"></textarea>
                                             </div>
                                         </div>
                                     </div>

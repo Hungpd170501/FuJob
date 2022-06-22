@@ -23,13 +23,15 @@ public class JobDAO {
 
     private static final String CREATEJOB = "INSERT INTO tblJobs(userID, jobTitle, jobCategoryID,"
             + " budget, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,1)";
-    private String SEARCHALL_JOBTITLE_EXPERIENCE_CATEGORY = "SELECT * FROM tblJobs ";
+    private String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.address, j.budget, j.paymentMethodID, "
+            + "j.email, j.phone, j.description, j.createdDate, j.lastModifiedDate, j.expiriedDate, j.jobStatus, "
+            + "j.jobCategoryID, cate.categoryName, cate.img, js.skillID "
+            + "FROM ((tblJobs j left join tblJobSkills js on j.jobID = js.jobID) left join tblCategories cate on cate.categoryID = j.jobCategoryID) ";
     private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJobs WHERE jobID = (SELECT MAX(jobID) FROM tblJobs) and jobStatus = 1 and userID = ?";
     private static final String SEARCHBYJOBID = "SELECT * FROM tblJobs WHERE jobID = ? and jobStatus = 1";
 
     private static final String VIEWALLJOB = "SELECT j.jobID, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate"
-            + "            FROM (((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) left join tblUsers u on j.userID = u.userID)"
-            + "            left join tblCompanies com on u.companyID = com.companyID)"
+            + "            FROM (tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)"
             + "            WHERE j.jobStatus = 1 ORDER BY createdDate DESC";
 
     private static final String VIEWHRJOB = "SELECT j.jobID, j.jobTitle, j.lastDateUpdate, j.address, c.categoryName, c.img, j.ExperienceNeeded "
@@ -299,24 +301,49 @@ public class JobDAO {
         return jobID;
     }
 
-    public List<Job> searchAllJobTile_Experience_Category(String searchJobTitle, String searchExperienceNeeded, int searchJobCategoryID) throws SQLException {
+    public List<Job> searchAllJobTile_Skill_Category(String searchJobTitle, int searchSkillID, int searchJobCategoryID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 List<Job> listJob = new ArrayList<>();
-                String getDataSQL = this.SEARCHALL_JOBTITLE_EXPERIENCE_CATEGORY;
-                boolean checkCateID = true;
-                if (searchJobCategoryID == 0) {
-                    getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? and jobStatus = 1";
+                String getDataSQL = "";
+                String getDataSQL1 = this.SEARCHALL_JOBTITLE_SKILL_CATEGORY;
+                boolean checkCateID = false;
+                boolean checkSkillID = false;
+
+                if (searchJobCategoryID == 0 && searchSkillID == 0) {
+                    getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobStatus = 1";
+                    checkCateID = true;
+                    checkSkillID = true;
                 } else {
-                    getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? and jobCategoryID = ? and jobStatus = 1";
-                    checkCateID = false;
+                    getDataSQL = getDataSQL1 + " WHERE jobTitle like ? and skillID like ? and jobCategoryID = ? and jobStatus = 1";
+                    if (searchJobCategoryID == 0) {
+                        getDataSQL = getDataSQL1 + " WHERE jobTitle like ? and skillID like ? and jobStatus = 1";
+                        checkCateID = true;
+                    }
+                    if (searchSkillID == 0) {
+                        getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobCategoryID like ? and jobStatus = 1";
+                        checkSkillID = true;
+                    }
                 }
+
                 preStm = conn.prepareStatement(getDataSQL);
-                preStm.setString(1, "%" + searchJobTitle + "%");
-                preStm.setString(2, "%" + searchExperienceNeeded + "%");
-                if (!checkCateID) {
-                    preStm.setInt(3, searchJobCategoryID);
+                if (checkCateID == true && checkSkillID == true) {
+                    preStm.setString(1, "%" + searchJobTitle + "%");
+                } else {
+                    preStm.setString(1, "%" + searchJobTitle + "%");
+                    if (checkCateID == false && checkSkillID == false) {
+                        preStm.setInt(2, searchSkillID);
+                        preStm.setInt(3, searchJobCategoryID);
+                    } else {
+                        if (checkSkillID == false) {
+                            preStm.setInt(2, searchSkillID);
+                        }
+                        if (checkCateID == false) {
+                            preStm.setInt(2, searchJobCategoryID);
+                        }
+                    }
+
                 }
                 rs = preStm.executeQuery();
                 while (rs.next()) {
@@ -324,24 +351,37 @@ public class JobDAO {
                     int userID = rs.getInt("userID");
                     String jobTitle = rs.getString("jobTitle");
                     int jobCategoryID = rs.getInt("jobCategoryID");
-                    String experienceNeeded = rs.getString("experienceNeeded");
-                    Date deadline = rs.getDate("deadline");
-                    String completionTime = rs.getString("completionTime");
-                    String salary = rs.getString("salary");
+                    String categoryName = rs.getString("categoryName");
+                    String img = rs.getString("img");
+                    int budget = rs.getInt("budget");
+                    int paymentMethodID = rs.getInt("paymentMethodID");
                     String address = rs.getString("address");
                     String email = rs.getString("email");
                     String phone = rs.getString("phone");
                     String description = rs.getString("description");
-                    Date lastDateUpdate = rs.getDate("lastDateUpdate");
-                    listJob.add(Job.builder().jobID(jobID)
+                    Date createdDate = rs.getDate("createdDate");
+                    Date lastModifiedDate = rs.getDate("lastModifiedDate");
+                    Date expiriedDate = rs.getDate("expiriedDate");
+                    int jobStatus = rs.getInt("jobStatus");
+
+                    Category category = Category.builder().categoryID(jobCategoryID).categoryName(categoryName).img(img).build();
+                    listJob.add(Job.builder()
+                            .jobID(jobID)
                             .userID(userID)
                             .jobTitle(jobTitle)
-                            .category(Category.builder().categoryID(jobCategoryID).build())
+                            .category(category)
+                            .budget(budget)
+                            .paymentMethodID(paymentMethodID)
+                            .createdDate(createdDate)
+                            .lastModifiedDate(lastModifiedDate)
+                            .expiriedDate(expiriedDate)
+                            .jobStatus(jobStatus)
                             .address(address)
                             .email(email)
                             .phone(phone)
                             .description(description)
-                            .build());
+                            .build()
+                    );
                 }
                 return listJob;
             }
@@ -367,7 +407,7 @@ public class JobDAO {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 List<Job> listJob = new ArrayList<>();
-                String getDataSQL = this.SEARCHALL_JOBTITLE_EXPERIENCE_CATEGORY;
+                String getDataSQL = this.SEARCHALL_JOBTITLE_SKILL_CATEGORY;
                 boolean checkCateID = true;
                 if (searchJobCategoryID == 0) {
                     getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? and jobStatus = 1 and userID = " + hrID;
@@ -466,7 +506,7 @@ public class JobDAO {
         }
         return null;
     }
-    
+
     public boolean deleteJobPost(int jobPostID) throws SQLException {
         boolean check = false;
         try {
@@ -488,5 +528,5 @@ public class JobDAO {
         }
         return check;
     }
-    
+
 }
