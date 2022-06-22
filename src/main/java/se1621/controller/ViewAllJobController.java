@@ -10,9 +10,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
 import se1621.dao.JobDAO;
+import se1621.dao.JobSkillsDAO;
 import se1621.dto.Job;
+import se1621.dto.JobSkills;
+import se1621.dto.Skill;
 
 /**
  *
@@ -29,12 +33,20 @@ public class ViewAllJobController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+
             JobDAO jobDAO = new JobDAO();
-            List<Job> listJob = jobDAO.getListJob();
+            List<Job>listJob = jobDAO.getListJob();
+            JobSkillsDAO jsDAO = new JobSkillsDAO();
+            for (Job job : listJob) {
+                List<JobSkills> listJs = jsDAO.getSkillRequire(job.getJobID());
+                job.setListJobSkills(listJs);
+            }
             if (!listJob.isEmpty()) {
                 request.setAttribute("LIST_ALLJOB", listJob);
                 url = SUCCESS;
+
             }
+
         } catch (Exception e) {
             log("Error at View all job Controller" + e.toString());
         } finally {

@@ -11,11 +11,12 @@ C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Role.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\SearchInJobOrderController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\ResumeDAO.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\StudentSkillDAO.java
-C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\JobOrder.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\SkillRequire.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\JobApplication.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\DeleteJobPostController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\service\EmailService.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\UpdateStatusHRController.java
+C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\JobApplicationDAO.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\utils\DBUtils.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\CompanyInfo.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\utils\EmailUtils.java
@@ -27,7 +28,6 @@ C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\User.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\ListJobByIDController.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\CompanyInfoDAO.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Error\UserError.java
-C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dao\JobOrderDAO.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\Skill.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\controller\EmailVerifyHandler.java
 C:\Users\lehad\Desktop\FuJob\FuJob\src\main\java\se1621\dto\JobSkills.java

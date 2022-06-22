@@ -650,6 +650,7 @@ public class EmailServiceIml implements EmailService {
             }
             EmailUtils.sendEmail(host, port, user, pass, repliient.getEmail(), subject, content);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

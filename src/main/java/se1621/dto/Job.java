@@ -2,7 +2,7 @@ package se1621.dto;
 
 import java.sql.Date;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,6 +32,6 @@ public class Job {
     private Date createdDate;
     private Date lastModifiedDate;
     private Date expiriedDate;
+    List<JobSkills> listJobSkills;
     private int jobStatus;
-
 }

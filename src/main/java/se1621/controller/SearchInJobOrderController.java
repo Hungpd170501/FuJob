@@ -12,8 +12,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import se1621.dao.JobOrderDAO;
-import se1621.dto.JobOrder;
+import se1621.dao.JobApplicationDAO;
+import se1621.dto.JobApplication;
 
 /**
  *
@@ -38,8 +38,8 @@ public class SearchInJobOrderController extends HttpServlet {
                 searchCate = Integer.parseInt(request.getParameter("searchCate"));
             } catch (Exception e) {
             }
-            JobOrderDAO jobOrderDAO = new JobOrderDAO();
-            List<JobOrder> listJobOrder = jobOrderDAO.getJobOrder(searchTitle, searchExper, searchCate, studentID);
+            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
+            List<JobApplication> listJobOrder = jobOrderDAO.getJobOrder(searchTitle, searchExper, searchCate, studentID);
             if (!listJobOrder.isEmpty()) {
                 request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
                 url = SUCCESS;

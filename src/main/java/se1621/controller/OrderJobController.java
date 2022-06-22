@@ -10,9 +10,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import se1621.dao.JobOrderDAO;
+import se1621.dao.JobApplicationDAO;
 import se1621.dto.Job;
-import se1621.dto.JobOrder;
+import se1621.dto.JobApplication;
 
 /**
  *
@@ -34,14 +34,14 @@ public class OrderJobController extends HttpServlet {
             String cvFile = request.getParameter("cvFile");
             String salaryDeal = request.getParameter("salaryDeal");
             String message = request.getParameter("message");
-            JobOrder jobOrder = JobOrder.builder()
+            JobApplication jobOrder = JobApplication.builder()
                     .resumeID(userID)
                     .job(Job.builder().jobID(jobID).build())
                     .cvFile(cvFile)
                     .priceDeal(salaryDeal)
                     .message(message)
                     .build();
-            JobOrderDAO jobOrderDAO = new JobOrderDAO();
+            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
             int jobOrderID = jobOrderDAO.getJobOrderID(userID, jobID); // neu user da apply ma huy chua
             if (jobOrderID > 0) { // tien hanh re apply (update)
                 boolean reApply = jobOrderDAO.reApply(jobOrder, jobOrderID);

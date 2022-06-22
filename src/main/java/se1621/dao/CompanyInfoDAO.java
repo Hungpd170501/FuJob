@@ -24,7 +24,7 @@ public class CompanyInfoDAO {
     private static final String GETLISTCOMPANY = "SELECT * FROM tblCompanies and companyStatus = 1";
     private static final String GETCOMID = "SELECT companyID FROM tblCompanies WHERE companyName=?";
     private static final String CHECK_DUPLICATE = "SELECT companyID FROM tblCompanies WHERE companyName=?";
-    private static final String SEARCH = "SELECT companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar, createdDate, lastModifiedDate FROM tblCompanies WHERE companyID = 1 and companyStatus = 1";
+    private static final String SEARCH = "SELECT companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar, createdDate, lastModifiedDate FROM tblCompanies WHERE companyID = ? and companyStatus = 1";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;

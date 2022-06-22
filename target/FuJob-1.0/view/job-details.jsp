@@ -10,7 +10,7 @@
 <%@page import="se1621.dto.JobSkills"%>
 <%@page import="java.util.List"%>
 <%@page import="se1621.dto.SkillRequire"%>
-<%@page import="se1621.dao.JobOrderDAO"%>
+<%@page import="se1621.dao.JobApplicationDAO"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="se1621.dto.User"%>
 <%@page import="se1621.dto.Job"%>
@@ -73,18 +73,17 @@
                             </div>
                             <div class="col-lg-7" style="margin-top: 30px">
                                 <div class="job-detail-com-desc overflow-hidden d-block">
-                            <%--    <p class=" mb-3"><h7 style="font-weight: 700">Company: </h7> <a href="#"> <%= job.getCompany().getCompanyName() %></a></p> --%>
                                     <p class=" mb-3"><h7  style="font-weight: 700"> Category: </h7><%= job.getCategory().getCategoryName()%></p>
                                     <p class=" mb-3"><h7 style="font-weight: 700">Skill require: </h7> 
                                         <%
-                                            List<JobSkills> listStudentSkill = (List<JobSkills>) request.getAttribute("LIST_SKILLREQUIRE");
-                                            for (int i = 0; i < listStudentSkill.size() - 1; i++) {
+                                            List<JobSkills> listJobSkills = (List<JobSkills>) request.getAttribute("LIST_SKILLREQUIRE");
+                                            for (int i = 0; i < listJobSkills.size() - 1; i++) {
                                         %>
-                                        <%= listStudentSkill.get(i).getSkill().getSkillName()%>,
+                                        <%= listJobSkills.get(i).getSkill().getSkillName()%>,
                                     <%
                                         }
                                     %>
-                                    <%= listStudentSkill.get(listStudentSkill.size() - 1).getSkill().getSkillName()%>
+                                    <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
                                     </p>
                                     <p class=" mb-3"><h7 style="font-weight: 700"> Budget: </h7><%= job.getBudget()%> $ <% if(job.getPaymentMethodID() == 2)
                                     { %> 
@@ -118,6 +117,18 @@
                         <div class="job-detail border rounded p-4">
                             <h5 class="text-center pb-2" style="font-weight: 700">Contact me</h5>
                             <div class="job-detail-location pt-4 border-top">
+                                <%
+                                    if(job.getCompany().getCompanyName()!= null){
+                                %>
+                                <div class="job-details-desc-item">
+                                    <div class="float-left mr-2">
+                                        <i class="mdi mdi-office-building" style="color: gray" ></i>
+                                    </div>
+                                    <p class=" mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchCompanyID&searchCompanyID=<%= job.getCompany().getCompanyID() %>"> <%= job.getCompany().getCompanyName() %></a></p>
+                                </div>
+                                <%
+                                    }
+                                %>
                                 <div class="job-details-desc-item">
                                     <div class="float-left mr-2">
                                         <i class="mdi mdi-map-marker" style="color: red" ></i>
@@ -147,7 +158,7 @@
                         </div>
                         <%
                         } else if (loginUser != null && !StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
-                            JobOrderDAO jobOrderDAO = new JobOrderDAO();
+                            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
                             ResumeDAO resumeDAO = new ResumeDAO();
                             boolean checkDuplicateUserOrderJob = jobOrderDAO.checkDuplicateJobOrderByOneUser(resumeDAO.getResumeID(loginUser.getUserID()), job.getJobID());
                             if (checkDuplicateUserOrderJob) {

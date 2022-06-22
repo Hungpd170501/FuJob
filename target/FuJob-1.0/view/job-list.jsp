@@ -1,3 +1,5 @@
+<%@page import="se1621.dao.JobSkillsDAO"%>
+<%@page import="se1621.dto.JobSkills"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.sql.Date"%>
@@ -19,6 +21,7 @@
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
 
             <!-- Start home -->
             <section class="bg-half page-next-level"> 
@@ -63,12 +66,10 @@
                                             <i class="fa fa-archive"></i>
                                             <select class="demo-default" id="select-category" name="searchExper">
                                                 <!--                                                <select class="demo-default" id="select-category" required="">-->
-                                                <option value="">Experience</option>
-                                                <option value="Less than 1 year">Less than 1 year</option>
-                                                <option value="1-3 years">1-3 years</option>
-                                                <option value="3-5 years">3-5 years</option>
-                                                <option value="5-10 years">5-10 years</option>
-                                                <option value="More than 10 years">More than 10 years</option>
+                                                <option value="">Skill</option>
+                                                <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                    <option value="${i.skillID}">${i.skillName}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
@@ -118,9 +119,12 @@
                                 <h5 class="text-dark mb-0 pt-2 f-18">Showing projects</h5>
                             </div>
                             <div class="registration-form-box float-right">
-                                <button onclick="sortList('painting-price', 'asc')" value="Lowest budget first"> Price up </button>
-                                <button onclick="sortList('painting-price', 'desc')" value="Lowest budget first"> Price dow</button>
+                                <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-name', 'asc')"> Sort name project </button>
+                                <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-price', 'asc')"> Lowest budget first </button>
+                                <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-price', 'desc')"> Highest budget first </button>
+                                <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-id', 'desc')"> Newest </button>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -128,11 +132,18 @@
                 <div class="row">
                     <ul  id="paintings"
                          data-role="list"
-                         data-sort-class="painting-price"
+                         data-sort-class="painting"
                          data-sort-dir="desc"
                          data-cls-list="unstyled-list row flex-justify-center mt-4"
-                         data-cls-list-item="cell-sm-6 cell-md-4">
+                         data-cls-list-item="cell-sm-6 cell-md-4"
+                         data-filter-class="painting-author"
+                         data-show-pagination="true"
+                         data-items="10"
+                         data-items-steps="all, 3, 10"
 
+                         >
+<!--                         data-show-items-steps="true"
+                         data-show-list-info="true"-->
                         <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_ALLJOB");
                             if (listJob.isEmpty()) {
                                 String message = (String) request.getAttribute("MESSAGE");
@@ -147,9 +158,9 @@
                                     for (Job job : listJob) {
                         %>
                         <li style="list-style: none"> 
-                            <div class="job-display col-lg-12 mt-4 pt-1" style="display: none">
+                            <div class="job-display col-lg-12 mt-4 pt-1">
                                 <div class="job-list-box border rounded" >
-                                    <div class="p-3">
+                                    <div class="p-3" style="width: 1098px; height: 298.4px">
                                         <div class="row align-items-center">
                                             <div class="col-lg-3">
                                                 <div class="company-logo-img">
@@ -158,15 +169,31 @@
                                             </div>
                                             <div class="col-lg-6 col-md-9">
                                                 <div class="job-list-desc">
-                                                    <h4 class="mb-1" style="font-weight: 700"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h4>
+                                                    <h4 class="painting-name mb-1" style="font-weight: 700"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h4>
                                                         <%
                                                             Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
                                                             long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
                                                             long resultDate = exDate / (24 * 60 * 60 * 1000);
                                                         %>
                                                     <p class="mb-2 text-muted"> <%= resultDate%> days left</p>
-                                                    <p class="mb-4">    <%= job.getDescription()%> </p>
-                                                    <h6>Skills Require: </h6>
+                                                    <%
+                                                        String description = job.getDescription();
+                                                        if (description.length() > 200) {
+                                                            description = description.substring(0, 197) + ". . .";
+                                                        }
+                                                    %>
+                                                    <p class="mb-4"><%= description%></p>
+                                                    <h6>Skills Require: 
+                                                        <%
+                                                            List<JobSkills> listJobSkills = job.getListJobSkills();
+                                                            for (int i = 0; i < listJobSkills.size() - 1; i++) {
+                                                        %>
+                                                        <%= listJobSkills.get(i).getSkill().getSkillName()%>,
+                                                        <%
+                                                            }
+                                                        %>
+                                                        <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
+                                                    </h6>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
                                                         </li>
@@ -179,6 +206,7 @@
                                                         <p class=" mb-5"><i class="mr-2"></i>5 bids</p>
                                                     </div>
                                                     <div>
+                                                        <h5 class="painting-id" data-format="money" style="display: none"> <%= job.getJobID()%> </h5>
                                                         <h5 class="painting-price mb-5" data-format="money">  <i class="mr-2"></i> <%= job.getBudget()%>$ <% if (job.getPaymentMethodID() == 2) {
                                                             %>
                                                             / hour
@@ -208,54 +236,52 @@
 
                         <%                                if (listJob.size() > 10) {
                         %>
-                    <!--    <div class="smj col-12 text-center mt-4 pt-2">
+                        <!--    <div class="smj col-12 text-center mt-4 pt-2">
                             <a class="btn btn-primary-outline">Show more</a>
-                        </div> -->
+                        </div> --> 
                         <%
                             }
                         %>
                     </ul>
-
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- Back to top -->
-    <a href="#" class="back-to-top rounded text-center" id="back-to-top" style="display: inline"> 
-        <i class="mdi mdi-chevron-up d-block"></i> 
-    </a>
-    <!-- Back to top -->
-    <jsp:include page="./include/footer.jsp"></jsp:include>
-        <!-- javascript -->
-        <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/asset/js/bootstrap.bundle.min.js"></script>
-    <script src="${pageContext.request.contextPath}/asset/js/jquery.easing.min.js"></script>
-    <script src="${pageContext.request.contextPath}/asset/js/plugins.js"></script>
+        </section>
+        <!-- Back to top -->
+        <a href="#" class="back-to-top rounded text-center" id="back-to-top" style="display: inline"> 
+            <i class="mdi mdi-chevron-up d-block"></i> 
+        </a>
+        <!-- Back to top -->
+        <jsp:include page="./include/footer.jsp"></jsp:include>
+            <!-- javascript -->
+            <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/bootstrap.bundle.min.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/jquery.easing.min.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/plugins.js"></script>
 
-    <!-- selectize js -->
-    <script src="${pageContext.request.contextPath}/asset/js/selectize.min.js"></script>
-    <script src="${pageContext.request.contextPath}/asset/js/jquery.nice-select.min.js"></script>
+        <!-- selectize js -->
+        <script src="${pageContext.request.contextPath}/asset/js/selectize.min.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/jquery.nice-select.min.js"></script>
 
-    <script src="${pageContext.request.contextPath}/asset/js/owl.carousel.min.js"></script>
-    <script src="${pageContext.request.contextPath}/asset/js/counter.int.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/owl.carousel.min.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/counter.int.js"></script>
 
-    <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
-    <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-    <script src="${pageContext.request.contextPath}/asset/js/metro.min.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/metro.min.js"></script>
 
-    <script>
-                                    $(".job-display").slice(0, 30).show();
-                                    $(".smj").on("click", function () {
-                                        $(".job-display:hidden").slice(0, 5).slideDown();
-                                        if ($(".job-display:hidden").length == 0) {
-                                            $(".smj").fadeOut('slow');
-                                        }
-                                    });
-    </script>
-    <script>
-        function sortList(col, dir) {
-            $('#paintings').data('list').sorting(col, dir, true);
-        }
-    </script>
-</body>
+<%--        <script>
+                                        $(".job-display").slice(0, 30).show();
+                                        $(".smj").on("click", function () {
+                                            $(".job-display:hidden").slice(0, 5).slideDown();
+                                            if ($(".job-display:hidden").length == 0) {
+                                                $(".smj").fadeOut('slow');
+                                            }
+                                        });
+        </script> --%>
+        <script>
+            function sortList(col, dir) {
+                $('#paintings').data('list').sorting(col, dir, true);
+            }
+        </script>
+    </body>
 </html>

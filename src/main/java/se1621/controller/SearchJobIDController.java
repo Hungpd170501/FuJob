@@ -10,19 +10,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import se1621.dao.CategoryDAO;
 import se1621.dao.CompanyInfoDAO;
 import se1621.dao.JobDAO;
 import se1621.dao.JobSkillsDAO;
-import se1621.dao.SkillRequireDAO;
 import se1621.dao.UserDAO;
 import se1621.dto.Category;
 import se1621.dto.CompanyInfo;
 import se1621.dto.Job;
 import se1621.dto.JobSkills;
-import se1621.dto.SkillRequire;
 import se1621.dto.User;
 
 /**
