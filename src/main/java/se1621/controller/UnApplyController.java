@@ -12,7 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import se1621.dao.JobOrderDAO;
+import se1621.dao.JobApplicationDAO;
 
 /**
  *
@@ -30,7 +30,7 @@ public class UnApplyController extends HttpServlet {
         try {
             int jobOrderID = Integer.parseInt(request.getParameter("jobOrderID"));
             int userID = Integer.parseInt(request.getParameter("userID"));
-            JobOrderDAO jobOrderDAO = new JobOrderDAO();
+            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
             boolean check = jobOrderDAO.delete(jobOrderID);
             if(check){
                url = SUCCESS + userID;

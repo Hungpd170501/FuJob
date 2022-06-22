@@ -73,7 +73,6 @@ public class CreateResumeController extends HttpServlet {
                                           .linkedIn(linkedIn)
                                           .overview(overview)
                                           .build();
-
             StudentSkillDAO studentSkillDAO = new StudentSkillDAO();
             List<StudentSkill> listStudentSkill = new ArrayList<>();
             if(studentSkillDAO.checkStudentHaveSkill(studentID)) {

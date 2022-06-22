@@ -23,7 +23,7 @@ public class ResumeDAO {
     private static final String SEARCH = "SELECT resumeID, userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, major, gpa, website, gitHub, linkedIn, overview, createdDate, lastModifiedDate FROM tblResumes WHERE userID = ? and resumeStatus = 1";
     private static final String CREATERESUME = "INSERT INTO tblResumes( userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, major, gpa, website, gitHub, linkedIn, overview, createdDate, lastModifiedDate, resumeStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1)";
     private static final String CHECK_DUPLICATE = "SELECT resumeID FROM tblResumes WHERE userID=?";
-    private static final String UPDATERESUME = "UPDATE tblResumes SET avatar=?, fullName=?, gender=?, dateOfBirth=?, gmail=?, "      
+    private static final String UPDATERESUME = "UPDATE tblResumes SET avatar=?, fullName=?, gender=?, dateOfBirth=?, gmail=?, "
             + "phone=?, address=?, schoolName=?, major=?, gpa=?, experienceYear=?, "
             + "website=?, overview=? WHERE userID=?";
     Connection conn;

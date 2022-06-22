@@ -43,7 +43,8 @@ public class CheckCreateResumeController extends HttpServlet {
             } else {
                 Resume resume = Resume.builder().address("").avatar("").dateOfBirth(null)
                         .fullName("").gender("").gmail("").gpa("")
-                        .major("").overview("").phone("").website("").build();
+                        .major("").overview("").phone("").website("").gitHub("").linkedIn("")
+                        .build();
                 listResume.add(resume);
                 request.setAttribute("LIST_RESUME", listResume);
                 request.setAttribute("LIST_STUDENTSKILL", listStudentSkill);
