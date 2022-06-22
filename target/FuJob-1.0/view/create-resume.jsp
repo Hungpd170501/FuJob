@@ -55,7 +55,7 @@
                             <form action="/FuJob/MainController" method="POST">
                                 <label class="col-md-12">
                                     <input type="file" style="display: none" id="imageFile" name="avatar" > <p class="text-muted text-center">Upload Your Avatar</p>
-                                    <img style="cursor:  pointer" id="image"   src="<%= resume.getAvartar()%>" class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill" alt="" >
+                                    <img style="cursor:  pointer" id="image"   src="<%= resume.getAvatar()%>" class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill" alt="" >
                                 </label>
                                 <div class="row mt-4">
                                     <div class="col-md-4">

@@ -90,7 +90,6 @@
                                             <div class="candidates-list-desc overflow-hidden job-single-meta  pt-2">
                                                 <h5 class="mb-2"><a href="#" class="text-dark"><%= resume.getFullName()%></a></h5>
                                                 <ul class="list-unstyled">
-                                                    <li class="text-muted"><i class="mdi mdi-account mr-1"></i><%= resume.getExperienceYear()%></li>
                                                     <li class="text-muted"><i class="mdi mdi-map-marker mr-1"></i><%= resume.getGender()%></li>
                                                     <li class="text-muted"><i class="mdi mdi-currency-usd mr-1"></i> </li>
                                                 </ul>

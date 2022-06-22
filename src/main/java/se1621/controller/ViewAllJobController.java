@@ -10,13 +10,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import se1621.dao.JobDAO;
 import se1621.dao.JobSkillsDAO;
 import se1621.dto.Job;
 import se1621.dto.JobSkills;
-import se1621.dto.Skill;
 
 /**
  *
@@ -37,9 +36,15 @@ public class ViewAllJobController extends HttpServlet {
             JobDAO jobDAO = new JobDAO();
             List<Job>listJob = jobDAO.getListJob();
             JobSkillsDAO jsDAO = new JobSkillsDAO();
+            List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
             for (Job job : listJob) {
-                List<JobSkills> listJs = jsDAO.getSkillRequire(job.getJobID());
-                job.setListJobSkills(listJs);
+                List<JobSkills> ljk = new ArrayList<>();
+                for (JobSkills js : listJs) {
+                    if(job.getJobID() == js.getJobID()){
+                                ljk.add(js);
+                    }
+                    job.setListJobSkills(ljk);
+                }
             }
             if (!listJob.isEmpty()) {
                 request.setAttribute("LIST_ALLJOB", listJob);

@@ -3,6 +3,8 @@
     Created on : Jun 1, 2022, 7:52:12 AM
     Author     : HNGB
 --%>
+<%@page import="se1621.dao.JobApplicationDAO"%>
+<%@page import="se1621.dto.JobApplication"%>
 <%@page import="se1621.dao.ResumeDAO"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.time.LocalDate"%>
@@ -10,7 +12,6 @@
 <%@page import="se1621.dto.JobSkills"%>
 <%@page import="java.util.List"%>
 <%@page import="se1621.dto.SkillRequire"%>
-<%@page import="se1621.dao.JobOrderDAO"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="se1621.dto.User"%>
 <%@page import="se1621.dto.Job"%>
@@ -158,7 +159,7 @@
                         </div>
                         <%
                         } else if (loginUser != null && !StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
-                            JobOrderDAO jobOrderDAO = new JobOrderDAO();
+                            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
                             ResumeDAO resumeDAO = new ResumeDAO();
                             boolean checkDuplicateUserOrderJob = jobOrderDAO.checkDuplicateJobOrderByOneUser(resumeDAO.getResumeID(loginUser.getUserID()), job.getJobID());
                             if (checkDuplicateUserOrderJob) {

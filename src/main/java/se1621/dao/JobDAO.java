@@ -23,10 +23,9 @@ public class JobDAO {
 
     private static final String CREATEJOB = "INSERT INTO tblJobs(userID, jobTitle, jobCategoryID,"
             + " budget, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,1)";
-    private String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.address, j.budget, j.paymentMethodID, "
-            + "j.email, j.phone, j.description, j.createdDate, j.lastModifiedDate, j.expiriedDate, j.jobStatus, "
-            + "j.jobCategoryID, cate.categoryName, cate.img, js.skillID "
-            + "FROM ((tblJobs j left join tblJobSkills js on j.jobID = js.jobID) left join tblCategories cate on cate.categoryID = j.jobCategoryID) ";
+    private String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
+            + "j.jobCategoryID, c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate "
+            + "FROM (tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)";
     private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJobs WHERE jobID = (SELECT MAX(jobID) FROM tblJobs) and jobStatus = 1 and userID = ?";
     private static final String SEARCHBYJOBID = "SELECT * FROM tblJobs WHERE jobID = ? and jobStatus = 1";
 
@@ -308,6 +307,11 @@ public class JobDAO {
                 List<Job> listJob = new ArrayList<>();
                 String getDataSQL = "";
                 String getDataSQL1 = this.SEARCHALL_JOBTITLE_SKILL_CATEGORY;
+                String queryForSearchSkill = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
+                            + " j.jobCategoryID, c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, "
+                            + "j.paymentMethodID, j.budget, j.expiriedDate "
+                            + "FROM ((tblJobSkills js left join tblJobs j on j.jobID = js.jobID)) "
+                            + "left join tblCategories c on c.categoryID = j.jobCategoryID ";
                 boolean checkCateID = false;
                 boolean checkSkillID = false;
 
@@ -316,13 +320,13 @@ public class JobDAO {
                     checkCateID = true;
                     checkSkillID = true;
                 } else {
-                    getDataSQL = getDataSQL1 + " WHERE jobTitle like ? and skillID like ? and jobCategoryID = ? and jobStatus = 1";
+                    getDataSQL = queryForSearchSkill + "WHERE jobTitle like ? and skillID = ? and jobCategoryID = ? and jobStatus = 1";
                     if (searchJobCategoryID == 0) {
-                        getDataSQL = getDataSQL1 + " WHERE jobTitle like ? and skillID like ? and jobStatus = 1";
+                        getDataSQL = queryForSearchSkill + " WHERE jobTitle like ? and skillID = ? and jobStatus = 1";
                         checkCateID = true;
                     }
                     if (searchSkillID == 0) {
-                        getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobCategoryID like ? and jobStatus = 1";
+                        getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobCategoryID = ? and jobStatus = 1";
                         checkSkillID = true;
                     }
                 }
@@ -362,7 +366,7 @@ public class JobDAO {
                     Date createdDate = rs.getDate("createdDate");
                     Date lastModifiedDate = rs.getDate("lastModifiedDate");
                     Date expiriedDate = rs.getDate("expiriedDate");
-                    int jobStatus = rs.getInt("jobStatus");
+                    int jobStatus = 1;
 
                     Category category = Category.builder().categoryID(jobCategoryID).categoryName(categoryName).img(img).build();
                     listJob.add(Job.builder()

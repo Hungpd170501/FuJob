@@ -20,7 +20,7 @@
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
         <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
         <jsp:useBean id="totalJobPost" class="se1621.dao.JobDAO" scope="request"></jsp:useBean>
-        <jsp:useBean id="totalJobOrder" class="se1621.dao.JobOrderDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="totalJobOrder" class="se1621.dao.JobApplicationDAO" scope="request"></jsp:useBean>
         <jsp:useBean id="totalUserNonAD" class="se1621.dao.UserDAO" scope="request"></jsp:useBean>
         <jsp:useBean id="RecentJob" class="se1621.dao.JobDAO" scope="request"></jsp:useBean>
 
