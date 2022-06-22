@@ -50,6 +50,7 @@
                                                 <div class="form-group app-label mt-2">
                                                     <label>Project Name<span class="text-danger">*</span></label>
                                                     <input id="jobtitle" name="jobtitle" type="text" class="form-control resume" required="" placeholder="Enter your project name">
+
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -65,13 +66,11 @@
                                             </div>
                                         </div>
 
-
-
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
                                                 <label>Skill Required<span class="text-danger">*</span></label> 
                                                 <div class="form-button p-1">
-                                                    <select class="form-control resume select2 select2-hidden-accessible" name="skillID" multiple="" data-placeholder="Select skill" style="width: 100%; border-color: #dee2e6;" tabindex="-1" aria-hidden="true">
+                                                    <select class="form-control resume select2 select2-hidden-accessible" name="skillID" multiple="" data-placeholder="Select skill" style="width: 100%; border-color: #dee2e6" tabindex="-1" aria-hidden="true">
                                                         <c:forEach items="${chooseSkill.listSkill}" var="i">
                                                             <option value="${i.skillID}">${i.skillName}</option>
                                                         </c:forEach>
@@ -102,13 +101,6 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
-                                                <label>Address<span class="text-danger">*</span></label>
-                                                <input id="address" name="address" type="text" class="form-control resume" required="" placeholder="District 9, Ho Chi Minh City">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group app-label mt-2">
                                                 <label>Email<span class="text-danger">*</span></label>
                                                 <input id="email" name="email" type="tel" class="form-control resume" required="" placeholder="abc@gmail.com">
                                             </div>
@@ -119,6 +111,20 @@
                                                 <label>Phone<span class="text-danger">*</span></label>
                                                 <input onchange="checkNumber()" id="phone" name="phone" type="tel" class="form-control resume" required="" placeholder="0123456789">
                                                 <p id="errorPhone" class="text-danger"><p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group app-label mt-2">
+                                                <label>Expiry date<span class="text-danger">*</span></label>
+                                                <input id="expiriedDate" name="expiriedDate" type="date" class="form-control resume" required="" placeholder="dd/mm/yyyy">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <div class="form-group app-label mt-2">
+                                                <label>Address<span class="text-danger">*</span></label>
+                                                <input id="address" name="address" type="text" class="form-control resume" required="" placeholder="District 9, Ho Chi Minh City">
                                             </div>
                                         </div>
 

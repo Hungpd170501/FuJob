@@ -32,7 +32,7 @@ public class SearchJobTitle_Exper_CateController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String searchTitle = request.getParameter("searchtitle");
+            String searchTitle = request.getParameter("searchTitle");
             int searchSkill = 0;
             String searchSkillString = request.getParameter("searchSkill");
             if(!searchSkillString.isBlank()){

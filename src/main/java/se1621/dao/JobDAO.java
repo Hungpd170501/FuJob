@@ -22,16 +22,19 @@ import se1621.dto.Job;
 public class JobDAO {
 
     private static final String CREATEJOB = "INSERT INTO tblJobs(userID, jobTitle, jobCategoryID,"
-            + " budget, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,1)";
+            + "budget, paymentMethodID, expiriedDate, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?s,1)";
     private String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
             + "j.jobCategoryID, c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate "
             + "FROM (tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)";
+
     private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJobs WHERE jobID = (SELECT MAX(jobID) FROM tblJobs) and jobStatus = 1 and userID = ?";
     private static final String SEARCHBYJOBID = "SELECT * FROM tblJobs WHERE jobID = ? and jobStatus = 1";
 
     private static final String VIEWALLJOB = "SELECT j.jobID, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate"
-            + "            FROM (tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)"
-            + "            WHERE j.jobStatus = 1 ORDER BY createdDate DESC";
+            + "            FROM (((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) left join tblUsers u on j.userID = u.userID)"
+            + "            left join tblCompanies com on u.companyID = com.companyID)"
+            + "            WHERE j.jobStatus = 1 ORDER BY j.jobID DESC";
+
 
     private static final String VIEWHRJOB = "SELECT j.jobID, j.jobTitle, j.lastDateUpdate, j.address, c.categoryName, c.img, j.ExperienceNeeded "
             + "FROM (((tblJob j left join tblCategory c on j.jobCategoryID = c.categoryID) left join tblUser u on j.userID = u.userID) "
@@ -130,7 +133,6 @@ public class JobDAO {
         boolean check = false;
         conn = null;
         preStm = null;
-
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
@@ -139,11 +141,12 @@ public class JobDAO {
                 preStm.setString(2, job.getJobTitle());
                 preStm.setInt(3, job.getCategory().getCategoryID());
                 preStm.setInt(4, job.getBudget());
-                preStm.setString(6, job.getAddress());
-                preStm.setString(7, job.getEmail());
-                preStm.setString(8, job.getPhone());
-                preStm.setString(9, job.getDescription());
-
+                preStm.setInt(5, job.getPaymentMethodID());
+                preStm.setDate(6, job.getExpiriedDate());
+                preStm.setString(7, job.getAddress());
+                preStm.setString(8, job.getEmail());
+                preStm.setString(9, job.getPhone());
+                preStm.setString(10, job.getDescription());
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
