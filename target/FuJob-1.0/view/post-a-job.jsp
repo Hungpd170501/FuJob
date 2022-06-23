@@ -49,13 +49,14 @@
                                             <div class="col-md-12">
                                                 <div class="form-group app-label mt-2">
                                                     <label>Project Name<span class="text-danger">*</span></label>
-                                                    <input id="jobtitle" name="jobtitle" type="text" class="form-control resume" required="" placeholder="">
+                                                    <input id="jobtitle" name="jobtitle" type="text" class="form-control resume" required="" placeholder="Enter your project name">
+
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group app-label mt-2">
-                                                    <label>Project Category</label>
-                                                    <div class="form-button">
+                                                    <label>Project Category</label><span class="text-danger">*</span>
+                                                    <div class="form-button p-1">
                                                         <select class="form-control resume" name="categoryID" required="">
                                                         <c:forEach items="${chooseCategory.listCategory}" var="i">
                                                             <option value="${i.categoryID}">${i.categoryName}</option>
@@ -65,12 +66,10 @@
                                             </div>
                                         </div>
 
-
-
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
                                                 <label>Skill Required<span class="text-danger">*</span></label> 
-                                                <div class="form-button">
+                                                <div class="form-button p-1">
                                                     <select class="form-control resume select2 select2-hidden-accessible" name="skillID" multiple="" data-placeholder="Select skill" style="width: 100%; border-color: #dee2e6" tabindex="-1" aria-hidden="true">
                                                         <c:forEach items="${chooseSkill.listSkill}" var="i">
                                                             <option value="${i.skillID}">${i.skillName}</option>
@@ -83,24 +82,20 @@
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
                                                 <label>How do you want to pay?<span class="text-danger">*</span></label>
-                                                <div class="row">
-                                                    <div class="col-lg-7 p-1">
+                                                <div class="row form-button">
+                                                    <div class="col-lg-7 p-1 col-md-6">
                                                         <select class="form-control resume">
                                                             <option value="Pay by the hour">Pay by the hour</option>
                                                             <option value="Pay fixed price">Pay fixed price</option>
                                                         </select>
                                                     </div>
-                                                    <div class="col-lg-5 p-1" >
-                                                        <input id="salary" name="salary" type="text" class="form-control resume" required="" placeholder="100$">
+                                                    <div class="col-lg-4 p-1 col-md-5" >
+                                                        <input id="salary" name="salary" type="text" class="form-control resume" required="" placeholder="100">
+                                                    </div>
+                                                    <div class="col-lg-1 p-2 col-md-1">
+                                                        <h5>$</h5>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group app-label mt-2">
-                                                <label>Address<span class="text-danger">*</span></label>
-                                                <input id="address" name="address" type="text" class="form-control resume" required="" placeholder="District 9, Ho Chi Minh City">
                                             </div>
                                         </div>
 
@@ -114,7 +109,22 @@
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
                                                 <label>Phone<span class="text-danger">*</span></label>
-                                                <input id="phone" name="phone" type="tel" class="form-control resume" required="" placeholder="0123456789">
+                                                <input onchange="checkNumber()" id="phone" name="phone" type="tel" class="form-control resume" required="" placeholder="0123456789">
+                                                <p id="errorPhone" class="text-danger"><p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group app-label mt-2">
+                                                <label>Expiry date<span class="text-danger">*</span></label>
+                                                <input id="expiriedDate" name="expiriedDate" type="date" class="form-control resume" required="" placeholder="dd/mm/yyyy">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <div class="form-group app-label mt-2">
+                                                <label>Address<span class="text-danger">*</span></label>
+                                                <input id="address" name="address" type="text" class="form-control resume" required="" placeholder="District 9, Ho Chi Minh City">
                                             </div>
                                         </div>
 
@@ -160,11 +170,21 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
         <script>
-            $(document).ready(function () {
-                $('.select2').select2({
-                    closeOnSelect: false
-                });
-            });
+                                                    $(document).ready(function () {
+                                                        $('.select2').select2({
+                                                            closeOnSelect: false
+                                                        });
+                                                    });
+
+                                                    function checkNumber() {
+                                                        var phoneNumber = document.getElementById('phone').value;
+                                                        if (isNaN(phoneNumber)) {
+                                                            $('#errorPhone').text('Phone number is is invalid!');
+                                                            phoneNumber = null;
+                                                        } else {
+                                                            $('#errorPhone').text('');
+                                                        }
+                                                    }
         </script>
 
     </body>

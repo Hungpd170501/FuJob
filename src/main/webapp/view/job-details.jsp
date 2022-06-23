@@ -3,13 +3,18 @@
     Created on : Jun 1, 2022, 7:52:12 AM
     Author     : HNGB
 --%>
+<%@page import="se1621.dao.JobApplicationDAO"%>
+<%@page import="se1621.dto.JobApplication"%>
 <%@page import="se1621.dao.ResumeDAO"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.sql.Date"%>
 <%@page import="se1621.dto.JobSkills"%>
 <%@page import="java.util.List"%>
+<<<<<<< HEAD
 <%@page import="se1621.dto.SkillRequire"%>
+=======
+>>>>>>> 77c31e9c64ea4e7f0e78aba40360d77810a0aa81
 <%@page import="se1621.dao.JobApplicationDAO"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="se1621.dto.User"%>

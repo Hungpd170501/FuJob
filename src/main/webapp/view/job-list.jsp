@@ -53,47 +53,45 @@
 
                                 <!-- START SEARCH -->
                                 <form class="registration-form" action="${pageContext.request.contextPath}/MainController">
-                                <!--                                <form class="registration-form">-->
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="registration-form-box">
-                                            <i class="fa fa-briefcase"></i>
-                                            <input type="text" name="searchtitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="registration-form-box">
-                                            <i class="fa fa-archive"></i>
-                                            <select class="demo-default" id="select-category" name="searchExper">
-                                                <!--                                                <select class="demo-default" id="select-category" required="">-->
-                                                <option value="">Skill</option>
-                                                <c:forEach items="${chooseSkill.listSkill}" var="i">
-                                                    <option value="${i.skillID}">${i.skillName}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="registration-form-box">
-                                            <i class="fa fa-list-alt"></i>
-                                            <select id="select-category" class="demo-default" name="searchCate">
-                                                <!--<select id="select-category" class="demo-default">-->
-                                                <option value="">Categories...</option>
-                                                <c:forEach items="${chooseCategory.listCategory}" var="i">
-                                                    <option value="${i.categoryID}">${i.categoryName}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="registration-form-box">
-                                            <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Submit">
-                                            <!-- name = action  -->
-                                            <input type="hidden" name ="action" value="Search_title_exper_cate">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                                            <!--<form class="registration-form">-->
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-6">
+                                                    <div class="registration-form-box">
+                                                        <i class="fa fa-briefcase"></i>
+                                                        <input type="text" name="searchTitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-6">
+                                                    <div class="registration-form-box">
+                                                        <i class="fa fa-archive"></i>
+                                                        <select class="demo-default" id="select-category" name="searchSkill">
+                                                            <option value="">Skill</option>
+                                                            <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                                <option value="${i.skillID}">${i.skillName}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-6">
+                                                    <div class="registration-form-box">
+                                                        <i class="fa fa-list-alt"></i>
+                                                        <select id="select-category" class="demo-default" name="searchCate">
+                                                            <option value="">Categories...</option>
+                                                            <c:forEach items="${chooseCategory.listCategory}" var="i">
+                                                                <option value="${i.categoryID}">${i.categoryName}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-6">
+                                                    <div class="registration-form-box">
+                                                        <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Find">
+                                                        <!-- name = action  -->
+                                                        <input type="hidden" name ="action" value="Search_title_exper_cate">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
                             <!-- END SEARCH -->
                         </div>
                     </div>
@@ -112,45 +110,64 @@
                         </div>
                     </div>
                 </div>
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <div class="show-results">
+                            <div class="float-left">
+                                <h5 class="text-dark mb-0 pt-2 f-18">Showing projects</h5>
+                            </div>
+                            <div class="registration-form-box float-right">
+                                <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-name', 'asc')"> Sort projects name </button>
+                                <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-price', 'asc')"> Lowest budget first </button>
+                                <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-price', 'desc')"> Highest budget first </button>
+                                <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-id', 'desc')"> Newest </button>
+                            </div>
 
-                <div class="row">
-                    <div class="col-lg-12 mt-4 pt-2">
-                        <div class="row align-items-center">
-                            <div class="col-lg-12">
-                                <div class="show-results">
-                                    <div class="float-left">
-                                        <h5 class="text-dark mb-0 pt-2 f-18">Showing result</h5>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                        <!-- them display -->
-                        <div class="row" > 
-                            <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_ALLJOB");
-                                if (listJob.isEmpty()) {
-                                    String message = (String) request.getAttribute("MESSAGE");
-                            %>
-                            <div class="col-lg-12 text-warning text-center">
-                                <h3> <%=message%> </h3>
-                            </div>
-                            <%
-                                }
-                                if (listJob != null) {
-                                    if (listJob.size() > 0) {
-                                        for (Job job : listJob) {
-                            %>
-                            <div class="job-display col-lg-12 mt-4 pt-1" style="display: none">
+                    </div>
+                </div>
+                <!-- them display -->
+                <div class="row">
+                    <ul  id="paintings"
+                         data-role="list"
+                         data-sort-class="painting"
+                         data-sort-dir="desc"
+                         data-cls-list="unstyled-list row flex-justify-center mt-4"
+                         data-cls-list-item="cell-sm-6 cell-md-4"
+                         data-filter-class="painting-author"
+                         data-show-pagination="true"
+                         data-items="10"
+                         data-items-steps="all, 3, 10"
+                         
+                         data-show-list-info="true"
+                         >
+
+                        <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_ALLJOB");
+                            if (listJob.isEmpty()) {
+                                String message = (String) request.getAttribute("MESSAGE");
+                        %>
+                        <div class="col-lg-12 text-warning text-center">
+                            <h3> <%=message%> </h3>
+                        </div>
+                        <%
+                            }
+                            if (listJob != null) {
+                                if (listJob.size() > 0) {
+                                    for (Job job : listJob) {
+                        %>
+                        <li style="list-style: none"> 
+                            <div class="job-display col-lg-12 mt-4 pt-1">
                                 <div class="job-list-box border rounded" >
-                                    <div class="p-3">
+                                    <div class="p-3" style="width: 1098px; height: 298.4px">
                                         <div class="row align-items-center">
                                             <div class="col-lg-3">
                                                 <div class="company-logo-img">
-                                                    <img loading="lazy" src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:250px;height:250px">
+                                                    <img loading="lazy" src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:250px;height:266px">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-9">
                                                 <div class="job-list-desc">
-                                                    <h4 class="mb-1" style="font-weight: 700"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h4>
+                                                    <h4 class="painting-name mb-1" style="font-weight: 700"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h4>
                                                         <%
                                                             Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
                                                             long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
@@ -177,7 +194,6 @@
                                                     </h6>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
-
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -188,12 +204,14 @@
                                                         <p class=" mb-5"><i class="mr-2"></i>5 bids</p>
                                                     </div>
                                                     <div>
-                                                        <h5 class=" mb-5"><i class="mr-2"></i> <%= job.getBudget()%>$ <% if (job.getPaymentMethodID() == 2) {
+                                                        <h5 class="painting-id" data-format="money" style="display: none"> <%= job.getJobID()%> </h5>
+                                                        <h5 class="painting-price mb-5" data-format="money">  <i class="mr-2"></i> <%= job.getBudget()%>$ <% if (job.getPaymentMethodID() == 2) {
                                                             %>
                                                             / hour
                                                             <%
                                                                 }
-                                                            %> </h5>
+                                                            %> 
+                                                        </h5>
                                                     </div>
                                                     <div class="mt-3">
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
@@ -204,25 +222,25 @@
                                     </div>
                                 </div>
                             </div>
-                            <%
-
-                                        }
+                        </li>
+                        <%
 
                                     }
-                                }
 
-                            %>
-
-                            <%                                if (listJob.size() > 10) {
-                            %>
-                            <div class="smj col-12 text-center mt-4 pt-2">
-                                <a class="btn btn-primary-outline">Show more</a>
-                            </div>
-                            <%
                                 }
-                            %>
-                        </div>
-                    </div>
+                            }
+
+                        %>
+
+                        <%                                if (listJob.size() > 10) {
+                        %>
+                        <!--    <div class="smj col-12 text-center mt-4 pt-2">
+                            <a class="btn btn-primary-outline">Show more</a>
+                        </div> --> 
+                        <%
+                            }
+                        %>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -247,15 +265,21 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/metro.min.js"></script>
+
+        <%--        <script>
+                                                $(".job-display").slice(0, 30).show();
+                                                $(".smj").on("click", function () {
+                                                    $(".job-display:hidden").slice(0, 5).slideDown();
+                                                    if ($(".job-display:hidden").length == 0) {
+                                                        $(".smj").fadeOut('slow');
+                                                    }
+                                                });
+                </script> --%>
         <script>
-            $(".job-display").slice(0, 10).show();
-            $(".smj").on("click", function () {
-                $(".job-display:hidden").slice(0, 5).slideDown();
-                if ($(".job-display:hidden").length == 0) {
-                    $(".smj").fadeOut('slow');
-                }
-            });
+                                    function sortList(col, dir) {
+                                        $('#paintings').data('list').sorting(col, dir, true);
+                                    }
         </script>
     </body>
 </html>

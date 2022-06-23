@@ -173,7 +173,7 @@
                     <ul class="submenu">
                         <li><a href="${pageContext.request.contextPath}/view/create-companyinfo.jsp">Edit your company info</a></li>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=SearchCompanyID&searchCompanyID=${sessionScope.LOGIN_USER.companyID}">View your company info</a></li>
-                        <li><a href="#">Your human resource </a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ViewAllHR&companyID=${sessionScope.LOGIN_USER.companyID}">Your human resource </a></li>
                     </ul>
                 </li>
                 <%

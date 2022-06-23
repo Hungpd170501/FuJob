@@ -20,8 +20,11 @@ import se1621.utils.DBUtils;
  */
 public class JobSkillsDAO {
     private static final String CREATEOBSKILLS= "INSERT INTO tblJobSkills (jobID, skillID) VALUES (?, ?)";
-    private static final String GETJOBSKILLS = "SELECT jk.jobSkillID, jk.jobID, jk.skillID, skill.skillName FROM (tblJobSkills jk left join tblSkills skill on jk.SkillID = skill.skillID)"
+    private static final String GET_JOBSKILLS_FOR_ONE_JOB = "SELECT jk.jobSkillID, jk.jobID, jk.skillID, skill.skillName FROM (tblJobSkills jk left join tblSkills skill on jk.SkillID = skill.skillID)"
             +"WHERE jk.jobID = ?";
+    private static final String GET_JOBSKILLS_FOR_ALLJOB = "SELECT jk.jobSkillID, jk.jobID, jk.skillID, skill.skillName " +
+    "FROM (tblJobSkills jk left join tblSkills skill on jk.SkillID = skill.skillID) " +
+    "WHERE jk.jobID IN  (SELECT jobID FROM tblJobs WHERE jobStatus = 1)";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -58,11 +61,44 @@ public class JobSkillsDAO {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
-                preStm = conn.prepareStatement(GETJOBSKILLS);
+                preStm = conn.prepareStatement(GET_JOBSKILLS_FOR_ONE_JOB);
                 preStm.setInt(1, jobID);
                 rs = preStm.executeQuery();
                 while (rs.next()) {
                     int jobSkillID = rs.getInt("jobSkillID");
+                    int skillID = rs.getInt("skillID");
+                    String skillName = rs.getString("skillName");
+                    Skill skill = Skill.builder().skillID(skillID).skillName(skillName).build();
+                    listJobSkills.add(JobSkills.builder().jobSkillID(jobSkillID).jobID(jobID).skill(skill).build());
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listJobSkills;
+    }
+    
+    public List<JobSkills> getJobSkillForAllJob() throws SQLException {
+        List<JobSkills> listJobSkills = new ArrayList<>();
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GET_JOBSKILLS_FOR_ALLJOB);
+                rs = preStm.executeQuery();
+                while (rs.next()) {
+                    int jobSkillID = rs.getInt("jobSkillID");
+                    int jobID = rs.getInt("jobID");
                     int skillID = rs.getInt("skillID");
                     String skillName = rs.getString("skillName");
                     Skill skill = Skill.builder().skillID(skillID).skillName(skillName).build();
