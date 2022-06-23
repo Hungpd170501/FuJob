@@ -1,6 +1,8 @@
 se1621\dto\Resume.class
+se1621\dao\ResumeSkillDAO.class
 se1621\controller\SearchResumeIDController.class
 se1621\controller\CreateResumeController.class
+se1621\dto\ResumeSkill$ResumeSkillBuilder.class
 se1621\controller\SearchJobIDController.class
 se1621\utils\EmailUtils.class
 se1621\dao\CategoryDAO.class
@@ -15,7 +17,6 @@ se1621\dto\Resume$ResumeBuilder.class
 se1621\dao\CompanyInfoDAO.class
 se1621\controller\UnApplyController.class
 se1621\utils\JwtTokenUtils.class
-se1621\dto\StudentSkill.class
 se1621\controller\PostJobController.class
 se1621\dto\JobSkills.class
 se1621\dto\SkillRequire.class
@@ -32,6 +33,7 @@ se1621\dao\JobApplicationDAO.class
 se1621\controller\CreateCompanyInfoController.class
 se1621\utils\Helper.class
 se1621\dao\AuthDAO.class
+se1621\dto\ResumeSkill.class
 se1621\dto\CompanyInfo$CompanyInfoBuilder.class
 se1621\service\EmailServiceIml.class
 se1621\dto\PayMentMethod$PayMentMethodBuilder.class
@@ -40,7 +42,6 @@ se1621\dto\Category$CategoryBuilder.class
 se1621\dto\User.class
 se1621\controller\SearchInJobOrderController.class
 se1621\dao\ResumeDAO.class
-se1621\dao\StudentSkillDAO.class
 se1621\dto\UserGoogle.class
 se1621\dao\UserDAO.class
 se1621\controller\ViewAllJobController.class
@@ -48,7 +49,6 @@ se1621\controller\ChangePasswordController.class
 se1621\service\EmailService.class
 se1621\controller\SearchInJobPostedController.class
 se1621\controller\RecoveryPasswordController.class
-se1621\dto\StudentSkill$StudentSkillBuilder.class
 se1621\utils\GoogleRacaptcha.class
 se1621\dto\JobApplication.class
 se1621\controller\ViewAllJobOrderController.class

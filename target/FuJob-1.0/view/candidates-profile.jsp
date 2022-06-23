@@ -1,4 +1,4 @@
-<%@page import="se1621.dto.StudentSkill"%>
+<%@page import="se1621.dto.ResumeSkill"%>
 <%@page import="se1621.dto.Resume"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,14 +14,6 @@
     <body>
         <jsp:include     page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
-
-
-        <%
-            String search = request.getParameter("searchResumeID");
-            if (search == null) {
-                search = " ";
-            }
-        %>
 
         <%
             List<Resume> listResume = (List<Resume>) request.getAttribute("LIST_RESUME");
@@ -141,7 +133,7 @@
                                     <div class="profile-education-icon border rounded-pill bg-white text-primary">
                                         <i class="mdi mdi-36px mdi-school"></i>
                                     </div>
-                                    <h6 class="text-uppercase f-17 text-muted font-weight-bold " style="letter-spacing: 5px"> <%= resume.getSchoolName()%> </p></h6>
+                                    <h6 class="text-uppercase f-17 text-muted font-weight-bold " style="letter-spacing: 5px"> FPT UNIVERSITY</p</h6>
                                     <p class="border-top"></p>
                                     <p class="f-14 mb-1"> <%= resume.getMajor()%> </p>
                                     <p class="pb-3 mb-0"> GPA: <%= resume.getGpa()%> </p>                               
@@ -165,7 +157,7 @@
                                     </div>
                                     <p class="pb-3 mb-0">Skills:
                                         <%
-                                            List<StudentSkill> listStudentSkill = (List<StudentSkill>) request.getAttribute("LIST_STUDENTSKILL");
+                                            List<ResumeSkill> listStudentSkill = (List<ResumeSkill>) request.getAttribute("LIST_STUDENTSKILL");
                                             for(int i = 0; i< listStudentSkill.size()-1; i++){ 
                                         %>
                                         <%= listStudentSkill.get(i).getSkill().getSkillName()%>,
