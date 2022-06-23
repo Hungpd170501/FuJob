@@ -61,6 +61,14 @@ public class MainController extends HttpServlet {
     private static final String SEARCHJOBPOSTED_CONTROLLER = "SearchInJobPostedController";
     private static final String SEARCHJOBORDER = "SearchJobOrder";
     private static final String SEARCHJOBORDER_CONTROLLER = "SearchInJobOrderController";
+    private static final String CHECKCREATERESUME = "CheckCreateResume";
+    private static final String CHECKCREATERESUME_CONTROLLER = "CheckCreateResumeController";
+    private static final String DELETEJOBPOST = "DeleteJobPost";
+    private static final String DELETEJOBPOST_CONTROLLER = "DeleteJobPostController";
+    private static final String VIEWALLHR = "ViewAllHR";
+    private static final String VIEWALLHR_CONTROLLER = "ViewAllHRController";
+    private static final String UPDATESTATUSHR = "UpdateStatusHR";
+    private static final String UPDATESTATUSHR_CONTROLLER = "UpdateStatusHRController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -78,10 +86,10 @@ public class MainController extends HttpServlet {
                 url = LOGOUT_CONTROLLER;
             } else if (CHANGE_PASSWORD.equals(action)) {
                 url = CHANGE_PASSWORD_CONTROLLER;
-            }else if (VIEWALLJOB.equals(action)) {
+            } else if (VIEWALLJOB.equals(action)) {
                 url = VIEWALLJOB_CONTROLLER;
             } else if (SEARCHJOBTITLE_EXPER_CATE.equals(action)) {
-                url = SEARCHJOBTITLE_EXPER_CATE_CONTROLLER;  
+                url = SEARCHJOBTITLE_EXPER_CATE_CONTROLLER;
             } else if (SEARCH_COMPANYID.equals(action)) {
                 url = SEARCH_COMPANYID_CONTROLLER;
             } else if (SEARCH_RESUMEID.equals(action)) {
@@ -93,7 +101,7 @@ public class MainController extends HttpServlet {
             } else if (CREATERESUME.equals(action)) {
                 url = CREATERESUME_CONTROLLER;
             } else if (POSTJOB.equals(action)) {
-                url = POSTJOB_CONTROLLER;       
+                url = POSTJOB_CONTROLLER;
             } else if (LISTJOBBYID.equals(action)) {
                 url = LISTJOBBYID_CONTROLLER;
             } else if (SEARCH_JOBID.equals(action)) {
@@ -116,6 +124,14 @@ public class MainController extends HttpServlet {
                 url = SEARCHJOBPOSTED_CONTROLLER;
             } else if (SEARCHJOBORDER.equals(action)) {
                 url = SEARCHJOBORDER_CONTROLLER;
+            } else if (CHECKCREATERESUME.equals(action)) {
+                url = CHECKCREATERESUME_CONTROLLER;    
+            } else if (DELETEJOBPOST.equals(action)) {
+                url = DELETEJOBPOST_CONTROLLER;
+            } else if (VIEWALLHR.equals(action)) {
+                url = VIEWALLHR_CONTROLLER;
+            } else if (UPDATESTATUSHR.equals(action)) {
+                url = UPDATESTATUSHR_CONTROLLER;    
             } else {
                 url = ERROR;
             }

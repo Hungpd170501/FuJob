@@ -155,14 +155,14 @@ public class JwtTokenUtils {
         return refreshedToken;
     }
 
-    public Boolean validateToken(String token, User userDetails) {
-        final String username = getUsernameFromToken(token);
-        final Date created = getCreatedDateFromToken(token);
-        final Date expiration = getExpirationDateFromToken(token);
-        return (username.equals(userDetails.getUsername())
-                && !isTokenExpired(token)
-                && StringUtils.equals(userDetails.getPassword(), token));
-    }
+//    public Boolean validateToken(String token, User userDetails) {
+//        final String username = getUsernameFromToken(token);
+//        final Date created = getCreatedDateFromToken(token);
+//        final Date expiration = getExpirationDateFromToken(token);
+//        return (username.equals(userDetails.getUsername())
+//                && !isTokenExpired(token)
+//                && StringUtils.equals(userDetails.getPassword(), token));
+//    }
 
     public Boolean canParseToken(final String compactToken) {
         Boolean check = true;
@@ -175,10 +175,4 @@ public class JwtTokenUtils {
         }
         return check;
     }
-//    public static void main(String[] args) {
-//        JwtTokenUtils jwtTokenUtils= new JwtTokenUtils();
-//        User user=new User(0, CLAIM_KEY_USERNAME, CLAIM_KEY_PASSWORD, CLAIM_KEY_USERNAME, CLAIM_KEY_USERNAME, CLAIM_KEY_CREATED, 0, new Role(CLAIM_KEY_CREATED, CLAIM_KEY_USERNAME));
-//        jwtTokenUtils.generateToken(user);
-//        System.out.println(jwtTokenUtils.generateToken(user));
-//    }
 }

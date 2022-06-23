@@ -26,6 +26,7 @@ public class LoginController extends HttpServlet {
     private static final String AD = "AD";
     private static final String US = "US";
     private static final String HR = "HR";
+    private static final String HRM = "HRM";
     private static final String USER_PAGE = "/view/index.jsp";
     private static final String ADMIN_PAGE = "/AdminIndexController";
 
@@ -42,7 +43,7 @@ public class LoginController extends HttpServlet {
             if (loginUser != null && helper.checkPass(password, loginUser.getPassword())) {
                 HttpSession session = request.getSession();
                 session.setAttribute("LOGIN_USER", loginUser);
-                switch (loginUser.getStatus()) {
+                switch (loginUser.getUserStatus()) {
                     case 0:
                         request.setAttribute("LOGIN_MESSAGE", "Your account has been deactivated. Please contact to FuJob Support to reactivate it!!");
                         break;
@@ -59,6 +60,9 @@ public class LoginController extends HttpServlet {
                                 break;
                             case AD:
                                 url = ADMIN_PAGE;
+                                break;
+                            case HRM:
+                                url = USER_PAGE;
                                 break;
                             default:
                                 request.setAttribute("LOGIN_MESSAGE", "Your role is not supported!");

@@ -5,7 +5,7 @@
 package se1621.dao.v2;
 
 import java.util.List;
-import se1621.model.CategoryEntity;
+import se1621.entity.CategoryEntity;
 
 /**
  *

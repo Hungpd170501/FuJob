@@ -6,27 +6,27 @@ package se1621.dao.v2;
 
 import java.io.Serializable;
 import java.util.List;
+import org.hibernate.Session;
 
-import se1621.utils.HibernateDriver;
+import se1621.utils.HibernateUtils;
 
-/**
- * @author ACER
- */
 public class BaseDAOImpl implements BaseDAO {
 
-    HibernateDriver hibernateDriver = new HibernateDriver();
+    private Session session;
 
     @Override
     public <T> void saveEntity(T entity) {
-        hibernateDriver.getSession();
+        session = HibernateUtils.getSession();
         try {
-            hibernateDriver.openSession();
-            hibernateDriver.getSession().save(entity);
-            hibernateDriver.getTransaction().commit();
+            session.beginTransaction();
+            session.save(entity);
+            session.getTransaction().commit();
         } catch (RuntimeException e) {
-            hibernateDriver.roleBack();
+            if (null != session.getTransaction()) {
+                session.getTransaction().rollback();
+            }
         } finally {
-            hibernateDriver.closeSession();
+            HibernateUtils.closeSession();
         }
     }
 
@@ -42,22 +42,26 @@ public class BaseDAOImpl implements BaseDAO {
 
     @Override
     public <T> void updateEntity(T entity) {
-        hibernateDriver.getSession();
+        session = HibernateUtils.getSession();
         try {
-            hibernateDriver.openSession();
-            hibernateDriver.getSession().update(entity);
-            hibernateDriver.getTransaction().commit();
+            session.beginTransaction();
+            session.update(entity);
+            session.getTransaction().commit();
+
         } catch (RuntimeException e) {
-            hibernateDriver.roleBack();
+            session.getTransaction().rollback();
         } finally {
-            hibernateDriver.closeSession();
+            HibernateUtils.closeSession();
         }
     }
 
     @Override
     public <T> List<T> getAllEntity(String entityName) {
-        List<T> list = hibernateDriver.getSession().createQuery("FROM " + entityName).list();
-        hibernateDriver.closeSession();
+        session = HibernateUtils.getSession();
+        List<T> list = session
+                .createQuery("FROM " + entityName)
+                .list();
+        HibernateUtils.closeSession();
         return list;
     }
 

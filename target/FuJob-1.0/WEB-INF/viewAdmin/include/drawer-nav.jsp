@@ -18,7 +18,7 @@
                 </li>
                 <li class="sidebar-menu-item" data-title="Dashboards" data-placement="right"
                     data-boundary="window">
-                    <a class="sidebar-menu-button" href="/MainController?action=AdminIndex"
+                    <a class="sidebar-menu-button" href="${pageContext.request.contextPath}/MainController?action=AdminIndex"
                        aria-controls="sm_dashboards"
                        aria-selected="true">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dashboard</i>

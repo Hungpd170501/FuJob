@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package se1621.dto;
 
+import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,8 +15,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class Category {
-
     public int categoryID;
     public String categoryName;
     public String img;
+    public Date createdDate;
+    public Date lastModifiedDate;
+    public int categoryStatus;
+    
 }

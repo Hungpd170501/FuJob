@@ -19,7 +19,7 @@ import se1621.utils.DBUtils;
  */
 public class SkillDAO {
 
-    private static final String GETLISTSKILL = "SELECT skillID, skillName FROM tblSkill ORDER BY skillName";
+    private static final String GETLISTSKILL = "SELECT skillID, skillName FROM tblSkills ORDER BY skillName";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;

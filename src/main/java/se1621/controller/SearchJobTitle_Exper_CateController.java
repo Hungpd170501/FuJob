@@ -10,16 +10,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
-import se1621.dao.CategoryDAO;
-import se1621.dao.CompanyInfoDAO;
 import se1621.dao.JobDAO;
-import se1621.dao.UserDAO;
-import se1621.dto.Category;
-import se1621.dto.CompanyInfo;
+import se1621.dao.JobSkillsDAO;
 import se1621.dto.Job;
-import se1621.dto.User;
+import se1621.dto.JobSkills;
+
 
 /**
  *
@@ -37,28 +33,25 @@ public class SearchJobTitle_Exper_CateController extends HttpServlet {
         String url = ERROR;
         try {
             String searchTitle = request.getParameter("searchtitle");
-            String searchExper = request.getParameter("searchExper");
+            int searchSkill = 0;
             int searchCate = 0;
             int hrID = 0;
             try {
+                searchSkill = Integer.parseInt(request.getParameter("searchSkill"));
+            } catch (Exception e) {
+            }
+            try {
+                
                 searchCate = Integer.parseInt(request.getParameter("searchCate"));
                 hrID = Integer.parseInt(request.getParameter("hrID"));
             } catch (Exception e) {
             }
-            JobDAO jobDAO = new JobDAO();
-            UserDAO userDAO = new UserDAO();
-            CompanyInfoDAO compnayDAO = new CompanyInfoDAO();
-            CategoryDAO categoryDAO = new CategoryDAO();
-            
-            List<Job> listJob = jobDAO.searchAllJobTile_Experience_Category(searchTitle, searchExper, searchCate);
+            JobDAO jobDAO = new JobDAO();   
+            JobSkillsDAO jsDAO = new JobSkillsDAO();
+            List<Job> listJob = jobDAO.searchAllJobTile_Skill_Category(searchTitle, searchSkill, searchCate);
             for (Job job : listJob) {
-                int userID = job.getUserID();
-                User user = userDAO.getUser(userID);
-                CompanyInfo company = compnayDAO.getCompanyInfo(user.getCompanyID());
-                job.setCompany(company);
-                int categoryID = job.getCategory().getCategoryID();
-                Category category = categoryDAO.getCategory(categoryID);
-                job.setCategory(category);
+                List<JobSkills> listJs = jsDAO.getSkillRequire(job.getJobID());
+                job.setListJobSkills(listJs);
             }
             if (!listJob.isEmpty()) {
                 request.setAttribute("LIST_ALLJOB", listJob);

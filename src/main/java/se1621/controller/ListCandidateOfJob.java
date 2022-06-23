@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import se1621.dao.JobOrderDAO;
+import se1621.dao.JobApplicationDAO;
 import se1621.dao.ResumeDAO;
 import se1621.dao.StudentSkillDAO;
 import se1621.dto.Resume;
@@ -43,7 +43,7 @@ public class ListCandidateOfJob extends HttpServlet {
         String url = ERROR;
         try {
             ResumeDAO resumeDAO = new ResumeDAO();
-            JobOrderDAO jobOrderDAO = new JobOrderDAO();
+            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
             int search = Integer.parseInt(request.getParameter("JobIDCandidate"));
             List<Integer> listUserID = jobOrderDAO.getListUserIDOfJob(search);
             List<Resume> listResume = new ArrayList<Resume>();

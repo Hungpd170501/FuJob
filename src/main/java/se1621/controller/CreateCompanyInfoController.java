@@ -80,13 +80,13 @@ public class CreateCompanyInfoController extends HttpServlet {
                     String email = loginUser.getEmail();
                     String password = loginUser.getPassword();
                     String roleID = loginUser.getRole().getRoleID();
+                    String roleName = loginUser.getRole().getRoleName();
                     User user = User.builder()
                             .userID(userID)
                             .fullName(fullName)
                             .password(password)
-                            .username(fullName)
                             .email(email)
-                            .role(new Role(roleID, ""))
+                            .role(new Role(roleID, roleName))
                             .companyID(companyID)
                             .build();
                     UserDAO udao = new UserDAO();

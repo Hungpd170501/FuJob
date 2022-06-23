@@ -13,12 +13,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import se1621.dao.v2.CategoryDAOImpl;
-import se1621.dto.Category;
-import se1621.model.CategoryEntity;
+import se1621.entity.CategoryEntity;
 
-/**
- * @author ACER
- */
 @WebServlet(name = "JobCategoryController", urlPatterns = {"/JobCategoryController"})
 public class JobCategoryController extends HttpServlet {
 
@@ -30,9 +26,9 @@ public class JobCategoryController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            CategoryDAOImpl categoryDAOImpl=new CategoryDAOImpl();
-            List<CategoryEntity> listCategory=categoryDAOImpl.getAll("CategoryEntity");
-            System.out.println(listCategory.get(1).getCategoryId());
+            CategoryDAOImpl categoryDAOImpl = new CategoryDAOImpl();
+            List<CategoryEntity> listCategory = categoryDAOImpl.getAll("CategoryEntity");
+            listCategory.get(0).getJobs().forEach((c)->log(c.getJobTitle()));
             request.setAttribute("JOB_CATEGORY_LIST", listCategory);
             url = SUCCESS;
         } catch (Exception e) {
@@ -43,14 +39,13 @@ public class JobCategoryController extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -61,10 +56,10 @@ public class JobCategoryController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

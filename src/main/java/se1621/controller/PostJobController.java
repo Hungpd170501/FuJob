@@ -57,11 +57,7 @@ public class PostJobController extends HttpServlet {
             int userID = loginUser.getUserID();
             Job job = Job.builder().userID(userID)
                     .jobTitle(jobTitle)
-                    .ExperienceNeeded(experienceNeeded)
                     .category(Category.builder().categoryID(categoryID).build())
-                    .deadline(deadline)
-                    .completionTime(completionTime)
-                    .salary(salary)
                     .address(address)
                     .email(email)
                     .phone(phone)

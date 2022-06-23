@@ -4,6 +4,7 @@
  */
 package se1621.dto;
 
+import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,7 +19,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class CompanyInfo {
-
     private int companyID;
     private String companyName;
     private String address;
@@ -30,4 +30,8 @@ public class CompanyInfo {
     private int numberOfEmployee;
     private String companyOverview;
     private String avatar;
+    private Date createdDate;
+    private Date lastModifiedDate;
+    private int companyStatus;
+    
 }

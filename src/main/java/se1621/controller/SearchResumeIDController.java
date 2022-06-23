@@ -5,7 +5,6 @@
 package se1621.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,8 +23,8 @@ import se1621.dto.StudentSkill;
 @WebServlet(name = "SearchResumeIDController", urlPatterns = {"/SearchResumeIDController"})
 public class SearchResumeIDController extends HttpServlet {
 
-    private static final String ERROR = "/view/candidates-profile.jsp";
-    private static final String SUCCESS = "/view/candidates-profile.jsp";
+    private static String ERROR = "/view/candidates-profile.jsp";
+    private static String SUCCESS = "/view/candidates-profile.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

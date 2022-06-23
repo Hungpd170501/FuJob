@@ -5,25 +5,18 @@
 package se1621.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import se1621.dao.CategoryDAO;
-import se1621.dao.CompanyInfoDAO;
 import se1621.dao.JobDAO;
-import se1621.dao.UserDAO;
-import se1621.dto.Category;
-import se1621.dto.CompanyInfo;
+import se1621.dao.JobSkillsDAO;
 import se1621.dto.Job;
-import se1621.dto.User;
+import se1621.dto.JobSkills;
+import se1621.dto.Skill;
 
 /**
  *
@@ -40,12 +33,20 @@ public class ViewAllJobController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+
             JobDAO jobDAO = new JobDAO();
-            List<Job> listJob = jobDAO.getListJob();
+            List<Job>listJob = jobDAO.getListJob();
+            JobSkillsDAO jsDAO = new JobSkillsDAO();
+            for (Job job : listJob) {
+                List<JobSkills> listJs = jsDAO.getSkillRequire(job.getJobID());
+                job.setListJobSkills(listJs);
+            }
             if (!listJob.isEmpty()) {
                 request.setAttribute("LIST_ALLJOB", listJob);
                 url = SUCCESS;
+
             }
+
         } catch (Exception e) {
             log("Error at View all job Controller" + e.toString());
         } finally {

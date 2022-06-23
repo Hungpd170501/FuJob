@@ -1,3 +1,8 @@
+<%@page import="se1621.dao.JobSkillsDAO"%>
+<%@page import="se1621.dto.JobSkills"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.sql.Date"%>
 <%@page import="se1621.dto.User"%>
 <%@page import="se1621.dto.Job"%>
 <%@page import="java.util.List"%>
@@ -16,6 +21,7 @@
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
 
             <!-- Start home -->
             <section class="bg-half page-next-level"> 
@@ -60,12 +66,10 @@
                                             <i class="fa fa-archive"></i>
                                             <select class="demo-default" id="select-category" name="searchExper">
                                                 <!--                                                <select class="demo-default" id="select-category" required="">-->
-                                                <option value="">Experience</option>
-                                                <option value="Less than 1 year">Less than 1 year</option>
-                                                <option value="1-3 years">1-3 years</option>
-                                                <option value="3-5 years">3-5 years</option>
-                                                <option value="5-10 years">5-10 years</option>
-                                                <option value="More than 10 years">More than 10 years</option>
+                                                <option value="">Skill</option>
+                                                <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                    <option value="${i.skillID}">${i.skillName}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
@@ -135,40 +139,65 @@
                                     if (listJob.size() > 0) {
                                         for (Job job : listJob) {
                             %>
-                            <div class="job-display col-lg-12 mt-4 pt-2" style="display: none">
+                            <div class="job-display col-lg-12 mt-4 pt-1" style="display: none">
                                 <div class="job-list-box border rounded" >
                                     <div class="p-3">
                                         <div class="row align-items-center">
-                                            <div class="col-lg-2">
+                                            <div class="col-lg-3">
                                                 <div class="company-logo-img">
-                                                    <img loading="lazy" src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:150px;height:150px">
+                                                    <img loading="lazy" src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:250px;height:250px">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-7 col-md-9">
+                                            <div class="col-lg-6 col-md-9">
                                                 <div class="job-list-desc">
-
-                                                    <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h6>
-
-                                                    <p class="text-muted mb-0"><i class="fa fa-archive mr-2"></i><%= job.getExperienceNeeded()%></p>
-                                                    <p class="text-muted mb-0"><i class="fa fa-list-alt mr-2"></i><%= job.getCategory().getCategoryName()%></p>
+                                                    <h4 class="mb-1" style="font-weight: 700"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h4>
+                                                        <%
+                                                            Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                                                            long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
+                                                            long resultDate = exDate / (24 * 60 * 60 * 1000);
+                                                        %>
+                                                    <p class="mb-2 text-muted"> <%= resultDate%> days left</p>
+                                                    <%
+                                                        String description = job.getDescription();
+                                                        if (description.length() > 200) {
+                                                            description = description.substring(0, 197) + ". . .";
+                                                        }
+                                                    %>
+                                                    <p class="mb-4"><%= description%></p>
+                                                    <h6>Skills Require: 
+                                                        <%
+                                                            List<JobSkills> listJobSkills = job.getListJobSkills();
+                                                            for (int i = 0; i < listJobSkills.size() - 1; i++) {
+                                                        %>
+                                                        <%= listJobSkills.get(i).getSkill().getSkillName()%>,
+                                                        <%
+                                                            }
+                                                        %>
+                                                        <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
+                                                    </h6>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= job.getAddress()%></p>
-                                                        </li>
 
-                                                        <li class="list-inline-item mr-3">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"><%= job.getLastDateUpdate()%></i></p>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
-
+                                                    <div>
+                                                        <p class=" mb-5"><i class="mr-2"></i>5 bids</p>
+                                                    </div>
+                                                    <div>
+                                                        <h5 class=" mb-5"><i class="mr-2"></i> <%= job.getBudget()%>$ <% if (job.getPaymentMethodID() == 2) {
+                                                            %>
+                                                            / hour
+                                                            <%
+                                                                }
+                                                            %> </h5>
+                                                    </div>
                                                     <div class="mt-3">
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -195,6 +224,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </section>
         <!-- Back to top -->
         <a href="#" class="back-to-top rounded text-center" id="back-to-top" style="display: inline"> 
