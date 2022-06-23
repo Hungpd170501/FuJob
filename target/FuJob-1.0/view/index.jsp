@@ -215,7 +215,7 @@
                                     <i class="mdi mdi-account-multiple-plus h1 text-white"></i>
                                 </div>
                                 <h1 class="counter-value text-white mb-1" data-count="${totalUserNonAD.allTotalUser_NonAD}">0</h1>
-                                <p class="counter-name text-white text-uppercase mb-0">Member</p>
+                                <p class="counter-name text-white text-uppercase mb-0">Members</p>
                             </div>
                         </div>
                     </div>
