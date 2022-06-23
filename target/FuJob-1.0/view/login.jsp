@@ -58,7 +58,6 @@
                                             <!-- Nut LOGIN -->
                                             <div class="col-lg-12 mb-0">
                                                 <input type="submit" name="action" class="btn btn-primary w-100" value="Login"/>
-                                                <!--                                                    <button class="btn btn-primary w-100">Sign in</button>-->
                                             </div>
                                             <div class="col-lg-12 mt-4 text-center">
                                                 <h6>Or Login With</h6>

@@ -55,8 +55,8 @@
                                                 <div class="col-lg-3 col-md-6">
                                                     <div class="registration-form-box">
                                                         <i class="fa fa-archive"></i>
-                                                        <select class="demo-default" id="select-category" name="searchSkill">
-                                                            <option value="">Skill</option>
+                                                        <select class="demo-default" id="select-category" name="searchSkill" >
+                                                            <option value="">Skill...</option>
                                                             <c:forEach items="${chooseSkill.listSkill}" var="i">
                                                                 <option value="${i.skillID}">${i.skillName}</option>
                                                             </c:forEach>
@@ -121,7 +121,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="apply-button p-3 border-top">
+                                            <div class="apply-button p-3 border-top" style="text-align: center">
                                             <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=${t10.jobID}" class="btn btn-primary btn-sm">View detail</a>
                                         </div>
                                     </div>
@@ -151,18 +151,17 @@
                         </div>
                     </div>
                 </div>
-                <div></div>
+                
                 <div class="row">
                     <c:forEach items="${chooseCategory.listCategory}" var="c">
                         <div class="job-display col-lg-3 col-md-6 mt-4 pt-2" style="display: none">
                             <a href="${pageContext.request.contextPath}/MainController?action=Search_title_exper_cate&searchtitle=${""}&searchSkill=${""}&searchCate=${c.categoryID}">
-                                <div class="popu-category-box bg-light rounded text-center p-4">
+                                <div class="popu-category-box bg-light rounded text-center p-4" style="width: 255px; height: 234px">
                                     <div class="popu-category-icon mb-3">
                                         <img loading="lazy" src="${c.img}" alt="" class="img-fluid img-thumbnail d-inline-block rounded-pill h3 text-primary" style="width:100px;height:100px">
                                     </div>
                                     <div class="popu-category-content">
                                         <h5 class="mb-2 text-dark title">${c.categoryName}</h5>
-                                        <!--                                    <p class="text-success mb-0 rounded">1270 Jobs</p>-->
                                     </div>
                                 </div>
                             </a>
@@ -305,7 +304,7 @@
             });
             $(".slj").on('click', function () {
                 $(".job-display").slice(8, 50).slideUp("slow");
-                $("html, body").animate({scrollTop: 800}, "slow");
+                $("html, body").animate({scrollTop: 2100}, "slow");
                 if ($(".job-display").length > 0) {
                     document.getElementById("slj").style.display = "none";
                     $(".smj").css("display", "inline-block");

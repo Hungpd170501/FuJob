@@ -4,13 +4,13 @@
     Author     : HNGB
 --%>
 <%@page import="se1621.dao.JobApplicationDAO"%>
+<%@page import="se1621.dto.JobApplication"%>
 <%@page import="se1621.dao.ResumeDAO"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.sql.Date"%>
 <%@page import="se1621.dto.JobSkills"%>
 <%@page import="java.util.List"%>
-<%@page import="se1621.dto.SkillRequire"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="se1621.dto.User"%>
 <%@page import="se1621.dto.Job"%>

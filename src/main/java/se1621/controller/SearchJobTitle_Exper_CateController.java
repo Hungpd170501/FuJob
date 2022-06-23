@@ -10,12 +10,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import se1621.dao.JobDAO;
 import se1621.dao.JobSkillsDAO;
 import se1621.dto.Job;
 import se1621.dto.JobSkills;
-
 
 /**
  *
@@ -32,26 +32,29 @@ public class SearchJobTitle_Exper_CateController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String searchTitle = request.getParameter("searchtitle");
+            String searchTitle = request.getParameter("searchTitle");
             int searchSkill = 0;
+            String searchSkillString = request.getParameter("searchSkill");
+            if(!searchSkillString.isBlank()){
+                searchSkill = Integer.parseInt(searchSkillString);
+            }
             int searchCate = 0;
-            int hrID = 0;
-            try {
-                searchSkill = Integer.parseInt(request.getParameter("searchSkill"));
-            } catch (Exception e) {
+            String searchCateString = request.getParameter("searchCate");
+            if(!searchCateString.isBlank()) {
+                searchCate = Integer.parseInt(searchCateString);
             }
-            try {
-                
-                searchCate = Integer.parseInt(request.getParameter("searchCate"));
-                hrID = Integer.parseInt(request.getParameter("hrID"));
-            } catch (Exception e) {
-            }
-            JobDAO jobDAO = new JobDAO();   
+            JobDAO jobDAO = new JobDAO();
             JobSkillsDAO jsDAO = new JobSkillsDAO();
             List<Job> listJob = jobDAO.searchAllJobTile_Skill_Category(searchTitle, searchSkill, searchCate);
+            List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
             for (Job job : listJob) {
-                List<JobSkills> listJs = jsDAO.getSkillRequire(job.getJobID());
-                job.setListJobSkills(listJs);
+                List<JobSkills> ljk = new ArrayList<>();
+                for (JobSkills js : listJs) {
+                    if(job.getJobID() == js.getJobID()){
+                                ljk.add(js);
+                    }
+                    job.setListJobSkills(ljk);
+                }
             }
             if (!listJob.isEmpty()) {
                 request.setAttribute("LIST_ALLJOB", listJob);

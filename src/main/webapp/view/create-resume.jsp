@@ -1,4 +1,4 @@
-<%@page import="se1621.dto.StudentSkill"%>
+<%@page import="se1621.dto.ResumeSkill"%>
 <%@page import="se1621.dto.Resume"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,6 +11,9 @@
             <jsp:param name="title" value="FuJob | Create Resume"/>
         </jsp:include>
         <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
+<link rel="stylesheet" href="https://unpkg.com/filepond@^4/dist/filepond.css" type="text/css"/>
+<link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" type="text/css"/>
+<link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css" type="text/css"/>
         </head>
 
         <body>
@@ -69,7 +72,7 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <div class="form-group app-label">D
+                                        <div class="form-group app-label">
                                             <label class="text-muted">Gender<span class="text-danger">*</span> :</label>
                                             <div class="form-button">
                                                 <select class="form-control resume" name="gender" required="">
@@ -153,9 +156,9 @@
                                             <div class="form-button">
                                                 <select class="form-control resume select2 select2-hidden-accessible" name="skillID" multiple="" data-placeholder="Select skill" style="width: 100%; border-color: #dee2e6" tabindex="-1" aria-hidden="true">
                                                     <%
-                                                        List<StudentSkill> listStudentSkill = (List<StudentSkill>) request.getAttribute("LIST_STUDENTSKILL");
-                                                        if (!listStudentSkill.isEmpty()) {
-                                                            for (StudentSkill studentSkill : listStudentSkill) {
+                                                        List<ResumeSkill> listResumeSkill = (List<ResumeSkill>) request.getAttribute("LIST_STUDENTSKILL");
+                                                        if (!listResumeSkill.isEmpty()) {
+                                                            for (ResumeSkill studentSkill : listResumeSkill) {
                                                     %>
                                                     <option selected="selected" value="<%= studentSkill.getSkill().getSkillID()%>" ><%= studentSkill.getSkill().getSkillName()%></option>
                                                     <c:forEach items="${chooseSkill.listSkill}" var="i">
@@ -179,20 +182,20 @@
                                         <div class="form-group app-label">
                                             <label class="text-muted">Your Website:</label>
 
-                                            <input id="website" name="website" type="text" class="form-control resume" placeholder="If u have a website of yourself, fill in here" value="<%= resume.getWebsite()%>">
+                                            <input id="website" name="website" type="text" class="form-control resume" placeholder="If u have a website of yourself, fill in here" value="${pageScope.resume.website}">
 
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group app-label">
                                             <label class="text-muted">Your GitHub</label>
-                                            <input id="" name="" type="text" class="form-control resume" placeholder="If u have a github, fill in here ">
+                                            <input id="" name="github" type="text" class="form-control resume" placeholder="If u have a github, fill in here " value="${pageScope.resume.gitHub}">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group app-label">
-                                            <label class="text-muted">Your Linkedin</label>
-                                            <input id="" name="" type="text" class="form-control resume" placeholder="If u have a linkedin, fill in here ">
+                                            <label class="text-muted">Your LinkedIn</label>
+                                            <input id="" name="linkedIn" type="text" class="form-control resume" placeholder="If u have a linkedin, fill in here " value="${pageScope.resume.linkeIn}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -238,14 +241,12 @@
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-
         <script>
             $(document).ready(function () {
                 $('.select2').select2({
                     closeOnSelect: false
                     });
             });
-
             var img = $('#image').attr('src');
             if (img == "") {
                 document.getElementById("image").src = "https://imgfan.com/images/imgupload.jpg";

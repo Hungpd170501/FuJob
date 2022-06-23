@@ -15,7 +15,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class Category {
-
     public int categoryID;
     public String categoryName;
     public String img;

@@ -133,8 +133,8 @@
                         <div class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Your Resume</div>
                     </div>
                     <ul class="submenu">
-                        <li><a href="${pageContext.request.contextPath}/view/create-resume.jsp">Edit your resume</a></li>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&searchResumeID=${sessionScope.LOGIN_USER.userID}">View your resume</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=CheckCreateResume&studentID=${sessionScope.LOGIN_USER.userID}">Edit your resume</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&studentID=${sessionScope.LOGIN_USER.userID}">View your resume</a></li>
                     </ul>  
                 </li>
                 <%
@@ -173,7 +173,7 @@
                     <ul class="submenu">
                         <li><a href="${pageContext.request.contextPath}/view/create-companyinfo.jsp">Edit your company info</a></li>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=SearchCompanyID&searchCompanyID=${sessionScope.LOGIN_USER.companyID}">View your company info</a></li>
-                        <li><a href="#">Your human resource </a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ViewAllHR&companyID=${sessionScope.LOGIN_USER.companyID}">Your human resource </a></li>
                     </ul>
                 </li>
                 <%

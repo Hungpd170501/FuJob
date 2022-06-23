@@ -1,4 +1,3 @@
-
 <%@page import="se1621.dto.JobApplication"%>
 <%@page import="se1621.dto.Job"%>
 <%@page import="java.util.List"%>
@@ -123,6 +122,7 @@
                         <div class="row"> 
                             <% List<JobApplication> listJobApplication = (List<JobApplication>) request.getAttribute("LIST_ALLJOBORDER");
                                  if (listJobApplication.isEmpty()) {
+
                                     String message = (String) request.getAttribute("MESSAGE");
                             %>
                             <div class="col-lg-12 text-warning text-center">
@@ -146,7 +146,6 @@
                                             <div class="col-lg-7 col-md-9">
                                                 <div class="job-list-desc">
                                                     <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="text-dark"><%= jobOrder.getJob().getJobTitle()%></a></h6>
-                                                    
                                                     <p class="text-muted mb-0"><i class="fa fa-list-alt mr-2"></i><%= jobOrder.getJob().getCategory().getCategoryName()%></p>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">

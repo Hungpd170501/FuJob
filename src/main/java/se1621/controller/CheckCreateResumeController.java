@@ -12,9 +12,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import se1621.dao.ResumeDAO;
-import se1621.dao.StudentSkillDAO;
+import se1621.dao.ResumeSkillDAO;
 import se1621.dto.Resume;
-import se1621.dto.StudentSkill;
+import se1621.dto.ResumeSkill;
 
 /**
  *
@@ -32,10 +32,11 @@ public class CheckCreateResumeController extends HttpServlet {
         String url = ERROR;
         try {
             int studentID = Integer.parseInt(request.getParameter("studentID"));
-            ResumeDAO dao = new ResumeDAO();
-            List<Resume> listResume = dao.getListResume(studentID);
-            StudentSkillDAO studentSkillDAO = new StudentSkillDAO();
-            List<StudentSkill> listStudentSkill = studentSkillDAO.getStudentSkill(studentID);
+            ResumeDAO resumeDAO = new ResumeDAO();
+            int resumeID = resumeDAO.getResumeID(studentID);
+            List<Resume> listResume = resumeDAO.getListResume(studentID);
+            ResumeSkillDAO resumeSkillDAO = new ResumeSkillDAO();
+            List<ResumeSkill> listStudentSkill = resumeSkillDAO.getStudentSkill(resumeID);
             if (!listResume.isEmpty()) {
                 request.setAttribute("LIST_RESUME", listResume);
                 request.setAttribute("LIST_STUDENTSKILL", listStudentSkill);

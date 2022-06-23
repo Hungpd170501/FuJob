@@ -23,7 +23,7 @@ import se1621.dto.PayMentMethod;
 public class JobDAO {
 
     private static final String CREATEJOB = "INSERT INTO tblJobs(userID, jobTitle, jobCategoryID,"
-            + " budget, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,1)";
+            + "budget, paymentMethodID, expiriedDate, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?s,1)";
     //xong ne
     private String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.address, j.budget, j.paymentMethodID, "
             + "            j.email, j.phone, j.description, j.createdDate, j.lastModifiedDate, j.expiriedDate, j.jobStatus, "
@@ -45,6 +45,7 @@ public class JobDAO {
     private static final String VIEWHRJOB = "SELECT j.jobID, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate, p.paymentMethodName"
             + "                      FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) left join tblPaymentMethods p on p.paymentMethodID = j.paymentMethodID) "
             + "                    WHERE j.jobStatus = 1 AND j.userID=? ORDER BY createdDate DESC";
+
     private static final String DELETEJOBPOST = "UPDATE tblJobs SET jobStatus=0 WHERE jobID=?";
     private static final String GETALLNUMBEROFJOBPOST = "SELECT COUNT (*) AS totalJob FROM tblJobs";
     //roi ne
@@ -143,7 +144,6 @@ public class JobDAO {
         boolean check = false;
         conn = null;
         preStm = null;
-
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
@@ -152,11 +152,12 @@ public class JobDAO {
                 preStm.setString(2, job.getJobTitle());
                 preStm.setInt(3, job.getCategory().getCategoryID());
                 preStm.setInt(4, job.getBudget());
-                preStm.setString(6, job.getAddress());
-                preStm.setString(7, job.getEmail());
-                preStm.setString(8, job.getPhone());
-                preStm.setString(9, job.getDescription());
-
+                preStm.setInt(5, job.getPayMentMethod().getPaymentMethodID());
+                preStm.setDate(6, job.getExpiriedDate());
+                preStm.setString(7, job.getAddress());
+                preStm.setString(8, job.getEmail());
+                preStm.setString(9, job.getPhone());
+                preStm.setString(10, job.getDescription());
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -323,6 +324,11 @@ public class JobDAO {
                 List<Job> listJob = new ArrayList<>();
                 String getDataSQL = "";
                 String getDataSQL1 = this.SEARCHALL_JOBTITLE_SKILL_CATEGORY;
+                String queryForSearchSkill = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
+                            + " j.jobCategoryID, c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, "
+                            + "j.paymentMethodID, j.budget, j.expiriedDate "
+                            + "FROM ((tblJobSkills js left join tblJobs j on j.jobID = js.jobID)) "
+                            + "left join tblCategories c on c.categoryID = j.jobCategoryID ";
                 boolean checkCateID = false;
                 boolean checkSkillID = false;
 
@@ -331,13 +337,13 @@ public class JobDAO {
                     checkCateID = true;
                     checkSkillID = true;
                 } else {
-                    getDataSQL = getDataSQL1 + " WHERE jobTitle like ? and skillID like ? and jobCategoryID = ? and jobStatus = 1";
+                    getDataSQL = queryForSearchSkill + "WHERE jobTitle like ? and skillID = ? and jobCategoryID = ? and jobStatus = 1";
                     if (searchJobCategoryID == 0) {
-                        getDataSQL = getDataSQL1 + " WHERE jobTitle like ? and skillID like ? and jobStatus = 1";
+                        getDataSQL = queryForSearchSkill + " WHERE jobTitle like ? and skillID = ? and jobStatus = 1";
                         checkCateID = true;
                     }
                     if (searchSkillID == 0) {
-                        getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobCategoryID like ? and jobStatus = 1";
+                        getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobCategoryID = ? and jobStatus = 1";
                         checkSkillID = true;
                     }
                 }
@@ -378,7 +384,7 @@ public class JobDAO {
                     Date createdDate = rs.getDate("createdDate");
                     Date lastModifiedDate = rs.getDate("lastModifiedDate");
                     Date expiriedDate = rs.getDate("expiriedDate");
-                    int jobStatus = rs.getInt("jobStatus");
+                    int jobStatus = 1;
 
                     Category category = Category.builder().categoryID(jobCategoryID).categoryName(categoryName).img(img).build();
                     PayMentMethod payment = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();

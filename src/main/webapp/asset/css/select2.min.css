@@ -196,7 +196,9 @@
     background-color:white;
     border:1px solid #dee2e6;
     border-radius:10px;
-    cursor:text
+    cursor:text;
+    padding-bottom: 3.5px
+        
 }
 .select2-container--default .select2-selection--multiple .select2-selection__rendered{
     box-sizing:border-box;

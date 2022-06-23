@@ -15,7 +15,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class Resume {
-
     private int resumeID;
     private int userID;
     private String avatar;

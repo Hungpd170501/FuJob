@@ -127,7 +127,7 @@
                         <!-- them display -->
                         <div class="row" > 
                             <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_JOBPOST");
-                                if (listJob.isEmpty()) {
+                                if (listJob==null||listJob.isEmpty()) {
                                     String message = (String) request.getAttribute("MESSAGE");
                             %>
                             <div class="col-lg-12 text-warning text-center">
@@ -183,9 +183,14 @@
                                                             }
                                                         %>
                                                     </h6>
-                                                    <ul class="list-inline mb-0">
-                                                        <li class="list-inline-item mr-3">
+<!--
+                                                    <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h6>
+                                                    <p class="text-muted mb-0"><i class="fa fa-list-alt mr-2"></i><%= job.getCategory().getCategoryName()%></p>-->
 
+                                                    <ul class="list-inline mb-0">
+                                                        <!--<l //i class="list-inline-item mr-3">-->
+                                                        <li class="list-inline-item">
+                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i><%= job.getLastModifiedDate()%></p>
                                                         </li>
                                                     </ul>
                                                 </div>
