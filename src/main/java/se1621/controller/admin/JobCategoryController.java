@@ -28,7 +28,6 @@ public class JobCategoryController extends HttpServlet {
         try {
             CategoryDAOImpl categoryDAOImpl = new CategoryDAOImpl();
             List<CategoryEntity> listCategory = categoryDAOImpl.getAll("CategoryEntity");
-            listCategory.get(0).getJobs().forEach((c)->log(c.getJobTitle()));
             request.setAttribute("JOB_CATEGORY_LIST", listCategory);
             url = SUCCESS;
         } catch (Exception e) {

@@ -4,7 +4,6 @@ se1621\controller\SearchJobIDController.class
 se1621\utils\EmailUtils.class
 se1621\entity\PaymentMethodEntity$PaymentMethodEntityBuilder.class
 se1621\dto\User$UserBuilder.class
-se1621\utils\HibernateDriver.class
 se1621\dto\Job$JobBuilder.class
 se1621\controller\DeleteJobPostController.class
 se1621\controller\admin\AddJobCategoryController.class
@@ -16,21 +15,10 @@ se1621\entity\UserEntity.class
 se1621\dto\SkillRequire.class
 se1621\utils\EmailUtils$1.class
 se1621\controller\SignUpController.class
-<<<<<<< HEAD
 se1621\controller\admin\AdminIndexController.class
-=======
-se1621\controller\CheckCreateResumeController.class
-se1621\dto\Skill$SkillBuilder.class
-se1621\dto\JobApplication$JobApplicationBuilder.class
->>>>>>> 77c31e9c64ea4e7f0e78aba40360d77810a0aa81
 se1621\dto\Role.class
 se1621\dto\PayMentMethod.class
-<<<<<<< HEAD
 se1621\entity\RoleEntity.class
-=======
-se1621\controller\SearchJobTitle_Exper_CateController.class
-se1621\dao\JobApplicationDAO.class
->>>>>>> 77c31e9c64ea4e7f0e78aba40360d77810a0aa81
 se1621\controller\CreateCompanyInfoController.class
 se1621\dao\AuthDAO.class
 se1621\dao\v2\JobDAO.class
@@ -50,7 +38,6 @@ se1621\entity\CompanyEntity.class
 se1621\service\EmailService.class
 se1621\controller\SearchInJobPostedController.class
 se1621\controller\RecoveryPasswordController.class
-<<<<<<< HEAD
 se1621\entity\SkillEntity$SkillEntityBuilder.class
 se1621\entity\ResumeEntity.class
 se1621\controller\LoginGoogleHandler.class
@@ -58,16 +45,6 @@ se1621\dto\Skill.class
 se1621\dao\SkillRequireDAO.class
 se1621\controller\uploadServlet.class
 se1621\entity\ResumeSkillEntity.class
-=======
-se1621\dto\StudentSkill$StudentSkillBuilder.class
-se1621\utils\GoogleRacaptcha.class
-se1621\dto\JobApplication.class
-se1621\controller\ViewAllJobOrderController.class
-se1621\controller\ListCandidateOfJob.class
-se1621\controller\LoginGoogleHandler.class
-se1621\dto\Skill.class
-se1621\dao\SkillRequireDAO.class
->>>>>>> 77c31e9c64ea4e7f0e78aba40360d77810a0aa81
 se1621\dao\JobSkillsDAO.class
 se1621\entity\PaymentMethodEntity.class
 se1621\controller\UpdateStatusHRController.class
@@ -75,10 +52,6 @@ se1621\dto\Error\CompanyInfoError.class
 se1621\controller\ViewAllHRController.class
 se1621\dto\Category.class
 se1621\constant\Constant.class
-<<<<<<< HEAD
-=======
-se1621\controller\OrderJobController.class
->>>>>>> 77c31e9c64ea4e7f0e78aba40360d77810a0aa81
 se1621\dto\SkillRequire$SkillRequireBuilder.class
 se1621\controller\MainController.class
 se1621\entity\UserEntity$UserEntityBuilder.class
@@ -111,7 +84,6 @@ se1621\utils\DBUtils.class
 se1621\controller\SearchJobTitle_Exper_CateController.class
 se1621\entity\CategoryEntity.class
 se1621\dao\JobApplicationDAO.class
-se1621\dto\v2\JobDTO.class
 se1621\utils\Helper.class
 se1621\dao\v2\CategoryDAOImpl.class
 se1621\dto\PayMentMethod$PayMentMethodBuilder.class
