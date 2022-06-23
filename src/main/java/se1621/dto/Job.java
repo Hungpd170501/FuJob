@@ -17,7 +17,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class Job {
-
     private int jobID;
     private int userID;
     private String jobTitle;

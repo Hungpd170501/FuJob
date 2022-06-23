@@ -15,10 +15,10 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import se1621.dao.ResumeDAO;
-import se1621.dao.StudentSkillDAO;
+import se1621.dao.ResumeSkillDAO;
 import se1621.dto.Resume;
 import se1621.dto.Skill;
-import se1621.dto.StudentSkill;
+import se1621.dto.ResumeSkill;
 import se1621.dto.User;
 
 /**
@@ -29,7 +29,7 @@ import se1621.dto.User;
 public class CreateResumeController extends HttpServlet {
 
     private static final String ERROR = "/view/create-resume.jsp";
-    private static final String SUCCESS = "/MainController?action=SearchResumeID&searchResumeID=";
+    private static final String SUCCESS = "/MainController?action=SearchResumeID&studentID=";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -60,6 +60,7 @@ public class CreateResumeController extends HttpServlet {
             int studentID = loginUser.getUserID();
             Resume resume = Resume.builder()
                                           .avatar(avatar)
+                                          .userID(studentID)
                                           .fullName(fullName)
                                           .gender(gender)
                                           .dateOfBirth(dateOfBirth)
@@ -73,18 +74,20 @@ public class CreateResumeController extends HttpServlet {
                                           .linkedIn(linkedIn)
                                           .overview(overview)
                                           .build();
-            StudentSkillDAO studentSkillDAO = new StudentSkillDAO();
-            List<StudentSkill> listStudentSkill = new ArrayList<>();
-            if(studentSkillDAO.checkStudentHaveSkill(studentID)) {
-                studentSkillDAO.deleteStudetnSkill(studentID);
+            ResumeSkillDAO resumeSkillDAO = new ResumeSkillDAO();
+            List<ResumeSkill> listStudentSkill = new ArrayList<>();
+            ResumeDAO resumeDAO = new ResumeDAO();
+            int resumeID = resumeDAO.getResumeID(studentID);
+            if(resumeSkillDAO.checkStudentHaveSkill(resumeID)) {
+                resumeSkillDAO.deleteStudetnSkill(resumeID);
             }
             for (Integer skill : skillSet) {
-                StudentSkill studentSkill = StudentSkill.builder().studentID(studentID).skill(Skill.builder().skillID(skill).build()).build();
+                ResumeSkill studentSkill = ResumeSkill.builder().resumeID(resumeID).skill(Skill.builder().skillID(skill).build()).build();
                 listStudentSkill.add(studentSkill);
             }
             List<Boolean> listCheckCreateStudentSkill = new ArrayList<>();
-            for (StudentSkill studentSkill : listStudentSkill) {
-                boolean checkCreateStudentSkill = studentSkillDAO.createStudetnSkill(studentSkill);
+            for (ResumeSkill studentSkill : listStudentSkill) {
+                boolean checkCreateStudentSkill = resumeSkillDAO.createStudetnSkill(studentSkill);
                 if (checkCreateStudentSkill) {
                     listCheckCreateStudentSkill.add(checkCreateStudentSkill);
                 }
@@ -93,10 +96,9 @@ public class CreateResumeController extends HttpServlet {
 
                 ResumeDAO resumedao = new ResumeDAO();
                 boolean checkValidation = true;
-                int resumeID = resumedao.getResumeID(studentID);
                 if (resumeID!=0) {
                     checkValidation = false;
-                    boolean checkUpdateResume = resumedao.updateResume(resume, studentID);
+                    boolean checkUpdateResume = resumedao.updateResume(resume, resumeID);
                     if (checkUpdateResume) {
                         request.setAttribute("MESSAGE", "Your Resume has been updated!");
                         url = SUCCESS + studentID;

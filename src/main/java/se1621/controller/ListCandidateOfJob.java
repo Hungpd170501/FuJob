@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import se1621.dao.JobApplicationDAO;
 import se1621.dao.ResumeDAO;
-import se1621.dao.StudentSkillDAO;
+import se1621.dao.ResumeSkillDAO;
 import se1621.dto.Resume;
-import se1621.dto.StudentSkill;
+import se1621.dto.ResumeSkill;
 
 /**
  *
@@ -47,10 +47,10 @@ public class ListCandidateOfJob extends HttpServlet {
             int search = Integer.parseInt(request.getParameter("JobIDCandidate"));
             List<Integer> listUserID = jobOrderDAO.getListUserIDOfJob(search);
             List<Resume> listResume = new ArrayList<Resume>();
-            List<StudentSkill> listStudentSkill = new ArrayList<>();
+            List<ResumeSkill> listStudentSkill = new ArrayList<>();
             for (Integer integer : listUserID) {
-                listResume.add(resumeDAO.getResumeByID(integer));
-                StudentSkillDAO studentSkillDAO = new StudentSkillDAO();
+                listResume.add(resumeDAO.getResumeByUserID(integer));
+                ResumeSkillDAO studentSkillDAO = new ResumeSkillDAO();
                 listStudentSkill = studentSkillDAO.getStudentSkill(integer);
 
             }

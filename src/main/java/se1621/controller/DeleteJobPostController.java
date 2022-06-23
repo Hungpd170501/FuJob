@@ -6,7 +6,6 @@
 package se1621.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -32,14 +31,14 @@ public class DeleteJobPostController extends HttpServlet {
         String url = ERROR;
         try{
             JobDAO jobDao = new JobDAO();
-            JobApplicationDAO jobOrderDao = new JobApplicationDAO();
+            JobApplicationDAO jobApplicationDAO = new JobApplicationDAO();
             int jobPostID = Integer.parseInt(request.getParameter("jobPostID"));
             int userID = Integer.parseInt(request.getParameter("userID"));
-            List<Integer> listJobOrderID = jobOrderDao.getListJobOrderOfJob(jobPostID);
+            List<Integer> listJobOrderID = jobApplicationDAO.getListJobOrderOfJob(jobPostID);
             boolean check = jobDao.deleteJobPost(jobPostID);
             if(check){
                 for (Integer jobOrderID : listJobOrderID) {
-                    jobOrderDao.delete(jobOrderID);
+                    jobApplicationDAO.delete(jobOrderID);
                 }
                url = SUCCESS + userID;
             }

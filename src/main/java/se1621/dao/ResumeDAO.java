@@ -20,23 +20,23 @@ import se1621.utils.DBUtils;
  */
 public class ResumeDAO {
 
-    private static final String SEARCH = "SELECT resumeID, userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, major, gpa, website, gitHub, linkedIn, overview, createdDate, lastModifiedDate FROM tblResumes WHERE userID = ? and resumeStatus = 1";
+    private static final String GETRESUME_BYUSERID = "SELECT resumeID, userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, major, gpa, website, gitHub, linkedIn, overview, createdDate, lastModifiedDate FROM tblResumes WHERE userID = ? and resumeStatus = 1";
     private static final String CREATERESUME = "INSERT INTO tblResumes( userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, major, gpa, website, gitHub, linkedIn, overview, createdDate, lastModifiedDate, resumeStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1)";
     private static final String CHECK_DUPLICATE = "SELECT resumeID FROM tblResumes WHERE userID=?";
     private static final String UPDATERESUME = "UPDATE tblResumes SET avatar=?, fullName=?, gender=?, dateOfBirth=?, gmail=?, "
-            + "phone=?, address=?, schoolName=?, major=?, gpa=?, experienceYear=?, "
-            + "website=?, overview=? WHERE userID=?";
+            + "phone=?, address=?, major=?, gpa=?, "
+            + "website=?, gitHub=?, linkedIn=?, overview=? WHERE resumeID=?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
 
-    public List<Resume> getListResume(int search) throws SQLException {
+    public List<Resume> getListResume(int studentID) throws SQLException {
         List<Resume> listResume = new ArrayList<>();
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
-                preStm = conn.prepareStatement(SEARCH);
-                preStm.setInt(1, search);
+                preStm = conn.prepareStatement(GETRESUME_BYUSERID);
+                preStm.setInt(1, studentID);
                 rs = preStm.executeQuery();
                 while (rs.next()) {
                     int resumeID = rs.getInt("resumeID");
@@ -93,17 +93,16 @@ public class ResumeDAO {
         return listResume;
     }
 
-    public Resume getResumeByID(int search) throws SQLException {
+    public Resume getResumeByUserID(int userID) throws SQLException {
         Resume resume = new Resume();
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
-                preStm = conn.prepareStatement(SEARCH);
-                preStm.setInt(1, search);
+                preStm = conn.prepareStatement(GETRESUME_BYUSERID);
+                preStm.setInt(1, userID);
                 rs = preStm.executeQuery();
                 if (rs.next()) {
                    int resumeID = rs.getInt("resumeID");
-                    int userID = rs.getInt("userID");
                     String avatar = rs.getString("avatar");
                     String fullName = rs.getString("fullName");
                     String gender = rs.getString("gender");
@@ -229,7 +228,7 @@ public class ResumeDAO {
         return resumeID;
     }
 
-    public boolean updateResume(Resume resume, int userID) throws SQLException {
+    public boolean updateResume(Resume resume, int resumeID) throws SQLException {
         boolean check = false;
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -242,13 +241,13 @@ public class ResumeDAO {
                 preStm.setString(5, resume.getGmail());
                 preStm.setString(6, resume.getPhone());
                 preStm.setString(7, resume.getAddress());
-                preStm.setString(8, resume.getGitHub());
-                preStm.setString(9, resume.getMajor());
-                preStm.setString(10, resume.getGpa());
-                preStm.setString(11, resume.getLinkedIn());
-                preStm.setString(12, resume.getWebsite());
+                preStm.setString(8, resume.getMajor());
+                preStm.setString(9, resume.getGpa());
+                preStm.setString(10, resume.getWebsite());
+                preStm.setString(11, resume.getGitHub());
+                preStm.setString(12, resume.getLinkedIn());
                 preStm.setString(13, resume.getOverview());
-                preStm.setInt(14, userID);
+                preStm.setInt(14, resumeID);
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

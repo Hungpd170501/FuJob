@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import se1621.dao.UserDAO;
 import se1621.dto.Role;
 import se1621.dto.User;
-import se1621.service.EmailServiceIml;
+import se1621.service.EmailServiceImpl;
 import se1621.utils.Helper;
 
 /**
@@ -56,7 +56,7 @@ public class SignUpController extends HttpServlet {
                         .build();
                 boolean checkSignup = dao.signup(user);
                 if (checkSignup) {
-                    EmailServiceIml emailServiceIml = new EmailServiceIml();
+                    EmailServiceImpl emailServiceIml = new EmailServiceImpl();
                     new Thread(() -> emailServiceIml.sendEmail(getServletContext(), user, "verify")).start();
                     url = SUCCESS;
                 }
@@ -64,6 +64,7 @@ public class SignUpController extends HttpServlet {
                 request.setAttribute("USER_ERROR", userError);
             }
         } catch (Exception e) {
+            log("Error at SignUpController:"+e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

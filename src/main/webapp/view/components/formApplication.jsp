@@ -16,7 +16,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="${pageContext.request.contextPath}/MainController">
+                <form method="post" action="${pageContext.request.contextPath}/MainController" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="form-group text-dark">
                             <label>Deal Price</label>
@@ -28,11 +28,12 @@
                         </div>
                         <div class="form-group text-dark">
                             <label>Upload CV</label>
-                            <input type="file" class="form-control" name="cvFile" placeholder="Password">
-                        </div>    
+                            <input type="file" class="form-control" name="file">
+                        </div>
                     </div>
                     <div class="modal-footer border-top-0 d-flex justify-content-center">
-                        <input type="submit" name="action" class="btn btn-primary" value="Send application">
+                        <input type="submit" class="btn btn-primary" value="Send application">
+                        <input type="hidden" name="action" value="Send application">
                     </div>
                     <input type="hidden" name="jobID" value="${requestScope.JOB.jobID}">
                     <input type="hidden" name="userID" value="${sessionScope.LOGIN_USER.userID}">

@@ -1,4 +1,4 @@
-<%@page import="se1621.dto.JobOrder"%>
+<%@page import="se1621.dto.JobApplication"%>
 <%@page import="se1621.dto.Job"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
@@ -120,7 +120,7 @@
                         </div>
 
                         <div class="row"> 
-                            <% List<JobOrder> listJobOrder = (List<JobOrder>) request.getAttribute("LIST_ALLJOBORDER");
+                            <% List<JobApplication> listJobOrder = (List<JobApplication>) request.getAttribute("LIST_ALLJOBORDER");
                                  if (listJobOrder.isEmpty()) {
                                     String message = (String) request.getAttribute("MESSAGE");
                             %>
@@ -131,7 +131,7 @@
                                 }
                                 if (listJobOrder != null) {
                                     if (listJobOrder.size() > 0) {
-                                        for (JobOrder jobOrder : listJobOrder) {
+                                        for (JobApplication jobOrder : listJobOrder) {
                             %>
                             <div class="job-display col-lg-12 mt-4 pt-2" style="display: none">
                                 <div class="job-list-box border rounded">
@@ -145,7 +145,6 @@
                                             <div class="col-lg-7 col-md-9">
                                                 <div class="job-list-desc">
                                                     <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="text-dark"><%= jobOrder.getJob().getJobTitle()%></a></h6>
-                                                    <p class="text-muted mb-0"><i class="fa fa-archive mr-2"></i><%= jobOrder.getJob().getExperienceNeeded() %></p>
                                                     <p class="text-muted mb-0"><i class="fa fa-list-alt mr-2"></i><%= jobOrder.getJob().getCategory().getCategoryName()%></p>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
@@ -153,7 +152,7 @@
                                                         </li>
 
                                                         <li class="list-inline-item">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i><%= jobOrder.getDateApplied() %></p>
+                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i><%= jobOrder.getLastModifiedDate() %></p>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -167,7 +166,7 @@
 
                                                     <div class="mt-3">
                                                         
-                                                        <button onclick="getJobOrderID(<%= jobOrder.getJobOrderID()%>, <%= jobOrder.getUserID()%>)" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation">
+                                                        <button onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation">
                                                             Cancel
                                                         </button>
                                                         
