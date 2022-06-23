@@ -23,7 +23,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class JobApplication {
-
     private int jobApplicationID;
     private int resumeID;
     Job job;

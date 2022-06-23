@@ -133,7 +133,11 @@
                                     <div class="profile-education-icon border rounded-pill bg-white text-primary">
                                         <i class="mdi mdi-36px mdi-school"></i>
                                     </div>
+<<<<<<< HEAD
                                     <h6 class="text-uppercase f-17 text-muted font-weight-bold " style="letter-spacing: 5px"> FPT UNIVERSITY</p</h6>
+=======
+                                    <h6 class="text-uppercase f-17 text-muted font-weight-bold " style="letter-spacing: 5px"> FPT University </p></h6>
+>>>>>>> 3fbc380cd5e538bd8c9a13c34963b733da9c4451
                                     <p class="border-top"></p>
                                     <p class="f-14 mb-1"> <%= resume.getMajor()%> </p>
                                     <p class="pb-3 mb-0"> GPA: <%= resume.getGpa()%> </p>                               

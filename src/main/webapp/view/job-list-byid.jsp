@@ -122,7 +122,7 @@
 
                         <div class="row"> 
                             <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_JOBPOST");
-                                if (listJob.isEmpty()) {
+                                if (listJob==null||listJob.isEmpty()) {
                                     String message = (String) request.getAttribute("MESSAGE");
                             %>
                             <div class="col-lg-12 text-warning text-center">
@@ -147,6 +147,10 @@
                                                 <div class="job-list-desc">
 
                                                     <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h6>
+<<<<<<< HEAD
+
+=======
+>>>>>>> 77c31e9c64ea4e7f0e78aba40360d77810a0aa81
                                                     <p class="text-muted mb-0"><i class="fa fa-list-alt mr-2"></i><%= job.getCategory().getCategoryName()%></p>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
@@ -154,7 +158,11 @@
                                                         </li>
 
                                                         <li class="list-inline-item">
+<<<<<<< HEAD
+                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i><%= job.getLastModifiedDate()%></p>
+=======
                                                             <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i><%= job.getExpiriedDate() %></p>
+>>>>>>> 77c31e9c64ea4e7f0e78aba40360d77810a0aa81
                                                         </li>
                                                     </ul>
                                                 </div>

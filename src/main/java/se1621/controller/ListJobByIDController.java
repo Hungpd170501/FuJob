@@ -44,7 +44,6 @@ public class ListJobByIDController extends HttpServlet {
                 request.setAttribute("LIST_JOBPOST", listJob);
                 url = SUCCESS;
             }else{
-                request.setAttribute("LIST_JOBPOST", listJob);
                 request.setAttribute("MESSAGE", "NO PROJECT TO DISPLAY");
             }
         } catch (Exception e) {

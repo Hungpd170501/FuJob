@@ -11,6 +11,9 @@
             <jsp:param name="title" value="FuJob | Create Resume"/>
         </jsp:include>
         <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
+<link rel="stylesheet" href="https://unpkg.com/filepond@^4/dist/filepond.css" type="text/css"/>
+<link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" type="text/css"/>
+<link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css" type="text/css"/>
         </head>
         <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
@@ -230,14 +233,12 @@
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-
         <script>
             $(document).ready(function () {
                 $('.select2').select2({
                     closeOnSelect: false
                 });
             });
-
             var img = $('#image').attr('src');
             if (img == "") {
                 document.getElementById("image").src = "https://imgfan.com/images/imgupload.jpg";

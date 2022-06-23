@@ -51,6 +51,12 @@ public class MainController extends HttpServlet {
     private static final String UNAPPLY = "UnApply";
     private static final String SEARCHCANDIDATEOFJOB = "SearchCandidateOfJob";
     private static final String SEARCHCANDIDATEOFJOB_CONTROLLER = "ListCandidateOfJob";
+    private static final String UPDATE_JOB_CATEGORY_CONTROLLER = "UpdateJobCategoryController";
+    private static final String UPDATE_JOB_CATEGORY = "UpdateJobCategory";
+    private static final String JOB_CATEGORY_CONTROLLER = "JobCategoryController";
+    private static final String JOB_CATEGORY = "JobCategory";
+    private static final String ADMIN_INDEX = "AdminIndex";
+    private static final String ADMIN_INDEX_CONTROLLER = "AdminIndexController";
     private static final String SEARCHJOBPOSTED = "searchJobPost";
     private static final String SEARCHJOBPOSTED_CONTROLLER = "SearchInJobPostedController";
     private static final String SEARCHJOBORDER = "SearchJobOrder";
@@ -108,6 +114,12 @@ public class MainController extends HttpServlet {
                 url = UNAPPLY_CONTROLLER;
             } else if (SEARCHCANDIDATEOFJOB.equals(action)) {
                 url = SEARCHCANDIDATEOFJOB_CONTROLLER;
+            }else if (UPDATE_JOB_CATEGORY.equals(action)) {
+                url = UPDATE_JOB_CATEGORY_CONTROLLER;
+            } else if (JOB_CATEGORY.equals(action)) {
+                url = JOB_CATEGORY_CONTROLLER;
+            }else if (ADMIN_INDEX.equals(action)) {
+                url = ADMIN_INDEX_CONTROLLER;
             } else if (SEARCHJOBPOSTED.equals(action)) {
                 url = SEARCHJOBPOSTED_CONTROLLER;
             } else if (SEARCHJOBORDER.equals(action)) {

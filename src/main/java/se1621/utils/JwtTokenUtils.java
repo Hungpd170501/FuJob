@@ -175,10 +175,4 @@ public class JwtTokenUtils {
         }
         return check;
     }
-//    public static void main(String[] args) {
-//        JwtTokenUtils jwtTokenUtils= new JwtTokenUtils();
-//        User user=new User(0, CLAIM_KEY_USERNAME, CLAIM_KEY_PASSWORD, CLAIM_KEY_USERNAME, CLAIM_KEY_USERNAME, CLAIM_KEY_CREATED, 0, new Role(CLAIM_KEY_CREATED, CLAIM_KEY_USERNAME));
-//        jwtTokenUtils.generateToken(user);
-//        System.out.println(jwtTokenUtils.generateToken(user));
-//    }
 }
