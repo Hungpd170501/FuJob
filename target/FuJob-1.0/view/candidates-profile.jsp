@@ -35,7 +35,6 @@
 
         <%
             for (Resume resume : listResume) {
-                int studentID = resume.getUserID();
         %>
         <!-- Start home -->
         <section class="bg-half page-next-level"> 
@@ -44,24 +43,13 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6">
                         <div class="candidates-profile-details text-center">
-                            <img src="https://via.placeholder.com/400X400//88929f/5a6270C/O https://placeholder.com/" height="150" alt="" class="d-block mx-auto shadow rounded-pill mb-4">
+                            <img id="image" src="<%= resume.getAvatar() %>" height="150" alt="" class="d-block mx-auto shadow rounded-pill mb-4">
                             <h5 class="text-white mb-2"> <%=resume.getFullName()%> </h5>
-                            <!--<p class="text-white-50 h6 mb-2"><i class="mdi mdi-bank mr-2"></i><%= resume.getWebsite()%></p>-->
                             <p class="text-white-50 h6 mb-2"><%=resume.getMajor()%></p>
-<!--                            <ul class="candidates-profile-icons list-inline mb-3">
-                                <li class="list-inline-item"><a href="#" class="text-warning"><i class="mdi mdi-star"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="text-warning"><i class="mdi mdi-star"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="text-warning"><i class="mdi mdi-star"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="text-warning"><i class="mdi mdi-star"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="text-warning"><i class="mdi mdi-star"></i></a></li>
-                            </ul>-->
-
                             <ul class="list-unstyled social-icon social mb-0">
-                                <li class="list-inline-item"><a href="#" class="rounded"><i class="mdi mdi-facebook"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="rounded"><i class="mdi mdi-web"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="rounded"><i class="mdi mdi-linkedin"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="rounded"><i class="mdi mdi-github-circle"></i></a></li>
-                                <!--<li class="list-inline-item"><a href="#" class="rounded"><i class="mdi mdi-google-plus"></i></a></li>-->
+                                <li class="list-inline-item"><a href="${pageScope.resume.website}" class="rounded"><i class="mdi mdi-web"></i></a></li>
+                                <li class="list-inline-item"><a href="${pageScope.resume.linkedIn}" class="rounded"><i class="mdi mdi-linkedin"></i></a></li>
+                                <li class="list-inline-item"><a href="${pageScope.resume.gitHub}" class="rounded"><i class="mdi mdi-github-circle"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -97,7 +85,7 @@
                                 
 
                                 <li class="list-inline-item mr-3 col-md-3">
-                                    <p href="" class="text-muted f-15 mb-0"><i class="mdi mdi-email mr-2">Gmail: </i><%= resume.getGmail()%></p>
+                                    <p href="" class="text-muted f-15 mb-0"><i class="mdi mdi-email mr-2">Email: </i><%= resume.getGmail()%></p>
                                 </li>
 
                                 <li class="list-inline-item mr-3">
@@ -105,7 +93,7 @@
                                 </li>
                                 
                                 <li class="list-inline-item mr-3 col-md-3">
-                                    <p href="" class="text-muted f-15 mb-0 "><i class="mdi mdi-timetable mr-2"></i>Joined November 25, 2020</p>
+                                    <p href="" class="text-muted f-15 mb-0 "><i class="mdi mdi-timetable mr-2"></i>Joined <%= resume.getCreatedDate() %></p>
                                 </li>
                             </ul>
                                <ul class="list-inline pt-3 border-top mb-0 row">
@@ -133,17 +121,12 @@
                                     <div class="profile-education-icon border rounded-pill bg-white text-primary">
                                         <i class="mdi mdi-36px mdi-school"></i>
                                     </div>
-<<<<<<< HEAD
                                     <h6 class="text-uppercase f-17 text-muted font-weight-bold " style="letter-spacing: 5px"> FPT UNIVERSITY</p</h6>
-=======
-                                    <h6 class="text-uppercase f-17 text-muted font-weight-bold " style="letter-spacing: 5px"> FPT University </p></h6>
->>>>>>> 3fbc380cd5e538bd8c9a13c34963b733da9c4451
                                     <p class="border-top"></p>
                                     <p class="f-14 mb-1"> <%= resume.getMajor()%> </p>
                                     <p class="pb-3 mb-0"> GPA: <%= resume.getGpa()%> </p>                               
                                 </div>
                             </div>
-                            <!--                    <div class="col-lg-3"></div>-->
                         </div>
                     </div>
                     <div class ="col-lg-6">
@@ -153,7 +136,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <!--                    <div class="col-lg-3"></div>-->
                             <div class="col-lg-12 mt-4 pt-5">
                                 <div class="border rounded candidates-profile-education text-center text-muted">
                                     <div class="profile-education-icon border rounded-pill bg-white text-primary">
@@ -170,10 +152,9 @@
                                         %>
                                         <%= listStudentSkill.get(listStudentSkill.size()-1).getSkill().getSkillName() %>
                                     </p>
-                                    <p class="pb-3 mb-0">Website: <%= resume.getWebsite()%> </p>                               
+                                    <p class="pb-3 mb-0">Website: ${pageScope.resume.website}</p>                               
                                 </div>
                             </div>
-                            <!--                    <div class="col-lg-3"></div>-->
                         </div>
                     </div>
                 </div>
@@ -206,5 +187,11 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
+        <script>
+            var img = $('#image').attr('src');
+            if (img == "") {
+                document.getElementById("image").src = "https://imgfan.com/images/imgupload.jpg";
+            }
+        </script>
     </body>
 </html>
