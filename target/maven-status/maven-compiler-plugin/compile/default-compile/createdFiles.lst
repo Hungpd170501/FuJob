@@ -23,11 +23,12 @@ se1621\utils\EmailUtils$1.class
 se1621\controller\SignUpController.class
 se1621\controller\CheckCreateResumeController.class
 se1621\dto\Skill$SkillBuilder.class
-se1621\dto\JobOrder.class
+se1621\dto\JobApplication$JobApplicationBuilder.class
 se1621\dto\Role.class
 se1621\utils\DBUtils.class
 se1621\dto\PayMentMethod.class
 se1621\controller\SearchJobTitle_Exper_CateController.class
+se1621\dao\JobApplicationDAO.class
 se1621\controller\CreateCompanyInfoController.class
 se1621\utils\Helper.class
 se1621\dao\AuthDAO.class
@@ -49,12 +50,12 @@ se1621\controller\SearchInJobPostedController.class
 se1621\controller\RecoveryPasswordController.class
 se1621\dto\StudentSkill$StudentSkillBuilder.class
 se1621\utils\GoogleRacaptcha.class
+se1621\dto\JobApplication.class
 se1621\controller\ViewAllJobOrderController.class
 se1621\controller\ListCandidateOfJob.class
 se1621\controller\LoginGoogleHandler.class
 se1621\dto\Skill.class
 se1621\dao\SkillRequireDAO.class
-se1621\dao\JobOrderDAO.class
 se1621\dao\JobSkillsDAO.class
 se1621\controller\RecoveryPasswordHandler.class
 se1621\controller\EmailVerifyHandler.class
@@ -65,7 +66,6 @@ se1621\controller\ViewAllHRController.class
 se1621\dto\Category.class
 se1621\constant\Constant.class
 se1621\controller\OrderJobController.class
-se1621\dto\JobOrder$JobOrderBuilder.class
 se1621\dto\SkillRequire$SkillRequireBuilder.class
 se1621\controller\MainController.class
 se1621\dto\Error\UserError.class

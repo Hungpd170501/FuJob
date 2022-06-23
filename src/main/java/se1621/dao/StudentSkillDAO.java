@@ -19,12 +19,12 @@ import se1621.utils.DBUtils;
  * @author HNGB
  */
 public class StudentSkillDAO {
-    private static final String CREATESTUDENTSKILL = "INSERT INTO tblStudentSkill (studentID, skillID) VALUES (?, ?)";
-    private static final String GETSTUDENTSKILL = "SELECT stskill.StudentSkillID, stskill.StudentID, stskill.skillID, skill.skillName "
-            + "FROM (tblStudentSkill stskill left join tblSkill skill on stskill.skillID = skill.skillID) "
-            + "WHERE stskill.StudentID = ?";
-    private  static final String DELETESKILL = "DELETE FROM tblStudentSkill WHERE StudentID = ? ";
-    private  static final String CHECKSTUDENTHAVESKILL = "SELECT StudentSkillID FROM tblStudentSkill WHERE StudentID = ? ";
+    private static final String CREATESTUDENTSKILL = "INSERT INTO tblResumeSkills (resumeID, skillID) VALUES (?, ?)";
+    private static final String GETSTUDENTSKILL = "SELECT stskill.resumeSkillID, stskill.resumeID, stskill.skillID, skill.skillName "
+            + "FROM (tblResumeSkills stskill left join tblSkills skill on stskill.skillID = skill.skillID) "
+            + "WHERE stskill.resumeID = ?";
+    private  static final String DELETESKILL = "DELETE FROM tblResumeSkills WHERE resumeID = ? ";
+    private  static final String CHECKSTUDENTHAVESKILL = "SELECT resumeSkillID FROM tblResumeSkills WHERE resumeID = ? ";
 
     Connection conn;
     PreparedStatement preStm;
@@ -66,7 +66,7 @@ public class StudentSkillDAO {
                 preStm.setInt(1, studentID);
                 rs = preStm.executeQuery();
                 while (rs.next()) {
-                    int studentSkillID = rs.getInt("studentSkillID");
+                    int studentSkillID = rs.getInt("resumeSkillID");
                     int skillID = rs.getInt("skillID");
                     String skillName = rs.getString("skillName");
                     Skill skill = Skill.builder().skillID(skillID).skillName(skillName).build();

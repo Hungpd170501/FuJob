@@ -108,13 +108,13 @@
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
 
-        <script src="https://www.google.com/recaptcha/api.js?render=6LeCa7IeAAAAAFhlitWRqflibLyvju1K_P5U52dj"></script>
+<!--        <script src="https://www.google.com/recaptcha/api.js?render=6LeCa7IeAAAAAFhlitWRqflibLyvju1K_P5U52dj"></script>
         <script>
             grecaptcha.ready(function () {
                 grecaptcha.execute('6LeCa7IeAAAAAFhlitWRqflibLyvju1K_P5U52dj', {action: ''}).then(function (token) {
                     document.getElementById('recaptToken').value = token;
                 });
             });
-        </script>
+        </script>-->
     </body>
 </html>

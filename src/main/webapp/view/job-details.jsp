@@ -3,6 +3,7 @@
     Created on : Jun 1, 2022, 7:52:12 AM
     Author     : HNGB
 --%>
+<%@page import="se1621.dao.JobApplicationDAO"%>
 <%@page import="se1621.dao.ResumeDAO"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.time.LocalDate"%>
@@ -10,7 +11,6 @@
 <%@page import="se1621.dto.JobSkills"%>
 <%@page import="java.util.List"%>
 <%@page import="se1621.dto.SkillRequire"%>
-<%@page import="se1621.dao.JobOrderDAO"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="se1621.dto.User"%>
 <%@page import="se1621.dto.Job"%>
@@ -85,7 +85,7 @@
                                     %>
                                     <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
                                     </p>
-                                    <p class=" mb-3"><h7 style="font-weight: 700"> Budget: </h7><%= job.getBudget()%> $ <% if(job.getPaymentMethodID() == 2)
+                                    <p class=" mb-3"><h7 style="font-weight: 700"> Budget: </h7><%= job.getBudget()%> $ <% if(job.getPayMentMethod().getPaymentMethodID() == 2)
                                     { %> 
                                         / hour
                                     <% } %></p>
@@ -158,7 +158,7 @@
                         </div>
                         <%
                         } else if (loginUser != null && !StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
-                            JobOrderDAO jobOrderDAO = new JobOrderDAO();
+                            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
                             ResumeDAO resumeDAO = new ResumeDAO();
                             boolean checkDuplicateUserOrderJob = jobOrderDAO.checkDuplicateJobOrderByOneUser(resumeDAO.getResumeID(loginUser.getUserID()), job.getJobID());
                             if (checkDuplicateUserOrderJob) {

@@ -14,6 +14,7 @@ import java.util.List;
 import se1621.utils.DBUtils;
 import se1621.dto.Category;
 import se1621.dto.Job;
+import se1621.dto.PayMentMethod;
 
 /**
  *
@@ -23,27 +24,35 @@ public class JobDAO {
 
     private static final String CREATEJOB = "INSERT INTO tblJobs(userID, jobTitle, jobCategoryID,"
             + " budget, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,1)";
+    //xong ne
     private String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.address, j.budget, j.paymentMethodID, "
-            + "j.email, j.phone, j.description, j.createdDate, j.lastModifiedDate, j.expiriedDate, j.jobStatus, "
-            + "j.jobCategoryID, cate.categoryName, cate.img, js.skillID "
-            + "FROM ((tblJobs j left join tblJobSkills js on j.jobID = js.jobID) left join tblCategories cate on cate.categoryID = j.jobCategoryID) ";
+            + "            j.email, j.phone, j.description, j.createdDate, j.lastModifiedDate, j.expiriedDate, j.jobStatus, "
+            + "            j.jobCategoryID, cate.categoryName, cate.img, js.skillID , pay.paymentMethodName"
+            + "            FROM (((tblJobs j left join tblJobSkills js on j.jobID = js.jobID) left join tblCategories cate on cate.categoryID = j.jobCategoryID) "
+            + "			left join tblPaymentMethods pay on j.paymentMethodID = pay.paymentMethodID)"
+            + "    ";
     private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJobs WHERE jobID = (SELECT MAX(jobID) FROM tblJobs) and jobStatus = 1 and userID = ?";
-    private static final String SEARCHBYJOBID = "SELECT * FROM tblJobs WHERE jobID = ? and jobStatus = 1";
-
-    private static final String VIEWALLJOB = "SELECT j.jobID, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate"
-            + "            FROM (tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)"
-            + "            WHERE j.jobStatus = 1 ORDER BY createdDate DESC";
-
-    private static final String VIEWHRJOB = "SELECT j.jobID, j.jobTitle, j.lastDateUpdate, j.address, c.categoryName, c.img, j.ExperienceNeeded "
-            + "FROM (((tblJob j left join tblCategory c on j.jobCategoryID = c.categoryID) left join tblUser u on j.userID = u.userID) "
-            + "left join tblCompany com on u.companyID = com.companyID) "
-            + "WHERE j.jobStatus = 1 and j.userID = ?";
+    //roi ne
+    private static final String SEARCHBYJOBID = "SELECT j.jobID, j.userID, j.jobTitle,j.jobCategoryID, j.budget, j.paymentMethodID, payment.paymentMethodName, j.address, j.email, j.phone, j.description, j.createdDate, j.lastModifiedDate, j.expiriedDate, j.jobStatus FROM tblJobs j "
+            + "            left join tblPaymentMethods payment on j.paymentMethodID = payment.paymentMethodID "
+            + "           WHERE jobID = ? and jobStatus = 1";
+    //roi ne
+    private static final String VIEWALLJOB = "SELECT j.jobID, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate, pay.paymentMethodName"
+            + "                        FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)"
+            + "						left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID )"
+            + "                        WHERE j.jobStatus = 1 ORDER BY createdDate DESC";
+    //sua roi 
+    private static final String VIEWHRJOB = "SELECT j.jobID, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate, p.paymentMethodName"
+            + "                      FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) left join tblPaymentMethods p on p.paymentMethodID = j.paymentMethodID) "
+            + "                    WHERE j.jobStatus = 1 AND j.userID=? ORDER BY createdDate DESC";
     private static final String DELETEJOBPOST = "UPDATE tblJobs SET jobStatus=0 WHERE jobID=?";
     private static final String GETALLNUMBEROFJOBPOST = "SELECT COUNT (*) AS totalJob FROM tblJobs";
-    private static final String GETVIEWRECENTJOB = "SELECT TOP(8) j.jobID, j.jobTitle, j.address, j.budget, c.categoryName, c.img, j.paymentMethodID, j.createdDate, j.lastModifiedDate, j.expiriedDate"
-            + "                        FROM (((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) left join tblUsers u on j.userID = u.userID)"
-            + "                        left join tblCompanies com on u.companyID = com.companyID)"
-            + "                       WHERE j.jobStatus = 1 ORDER BY createdDate DESC";
+    //roi ne
+    private static final String GETVIEWRECENTJOB = "SELECT TOP(8) j.jobID, j.jobTitle, j.address, j.budget, c.categoryName, c.img, j.paymentMethodID, j.createdDate, j.lastModifiedDate, j.expiriedDate, pay.paymentMethodName"
+            + "                                    FROM ((((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) left join tblUsers u on j.userID = u.userID)"
+            + "                                    left join tblCompanies com on u.companyID = com.companyID)"
+            + "									left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
+            + "                                 WHERE j.jobStatus = 1 ORDER BY createdDate DESC";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -63,17 +72,20 @@ public class JobDAO {
                     String categoryName = rs.getString("categoryName");
                     int budget = rs.getInt("budget");
                     int paymentMethodID = rs.getInt("paymentMethodID");
+                    String paymentMethodName = rs.getString("paymentMethodName");
                     String img = rs.getString("img");
                     Date createdDate = rs.getDate("createdDate");
                     Date lastModifiedDate = rs.getDate("lastModifiedDate");
                     Date expiriedDate = rs.getDate("expiriedDate");
+
                     Category category = Category.builder().categoryName(categoryName).img(img).build();
+                    PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder()
                             .jobID(jobID)
                             .jobTitle(jobTitle)
                             .address(address)
                             .budget(budget)
-                            .paymentMethodID(paymentMethodID)
+                            .payMentMethod(payMent)
                             .category(category)
                             .createdDate(createdDate)
                             .lastModifiedDate(lastModifiedDate)
@@ -180,10 +192,12 @@ public class JobDAO {
                     Date createdDate = rs.getDate("createdDate");
                     Date expiriedDate = rs.getDate("expiriedDate");
                     int paymentMethodID = rs.getInt("paymentMethodID");
+                    String paymentMethodName = rs.getString("paymentMethodName");
                     int budget = rs.getInt("budget");
                     String categoryName = rs.getString("categoryName");
                     String img = rs.getString("img");
                     Category category = Category.builder().categoryName(categoryName).img(img).build();
+                    PayMentMethod payment = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder()
                             .jobID(jobID)
                             .jobTitle(jobTitle)
@@ -193,7 +207,7 @@ public class JobDAO {
                             .lastModifiedDate(lastModifiedDate)
                             .createdDate(createdDate)
                             .expiriedDate(expiriedDate)
-                            .paymentMethodID(paymentMethodID)
+                            .payMentMethod(payment)
                             .budget(budget)
                             .build();
                     listJob.add(job);
@@ -232,6 +246,7 @@ public class JobDAO {
                     int jobCategoryID = rs.getInt("jobCategoryID");
                     int budget = rs.getInt("budget");
                     int paymentMethodID = rs.getInt("paymentMethodID");
+                    String paymentMethodName = rs.getString("paymentMethodName");
                     String address = rs.getString("address");
                     String email = rs.getString("email");
                     String phone = rs.getString("phone");
@@ -245,7 +260,7 @@ public class JobDAO {
                             .jobTitle(jobTitle)
                             .category(Category.builder().categoryID(jobCategoryID).build())
                             .budget(budget)
-                            .paymentMethodID(paymentMethodID)
+                            .payMentMethod(PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build())
                             .createdDate(createdDate)
                             .lastModifiedDate(lastModifiedDate)
                             .expiriedDate(expiriedDate)
@@ -355,6 +370,7 @@ public class JobDAO {
                     String img = rs.getString("img");
                     int budget = rs.getInt("budget");
                     int paymentMethodID = rs.getInt("paymentMethodID");
+                    String paymentMethodName = rs.getString("paymentMethodName");
                     String address = rs.getString("address");
                     String email = rs.getString("email");
                     String phone = rs.getString("phone");
@@ -365,13 +381,14 @@ public class JobDAO {
                     int jobStatus = rs.getInt("jobStatus");
 
                     Category category = Category.builder().categoryID(jobCategoryID).categoryName(categoryName).img(img).build();
+                    PayMentMethod payment = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     listJob.add(Job.builder()
                             .jobID(jobID)
                             .userID(userID)
                             .jobTitle(jobTitle)
                             .category(category)
                             .budget(budget)
-                            .paymentMethodID(paymentMethodID)
+                            .payMentMethod(payment)
                             .createdDate(createdDate)
                             .lastModifiedDate(lastModifiedDate)
                             .expiriedDate(expiriedDate)
@@ -475,17 +492,29 @@ public class JobDAO {
                 while (rs.next()) {
                     int jobID = rs.getInt("jobID");
                     String jobTitle = rs.getString("jobTitle");
-                    String ExperienceNeeded = rs.getString("ExperienceNeeded");
-                    String categoryName = rs.getString("categoryName");
+                    Date lastModifiedDate = rs.getDate("lastModifiedDate");
                     String address = rs.getString("address");
+                    String description = rs.getString("description");
+                    Date createdDate = rs.getDate("createdDate");
+                    Date expiriedDate = rs.getDate("expiriedDate");
+                    int paymentMethodID = rs.getInt("paymentMethodID");
+                    String paymentMethodName = rs.getString("paymentMethodName");
+                    int budget = rs.getInt("budget");
+                    String categoryName = rs.getString("categoryName");
                     String img = rs.getString("img");
-                    Date lastDateUpdate = rs.getDate("lastDateUpdate");
                     Category category = Category.builder().categoryName(categoryName).img(img).build();
+                    PayMentMethod payment = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder()
                             .jobID(jobID)
                             .jobTitle(jobTitle)
                             .address(address)
                             .category(category)
+                            .description(description)
+                            .lastModifiedDate(lastModifiedDate)
+                            .createdDate(createdDate)
+                            .expiriedDate(expiriedDate)
+                            .payMentMethod(payment)
+                            .budget(budget)
                             .build();
                     listHrJob.add(job);
                 }

@@ -20,7 +20,7 @@
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
         <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
         <jsp:useBean id="totalJobPost" class="se1621.dao.JobDAO" scope="request"></jsp:useBean>
-        <jsp:useBean id="totalJobOrder" class="se1621.dao.JobOrderDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="totalJobOrder" class="se1621.dao.JobApplicationDAO" scope="request"></jsp:useBean>
         <jsp:useBean id="totalUserNonAD" class="se1621.dao.UserDAO" scope="request"></jsp:useBean>
         <jsp:useBean id="RecentJob" class="se1621.dao.JobDAO" scope="request"></jsp:useBean>
 
@@ -274,102 +274,7 @@
                 </div>
             </div>
         </div>
-        <!-- How it Work end -->
-
-        <!--         testimonial start 
-                <section class="section">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-12">
-                                <div class="section-title text-center mb-4 pb-2">
-                                    <h4 class="title title-line pb-5">Our Success Stories</h4>
-                                    <p class="text-muted para-desc mx-auto mb-1">Post a project to tell us about your project. We'll quickly match you with the right freelancers.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row pt-4">
-                            <div class="col-lg-12">
-                                <div id="owl-testi" class="owl-carousel owl-theme">
-                                    <div class="item testi-box rounded p-4 mr-3 ml-2 mb-4 bg-light position-relative">
-                                        <p class="text-muted mb-5">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet consecteturqui adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam</p>
-                                        <div class="clearfix">
-                                            <div class="testi-img float-left mr-3">
-                                                <img src="https://via.placeholder.com/400X400//88929f/5a6270C/O https://placeholder.com/" height="64" alt="" class="rounded-circle shadow">
-                                            </div>
-                                            <h5 class="f-18 pt-1">Kevin Stewart</h5>
-                                            <p class="text-muted mb-0">Web Designer at xyz Company</p>
-                                            <div class="testi-icon">
-                                                <i class="mdi mdi-format-quote-open display-2"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-        
-                                    <div class="item testi-box rounded p-4 mr-3 ml-2 bg-light position-relative">
-                                        <p class="text-muted mb-5">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo</p>
-                                        <div class="clearfix">
-                                            <div class="testi-img float-left mr-3">
-                                                <img src="https://via.placeholder.com/400X400//88929f/5a6270C/O https://placeholder.com/" height="64" alt="" class="rounded-circle shadow">
-                                            </div>
-                                            <h5 class="f-18 pt-1">Charles Garrett</h5>
-                                            <p class="text-muted mb-0">Marketing manager at abc Company</p>
-                                            <div class="testi-icon">
-                                                <i class="mdi mdi-format-quote-open display-2"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-        
-                                    <div class="item testi-box rounded p-4 mr-3 ml-2 bg-light position-relative">
-                                        <p class="text-muted mb-5">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet consecteturqui adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam</p>
-                                        <div class="clearfix">
-                                            <div class="testi-img float-left mr-3">
-                                                <img src="https://via.placeholder.com/400X400//88929f/5a6270C/O https://placeholder.com/" height="64" alt="" class="rounded-circle shadow">
-                                            </div>
-                                            <h5 class="f-18 pt-1">Perry Martinez</h5>
-                                            <p class="text-muted mb-0">Marketing manager at abc Company</p>
-                                            <div class="testi-icon">
-                                                <i class="mdi mdi-format-quote-open display-2"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-        
-                            </div>
-                        </div>
-                    </div>
-        
-                                <div class="container mt-100 mt-60">
-                                    <div class="row justify-content-center">
-                                        <div class="col-12">
-                                            <div class="section-title text-center mb-4 pb-2">
-                                                <h4 class="title title-line pb-5">Our Client's</h4>
-                                                <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                    
-                                    <div class="row align-items-center">
-                                        <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                                            <img src="${pageContext.request.contextPath}/asset/images/clients/1.png" height="50" alt="">
-                                        </div>end col
-                                        <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                                            <img src="${pageContext.request.contextPath}/asset/images/clients/2.png" height="50" alt="">
-                                        </div>end col
-                                        <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                                            <img src="${pageContext.request.contextPath}/asset/images/clients/3.png" height="50" alt="">
-                                        </div>end col
-                                        <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                                            <img src="${pageContext.request.contextPath}/asset/images/clients/4.png" height="50" alt="">
-                                        </div>end col
-                                        <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                                            <img src="${pageContext.request.contextPath}/asset/images/clients/1.png" height="50" alt="">
-                                        </div>end col
-                                        <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                                            <img src="${pageContext.request.contextPath}/asset/images/clients/2.png" height="50" alt="">
-                                        </div>end col
-                                    </div>
-                                </div>
-                </section>
-                 testimonial end -->
+      
 
         <jsp:include page="./include/footer.jsp"></jsp:include>
             <!-- javascript -->
