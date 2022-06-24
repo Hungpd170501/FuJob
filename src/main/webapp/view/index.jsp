@@ -49,7 +49,7 @@
                                                 <div class="col-lg-3 col-md-6">
                                                     <div class="registration-form-box">
                                                         <i class="fa fa-briefcase"></i>
-                                                        <input type="text" name="searchtitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
+                                                        <input type="text" name="searchTitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
@@ -215,7 +215,7 @@
                                     <i class="mdi mdi-account-multiple-plus h1 text-white"></i>
                                 </div>
                                 <h1 class="counter-value text-white mb-1" data-count="${totalUserNonAD.allTotalUser_NonAD}">0</h1>
-                                <p class="counter-name text-white text-uppercase mb-0">Member</p>
+                                <p class="counter-name text-white text-uppercase mb-0">Members</p>
                             </div>
                         </div>
                     </div>

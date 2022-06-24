@@ -30,6 +30,7 @@ se1621\controller\SearchInJobOrderController.class
 se1621\dao\ResumeDAO.class
 se1621\entity\JobEntity$JobEntityBuilder.class
 se1621\dto\UserGoogle.class
+se1621\controller\NewServlet.class
 se1621\dao\v2\BaseDAO.class
 se1621\controller\ViewAllJobController.class
 se1621\entity\CompanyEntity.class

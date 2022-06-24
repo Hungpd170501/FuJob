@@ -47,9 +47,9 @@
                             <h5 class="text-white mb-2"> <%=resume.getFullName()%> </h5>
                             <p class="text-white-50 h6 mb-2"><%=resume.getMajor()%></p>
                             <ul class="list-unstyled social-icon social mb-0">
-                                <li class="list-inline-item"><a href="${pageScope.resume.website}" class="rounded"><i class="mdi mdi-web"></i></a></li>
-                                <li class="list-inline-item"><a href="${pageScope.resume.linkedIn}" class="rounded"><i class="mdi mdi-linkedin"></i></a></li>
-                                <li class="list-inline-item"><a href="${pageScope.resume.gitHub}" class="rounded"><i class="mdi mdi-github-circle"></i></a></li>
+                                <li class="list-inline-item"><a href="<%= resume.getWebsite() %>" class="rounded"><i class="mdi mdi-web"></i></a></li>
+                                <li class="list-inline-item"><a href="<%= resume.getLinkedIn() %>" class="rounded"><i class="mdi mdi-linkedin"></i></a></li>
+                                <li class="list-inline-item"><a href="<%= resume.getGitHub() %>" class="rounded"><i class="mdi mdi-github-circle"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -148,7 +148,7 @@
                                         %>
                                         <%= listStudentSkill.get(listStudentSkill.size() - 1).getSkill().getSkillName()%>
                                     </p>
-                                    <p class="pb-3 mb-0">Website: ${pageScope.resume.website}</p>                               
+                                    <p class="pb-3 mb-0">Website: <%= resume.getWebsite() %></p>                               
                                 </div>
                             </div>
                         </div>

@@ -15,7 +15,7 @@
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
-
+        <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
             <!-- Start home -->
             <section class="bg-half page-next-level"> 
                 <div class="bg-overlay"></div>
@@ -45,25 +45,22 @@
                             <div class="home-registration-form job-list-reg-form bg-light shadow p-4 mb-3">
                                 <!-- START SEARCH -->
                                 <form class="registration-form" action="${pageContext.request.contextPath}/MainController">
-                                <!--                                <form class="registration-form">-->
+                                <!--<form class="registration-form">-->
                                 <div class="row">
                                     <div class="col-lg-3 col-md-6">
                                         <div class="registration-form-box">
                                             <i class="fa fa-briefcase"></i>
-                                            <input type="text" name="searchtitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
+                                            <input type="text" name="searchTitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-6">
                                         <div class="registration-form-box">
                                             <i class="fa fa-archive"></i>
-                                            <select class="demo-default" id="select-category" name="searchExper">
-                                                <!--                                                <select class="demo-default" id="select-category" required="">-->
-                                                <option value="">Experience</option>
-                                                <option value="Less than 1 year">Less than 1 year</option>
-                                                <option value="1-3 years">1-3 years</option>
-                                                <option value="3-5 years">3-5 years</option>
-                                                <option value="5-10 years">5-10 years</option>
-                                                <option value="More than 10 years">More than 10 years</option>
+                                            <select class="demo-default" id="select-category" name="searchSkill" >
+                                                <option value="">Skill...</option>
+                                                <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                    <option value="${i.skillID}">${i.skillName}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
@@ -71,7 +68,6 @@
                                         <div class="registration-form-box">
                                             <i class="fa fa-list-alt"></i>
                                             <select id="select-category" class="demo-default" name="searchCate">
-                                                <!--<select id="select-category" class="demo-default">-->
                                                 <option value="">Categories...</option>
                                                 <c:forEach items="${chooseCategory.listCategory}" var="i">
                                                     <option value="${i.categoryID}">${i.categoryName}</option>
@@ -81,7 +77,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-6">
                                         <div class="registration-form-box">
-                                            <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Submit">
+                                            <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Find">
                                             <!-- name = action  -->
                                             <input type="hidden" name ="action" value="SearchJobOrder">
                                             <input type="hidden" name ="studentID" value="${sessionScope.LOGIN_USER.userID}">
@@ -121,7 +117,7 @@
 
                         <div class="row"> 
                             <% List<JobApplication> listJobApplication = (List<JobApplication>) request.getAttribute("LIST_ALLJOBORDER");
-                                 if (listJobApplication.isEmpty()) {
+                                if (listJobApplication.isEmpty()) {
 
                                     String message = (String) request.getAttribute("MESSAGE");
                             %>
@@ -140,7 +136,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-lg-2">
                                                 <div class="company-logo-img">
-                                                    <img src="<%= jobOrder.getJob().getCategory().getImg() %>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:150px;height:150px">
+                                                    <img src="<%= jobOrder.getJob().getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:150px;height:150px">
                                                 </div>
                                             </div>
                                             <div class="col-lg-7 col-md-9">
@@ -153,7 +149,7 @@
                                                         </li>
 
                                                         <li class="list-inline-item">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i><%= jobOrder.getLastModifiedDate() %></p>
+                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i><%= jobOrder.getLastModifiedDate()%></p>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -166,11 +162,11 @@
                                                     </div>
 
                                                     <div class="mt-3">
-                                                        
+
                                                         <button onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation">
                                                             Cancel
                                                         </button>
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -203,8 +199,7 @@
                                 }
 
                             %>
-                            <%
-                                    if (listJobApplication.size() > 10) {
+                            <%                                if (listJobApplication.size() > 10) {
                             %>
                             <div class="smj col-12 text-center mt-4 pt-2">
                                 <a class="btn btn-primary-outline">Show more</a>
@@ -245,20 +240,20 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-        <script> 
-            function getJobOrderID(id, userID){
-                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=UnApply&jobOrderID='+id+'&userID='+userID);
-            }
+        <script>
+                                                            function getJobOrderID(id, userID) {
+                                                                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=UnApply&jobOrderID=' + id + '&userID=' + userID);
+                                                            }
         </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-            $(".job-display").slice(0, 10).show();
-            $(".smj").on("click", function () {
-                $(".job-display:hidden").slice(0, 5).slideDown();
-                if ($(".job-display:hidden").length == 0) {
-                    $(".smj").fadeOut('slow');
-                }
-            });
+                                                            $(".job-display").slice(0, 10).show();
+                                                            $(".smj").on("click", function () {
+                                                                $(".job-display:hidden").slice(0, 5).slideDown();
+                                                                if ($(".job-display:hidden").length == 0) {
+                                                                    $(".smj").fadeOut('slow');
+                                                                }
+                                                            });
         </script>
     </body>
 </html>

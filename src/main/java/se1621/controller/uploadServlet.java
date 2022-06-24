@@ -45,6 +45,7 @@ public class uploadServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<a href="+filename+">"+filename+"</a>");
+            out.println("<h1> "+request.getParameter("action")+" </h1>");
             out.println("<img src='"+filename+"' height='150'>");
             out.println("</body>");
             out.println("</html>");

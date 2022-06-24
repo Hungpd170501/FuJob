@@ -15,12 +15,12 @@
         <form method="post" action="${pageContext.request.contextPath}/uploadServlet" enctype="multipart/form-data">
             <table border="0">
                 <tr>
-                    <div class="preview">
-                       <img id="file-ip-1-preview" class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill">
-                    </div>
-                    <div class="col-2">
-                        <input type="file" id="imageFile" name="file" onchange="showPreview(event);"/>
-                    </div>
+                <div class="preview">
+                    <img id="file-ip-1-preview" class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill">
+                </div>
+                <div class="col-2">
+                    <input type="file" id="imageFile" name="file" onchange="showPreview(event);"/>
+                </div>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -35,11 +35,12 @@
         </br>
         </br>
         <h1>File Upload Demo</h1>
-        <form method="post" action="${pageContext.request.contextPath}/uploadServlet" enctype="multipart/form-data">
+        <form method="post" action="${pageContext.request.contextPath}/MainController" enctype="multipart/form-data">
             <table border="0">
                 <tr>
                     <td> 
                         <input type="file" name="file"/>
+                        <input type="hidden" name="action" value="Send application"/>
                     </td>
                 </tr>
                 <tr>
@@ -51,14 +52,14 @@
         </form>
     </center>
     <script>
-        function showPreview(event){
-            if(event.target.files.length > 0){
-              var src = URL.createObjectURL(event.target.files[0]);
-              var preview = document.getElementById("file-ip-1-preview");
-              preview.src = src;
-              preview.style.display = "block";
+        function showPreview(event) {
+            if (event.target.files.length > 0) {
+                var src = URL.createObjectURL(event.target.files[0]);
+                var preview = document.getElementById("file-ip-1-preview");
+                preview.src = src;
+                preview.style.display = "block";
             }
         }
     </script>
-    </body>
+</body>
 </html>

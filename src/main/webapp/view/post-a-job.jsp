@@ -49,7 +49,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group app-label mt-2">
                                                     <label>Project Name<span class="text-danger">*</span></label>
-                                                    <input id="jobtitle" name="jobtitle" type="text" class="form-control resume" required="" placeholder="Enter your project name">
+                                                    <input id="jobtitle" name="jobTitle" type="text" class="form-control resume" required="" placeholder="Enter your project name">
 
                                                 </div>
                                             </div>
@@ -84,13 +84,13 @@
                                                 <label>How do you want to pay?<span class="text-danger">*</span></label>
                                                 <div class="row form-button">
                                                     <div class="col-lg-7 p-1 col-md-6">
-                                                        <select class="form-control resume">
-                                                            <option value="Pay by the hour">Pay by the hour</option>
-                                                            <option value="Pay fixed price">Pay fixed price</option>
+                                                        <select class="form-control resume" name="paymentMethodID">
+                                                            <option value="1">Pay by the hour</option>
+                                                            <option value="2">Pay fixed price</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-4 p-1 col-md-5" >
-                                                        <input id="salary" name="salary" type="text" class="form-control resume" required="" placeholder="100">
+                                                        <input id="budget" name="budget" type="text" class="form-control resume" required="" placeholder="100">
                                                     </div>
                                                     <div class="col-lg-1 p-2 col-md-1">
                                                         <h5>$</h5>

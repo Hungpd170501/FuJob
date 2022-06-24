@@ -6,10 +6,11 @@ package se1621.controller;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+@MultipartConfig(maxFileSize = 16177215)
 public class MainController extends HttpServlet {
 
     private static final String SIGNUP_CONTROLLER = "SignUpController";

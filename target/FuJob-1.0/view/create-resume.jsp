@@ -11,9 +11,9 @@
             <jsp:param name="title" value="FuJob | Create Resume"/>
         </jsp:include>
         <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
-<link rel="stylesheet" href="https://unpkg.com/filepond@^4/dist/filepond.css" type="text/css"/>
-<link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" type="text/css"/>
-<link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css" type="text/css"/>
+            <link rel="stylesheet" href="https://unpkg.com/filepond@^4/dist/filepond.css" type="text/css"/>
+            <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" type="text/css"/>
+            <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css" type="text/css"/>
         </head>
 
         <body>
@@ -59,8 +59,8 @@
 
                             <form action="/FuJob/MainController" method="POST">
                                 <label class="col-md-12">
-                                    <input type="file" style="display: none" id="imageFile" name="avatar" > <p class="text-muted text-center">Upload Your Avatar</p>
-                                    <img style="cursor:  pointer" id="image"   src="<%= resume.getAvatar()%>" class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill" alt="" >
+                                    <input type="file" style="display: none" id="imageFile" name="avatar" onchange="showPreview(event);" > <p class="text-muted text-center">Upload Your Avatar</p>
+                                    <img style="cursor:  pointer" id="file-ip-1-preview" onerror="this.src='${pageContext.request.contextPath}/asset/images/avatar-default.jpg';"  src="<%= resume.getAvatar()%>" class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill" alt="avatar">
                                 </label>
                                 <div class="row mt-4">
                                     <div class="col-md-4">
@@ -182,26 +182,26 @@
                                         <div class="form-group app-label">
                                             <label class="text-muted">Your Website:</label>
 
-                                            <input id="website" name="website" type="text" class="form-control resume" placeholder="If u have a website of yourself, fill in here" value="${pageScope.resume.website}">
+                                            <input id="website" name="website" type="text" class="form-control resume" placeholder="If u have a website of yourself, fill in here" value="<%= resume.getWebsite() %>">
 
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group app-label">
                                             <label class="text-muted">Your GitHub</label>
-                                            <input id="" name="github" type="text" class="form-control resume" placeholder="If u have a github, fill in here " value="${pageScope.resume.gitHub}">
+                                            <input id="" name="github" type="text" class="form-control resume" placeholder="If u have a github, fill in here " value="<%= resume.getGitHub() %>">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group app-label">
                                             <label class="text-muted">Your LinkedIn</label>
-                                            <input id="" name="linkedIn" type="text" class="form-control resume" placeholder="If u have a linkedin, fill in here " value="${pageScope.resume.linkeIn}">
+                                            <input id="" name="linkedIn" type="text" class="form-control resume" placeholder="If u have a linkedin, fill in here " value="<%= resume.getLinkedIn() %>">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group app-label">
                                             <label class="text-muted">Self-Introduction<span class="text-danger">*</span> :</label>
-                                            <textarea id="seflintro" name="seflintro" type="text" class="form-control resume" required="" placeholder="Self-Introduction :"><%= resume.getOverview()%></textarea>
+                                            <textarea id="seflintro" name="seflintro" type="text" class="form-control resume" required="" placeholder="Self-Introduction :"><%= resume.getOverview() %></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -242,14 +242,20 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
         <script>
-            $(document).ready(function () {
-                $('.select2').select2({
-                    closeOnSelect: false
-                    });
-            });
-            var img = $('#image').attr('src');
-            if (img == "") {
-                document.getElementById("image").src = "https://imgfan.com/images/imgupload.jpg";
+                                        $(document).ready(function () {
+                                            $('.select2').select2({
+                                                closeOnSelect: false
+                                            });
+                                        });
+        </script>
+        <script>
+            function showPreview(event) {
+                if (event.target.files.length > 0) {
+                    var src = URL.createObjectURL(event.target.files[0]);
+                    var preview = document.getElementById("file-ip-1-preview");
+                    preview.src = src;
+                    preview.style.display = "block";
+                }
             }
         </script>
     </body>

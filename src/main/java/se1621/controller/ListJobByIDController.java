@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import se1621.dao.JobDAO;
 import se1621.dao.JobSkillsDAO;
@@ -43,15 +44,23 @@ public class ListJobByIDController extends HttpServlet {
             int userID = Integer.parseInt(request.getParameter("userID"));
             List<Job> listJob = jobDAO.getListHrJob(userID);
             JobSkillsDAO jsDAO = new JobSkillsDAO();
+            List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
             for (Job job : listJob) {
-                List<JobSkills> listJs = jsDAO.getSkillRequire(job.getJobID());
-                job.setListJobSkills(listJs);
+                List<JobSkills> ljk = new ArrayList<>();
+                for (JobSkills js : listJs) {
+                    if(job.getJobID() == js.getJobID()){
+                                ljk.add(js);
+                    }
+                    job.setListJobSkills(ljk);
+                }
             }
             if (!listJob.isEmpty()) {
                 request.setAttribute("LIST_JOBPOST", listJob);
                 url = SUCCESS;
             }else{
+                request.setAttribute("LIST_JOBPOST", listJob);
                 request.setAttribute("MESSAGE", "NO PROJECT TO DISPLAY");
+                url = SUCCESS;
             }
             
         } catch (Exception e) {

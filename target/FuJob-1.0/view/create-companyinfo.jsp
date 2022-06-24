@@ -60,8 +60,8 @@
                             <form action="/FuJob/MainController" method="POST">
                                 <div class="row mt-4">
                                     <label class="col-md-12">
-                                        <input type="file" style="display: none" id="imageFile" name="avatar" >
-                                        <img style="cursor:  pointer" id="image"   src="https://via.placeholder.com/400X400//88929f/5a6270C/O https://placeholder.com/" class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill" alt="" >
+                                        <input type="file" style="display: none" id="imageFile" name="avatar" onchange="showPreview(event);" >
+                                        <img style="cursor:  pointer" id="file-ip-1-preview" onerror="this.src='${pageContext.request.contextPath}/asset/images/avatar-default.jpg';" src="" class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill" alt="" >
                                     </label>
                                     <div class="col-md-4">
                                         <div class="form-group app-label">
@@ -157,7 +157,16 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-
+        <script>
+            function showPreview(event) {
+                if (event.target.files.length > 0) {
+                    var src = URL.createObjectURL(event.target.files[0]);
+                    var preview = document.getElementById("file-ip-1-preview");
+                    preview.src = src;
+                    preview.style.display = "block";
+                }
+            }
+        </script>
 
     </body>
 </html>

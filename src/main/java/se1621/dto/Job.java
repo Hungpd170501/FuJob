@@ -1,7 +1,6 @@
 package se1621.dto;
 
 import java.sql.Date;
-import java.util.HashMap;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

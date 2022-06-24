@@ -53,20 +53,19 @@
 
                                 <!-- START SEARCH -->
                                 <form class="registration-form" action="${pageContext.request.contextPath}/MainController">
-                                <!--                                <form class="registration-form">-->
+                                <!--<form class="registration-form">-->
                                 <div class="row">
                                     <div class="col-lg-3 col-md-6">
                                         <div class="registration-form-box">
                                             <i class="fa fa-briefcase"></i>
-                                            <input type="text" name="searchtitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
+                                            <input type="text" name="searchTitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-6">
                                         <div class="registration-form-box">
                                             <i class="fa fa-archive"></i>
-                                            <select class="demo-default" id="select-category" name="searchExper">
-                                                <!--                                                <select class="demo-default" id="select-category" required="">-->
-                                                <option value="">Skill</option>
+                                            <select class="demo-default" id="select-category" name="searchSkill" >
+                                                <option value="">Skill...</option>
                                                 <c:forEach items="${chooseSkill.listSkill}" var="i">
                                                     <option value="${i.skillID}">${i.skillName}</option>
                                                 </c:forEach>
@@ -77,7 +76,6 @@
                                         <div class="registration-form-box">
                                             <i class="fa fa-list-alt"></i>
                                             <select id="select-category" class="demo-default" name="searchCate">
-                                                <!--<select id="select-category" class="demo-default">-->
                                                 <option value="">Categories...</option>
                                                 <c:forEach items="${chooseCategory.listCategory}" var="i">
                                                     <option value="${i.categoryID}">${i.categoryName}</option>
@@ -87,9 +85,10 @@
                                     </div>
                                     <div class="col-lg-3 col-md-6">
                                         <div class="registration-form-box">
-                                            <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Submit">
+                                            <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Find">
                                             <!-- name = action  -->
-                                            <input type="hidden" name ="action" value="Search_title_exper_cate">
+                                            <input type="hidden" name ="action" value="searchJobPost">
+                                            <input type="hidden" name ="hrID" value="${sessionScope.LOGIN_USER.userID}">
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +126,7 @@
                         <!-- them display -->
                         <div class="row" > 
                             <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_JOBPOST");
-                                if (listJob==null||listJob.isEmpty()) {
+                                if (listJob == null || listJob.isEmpty()) {
                                     String message = (String) request.getAttribute("MESSAGE");
                             %>
                             <div class="col-lg-12 text-warning text-center">
@@ -176,28 +175,13 @@
                                                         <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
                                                     </h6>
                                                     <h6>
-                                                        <%= job.getPayMentMethod().getPaymentMethodName()%> :<%= job.getBudget()%>$ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) {
+                                                        <%= job.getPayMentMethod().getPaymentMethodName()%>: <%= job.getBudget()%>$ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) {
                                                         %>
                                                         / hour
                                                         <%
                                                             }
                                                         %>
                                                     </h6>
-<!--
-                                                    <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h6>
-<<<<<<< HEAD
-
-                                                    <p class="text-muted mb-0"><i class="fa fa-list-alt mr-2"></i><%= job.getCategory().getCategoryName()%></p>
-=======
-                                                    <p class="text-muted mb-0"><i class="fa fa-list-alt mr-2"></i><%= job.getCategory().getCategoryName()%></p>-->
-
->>>>>>> bc5b3f6f9b28f25995b77826f461e313c5cacd54
-                                                    <ul class="list-inline mb-0">
-                                                        <!--<l //i class="list-inline-item mr-3">-->
-                                                        <li class="list-inline-item">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i><%= job.getLastModifiedDate()%></p>
-                                                        </li>
-                                                    </ul>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-3">

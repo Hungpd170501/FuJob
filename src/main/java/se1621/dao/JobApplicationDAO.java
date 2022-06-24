@@ -15,6 +15,7 @@ import se1621.dto.Category;
 import se1621.dto.CompanyInfo;
 import se1621.dto.Job;
 import se1621.dto.JobApplication;
+import se1621.dto.PayMentMethod;
 import se1621.utils.DBUtils;
 
 /**
@@ -36,10 +37,12 @@ public class JobApplicationDAO {
             + "            left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)"
             + "            WHERE jo.resumeID=? and jo.jobApplicationStatus = 1";
     private static final String UPDATE_STATUS = "UPDATE tblJobApplications SET cvFile = ?, priceDeal = ?, message = ?, jobApplicationStatus = 1 WHERE jobApplicationID = ? and resumeID = ? and jobID = ?";
-    private String SEARCHJOBORDER = "SELECT jo.jobApplicationID, jo.resumeID, jo.cvFile, jo.createdDate, jo.message, jo.priceDeal, jo.jobID,"
-            + "            j.jobTitle, j.jobCategoryID, c.categoryName, c.img, j.createdDate, j.expiriedDate, j.budget,"
-            + "            j.address, j.email, j.phone, j.description, j.lastModifiedDate"
-            + "            FROM ((tblJobApplications jo LEFT JOIN tblJobs j ON jo.jobID = j.jobID)LEFT JOIN tblCategories c ON j.jobCategoryID = c.categoryID)";
+    private String SEARCHJOBORDER = "SELECT ja.jobApplicationID, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, "
+            + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.budget, j.paymentMethodID, pm.paymentMethodName, "
+            + "j.address, j.email, j.phone, j.description, j.lastModifiedDate "
+            + "FROM (((tblJobApplications ja LEFT JOIN tblJobs j ON ja.jobID = j.jobID) "
+            + "LEFT JOIN tblCategories c ON j.jobCategoryID = c.categoryID) "
+            + "left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID) ";
 
     private static final String GETALLNUMBEROFJOBORDER = "SELECT COUNT (*) AS totalJobOrder FROM tblJobApplications";
     Connection conn;
@@ -343,66 +346,103 @@ public class JobApplicationDAO {
         return null;
     }
 
-    public List<JobApplication> getJobOrder(String searchJobTitle, String searchExperienceNeeded, int searchJobCategoryID, int studentID) throws SQLException {
+    public List<JobApplication> getJobOrder(String searchJobTitle, int searchSkillID, int searchJobCategoryID, int resumeID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
-                List<JobApplication> listJobOrder = new ArrayList<>();
-                String getDataSQL = this.SEARCHJOBORDER;
-                boolean checkCateID = true;
-                if (searchJobCategoryID == 0) {
-                    getDataSQL = getDataSQL + " WHERE j.jobTitle like ? and j.ExperienceNeeded like ? and jo.jobOrderStatus = 1 and jo.userID = " + studentID;
+               List<JobApplication> listJobApp = new ArrayList<>();
+                String getDataSQL = "";
+                String getDataSQL1 = this.SEARCHJOBORDER;
+                String queryForSearchSkill = 
+                "SELECT ja.jobApplicationID, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, "
+            + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.budget, j.paymentMethodID, pm.paymentMethodName, "
+            + "j.address, j.email, j.phone, j.description, j.lastModifiedDate "
+            + "FROM (((tblJobApplications ja LEFT JOIN tblJobs j ON ja.jobID = j.jobID) "
+            + "LEFT JOIN tblCategories c ON j.jobCategoryID = c.categoryID) "
+            + "left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID) "
+            + "left join tblJobSkills js on js.jobID = j.jobID ";
+                boolean checkCateID = false;
+                boolean checkSkillID = false;
+
+                if (searchJobCategoryID == 0 && searchSkillID == 0) {
+                    getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobApplicationStatus = 1 and resumeID =" + resumeID;
+                    checkCateID = true;
+                    checkSkillID = true;
                 } else {
-                    getDataSQL = getDataSQL + " WHERE j.jobTitle like ? and j.ExperienceNeeded like ? and j.jobCategoryID = ? and jo.jobOrderStatus = 1 and jo.userID = " + studentID;
-                    checkCateID = false;
+                    getDataSQL = queryForSearchSkill + "WHERE jobTitle like ? and skillID = ? and jobCategoryID = ? and jobStatus = 1 and userID =" + resumeID;
+                    if (searchJobCategoryID == 0) {
+                        getDataSQL = queryForSearchSkill + " WHERE jobTitle like ? and skillID = ? and jobStatus = 1 and userID =" + resumeID;
+                        checkCateID = true;
+                    }
+                    if (searchSkillID == 0) {
+                        getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobCategoryID = ? and jobStatus = 1 and userID =" + resumeID;
+                        checkSkillID = true;
+                    }
                 }
                 preStm = conn.prepareStatement(getDataSQL);
-                preStm.setString(1, "%" + searchJobTitle + "%");
-                preStm.setString(2, "%" + searchExperienceNeeded + "%");
-                if (!checkCateID) {
-                    preStm.setInt(3, searchJobCategoryID);
+                if (checkCateID == true && checkSkillID == true) {
+                    preStm.setString(1, "%" + searchJobTitle + "%");
+                } else {
+                    preStm.setString(1, "%" + searchJobTitle + "%");
+                    if (checkCateID == false && checkSkillID == false) {
+                        preStm.setInt(2, searchSkillID);
+                        preStm.setInt(3, searchJobCategoryID);
+                    } else {
+                        if (checkSkillID == false) {
+                            preStm.setInt(2, searchSkillID);
+                        }
+                        if (checkCateID == false) {
+                            preStm.setInt(2, searchJobCategoryID);
+                        }
+                    }
+
                 }
                 rs = preStm.executeQuery();
                 while (rs.next()) {
                     int jobApplicationID = rs.getInt("jobApplicationID");
                     int jobID = rs.getInt("jobID");
+                    int userID = rs.getInt("userID");
                     String cvFile = rs.getString("cvFile");
                     String message = rs.getString("message");
                     String priceDeal = rs.getString("priceDeal");
                     String jobTitle = rs.getString("jobTitle");
                     int budget = rs.getInt("budget");
+                    int payID = rs.getInt("paymentMethodID");
+                    String payName = rs.getString("paymentMethodName");
                     String address = rs.getString("address");
                     String email = rs.getString("email");
                     String phone = rs.getString("phone");
                     String description = rs.getString("description");
                     Date lastModifiedDate = rs.getDate("lastModifiedDate");
-                    Date createdDate = rs.getDate("createdDate");
+                    Date expiriedDate = rs.getDate("expiriedDate");
                     int categoryID = rs.getInt("jobCategoryID");
                     String categoryName = rs.getString("categoryName");
                     String img = rs.getString("img");
                     Job job = Job.builder().jobID(jobID)
-                            .userID(studentID)
+                            .userID(userID)
                             .jobTitle(jobTitle)
                             .category(Category.builder().categoryID(categoryID).categoryName(categoryName).img(img).build())
                             .address(address)
                             .email(email)
                             .phone(phone)
-                            .description(description)
                             .budget(budget)
+                            .payMentMethod(PayMentMethod.builder().paymentMethodID(payID).paymentMethodName(payName).build())
+                            .description(description)
+                            .expiriedDate(expiriedDate)
+                            .lastModifiedDate(lastModifiedDate)
                             .build();
-                    JobApplication jobOrder = JobApplication.builder()
+                    JobApplication jobApp = JobApplication.builder()
                             .jobApplicationID(jobApplicationID)
                             .cvFile(cvFile)
                             .message(message)
                             .priceDeal(priceDeal)
-                            .resumeID(studentID)
+                            .resumeID(resumeID)
                             .job(job)
-                            .createdDate(createdDate)
-                            .lastModifiedDate(lastModifiedDate)
+                            .jobApplicationStatus(1)
                             .build();
-                    listJobOrder.add(jobOrder);
+                    listJobApp.add(jobApp);
                 }
-                return listJobOrder;
+                return listJobApp;
             }
         } catch (Exception e) {
             e.printStackTrace();

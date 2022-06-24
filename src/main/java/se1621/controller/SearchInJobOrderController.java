@@ -5,7 +5,6 @@
 package se1621.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import se1621.dao.JobApplicationDAO;
+import se1621.dao.ResumeDAO;
 import se1621.dto.JobApplication;
 
 /**
@@ -30,22 +30,29 @@ public class SearchInJobOrderController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String searchTitle = request.getParameter("searchtitle");
-            String searchExper = request.getParameter("searchExper");
-            int searchCate = 0;
-            int studentID = Integer.parseInt(request.getParameter("studentID"));
-            try {
-                searchCate = Integer.parseInt(request.getParameter("searchCate"));
-            } catch (Exception e) {
+            String searchTitle = request.getParameter("searchTitle");
+            int searchSkill = 0;
+            String searchSkillString = request.getParameter("searchSkill");
+            if(!searchSkillString.isBlank()){
+                searchSkill = Integer.parseInt(searchSkillString);
             }
+            int searchCate = 0;
+            String searchCateString = request.getParameter("searchCate");
+            if(!searchCateString.isBlank()) {
+                searchCate = Integer.parseInt(searchCateString);
+            }
+            int studentID = Integer.parseInt(request.getParameter("studentID"));
+            ResumeDAO resumeDAO = new ResumeDAO();
+            int resumeID = resumeDAO.getResumeID(studentID);
             JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-            List<JobApplication> listJobOrder = jobOrderDAO.getJobOrder(searchTitle, searchExper, searchCate, studentID);
+            List<JobApplication> listJobOrder = jobOrderDAO.getJobOrder(searchTitle, searchSkill, searchCate, resumeID);
             if (!listJobOrder.isEmpty()) {
                 request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
                 url = SUCCESS;
             } else {
                 request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
                 request.setAttribute("MESSAGE", "NO PROJECT TO DISPLAY");
+                url = SUCCESS;
             }
         } catch (Exception e) {
             log("Error at Search JobOrderController" + toString());

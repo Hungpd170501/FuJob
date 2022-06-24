@@ -23,14 +23,13 @@ import se1621.dto.PayMentMethod;
 public class JobDAO {
 
     private static final String CREATEJOB = "INSERT INTO tblJobs(userID, jobTitle, jobCategoryID,"
-            + "budget, paymentMethodID, expiriedDate, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?s,1)";
+            + " budget, paymentMethodID, expiriedDate, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,1)";
     //xong ne
-    private String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.address, j.budget, j.paymentMethodID, "
-            + "            j.email, j.phone, j.description, j.createdDate, j.lastModifiedDate, j.expiriedDate, j.jobStatus, "
-            + "            j.jobCategoryID, cate.categoryName, cate.img, js.skillID , pay.paymentMethodName"
-            + "            FROM (((tblJobs j left join tblJobSkills js on j.jobID = js.jobID) left join tblCategories cate on cate.categoryID = j.jobCategoryID) "
-            + "			left join tblPaymentMethods pay on j.paymentMethodID = pay.paymentMethodID)"
-            + "    ";
+    private String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
+            + "j.jobCategoryID, c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, "
+            + "pm.paymentMethodName, j.budget, j.expiriedDate "
+            + "FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)"
+            + " left join tblPaymentMethods pm on j.paymentMethodID = pm.paymentMethodID) ";
     private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJobs WHERE jobID = (SELECT MAX(jobID) FROM tblJobs) and jobStatus = 1 and userID = ?";
     //roi ne
     private static final String SEARCHBYJOBID = "SELECT j.jobID, j.userID, j.jobTitle,j.jobCategoryID, j.budget, j.paymentMethodID, payment.paymentMethodName, j.address, j.email, j.phone, j.description, j.createdDate, j.lastModifiedDate, j.expiriedDate, j.jobStatus FROM tblJobs j "
@@ -324,11 +323,11 @@ public class JobDAO {
                 List<Job> listJob = new ArrayList<>();
                 String getDataSQL = "";
                 String getDataSQL1 = this.SEARCHALL_JOBTITLE_SKILL_CATEGORY;
-                String queryForSearchSkill = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
-                            + " j.jobCategoryID, c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, "
-                            + "j.paymentMethodID, j.budget, j.expiriedDate "
-                            + "FROM ((tblJobSkills js left join tblJobs j on j.jobID = js.jobID)) "
-                            + "left join tblCategories c on c.categoryID = j.jobCategoryID ";
+                String queryForSearchSkill = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, j.jobCategoryID, "
+                        + "c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, pm.paymentMethodName, "
+                        + "j.budget, j.expiriedDate "
+                        + "FROM (((tblJobSkills js left join tblJobs j on j.jobID = js.jobID)) "
+                        + "left join tblCategories c on c.categoryID = j.jobCategoryID) left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID ";
                 boolean checkCateID = false;
                 boolean checkSkillID = false;
 
@@ -425,24 +424,54 @@ public class JobDAO {
     }
 
     // search for all page
-    public List<Job> getJobPosted(String searchJobTitle, String searchExperienceNeeded, int searchJobCategoryID, int hrID) throws SQLException {
+    public List<Job> getJobPosted(String searchJobTitle, int searchSkillID, int searchJobCategoryID, int hrID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 List<Job> listJob = new ArrayList<>();
-                String getDataSQL = this.SEARCHALL_JOBTITLE_SKILL_CATEGORY;
-                boolean checkCateID = true;
-                if (searchJobCategoryID == 0) {
-                    getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? and jobStatus = 1 and userID = " + hrID;
+                String getDataSQL = "";
+                String getDataSQL1 = this.SEARCHALL_JOBTITLE_SKILL_CATEGORY;
+                String queryForSearchSkill = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, j.jobCategoryID, "
+                        + "c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, pm.paymentMethodName, "
+                        + "j.budget, j.expiriedDate "
+                        + "FROM (((tblJobSkills js left join tblJobs j on j.jobID = js.jobID)) "
+                        + "left join tblCategories c on c.categoryID = j.jobCategoryID) left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID ";
+                boolean checkCateID = false;
+                boolean checkSkillID = false;
+
+                if (searchJobCategoryID == 0 && searchSkillID == 0) {
+                    getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobStatus = 1 and userID =" + hrID;
+                    checkCateID = true;
+                    checkSkillID = true;
                 } else {
-                    getDataSQL = getDataSQL + " WHERE jobTitle like ? and ExperienceNeeded like ? and jobCategoryID = ? and jobStatus = 1 and userID = " + hrID;
-                    checkCateID = false;
+                    getDataSQL = queryForSearchSkill + "WHERE jobTitle like ? and skillID = ? and jobCategoryID = ? and jobStatus = 1 and userID =" + hrID;
+                    if (searchJobCategoryID == 0) {
+                        getDataSQL = queryForSearchSkill + " WHERE jobTitle like ? and skillID = ? and jobStatus = 1 and userID =" + hrID;
+                        checkCateID = true;
+                    }
+                    if (searchSkillID == 0) {
+                        getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobCategoryID = ? and jobStatus = 1 and userID =" + hrID;
+                        checkSkillID = true;
+                    }
                 }
+
                 preStm = conn.prepareStatement(getDataSQL);
-                preStm.setString(1, "%" + searchJobTitle + "%");
-                preStm.setString(2, "%" + searchExperienceNeeded + "%");
-                if (!checkCateID) {
-                    preStm.setInt(3, searchJobCategoryID);
+                if (checkCateID == true && checkSkillID == true) {
+                    preStm.setString(1, "%" + searchJobTitle + "%");
+                } else {
+                    preStm.setString(1, "%" + searchJobTitle + "%");
+                    if (checkCateID == false && checkSkillID == false) {
+                        preStm.setInt(2, searchSkillID);
+                        preStm.setInt(3, searchJobCategoryID);
+                    } else {
+                        if (checkSkillID == false) {
+                            preStm.setInt(2, searchSkillID);
+                        }
+                        if (checkCateID == false) {
+                            preStm.setInt(2, searchJobCategoryID);
+                        }
+                    }
+
                 }
                 rs = preStm.executeQuery();
                 while (rs.next()) {
@@ -450,24 +479,39 @@ public class JobDAO {
                     int userID = rs.getInt("userID");
                     String jobTitle = rs.getString("jobTitle");
                     int jobCategoryID = rs.getInt("jobCategoryID");
-                    String experienceNeeded = rs.getString("experienceNeeded");
-                    Date deadline = rs.getDate("deadline");
-                    String completionTime = rs.getString("completionTime");
-                    String salary = rs.getString("salary");
+                    String categoryName = rs.getString("categoryName");
+                    String img = rs.getString("img");
+                    int budget = rs.getInt("budget");
+                    int paymentMethodID = rs.getInt("paymentMethodID");
+                    String paymentMethodName = rs.getString("paymentMethodName");
                     String address = rs.getString("address");
                     String email = rs.getString("email");
                     String phone = rs.getString("phone");
                     String description = rs.getString("description");
-                    Date lastDateUpdate = rs.getDate("lastDateUpdate");
-                    listJob.add(Job.builder().jobID(jobID)
+                    Date createdDate = rs.getDate("createdDate");
+                    Date lastModifiedDate = rs.getDate("lastModifiedDate");
+                    Date expiriedDate = rs.getDate("expiriedDate");
+                    int jobStatus = 1;
+
+                    Category category = Category.builder().categoryID(jobCategoryID).categoryName(categoryName).img(img).build();
+                    PayMentMethod payment = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
+                    listJob.add(Job.builder()
+                            .jobID(jobID)
                             .userID(userID)
                             .jobTitle(jobTitle)
-                            .category(Category.builder().categoryID(jobCategoryID).build())
+                            .category(category)
+                            .budget(budget)
+                            .payMentMethod(payment)
+                            .createdDate(createdDate)
+                            .lastModifiedDate(lastModifiedDate)
+                            .expiriedDate(expiriedDate)
+                            .jobStatus(jobStatus)
                             .address(address)
                             .email(email)
                             .phone(phone)
                             .description(description)
-                            .build());
+                            .build()
+                    );
                 }
                 return listJob;
             }
