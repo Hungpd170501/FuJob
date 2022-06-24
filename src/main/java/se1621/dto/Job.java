@@ -23,7 +23,6 @@ public class Job {
     CompanyInfo company;
     Category category;
     private int budget;
-    private int paymentMethodID;
     private String address;
     private String email;
     private String phone;
@@ -33,4 +32,5 @@ public class Job {
     private Date expiriedDate;
     List<JobSkills> listJobSkills;
     private int jobStatus;
+    private PayMentMethod payMentMethod;
 }

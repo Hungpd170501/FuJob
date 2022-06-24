@@ -120,8 +120,9 @@
                         </div>
 
                         <div class="row"> 
-                            <% List<JobApplication> listJobOrder = (List<JobApplication>) request.getAttribute("LIST_ALLJOBORDER");
-                                 if (listJobOrder.isEmpty()) {
+                            <% List<JobApplication> listJobApplication = (List<JobApplication>) request.getAttribute("LIST_ALLJOBORDER");
+                                 if (listJobApplication.isEmpty()) {
+
                                     String message = (String) request.getAttribute("MESSAGE");
                             %>
                             <div class="col-lg-12 text-warning text-center">
@@ -129,9 +130,9 @@
                             </div>
                             <%
                                 }
-                                if (listJobOrder != null) {
-                                    if (listJobOrder.size() > 0) {
-                                        for (JobApplication jobOrder : listJobOrder) {
+                                if (listJobApplication != null) {
+                                    if (listJobApplication.size() > 0) {
+                                        for (JobApplication jobOrder : listJobApplication) {
                             %>
                             <div class="job-display col-lg-12 mt-4 pt-2" style="display: none">
                                 <div class="job-list-box border rounded">
@@ -203,7 +204,7 @@
 
                             %>
                             <%
-                                    if (listJobOrder.size() > 10) {
+                                    if (listJobApplication.size() > 10) {
                             %>
                             <div class="smj col-12 text-center mt-4 pt-2">
                                 <a class="btn btn-primary-outline">Show more</a>

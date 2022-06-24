@@ -20,6 +20,7 @@ import se1621.dao.SkillRequireDAO;
 import se1621.dto.Category;
 import se1621.dto.Job;
 import se1621.dto.JobSkills;
+import se1621.dto.PayMentMethod;
 import se1621.dto.Skill;
 import se1621.dto.SkillRequire;
 import se1621.dto.User;
@@ -60,7 +61,7 @@ public class PostJobController extends HttpServlet {
                     .jobTitle(jobTitle)
                     .category(Category.builder().categoryID(categoryID).build())
                     .address(address)
-                    .paymentMethodID(paymentMethodID)
+                    .payMentMethod(PayMentMethod.builder().paymentMethodID(paymentMethodID).build())
                     .email(email)
                     .expiriedDate(expiriedDate)
                     .phone(phone)

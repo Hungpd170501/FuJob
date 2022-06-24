@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" type="text/css"/>
 <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css" type="text/css"/>
         </head>
+
         <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
@@ -45,6 +46,7 @@
         </section>
         <!-- end home -->
 
+
         <!-- CREATE RESUME START -->
         <section class="section">
             <div class="container">
@@ -65,6 +67,7 @@
                                         <div class="form-group app-label">
                                             <label class="text-muted">Full Name<span class="text-danger">*</span> :</label>
                                             <input id="full-name" type="text" name="fullname" class="form-control resume" placeholder="Full Name :" required="" value="<%= resume.getFullName()%>">
+
                                         </div>
                                     </div>
 
@@ -76,7 +79,6 @@
                                                     <%
                                                         if (resume.getGender() != "") {
                                                             if (resume.getGender() == "Male") {
-
                                                     %>    
                                                     <option selected="selected" value="Male">Male</option>
                                                     <option value="Female">Female</option>
@@ -179,13 +181,15 @@
                                     <div class="col-md-4">
                                         <div class="form-group app-label">
                                             <label class="text-muted">Your Website:</label>
+
                                             <input id="website" name="website" type="text" class="form-control resume" placeholder="If u have a website of yourself, fill in here" value="${pageScope.resume.website}">
+
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group app-label">
                                             <label class="text-muted">Your GitHub</label>
-                                            <input id="" name="github" type="text" class="form-control resume" placeholder="If u have a github, fill in here " value="<%= resume.getGitHub() %>">
+                                            <input id="" name="github" type="text" class="form-control resume" placeholder="If u have a github, fill in here " value="${pageScope.resume.gitHub}">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -201,6 +205,9 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+
                                 <div class="col-12 mt-4">
                                     <input type="submit" id="submit" name="action" class="submitBnt btn btn-primary" value="Submit Resume">
                                 </div>
@@ -212,6 +219,7 @@
             </div>
         </section>   
         <!-- CREATE RESUME END -->
+
         <%
             }
         %>
@@ -237,7 +245,7 @@
             $(document).ready(function () {
                 $('.select2').select2({
                     closeOnSelect: false
-                });
+                    });
             });
             var img = $('#image').attr('src');
             if (img == "") {

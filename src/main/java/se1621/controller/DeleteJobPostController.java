@@ -12,8 +12,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import se1621.dao.JobDAO;
 import se1621.dao.JobApplicationDAO;
+import se1621.dao.JobDAO;
+import se1621.dto.JobApplication;
+
 
 /**
  *
@@ -31,6 +33,7 @@ public class DeleteJobPostController extends HttpServlet {
         String url = ERROR;
         try{
             JobDAO jobDao = new JobDAO();
+
             JobApplicationDAO jobApplicationDAO = new JobApplicationDAO();
             int jobPostID = Integer.parseInt(request.getParameter("jobPostID"));
             int userID = Integer.parseInt(request.getParameter("userID"));

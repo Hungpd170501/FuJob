@@ -204,8 +204,8 @@
                                                         <p class=" mb-5"><i class="mr-2"></i>5 bids</p>
                                                     </div>
                                                     <div>
-                                                        <h5 class="painting-id" data-format="money" style="display: none"> <%= job.getJobID()%> </h5>
-                                                        <h5 class="painting-price mb-5" data-format="money">  <i class="mr-2"></i> <%= job.getBudget()%>$ <% if (job.getPaymentMethodID() == 2) {
+                                                       <h5 class="painting-id" data-format="money" style="display: none"> <%= job.getJobID()%> </h5>
+                                                        <h5 class="painting-price mb-5" data-format="money">  <i class="mr-2"></i> <%= job.getBudget()%>$ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) {
                                                             %>
                                                             / hour
                                                             <%
