@@ -1,3 +1,5 @@
+<%@page import="se1621.dto.Job"%>
+<%@page import="se1621.dao.JobDAO"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.sql.Date"%>
@@ -110,18 +112,33 @@
                                 <div class="col-lg-3 col-md-6 mt-4 pt-0">
                                     <div class="list-grid-item rounded">
                                         <div class="grid-item-content p-3 bg-light">
-                                            <div class="grid-list-img mt-3">
-                                                <img src="${t10.category.img}" alt="" class="img-fluid mx-auto d-block" style="width:150px;height:150px">
+                                            <div class="grid-list-img">
+                                                <img src="${t10.category.img}" alt="" class="img-fluid mx-auto d-block" style="width:250px;height:200px">
                                             </div>
-                                            <div class="grid-list-desc mt-3" style="width: 176px; height: 212px">
+                                            <%
+                                                Job job = (Job) pageContext.getAttribute("t10");%>
+
+                                            <div class="grid-list-desc mt-3" style="width: 186px; height: 212px">
                                                 <h6 class="mb-1"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=${t10.jobID}" class="text-dark">${t10.jobTitle}</a></h6>
                                                 <p class="text-muted f-14 mb-1">Address: ${t10.address}<br></p>
-                                                <p class="text-muted mb-1">Budget: ${t10.budget}$ / hour</p>
-                                                <p class="text-muted mb-1">Expiry Date: ${t10.expiriedDate}</p>
+                                                <p class="text-muted mb-1">Budget: <%=job.getBudget()%> $ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) {
+
+                                                    %>
+                                                    / hour
+                                                    <%                                                                }
+                                                    %>  </p>
+                                                <%
+                                                            Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                                                            long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
+                                                            long resultDate = exDate / (24 * 60 * 60 * 1000);
+                                                        %>
+                                                <p class="text-muted mb-1">Expiry Date: <%= resultDate %> days left</p>
+
+
                                             </div>
                                         </div>
-                                            
-                                            <div class="apply-button p-3 border-top" style="text-align: center">
+
+                                        <div class="apply-button p-3 border-top" style="text-align: center">
                                             <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=${t10.jobID}" class="btn btn-primary btn-sm">View detail</a>
                                         </div>
                                     </div>
@@ -151,7 +168,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <c:forEach items="${chooseCategory.listCategory}" var="c">
                         <div class="job-display col-lg-3 col-md-6 mt-4 pt-2" style="display: none">
@@ -274,7 +291,7 @@
                 </div>
             </div>
         </div>
-      
+
 
         <jsp:include page="./include/footer.jsp"></jsp:include>
             <!-- javascript -->
