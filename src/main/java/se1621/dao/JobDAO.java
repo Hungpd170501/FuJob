@@ -77,7 +77,6 @@ public class JobDAO {
                     Date createdDate = rs.getDate("createdDate");
                     Date lastModifiedDate = rs.getDate("lastModifiedDate");
                     Date expiriedDate = rs.getDate("expiriedDate");
-
                     Category category = Category.builder().categoryName(categoryName).img(img).build();
                     PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder()

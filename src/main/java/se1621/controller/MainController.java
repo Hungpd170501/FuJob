@@ -70,6 +70,8 @@ public class MainController extends HttpServlet {
     private static final String VIEWALLHR_CONTROLLER = "ViewAllHRController";
     private static final String UPDATESTATUSHR = "UpdateStatusHR";
     private static final String UPDATESTATUSHR_CONTROLLER = "UpdateStatusHRController";
+    private static final String VIEW_RECENT_JOB = "viewRecentJob";
+    private static final String VIEW_RECENT_JOB_CONTROLLER = "ViewRecentJobController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -133,6 +135,8 @@ public class MainController extends HttpServlet {
                 url = VIEWALLHR_CONTROLLER;
             } else if (UPDATESTATUSHR.equals(action)) {
                 url = UPDATESTATUSHR_CONTROLLER;    
+            } else if (VIEW_RECENT_JOB.equals(action)) {
+                url = VIEW_RECENT_JOB_CONTROLLER;    
             } else {
                 url = ERROR;
             }
