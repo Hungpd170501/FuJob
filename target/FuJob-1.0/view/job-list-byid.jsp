@@ -1,3 +1,9 @@
+<%@page import="se1621.dao.JobSkillsDAO"%>
+<%@page import="se1621.dto.JobSkills"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.sql.Date"%>
+<%@page import="se1621.dto.User"%>
 <%@page import="se1621.dto.Job"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
@@ -7,13 +13,15 @@
 <html lang="en" class="no-js">
     <head>
         <jsp:include page="./include/header.jsp">
-            <jsp:param name="title" value="FuJob | Job List Post"/>
+            <jsp:param name="title" value="FuJob | Job List"/>
         </jsp:include>
     </head>
     <body>
+
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
 
             <!-- Start home -->
             <section class="bg-half page-next-level"> 
@@ -22,12 +30,12 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="text-center text-white">
-                                <h4 class="text-uppercase title mb-4">Projects posted view</h4>
+                                <h4 class="text-uppercase title mb-4">Project List view</h4>
                                 <ul class="page-next d-inline-block mb-0">
                                     <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
                                     <li><a href="#" class="text-uppercase font-weight-bold">Projects</a></li> 
                                     <li>
-                                        <span class="text-uppercase text-white font-weight-bold">Projects Posted Listing</span> 
+                                        <span class="text-uppercase text-white font-weight-bold">Projects Listing</span> 
                                     </li>
                                 </ul>
                             </div>
@@ -58,12 +66,10 @@
                                             <i class="fa fa-archive"></i>
                                             <select class="demo-default" id="select-category" name="searchExper">
                                                 <!--                                                <select class="demo-default" id="select-category" required="">-->
-                                                <option value="">Experience</option>
-                                                <option value="Less than 1 year">Less than 1 year</option>
-                                                <option value="1-3 years">1-3 years</option>
-                                                <option value="3-5 years">3-5 years</option>
-                                                <option value="5-10 years">5-10 years</option>
-                                                <option value="More than 10 years">More than 10 years</option>
+                                                <option value="">Skill</option>
+                                                <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                    <option value="${i.skillID}">${i.skillName}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
@@ -83,8 +89,7 @@
                                         <div class="registration-form-box">
                                             <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Submit">
                                             <!-- name = action  -->
-                                            <input type="hidden" name ="action" value="searchJobPost">
-                                            <input type="hidden" name ="hrID" value="${sessionScope.LOGIN_USER.userID}">
+                                            <input type="hidden" name ="action" value="Search_title_exper_cate">
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +107,7 @@
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <div class="section-title text-center mb-4 pb-2">
-                            <h4 class="title title-line pb-5">All Your Projects Posted</h4>
+                            <h4 class="title title-line pb-5">Available projects for you</h4>
                             <p class="text-muted para-desc mx-auto mb-1">Tell us about your project. We'll quickly match you with the right freelancers.</p>
                         </div>
                     </div>
@@ -119,8 +124,8 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row"> 
+                        <!-- them display -->
+                        <div class="row" > 
                             <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_JOBPOST");
                                 if (listJob==null||listJob.isEmpty()) {
                                     String message = (String) request.getAttribute("MESSAGE");
@@ -134,55 +139,82 @@
                                     if (listJob.size() > 0) {
                                         for (Job job : listJob) {
                             %>
-                            <div class="job-display col-lg-12 mt-4 pt-2"style="display: none">
-                                <div class="job-list-box border rounded">
+                            <div class="job-display col-lg-12 mt-4 pt-1" style="display: none">
+                                <div class="job-list-box border rounded" >
                                     <div class="p-3">
                                         <div class="row align-items-center">
-                                            <div class="col-lg-2">
+                                            <div class="col-lg-3">
                                                 <div class="company-logo-img">
-                                                    <img src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:150px;height:150px">
+                                                    <img loading="lazy" src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:250px;height:250px">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-7 col-md-9">
+                                            <div class="col-lg-6 col-md-9">
                                                 <div class="job-list-desc">
-
+                                                    <h4 class="mb-1" style="font-weight: 700"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h4>
+                                                        <%
+                                                            Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                                                            long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
+                                                            long resultDate = exDate / (24 * 60 * 60 * 1000);
+                                                        %>
+                                                    <p class="mb-2 text-muted"> <%= resultDate%> days left</p>
+                                                    <%
+                                                        String description = job.getDescription();
+                                                        if (description.length() > 200) {
+                                                            description = description.substring(0, 197) + ". . .";
+                                                        }
+                                                    %>
+                                                    <p class="mb-4"><%= description%></p>
+                                                    <h6>Skills Require: 
+                                                        <%
+                                                            List<JobSkills> listJobSkills = job.getListJobSkills();
+                                                            for (int i = 0; i < listJobSkills.size() - 1; i++) {
+                                                        %>
+                                                        <%= listJobSkills.get(i).getSkill().getSkillName()%>,
+                                                        <%
+                                                            }
+                                                        %>
+                                                        <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
+                                                    </h6>
+                                                    <h6>
+                                                        <%= job.getPayMentMethod().getPaymentMethodName()%> :<%= job.getBudget()%>$ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) {
+                                                        %>
+                                                        / hour
+                                                        <%
+                                                            }
+                                                        %>
+                                                    </h6>
+<!--
                                                     <h6 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h6>
-<<<<<<< HEAD
+                                                    <p class="text-muted mb-0"><i class="fa fa-list-alt mr-2"></i><%= job.getCategory().getCategoryName()%></p>-->
 
-=======
->>>>>>> 77c31e9c64ea4e7f0e78aba40360d77810a0aa81
-                                                    <p class="text-muted mb-0"><i class="fa fa-list-alt mr-2"></i><%= job.getCategory().getCategoryName()%></p>
                                                     <ul class="list-inline mb-0">
-                                                        <li class="list-inline-item mr-3">
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= job.getAddress()%></p>
-                                                        </li>
-
+                                                        <!--<l //i class="list-inline-item mr-3">-->
                                                         <li class="list-inline-item">
-<<<<<<< HEAD
                                                             <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i><%= job.getLastModifiedDate()%></p>
-=======
-                                                            <p class="text-muted mb-0"><i class="mdi mdi-clock-outline mr-2"></i><%= job.getExpiriedDate() %></p>
->>>>>>> 77c31e9c64ea4e7f0e78aba40360d77810a0aa81
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
-
-                                                    <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary">Detail</a>
+                                                    <div>
+                                                        <p class=" "><i class="mr-2"></i>5 bids</p>
                                                     </div>
 
+
+
+                                                    <div class="mt-3">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary" style="width: 50%">View Detail</a>
+                                                    </div>
                                                     <div class="mt-3">
 
-                                                        <button onclick="getJobPostID(<%= job.getJobID()%>, <%= job.getUserID()%>)" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation">
+                                                        <button onclick="getJobPostID(<%= job.getJobID()%>, <%= job.getUserID()%>)" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation"style="width: 50%" >
                                                             Cancel
                                                         </button>
 
                                                     </div>
                                                     <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchCandidateOfJob&JobIDCandidate=<%= job.getJobID()%>" class="btn btn-sm btn-primary">List candidate</a>
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchCandidateOfJob&JobIDCandidate=<%= job.getJobID()%>" class="btn btn-sm btn-primary"style="width: 50%">List candidate</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -205,7 +237,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>  
+                            </div> 
                             <%
 
                                         }
@@ -228,18 +260,12 @@
                 </div>
             </div>
         </section>
-        <!-- JOB LIST START -->
-
+        <!-- Back to top -->
+        <a href="#" class="back-to-top rounded text-center" id="back-to-top" style="display: inline"> 
+            <i class="mdi mdi-chevron-up d-block"></i> 
+        </a>
+        <!-- Back to top -->
         <jsp:include page="./include/footer.jsp"></jsp:include>
-
-            <!-- Back to top -->
-            <!-- Back to top -->
-            <a href="#" class="back-to-top rounded text-center" id="back-to-top" style="display: inline"> 
-                <i class="mdi mdi-chevron-up d-block"></i> 
-            </a>
-            <!-- Back to top -->
-            <!-- Back to top -->
-
             <!-- javascript -->
             <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/bootstrap.bundle.min.js"></script>
@@ -255,11 +281,6 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-        <script>
-                                                            function getJobPostID(id, userID) {
-                                                                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=DeleteJobPost&jobPostID=' + id + '&userID=${sessionScope.LOGIN_USER.userID}');
-                                                            }
-        </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
                                                             $(".job-display").slice(0, 10).show();
@@ -269,6 +290,11 @@
                                                                     $(".smj").fadeOut('slow');
                                                                 }
                                                             });
+        </script>
+        <script>
+            function getJobPostID(id, userID) {
+                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=DeleteJobPost&jobPostID=' + id + '&userID=${sessionScope.LOGIN_USER.userID}');
+            }
         </script>
     </body>
 </html>

@@ -11,7 +11,6 @@
 <%@page import="java.sql.Date"%>
 <%@page import="se1621.dto.JobSkills"%>
 <%@page import="java.util.List"%>
-<%@page import="se1621.dao.JobApplicationDAO"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="se1621.dto.User"%>
 <%@page import="se1621.dto.Job"%>
@@ -86,7 +85,7 @@
                                     %>
                                     <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
                                     </p>
-                                    <p class=" mb-3"><h7 style="font-weight: 700"> Budget: </h7><%= job.getBudget()%> $ <% if(job.getPaymentMethodID() == 2)
+                                    <p class=" mb-3"><h7 style="font-weight: 700"> Budget: </h7><%= job.getBudget()%> $ <% if(job.getPayMentMethod().getPaymentMethodID() == 2)
                                     { %> 
                                         / hour
                                     <% } %></p>

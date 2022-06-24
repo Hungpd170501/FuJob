@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import se1621.dao.JobApplicationDAO;
+import se1621.dao.ResumeDAO;
 import se1621.dto.Job;
 import se1621.dto.JobApplication;
 import se1621.service.FirebaseStoreServiceImpl;
@@ -41,8 +42,10 @@ public class OrderJobController extends HttpServlet {
 //            String cvFile = request.getParameter("cvFile");
             String salaryDeal = request.getParameter("salaryDeal");
             String message = request.getParameter("message");
+            ResumeDAO resumeDAO = new ResumeDAO();
+            int resumeID = resumeDAO.getResumeID(userID);
             JobApplication jobOrder = JobApplication.builder()
-                    .resumeID(userID)
+                    .resumeID(resumeID)
                     .job(Job.builder().jobID(jobID).build())
                     .cvFile(filename)
                     .priceDeal(salaryDeal)

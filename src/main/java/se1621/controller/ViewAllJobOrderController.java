@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import se1621.dao.JobApplicationDAO;
+import se1621.dao.ResumeDAO;
 import se1621.dto.JobApplication;
 
 /**
@@ -31,9 +32,11 @@ public class ViewAllJobOrderController extends HttpServlet {
         String url = ERROR;
         try {
             int userID = Integer.parseInt(request.getParameter("userID"));
+            ResumeDAO resumeDAO = new ResumeDAO();
+            int resumeID = resumeDAO.getResumeID(userID);
             List<JobApplication> listJobOrder = new ArrayList<>();
             JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-            listJobOrder = jobOrderDAO.getListJobApplied(userID);
+            listJobOrder = jobOrderDAO.getListJobApplied(resumeID);
             if (!listJobOrder.isEmpty()) {
                 request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
                 url = SUCCESS;

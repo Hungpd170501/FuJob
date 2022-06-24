@@ -18,6 +18,7 @@ import se1621.utils.DBUtils;
  *
  * @author HNGB
  */
+
 public class ResumeSkillDAO {
     private static final String CREATESTUDENTSKILL = "INSERT INTO tblResumeSkills (resumeID, skillID) VALUES (?, ?)";
     private static final String GETSTUDENTSKILL = "SELECT stskill.resumeSkillID, stskill.resumeID, stskill.skillID, skill.skillName "
