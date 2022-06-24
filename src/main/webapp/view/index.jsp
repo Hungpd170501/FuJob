@@ -25,7 +25,7 @@
         <jsp:useBean id="RecentJob" class="se1621.dao.JobDAO" scope="request"></jsp:useBean>
 
             <!-- Start Home -->
-            <section class="bg-home" style="background: url('${pageContext.request.contextPath}/asset/images/background-index.jpg') center center;">
+            <section class="bg-home" style="background: url('${pageContext.request.contextPath}/asset/images/background-home.jpg') center center;">
             <div class="bg-overlay"></div>
             <div class="home-center">
                 <div class="home-desc-center">
@@ -120,7 +120,7 @@
                                                 <p class="text-muted mb-1">Expiry Date: ${t10.expiriedDate}</p>
                                             </div>
                                         </div>
-
+                                            
                                             <div class="apply-button p-3 border-top" style="text-align: center">
                                             <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=${t10.jobID}" class="btn btn-primary btn-sm">View detail</a>
                                         </div>
@@ -182,7 +182,8 @@
 
 
         <!-- counter start -->
-        <section class="section bg-counter position-relative" style="background: url('${pageContext.request.contextPath}/asset/images/background-index.jpg') center center;">
+        <!--<section class="section bg-counter position-relative" style="background: url('${pageContext.request.contextPath}/asset/images/background-home.jpg') center center;">-->
+        <section class="section bg-counter position-relative" style="background: url('https://test.fpt.sk/wp-content/uploads/2015/10/fpt_banner31.jpg') center center;">
             <div class="bg-overlay bg-overlay-gradient"></div>
             <div class="container">
                 <div class="row" id="counter">

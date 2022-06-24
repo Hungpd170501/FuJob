@@ -157,6 +157,8 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/ckeditor/ckeditor.js"></script>
+        <script>CKEDITOR.replace('companyoverview');</script>
         <script>
             function showPreview(event) {
                 if (event.target.files.length > 0) {

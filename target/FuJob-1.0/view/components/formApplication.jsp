@@ -41,4 +41,6 @@
             </div>
         </div>
     </div>
+        <script src="${pageContext.request.contextPath}/asset/ckeditor/ckeditor.js"></script>
+        <script>CKEDITOR.replace('message');</script>
 </body>

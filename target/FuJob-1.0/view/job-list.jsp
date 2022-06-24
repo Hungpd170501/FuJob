@@ -176,7 +176,7 @@
                                                     <p class="mb-2 text-muted"> <%= resultDate%> days left</p>
                                                     <%
                                                         String description = job.getDescription();
-                                                        if (description.length() > 200) {
+                                                        if (description.length() > 200 || description.isBlank()) {
                                                             description = description.substring(0, 197) + ". . .";
                                                         }
                                                     %>

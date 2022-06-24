@@ -83,7 +83,6 @@
                 <li class="has-submenu">
                     <a href="javascript:void(0)">Your Project</a><span class="menu-arrow"></span>
                     <ul class="submenu">
-
                         <%--<li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&pageJob=${1}">Job List</a></li>--%>
                         <%
                             if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "US")) {
