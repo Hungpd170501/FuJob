@@ -1,4 +1,4 @@
-<%@page import="se1621.dto.StudentSkill"%>
+<%@page import="se1621.dto.ResumeSkill"%>
 <%@page import="se1621.dto.Resume"%>
 <%@page import="se1621.dto.Job"%>
 <%@page import="java.util.List"%>
@@ -48,7 +48,7 @@
                             <div class="section-title text-center mb-4 pb-2">
 
                                 <h4 class="title title-line pb-5">All Candidates Apply This Projects</h4>
-<!--                                <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>-->
+                                <!--                                <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>-->
 
                             </div>
                         </div>
@@ -97,10 +97,10 @@
                                                 </ul>
                                                 <p class="text-muted mt-1 mb-0">Skills:
                                                     <%
-                                                        List<StudentSkill> listStudentSkill = (List<StudentSkill>) request.getAttribute("LIST_STUDENTSKILL");
+                                                        List<ResumeSkill> listStudentSkill = (List<ResumeSkill>) request.getAttribute("LIST_STUDENTSKILL");
                                                         for (int i = 0; i < listStudentSkill.size() - 1; i++) {
                                                     %>
-                                                    <%= listStudentSkill.get(i).getSkill().getSkillName() %>,
+                                                    <%= listStudentSkill.get(i).getSkill().getSkillName()%>,
                                                     <%
                                                         }
                                                     %>
@@ -111,14 +111,17 @@
 
                                         <div class="col-md-3">
                                             <div class="candidates-list-fav-btn text-right">        
-                                                <div class="candidates-listing-btn mt-4">
-                                                    <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&searchResumeID=<%= resume.getUserID()%>" class="btn btn-primary-outline btn-sm">View Profile</a>
+                                                <div class="candidates-listing-btn ">
+                                                    <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&studentID=<%= resume.getUserID()%>" class="btn btn-primary-outline btn-sm" style="width: 50%">View Profile</a>
                                                 </div>
-                                                <div class="mt-3">
-                                                        
-                                                    <button onclick="getJobOrderID()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation">
+                                                <div class="candidates-listing-btn mt-3">
+
+                                                    <button onclick="getJobOrderID(<%= resume.getResumeID() %>)" type="button" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#confirmCancellation" style="width: 50%">
                                                         Deny
                                                     </button>
+                                                </div>
+                                                <div class="candidates-listing-btn mt-3">
+                                                    <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&studentID=<%= resume.getUserID()%>" class="btn btn-primary-outline btn-sm" style="width: 50%">Accept</a>
                                                 </div>
 
                                             </div>
@@ -183,10 +186,10 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-        <script> 
-            function getJobOrderID(id, userID){
-                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=DenyJob&jobOrderID='+id+'&userID='+userID);
-            }
+        <script>
+                                                        function getJobOrderID(id, userID) {
+                                                            $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=DenyJob&jobOrderID=' + id + '&userID=' + userID);
+                                                        }
         </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>

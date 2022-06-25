@@ -41,7 +41,6 @@ se1621\entity\ResumeEntity.class
 se1621\controller\LoginGoogleHandler.class
 se1621\dto\Skill.class
 se1621\dao\SkillRequireDAO.class
-.netbeans_automatic_build
 se1621\controller\uploadServlet.class
 se1621\dao\JobSkillsDAO.class
 se1621\entity\PaymentMethodEntity.class

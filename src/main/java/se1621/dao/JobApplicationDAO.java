@@ -27,7 +27,7 @@ public class JobApplicationDAO {
     private static final String CHECKDUPLICATE = "SELECT jobApplicationID FROM tbljobApplications WHERE resumeID=? and jobID=? and jobApplicationStatus = 1";
     private static final String CHECKDUPLICATE_NONSTATUS = "SELECT jobApplicationID FROM tblJobApplications WHERE resumeID = ? and jobID = ? and jobApplicationStatus = 0";
     private static final String DELETE = "UPDATE tblJobApplications SET jobApplicationStatus = 0 WHERE jobApplicationID = ? ";
-    private static final String GETTALLUSERIDOFJOB = "SELECT resumeID FROM tblJobApplications WHERE jobID = ?";
+    private static final String GETTALLUSERIDOFJOB = "SELECT resumeID FROM tblJobApplications WHERE jobID = ? and jobApplicationStatus = 1";
     private static final String GETTALLJOBORDERIDOFJOB = "SELECT jobApplicationID FROM tblJobApplications WHERE jobID = ?";
     private static final String GETALLJOBAPPLIED = "SELECT jo.jobApplicationID, j.jobID, j.jobTitle, j.jobCategoryID, jo.cvFile, jo.priceDeal, jo.message,"
             + "            jo.createdDate, c.categoryName, c.img, com.companyName,"
@@ -35,6 +35,13 @@ public class JobApplicationDAO {
             + "            FROM (((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID )"
             + "            left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)"
             + "            WHERE jo.resumeID=? and jo.jobApplicationStatus = 1";
+    private static final String GETALLJOBAPPLIEDOFJOB = "SELECT jo.jobApplicationID, j.jobID, j.jobTitle, j.jobCategoryID, jo.cvFile, jo.priceDeal, jo.message,"
+            + "            jo.createdDate, c.categoryName, c.img, com.companyName,"
+            + "            j.createdDate, j.expiriedDate, j.lastModifiedDate, j.budget, j.address, j.email, j.phone, j.description"
+            + "            FROM (((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID )"
+            + "            left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)"
+            + "            WHERE j.jobID=? and jo.jobApplicationStatus = 1";
+    
     private static final String UPDATE_STATUS = "UPDATE tblJobApplications SET cvFile = ?, priceDeal = ?, message = ?, jobApplicationStatus = 1 WHERE jobApplicationID = ? and resumeID = ? and jobID = ?";
     private String SEARCHJOBORDER = "SELECT jo.jobApplicationID, jo.resumeID, jo.cvFile, jo.createdDate, jo.message, jo.priceDeal, jo.jobID,"
             + "            j.jobTitle, j.jobCategoryID, c.categoryName, c.img, j.createdDate, j.expiriedDate, j.budget,"
@@ -292,13 +299,14 @@ public class JobApplicationDAO {
                 rs = preStm.executeQuery();
                 List<Integer> list = new ArrayList<>();
                 while (rs.next()) {
-                    int userID = rs.getInt("userID");
+                    int userID = rs.getInt("resumeID");
                     list.add(userID);
                 }
                 return list;
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             if (rs != null) {
                 rs.close();
@@ -322,7 +330,7 @@ public class JobApplicationDAO {
                 rs = preStm.executeQuery();
                 List<Integer> list = new ArrayList<>();
                 while (rs.next()) {
-                    int jobOrderID = rs.getInt("jobOrderID");
+                    int jobOrderID = rs.getInt("jobApplicationID");
                     list.add(jobOrderID);
                 }
                 return list;
@@ -342,7 +350,6 @@ public class JobApplicationDAO {
         }
         return null;
     }
-
     public List<JobApplication> getJobOrder(String searchJobTitle, String searchExperienceNeeded, int searchJobCategoryID, int studentID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
