@@ -16,10 +16,6 @@
         <servlet-name>EmailVerifyHandler</servlet-name>
         <servlet-class>se1621.controller.EmailVerifyHandler</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>uploadServlet</servlet-name>
-        <servlet-class>se1621.controller.uploadServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -51,10 +47,6 @@
     <servlet-mapping>
         <servlet-name>EmailVerifyHandler</servlet-name>
         <url-pattern>/EmailVerifyHandler</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>uploadServlet</servlet-name>
-        <url-pattern>/uploadServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
