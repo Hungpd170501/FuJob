@@ -4,22 +4,22 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 import se1621.dao.JobApplicationDAO;
 import se1621.dao.ResumeDAO;
 import se1621.dao.ResumeSkillDAO;
 import se1621.dto.Resume;
 import se1621.dto.ResumeSkill;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author quocb
  */
 @WebServlet(name = "ListCandidateOfJob", urlPatterns = {"/ListCandidateOfJob"})
@@ -64,7 +64,7 @@ public class ListCandidateOfJob extends HttpServlet {
                 request.setAttribute("MESSAGE", "NO CANDICATES APPLY THIS JOB");
             }
         } catch (Exception e) {
-            log("Error at View all job Controller" + e.toString());
+            log("Error at View all job Controller" + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
