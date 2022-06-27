@@ -4,7 +4,6 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,6 +15,8 @@ import se1621.dao.UserDAO;
 import se1621.dto.User;
 import se1621.utils.Helper;
 import se1621.utils.JwtTokenUtils;
+
+import java.io.IOException;
 
 @WebServlet(name = "RecoveryPasswordHandler", urlPatterns = {"/RecoveryPasswordHandler"})
 public class RecoveryPasswordHandler extends HttpServlet {
@@ -48,7 +49,7 @@ public class RecoveryPasswordHandler extends HttpServlet {
                 request.setAttribute("RECOVERY_PASSWORD_MESSAGE", "It looks like you clicked on an invalid password reset link. Please try again!");
             }
         } catch (Exception e) {
-            log("Error at RecoveryPasswordHandler: " + e.toString());
+            log("Error at RecoveryPasswordHandler: " + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
