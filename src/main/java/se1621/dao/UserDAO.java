@@ -4,16 +4,13 @@
  */
 package se1621.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import se1621.dto.Role;
 import se1621.dto.User;
 import se1621.utils.DBUtils;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
 
@@ -59,7 +56,7 @@ public class UserDAO {
 
         return 0;
     }
-    
+
     private void closeConnection() throws Exception {
         if (rs != null) {
             rs.close();
@@ -118,7 +115,7 @@ public class UserDAO {
         return check;
     }
 
-    public User checkLogin(String email, String password) throws SQLException, Exception {
+    public User checkLogin(String email, String password) throws Exception {
         User user = null;
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -151,7 +148,7 @@ public class UserDAO {
         return user;
     }
 
-    public User checkUserByEmail(String email) throws SQLException, Exception {
+    public User checkUserByEmail(String email) throws Exception {
         User user = null;
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -274,13 +271,13 @@ public class UserDAO {
                     int userStatus = rs.getInt("userStatus");
                     Role role = new Role(roleID, roleName);
                     user = User.builder()
-                                .fullName(fullName)
-                                .email(email)
-                                .role(role)
-                                .companyID(companyID)
-                                .createdDate(createdDate)
-                                .userStatus(userStatus)
-                                .build();
+                            .fullName(fullName)
+                            .email(email)
+                            .role(role)
+                            .companyID(companyID)
+                            .createdDate(createdDate)
+                            .userStatus(userStatus)
+                            .build();
                 }
             }
         } catch (Exception e) {
@@ -298,12 +295,12 @@ public class UserDAO {
         }
         return user;
     }
-    
+
     public List<User> getListUserByCompanyID(int companyID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
-                
+
                 preStm = conn.prepareStatement(GETLISTUSERBYCOMPANYID);
                 preStm.setInt(1, companyID);
                 rs = preStm.executeQuery();
@@ -347,7 +344,7 @@ public class UserDAO {
 
         return null;
     }
-    
+
     public boolean updateUserStatus(int userID, int userStatus) throws SQLException {
         boolean check = false;
         try {
