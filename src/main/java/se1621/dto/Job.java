@@ -1,13 +1,9 @@
 package se1621.dto;
 
+import lombok.*;
+
 import java.sql.Date;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
@@ -21,7 +17,7 @@ public class Job {
     private String jobTitle;
     CompanyInfo company;
     Category category;
-    private int budget;
+    private float budget;
     private String address;
     private String email;
     private String phone;
