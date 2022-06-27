@@ -4,41 +4,41 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import jakarta.servlet.http.*;
 import se1621.dao.CompanyInfoDAO;
 import se1621.dao.UserDAO;
 import se1621.dto.CompanyInfo;
 import se1621.dto.Error.CompanyInfoError;
 import se1621.dto.Role;
 import se1621.dto.User;
+import se1621.service.FirebaseStoreServiceImpl;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author HNGB
  */
+@MultipartConfig(maxFileSize = 16177215)
 @WebServlet(name = "CreateCompanyInfoController", urlPatterns = {"/CreateCompanyInfoController"})
 public class CreateCompanyInfoController extends HttpServlet {
 
     private static final String ERROR = "/view/create-companyinfo.jsp";
     private static final String SUCCESS = "/MainController?action=SearchCompanyID&searchCompanyID=";
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            int companyID = Integer.parseInt(request.getParameter("companyID").trim());
             String companyName = request.getParameter("companyname");
-            String establishedYear = request.getParameter("establishedyear");
+            int establishedYear = Integer.parseInt(request.getParameter("establishedyear"));
             String address = request.getParameter("address");
             String typecompany = request.getParameter("typecompany");
             String website = request.getParameter("website");
@@ -46,35 +46,56 @@ public class CreateCompanyInfoController extends HttpServlet {
             String phone = request.getParameter("phone");
             int numberOfEmployee = Integer.parseInt(request.getParameter("numberofemployee"));
             String companyOverview = request.getParameter("companyoverview");
-            String avatar = request.getParameter("avatar");
-
+            Part filePart = request.getPart("avatar");
+            FirebaseStoreServiceImpl firebaseStoreServiceImpl = new FirebaseStoreServiceImpl();
+            String filename = firebaseStoreServiceImpl.uploadFile(filePart);
+            CompanyInfo company = CompanyInfo.builder()
+                    .companyName(companyName)
+                    .address(address)
+                    .website(website)
+                    .gmail(gmail)
+                    .phone(phone)
+                    .typeCompany(typecompany)
+                    .establishedYear(establishedYear)
+                    .numberOfEmployee(numberOfEmployee)
+                    .companyOverview(companyOverview)
+                    .avatar(filename)
+                    .companyID(companyID)
+                    .build();
             CompanyInfoDAO dao = new CompanyInfoDAO();
             CompanyInfoError comError = new CompanyInfoError();
             boolean checkValidation = true;
             boolean checkDuplicate = dao.checkDuplicate(companyName);
-
+            HttpSession session = request.getSession();
+            User loginUser = (User) session.getAttribute("LOGIN_USER");
+            int currentCompnayID = loginUser.getCompanyID();
+            boolean checkUpdate = false;
+            boolean checkCreate = true;
             if (checkDuplicate) {
-                checkValidation = false;
-                comError.setCompanyNameError("Company name already exists!");
+                if (currentCompnayID == companyID) {
+                    checkUpdate = dao.updateCompanyInfo(company);
+                    if (checkUpdate) {
+                        request.setAttribute("MESSAGE", "Create Company Successfully!!");
+
+                        url = SUCCESS + companyID;
+                    }
+                } else {
+                    checkValidation = false;
+                    comError.setCompanyNameError("Company name already exists!");
+                }
             }
             if (checkValidation) {
-                CompanyInfo company = CompanyInfo.builder()
-                        .companyName(companyName)
-                        .address(address)
-                        .website(website)
-                        .gmail(gmail)
-                        .phone(phone)
-                        .typeCompany(typecompany)
-                        .establishedYear(establishedYear)
-                        .numberOfEmployee(numberOfEmployee)
-                        .companyOverview(companyOverview)
-                        .avatar(avatar)
-                        .build();
-                boolean checkCreate = dao.createComInfo(company);
+                if (currentCompnayID == companyID) {
+                    checkUpdate = dao.updateCompanyInfo(company);
+                    if (checkUpdate) {
+                        request.setAttribute("MESSAGE", "Create Company Successfully!!");
+
+                        url = SUCCESS + companyID;
+                    }
+                } else {
+                    checkCreate = dao.createComInfo(company);
+                }
                 if (checkCreate) {
-                    int companyID = dao.getCompanyID(companyName);
-                    HttpSession session = request.getSession();
-                    User loginUser = (User) session.getAttribute("LOGIN_USER");
                     int userID = loginUser.getUserID();
                     String fullName = loginUser.getFullName();
                     String email = loginUser.getEmail();
@@ -91,10 +112,10 @@ public class CreateCompanyInfoController extends HttpServlet {
                             .build();
                     UserDAO udao = new UserDAO();
                     boolean check = udao.updateCompanyID(user, companyID);
-                    session.setAttribute("LOGIN_USER",user);
+                    session.setAttribute("LOGIN_USER", user);
                     if (check) {
                         request.setAttribute("MESSAGE", "Create Company Successfully!!");
-                        
+
                         url = SUCCESS + companyID;
                     }
                 }
