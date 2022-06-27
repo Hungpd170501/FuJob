@@ -31,7 +31,6 @@ public class CreateCompanyInfoController extends HttpServlet {
 
     private static final String ERROR = "/view/create-companyinfo.jsp";
     private static final String SUCCESS = "/MainController?action=SearchCompanyID&searchCompanyID=";
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
@@ -79,10 +78,10 @@ public class CreateCompanyInfoController extends HttpServlet {
                         request.setAttribute("MESSAGE", "Create Company Successfully!!");
 
                         url = SUCCESS + companyID;
-                    } else {
-                        checkValidation = false;
-                        comError.setCompanyNameError("Company name already exists!");
                     }
+                } else {
+                    checkValidation = false;
+                    comError.setCompanyNameError("Company name already exists!");
                 }
             }
             if (checkValidation) {
