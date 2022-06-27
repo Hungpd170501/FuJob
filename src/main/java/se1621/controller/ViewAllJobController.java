@@ -4,21 +4,21 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 import se1621.dao.JobDAO;
 import se1621.dao.JobSkillsDAO;
 import se1621.dto.Job;
 import se1621.dto.JobSkills;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author lehad
  */
 @WebServlet(name = "ViewAllJobController", urlPatterns = {"/ViewAllJobController"})
@@ -41,7 +41,7 @@ public class ViewAllJobController extends HttpServlet {
                 List<JobSkills> ljk = new ArrayList<>();
                 for (JobSkills js : listJs) {
                     if(job.getJobID() == js.getJobID()){
-                                ljk.add(js);
+                        ljk.add(js);
                     }
                     job.setListJobSkills(ljk);
                 }
@@ -53,7 +53,7 @@ public class ViewAllJobController extends HttpServlet {
             }
 
         } catch (Exception e) {
-            log("Error at View all job Controller" + e.toString());
+            log("Error at View all job Controller" + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
