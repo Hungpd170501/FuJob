@@ -83,7 +83,6 @@
                 <li class="has-submenu">
                     <a href="javascript:void(0)">Your Project</a><span class="menu-arrow"></span>
                     <ul class="submenu">
-
                         <%--<li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob&pageJob=${1}">Job List</a></li>--%>
                         <%
                             if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "US")) {
@@ -133,8 +132,8 @@
                         <div class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Your Resume</div>
                     </div>
                     <ul class="submenu">
-                        <li><a href="${pageContext.request.contextPath}/view/create-resume.jsp">Edit your resume</a></li>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&searchResumeID=${sessionScope.LOGIN_USER.userID}">View your resume</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=CheckCreateResume&studentID=${sessionScope.LOGIN_USER.userID}">Edit your resume</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&studentID=${sessionScope.LOGIN_USER.userID}">View your resume</a></li>
                     </ul>  
                 </li>
                 <%

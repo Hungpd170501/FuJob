@@ -52,7 +52,7 @@ public class HibernateUtils {
     public static void closeSessionFactory(){
         factory.close();
     }
-    public static void main(String[] args) {
-        System.out.println(HibernateUtils.getSession());
-    }
+//    public static void main(String[] args) {
+//        System.out.println(HibernateUtils.getSession());
+//    }
 }

@@ -5,7 +5,6 @@
 package se1621.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,14 +12,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import se1621.dao.CategoryDAO;
-import se1621.dao.CompanyInfoDAO;
 import se1621.dao.JobDAO;
-import se1621.dao.UserDAO;
-import se1621.dto.Category;
-import se1621.dto.CompanyInfo;
+import se1621.dao.JobSkillsDAO;
 import se1621.dto.Job;
-import se1621.dto.User;
+import se1621.dto.JobSkills;
 
 /**
  *
@@ -37,27 +32,30 @@ public class SearchInJobPostedController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String searchTitle = request.getParameter("searchtitle");
-            String searchExper = request.getParameter("searchExper");
-            int searchCate = 0;
-            int hrID = Integer.parseInt(request.getParameter("hrID"));
-            try {
-                searchCate = Integer.parseInt(request.getParameter("searchCate"));
-            } catch (Exception e) {
+            String searchTitle = request.getParameter("searchTitle");
+            int searchSkill = 0;
+            String searchSkillString = request.getParameter("searchSkill");
+            if(!searchSkillString.isBlank()){
+                searchSkill = Integer.parseInt(searchSkillString);
             }
+            int searchCate = 0;
+            String searchCateString = request.getParameter("searchCate");
+            if(!searchCateString.isBlank()) {
+                searchCate = Integer.parseInt(searchCateString);
+            }
+            int hrID = Integer.parseInt(request.getParameter("hrID"));
             JobDAO jobDAO = new JobDAO();
-            UserDAO userDAO = new UserDAO();
-            CompanyInfoDAO compnayDAO = new CompanyInfoDAO();
-            CategoryDAO categoryDAO = new CategoryDAO();
-            List<Job> listJob = jobDAO.getJobPosted(searchTitle, searchExper, searchCate, hrID);
+            JobSkillsDAO jsDAO = new JobSkillsDAO();
+            List<Job> listJob = jobDAO.getJobPosted(searchTitle, searchSkill, searchCate, hrID);
+            List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
             for (Job job : listJob) {
-                int userID = job.getUserID();
-                User user = userDAO.getUser(userID);
-                CompanyInfo company = compnayDAO.getCompanyInfo(user.getCompanyID());
-                job.setCompany(company);
-                int categoryID = job.getCategory().getCategoryID();
-                Category category = categoryDAO.getCategory(categoryID);
-                job.setCategory(category);
+                List<JobSkills> ljk = new ArrayList<>();
+                for (JobSkills js : listJs) {
+                    if(job.getJobID() == js.getJobID()){
+                                ljk.add(js);
+                    }
+                    job.setListJobSkills(ljk);
+                }
             }
             if (!listJob.isEmpty()) {
                 request.setAttribute("LIST_JOBPOST", listJob);
@@ -65,6 +63,7 @@ public class SearchInJobPostedController extends HttpServlet {
             } else {
                 request.setAttribute("LIST_JOBPOST", listJob);
                 request.setAttribute("MESSAGE", "NO PROJECT TO DISPLAY");
+                url = SUCCESS;
             }
         } catch (Exception e) {
             log("Error at Search JobPostedController" + toString());

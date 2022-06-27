@@ -176,7 +176,7 @@
                                                     <p class="mb-2 text-muted"> <%= resultDate%> days left</p>
                                                     <%
                                                         String description = job.getDescription();
-                                                        if (description.length() > 200) {
+                                                        if (description.length() > 200 || description.isBlank()) {
                                                             description = description.substring(0, 197) + ". . .";
                                                         }
                                                     %>
@@ -205,7 +205,7 @@
                                                     </div>
                                                     <div>
                                                         <h5 class="painting-id" data-format="money" style="display: none"> <%= job.getJobID()%> </h5>
-                                                        <h5 class="painting-price mb-5" data-format="money">  <i class="mr-2"></i> <%= job.getBudget()%>$ <% if (job.getPaymentMethodID() == 2) {
+                                                        <h5 class="painting-price mb-5" data-format="money">  <i class="mr-2"></i> <%= job.getBudget()%>$ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) {
                                                             %>
                                                             / hour
                                                             <%

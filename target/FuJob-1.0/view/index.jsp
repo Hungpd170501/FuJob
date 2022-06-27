@@ -1,3 +1,5 @@
+<%@page import="se1621.dto.Job"%>
+<%@page import="se1621.dao.JobDAO"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.sql.Date"%>
@@ -25,7 +27,7 @@
         <jsp:useBean id="RecentJob" class="se1621.dao.JobDAO" scope="request"></jsp:useBean>
 
             <!-- Start Home -->
-            <section class="bg-home" style="background: url('${pageContext.request.contextPath}/asset/images/background-index.jpg') center center;">
+            <section class="bg-home" style="background: url('${pageContext.request.contextPath}/asset/images/background-home.jpg') center center;">
             <div class="bg-overlay"></div>
             <div class="home-center">
                 <div class="home-desc-center">
@@ -49,7 +51,7 @@
                                                 <div class="col-lg-3 col-md-6">
                                                     <div class="registration-form-box">
                                                         <i class="fa fa-briefcase"></i>
-                                                        <input type="text" name="searchtitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
+                                                        <input type="text" name="searchTitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-6">
@@ -110,18 +112,33 @@
                                 <div class="col-lg-3 col-md-6 mt-4 pt-0">
                                     <div class="list-grid-item rounded">
                                         <div class="grid-item-content p-3 bg-light">
-                                            <div class="grid-list-img mt-3">
-                                                <img src="${t10.category.img}" alt="" class="img-fluid mx-auto d-block" style="width:150px;height:150px">
+                                            <div class="grid-list-img">
+                                                <img src="${t10.category.img}" alt="" class="img-fluid mx-auto d-block" style="width:250px;height:200px">
                                             </div>
-                                            <div class="grid-list-desc mt-3" style="width: 176px; height: 212px">
+                                            <%
+                                                Job job = (Job) pageContext.getAttribute("t10");%>
+
+                                            <div class="grid-list-desc mt-3" style="width: 186px; height: 212px">
                                                 <h6 class="mb-1"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=${t10.jobID}" class="text-dark">${t10.jobTitle}</a></h6>
                                                 <p class="text-muted f-14 mb-1">Address: ${t10.address}<br></p>
-                                                <p class="text-muted mb-1">Budget: ${t10.budget}$ / hour</p>
-                                                <p class="text-muted mb-1">Expiry Date: ${t10.expiriedDate}</p>
+                                                <p class="text-muted mb-1">Budget: <%=job.getBudget()%> $ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) {
+
+                                                    %>
+                                                    / hour
+                                                    <%                                                                }
+                                                    %>  </p>
+                                                <%
+                                                            Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                                                            long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
+                                                            long resultDate = exDate / (24 * 60 * 60 * 1000);
+                                                        %>
+                                                <p class="text-muted mb-1">Expiry Date: <%= resultDate %> days left</p>
+
+
                                             </div>
                                         </div>
 
-                                            <div class="apply-button p-3 border-top" style="text-align: center">
+                                        <div class="apply-button p-3 border-top" style="text-align: center">
                                             <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=${t10.jobID}" class="btn btn-primary btn-sm">View detail</a>
                                         </div>
                                     </div>
@@ -151,7 +168,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <c:forEach items="${chooseCategory.listCategory}" var="c">
                         <div class="job-display col-lg-3 col-md-6 mt-4 pt-2" style="display: none">
@@ -182,7 +199,8 @@
 
 
         <!-- counter start -->
-        <section class="section bg-counter position-relative" style="background: url('${pageContext.request.contextPath}/asset/images/background-index.jpg') center center;">
+        <!--<section class="section bg-counter position-relative" style="background: url('${pageContext.request.contextPath}/asset/images/background-home.jpg') center center;">-->
+        <section class="section bg-counter position-relative" style="background: url('https://test.fpt.sk/wp-content/uploads/2015/10/fpt_banner31.jpg') center center;">
             <div class="bg-overlay bg-overlay-gradient"></div>
             <div class="container">
                 <div class="row" id="counter">
@@ -215,7 +233,7 @@
                                     <i class="mdi mdi-account-multiple-plus h1 text-white"></i>
                                 </div>
                                 <h1 class="counter-value text-white mb-1" data-count="${totalUserNonAD.allTotalUser_NonAD}">0</h1>
-                                <p class="counter-name text-white text-uppercase mb-0">Member</p>
+                                <p class="counter-name text-white text-uppercase mb-0">Members</p>
                             </div>
                         </div>
                     </div>
@@ -273,102 +291,7 @@
                 </div>
             </div>
         </div>
-        <!-- How it Work end -->
 
-        <!--         testimonial start 
-                <section class="section">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-12">
-                                <div class="section-title text-center mb-4 pb-2">
-                                    <h4 class="title title-line pb-5">Our Success Stories</h4>
-                                    <p class="text-muted para-desc mx-auto mb-1">Post a project to tell us about your project. We'll quickly match you with the right freelancers.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row pt-4">
-                            <div class="col-lg-12">
-                                <div id="owl-testi" class="owl-carousel owl-theme">
-                                    <div class="item testi-box rounded p-4 mr-3 ml-2 mb-4 bg-light position-relative">
-                                        <p class="text-muted mb-5">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet consecteturqui adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam</p>
-                                        <div class="clearfix">
-                                            <div class="testi-img float-left mr-3">
-                                                <img src="https://via.placeholder.com/400X400//88929f/5a6270C/O https://placeholder.com/" height="64" alt="" class="rounded-circle shadow">
-                                            </div>
-                                            <h5 class="f-18 pt-1">Kevin Stewart</h5>
-                                            <p class="text-muted mb-0">Web Designer at xyz Company</p>
-                                            <div class="testi-icon">
-                                                <i class="mdi mdi-format-quote-open display-2"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-        
-                                    <div class="item testi-box rounded p-4 mr-3 ml-2 bg-light position-relative">
-                                        <p class="text-muted mb-5">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo</p>
-                                        <div class="clearfix">
-                                            <div class="testi-img float-left mr-3">
-                                                <img src="https://via.placeholder.com/400X400//88929f/5a6270C/O https://placeholder.com/" height="64" alt="" class="rounded-circle shadow">
-                                            </div>
-                                            <h5 class="f-18 pt-1">Charles Garrett</h5>
-                                            <p class="text-muted mb-0">Marketing manager at abc Company</p>
-                                            <div class="testi-icon">
-                                                <i class="mdi mdi-format-quote-open display-2"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-        
-                                    <div class="item testi-box rounded p-4 mr-3 ml-2 bg-light position-relative">
-                                        <p class="text-muted mb-5">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet consecteturqui adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam</p>
-                                        <div class="clearfix">
-                                            <div class="testi-img float-left mr-3">
-                                                <img src="https://via.placeholder.com/400X400//88929f/5a6270C/O https://placeholder.com/" height="64" alt="" class="rounded-circle shadow">
-                                            </div>
-                                            <h5 class="f-18 pt-1">Perry Martinez</h5>
-                                            <p class="text-muted mb-0">Marketing manager at abc Company</p>
-                                            <div class="testi-icon">
-                                                <i class="mdi mdi-format-quote-open display-2"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-        
-                            </div>
-                        </div>
-                    </div>
-        
-                                <div class="container mt-100 mt-60">
-                                    <div class="row justify-content-center">
-                                        <div class="col-12">
-                                            <div class="section-title text-center mb-4 pb-2">
-                                                <h4 class="title title-line pb-5">Our Client's</h4>
-                                                <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                    
-                                    <div class="row align-items-center">
-                                        <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                                            <img src="${pageContext.request.contextPath}/asset/images/clients/1.png" height="50" alt="">
-                                        </div>end col
-                                        <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                                            <img src="${pageContext.request.contextPath}/asset/images/clients/2.png" height="50" alt="">
-                                        </div>end col
-                                        <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                                            <img src="${pageContext.request.contextPath}/asset/images/clients/3.png" height="50" alt="">
-                                        </div>end col
-                                        <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                                            <img src="${pageContext.request.contextPath}/asset/images/clients/4.png" height="50" alt="">
-                                        </div>end col
-                                        <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                                            <img src="${pageContext.request.contextPath}/asset/images/clients/1.png" height="50" alt="">
-                                        </div>end col
-                                        <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
-                                            <img src="${pageContext.request.contextPath}/asset/images/clients/2.png" height="50" alt="">
-                                        </div>end col
-                                    </div>
-                                </div>
-                </section>
-                 testimonial end -->
 
         <jsp:include page="./include/footer.jsp"></jsp:include>
             <!-- javascript -->

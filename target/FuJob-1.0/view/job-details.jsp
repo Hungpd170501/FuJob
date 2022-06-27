@@ -11,11 +11,6 @@
 <%@page import="java.sql.Date"%>
 <%@page import="se1621.dto.JobSkills"%>
 <%@page import="java.util.List"%>
-<<<<<<< HEAD
-<%@page import="se1621.dto.SkillRequire"%>
-=======
->>>>>>> 77c31e9c64ea4e7f0e78aba40360d77810a0aa81
-<%@page import="se1621.dao.JobApplicationDAO"%>
 <%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="se1621.dto.User"%>
 <%@page import="se1621.dto.Job"%>
@@ -90,16 +85,15 @@
                                     %>
                                     <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
                                     </p>
-                                    <p class=" mb-3"><h7 style="font-weight: 700"> Budget: </h7><%= job.getBudget()%> $ <% if(job.getPaymentMethodID() == 2)
-                                    { %> 
-                                        / hour
+                                    <p class=" mb-3"><h7 style="font-weight: 700"> Budget: </h7><%= job.getBudget()%> $ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) { %> 
+                                    / hour
                                     <% } %></p>
-                                <%  
-                                    Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-                                    long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
-                                    long resultDate = exDate/(24*60*60*1000);
-                                %>
-                                    <p class=" mb-3"><h7 style="font-weight: 700"> Expiry Date: </h7><%= resultDate %> days left</p>
+                                    <%
+                                        Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                                        long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
+                                        long resultDate = exDate / (24 * 60 * 60 * 1000);
+                                    %>
+                                    <p class=" mb-3"><h7 style="font-weight: 700"> Expiry Date: </h7><%= resultDate%> days left</p>
                                 </div>
                             </div> 
                         </div>
@@ -123,13 +117,13 @@
                             <h5 class="text-center pb-2" style="font-weight: 700">Contact me</h5>
                             <div class="job-detail-location pt-4 border-top">
                                 <%
-                                    if(job.getCompany().getCompanyName()!= null){
+                                    if (job.getCompany().getCompanyName() != null) {
                                 %>
                                 <div class="job-details-desc-item">
                                     <div class="float-left mr-2">
                                         <i class="mdi mdi-office-building" style="color: gray" ></i>
                                     </div>
-                                    <p class=" mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchCompanyID&searchCompanyID=<%= job.getCompany().getCompanyID() %>"> <%= job.getCompany().getCompanyName() %></a></p>
+                                    <p class=" mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchCompanyID&searchCompanyID=<%= job.getCompany().getCompanyID()%>"> <%= job.getCompany().getCompanyName()%></a></p>
                                 </div>
                                 <%
                                     }
@@ -170,6 +164,13 @@
                         %>
                         <div class="job-detail border rounded mt-4">
                             <button type="button" disabled class="btn btn-secondary btn-block">You Applied This Project</button>
+                        </div>                    
+                        <%
+                        } else {
+                            if (loginUser.getUserID() == job.getUserID()) {
+                        %>
+                        <div class="job-detail border rounded mt-4">
+                            <button type="button" disabled class="btn btn-secondary btn-block">This's Your Project</button>
                         </div>
                         <%
                         } else {
@@ -178,6 +179,7 @@
                             <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Apply For Projects</a>
                         </div>
                         <%
+                                    }
                                 }
                             }
                         %>

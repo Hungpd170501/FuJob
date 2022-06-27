@@ -1,7 +1,6 @@
 package se1621.dto;
 
 import java.sql.Date;
-import java.util.HashMap;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +22,6 @@ public class Job {
     CompanyInfo company;
     Category category;
     private int budget;
-    private int paymentMethodID;
     private String address;
     private String email;
     private String phone;
@@ -33,4 +31,5 @@ public class Job {
     private Date expiriedDate;
     List<JobSkills> listJobSkills;
     private int jobStatus;
+    private PayMentMethod payMentMethod;
 }

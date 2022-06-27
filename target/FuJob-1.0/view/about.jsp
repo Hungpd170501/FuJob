@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 
@@ -11,6 +12,9 @@
     <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
+        <jsp:useBean id="totalJobPost" class="se1621.dao.JobDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="totalJobOrder" class="se1621.dao.JobApplicationDAO" scope="request"></jsp:useBean>
+        <jsp:useBean id="totalUserNonAD" class="se1621.dao.UserDAO" scope="request"></jsp:useBean>
             <!-- Start home -->
             <section class="bg-half page-next-level"> 
                 <div class="bg-overlay"></div>
@@ -60,40 +64,40 @@
                 <div class="container">
                     <div class="blog-post-counter">
                         <div class="row" id="counter">
-                            <div class="col-md-3 col-6 border-right">
-                                <div class="p-4">
+                            <div class="col-md-4 col-6 border-right">
+                                <div class="p-4" >
                                     <div class="blog-post counter-content text-center">
-                                        <h1 class="counter-value font-weight-light text-dark mb-2" data-count="150">0</h1>
-                                        <p class="counter-name text-muted f-15 text-uppercase mb-2">Project</p>
+                                        <h1 class="counter-value font-weight-light text-dark mb-2" data-count="${totalJobOrder.allTotalJobOrder}">0</h1>
+                                        <p class="counter-name text-muted f-15 text-uppercase mb-2">Project order</p>
                                         <i class="mdi mdi-account-multiple h3 text-muted"></i>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-3 col-6 border-right">
+                            <div class="col-md-4 col-6 border-right">
                                 <div class="p-4">
                                     <div class="blog-post counter-content text-center">
-                                        <h1 class="counter-value font-weight-light text-dark mb-2" data-count="210">0</h1>
-                                        <p class="counter-name text-muted f-15 text-uppercase mb-2">Applications</p>
+                                        <h1 class="counter-value font-weight-light text-dark mb-2" data-count="${totalJobPost.allTotalJobPost}">0</h1>
+                                        <p class="counter-name text-muted f-15 text-uppercase mb-2">Project post</p>
                                         <i class="mdi mdi-file h3 text-muted"></i>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-3 col-6 border-right">
+<!--                            <div class="col-md-4 col-6 border-right">
                                 <div class="p-4">
                                     <div class="blog-post counter-content text-center">
                                         <h1 class="counter-value font-weight-light text-dark mb-2" data-count="101">0</h1>
-                                        <p class="counter-name text-muted f-15 text-uppercase mb-2">Companies</p>
+                                        <p class="counter-name text-muted f-15 text-uppercase mb-2">Member</p>
                                         <i class="mdi mdi-bank h3 text-muted"></i>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3 col-6">
+                            </div>-->
+                            <div class="col-md-4 col-6">
                                 <div class="p-4">
                                     <div class="blog-post counter-content text-center">
-                                        <h1 class="counter-value font-weight-light text-dark mb-2" data-count="300">0</h1>
-                                        <p class="counter-name text-muted f-15 text-uppercase mb-2">Employers</p>
+                                        <h1 class="counter-value font-weight-light text-dark mb-2" data-count="${totalUserNonAD.allTotalUser_NonAD}">0</h1>
+                                        <p class="counter-name text-muted f-15 text-uppercase mb-2">Members</p>
                                         <i class="mdi mdi-account-group h3 text-muted"></i>
                                     </div>
                                 </div>
@@ -109,7 +113,7 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-5">
-                            <h4 class="text-dark font-weight-">Group Menbers</h4>
+                            <h4 class="text-dark font-weight-">Founders</h4>
                             <div class="blog-post-border mt-3 mb-3"></div>
                             <h5 class="text-muted mb-1">FuJob</h5>
                             <!--                    <p class="mb-4 f-16"><a href="" class="text-muted"><i class="mdi mdi-earth mr-2"></i>FuJobltd.co.in</a></p>-->
@@ -139,9 +143,9 @@
                                 <p class="text-muted f-14 mb-1">Pham Duc Hung</p>
                             </div>
                             <p class="text-muted f-14">We are always trying to be better</p>
+                            <p class="border-top"></p>
 
-
-                            <ul class="list-inline pt-4 border-top mb-4">
+<!--                            <ul class="list-inline pt-4 border-top mb-4">
                                 <li class="list-inline-item float-right mt-2">
                                     <ul class="list-inline bolg-post-icon mb-0">
                                         <li class="list-inline-item f-20"><a href="" class=""><i class="mdi mdi-facebook"></i></a></li>
@@ -150,7 +154,7 @@
                                         <li class="list-inline-item f-20"><a href="" class=""><i class="mdi mdi-instagram"></i></a></li>
                                     </ul>
                                 </li>
-                            </ul>
+                            </ul>-->
                         </div>
 
                         <div class="col-lg-7">
@@ -267,7 +271,7 @@
                 </section>-->
             <!-- DOWNLOAD APP END -->
 
-            <!-- ABOUT CLIENTS START -->
+<!--             ABOUT CLIENTS START 
             <section class="section">
                 <div class="container">
                     <div class="row justify-content-center">
@@ -282,25 +286,25 @@
                     <div class="row align-items-center">
                         <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
                             <img src="${pageContext.request.contextPath}/asset/images/clients/1.png" height="50" alt="">
-                    </div><!--end col-->
+                    </div>end col
                     <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
                         <img src="${pageContext.request.contextPath}/asset/images/clients/2.png" height="50" alt="">
-                    </div><!--end col-->
+                    </div>end col
                     <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
                         <img src="${pageContext.request.contextPath}/asset/images/clients/3.png" height="50" alt="">
-                    </div><!--end col-->
+                    </div>end col
                     <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
                         <img src="${pageContext.request.contextPath}/asset/images/clients/4.png" height="50" alt="">
-                    </div><!--end col-->
+                    </div>end col
                     <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
                         <img src="${pageContext.request.contextPath}/asset/images/clients/1.png" height="50" alt="">
-                    </div><!--end col-->
+                    </div>end col
                     <div class="col-lg-2 col-md-4 col-6 mt-4 pt-2 text-center">
                         <img src="${pageContext.request.contextPath}/asset/images/clients/2.png" height="50" alt="">
-                    </div><!--end col-->
+                    </div>end col
                 </div>
             </div>
-        </section>
+        </section>-->
         <!-- ABOUT CLIENTS END -->
 
         <jsp:include page="./include/footer.jsp"></jsp:include>

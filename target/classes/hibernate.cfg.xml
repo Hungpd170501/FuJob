@@ -16,10 +16,8 @@
         <mapping class="se1621.entity.CompanyEntity"/>
         <mapping class="se1621.entity.JobApplicationEntity"/>
         <mapping class="se1621.entity.JobEntity"/>
-        <mapping class="se1621.entity.JobSkillEntity"/>
         <mapping class="se1621.entity.PaymentMethodEntity"/>
         <mapping class="se1621.entity.ResumeEntity"/>
-        <mapping class="se1621.entity.ResumeSkillEntity"/>
         <mapping class="se1621.entity.RoleEntity"/>
         <mapping class="se1621.entity.SkillEntity"/>
         <mapping class="se1621.entity.UserEntity"/>
