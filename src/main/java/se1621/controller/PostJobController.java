@@ -4,26 +4,20 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import se1621.dao.JobDAO;
+import se1621.dao.JobSkillsDAO;
+import se1621.dto.*;
+
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import se1621.dao.JobDAO;
-import se1621.dao.JobSkillsDAO;
-import se1621.dao.SkillRequireDAO;
-import se1621.dto.Category;
-import se1621.dto.Job;
-import se1621.dto.JobSkills;
-import se1621.dto.PayMentMethod;
-import se1621.dto.Skill;
-import se1621.dto.SkillRequire;
-import se1621.dto.User;
 
 /**
  *
@@ -49,7 +43,7 @@ public class PostJobController extends HttpServlet {
                 skillSet.add(Integer.parseInt(skill));
             }
             Date expiriedDate = Date.valueOf(request.getParameter("expiriedDate"));
-            int budget = Integer.parseInt(request.getParameter("budget"));
+            float budget = Float.parseFloat(request.getParameter("budget"));
             String address = request.getParameter("address");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
