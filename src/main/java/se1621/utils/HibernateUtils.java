@@ -1,43 +1,30 @@
 package se1621.utils;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 /**
-* Hibernate Utility class with a convenient method to get Session Factory
-* object.
-*
-* @author is wrong
-*/
+ * Hibernate Utility class with a convenient method to get Session Factory
+ * object.
+ *
+ * @author is wrong
+ */
 public class HibernateUtils {
+    private static final ThreadLocal<Session> threadLocal = new ThreadLocal<Session>();
+    private static SessionFactory factory = null;
 
-//    private static final SessionFactory sessionFactory;
-//    
-//    static {
-//        try {
-//            sessionFactory = new Configuration().configure().buildSessionFactory();
-//        } catch (HibernateException ex) {
-//            throw new ExceptionInInitializerError(ex);
-//        }
-//    }
-//    
-//    public static SessionFactory getSessionFactory() {
-//        return sessionFactory;
-//    }
-    private static ThreadLocal<Session> threadLocal = new ThreadLocal<Session>();
-    private static SessionFactory factory=null;
-    static{
+    static {
         factory = new Configuration().configure().buildSessionFactory();
     }
-    public static Session getSession(){
-        Session session=null;
-        if(threadLocal.get()==null){
-            session=factory.openSession();
+
+    public static Session getSession() {
+        Session session = null;
+        if (threadLocal.get() == null) {
+            session = factory.openSession();
             threadLocal.set(session);
-        }else{
-            session=threadLocal.get();
+        } else {
+            session = threadLocal.get();
         }
         return session;
     }
@@ -52,7 +39,4 @@ public class HibernateUtils {
     public static void closeSessionFactory(){
         factory.close();
     }
-//    public static void main(String[] args) {
-//        System.out.println(HibernateUtils.getSession());
-//    }
 }
