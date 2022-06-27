@@ -4,7 +4,6 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,8 +17,9 @@ import se1621.dto.Job;
 import se1621.dto.JobApplication;
 import se1621.service.FirebaseStoreServiceImpl;
 
+import java.io.IOException;
+
 /**
- *
  * @author HNGB
  */
 @MultipartConfig(maxFileSize = 16177215)
