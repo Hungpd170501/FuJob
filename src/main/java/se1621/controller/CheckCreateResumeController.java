@@ -4,20 +4,20 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 import se1621.dao.ResumeDAO;
 import se1621.dao.ResumeSkillDAO;
 import se1621.dto.Resume;
 import se1621.dto.ResumeSkill;
 
+import java.io.IOException;
+import java.util.List;
+
 /**
- *
  * @author HNGB
  */
 @WebServlet(name = "CheckCreateResumeController", urlPatterns = {"/CheckCreateResumeController"})
@@ -34,24 +34,23 @@ public class CheckCreateResumeController extends HttpServlet {
             int studentID = Integer.parseInt(request.getParameter("studentID"));
             ResumeDAO resumeDAO = new ResumeDAO();
             int resumeID = resumeDAO.getResumeID(studentID);
-            List<Resume> listResume = resumeDAO.getListResume(studentID);
+            Resume resume = resumeDAO.getResumeByUserID(studentID);
             ResumeSkillDAO resumeSkillDAO = new ResumeSkillDAO();
             List<ResumeSkill> listStudentSkill = resumeSkillDAO.getStudentSkill(resumeID);
-            if (!listResume.isEmpty()) {
-                request.setAttribute("LIST_RESUME", listResume);
+            if (resume != null) {
+                request.setAttribute("RESUME", resume);
                 request.setAttribute("LIST_STUDENTSKILL", listStudentSkill);
                 url = SUCCESS;
             } else {
-                Resume resume = Resume.builder().address("").avatar("").dateOfBirth(null)
+                resume = Resume.builder().address("").avatar("").dateOfBirth(null)
                         .fullName("").gender("").gmail("").gpa("")
                         .major("").overview("").phone("").website("").gitHub("").linkedIn("")
                         .build();
-                listResume.add(resume);
-                request.setAttribute("LIST_RESUME", listResume);
+                request.setAttribute("RESUME", resume);
                 request.setAttribute("LIST_STUDENTSKILL", listStudentSkill);
             }
         } catch (Exception e) {
-            log("Error at SearchResumeIDController: " + e.toString());
+            log("Error at SearchResumeIDController: " + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
