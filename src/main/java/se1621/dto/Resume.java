@@ -1,12 +1,8 @@
 package se1621.dto;
 
+import lombok.*;
+
 import java.sql.Date;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
