@@ -4,21 +4,21 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 import se1621.dao.JobDAO;
 import se1621.dao.JobSkillsDAO;
 import se1621.dto.Job;
 import se1621.dto.JobSkills;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author lehad
  */
 @WebServlet(name = "SearchInJobPostedController", urlPatterns = {"/SearchInJobPostedController"})
@@ -52,7 +52,7 @@ public class SearchInJobPostedController extends HttpServlet {
                 List<JobSkills> ljk = new ArrayList<>();
                 for (JobSkills js : listJs) {
                     if(job.getJobID() == js.getJobID()){
-                                ljk.add(js);
+                        ljk.add(js);
                     }
                     job.setListJobSkills(ljk);
                 }
@@ -66,7 +66,7 @@ public class SearchInJobPostedController extends HttpServlet {
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at Search JobPostedController" + toString());
+            log("Error at Search JobPostedController" + this);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
