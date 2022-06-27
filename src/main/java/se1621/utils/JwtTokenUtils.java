@@ -4,20 +4,13 @@
  */
 package se1621.utils;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.*;
+import se1621.constant.Constant;
+import se1621.dto.User;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.commons.lang3.StringUtils;
-import se1621.constant.Constant;
-import se1621.dto.Role;
-import se1621.dto.User;
 
 /**
  *
@@ -29,7 +22,7 @@ public class JwtTokenUtils {
     static final String CLAIM_KEY_CREATED = "created";
     static final String CLAIM_KEY_PASSWORD = "password";
     static final String CLAIM_KEY_EMAIL = "email";
-    private Long expiration = 900L;
+    private final Long expiration = 900L;
     private final String SECRET_KEY = Constant.TOKEN_SECRET_KEY;
 
     public String getUsernameFromToken(String token) {
@@ -109,7 +102,7 @@ public class JwtTokenUtils {
         return expiration.before(new Date());
     }
 
-//    private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
+    //    private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
 //        return (lastPasswordReset != null && created.before(lastPasswordReset));
 //    }
     public String generateToken(User userDetails) {
@@ -138,7 +131,7 @@ public class JwtTokenUtils {
                 .compact();
     }
 
-//    public Boolean canTokenBeRefreshed(String token, Date lastPasswordReset) {
+    //    public Boolean canTokenBeRefreshed(String token, Date lastPasswordReset) {
 //        final Date created = getCreatedDateFromToken(token);
 //        return !isCreatedBeforeLastPasswordReset(created, lastPasswordReset)
 //                && (!isTokenExpired(token) || ignoreTokenExpiration(token));
