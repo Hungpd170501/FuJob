@@ -4,15 +4,16 @@
  */
 package se1621.dao;
 
+import se1621.dto.ResumeSkill;
+import se1621.dto.Skill;
+import se1621.utils.DBUtils;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import se1621.dto.Skill;
-import se1621.dto.ResumeSkill;
-import se1621.utils.DBUtils;
 
 /**
  *
@@ -30,7 +31,7 @@ public class ResumeSkillDAO {
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
-    
+
     public boolean createStudetnSkill(ResumeSkill resumeSkill) throws SQLException {
         boolean check = false;
         try {
@@ -40,7 +41,7 @@ public class ResumeSkillDAO {
                 preStm.setInt(1, resumeSkill.getResumeID());
                 preStm.setInt(2, resumeSkill.getSkill().getSkillID());
 
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,7 +58,7 @@ public class ResumeSkillDAO {
         }
         return check;
     }
-    
+
     public List<ResumeSkill> getStudentSkill(int resumeID) throws SQLException {
         List<ResumeSkill> listStudentSkill = new ArrayList<>();
         try {
@@ -97,7 +98,7 @@ public class ResumeSkillDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(DELETESKILL);
                 preStm.setInt(1, resumeID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -114,7 +115,7 @@ public class ResumeSkillDAO {
         }
         return check;
     }
-    
+
     public boolean checkStudentHaveSkill(int resumeID) throws SQLException {
         boolean check = false;
         try {
@@ -124,7 +125,7 @@ public class ResumeSkillDAO {
                 preStm.setInt(1, resumeID);
                 rs = preStm.executeQuery();
                 while (rs.next()) {
-                   check = true;
+                    check = true;
                 }
             }
         } catch (Exception e) {
