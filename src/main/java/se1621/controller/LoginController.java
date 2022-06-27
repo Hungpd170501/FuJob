@@ -4,7 +4,6 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,8 +14,9 @@ import se1621.dao.UserDAO;
 import se1621.dto.User;
 import se1621.utils.Helper;
 
+import java.io.IOException;
+
 /**
- *
  * @author ACER
  */
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
@@ -77,7 +77,7 @@ public class LoginController extends HttpServlet {
             }
         } catch (Exception e) {
             request.setAttribute("LOGIN_MESSAGE", "Something wrong!!");
-            log("Error at LoginController: " + e.toString());
+            log("Error at LoginController: " + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
