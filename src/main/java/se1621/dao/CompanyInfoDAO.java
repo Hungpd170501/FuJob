@@ -4,18 +4,14 @@
  */
 package se1621.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import se1621.dto.CompanyInfo;
 import se1621.utils.DBUtils;
 
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author ACER
  */
 public class CompanyInfoDAO {
@@ -25,6 +21,9 @@ public class CompanyInfoDAO {
     private static final String GETCOMID = "SELECT companyID FROM tblCompanies WHERE companyName=?";
     private static final String CHECK_DUPLICATE = "SELECT companyID FROM tblCompanies WHERE companyName=?";
     private static final String SEARCH = "SELECT companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar, createdDate, lastModifiedDate FROM tblCompanies WHERE companyID = ? and companyStatus = 1";
+    private static final String UPDATE_COMPANYINFO = "UPDATE tblCompanies"
+            + "   SET companyName = ? ,address = ? ,website = ? ,gmail = ? ,phone = ? ,typeCompany = ? ,establishedYear = ? ,numberOfEmployee = ? ,companyOverview = ? ,avatar = ? "
+            + "   WHERE companyID = ? and companyStatus = 1";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -44,12 +43,12 @@ public class CompanyInfoDAO {
                 preStm.setString(4, company.getGmail());
                 preStm.setString(5, company.getPhone());
                 preStm.setString(6, company.getTypeCompany());
-                preStm.setString(7, company.getEstablishedYear());
+                preStm.setInt(7, company.getEstablishedYear());
                 preStm.setInt(8, company.getNumberOfEmployee());
                 preStm.setString(9, company.getCompanyOverview());
                 preStm.setString(10, company.getAvatar());
 
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } finally {
             if (rs != null) {
@@ -83,7 +82,7 @@ public class CompanyInfoDAO {
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
                     String typeCompany = rs.getString("typeCompany");
-                    String establishedYear = rs.getString("establishedYear");
+                    int establishedYear = rs.getInt("establishedYear");
                     int numberOfEmployee = rs.getInt("numberOfEmployee");
                     String companyOverview = rs.getString("companyOverview");
                     String avatar = rs.getString("avatar");
@@ -186,9 +185,9 @@ public class CompanyInfoDAO {
 
     public CompanyInfo getCompanyInfo(int companyID) throws SQLException {
         CompanyInfo companyInfo = new CompanyInfo();
-         conn = null;
-         preStm = null;
-         rs = null;
+        conn = null;
+        preStm = null;
+        rs = null;
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
@@ -202,7 +201,7 @@ public class CompanyInfoDAO {
                     String gmail = rs.getString("gmail");
                     String phone = rs.getString("phone");
                     String typeCompany = rs.getString("typeCompany");
-                    String establishedYear = rs.getString("establishedYear");
+                    int establishedYear = rs.getInt("establishedYear");
                     int numberOfEmployee = rs.getInt("numberOfEmployee");
                     String companyOverview = rs.getString("companyOverview");
                     String avatar = rs.getString("avatar");
@@ -222,6 +221,7 @@ public class CompanyInfoDAO {
                             .avatar(avatar)
                             .createdDate(createdDate)
                             .lastModifiedDate(lastModifiedDate)
+                            .companyStatus(1)
                             .build();
                 }
             }
@@ -239,5 +239,37 @@ public class CompanyInfoDAO {
             }
         }
         return companyInfo;
+    }
+
+    public boolean updateCompanyInfo(CompanyInfo company) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UPDATE_COMPANYINFO);
+                preStm.setString(1, company.getCompanyName());
+                preStm.setString(2, company.getAddress());
+                preStm.setString(3, company.getWebsite());
+                preStm.setString(4, company.getGmail());
+                preStm.setString(5, company.getPhone());
+                preStm.setString(6, company.getTypeCompany());
+                preStm.setInt(7, company.getEstablishedYear());
+                preStm.setInt(8, company.getNumberOfEmployee());
+                preStm.setString(9, company.getCompanyOverview());
+                preStm.setString(10, company.getAvatar());
+                preStm.setInt(11, company.getCompanyID());
+                check = preStm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 }
