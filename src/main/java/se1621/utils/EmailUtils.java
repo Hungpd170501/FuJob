@@ -4,23 +4,17 @@
  */
 package se1621.utils;
 
-import java.util.Date;
-import java.util.Properties;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Date;
+import java.util.Properties;
 
 public class EmailUtils {
 
     public void sendEmail(String host, String port,
-            final String userName, final String password, String toAddress,
-            String subject, String message) throws AddressException,
+                          final String userName, final String password, String toAddress,
+                          String subject, String message) throws
             MessagingException {
         // sets SMTP server properties
         Properties properties = new Properties();
