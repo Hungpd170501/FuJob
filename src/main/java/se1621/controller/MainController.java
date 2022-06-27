@@ -4,12 +4,13 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 @MultipartConfig(maxFileSize = 16177215)
 public class MainController extends HttpServlet {
 
@@ -72,6 +73,9 @@ public class MainController extends HttpServlet {
     private static final String UPDATESTATUSHR_CONTROLLER = "UpdateStatusHRController";
     private static final String VIEW_RECENT_JOB = "viewRecentJob";
     private static final String VIEW_RECENT_JOB_CONTROLLER = "ViewRecentJobController";
+    private static final String CHECKCREATECOMPANY = "CheckCreateCompany";
+    private static final String CHECKCREATECOMPANY_CONTROLLER = "CheckCreateCompanyInfoController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -128,20 +132,22 @@ public class MainController extends HttpServlet {
             } else if (SEARCHJOBORDER.equals(action)) {
                 url = SEARCHJOBORDER_CONTROLLER;
             } else if (CHECKCREATERESUME.equals(action)) {
-                url = CHECKCREATERESUME_CONTROLLER;    
+                url = CHECKCREATERESUME_CONTROLLER;
             } else if (DELETEJOBPOST.equals(action)) {
                 url = DELETEJOBPOST_CONTROLLER;
             } else if (VIEWALLHR.equals(action)) {
                 url = VIEWALLHR_CONTROLLER;
             } else if (UPDATESTATUSHR.equals(action)) {
-                url = UPDATESTATUSHR_CONTROLLER;    
+                url = UPDATESTATUSHR_CONTROLLER;
+            } else if (CHECKCREATECOMPANY.equals(action)) {
+                url = CHECKCREATECOMPANY_CONTROLLER;
             } else if (VIEW_RECENT_JOB.equals(action)) {
-                url = VIEW_RECENT_JOB_CONTROLLER;    
+                url = VIEW_RECENT_JOB_CONTROLLER;
             } else {
                 url = ERROR;
             }
         } catch (Exception e) {
-            log("Error at MainController: " + e.toString());
+            log("Error at MainController: " + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
