@@ -1,4 +1,4 @@
-<%@page import="se1621.dto.StudentSkill"%>
+<%@page import="se1621.dto.ResumeSkill" %>
 <%@page import="se1621.dto.Resume"%>
 <%@page import="se1621.dto.Job"%>
 <%@page import="java.util.List"%>
@@ -97,7 +97,7 @@
                                                 </ul>
                                                 <p class="text-muted mt-1 mb-0">Skills:
                                                     <%
-                                                        List<StudentSkill> listStudentSkill = (List<StudentSkill>) request.getAttribute("LIST_STUDENTSKILL");
+                                                        List<ResumeSkill> listStudentSkill = (List<ResumeSkill>) request.getAttribute("LIST_STUDENTSKILL");
                                                         for (int i = 0; i < listStudentSkill.size() - 1; i++) {
                                                     %>
                                                     <%= listStudentSkill.get(i).getSkill().getSkillName() %>,
