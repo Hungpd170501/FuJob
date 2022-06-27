@@ -4,19 +4,19 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 import se1621.dao.JobApplicationDAO;
 import se1621.dao.ResumeDAO;
 import se1621.dto.JobApplication;
 
+import java.io.IOException;
+import java.util.List;
+
 /**
- *
  * @author lehad
  */
 @WebServlet(name = "SearchInJobOrderController", urlPatterns = {"/SearchInJobOrderController"})
@@ -55,7 +55,7 @@ public class SearchInJobOrderController extends HttpServlet {
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at Search JobOrderController" + toString());
+            log("Error at Search JobOrderController" + this);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
