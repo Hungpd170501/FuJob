@@ -4,21 +4,21 @@
  */
 package se1621.controller;
 
-import se1621.dto.Error.UserError;
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import se1621.dao.UserDAO;
+import se1621.dto.Error.UserError;
 import se1621.dto.Role;
 import se1621.dto.User;
 import se1621.service.EmailServiceImpl;
 import se1621.utils.Helper;
 
+import java.io.IOException;
+
 /**
- *
  * @author HNGB
  */
 @WebServlet(name = "SignUpController", urlPatterns = {"/SignUpController"})
