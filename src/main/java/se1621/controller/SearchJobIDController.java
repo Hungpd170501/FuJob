@@ -4,23 +4,19 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import org.apache.commons.lang3.StringUtils;
+import se1621.dao.*;
+import se1621.dto.*;
+
+import java.io.IOException;
 import java.util.List;
-import se1621.dao.CategoryDAO;
-import se1621.dao.CompanyInfoDAO;
-import se1621.dao.JobDAO;
-import se1621.dao.JobSkillsDAO;
-import se1621.dao.UserDAO;
-import se1621.dto.Category;
-import se1621.dto.CompanyInfo;
-import se1621.dto.Job;
-import se1621.dto.JobSkills;
-import se1621.dto.User;
 
 /**
  *
@@ -45,6 +41,14 @@ public class SearchJobIDController extends HttpServlet {
             UserDAO userDAO = new UserDAO();
             JobSkillsDAO jobSkillsDAO = new JobSkillsDAO();
             List<JobSkills> listJobSkills = jobSkillsDAO.getSkillRequire(jobIDSearch);
+            HttpSession session = request.getSession();
+            User loginUser = (User) session.getAttribute("LOGIN_USER");
+            if (loginUser != null && !StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
+                JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
+                ResumeDAO resumeDAO = new ResumeDAO();
+                boolean checkDuplicateUserOrderJob = jobOrderDAO.checkDuplicateJobOrderByOneUser(resumeDAO.getResumeID(loginUser.getUserID()), job.getJobID());
+                request.setAttribute("DUPLICATE_APPLIED", checkDuplicateUserOrderJob);
+            }
             if (job != null) {
                 int userID = job.getUserID();
                 User user = userDAO.getUser(userID);
@@ -57,7 +61,7 @@ public class SearchJobIDController extends HttpServlet {
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at SearchCompanyIDController: " + e.toString());
+            log("Error at SearchCompanyIDController: " + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
