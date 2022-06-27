@@ -4,19 +4,12 @@
  */
 package se1621.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import se1621.dto.*;
+import se1621.utils.DBUtils;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import se1621.dto.Category;
-import se1621.dto.CompanyInfo;
-import se1621.dto.Job;
-import se1621.dto.JobApplication;
-import se1621.dto.PayMentMethod;
-import se1621.utils.DBUtils;
 
 /**
  *
@@ -30,14 +23,14 @@ public class JobApplicationDAO {
     private static final String DELETE = "UPDATE tblJobApplications SET jobApplicationStatus = 0 WHERE jobApplicationID = ? ";
     private static final String GETTALLUSERIDOFJOB = "SELECT resumeID FROM tblJobApplications WHERE jobID = ?";
     private static final String GETTALLJOBORDERIDOFJOB = "SELECT jobApplicationID FROM tblJobApplications WHERE jobID = ?";
-    private static final String GETALLJOBAPPLIED = "SELECT jo.jobApplicationID, j.jobID, j.jobTitle, j.jobCategoryID, jo.cvFile, jo.priceDeal, jo.message,"
-            + "            jo.createdDate, c.categoryName, c.img, com.companyName,"
-            + "            j.createdDate, j.expiriedDate, j.lastModifiedDate, j.budget, j.address, j.email, j.phone, j.description"
-            + "            FROM (((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID )"
-            + "            left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)"
-            + "            WHERE jo.resumeID=? and jo.jobApplicationStatus = 1";
+    private static final String GETALLJOBAPPLIED = "SELECT jo.jobApplicationID, j.jobID, j.jobTitle, j.jobCategoryID, j.budget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
+            + "                        jo.createdDate, c.categoryName, c.img, com.companyName, "
+            + "                        j.createdDate, j.expiriedDate, j.lastModifiedDate, j.budget, j.address, j.email, j.phone, j.description "
+            + "                        FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
+            + "                        left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
+            + "                        WHERE jo.resumeID=? and jo.jobApplicationStatus = 1 ORDER BY jobID";
     private static final String UPDATE_STATUS = "UPDATE tblJobApplications SET cvFile = ?, priceDeal = ?, message = ?, jobApplicationStatus = 1 WHERE jobApplicationID = ? and resumeID = ? and jobID = ?";
-    private String SEARCHJOBORDER = "SELECT ja.jobApplicationID, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, "
+    private final String SEARCHJOBORDER = "SELECT ja.jobApplicationID, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, "
             + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.budget, j.paymentMethodID, pm.paymentMethodName, "
             + "j.address, j.email, j.phone, j.description, j.lastModifiedDate "
             + "FROM (((tblJobApplications ja LEFT JOIN tblJobs j ON ja.jobID = j.jobID) "
@@ -91,7 +84,7 @@ public class JobApplicationDAO {
                 preStm.setString(3, jobOrder.getCvFile());
                 preStm.setString(4, jobOrder.getPriceDeal());
                 preStm.setString(5, jobOrder.getMessage());
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,7 +117,7 @@ public class JobApplicationDAO {
                 preStm.setInt(4, jobOrderID);
                 preStm.setInt(5, jobOrder.getResumeID());
                 preStm.setInt(6, jobOrder.getJob().getJobID());
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -214,10 +207,13 @@ public class JobApplicationDAO {
                 while (rs.next()) {
                     int jobApplicationID = rs.getInt("jobApplicationID");
                     int jobID = rs.getInt("jobID");
+                    String priceDeal = rs.getString("priceDeal");
                     String jobTitle = rs.getString("jobTitle");
                     Date createdDate = rs.getDate("createdDate");
                     Date expiriedDate = rs.getDate("expiriedDate");
                     int budget = rs.getInt("budget");
+                    int paymentMethodID = rs.getInt("paymentMethodID");
+                    String paymentMethodName = rs.getString("paymentMethodName");
                     String address = rs.getString("address");
                     String email = rs.getString("email");
                     String phone = rs.getString("phone");
@@ -226,6 +222,7 @@ public class JobApplicationDAO {
                     String categoryName = rs.getString("categoryName");
                     String img = rs.getString("img");
                     String companyName = rs.getString("companyName");
+                    PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder().jobID(jobID)
                             .userID(userID)
                             .jobTitle(jobTitle)
@@ -234,6 +231,7 @@ public class JobApplicationDAO {
                             .address(address)
                             .email(email)
                             .budget(budget)
+                            .payMentMethod(payMent)
                             .phone(phone)
                             .expiriedDate(expiriedDate)
                             .description(description)
@@ -242,6 +240,7 @@ public class JobApplicationDAO {
                             .jobApplicationID(jobApplicationID)
                             .resumeID(userID).job(job)
                             .createdDate(createdDate)
+                            .priceDeal(priceDeal)
                             .lastModifiedDate(createdDate)
                             .build();
                     list.add(listJobOrder);
@@ -271,7 +270,7 @@ public class JobApplicationDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(DELETE);
                 preStm.setInt(1, jobOrderID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -350,17 +349,17 @@ public class JobApplicationDAO {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
-               List<JobApplication> listJobApp = new ArrayList<>();
+                List<JobApplication> listJobApp = new ArrayList<>();
                 String getDataSQL = "";
                 String getDataSQL1 = this.SEARCHJOBORDER;
-                String queryForSearchSkill = 
-                "SELECT ja.jobApplicationID, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, "
-            + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.budget, j.paymentMethodID, pm.paymentMethodName, "
-            + "j.address, j.email, j.phone, j.description, j.lastModifiedDate "
-            + "FROM (((tblJobApplications ja LEFT JOIN tblJobs j ON ja.jobID = j.jobID) "
-            + "LEFT JOIN tblCategories c ON j.jobCategoryID = c.categoryID) "
-            + "left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID) "
-            + "left join tblJobSkills js on js.jobID = j.jobID ";
+                String queryForSearchSkill =
+                        "SELECT ja.jobApplicationID, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, "
+                                + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.budget, j.paymentMethodID, pm.paymentMethodName, "
+                                + "j.address, j.email, j.phone, j.description, j.lastModifiedDate "
+                                + "FROM (((tblJobApplications ja LEFT JOIN tblJobs j ON ja.jobID = j.jobID) "
+                                + "LEFT JOIN tblCategories c ON j.jobCategoryID = c.categoryID) "
+                                + "left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID) "
+                                + "left join tblJobSkills js on js.jobID = j.jobID ";
                 boolean checkCateID = false;
                 boolean checkSkillID = false;
 
@@ -406,7 +405,7 @@ public class JobApplicationDAO {
                     String message = rs.getString("message");
                     String priceDeal = rs.getString("priceDeal");
                     String jobTitle = rs.getString("jobTitle");
-                    int budget = rs.getInt("budget");
+                    float budget = rs.getFloat("budget");
                     int payID = rs.getInt("paymentMethodID");
                     String payName = rs.getString("paymentMethodName");
                     String address = rs.getString("address");
