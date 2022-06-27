@@ -4,27 +4,28 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.servlet.http.*;
 import se1621.dao.ResumeDAO;
 import se1621.dao.ResumeSkillDAO;
 import se1621.dto.Resume;
-import se1621.dto.Skill;
 import se1621.dto.ResumeSkill;
+import se1621.dto.Skill;
 import se1621.dto.User;
+import se1621.service.FirebaseStoreServiceImpl;
+
+import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author HNGB
  */
+@MultipartConfig(maxFileSize = 16177215)
 @WebServlet(name = "CreateResumeController", urlPatterns = {"/CreateResumeController"})
 public class CreateResumeController extends HttpServlet {
 
@@ -36,7 +37,9 @@ public class CreateResumeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String avatar = request.getParameter("avatar");
+            Part filePart = request.getPart("avatar");
+            FirebaseStoreServiceImpl firebaseStoreServiceImpl = new FirebaseStoreServiceImpl();
+            String filename = firebaseStoreServiceImpl.uploadFile(filePart);
             String fullName = request.getParameter("fullname");
             String gender = request.getParameter("gender");
             Date dateOfBirth = Date.valueOf(request.getParameter("dateofbirth"));
@@ -59,21 +62,21 @@ public class CreateResumeController extends HttpServlet {
             User loginUser = (User) session.getAttribute("LOGIN_USER");
             int studentID = loginUser.getUserID();
             Resume resume = Resume.builder()
-                                          .avatar(avatar)
-                                          .userID(studentID)
-                                          .fullName(fullName)
-                                          .gender(gender)
-                                          .dateOfBirth(dateOfBirth)
-                                          .gmail(gmail)
-                                          .phone(phone)
-                                          .address(address)
-                                          .major(major)
-                                          .gpa(gpa)
-                                          .website(website)
-                                          .gitHub(gitHub)
-                                          .linkedIn(linkedIn)
-                                          .overview(overview)
-                                          .build();
+                    .avatar(filename)
+                    .userID(studentID)
+                    .fullName(fullName)
+                    .gender(gender)
+                    .dateOfBirth(dateOfBirth)
+                    .gmail(gmail)
+                    .phone(phone)
+                    .address(address)
+                    .major(major)
+                    .gpa(gpa)
+                    .website(website)
+                    .gitHub(gitHub)
+                    .linkedIn(linkedIn)
+                    .overview(overview)
+                    .build();
             ResumeSkillDAO resumeSkillDAO = new ResumeSkillDAO();
             List<ResumeSkill> listStudentSkill = new ArrayList<>();
             ResumeDAO resumeDAO = new ResumeDAO();
