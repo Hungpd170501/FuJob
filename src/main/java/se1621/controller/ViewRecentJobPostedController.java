@@ -4,20 +4,18 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import org.checkerframework.checker.units.qual.A;
 import se1621.dao.JobDAO;
 import se1621.dto.Job;
 
+import java.io.IOException;
+import java.util.List;
+
 /**
- *
  * @author lehad
  */
 @WebServlet(name = "ViewRecentJobController", urlPatterns = {"/ViewRecentJobController"})
@@ -38,7 +36,7 @@ public class ViewRecentJobPostedController extends HttpServlet {
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error in ViewRecentJobController" + e.toString());
+            log("Error in ViewRecentJobController" + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
