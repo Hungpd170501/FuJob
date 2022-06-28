@@ -52,7 +52,7 @@ public class SearchInJobPostedController extends HttpServlet {
                 List<JobSkills> ljk = new ArrayList<>();
                 for (JobSkills js : listJs) {
                     if(job.getJobID() == js.getJobID()){
-                        ljk.add(js);
+                                ljk.add(js);
                     }
                     job.setListJobSkills(ljk);
                 }
@@ -66,7 +66,7 @@ public class SearchInJobPostedController extends HttpServlet {
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at Search JobPostedController" + this);
+            log("Error at Search JobPostedController" + toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

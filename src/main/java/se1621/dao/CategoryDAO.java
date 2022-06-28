@@ -60,8 +60,8 @@ public class CategoryDAO {
         }
         return null;
     }
-
-    public List<Category> getListCategory_nonOrderBy() throws SQLException {
+    
+     public List<Category> getListCategory_nonOrderBy() throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {

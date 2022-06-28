@@ -73,7 +73,7 @@ public class LoginGoogleHandler extends HttpServlet {
                 in.close();
                 JSONParser parser = new JSONParser();
                 JSONObject json = (JSONObject) parser.parse(responseToken.toString());
-                String accessToken = json.get("access_token").toString().replaceAll("\"", "");
+                String accessToken = (String) json.get("access_token").toString().replaceAll("\"", "");
                 String link = GOOGLE_LINK_GET_USER_INFO + accessToken;
                 String responseDetail = Request.Get(link).execute().returnContent().asString();
                 UserGoogle googlePojo = new Gson().fromJson(responseDetail, UserGoogle.class);
@@ -101,7 +101,7 @@ public class LoginGoogleHandler extends HttpServlet {
                                     case "HR":
                                         url = USER_PAGE;
                                         break;
-                                    case "HRM":
+                                        case "HRM":
                                         url = USER_PAGE;
                                         break;
                                     default:
@@ -120,7 +120,7 @@ public class LoginGoogleHandler extends HttpServlet {
             }
         } catch (Exception e) {
             request.setAttribute("LOGIN_MESSAGE", "Opp Something wrong!");
-            log("Error at LoginGoogleHandler: " + e);
+            log("Error at LoginGoogleHandler: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

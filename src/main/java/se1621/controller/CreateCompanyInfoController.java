@@ -90,7 +90,7 @@ public class CreateCompanyInfoController extends HttpServlet {
                     }
                 }
             }
-            if (checkValidation){
+            if (checkValidation) {
                 if (currentCompnayID == companyID) {
                     checkUpdate = dao.updateCompanyInfo(company);
                     if (checkUpdate) {

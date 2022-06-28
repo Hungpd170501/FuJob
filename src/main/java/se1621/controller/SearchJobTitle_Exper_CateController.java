@@ -51,7 +51,7 @@ public class SearchJobTitle_Exper_CateController extends HttpServlet {
                 List<JobSkills> ljk = new ArrayList<>();
                 for (JobSkills js : listJs) {
                     if(job.getJobID() == js.getJobID()){
-                        ljk.add(js);
+                                ljk.add(js);
                     }
                     job.setListJobSkills(ljk);
                 }
@@ -64,7 +64,7 @@ public class SearchJobTitle_Exper_CateController extends HttpServlet {
                 request.setAttribute("MESSAGE", "NO PROJECT TO DISPLAY");
             }
         } catch (Exception e) {
-            log("Error at View all job Controller" + e);
+            log("Error at View all job Controller" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

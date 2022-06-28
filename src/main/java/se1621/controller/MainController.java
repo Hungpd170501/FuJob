@@ -132,24 +132,24 @@ public class MainController extends HttpServlet {
             } else if (SEARCHJOBORDER.equals(action)) {
                 url = SEARCHJOBORDER_CONTROLLER;
             } else if (CHECKCREATERESUME.equals(action)) {
-                url = CHECKCREATERESUME_CONTROLLER;
+                url = CHECKCREATERESUME_CONTROLLER;    
             } else if (DELETEJOBPOST.equals(action)) {
                 url = DELETEJOBPOST_CONTROLLER;
             } else if (VIEWALLHR.equals(action)) {
                 url = VIEWALLHR_CONTROLLER;
             } else if (UPDATESTATUSHR.equals(action)) {
-                url = UPDATESTATUSHR_CONTROLLER;
+                url = UPDATESTATUSHR_CONTROLLER;    
             } else if (CHECKCREATECOMPANY.equals(action)) {
-                url = CHECKCREATECOMPANY_CONTROLLER;
+                url = CHECKCREATECOMPANY_CONTROLLER;    
             } else if (VIEW_RECENT_JOB.equals(action)) {
-                url = VIEW_RECENT_JOB_CONTROLLER;
+                url = VIEW_RECENT_JOB_CONTROLLER;    
             } else if (REGISTER_HR.equals(action)) {
-                url = REGISTERHR_CONTROLLER;
+                url = REGISTERHR_CONTROLLER;    
             } else {
                 url = ERROR;
             }
         } catch (Exception e) {
-            log("Error at MainController: " + e);
+            log("Error at MainController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

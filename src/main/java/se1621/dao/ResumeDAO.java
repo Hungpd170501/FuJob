@@ -57,23 +57,23 @@ public class ResumeDAO {
                     Date createdDate = rs.getDate("createdDate");
                     Date lastModifiedDate = rs.getDate("lastModifiedDate");
                     Resume resume = Resume.builder()
-                            .resumeID(resumeID)
-                            .avatar(avatar)
-                            .fullName(fullName)
-                            .gender(gender)
-                            .dateOfBirth(dateOfBirth)
-                            .gmail(gmail)
-                            .phone(phone)
-                            .address(address)
-                            .major(major)
-                            .gpa(gpa)
-                            .website(website)
-                            .gitHub(gitHub)
-                            .linkedIn(linkedIn)
-                            .overview(overview)
-                            .createdDate(createdDate)
-                            .lastModifiedDate(lastModifiedDate)
-                            .build();
+                                          .resumeID(resumeID)
+                                          .avatar(avatar)
+                                          .fullName(fullName)
+                                          .gender(gender)
+                                          .dateOfBirth(dateOfBirth)
+                                          .gmail(gmail)
+                                          .phone(phone)
+                                          .address(address)
+                                          .major(major)
+                                          .gpa(gpa)
+                                          .website(website)
+                                          .gitHub(gitHub)
+                                          .linkedIn(linkedIn)
+                                          .overview(overview)
+                                          .createdDate(createdDate)
+                                          .lastModifiedDate(lastModifiedDate)
+                                          .build();
                     listResume.add(resume);
                 }
             }
@@ -102,7 +102,7 @@ public class ResumeDAO {
                 preStm.setInt(1, userID);
                 rs = preStm.executeQuery();
                 if (rs.next()) {
-                    int resumeID = rs.getInt("resumeID");
+                   int resumeID = rs.getInt("resumeID");
                     String avatar = rs.getString("avatar");
                     String fullName = rs.getString("fullName");
                     String gender = rs.getString("gender");
@@ -119,24 +119,24 @@ public class ResumeDAO {
                     Date createdDate = rs.getDate("createdDate");
                     Date lastModifiedDate = rs.getDate("lastModifiedDate");
                     resume = Resume.builder()
-                            .resumeID(resumeID)
-                            .userID(userID)
-                            .avatar(avatar)
-                            .fullName(fullName)
-                            .gender(gender)
-                            .dateOfBirth(dateOfBirth)
-                            .gmail(gmail)
-                            .phone(phone)
-                            .address(address)
-                            .major(major)
-                            .gpa(gpa)
-                            .website(website)
-                            .gitHub(gitHub)
-                            .linkedIn(linkedIn)
-                            .overview(overview)
-                            .createdDate(createdDate)
-                            .lastModifiedDate(lastModifiedDate)
-                            .build();
+                                          .resumeID(resumeID)
+                                          .userID(userID)
+                                          .avatar(avatar)
+                                          .fullName(fullName)
+                                          .gender(gender)
+                                          .dateOfBirth(dateOfBirth)
+                                          .gmail(gmail)
+                                          .phone(phone)
+                                          .address(address)
+                                          .major(major)
+                                          .gpa(gpa)
+                                          .website(website)
+                                          .gitHub(gitHub)
+                                          .linkedIn(linkedIn)
+                                          .overview(overview)
+                                          .createdDate(createdDate)
+                                          .lastModifiedDate(lastModifiedDate)
+                                          .build();
                 }
             }
         } catch (Exception e) {
@@ -179,7 +179,7 @@ public class ResumeDAO {
                 preStm.setString(13, resume.getWebsite());
                 preStm.setString(14, resume.getOverview());
 
-                check = preStm.executeUpdate() > 0;
+                check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -248,7 +248,7 @@ public class ResumeDAO {
                 preStm.setString(12, resume.getLinkedIn());
                 preStm.setString(13, resume.getOverview());
                 preStm.setInt(14, resumeID);
-                check = preStm.executeUpdate() > 0;
+                check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
             e.printStackTrace();

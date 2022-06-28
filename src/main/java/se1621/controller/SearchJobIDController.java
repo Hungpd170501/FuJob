@@ -56,7 +56,7 @@ public class SearchJobIDController extends HttpServlet {
                 JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
                 ResumeDAO resumeDAO = new ResumeDAO();
                 boolean checkDuplicateUserOrderJob = jobOrderDAO.checkDuplicateJobOrderByOneUser(resumeDAO.getResumeID(loginUser.getUserID()), job.getJobID());
-                request.setAttribute("DUPLICATE_APPLIED", checkDuplicateUserOrderJob);
+                    request.setAttribute("DUPLICATE_APPLIED", checkDuplicateUserOrderJob);
             }
             if (job != null) {
                 int userID = job.getUserID();
@@ -70,7 +70,7 @@ public class SearchJobIDController extends HttpServlet {
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at SearchCompanyIDController: " + e);
+            log("Error at SearchCompanyIDController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
