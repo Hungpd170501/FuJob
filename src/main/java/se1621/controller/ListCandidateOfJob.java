@@ -64,7 +64,7 @@ public class ListCandidateOfJob extends HttpServlet {
                 request.setAttribute("MESSAGE", "NO CANDICATES APPLY THIS JOB");
             }
         } catch (Exception e) {
-            log("Error at View all job Controller" + e);
+            log("Error at View all job Controller" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
