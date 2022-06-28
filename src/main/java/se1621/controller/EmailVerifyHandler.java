@@ -54,7 +54,7 @@ public class EmailVerifyHandler extends HttpServlet {
                 request.setAttribute("LOGIN_MESSAGE", "It looks like you clicked on an invalid email verification link or your account has been deactivated. Please try again!");
             }
         } catch (Exception e) {
-            log("Error at RecoveryPasswordHandler: " + e);
+            log("Error at RecoveryPasswordHandler: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
