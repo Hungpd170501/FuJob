@@ -31,10 +31,9 @@ import se1621.service.FirebaseStoreServiceImpl;
 @MultipartConfig(maxFileSize = 16177215)
 @WebServlet(name = "CreateCompanyInfoController", urlPatterns = {"/CreateCompanyInfoController"})
 public class CreateCompanyInfoController extends HttpServlet {
-
+    
     private static final String ERROR = "/view/create-companyinfo.jsp";
     private static final String SUCCESS = "/MainController?action=SearchCompanyID&searchCompanyID=";
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
@@ -80,12 +79,12 @@ public class CreateCompanyInfoController extends HttpServlet {
                     checkUpdate = dao.updateCompanyInfo(company);
                     if (checkUpdate) {
                         request.setAttribute("MESSAGE", "Create Company Successfully!!");
-
+                        
                         url = SUCCESS + companyID;
-                    } else {
-                        checkValidation = false;
-                        comError.setCompanyNameError("Company name already exists!");
                     }
+                } else {
+                    checkValidation = false;
+                    comError.setCompanyNameError("Company name already exists!");
                 }
             }
             if (checkValidation) {
@@ -93,7 +92,7 @@ public class CreateCompanyInfoController extends HttpServlet {
                     checkUpdate = dao.updateCompanyInfo(company);
                     if (checkUpdate) {
                         request.setAttribute("MESSAGE", "Create Company Successfully!!");
-
+                        
                         url = SUCCESS + companyID;
                     }
                 } else {
@@ -119,7 +118,7 @@ public class CreateCompanyInfoController extends HttpServlet {
                     session.setAttribute("LOGIN_USER", user);
                     if (check) {
                         request.setAttribute("MESSAGE", "Create Company Successfully!!");
-
+                        
                         url = SUCCESS + companyID;
                     }
                 }
