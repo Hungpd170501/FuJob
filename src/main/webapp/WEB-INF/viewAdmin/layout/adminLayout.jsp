@@ -11,7 +11,7 @@
 <%@include file="/WEB-INF/viewAdmin/components/loader.jsp" %>
 <div class="mdk-drawer-layout js-mdk-drawer-layout" data-push data-responsive-width="992px">
     <div class="mdk-drawer-layout__content page-content">
-        <%@include file="/WEB-INF/viewAdmin/components/loader.jsp" %>
+        <%@include file="/WEB-INF/viewAdmin/include/navbar.jsp" %>
         <div class="border-bottom-2 py-32pt position-relative z-1">
             <div
                     class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left">

@@ -1,7 +1,7 @@
-<%@page import="se1621.dto.ResumeSkill" %>
-<%@page import="se1621.dto.Resume" %>
-<%@page import="java.util.List" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page import="se1621.dto.ResumeSkill"%>
+<%@page import="se1621.dto.Resume"%>
+<%@page import="java.util.List"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -12,9 +12,7 @@
     </jsp:include>
     <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
     <link rel="stylesheet" href="https://unpkg.com/filepond@^4/dist/filepond.css" type="text/css"/>
-    <link rel="stylesheet"
-          href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
-          type="text/css"/>
+    <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" type="text/css"/>
     <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css" type="text/css"/>
 </head>
 
@@ -57,21 +55,14 @@
                 <div class="custom-form p-4 border rounded">
                     <form action="/FuJob/MainController" method="POST">
                         <label class="col-md-12">
-                            <input type="file" style="display: none" id="imageFile" name="avatar"
-                                   onchange="showPreview(event);">
-                            <p class="text-muted text-center">Upload Your Avatar</p>
-                            <img style="cursor:  pointer" id="file-ip-1-preview"
-                                 onerror="this.src='${pageContext.request.contextPath}/asset/images/avatar-default.jpg';"
-                                 src="${requestScope.RESUME.avatar}"
-                                 class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill" alt="avatar">
+                            <input type="file" style="display: none" id="imageFile" name="avatar" onchange="showPreview(event);" > <p class="text-muted text-center">Upload Your Avatar</p>
+                            <img style="cursor:  pointer" id="file-ip-1-preview" onerror="this.src='${pageContext.request.contextPath}/asset/images/avatar-default.jpg';"  src="${requestScope.RESUME.avatar}" class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill" alt="avatar">
                         </label>
                         <div class="row mt-4">
                             <div class="col-md-4">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Full Name<span class="text-danger">*</span> :</label>
-                                    <input id="full-name" type="text" name="fullname" class="form-control resume"
-                                           placeholder="Full Name :" required=""
-                                           value="${requestScope.RESUME.fullName}">
+                                    <input id="full-name" type="text" name="fullname" class="form-control resume" placeholder="Full Name :" required="" value="${requestScope.RESUME.fullName}">
 
                                 </div>
                             </div>
@@ -88,7 +79,7 @@
                                             <option selected="selected" value="Male">Male</option>
                                             <option value="Female">Female</option>
                                             <option value="Other">Other</option>
-                                            <% }
+                                            <%                                                        }
                                                 if (resume.getGender() == "Female") {
                                             %>
                                             <option value="Male">Male</option>
@@ -116,55 +107,43 @@
                             <div class="col-md-4">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Date Of Birth<span class="text-danger">*</span> :</label>
-                                    <input id="date-of-birth" type="date" name="dateofbirth" class="form-control resume"
-                                           placeholder="Date Of Birth" required=""
-                                           value="${requestScope.RESUME.dateOfBirth}">
+                                    <input id="date-of-birth" type="date" name="dateofbirth" class="form-control resume" placeholder="Date Of Birth" required="" value="${requestScope.RESUME.dateOfBirth}">
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Email<span class="text-danger">*</span> :</label>
-                                    <input onchange="checkValidation()" id="email" type="email" name="email"
-                                           class="form-control resume" placeholder="Email :" required=""
-                                           value="${requestScope.RESUME.gmail}">
-                                    <p id="errorEmail" class="text-danger h7">
-                                    <p>
+                                    <input onchange="checkValidation()" id="email" type="email" name="email" class="form-control resume" placeholder="Email :" required="" value="${requestScope.RESUME.gmail}">
+                                    <p id="errorEmail" class="text-danger h7"><p>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Phone<span class="text-danger">*</span> :</label>
-                                    <input onchange="checkValidation()" id="phone" name="phone" type="tel"
-                                           class="form-control resume" required="" placeholder="0123456789 "
-                                           value="${requestScope.RESUME.phone}">
-                                    <p id="errorPhone" class="text-danger h7">
-                                    <p>
+                                    <input onchange="checkValidation()" id="phone" name="phone" type="tel" class="form-control resume" required="" placeholder="0123456789 " value="${requestScope.RESUME.phone}">
+                                    <p id="errorPhone" class="text-danger h7"><p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Address<span class="text-danger">*</span> :</label>
-                                    <input id="address" name="address" type="text" class="form-control resume"
-                                           required="" placeholder="District 9, Ho Chi Minh City "
-                                           value="${requestScope.RESUME.address}">
+                                    <input id="address" name="address" type="text" class="form-control resume" required="" placeholder="District 9, Ho Chi Minh City " value="${requestScope.RESUME.address}">
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Major<span class="text-danger">*</span> :</label>
-                                    <input id="major" name="major" type="text" class="form-control resume" required=""
-                                           placeholder="Major: " value="${requestScope.RESUME.major}">
+                                    <input id="major" name="major" type="text" class="form-control resume" required="" placeholder="Major: " value="${requestScope.RESUME.major}">
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group app-label">
                                     <label class="text-muted">GPA:</label>
-                                    <input id="gpa" name="gpa" type="text" class="form-control resume"
-                                           placeholder="8/10 " value="${requestScope.RESUME.gpa}">
+                                    <input id="gpa" name="gpa" type="text" class="form-control resume" placeholder="8/10 " value="${requestScope.RESUME.gpa}">
                                 </div>
                             </div>
 
@@ -173,18 +152,13 @@
                                 <div class="form-group app-label">
                                     <label class="text-muted">Skill Required<span class="text-danger">*</span></label>
                                     <div class="form-button">
-                                        <select class="form-control resume select2 select2-hidden-accessible"
-                                                name="skillID" multiple="" data-placeholder="Select skill"
-                                                style="width: 100%; border-color: #dee2e6" tabindex="-1"
-                                                aria-hidden="true">
+                                        <select class="form-control resume select2 select2-hidden-accessible" name="skillID" multiple="" data-placeholder="Select skill" style="width: 100%; border-color: #dee2e6" tabindex="-1" aria-hidden="true">
                                             <%
                                                 List<ResumeSkill> listResumeSkill = (List<ResumeSkill>) request.getAttribute("LIST_STUDENTSKILL");
                                                 if (!listResumeSkill.isEmpty()) {
                                                     for (ResumeSkill studentSkill : listResumeSkill) {
                                             %>
-                                            <option selected="selected"
-                                                    value="<%= studentSkill.getSkill().getSkillID()%>"><%= studentSkill.getSkill().getSkillName()%>
-                                            </option>
+                                            <option selected="selected" value="<%= studentSkill.getSkill().getSkillID()%>" ><%= studentSkill.getSkill().getSkillName()%></option>
                                             <c:forEach items="${chooseSkill.listSkill}" var="i">
                                                 <option value="${i.skillID}">${i.skillName}</option>
                                             </c:forEach>
@@ -205,47 +179,33 @@
                             <div class="col-md-4">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Your Website:</label>
-                                    <input onchange="checkValidation()" id="website" name="website" type="text"
-                                           class="form-control resume"
-                                           placeholder="If u have a website of yourself, fill in here"
-                                           value="${requestScope.RESUME.website}">
-                                    <p id="errorWebsite" class="text-danger h7">
-                                    <p>
+                                    <input onchange="checkValidation()" id="website" name="website" type="text" class="form-control resume" placeholder="If u have a website of yourself, fill in here" value="${requestScope.RESUME.website}">
+                                    <p id="errorWebsite" class="text-danger h7"><p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Your GitHub</label>
-                                    <input onchange="checkValidation()" id="gitHub" name="github" type="text"
-                                           class="form-control resume" placeholder="If u have a github, fill in here "
-                                           value="${requestScope.RESUME.gitHub}">
-                                    <p id="errorGitHub" class="text-danger h7">
-                                    <p>
+                                    <input onchange="checkValidation()" id="gitHub" name="github" type="text" class="form-control resume" placeholder="If u have a github, fill in here " value="${requestScope.RESUME.gitHub}">
+                                    <p id="errorGitHub" class="text-danger h7"><p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Your LinkedIn</label>
-                                    <input onchange="checkValidation()" id="linkedIn" name="linkedIn" type="text"
-                                           class="form-control resume" placeholder="If u have a linkedin, fill in here "
-                                           value="${requestScope.RESUME.linkedIn}">
-                                    <p id="errorLinkedIn" class="text-danger h7">
-                                    <p>
+                                    <input onchange="checkValidation()" id="linkedIn" name="linkedIn" type="text" class="form-control resume" placeholder="If u have a linkedin, fill in here " value="${requestScope.RESUME.linkedIn}">
+                                    <p id="errorLinkedIn" class="text-danger h7"><p>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group app-label">
-                                    <label class="text-muted">Self-Introduction<span class="text-danger">*</span>
-                                        :</label>
-                                    <textarea id="seflintro" name="seflintro" type="text" class="form-control resume"
-                                              required=""
-                                              placeholder="Self-Introduction :">${requestScope.RESUME.overview}</textarea>
+                                    <label class="text-muted">Self-Introduction<span class="text-danger">*</span> :</label>
+                                    <textarea id="seflintro" name="seflintro" type="text" class="form-control resume" required="" placeholder="Self-Introduction :">${requestScope.RESUME.overview}</textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 mt-4">
-                            <input type="submit" id="submitResume" name="action" class="submitBnt btn btn-primary"
-                                   value="Submit Resume">
+                            <input type="submit" id="submitResume" name="action" class="submitBnt btn btn-primary" value="Submit Resume">
                         </div>
                     </form>
                 </div>
@@ -302,10 +262,9 @@
             '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
         return !!pattern.test(str);
     }
-
     function checkValidation() {
         var regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-        var phoneNumber = document.getElementById('phone').value;
+        var phoneNumber = document.getElementById('phone').value.replace(/\s/g, '');
         var checkPhone = false;
         let email = document.getElementById('email').value;
         var checkEmail = email.includes("@");
@@ -384,7 +343,7 @@
             $('#errorLinkedIn').text('');
             checkL = true;
         }
-        if (checkPhone == true && checkM == true && checkW == true && checkG == true && checkL == true || regex.test(phoneNumber) == true && checkEmail == true && validURL(website) == true && validURL(gitHub) == true && validURL(linkedIn) == true) {
+        if (checkPhone == true && checkM == true && checkW == true && checkG == true && checkL == true|| regex.test(phoneNumber) == true && checkEmail == true && validURL(website) == true && validURL(gitHub) == true && validURL(linkedIn) == true) {
             document.getElementById('submitResume').disabled = false;
         }
 

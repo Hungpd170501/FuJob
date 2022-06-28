@@ -4,6 +4,7 @@
  */
 package se1621.controller;
 
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,9 +15,8 @@ import se1621.dao.UserDAO;
 import se1621.dto.User;
 import se1621.utils.Helper;
 
-import java.io.IOException;
-
 /**
+ *
  * @author ACER
  */
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})

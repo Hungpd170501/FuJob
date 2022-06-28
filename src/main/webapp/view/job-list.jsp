@@ -1,14 +1,14 @@
-<%@page import="se1621.dao.JobSkillsDAO" %>
-<%@page import="se1621.dto.JobSkills" %>
-<%@page import="java.util.Calendar" %>
-<%@page import="java.sql.Date" %>
-<%@page import="java.sql.Date" %>
-<%@page import="se1621.dto.User" %>
-<%@page import="se1621.dto.Job" %>
-<%@page import="java.util.List" %>
-<%@page import="java.util.List" %>
+<%@page import="se1621.dao.JobSkillsDAO"%>
+<%@page import="se1621.dto.JobSkills"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.sql.Date"%>
+<%@page import="se1621.dto.User"%>
+<%@page import="se1621.dto.Job"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
@@ -58,8 +58,7 @@
                             <div class="col-lg-3 col-md-6">
                                 <div class="registration-form-box">
                                     <i class="fa fa-briefcase"></i>
-                                    <input type="text" name="searchTitle" id="exampleInputName1"
-                                           class="form-control rounded registration-input-box" placeholder="Title...">
+                                    <input type="text" name="searchTitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6">
@@ -86,10 +85,9 @@
                             </div>
                             <div class="col-lg-3 col-md-6">
                                 <div class="registration-form-box">
-                                    <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block"
-                                           value="Find">
+                                    <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Find">
                                     <!-- name = action  -->
-                                    <input type="hidden" name="action" value="Search_title_exper_cate">
+                                    <input type="hidden" name ="action" value="Search_title_exper_cate">
                                 </div>
                             </div>
                         </div>
@@ -108,8 +106,7 @@
             <div class="col-12">
                 <div class="section-title text-center mb-4 pb-2">
                     <h4 class="title title-line pb-5">Available projects for you</h4>
-                    <p class="text-muted para-desc mx-auto mb-1">Tell us about your project. We'll quickly match you
-                        with the right freelancers.</p>
+                    <p class="text-muted para-desc mx-auto mb-1">Tell us about your project. We'll quickly match you with the right freelancers.</p>
                 </div>
             </div>
         </div>
@@ -120,18 +117,10 @@
                         <h5 class="text-dark mb-0 pt-2 f-18">Showing projects</h5>
                     </div>
                     <div class="registration-form-box float-right">
-                        <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-name', 'asc')"> Sort
-                            projects name
-                        </button>
-                        <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-price', 'asc')">
-                            Lowest budget first
-                        </button>
-                        <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-price', 'desc')">
-                            Highest budget first
-                        </button>
-                        <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-id', 'desc')">
-                            Newest
-                        </button>
+                        <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-name', 'asc')"> Sort projects name </button>
+                        <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-price', 'asc')"> Lowest budget first </button>
+                        <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-price', 'desc')"> Highest budget first </button>
+                        <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-id', 'desc')"> Newest </button>
                     </div>
 
                 </div>
@@ -139,18 +128,18 @@
         </div>
         <!-- them display -->
         <div class="row">
-            <ul id="paintings"
-                data-role="list"
-                data-sort-class="painting"
-                data-sort-dir="desc"
-                data-cls-list="unstyled-list row flex-justify-center mt-4"
-                data-cls-list-item="cell-sm-6 cell-md-4"
-                data-filter-class="painting-author"
-                data-show-pagination="true"
-                data-items="10"
-                data-items-steps="all, 3, 10"
+            <ul  id="paintings"
+                 data-role="list"
+                 data-sort-class="painting"
+                 data-sort-dir="desc"
+                 data-cls-list="unstyled-list row flex-justify-center mt-4"
+                 data-cls-list-item="cell-sm-6 cell-md-4"
+                 data-filter-class="painting-author"
+                 data-show-pagination="true"
+                 data-items="10"
+                 data-items-steps="all, 3, 10"
 
-                data-show-list-info="true"
+                 data-show-list-info="true"
             >
 
                 <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_ALLJOB");
@@ -158,8 +147,7 @@
                         String message = (String) request.getAttribute("MESSAGE");
                 %>
                 <div class="col-lg-12 text-warning text-center">
-                    <h3><%=message%>
-                    </h3>
+                    <h3> <%=message%> </h3>
                 </div>
                 <%
                     }
@@ -169,36 +157,30 @@
                 %>
                 <li style="list-style: none">
                     <div class="job-display col-lg-12 mt-4 pt-1">
-                        <div class="job-list-box border rounded">
+                        <div class="job-list-box border rounded" >
                             <div class="p-3" style="width: 1098px; height: 298px">
                                 <div class="row align-items-center">
                                     <div class="col-lg-3">
                                         <div class="company-logo-img">
-                                            <img loading="lazy" src="<%= job.getCategory().getImg()%>" alt=""
-                                                 class="img-fluid img-thumbnail mx-auto d-block"
-                                                 style="width:250px;height:266px">
+                                            <img loading="lazy" src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:250px;height:266px">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-9">
                                         <div class="job-list-desc">
-                                            <h4 class="painting-name mb-1" style="font-weight: 700"><a
-                                                    href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>"
-                                                    class="text-dark"><%= job.getJobTitle()%>
-                                            </a></h4>
+                                            <h4 class="painting-name mb-1" style="font-weight: 700"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h4>
                                             <%
                                                 Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
                                                 long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
                                                 long resultDate = exDate / (24 * 60 * 60 * 1000);
                                             %>
-                                            <p class="mb-2 text-muted"><%= resultDate%> days left</p>
+                                            <p class="mb-2 text-muted"> <%= resultDate%> days left</p>
                                             <%
                                                 String description = job.getDescription();
                                                 if (description.length() > 200 || description.isBlank()) {
                                                     description = description.substring(0, 197) + ". . .";
                                                 }
                                             %>
-                                            <p class="mb-4"><%= description%>
-                                            </p>
+                                            <p class="mb-4"><%= description%></p>
                                             <h6>Skills Require:
                                                 <%
                                                     List<JobSkills> listJobSkills = job.getListJobSkills();
@@ -222,13 +204,9 @@
                                                 <p class=" mb-5"><i class="mr-2"></i>5 bids</p>
                                             </div>
                                             <div>
-                                                <h5 class="painting-id" data-format="money"
-                                                    style="display: none"><%= job.getJobID()%>
-                                                </h5>
-                                                <h5 class="painting-price mb-5" data-format="money"><i
-                                                        class="mr-2"></i> <%= job.getBudget()%>
-                                                    $ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) {
-                                                    %>
+                                                <h5 class="painting-id" data-format="money" style="display: none"> <%= job.getJobID()%> </h5>
+                                                <h5 class="painting-price mb-5" data-format="money">  <i class="mr-2"></i> <%= job.getBudget()%>$ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) {
+                                                %>
                                                     / hour
                                                     <%
                                                         }
@@ -236,8 +214,7 @@
                                                 </h5>
                                             </div>
                                             <div class="mt-3">
-                                                <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>"
-                                                   class="btn btn-sm btn-primary">View Detail</a>
+                                                <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
                                             </div>
                                         </div>
                                     </div>
@@ -255,7 +232,7 @@
 
                 %>
 
-                <% if (listJob.size() > 10) {
+                <%                                if (listJob.size() > 10) {
                 %>
                 <!--    <div class="smj col-12 text-center mt-4 pt-2">
                     <a class="btn btn-primary-outline">Show more</a>

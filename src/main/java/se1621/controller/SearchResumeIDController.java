@@ -4,20 +4,20 @@
  */
 package se1621.controller;
 
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 import se1621.dao.ResumeDAO;
 import se1621.dao.ResumeSkillDAO;
 import se1621.dto.Resume;
 import se1621.dto.ResumeSkill;
 
-import java.io.IOException;
-import java.util.List;
-
 /**
+ *
  * @author lehad
  */
 @WebServlet(name = "SearchResumeIDController", urlPatterns = {"/SearchResumeIDController"})
@@ -37,7 +37,7 @@ public class SearchResumeIDController extends HttpServlet {
             Resume resume = resumeDAO.getResumeByUserID(studentID);
             ResumeSkillDAO studentSkillDAO = new ResumeSkillDAO();
             List<ResumeSkill> listResumeSkill = studentSkillDAO.getStudentSkill(resumeID);
-            if (resume != null) {
+            if (resume!=null) {
                 request.setAttribute("RESUME", resume);
                 request.setAttribute("LIST_STUDENTSKILL", listResumeSkill);
                 url = SUCCESS;

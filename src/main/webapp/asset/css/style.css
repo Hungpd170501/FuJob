@@ -788,7 +788,7 @@ p {
 }
 
 .bg-overlay {
-    background-color: rgba(40, 44, 50, 0.7);
+    background-color: rgba(40, 44, 50, 0.4);
     position: absolute;
     top: 0;
     right: 0;
@@ -799,7 +799,7 @@ p {
 }
 
 .bg-overlay-gradient {
-/*    background-color: rgba(94, 119, 204, 0.75);*/
+    /*    background-color: rgba(94, 119, 204, 0.75);*/
     background-color: rgba(158, 148, 121, 0.2);
 }
 
@@ -1631,7 +1631,7 @@ p {
 
 .bg-half {
     padding: 280px 0px 180px 0px;
-    background-image: url("../images/background-AboutUs.jpg");
+    background-image: url("../images/background_fpt3.jpg");
     background-size: cover;
     position: relative;
     background-position: center center;
