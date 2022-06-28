@@ -4,6 +4,7 @@
  */
 package se1621.controller;
 
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,9 +14,8 @@ import jakarta.servlet.http.HttpSession;
 import se1621.dao.CompanyInfoDAO;
 import se1621.dto.CompanyInfo;
 
-import java.io.IOException;
-
 /**
+ *
  * @author lehad
  */
 @WebServlet(name = "SearchCompanyIDController", urlPatterns = {"/SearchCompanyIDController"})
@@ -35,7 +35,7 @@ public class SearchCompanyIDController extends HttpServlet {
             HttpSession session = request.getSession();
             if (companyInfo != null && companyID > 0) {
                 request.setAttribute("COMPANYINFO", companyInfo);
-                session.setAttribute("LOGIN_USER.companyID", companyInfo.getCompanyID());
+                session.setAttribute("LOGIN_USER.companyID",companyInfo.getCompanyID());
                 url = SUCCESS;
             } else {
                 request.setAttribute("MESSAGE", "YOU'VE NOT CREATED YOUR COMPANY INFORMATION");

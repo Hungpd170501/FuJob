@@ -1,5 +1,5 @@
-<%@page import="se1621.dto.Error.UserError" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page import="se1621.dto.Error.UserError"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,8 +20,7 @@
 </div>
 
 <!-- Hero Start -->
-<section class="vh-85"
-         style="background: url('https://via.placeholder.com/2000X1333//88929f/5a6270C/O https://placeholder.com/') center center;">
+<section class="vh-85" style="background: url('https://via.placeholder.com/2000X1333//88929f/5a6270C/O https://placeholder.com/') center center;">
     <div class="home-center">
         <div class="home-desc-center">
             <div class="container">
@@ -37,39 +36,32 @@
                                     userError = new UserError();
                                 }
                             %>
-                            <form action="${pageContext.request.contextPath}/MainController" method="POST"
-                                  class="login-form"
-                                  oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Password do not match!" : "")'>
+                            <form action="${pageContext.request.contextPath}/MainController" method="POST" class="login-form" oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Password do not match!" : "")'>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group position-relative">
                                             <label>Full Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" placeholder="First Name"
-                                                   name="fullName" required="">
+                                            <input type="text" class="form-control" placeholder="First Name" name="fullName" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group position-relative">
                                             <label>Your Email <span class="text-danger">*</span></label>
-                                            <input type="email" class="form-control" placeholder="Email" name="email"
-                                                   value="${param.email}" required="">
-                                            <p class="text-danger text-right h6 small"><%= userError.getEmailError()%>
-                                            </p>
+                                            <input type="email" class="form-control" placeholder="Email" name="email" value="${param.email}" required="">
+                                            <p class="text-danger text-right h6 small"><%= userError.getEmailError()%></p>
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
                                         <div class="form-group position-relative">
                                             <label>Password <span class="text-danger">*</span></label>
-                                            <input type="password" class="form-control" placeholder="Password"
-                                                   name="password" required="">
+                                            <input type="password" class="form-control" placeholder="Password" name="password" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group position-relative">
                                             <label>Confirm Password <span class="text-danger">*</span></label>
-                                            <input type="password" class="form-control" placeholder="Confirm Password"
-                                                   name="confirmpassword" required="">
+                                            <input type="password" class="form-control" placeholder="Confirm Password" name="confirmpassword" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -87,10 +79,8 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="custom-control m-0 custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck1"
-                                                       required="">
-                                                <label class="custom-control-label" for="customCheck1">I Accept <a
-                                                        href="#" class="text-primary">Terms And Condition</a></label>
+                                                <input type="checkbox" class="custom-control-input" id="customCheck1" required="">
+                                                <label class="custom-control-label" for="customCheck1" >I Accept <a href="#" class="text-primary">Terms And Condition</a></label>
                                             </div>
                                         </div>
                                     </div>
@@ -99,9 +89,7 @@
                                     </div>
 
                                     <div class="mx-auto">
-                                        <p class="mb-0 mt-3"><small class="text-dark mr-2">Already have an account
-                                            ?</small> <a href="${pageContext.request.contextPath}/view/login.jsp"
-                                                         class="text-dark font-weight-bold">Sign in</a></p>
+                                        <p class="mb-0 mt-3"><small class="text-dark mr-2">Already have an account ?</small> <a href="${pageContext.request.contextPath}/view/login.jsp" class="text-dark font-weight-bold">Sign in</a></p>
                                     </div>
                                 </div>
                             </form>

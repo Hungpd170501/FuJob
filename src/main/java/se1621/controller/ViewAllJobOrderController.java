@@ -4,20 +4,19 @@
  */
 package se1621.controller;
 
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 import se1621.dao.JobApplicationDAO;
 import se1621.dao.JobSkillsDAO;
 import se1621.dao.ResumeDAO;
 import se1621.dto.JobApplication;
 import se1621.dto.JobSkills;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -46,7 +45,7 @@ public class ViewAllJobOrderController extends HttpServlet {
 
                 List<JobSkills> ljk = new ArrayList<>();
                 for (JobSkills js : listJs) {
-                    if (jobApply.getJob().getJobID() == js.getJobID()) {
+                    if(jobApply.getJob().getJobID() == js.getJobID()){
                         ljk.add(js);
                     }
                     jobApply.getJob().setListJobSkills(ljk);
@@ -55,7 +54,7 @@ public class ViewAllJobOrderController extends HttpServlet {
             if (!listJobOrder.isEmpty()) {
                 request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
                 url = SUCCESS;
-            } else {
+            }else{
                 request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
                 request.setAttribute("MESSAGE", "YOU HAVEN'T APPLIED FOR ANY PROJECT");
             }

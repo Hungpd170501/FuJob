@@ -1,8 +1,9 @@
-<%@page import="java.time.LocalDate" %>
-<%@page import="java.time.format.DateTimeFormatter" %>
-<%@page import="java.util.Calendar" %>
-<%@page import="java.sql.Date" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.sql.Date"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -53,8 +54,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group app-label mt-2">
                                         <label>Project Name<span class="text-danger">*</span></label>
-                                        <input id="jobtitle" name="jobTitle" type="text" class="form-control resume"
-                                               required="" placeholder="Enter your project name">
+                                        <input id="jobtitle" name="jobTitle" type="text" class="form-control resume" required="" placeholder="Enter your project name">
 
                                     </div>
                                 </div>
@@ -75,10 +75,7 @@
                                     <div class="form-group app-label mt-2">
                                         <label>Skill Required<span class="text-danger">*</span></label>
                                         <div class="form-button p-1">
-                                            <select class="form-control resume select2 select2-hidden-accessible"
-                                                    name="skillID" multiple="" data-placeholder="Select skill"
-                                                    style="width: 100%; border-color: #dee2e6" tabindex="-1"
-                                                    aria-hidden="true">
+                                            <select class="form-control resume select2 select2-hidden-accessible" name="skillID" multiple="" data-placeholder="Select skill" style="width: 100%; border-color: #dee2e6" tabindex="-1" aria-hidden="true">
                                                 <c:forEach items="${chooseSkill.listSkill}" var="i">
                                                     <option value="${i.skillID}">${i.skillName}</option>
                                                 </c:forEach>
@@ -97,9 +94,8 @@
                                                     <option value="2">Pay fixed price</option>
                                                 </select>
                                             </div>
-                                            <div class="col-lg-4 p-1 col-md-5">
-                                                <input id="budget" name="budget" type="number" step="0.5" min="1"
-                                                       class="form-control resume" required="" placeholder="100">
+                                            <div class="col-lg-4 p-1 col-md-5" >
+                                                <input id="budget" name="budget" type="number" step="0.5" min="1" class="form-control resume" required="" placeholder="100">
                                             </div>
                                             <div class="col-lg-1 p-2 col-md-1">
                                                 <h5>$</h5>
@@ -111,20 +107,16 @@
                                 <div class="col-md-4">
                                     <div class="form-group app-label mt-2">
                                         <label>Email<span class="text-danger">*</span></label>
-                                        <input onchange="checkValidation()" id="email" name="email" type="email"
-                                               class="form-control resume" required="" placeholder="abc@gmail.com">
-                                        <p id="errorEmail" class="text-danger h7">
-                                        <p>
+                                        <input onchange="checkValidation()" id="email" name="email" type="email" class="form-control resume" required="" placeholder="abc@gmail.com">
+                                        <p id="errorEmail" class="text-danger h7"><p>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group app-label mt-2">
                                         <label>Phone<span class="text-danger">*</span></label>
-                                        <input onchange="checkValidation()" id="phone" name="phone" type="tel"
-                                               class="form-control resume" required="" placeholder="0123456789">
-                                        <p id="errorPhone" class="text-danger h7">
-                                        <p>
+                                        <input onchange="checkValidation()" id="phone" name="phone" type="tel" class="form-control resume" required="" placeholder="0123456789">
+                                        <p id="errorPhone" class="text-danger h7"><p>
                                     </div>
                                 </div>
 
@@ -135,38 +127,30 @@
                                             LocalDate localDate = LocalDate.now();
                                         %>
                                         <label>Expiry date<span class="text-danger">*</span></label>
-                                        <input min="<%=dtf.format(localDate)%>" id="expiriedDate" name="expiriedDate"
-                                               type="date" class="form-control resume" required=""
-                                               placeholder="dd/mm/yyyy">
-                                        <p id="errorExDate" class="text-danger h7">
-                                        <p>
+                                        <input min="<%=dtf.format(localDate)%>" id="expiriedDate" name="expiriedDate" type="date" class="form-control resume" required="" placeholder="dd/mm/yyyy">
+                                        <p id="errorExDate" class="text-danger h7"><p>
                                     </div>
                                 </div>
 
                                 <div class="col-md-8">
                                     <div class="form-group app-label mt-2">
                                         <label>Address<span class="text-danger">*</span></label>
-                                        <input id="address" name="address" type="text" class="form-control resume"
-                                               required="" placeholder="District 9, Ho Chi Minh City">
+                                        <input id="address" name="address" type="text" class="form-control resume" required="" placeholder="District 9, Ho Chi Minh City">
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div class="form-group app-label">
                                         <label>Description<span class="text-danger">*</span> :</label>
-                                        <textarea id="description" name="description" type="text"
-                                                  class="form-control resume" required=""
-                                                  placeholder="Things needed for the job:"></textarea>
+                                        <textarea id="description" name="description" type="text" class="form-control resume" required="" placeholder="Things needed for the job:"></textarea>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-12 mt-2">
-                                    <input type="submit" id="postJobbtn" name="" class="submitBnt btn btn-primary"
-                                           value="Post a Project">
-                                    <input type="hidden" id="postJobbtn" name="action" class="submitBnt btn btn-primary"
-                                           value="Post a Job">
+                                    <input type="submit" id="postJobbtn" name="" class="submitBnt btn btn-primary" value="Post a Project">
+                                    <input type="hidden" id="postJobbtn" name="action" class="submitBnt btn btn-primary" value="Post a Job">
                                 </div>
                             </div>
                         </form>
@@ -208,7 +192,7 @@
 <script>
     function checkValidation() {
         var regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-        var phoneNumber = document.getElementById('phone').value;
+        var phoneNumber = document.getElementById('phone').value.replace(/\s/g, '');
         var checkPhone = false;
         let email = document.getElementById('email').value;
         var checkEmail = email.includes("@");

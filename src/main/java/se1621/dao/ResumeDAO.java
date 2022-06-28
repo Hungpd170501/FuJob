@@ -4,14 +4,18 @@
  */
 package se1621.dao;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import se1621.dto.Resume;
 import se1621.utils.DBUtils;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
+ *
  * @author ACER
  */
 public class ResumeDAO {

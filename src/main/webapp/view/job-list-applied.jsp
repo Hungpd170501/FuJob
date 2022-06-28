@@ -1,12 +1,13 @@
-<%@page import="java.util.Calendar" %>
-<%@page import="java.sql.Date" %>
-<%@page import="se1621.dto.JobSkills" %>
-<%@page import="se1621.dto.JobApplication" %>
-<%@page import="se1621.dto.Job" %>
-<%@page import="java.util.List" %>
-<%@page import="java.util.List" %>
+
+<%@page import="java.util.Calendar"%>
+<%@page import="java.sql.Date"%>
+<%@page import="se1621.dto.JobSkills"%>
+<%@page import="se1621.dto.JobApplication"%>
+<%@page import="se1621.dto.Job"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
@@ -53,14 +54,13 @@
                             <div class="col-lg-3 col-md-6">
                                 <div class="registration-form-box">
                                     <i class="fa fa-briefcase"></i>
-                                    <input type="text" name="searchTitle" id="exampleInputName1"
-                                           class="form-control rounded registration-input-box" placeholder="Title...">
+                                    <input type="text" name="searchTitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6">
                                 <div class="registration-form-box">
                                     <i class="fa fa-archive"></i>
-                                    <select class="demo-default" id="select-category" name="searchSkill">
+                                    <select class="demo-default" id="select-category" name="searchSkill" >
                                         <option value="">Skill...</option>
                                         <c:forEach items="${chooseSkill.listSkill}" var="i">
                                             <option value="${i.skillID}">${i.skillName}</option>
@@ -71,7 +71,7 @@
                             <div class="col-lg-3 col-md-6">
                                 <div class="registration-form-box">
                                     <i class="fa fa-list-alt"></i>
-                                    <select id="select-category1" class="demo-default" name="searchCate">
+                                    <select id="select-category" class="demo-default" name="searchCate">
                                         <option value="">Categories...</option>
                                         <c:forEach items="${chooseCategory.listCategory}" var="i">
                                             <option value="${i.categoryID}">${i.categoryName}</option>
@@ -81,11 +81,10 @@
                             </div>
                             <div class="col-lg-3 col-md-6">
                                 <div class="registration-form-box">
-                                    <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block"
-                                           value="Find">
+                                    <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Find">
                                     <!-- name = action  -->
-                                    <input type="hidden" name="action" value="SearchJobOrder">
-                                    <input type="hidden" name="studentID" value="${sessionScope.LOGIN_USER.userID}">
+                                    <input type="hidden" name ="action" value="SearchJobOrder">
+                                    <input type="hidden" name ="studentID" value="${sessionScope.LOGIN_USER.userID}">
                                 </div>
                             </div>
                         </div>
@@ -127,8 +126,7 @@
                             String message = (String) request.getAttribute("MESSAGE");
                     %>
                     <div class="col-lg-12 text-warning text-center">
-                        <h3><%=message%>
-                        </h3>
+                        <h3> <%=message%> </h3>
                     </div>
                     <%
                         }
@@ -142,23 +140,18 @@
                                 <div class="row align-items-center">
                                     <div class="col-lg-3">
                                         <div class="company-logo-img">
-                                            <img src="<%= jobOrder.getJob().getCategory().getImg()%>" alt=""
-                                                 class="img-fluid img-thumbnail mx-auto d-block"
-                                                 style="width:250px;height:250px">
+                                            <img src="<%= jobOrder.getJob().getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:250px;height:250px">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-9">
                                         <div class="job-list-desc">
-                                            <h4 class="mb-2"><a
-                                                    href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>"
-                                                    class="text-dark"><%= jobOrder.getJob().getJobTitle()%>
-                                            </a></h4>
+                                            <h4 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="text-dark"><%= jobOrder.getJob().getJobTitle()%></a></h4>
                                             <%
                                                 Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
                                                 long exDate = Math.abs(jobOrder.getJob().getExpiriedDate().getTime() - dateNow.getTime());
                                                 long resultDate = exDate / (24 * 60 * 60 * 1000);
                                             %>
-                                            <p class="mb-2 text-muted"><%= resultDate%> days left</p>
+                                            <p class="mb-2 text-muted"> <%= resultDate%> days left</p>
 
                                             <%
                                                 String description = jobOrder.getJob().getDescription();
@@ -166,8 +159,7 @@
                                                     description = description.substring(0, 197) + ". . .";
                                                 }
                                             %>
-                                            <p class="mb-4"><%= description%>
-                                            </p>
+                                            <p class="mb-4"><%= description%></p>
                                             <h6>Skills Require:
                                                 <%
                                                     List<JobSkills> listJobSkills = jobOrder.getJob().getListJobSkills();
@@ -180,9 +172,7 @@
                                                 <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
                                             </h6>
                                             <h6>
-                                                <%= jobOrder.getJob().getPayMentMethod().getPaymentMethodName()%>
-                                                : <%= jobOrder.getJob().getBudget()%>
-                                                $ <% if (jobOrder.getJob().getPayMentMethod().getPaymentMethodID() == 2) {
+                                                <%= jobOrder.getJob().getPayMentMethod().getPaymentMethodName()%>: <%= jobOrder.getJob().getBudget()%>$ <% if (jobOrder.getJob().getPayMentMethod().getPaymentMethodID() == 2) {
                                             %>
                                                 / hour
                                                 <%
@@ -197,13 +187,10 @@
                                                 <p class=" "><i class="mr-2"></i>5 bids</p>
                                             </div>
                                             <div class="mt-3">
-                                                <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>"
-                                                   class="btn btn-sm btn-primary">View Detail</a>
+                                                <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
                                             </div>
                                             <div class="mt-3">
-                                                <button onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)"
-                                                        type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                        data-target="#confirmCancellation">
+                                                <button onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation">
                                                     Cancel
                                                 </button>
                                             </div>
@@ -214,22 +201,18 @@
                         </div>
                     </div>
                     <!-- Modal -->
-                    <div class="modal fade" id="confirmCancellation" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal fade" id="confirmCancellation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title text-primary" id="exampleModalLongTitle">Do you want to
-                                        cancel your application?</h5>
+                                    <h5 class="modal-title text-primary" id="exampleModalLongTitle">Do you want to cancel your application?</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                    <a id="yesOption" href="">
-                                        <button type="button" class="btn btn-primary">Yes</button>
-                                    </a>
+                                    <a id="yesOption" href=""><button type="button" class="btn btn-primary">Yes</button></a>
                                 </div>
                             </div>
                         </div>
@@ -242,7 +225,7 @@
                         }
 
                     %>
-                    <% if (listJobApplication.size() > 10) {
+                    <%                                if (listJobApplication.size() > 10) {
                     %>
                     <div class="smj col-12 text-center mt-4 pt-2">
                         <a class="btn btn-primary-outline">Show more</a>
@@ -256,6 +239,7 @@
     </div>
 </section>
 <!-- JOB LIST START -->
+
 
 
 <!-- footer start -->
