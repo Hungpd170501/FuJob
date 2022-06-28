@@ -53,7 +53,7 @@
                     </div>
                     <div class="col-12 mt-3">
                         <div class="custom-form p-4 border rounded">
-                            <form action="/FuJob/MainController" method="POST">
+                            <form action="/FuJob/MainController" method="POST" enctype="multipart/form-data">
                                 <label class="col-md-12">
                                     <input type="file" style="display: none" id="imageFile" name="avatar" onchange="showPreview(event);" > <p class="text-muted text-center">Upload Your Avatar</p>
                                     <img style="cursor:  pointer" id="file-ip-1-preview" onerror="this.src='${pageContext.request.contextPath}/asset/images/avatar-default.jpg';"  src="${requestScope.RESUME.avatar}" class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill" alt="avatar">
