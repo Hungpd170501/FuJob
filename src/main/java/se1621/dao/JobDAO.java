@@ -25,7 +25,7 @@ public class JobDAO {
     private static final String CREATEJOB = "INSERT INTO tblJobs(userID, jobTitle, jobCategoryID,"
             + " budget, paymentMethodID, expiriedDate, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,1)";
     //xong ne
-    private final String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
+    private String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
             + "j.jobCategoryID, c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, "
             + "pm.paymentMethodName, j.budget, j.expiriedDate "
             + "FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)"
@@ -40,7 +40,7 @@ public class JobDAO {
             + "                        FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)"
             + "						left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID )"
             + "                        WHERE j.jobStatus = 1 ORDER BY jobID DESC";
-    //sua roi
+    //sua roi 
     private static final String VIEWHRJOB = "SELECT j.jobID, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate, p.paymentMethodName"
             + "                      FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) left join tblPaymentMethods p on p.paymentMethodID = j.paymentMethodID) "
             + "                    WHERE j.jobStatus = 1 AND j.userID=? ORDER BY createdDate DESC";
@@ -156,7 +156,7 @@ public class JobDAO {
                 preStm.setString(8, job.getEmail());
                 preStm.setString(9, job.getPhone());
                 preStm.setString(10, job.getDescription());
-                check = preStm.executeUpdate() > 0;
+                check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -174,7 +174,7 @@ public class JobDAO {
         return check;
     }
 
-    // View all job in job-list.jsp
+    // View all job in job-list.jsp  
     public List<Job> getListJob() throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -592,7 +592,7 @@ public class JobDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(DELETEJOBPOST);
                 preStm.setInt(1, jobPostID);
-                check = preStm.executeUpdate() > 0;
+                check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
             e.printStackTrace();
