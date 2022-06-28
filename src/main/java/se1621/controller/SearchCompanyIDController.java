@@ -41,7 +41,7 @@ public class SearchCompanyIDController extends HttpServlet {
                 request.setAttribute("MESSAGE", "YOU'VE NOT CREATED YOUR COMPANY INFORMATION");
             }
         } catch (Exception e) {
-            log("Error at SearchCompanyIDController: " + e);
+            log("Error at SearchCompanyIDController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
