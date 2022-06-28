@@ -152,6 +152,7 @@
                                                  class="img-fluid img-thumbnail mx-auto d-block"
                                                  style="width:250px;height:250px">
                                         </div>
+                                        <h1><%=job.getJobStatus()%></h1>
                                     </div>
                                     <div class="col-lg-6 col-md-9">
                                         <div class="job-list-desc">

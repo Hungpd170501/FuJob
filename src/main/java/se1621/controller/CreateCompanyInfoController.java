@@ -4,10 +4,18 @@
  */
 package se1621.controller;
 
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import se1621.dao.CompanyInfoDAO;
 import se1621.dao.UserDAO;
 import se1621.dto.CompanyInfo;
@@ -15,11 +23,6 @@ import se1621.dto.Error.CompanyInfoError;
 import se1621.dto.Role;
 import se1621.dto.User;
 import se1621.service.FirebaseStoreServiceImpl;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

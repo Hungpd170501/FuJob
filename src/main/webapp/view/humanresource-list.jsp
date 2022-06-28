@@ -1,6 +1,6 @@
-<%@page import="java.util.List" %>
-<%@page import="se1621.dto.User" %>
-<%@page contentType="text/html" pageEncoding="windows-1258" %>
+<%@page import="java.util.List"%>
+<%@page import="se1621.dto.User"%>
+<%@page contentType="text/html" pageEncoding="windows-1258"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -48,20 +48,18 @@
     </div>
     <% List<User> listUser = (List<User>) request.getAttribute("LIST_USER");
         String message = (String) request.getAttribute("MESSAGE");
-        if (message == null) {
+        if(message == null){
             message = "";
         }
     %>
     <div class="col-lg-12 text-warning text-center">
-        <h5><%=message%>
-        </h5>
+        <h5> <%=message%> </h5>
     </div>
     <%
     %>
     <div class="container">
         <div class="col-12 text-center">
-            <a onclick="getCompanyID(${sessionScope.LOGIN_USER.companyID})" class="btn btn-primary" data-toggle="modal"
-               data-target="#formAddNewHR">Add New</a>
+            <a class="btn btn-primary" data-toggle="modal" data-target="#formAddNewHR">Add New</a>
         </div>
         <form action="${pageContext.request.contextPath}/MainController" method="POST">
             <table id="example" class=" table table-striped table-bordered" style="width:100%">
@@ -84,16 +82,11 @@
                                 if (user.getRole().getRoleID().equals("HR")) {
                 %>
                 <tr>
-                    <td><%= user.getUserID()%>
-                    </td>
-                    <td><%= user.getFullName()%>
-                    </td>
-                    <td><%= user.getEmail()%>
-                    </td>
-                    <td><%= user.getCreatedDate()%>
-                    </td>
-                    <td><a href="#"><%= user.getProjectPosted()%>
-                    </a></td>
+                    <td><%= user.getUserID()%></td>
+                    <td><%= user.getFullName()%></td>
+                    <td><%= user.getEmail()%></td>
+                    <td><%= user.getCreatedDate()%></td>
+                    <td><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=<%= user.getUserID() %>"><%= user.getProjectPosted()%></a></td>
                     <td>
                         <%
                             if (user.getUserStatus() == 1) {
@@ -120,7 +113,7 @@
                     <td><input type="submit" class="btn btn-primary" value="Update"></td>
 
                 </tr>
-                <% }
+                <%          }
                 }
                 }
                 }
@@ -131,8 +124,7 @@
     </div>
 </section>
 
-<div class="modal fade" id="formAddNewHR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="formAddNewHR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header border-bottom-0">
@@ -149,16 +141,14 @@
                     </div>
                     <div class="form-group text-dark">
                         <label>Email Login<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="fullName" placeholder="Enter HR Email to Login"
-                               required="">
+                        <input type="text" class="form-control" name="email" placeholder="Enter HR Email to Login" required="">
                     </div>
-                    <input id="companyID" type="hidden" name="companyID">
+                    <input type="hidden" name="companyID" value="${sessionScope.LOGIN_USER.companyID}">
                     <input type="hidden" name="roleID" value="HR">
                     <input type="hidden" name="password" value="1">
                 </div>
                 <div class="modal-footer border-top-0 d-flex justify-content-center">
-                    <input type="hidden" name="action" value="SignUp">
-                    <input type="submit" class="btn btn-primary" value="Register HR">
+                    <input type="submit" name="action" class="btn btn-primary" value="Register HR">
                 </div>
             </form>
         </div>
@@ -185,10 +175,6 @@
     $(document).ready(function () {
         $('#example').DataTable();
     });
-
-    function getCompanyID(companyID) {
-        $('#companyID').value = companyID;
-    }
 </script>
 </body>
 </html>

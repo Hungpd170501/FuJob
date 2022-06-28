@@ -4,22 +4,22 @@
  */
 package se1621.controller;
 
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import se1621.dao.UserDAO;
 import se1621.dto.Role;
 import se1621.dto.User;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
+ *
  * @author HNGB
  */
 @WebServlet(name = "ChooseCompanyController", urlPatterns = {"/ChooseCompanyController"})
