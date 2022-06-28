@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,6 +51,7 @@ public class CreateCompanyInfoController extends HttpServlet {
             String phone = request.getParameter("phone");
             int numberOfEmployee = Integer.parseInt(request.getParameter("numberofemployee"));
             String companyOverview = request.getParameter("companyoverview");
+//            String avatar = request.getParameter("avatar");
             Part filePart = request.getPart("avatar");
             FirebaseStoreServiceImpl firebaseStoreServiceImpl = new FirebaseStoreServiceImpl();
             String filename = firebaseStoreServiceImpl.uploadFile(filePart);
@@ -88,7 +90,7 @@ public class CreateCompanyInfoController extends HttpServlet {
                     }
                 }
             }
-            if (checkValidation) {
+            if (checkValidation){
                 if (currentCompnayID == companyID) {
                     checkUpdate = dao.updateCompanyInfo(company);
                     if (checkUpdate) {
