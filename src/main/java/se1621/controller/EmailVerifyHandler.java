@@ -4,11 +4,12 @@
  */
 package se1621.controller;
 
+import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import se1621.dao.UserDAO;
 import se1621.dto.User;
@@ -16,9 +17,8 @@ import se1621.service.EmailServiceImpl;
 import se1621.utils.Helper;
 import se1621.utils.JwtTokenUtils;
 
-import java.io.IOException;
-
 /**
+ *
  * @author ACER
  */
 public class EmailVerifyHandler extends HttpServlet {

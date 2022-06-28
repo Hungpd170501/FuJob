@@ -1,8 +1,8 @@
-<%@page import="se1621.dto.Error.CompanyInfoError" %>
-<%@page import="se1621.dao.CompanyInfoDAO" %>
-<%@page import="java.util.List" %>
-<%@page import="se1621.dto.CompanyInfo" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page import="se1621.dto.Error.CompanyInfoError"%>
+<%@page import="se1621.dao.CompanyInfoDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="se1621.dto.CompanyInfo"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -59,102 +59,80 @@
                     <form action="/FuJob/MainController" method="POST" enctype="multipart/form-data">
                         <div class="row mt-4">
 
-                            <input type="hidden" name="companyID" value=" ${requestScope.COMPANYINFO.companyID}"/>
+                            <input type="hidden" name="companyID" value=" ${requestScope.COMPANYINFO.companyID}" />
                             <label class="col-md-12">
-                                <input type="file" style="display: none" id="imageFile" name="avatar"
-                                       onchange="showPreview(event);">
-                                <img style="cursor:  pointer" id="file-ip-1-preview"
-                                     onerror="this.src='${pageContext.request.contextPath}/asset/images/avatar-default.jpg';"
-                                     src="${requestScope.COMPANYINFO.avatar}"
-                                     class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill" alt="">
+                                <input type="file" style="display: none" id="imageFile" name="avatar" onchange="showPreview(event);" >
+                                <img style="cursor:  pointer" id="file-ip-1-preview" onerror="this.src='${pageContext.request.contextPath}/asset/images/avatar-default.jpg';" src="${requestScope.COMPANYINFO.avatar}" class="img-fluid avatar avatar-medium d-block mx-auto rounded-pill" alt="" >
                             </label>
                             <div class="col-md-4">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Company Name<span class="text-danger">*</span> :</label>
-                                    <input id="company-name" type="text" name="companyname" class="form-control resume"
-                                           required="" placeholder="Comapny Name :"
-                                           value="${requestScope.COMPANYINFO.companyName}">
-                                    <p class="text-danger text-right h6 small"><%= comError.getCompanyNameError()%>
-                                    </p>
+                                    <input id="company-name" type="text" name="companyname" class="form-control resume" required="" placeholder="Comapny Name :" value="${requestScope.COMPANYINFO.companyName}">
+                                    <p class="text-danger text-right h6 small"><%= comError.getCompanyNameError()%></p>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group app-label">
-                                    <label class="text-muted">Established Year<span class="text-danger">*</span>
-                                        :</label>
-                                    <input id="EstablishedYear" name="establishedyear" type="number" min="1000"
-                                           class="form-control resume" required="" placeholder="Established Year :"
-                                           value="${requestScope.COMPANYINFO.establishedYear}">
+                                    <label class="text-muted">Established Year<span class="text-danger">*</span> :</label>
+                                    <input id="EstablishedYear" name="establishedyear" type="number" min="1000" class="form-control resume" required="" placeholder="Established Year :" value="${requestScope.COMPANYINFO.establishedYear}">
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Address<span class="text-danger">*</span> :</label>
-                                    <input id="Address" name="address" type="text" class="form-control resume"
-                                           required="" placeholder="Address: "
-                                           value="${requestScope.COMPANYINFO.address}">
+                                    <input id="Address" name="address" type="text" class="form-control resume" required="" placeholder="Address: " value="${requestScope.COMPANYINFO.address}">
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Type Company<span class="text-danger">*</span> :</label>
-                                    <input id="TypeCompany" name="typecompany" type="text" class="form-control resume"
-                                           required="" placeholder="Type Company :"
-                                           value="${requestScope.COMPANYINFO.typeCompany}">
+                                    <input id="TypeCompany" name="typecompany" type="text" class="form-control resume" required="" placeholder="Type Company :" value="${requestScope.COMPANYINFO.typeCompany}">
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Website<span class="text-danger">*</span> :</label>
-                                    <input id="Website" name="website" type="text" class="form-control resume"
-                                           required="" placeholder="Website :"
-                                           value="${requestScope.COMPANYINFO.website}">
+                                    <input onchange="checkValidation()" id="Website" name="website" type="text" class="form-control resume" required="" placeholder="Website :" value="${requestScope.COMPANYINFO.website}">
+                                    <p id="errorWebsite" class="text-danger h7"><p>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Email<span class="text-danger">*</span> :</label>
-                                    <input id="Gmail" name="gmail" type="email" class="form-control resume" required=""
-                                           placeholder="Gmail :" value="${requestScope.COMPANYINFO.gmail}">
+                                    <input onchange="checkValidation()" id="Email" name="gmail" type="email" class="form-control resume" required="" placeholder="Gmail :" value="${requestScope.COMPANYINFO.gmail}">
+                                    <p id="errorEmail" class="text-danger h7"><p>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Phone<span class="text-danger">*</span> :</label>
-                                    <input id="Phone" name="phone" type="tel" class="form-control resume" required=""
-                                           placeholder="Phone: " value="${requestScope.COMPANYINFO.phone}">
+                                    <input onchange="checkValidation()" id="Phone" name="phone" type="tel" class="form-control resume" required="" placeholder="Phone: " value="${requestScope.COMPANYINFO.phone}">
+                                    <p id="errorPhone" class="text-danger h7"><p>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group app-label">
-                                    <label class="text-muted">Number of Employee<span class="text-danger">*</span>
-                                        :</label>
-                                    <input id="Numberofemployee" name="numberofemployee" type="number"
-                                           class="form-control resume" required="" placeholder="Number of employee :"
-                                           value="${requestScope.COMPANYINFO.numberOfEmployee}">
+                                    <label class="text-muted">Number of Employee<span class="text-danger">*</span> :</label>
+                                    <input id="Numberofemployee" name="numberofemployee" type="number" class="form-control resume" required="" placeholder="Number of employee :" value="${requestScope.COMPANYINFO.numberOfEmployee}">
                                 </div>
                             </div>
 
                             <div class="col-md-12">
                                 <div class="form-group app-label">
-                                    <label class="text-muted">Company Overview<span class="text-danger">*</span>
-                                        :</label>
-                                    <textarea id="Companyoverview" name="companyoverview" type="text"
-                                              class="form-control resume" required=""
-                                              placeholder="Company Overview :">${requestScope.COMPANYINFO.companyOverview}</textarea>
+                                    <label class="text-muted">Company Overview<span class="text-danger">*</span> :</label>
+                                    <textarea id="Companyoverview" name="companyoverview" type="text" class="form-control resume" required="" placeholder="Company Overview :">${requestScope.COMPANYINFO.companyOverview}</textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 mt-4">
-                            <input type="submit" id="submit" name="action" class="submitBnt btn btn-primary"
-                                   value="Create CompanyInfo">
+                            <input type="submit" id="btnCreateCom" name="action" class="submitBnt btn btn-primary" value="Create CompanyInfo">
                         </div>
                     </form>
                 </div>
@@ -204,25 +182,20 @@
             '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
         return !!pattern.test(str);
     }
-
     function checkValidation() {
         var regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-        var phoneNumber = document.getElementById('phone').value;
+        var phoneNumber = document.getElementById('Phone').value.replace(/\s/g, '');
         var checkPhone = false;
-        let email = document.getElementById('email').value;
+        let email = document.getElementById('Email').value;
         var checkEmail = email.includes("@");
         var checkM = false;
-        var website = document.getElementById('website').value;
+        var website = document.getElementById('Website').value;
         var checkW = false;
-        var gitHub = document.getElementById('gitHub').value;
-        var checkG = false;
-        var linkedIn = document.getElementById('linkedIn').value;
-        var checkL = false;
         //checkPhone
         if (phoneNumber !== '') {
             if (regex.test(phoneNumber) == false) {
                 $('#errorPhone').text('Phone number is invalid!');
-                document.getElementById('submitResume').disabled = true;
+                document.getElementById('btnCreateCom').disabled = true;
             } else {
                 $('#errorPhone').text('');
                 checkPhone = true;
@@ -235,7 +208,7 @@
         if (email !== "") {
             if (!checkEmail) {
                 $('#errorEmail').text('Email is invalid!');
-                document.getElementById('submitResume').disabled = true;
+                document.getElementById('btnCreateCom').disabled = true;
             } else {
                 $('#errorEmail').text('');
                 checkM = true;
@@ -249,7 +222,7 @@
         if (website !== '') {
             if (validURL(website) == false) {
                 $('#errorWebsite').text('Url is invalid!');
-                document.getElementById('submitResume').disabled = true;
+                document.getElementById('btnCreateCom').disabled = true;
             } else {
                 $('#errorWebsite').text('');
                 checkW = true;
@@ -259,35 +232,8 @@
             checkW = true;
         }
 
-        //checkGit
-        if (gitHub !== '') {
-            if (validURL(gitHub) == false) {
-                $('#errorGitHub').text('Url is invalid!');
-                document.getElementById('submitResume').disabled = true;
-            } else {
-                $('#errorGitHub').text('');
-                checkG = true;
-            }
-        } else {
-            $('#errorGitHub').text('');
-            checkG = true;
-        }
-
-        //checkLinkedIn
-        if (linkedIn !== '') {
-            if (validURL(linkedIn) == false) {
-                $('#errorLinkedIn').text('Url is invalid!');
-                document.getElementById('submitResume').disabled = true;
-            } else {
-                $('#errorLinkedIn').text('');
-                checkL = true;
-            }
-        } else {
-            $('#errorLinkedIn').text('');
-            checkL = true;
-        }
-        if (checkPhone == true && checkM == true && checkW == true && checkG == true && checkL == true || regex.test(phoneNumber) == true && checkEmail == true && validURL(website) == true && validURL(gitHub) == true && validURL(linkedIn) == true) {
-            document.getElementById('submitResume').disabled = false;
+        if (checkPhone == true && checkM == true && checkW == true|| regex.test(phoneNumber) == true && checkEmail == true && validURL(website) == true) {
+            document.getElementById('btnCreateCom').disabled = false;
         }
 
     }

@@ -4,13 +4,12 @@
  */
 package se1621.controller;
 
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
 @MultipartConfig(maxFileSize = 16177215)
 public class MainController extends HttpServlet {
 
@@ -75,7 +74,8 @@ public class MainController extends HttpServlet {
     private static final String VIEW_RECENT_JOB_CONTROLLER = "ViewRecentJobController";
     private static final String CHECKCREATECOMPANY = "CheckCreateCompany";
     private static final String CHECKCREATECOMPANY_CONTROLLER = "CheckCreateCompanyInfoController";
-
+    private static final String REGISTERHR_CONTROLLER = "RegisterHRController";
+    private static final String REGISTER_HR = "Register HR";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -143,6 +143,8 @@ public class MainController extends HttpServlet {
                 url = CHECKCREATECOMPANY_CONTROLLER;
             } else if (VIEW_RECENT_JOB.equals(action)) {
                 url = VIEW_RECENT_JOB_CONTROLLER;
+            } else if (REGISTER_HR.equals(action)) {
+                url = REGISTERHR_CONTROLLER;
             } else {
                 url = ERROR;
             }

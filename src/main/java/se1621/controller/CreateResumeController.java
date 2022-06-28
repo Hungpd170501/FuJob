@@ -4,22 +4,25 @@
  */
 package se1621.controller;
 
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
-import se1621.dao.ResumeDAO;
-import se1621.dao.ResumeSkillDAO;
-import se1621.dto.Resume;
-import se1621.dto.ResumeSkill;
-import se1621.dto.Skill;
-import se1621.dto.User;
-import se1621.service.FirebaseStoreServiceImpl;
-
-import java.io.IOException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import se1621.dao.ResumeDAO;
+import se1621.dao.ResumeSkillDAO;
+import se1621.dto.Resume;
+import se1621.dto.Skill;
+import se1621.dto.ResumeSkill;
+import se1621.dto.User;
+import se1621.service.FirebaseStoreServiceImpl;
 
 /**
  *
@@ -39,7 +42,7 @@ public class CreateResumeController extends HttpServlet {
         try {
             Part filePart = request.getPart("avatar");
             FirebaseStoreServiceImpl firebaseStoreServiceImpl = new FirebaseStoreServiceImpl();
-            String filename = firebaseStoreServiceImpl.uploadFile(filePart);
+            String filename=firebaseStoreServiceImpl.uploadFile(filePart);
             String fullName = request.getParameter("fullname");
             String gender = request.getParameter("gender");
             Date dateOfBirth = Date.valueOf(request.getParameter("dateofbirth"));

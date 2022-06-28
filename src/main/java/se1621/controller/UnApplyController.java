@@ -5,6 +5,7 @@
 
 package se1621.controller;
 
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,12 +13,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import se1621.dao.JobApplicationDAO;
 
-import java.io.IOException;
-
 /**
+ *
  * @author HNGB
  */
-@WebServlet(name = "UnApplyController", urlPatterns = {"/UnApplyController"})
+@WebServlet(name="UnApplyController", urlPatterns={"/UnApplyController"})
 public class UnApplyController extends HttpServlet {
 
     private static final String ERROR = "job-list-applied.jsp";
@@ -31,7 +31,7 @@ public class UnApplyController extends HttpServlet {
             int userID = Integer.parseInt(request.getParameter("userID"));
             JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
             boolean check = jobOrderDAO.delete(jobOrderID);
-            if (check) {
+            if(check){
                 url = SUCCESS + userID;
 
             }

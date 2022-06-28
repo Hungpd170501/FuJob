@@ -3,18 +3,18 @@
     Created on : Jun 1, 2022, 7:52:12 AM
     Author     : HNGB
 --%>
-<%@page import="se1621.dao.JobApplicationDAO" %>
-<%@page import="se1621.dto.JobApplication" %>
-<%@page import="se1621.dao.ResumeDAO" %>
-<%@page import="java.util.Calendar" %>
-<%@page import="java.time.LocalDate" %>
-<%@page import="java.sql.Date" %>
-<%@page import="se1621.dto.JobSkills" %>
-<%@page import="java.util.List" %>
-<%@page import="org.apache.commons.lang3.StringUtils" %>
-<%@page import="se1621.dto.User" %>
-<%@page import="se1621.dto.Job" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page import="se1621.dao.JobApplicationDAO"%>
+<%@page import="se1621.dto.JobApplication"%>
+<%@page import="se1621.dao.ResumeDAO"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.sql.Date"%>
+<%@page import="se1621.dto.JobSkills"%>
+<%@page import="java.util.List"%>
+<%@page import="org.apache.commons.lang3.StringUtils"%>
+<%@page import="se1621.dto.User"%>
+<%@page import="se1621.dto.Job"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
@@ -61,8 +61,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center" style="margin-bottom: 50px">
-                <h1 class="mb-2" style="font-weight: 700"><a href="#" class="text-dark"></a><%= job.getJobTitle()%>
-                </h1>
+                <h1 class="mb-2" style="font-weight: 700"><a href="#" class="text-dark"></a><%= job.getJobTitle()%></h1>
             </div>
         </div>
 
@@ -70,18 +69,12 @@
             <div class="col-lg-8 col-md-7">
                 <div class="row job-detail border rounded p-4 row">
                     <div class="col-lg-5">
-                        <img src="<%= job.getCategory().getImg()%>" alt=""
-                             class="img-fluid img-thumbnail float-left mr-md-3 mr-2 mx-auto d-block"
-                             style="width:800px;height:250px">
+                        <img src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail float-left mr-md-3 mr-2 mx-auto d-block" style="width:800px;height:250px">
                     </div>
                     <div class="col-lg-7" style="margin-top: 30px">
                         <div class="job-detail-com-desc overflow-hidden d-block">
-                            <p class=" mb-3">
-                                <h7 style="font-weight: 700"> Category:</h7>
-                                <%= job.getCategory().getCategoryName()%>
-                            </p>
-                            <p class=" mb-3">
-                                <h7 style="font-weight: 700">Skill require:</h7>
+                            <p class=" mb-3"><h7  style="font-weight: 700"> Category: </h7><%= job.getCategory().getCategoryName()%></p>
+                            <p class=" mb-3"><h7 style="font-weight: 700">Skill require: </h7>
                                 <%
                                     List<JobSkills> listJobSkills = (List<JobSkills>) request.getAttribute("LIST_SKILLREQUIRE");
                                     for (int i = 0; i < listJobSkills.size() - 1; i++) {
@@ -92,9 +85,7 @@
                                 %>
                                 <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
                             </p>
-                            <p class=" mb-3">
-                                <h7 style="font-weight: 700"> Budget:</h7>
-                                <%= job.getBudget()%> $ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) { %>
+                            <p class=" mb-3"><h7 style="font-weight: 700"> Budget: </h7><%= job.getBudget()%> $ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) { %>
                                 / hour
                                 <% } %></p>
                             <%
@@ -102,10 +93,7 @@
                                 long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
                                 long resultDate = exDate / (24 * 60 * 60 * 1000);
                             %>
-                            <p class=" mb-3">
-                                <h7 style="font-weight: 700"> Expiry Date:</h7>
-                                <%= resultDate%> days left
-                            </p>
+                            <p class=" mb-3"><h7 style="font-weight: 700"> Expiry Date: </h7><%= resultDate%> days left</p>
                         </div>
                     </div>
                 </div>
@@ -113,12 +101,11 @@
                     <div class="col-lg-12">
                         <div class="job-detail border rounded mt-2 p-4">
                             <div>
-                                <h5 class="text-dark" style="font-weight: 700">Projects Description </h5>
+                                <h5 class="text-dark"  style="font-weight: 700">Projects Description </h5>
                             </div>
                             <div class="job-detail-location pt-4 border-top">
                                 <div class="job-detail-desc">
-                                    <p class="mb-3"><%= job.getDescription()%>
-                                    </p>
+                                    <p class="mb-3"><%= job.getDescription()%></p>
                                 </div>
                             </div>
                         </div>
@@ -134,35 +121,30 @@
                         %>
                         <div class="job-details-desc-item">
                             <div class="float-left mr-2">
-                                <i class="mdi mdi-office-building" style="color: gray"></i>
+                                <i class="mdi mdi-office-building" style="color: gray" ></i>
                             </div>
-                            <p class=" mb-2"><a
-                                    href="${pageContext.request.contextPath}/MainController?action=SearchCompanyID&searchCompanyID=<%= job.getCompany().getCompanyID()%>"><%= job.getCompany().getCompanyName()%>
-                            </a></p>
+                            <p class=" mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchCompanyID&searchCompanyID=<%= job.getCompany().getCompanyID()%>"> <%= job.getCompany().getCompanyName()%></a></p>
                         </div>
                         <%
                             }
                         %>
                         <div class="job-details-desc-item">
                             <div class="float-left mr-2">
-                                <i class="mdi mdi-map-marker" style="color: red"></i>
+                                <i class="mdi mdi-map-marker" style="color: red" ></i>
                             </div>
-                            <p class="mb-2"><%= job.getAddress()%>
-                            </p>
+                            <p class="mb-2"><%= job.getAddress()%></p>
                         </div>
                         <div class="job-details-desc-item">
                             <div class="float-left mr-2">
                                 <i class="mdi mdi-email" style="color: #008fd8"></i>
                             </div>
-                            <p class="mb-2"><%= job.getEmail()%>
-                            </p>
+                            <p class="mb-2"><%= job.getEmail()%></p>
                         </div>
                         <div class="job-details-desc-item">
                             <div class="float-left mr-2">
                                 <i class="mdi mdi-cellphone-iphone" style="color: #079992"></i>
                             </div>
-                            <p class="mb-2"><%= job.getPhone()%>
-                            </p>
+                            <p class="mb-2"><%= job.getPhone()%></p>
                         </div>
                     </div>
                 </div>
@@ -171,13 +153,12 @@
                     if (loginUser == null) {
                 %>
                 <div class="job-detail border rounded mt-4">
-                    <a href="${pageContext.request.contextPath}/view/login.jsp" class="btn btn-primary btn-block">Apply
-                        For Projects</a>
+                    <a href="${pageContext.request.contextPath}/view/login.jsp" class="btn btn-primary btn-block">Apply For Projects</a>
                 </div>
                 <%
-                } else if (loginUser != null && !StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
+                } else if (loginUser != null && !StringUtils.equals(loginUser.getRole().getRoleID(), "HR") && !StringUtils.equals(loginUser.getRole().getRoleID(), "HRM")) {
                     Boolean checkDupApplied = (Boolean) request.getAttribute("DUPLICATE_APPLIED");
-                    if (checkDupApplied) {
+                    if(checkDupApplied) {
                 %>
                 <div class="job-detail border rounded mt-4">
                     <button type="button" disabled class="btn btn-secondary btn-block">You Applied This Project</button>
@@ -193,8 +174,7 @@
                 } else {
                 %>
                 <div class="job-detail border rounded mt-4">
-                    <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Apply
-                        For Projects</a>
+                    <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Apply For Projects</a>
                 </div>
                 <%
                             }

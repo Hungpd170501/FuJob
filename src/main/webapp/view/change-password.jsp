@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,43 +19,35 @@
 </div>
 
 <!-- Hero Start -->
-<section class="vh-100"
-         style="background: url('https://via.placeholder.com/2000X1333//88929f/5a6270C/O https://placeholder.com/') center center;">
+<section class="vh-100" style="background: url('https://via.placeholder.com/2000X1333//88929f/5a6270C/O https://placeholder.com/') center center;">
 
     <div class="home-center">
         <div class="home-desc-center">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-md-6">
-                        <div class="alert shadow alert-light hide-if-empty text-center"
-                             role="alert">${requestScope.CHANGE_PASSWORD_MESSAGE}</div>
+                        <div class="alert shadow alert-light hide-if-empty text-center" role="alert">${requestScope.CHANGE_PASSWORD_MESSAGE}</div>
                         <div class="login_page bg-white shadow rounded p-4">
                             <div class="text-center">
                                 <h4 class="mb-4">Change password for ${sessionScope.LOGIN_USER.email}</h4>
                             </div>
-                            <form class="login-form" id="recovery-pasword-form" method="post"
-                                  action="/FuJob/MainController"
-                                  oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Password do not match!" : "")'>
+                            <form class="login-form" id="recovery-pasword-form" method="post" action="/FuJob/MainController" oninput='confirmpassword.setCustomValidity(confirmpassword.value != password.value ? "Password do not match!" : "")'>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group position-relative">
                                             <label>Password <span class="text-danger">*</span></label>
-                                            <input type="password" class="form-control" placeholder="Password"
-                                                   name="password" required="">
+                                            <input type="password" class="form-control" placeholder="Password" name="password" required="">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group position-relative">
                                             <label>Confirm Password <span class="text-danger">*</span></label>
-                                            <input type="password" class="form-control" placeholder="Confirm Password"
-                                                   name="confirmpassword" required="">
+                                            <input type="password" class="form-control" placeholder="Confirm Password" name="confirmpassword" required="">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <input type="hidden" name="action" value="ChangePassword">
-                                        <button class="btn btn-primary w-100" type="submit"
-                                                form="recovery-pasword-form">Change Password
-                                        </button>
+                                        <button class="btn btn-primary w-100"  type="submit" form="recovery-pasword-form">Change Password</button>
                                     </div>
                                 </div>
                             </form>

@@ -4,18 +4,22 @@
  */
 package se1621.dao;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import se1621.dto.Role;
 import se1621.dto.User;
 import se1621.utils.DBUtils;
-
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserDAO {
 
     private static final String CHECK_DUPLICATE = "SELECT userID FROM tblUsers WHERE email=?";
     private static final String SINGUP = "INSERT INTO tblUsers(fullName, email, password, roleID, userStatus) VALUES(?,?,?,?,2)";
+    private static final String REGISTER_HR = "INSERT INTO tblUsers(fullName, email, password, roleID, userStatus, companyID) VALUES(?,?,?,?,2,?)";
     private static final String UPDATECOMID = "UPDATE tblUsers SET fullName=?, email=?, roleID=?, companyID=? WHERE userID=?";
     private static final String GETUSER = "SELECT fullName, email, u.roleID, r.roleName, companyID, r.createdDate, userStatus "
             + "FROM (tblUsers u left join tblRoles r on u.roleID = r.roleID) WHERE userID =?";
@@ -102,6 +106,32 @@ public class UserDAO {
                 preStm.setString(2, user.getEmail());
                 preStm.setString(3, user.getPassword());
                 preStm.setString(4, user.getRole().getRoleID());
+                check = preStm.executeUpdate() > 0;
+            }
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean registerHR(User user) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        conn = null;
+        preStm = null;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(REGISTER_HR);
+                preStm.setString(1, user.getFullName());
+                preStm.setString(2, user.getEmail());
+                preStm.setString(3, user.getPassword());
+                preStm.setString(4, user.getRole().getRoleID());
+                preStm.setInt(5, user.getCompanyID());
                 check = preStm.executeUpdate() > 0;
             }
         } finally {

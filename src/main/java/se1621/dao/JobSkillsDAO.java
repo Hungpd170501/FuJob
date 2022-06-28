@@ -4,18 +4,18 @@
  */
 package se1621.dao;
 
-import se1621.dto.JobSkills;
-import se1621.dto.Skill;
-import se1621.utils.DBUtils;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import se1621.dto.JobSkills;
+import se1621.dto.Skill;
+import se1621.utils.DBUtils;
 
 /**
+ *
  * @author lehad
  */
 public class JobSkillsDAO {

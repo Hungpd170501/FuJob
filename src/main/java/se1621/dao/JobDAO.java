@@ -4,14 +4,17 @@
  */
 package se1621.dao;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import se1621.utils.DBUtils;
 import se1621.dto.Category;
 import se1621.dto.Job;
 import se1621.dto.PayMentMethod;
-import se1621.utils.DBUtils;
-
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -21,22 +24,22 @@ public class JobDAO {
 
     private static final String CREATEJOB = "INSERT INTO tblJobs(userID, jobTitle, jobCategoryID,"
             + " budget, paymentMethodID, expiriedDate, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,1)";
-    //roi ne
-    private static final String VIEWALLJOB = "SELECT j.jobID,j.jobStatus, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate, pay.paymentMethodName"
-            + "                        FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)"
-            + "						left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID )"
-            + "                        WHERE (j.jobStatus = 1)ORDER BY jobID DESC";
-    private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJobs WHERE jobID = (SELECT MAX(jobID) FROM tblJobs) and jobStatus = 1 and userID = ?";
-    //roi ne
-    private static final String SEARCHBYJOBID = "SELECT j.jobID, j.userID, j.jobTitle,j.jobCategoryID, j.budget, j.paymentMethodID, payment.paymentMethodName, j.address, j.email, j.phone, j.description, j.createdDate, j.lastModifiedDate, j.expiriedDate, j.jobStatus FROM tblJobs j "
-            + "            left join tblPaymentMethods payment on j.paymentMethodID = payment.paymentMethodID "
-            + "           WHERE jobID = ? and jobStatus = 1";
     //xong ne
     private final String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
             + "j.jobCategoryID, c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, "
             + "pm.paymentMethodName, j.budget, j.expiriedDate "
             + "FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)"
             + " left join tblPaymentMethods pm on j.paymentMethodID = pm.paymentMethodID) ";
+    private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJobs WHERE jobID = (SELECT MAX(jobID) FROM tblJobs) and jobStatus = 1 and userID = ?";
+    //roi ne
+    private static final String SEARCHBYJOBID = "SELECT j.jobID, j.userID, j.jobTitle,j.jobCategoryID, j.budget, j.paymentMethodID, payment.paymentMethodName, j.address, j.email, j.phone, j.description, j.createdDate, j.lastModifiedDate, j.expiriedDate, j.jobStatus FROM tblJobs j "
+            + "            left join tblPaymentMethods payment on j.paymentMethodID = payment.paymentMethodID "
+            + "           WHERE jobID = ? and jobStatus = 1";
+    //roi ne
+    private static final String VIEWALLJOB = "SELECT j.jobID,j.jobStatus, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate, pay.paymentMethodName"
+            + "                        FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)"
+            + "						left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID )"
+            + "                        WHERE j.jobStatus = 1 ORDER BY jobID DESC";
     //sua roi
     private static final String VIEWHRJOB = "SELECT j.jobID,j.jobStatus, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate, p.paymentMethodName"
             + "                      FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) left join tblPaymentMethods p on p.paymentMethodID = j.paymentMethodID) "

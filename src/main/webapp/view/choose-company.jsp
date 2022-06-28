@@ -4,10 +4,10 @@
     Author     : HNGB
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page import="java.util.List" %>
-<%@page import="se1621.dao.CompanyInfoDAO" %>
-<%@page import="se1621.dto.CompanyInfo" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page import="java.util.List"%>
+<%@page import="se1621.dao.CompanyInfoDAO"%>
+<%@page import="se1621.dto.CompanyInfo"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,8 +22,7 @@
 <jsp:include page="./include/navbar.jsp"></jsp:include>
 
 
-<section class="bg-home"
-         style="background: url('https://via.placeholder.com/2000X1333//88929f/5a6270C/O https://placeholder.com/') center center;">
+<section class="bg-home" style="background: url('https://via.placeholder.com/2000X1333//88929f/5a6270C/O https://placeholder.com/') center center;">
     <div class="bg-overlay"></div>
     <div class="home-center">
         <div class="home-desc-center">
@@ -47,8 +46,7 @@
                                             <div class="registration-form-box">
                                                 <i class="fa fa-list-alt"></i>
 
-                                                <select id="select-category" name="choose-companyName"
-                                                        class="demo-default">
+                                                <select id="select-category" name ="choose-companyName" class="demo-default">
 
                                                     <option value="">Company...</option>
                                                     <c:forEach items="${chooseCompany.listCompany}" var="i">
@@ -61,17 +59,12 @@
                                         </div>
                                         <div class="col-lg-6 col-md-6">
                                             <div class="registration-form-box">
-                                                <input type="submit" id="submit" name="action"
-                                                       class="submitBnt btn btn-primary btn-block"
-                                                       value="Choose Company">
+                                                <input type="submit" id="submit" name="action" class="submitBnt btn btn-primary btn-block" value="Choose Company">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12 text-center">
-                                        <p class="mb-0 mt-3"><small class="text-light mr-2">Another Company ?</small> <a
-                                                href="/FuJob/view/create-companyinfo.jsp"
-                                                class="text-light font-weight-bold">Create your Company Information</a>
-                                        </p>
+                                        <p class="mb-0 mt-3"><small class="text-light mr-2">Another Company ?</small> <a href="/FuJob/view/create-companyinfo.jsp" class="text-light font-weight-bold">Create your Company Information</a></p>
                                     </div>
                                 </form>
                             </div>
@@ -82,6 +75,11 @@
         </div>
     </div>
 </section>
+
+
+
+
+
 
 
 <jsp:include page="./include/footer.jsp"></jsp:include>
