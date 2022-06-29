@@ -138,7 +138,6 @@
                          data-show-pagination="true"
                          data-items="10"
                          data-items-steps="all, 3, 10"
-                         
                          data-show-list-info="true"
                          >
 

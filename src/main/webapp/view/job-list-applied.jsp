@@ -21,7 +21,7 @@
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
         <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
             <!-- Start home -->
-            <section class="bg-half page-next-level"> 
+            <section class="bg-half page-next-level">
                 <div class="bg-overlay"></div>
                 <div class="container">
                     <div class="row justify-content-center">
@@ -118,8 +118,8 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
 
-                        <div class="row"> 
                             <% List<JobApplication> listJobApplication = (List<JobApplication>) request.getAttribute("LIST_ALLJOBORDER");
                                 if (listJobApplication.isEmpty()) {
 
@@ -145,12 +145,35 @@
                                             </div>
                                             <div class="col-lg-6 col-md-9">
                                                 <div class="job-list-desc">
-                                                    <h4 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="text-dark"><%= jobOrder.getJob().getJobTitle()%></a></h4>
-                                                        <%
-                                                            Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-                                                            long exDate = Math.abs(jobOrder.getJob().getExpiriedDate().getTime() - dateNow.getTime());
-                                                            long resultDate = exDate / (24 * 60 * 60 * 1000);
-                                                        %>
+                                                    <h4 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="text-dark"><%= jobOrder.getJob().getJobTitle()%>
+                                                            <% if (jobOrder.getJobApplicationStatus() == 1) {
+                                                            %>
+                                                            <br>
+                                                            <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: #C0C000"></i> 
+                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: #C0C000">Waiting</i>
+                                                            <%
+                                                            } else if (jobOrder.getJobApplicationStatus() == 3) {
+                                                            %>
+                                                            <br>
+                                                            <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
+                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Accepted</i>
+                                                            <%
+                                                            } else if (jobOrder.getJobApplicationStatus() == 5) {
+                                                            %>
+                                                            <br>
+                                                            <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: red"></i> 
+                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Rejected</i>
+                                                            <%
+                                                                }
+                                                            %>
+                                                        </a>
+                                                    </h4>
+
+                                                    <%
+                                                        Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                                                        long exDate = Math.abs(jobOrder.getJob().getExpiriedDate().getTime() - dateNow.getTime());
+                                                        long resultDate = exDate / (24 * 60 * 60 * 1000);
+                                                    %>
                                                     <p class="mb-2 text-muted"> <%= resultDate%> days left</p>
 
                                                     <%
@@ -160,7 +183,7 @@
                                                         }
                                                     %>
                                                     <p class="mb-4"><%= description%></p>
-                                                    <h6>Skills Require: 
+                                                    <h6>Skills Require:
                                                         <%
                                                             List<JobSkills> listJobSkills = jobOrder.getJob().getListJobSkills();
                                                             for (int i = 0; i < listJobSkills.size() - 1; i++) {
@@ -186,14 +209,42 @@
                                                     <div>
                                                         <p class=" "><i class="mr-2"></i>5 bids</p>
                                                     </div>
+                                                    <% if (jobOrder.getJobApplicationStatus() == 1) {
+                                                    %>
+                                                    <br>
                                                     <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">Nhin cai form</a>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)" type="button" style="width: 50%" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#confirmCancellation">
                                                             Cancel
                                                         </button>
+                                                    </div><%
+                                                    } else if (jobOrder.getJobApplicationStatus() == 3) {
+                                                    %>
+                                                    <br>
+                                                    <div class="mt-3">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>
+                                                    <div class="mt-3">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">Nhin cai form</a>
+                                                    </div>
+                                                    <%
+                                                    } else if (jobOrder.getJobApplicationStatus() == 5) {
+                                                    %>
+                                                    <br>
+                                                    <div class="mt-3">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">Nhin cai form</a>
+                                                    </div>
+                                                    <%
+                                                        }
+                                                    %>
                                                 </div>
                                             </div>
                                         </div>
@@ -216,7 +267,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                            
+                            </div>
+
                             <%
 
                                         }
@@ -246,8 +298,9 @@
         <jsp:include page="./include/footer.jsp"></jsp:include>
 
             <!-- Back to top -->
-            <a href="#" class="back-to-top rounded text-center" id="back-to-top"> 
-                <i class="mdi mdi-chevron-up d-block"> </i> 
+            <a href="#" class="back-to-top rounded text-center" id="back-to-top">
+                <i class="mdi mdi-chevron-up d-block"> </i>
+
             </a>
             <!-- Back to top -->
 
@@ -283,3 +336,4 @@
         </script>
     </body>
 </html>
+

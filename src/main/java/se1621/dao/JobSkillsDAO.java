@@ -24,7 +24,7 @@ public class JobSkillsDAO {
             + "WHERE jk.jobID = ?";
     private static final String GET_JOBSKILLS_FOR_ALLJOB = "SELECT jk.jobSkillID, jk.jobID, jk.skillID, skill.skillName "
             + "FROM (tblJobSkills jk left join tblSkills skill on jk.SkillID = skill.skillID) "
-            + "WHERE jk.jobID IN  (SELECT jobID FROM tblJobs WHERE jobStatus = 1)";
+            + "WHERE jk.jobID IN  (SELECT jobID FROM tblJobs)";
     private static final String GET_JOBSKILLS_FOR_JOBAPPLY = "SELECT jk.jobSkillID, jk.jobID, jk.skillID, skill.skillName "
             + "    FROM (tblJobSkills jk left join tblSkills skill on jk.SkillID = skill.skillID)"
             + "    WHERE jk.jobID IN  (SELECT jobID FROM tblJobApplications WHERE jobApplicationStatus = 1)";

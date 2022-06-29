@@ -169,6 +169,9 @@ File: main stylesheet
 .btn.btn-primary-outline:hover, .btn.btn-primary-outline:focus, .btn.btn-primary-outline:active, .btn.btn-primary-outline.active, .btn.btn-primary-outline.focus, .btn.btn-secondary-outline:hover, .btn.btn-secondary-outline:focus, .btn.btn-secondary-outline:active, .btn.btn-secondary-outline.active, .btn.btn-secondary-outline.focus, .btn.btn-success-outline:hover, .btn.btn-success-outline:focus, .btn.btn-success-outline:active, .btn.btn-success-outline.active, .btn.btn-success-outline.focus, .btn.btn-danger-outline:hover, .btn.btn-danger-outline:focus, .btn.btn-danger-outline:active, .btn.btn-danger-outline.active, .btn.btn-danger-outline.focus, .btn.btn-info-outline:hover, .btn.btn-info-outline:focus, .btn.btn-info-outline:active, .btn.btn-info-outline.active, .btn.btn-info-outline.focus, .btn.btn-warning-outline:hover, .btn.btn-warning-outline:focus, .btn.btn-warning-outline:active, .btn.btn-warning-outline.active, .btn.btn-warning-outline.focus, .btn.btn-dark-outline:hover, .btn.btn-dark-outline:focus, .btn.btn-dark-outline:active, .btn.btn-dark-outline.active, .btn.btn-dark-outline.focus {
     color: #ffffff !important;
 }
+.btn.btn-primary-outline-red:hover, .btn.btn-primary-outline-red:focus, .btn.btn-primary-outline-red:active, .btn.btn-primary-outline.active, .btn.btn-primary-outline-red.focus, .btn.btn-secondary-outline-red:hover, .btn.btn-secondary-outline-red:focus, .btn.btn-secondary-outline-red:active, .btn.btn-secondary-outline-red.active, .btn.btn-secondary-outline-red.focus, .btn.btn-success-outline-red:hover, .btn.btn-success-outline-red:focus, .btn.btn-success-outline-red:active, .btn.btn-success-outline-red.active, .btn.btn-success-outline-red.focus, .btn.btn-danger-outline-red:hover, .btn.btn-danger-outline-red:focus, .btn.btn-danger-outline-red:active, .btn.btn-danger-outline-red.active, .btn.btn-danger-outline-red.focus, .btn.btn-info-outline-red:hover, .btn.btn-info-outline-red:focus, .btn.btn-info-outline-red:active, .btn.btn-info-outline-red.active, .btn.btn-info-outline-red.focus, .btn.btn-warning-outline-red:hover, .btn.btn-warning-outline-red:focus, .btn.btn-warning-outline-red:active, .btn.btn-warning-outline-red.active, .btn.btn-warning-outline-red.focus, .btn.btn-dark-outline-red:hover, .btn.btn-dark-outline-red:focus, .btn.btn-dark-outline-red:active, .btn.btn-dark-outline-red.active, .btn.btn-dark-outline-red.focus {
+    color: #ffffff !important;
+}
 
 .btn.btn-primary {
     background: #2f55d4;
@@ -184,10 +187,20 @@ File: main stylesheet
     color: #2f55d4;
     background-color: transparent;
 }
+.btn.btn-primary-outline-red {
+    border: 1px solid red;
+    color: red;
+    background-color: transparent;
+}
+
 
 .btn.btn-primary-outline:hover, .btn.btn-primary-outline:focus, .btn.btn-primary-outline:active, .btn.btn-primary-outline.active, .btn.btn-primary-outline.focus {
     background-color: #2f55d4;
     border-color: #2f55d4;
+}
+.btn.btn-primary-outline-red:hover, .btn.btn-primary-outline-red:focus, .btn.btn-primary-outline-red:active, .btn.btn-primary-outline-red.active, .btn.btn-primary-outline-red.focus {
+    background-color: red;
+    border-color: red;
 }
 
 .btn.btn-secondary {

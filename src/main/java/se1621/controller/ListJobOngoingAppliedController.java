@@ -5,6 +5,7 @@
 package se1621.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,17 +14,17 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import se1621.dao.JobApplicationDAO;
+import se1621.dao.JobSkillsDAO;
 import se1621.dao.ResumeDAO;
-import se1621.dao.ResumeSkillDAO;
-import se1621.dto.Resume;
-import se1621.dto.ResumeSkill;
+import se1621.dto.JobApplication;
+import se1621.dto.JobSkills;
 
 /**
  *
  * @author quocb
  */
-@WebServlet(name = "ListCandidateOfJob", urlPatterns = {"/ListCandidateOfJob"})
-public class ListCandidateOfJob extends HttpServlet {
+@WebServlet(name = "ListJobOngoingAppliedController", urlPatterns = {"/ListJobOngoingAppliedController"})
+public class ListJobOngoingAppliedController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,35 +35,38 @@ public class ListCandidateOfJob extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String ERROR = "/view/candidates-listing.jsp";
-    private static final String SUCCESS = "/view/candidates-listing.jsp";
+    private static final String ERROR = "/view/job-list-accepted.jsp";
+    private static final String SUCCESS = "/view/job-list-accepted.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            int userID = Integer.parseInt(request.getParameter("userID"));
             ResumeDAO resumeDAO = new ResumeDAO();
+            int resumeID = resumeDAO.getResumeID(userID);
+            List<JobApplication> listJobOrder = new ArrayList<>();
             JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-            int search = Integer.parseInt(request.getParameter("JobIDCandidate"));
-            List<Integer> listResumeID = jobOrderDAO.getListResumeIDOfJob(search);
-            List<Resume> listResume = new ArrayList<Resume>();
-            List<ResumeSkill> listStudentSkill = new ArrayList<>();
-            for (Integer integer : listResumeID) {
-                listResume.add(resumeDAO.getResumeByResumeID(integer));
-                ResumeSkillDAO studentSkillDAO = new ResumeSkillDAO();
-                listStudentSkill = studentSkillDAO.getStudentSkill(integer);
+            listJobOrder = jobOrderDAO.getListJobAccepcted(resumeID);
+            JobSkillsDAO jsDAO = new JobSkillsDAO();
+            List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
+            for (JobApplication jobApply : listJobOrder) {
 
+                List<JobSkills> ljk = new ArrayList<>();
+                for (JobSkills js : listJs) {
+                    if (jobApply.getJob().getJobID() == js.getJobID()) {
+                        ljk.add(js);
+                    }
+                    jobApply.getJob().setListJobSkills(ljk);
+                }
             }
-            if (!listResume.isEmpty()) {
-                request.setAttribute("LIST_CANDIDATEOFJOB", listResume);
-                request.setAttribute("LIST_STUDENTSKILL", listStudentSkill);
-                request.setAttribute("JOBIDCANDIDATE", search);
+            if (!listJobOrder.isEmpty()) {
+                request.setAttribute("LIST_ALLJOBONGOING_APPLIED", listJobOrder);
                 url = SUCCESS;
             } else {
-                request.setAttribute("LIST_CANDIDATEOFJOB", listResume);
-                request.setAttribute("LIST_STUDENTSKILL", listStudentSkill);
-                request.setAttribute("MESSAGE", "NO CANDICATES APPLY THIS JOB");
+                request.setAttribute("LIST_ALLJOBONGOING_APPLIED", listJobOrder);
+                request.setAttribute("MESSAGE", "YOU HAVEN'T ACCEPTED FOR ANY PROJECT");
             }
         } catch (Exception e) {
             log("Error at View all job Controller" + e.toString());

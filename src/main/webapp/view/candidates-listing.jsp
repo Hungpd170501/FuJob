@@ -1,4 +1,4 @@
-<%@page import="se1621.dto.StudentSkill"%>
+<%@page import="se1621.dto.ResumeSkill"%>
 <%@page import="se1621.dto.Resume"%>
 <%@page import="se1621.dto.Job"%>
 <%@page import="java.util.List"%>
@@ -48,7 +48,7 @@
                             <div class="section-title text-center mb-4 pb-2">
 
                                 <h4 class="title title-line pb-5">All Candidates Apply This Projects</h4>
-<!--                                <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>-->
+                                <!--                                <p class="text-muted para-desc mx-auto mb-1">Post a job to tell us about your project. We'll quickly match you with the right freelancers.</p>-->
 
                             </div>
                         </div>
@@ -97,10 +97,10 @@
                                                 </ul>
                                                 <p class="text-muted mt-1 mb-0">Skills:
                                                     <%
-                                                        List<StudentSkill> listStudentSkill = (List<StudentSkill>) request.getAttribute("LIST_STUDENTSKILL");
+                                                        List<ResumeSkill> listStudentSkill = (List<ResumeSkill>) request.getAttribute("LIST_STUDENTSKILL");
                                                         for (int i = 0; i < listStudentSkill.size() - 1; i++) {
                                                     %>
-                                                    <%= listStudentSkill.get(i).getSkill().getSkillName() %>,
+                                                    <%= listStudentSkill.get(i).getSkill().getSkillName()%>,
                                                     <%
                                                         }
                                                     %>
@@ -112,15 +112,22 @@
                                         <div class="col-md-3">
                                             <div class="candidates-list-fav-btn text-right">        
                                                 <div class="candidates-listing-btn mt-4">
-                                                    <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&searchResumeID=<%= resume.getUserID()%>" class="btn btn-primary-outline btn-sm">View Profile</a>
+                                                    <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&studentID=<%= resume.getUserID()%>" class="btn btn-primary-outline btn-sm " style="width: 50%">View Profile</a>
                                                 </div>
                                                 <div class="mt-3">
-                                                        
-                                                    <button onclick="getJobOrderID()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation">
+                                                    <%
+                                                        int jobID = (Integer) request.getAttribute("JOBIDCANDIDATE");
+                                                    %>
+                                                    <button onclick="denyJobApp(<%= resume.getResumeID()%>,<%= jobID%>)" type="button" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#confirmCancellation" style="width: 50%">
                                                         Deny
                                                     </button>
                                                 </div>
+                                                <div class="mt-3">
 
+                                                    <button onclick="acceptJobApp(<%= resume.getResumeID()%>,<%= jobID%>)" type="button" class="btn btn-primary-outline btn-sm" data-toggle="modal" data-target="#confirmAcceptaction" style="width: 50%">
+                                                        Accept
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -143,6 +150,22 @@
                                 </div>
                             </div>
                         </div> 
+                        <div class="modal fade" id="confirmAcceptaction" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-primary" id="exampleModalLongTitle">Do you want to accept this application?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                        <a id="yesOption2" href=""><button type="button" class="btn btn-primary">Yes</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <%
 
                                     }
@@ -183,20 +206,27 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-        <script> 
-            function getJobOrderID(id, userID){
-                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=DenyJob&jobOrderID='+id+'&userID='+userID);
+        <script>
+                                                        function denyJobApp(resumeID, jobID) {
+                                                            $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=DenyJob&jobID=' + jobID + '&resumeID=' + resumeID);
+                                                        }
+        </script>
+
+        <script>
+            function acceptJobApp(resumeID, jobID) {
+                $('#yesOption2').attr('href', '${pageContext.request.contextPath}/MainController?action=AcceptJob&jobID=' + jobID + '&resumeID=' + resumeID);
             }
         </script>
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-                                                        $(".job-display").slice(0, 10).show();
-                                                        $(".smj").on("click", function () {
-                                                            $(".job-display:hidden").slice(0, 5).slideDown();
-                                                            if ($(".job-display:hidden").length == 0) {
-                                                                $(".smj").fadeOut('slow');
-                                                            }
-                                                        });
+            $(".job-display").slice(0, 10).show();
+            $(".smj").on("click", function () {
+                $(".job-display:hidden").slice(0, 5).slideDown();
+                if ($(".job-display:hidden").length == 0) {
+                    $(".smj").fadeOut('slow');
+                }
+            });
         </script>
     </body>
 </html>
