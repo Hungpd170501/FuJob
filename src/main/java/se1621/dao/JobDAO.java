@@ -25,7 +25,7 @@ public class JobDAO {
     private static final String CREATEJOB = "INSERT INTO tblJobs(userID, jobTitle, jobCategoryID,"
             + " budget, paymentMethodID, expiriedDate, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,1)";
     //xong ne
-    private final String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
+    private String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
             + "j.jobCategoryID, c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, "
             + "pm.paymentMethodName, j.budget, j.expiriedDate "
             + "FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)"
@@ -34,18 +34,23 @@ public class JobDAO {
     //roi ne
     private static final String SEARCHBYJOBID = "SELECT j.jobID, j.userID, j.jobTitle,j.jobCategoryID, j.budget, j.paymentMethodID, payment.paymentMethodName, j.address, j.email, j.phone, j.description, j.createdDate, j.lastModifiedDate, j.expiriedDate, j.jobStatus FROM tblJobs j "
             + "            left join tblPaymentMethods payment on j.paymentMethodID = payment.paymentMethodID "
-            + "           WHERE jobID = ? and jobStatus = 1";
+            + "           WHERE jobID = ?";
     //roi ne
     private static final String VIEWALLJOB = "SELECT j.jobID,j.jobStatus, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate, pay.paymentMethodName"
             + "                        FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)"
             + "						left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID )"
             + "                        WHERE j.jobStatus = 1 ORDER BY jobID DESC";
+
     //sua roi
     private static final String VIEWHRJOB = "SELECT j.jobID,j.jobStatus, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate, p.paymentMethodName"
             + "                      FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) left join tblPaymentMethods p on p.paymentMethodID = j.paymentMethodID) "
-            + "                    WHERE (j.jobStatus = 1 OR  j.jobStatus = 4)AND j.userID=? ORDER BY createdDate DESC";
+            + "                    WHERE (j.jobStatus = 1 OR  j.jobStatus = 3 OR  j.jobStatus = 4)AND j.userID=? ORDER BY createdDate DESC";
 
     private static final String DELETEJOBPOST = "UPDATE tblJobs SET jobStatus=0 WHERE jobID=?";
+    private static final String UPDATE_JOB_POST_HAVE_EMPLOYER = "UPDATE tblJobs SET jobStatus=3 WHERE jobID=? AND jobStatus=1 ";
+    private static final String UPDATE_JOB_POST_UNCOMPLETE = "UPDATE tblJobs SET jobStatus=6 WHERE jobID=? AND jobStatus=3 ";
+    private static final String UPDATE_JOB_POST_COMPLETE= "UPDATE tblJobs SET jobStatus=5 WHERE jobID=? AND jobStatus=3 ";
+    
     private static final String GETALLNUMBEROFJOBPOST = "SELECT COUNT (*) AS totalJob FROM tblJobs";
     //roi ne
     private static final String GETVIEWRECENTJOB = "SELECT TOP(8) j.jobID, j.jobTitle, j.address, j.budget, c.categoryName, c.img, j.paymentMethodID, j.createdDate, j.lastModifiedDate, j.expiriedDate, pay.paymentMethodName"
@@ -156,7 +161,7 @@ public class JobDAO {
                 preStm.setString(8, job.getEmail());
                 preStm.setString(9, job.getPhone());
                 preStm.setString(10, job.getDescription());
-                check = preStm.executeUpdate() > 0;
+                check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -174,7 +179,7 @@ public class JobDAO {
         return check;
     }
 
-    // View all job in job-list.jsp
+    // View all job in job-list.jsp  
     public List<Job> getListJob() throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -557,6 +562,7 @@ public class JobDAO {
                     Category category = Category.builder().categoryName(categoryName).img(img).build();
                     PayMentMethod payment = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder()
+                            .userID(userID)
                             .jobID(jobID)
                             .jobTitle(jobTitle)
                             .address(address)
@@ -596,7 +602,7 @@ public class JobDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(DELETEJOBPOST);
                 preStm.setInt(1, jobPostID);
-                check = preStm.executeUpdate() > 0;
+                check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -611,4 +617,71 @@ public class JobDAO {
         return check;
     }
 
+    public boolean updateJobPostHaveEmployer(int jobPostID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UPDATE_JOB_POST_HAVE_EMPLOYER);
+                preStm.setInt(1, jobPostID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    public boolean updateJobPostUncomplete(int jobPostID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UPDATE_JOB_POST_UNCOMPLETE);
+                preStm.setInt(1, jobPostID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    public boolean updateJobPostComplete(int jobPostID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UPDATE_JOB_POST_COMPLETE);
+                preStm.setInt(1, jobPostID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    
 }

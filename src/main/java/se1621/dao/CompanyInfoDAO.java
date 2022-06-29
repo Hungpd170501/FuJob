@@ -52,7 +52,7 @@ public class CompanyInfoDAO {
                 preStm.setString(9, company.getCompanyOverview());
                 preStm.setString(10, company.getAvatar());
 
-                check = preStm.executeUpdate() > 0;
+                check = preStm.executeUpdate() > 0 ? true : false;
             }
         } finally {
             if (rs != null) {
@@ -262,7 +262,7 @@ public class CompanyInfoDAO {
                 preStm.setString(9, company.getCompanyOverview());
                 preStm.setString(10, company.getAvatar());
                 preStm.setInt(11, company.getCompanyID());
-                check = preStm.executeUpdate() > 0;
+                check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
             e.printStackTrace();

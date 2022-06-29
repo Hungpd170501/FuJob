@@ -41,7 +41,7 @@ public class JobSkillsDAO {
                 preStm.setInt(1, JobSkills.getJobID());
                 preStm.setInt(2, JobSkills.getSkill().getSkillID());
 
-                check = preStm.executeUpdate() > 0;
+                check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
             e.printStackTrace();

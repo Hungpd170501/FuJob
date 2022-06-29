@@ -38,7 +38,7 @@ public class ListJobByIDController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = ERROR;
+         String url = ERROR;
         try {
             JobDAO jobDAO = new JobDAO();
             int userID = Integer.parseInt(request.getParameter("userID"));
@@ -49,7 +49,7 @@ public class ListJobByIDController extends HttpServlet {
                 List<JobSkills> ljk = new ArrayList<>();
                 for (JobSkills js : listJs) {
                     if(job.getJobID() == js.getJobID()){
-                        ljk.add(js);
+                                ljk.add(js);
                     }
                     job.setListJobSkills(ljk);
                 }
@@ -62,9 +62,9 @@ public class ListJobByIDController extends HttpServlet {
                 request.setAttribute("MESSAGE", "NO PROJECT TO DISPLAY");
                 url = SUCCESS;
             }
-
+            
         } catch (Exception e) {
-            log("Error at View all job Controller" + e);
+            log("Error at View all job Controller" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

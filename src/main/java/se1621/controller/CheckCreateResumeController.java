@@ -50,7 +50,7 @@ public class CheckCreateResumeController extends HttpServlet {
                 request.setAttribute("LIST_STUDENTSKILL", listStudentSkill);
             }
         } catch (Exception e) {
-            log("Error at SearchResumeIDController: " + e);
+            log("Error at SearchResumeIDController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

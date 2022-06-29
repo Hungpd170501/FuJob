@@ -40,7 +40,7 @@ public class RecoveryPasswordController extends HttpServlet {
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at RecoveryPasswordController: " + e);
+            log("Error at RecoveryPasswordController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

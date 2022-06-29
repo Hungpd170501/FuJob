@@ -42,11 +42,11 @@ public class ViewAllJobOrderController extends HttpServlet {
             JobSkillsDAO jsDAO = new JobSkillsDAO();
             List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
             for (JobApplication jobApply : listJobOrder) {
-
+                
                 List<JobSkills> ljk = new ArrayList<>();
                 for (JobSkills js : listJs) {
                     if(jobApply.getJob().getJobID() == js.getJobID()){
-                        ljk.add(js);
+                                ljk.add(js);
                     }
                     jobApply.getJob().setListJobSkills(ljk);
                 }
@@ -59,7 +59,7 @@ public class ViewAllJobOrderController extends HttpServlet {
                 request.setAttribute("MESSAGE", "YOU HAVEN'T APPLIED FOR ANY PROJECT");
             }
         } catch (Exception e) {
-            log("Error at View all job Controller" + e);
+            log("Error at View all job Controller" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

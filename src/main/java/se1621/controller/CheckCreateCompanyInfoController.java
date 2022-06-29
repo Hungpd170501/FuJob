@@ -10,62 +10,49 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import se1621.dao.JobApplicationDAO;
-import se1621.dao.ResumeDAO;
-import se1621.dao.ResumeSkillDAO;
-import se1621.dto.Resume;
-import se1621.dto.ResumeSkill;
+import se1621.dao.CompanyInfoDAO;
+import se1621.dto.CompanyInfo;
 
 /**
  *
- * @author quocb
+ * @author lehad
  */
-@WebServlet(name = "ListCandidateOfJob", urlPatterns = {"/ListCandidateOfJob"})
-public class ListCandidateOfJob extends HttpServlet {
+@WebServlet(name = "CheckCreateCompanyInfoController", urlPatterns = {"/CheckCreateCompanyInfoController"})
+public class CheckCreateCompanyInfoController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private static final String ERROR = "/view/candidates-listing.jsp";
-    private static final String SUCCESS = "/view/candidates-listing.jsp";
+    private static final String ERROR = "/view/create-companyinfo.jsp";
+    private static final String SUCCESS = "/view/create-companyinfo.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         String url = ERROR;
         try {
-            ResumeDAO resumeDAO = new ResumeDAO();
-            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-            int search = Integer.parseInt(request.getParameter("JobIDCandidate"));
-            List<Integer> listResumeID = jobOrderDAO.getListResumeIDOfJob(search);
-            List<Resume> listResume = new ArrayList<Resume>();
-            List<ResumeSkill> listStudentSkill = new ArrayList<>();
-            for (Integer integer : listResumeID) {
-                listResume.add(resumeDAO.getResumeByResumeID(integer));
-                ResumeSkillDAO studentSkillDAO = new ResumeSkillDAO();
-                listStudentSkill = studentSkillDAO.getStudentSkill(integer);
-
-            }
-            if (!listResume.isEmpty()) {
-                request.setAttribute("LIST_CANDIDATEOFJOB", listResume);
-                request.setAttribute("LIST_STUDENTSKILL", listStudentSkill);
-                request.setAttribute("JOBIDCANDIDATE", search);
+            int companyID = Integer.parseInt(request.getParameter("CompanyID"));
+            CompanyInfoDAO dao = new CompanyInfoDAO();
+            CompanyInfo companyInfo = dao.getCompanyInfo(companyID);
+            if (companyInfo != null && companyID > 0) {
+                request.setAttribute("COMPANYINFO", companyInfo);
                 url = SUCCESS;
-            } else {
-                request.setAttribute("LIST_CANDIDATEOFJOB", listResume);
-                request.setAttribute("LIST_STUDENTSKILL", listStudentSkill);
-                request.setAttribute("MESSAGE", "NO CANDICATES APPLY THIS JOB");
+            }else{
+                CompanyInfo company = CompanyInfo.builder()
+                        .companyID(0)
+                        .avatar("")
+                        .companyName("")
+                        .establishedYear(0)
+                        .address("")
+                        .typeCompany("")
+                        .website("")
+                        .gmail("")
+                        .phone("")
+                        .numberOfEmployee(0)
+                        .companyOverview("")
+                        .build();
+                request.setAttribute("COMPANYINFO", company);
             }
         } catch (Exception e) {
-            log("Error at View all job Controller" + e.toString());
+            log("Error at CheckCompanyController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
