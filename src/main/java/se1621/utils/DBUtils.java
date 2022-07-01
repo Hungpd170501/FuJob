@@ -19,7 +19,7 @@ public class DBUtils {
     private final String password = "jmpemldekukpuual@1";
 
     private DBUtils() {
-        String url = "jdbc:sqlserver://fujob.database.windows.net:1433;database=FuJobDB;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+        String url = "jdbc:sqlserver://fujob.database.windows.net:1433;database=FuJobDB;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         } catch (ClassNotFoundException e) {
