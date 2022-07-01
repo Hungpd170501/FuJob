@@ -75,6 +75,7 @@ CREATE TABLE tblCompanies
 	avatar varchar (2000),
 	createdDate datetime,
 	lastModifiedDate datetime,
+	businessLicense varchar(2000),
 	companyStatus tinyint,
 );
 GO
