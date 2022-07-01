@@ -26,16 +26,45 @@ public class JobApplicationDAO {
 
     private static final String ORDERJOB = "INSERT INTO tblJobApplications(resumeID, jobID, cvFile, priceDeal, message, jobApplicationStatus) VALUES(?,?,?,?,?,1)";
     private static final String CHECKDUPLICATE = "SELECT jobApplicationID FROM tbljobApplications WHERE resumeID=? and jobID=? and jobApplicationStatus = 1";
+
     private static final String CHECKDUPLICATE_NONSTATUS = "SELECT jobApplicationID FROM tblJobApplications WHERE resumeID = ? and jobID = ? and jobApplicationStatus = 0";
     private static final String DELETE = "UPDATE tblJobApplications SET jobApplicationStatus = 0 WHERE jobApplicationID = ? ";
-    private static final String GETTALLUSERIDOFJOB = "SELECT resumeID FROM tblJobApplications WHERE jobID = ?";
+    private static final String DENY_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 5 WHERE resumeID = ? AND jobID = ? AND jobApplicationStatus = 1 ";
+    private static final String ACCEPT_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 3 WHERE resumeID = ? AND jobID = ? AND jobApplicationStatus = 1 ";
+    private static final String UNCOMPLETE_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 7 WHERE jobApplicationID = ? AND jobApplicationStatus = 3";
+    private static final String COMPLETE_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 6 WHERE jobApplicationID = ? AND jobApplicationStatus = 3";
+    private static final String GETTALLUSERIDOFJOB = "SELECT resumeID FROM tblJobApplications WHERE jobID = ? and jobApplicationStatus = 1";
     private static final String GETTALLJOBORDERIDOFJOB = "SELECT jobApplicationID FROM tblJobApplications WHERE jobID = ?";
-    private static final String GETALLJOBAPPLIED = "SELECT jo.jobApplicationID, j.jobID, j.jobTitle, j.jobCategoryID, j.budget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
+    private static final String GETALLJOBAPPLIED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.budget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
+            + "                        jo.createdDate, c.categoryName, c.img, com.companyName, "
+            + "                        j.createdDate, j.expiriedDate, j.lastModifiedDate, j.budget,j.userID, j.address, j.email, j.phone, j.description "
+            + "                        FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
+            + "                        left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
+            + "                        WHERE jo.resumeID= ? and (jo.jobApplicationStatus = 1 OR "
+            + "                        jo.jobApplicationStatus =  3 OR jo.jobApplicationStatus =  5 ) ORDER BY jo.lastModifiedDate DESC";
+    private static final String GETALLJOBACCEPTED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.budget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
             + "                        jo.createdDate, c.categoryName, c.img, com.companyName, "
             + "                        j.createdDate, j.expiriedDate, j.lastModifiedDate, j.budget, j.address, j.email, j.phone, j.description "
             + "                        FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
             + "                        left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
-            + "                        WHERE jo.resumeID=? and jo.jobApplicationStatus = 1 ORDER BY jobID";
+            + "                        WHERE jo.resumeID=? and (jo.jobApplicationStatus = 3 OR "
+            + "                        jo.jobApplicationStatus =  6 OR jo.jobApplicationStatus =  7 ) ORDER BY jo.lastModifiedDate DESC";
+
+    private static final String GETALLJOBCOMPLEANDUNCOMPLETE = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.budget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
+            + "                        jo.createdDate, c.categoryName, c.img, com.companyName, "
+            + "                        j.createdDate, j.expiriedDate, j.lastModifiedDate, j.budget, j.address, j.email, j.phone, j.description "
+            + "                        FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
+            + "                        left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
+            + "                        WHERE jo.resumeID=? and ( "
+            + "                        jo.jobApplicationStatus =  6 OR jo.jobApplicationStatus =  7 ) ORDER BY jo.lastModifiedDate DESC";
+
+    private static final String GETALLJOBONGOINGPOSTED = " SELECT jo.jobApplicationID,jo.resumeID,jo.jobApplicationStatus, j.jobID,j.userID,j.jobStatus, j.jobTitle, j.jobCategoryID, j.budget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
+            + "                                               jo.createdDate, c.categoryName, c.img, com.companyName, "
+            + "                                              j.createdDate, j.expiriedDate, j.lastModifiedDate, j.budget, j.address, j.email, j.phone, j.description "
+            + "                                            FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
+            + "                                                left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
+            + "                                               WHERE j.userID=? and (j.jobStatus = 3 OR j.jobStatus = 5 OR j.jobStatus=6)"
+            + "                                             ORDER BY jo.lastModifiedDate DESC ";
     private static final String UPDATE_STATUS = "UPDATE tblJobApplications SET cvFile = ?, priceDeal = ?, message = ?, jobApplicationStatus = 1 WHERE jobApplicationID = ? and resumeID = ? and jobID = ?";
     private String SEARCHJOBORDER = "SELECT ja.jobApplicationID, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, "
             + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.budget, j.paymentMethodID, pm.paymentMethodName, "
@@ -172,7 +201,7 @@ public class JobApplicationDAO {
         return check;
     }
 
-    public int getJobOrderID(int userID, int jobID) throws Exception {
+    public int getJobOrderID(int resumeID, int jobID) throws Exception {
         conn = null;
         preStm = null;
         rs = null;
@@ -181,7 +210,7 @@ public class JobApplicationDAO {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(CHECKDUPLICATE_NONSTATUS);
-                preStm.setInt(1, userID);
+                preStm.setInt(1, resumeID);
                 preStm.setInt(2, jobID);
                 rs = preStm.executeQuery();
                 if (rs.next()) {
@@ -203,11 +232,84 @@ public class JobApplicationDAO {
         return jobOrderID;
     }
 
-    public List<JobApplication> getListJobApplied(int userID) throws SQLException {
+    public List<JobApplication> getListJobApplied(int resumeID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(GETALLJOBAPPLIED);
+                preStm.setInt(1, resumeID);
+                rs = preStm.executeQuery();
+                List<JobApplication> list = new ArrayList<>();
+                while (rs.next()) {
+                    int jobApplicationID = rs.getInt("jobApplicationID");
+                    int jobID = rs.getInt("jobID");
+                    int userID = rs.getInt("userID");
+                    String priceDeal = rs.getString("priceDeal");
+                    String jobTitle = rs.getString("jobTitle");
+                    Date createdDate = rs.getDate("createdDate");
+                    Date expiriedDate = rs.getDate("expiriedDate");
+                    int budget = rs.getInt("budget");
+                    int paymentMethodID = rs.getInt("paymentMethodID");
+                    String paymentMethodName = rs.getString("paymentMethodName");
+                    String address = rs.getString("address");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String description = rs.getString("description");
+                    int categoryID = rs.getInt("jobCategoryID");
+                    String categoryName = rs.getString("categoryName");
+                    String img = rs.getString("img");
+                    String companyName = rs.getString("companyName");
+                    int jobAppStatus = rs.getInt("jobApplicationStatus");
+                    PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
+                    Job job = Job.builder().jobID(jobID)
+                            .userID(userID)
+                            .jobTitle(jobTitle)
+                            .category(Category.builder().categoryID(categoryID).categoryName(categoryName).img(img).build())
+                            .company(CompanyInfo.builder().companyName(companyName).build())
+                            .address(address)
+                            .email(email)
+                            .budget(budget)
+                            .payMentMethod(payMent)
+                            .phone(phone)
+                            .expiriedDate(expiriedDate)
+                            .description(description)
+                            .build();
+                    JobApplication listJobOrder = JobApplication.builder()
+                            .jobApplicationID(jobApplicationID)
+                            .resumeID(resumeID)
+                            .job(job)
+                            .createdDate(createdDate)
+                            .priceDeal(priceDeal)
+                            .lastModifiedDate(createdDate)
+                            .jobApplicationStatus(jobAppStatus)
+                            .build();
+                    list.add(listJobOrder);
+                }
+                return list;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+    
+
+    public List<JobApplication> getListJobCompleteAndUncomplete(int userID) throws SQLException {
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GETALLJOBCOMPLEANDUNCOMPLETE);
                 preStm.setInt(1, userID);
                 rs = preStm.executeQuery();
                 List<JobApplication> list = new ArrayList<>();
@@ -229,6 +331,7 @@ public class JobApplicationDAO {
                     String categoryName = rs.getString("categoryName");
                     String img = rs.getString("img");
                     String companyName = rs.getString("companyName");
+                    int jobAppStatus = rs.getInt("jobApplicationStatus");
                     PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder().jobID(jobID)
                             .userID(userID)
@@ -249,6 +352,147 @@ public class JobApplicationDAO {
                             .createdDate(createdDate)
                             .priceDeal(priceDeal)
                             .lastModifiedDate(createdDate)
+                            .jobApplicationStatus(jobAppStatus)
+                            .build();
+                    list.add(listJobOrder);
+                }
+                return list;
+            }
+
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+
+    public List<JobApplication> getListJobAccepcted(int userID) throws SQLException {
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GETALLJOBACCEPTED);
+                preStm.setInt(1, userID);
+                rs = preStm.executeQuery();
+                List<JobApplication> list = new ArrayList<>();
+                while (rs.next()) {
+                    int jobApplicationID = rs.getInt("jobApplicationID");
+                    int jobID = rs.getInt("jobID");
+                    String priceDeal = rs.getString("priceDeal");
+                    String jobTitle = rs.getString("jobTitle");
+                    Date createdDate = rs.getDate("createdDate");
+                    Date expiriedDate = rs.getDate("expiriedDate");
+                    int budget = rs.getInt("budget");
+                    int paymentMethodID = rs.getInt("paymentMethodID");
+                    String paymentMethodName = rs.getString("paymentMethodName");
+                    String address = rs.getString("address");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String description = rs.getString("description");
+                    int categoryID = rs.getInt("jobCategoryID");
+                    String categoryName = rs.getString("categoryName");
+                    String img = rs.getString("img");
+                    String companyName = rs.getString("companyName");
+                    int jobAppStatus = rs.getInt("jobApplicationStatus");
+                    PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
+                    Job job = Job.builder().jobID(jobID)
+                            .userID(userID)
+                            .jobTitle(jobTitle)
+                            .category(Category.builder().categoryID(categoryID).categoryName(categoryName).img(img).build())
+                            .company(CompanyInfo.builder().companyName(companyName).build())
+                            .address(address)
+                            .email(email)
+                            .budget(budget)
+                            .payMentMethod(payMent)
+                            .phone(phone)
+                            .expiriedDate(expiriedDate)
+                            .description(description)
+                            .build();
+                    JobApplication listJobOrder = JobApplication.builder()
+                            .jobApplicationID(jobApplicationID)
+                            .resumeID(userID).job(job)
+                            .createdDate(createdDate)
+                            .priceDeal(priceDeal)
+                            .lastModifiedDate(createdDate)
+                            .jobApplicationStatus(jobAppStatus)
+                            .build();
+                    list.add(listJobOrder);
+                }
+                return list;
+            }
+
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+
+    public List<JobApplication> getListJobOngoingPosted(int userID) throws SQLException {
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GETALLJOBONGOINGPOSTED);
+                preStm.setInt(1, userID);
+                rs = preStm.executeQuery();
+                List<JobApplication> list = new ArrayList<>();
+                while (rs.next()) {
+                    int jobApplicationID = rs.getInt("jobApplicationID");
+                    int jobID = rs.getInt("jobID");
+                    String priceDeal = rs.getString("priceDeal");
+                    String jobTitle = rs.getString("jobTitle");
+                    Date createdDate = rs.getDate("createdDate");
+                    Date expiriedDate = rs.getDate("expiriedDate");
+                    int budget = rs.getInt("budget");
+                    int paymentMethodID = rs.getInt("paymentMethodID");
+                    String paymentMethodName = rs.getString("paymentMethodName");
+                    String address = rs.getString("address");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String description = rs.getString("description");
+                    int categoryID = rs.getInt("jobCategoryID");
+                    String categoryName = rs.getString("categoryName");
+                    String img = rs.getString("img");
+                    String companyName = rs.getString("companyName");
+                    int jobAppStatus = rs.getInt("jobApplicationStatus");
+                    int jobStatus = rs.getInt("jobStatus");
+                    PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
+                    Job job = Job.builder().jobID(jobID)
+                            .userID(userID)
+                            .jobTitle(jobTitle)
+                            .category(Category.builder().categoryID(categoryID).categoryName(categoryName).img(img).build())
+                            .company(CompanyInfo.builder().companyName(companyName).build())
+                            .address(address)
+                            .email(email)
+                            .budget(budget)
+                            .payMentMethod(payMent)
+                            .phone(phone)
+                            .expiriedDate(expiriedDate)
+                            .description(description)
+                            .jobStatus(jobStatus)
+                            .build();
+                    JobApplication listJobOrder = JobApplication.builder()
+                            .jobApplicationID(jobApplicationID)
+                            .resumeID(userID).job(job)
+                            .createdDate(createdDate)
+                            .priceDeal(priceDeal)
+                            .lastModifiedDate(createdDate)
+                            .jobApplicationStatus(jobAppStatus)
                             .build();
                     list.add(listJobOrder);
                 }
@@ -292,7 +536,97 @@ public class JobApplicationDAO {
         return check;
     }
 
-    public List<Integer> getListUserIDOfJob(int jobID) throws SQLException {
+    public boolean denyJobApplication(int resumeID, int jobID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(DENY_JOBAPPLICATION);
+                preStm.setInt(1, resumeID);
+                preStm.setInt(2, jobID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean uncompleteJobApp(int jobAppID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UNCOMPLETE_JOBAPPLICATION);
+                preStm.setInt(1, jobAppID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean completeJobApp(int jobAppID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(COMPLETE_JOBAPPLICATION);
+                preStm.setInt(1, jobAppID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean acceptJobApplication(int resumeID, int jobID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(ACCEPT_JOBAPPLICATION);
+                preStm.setInt(1, resumeID);
+                preStm.setInt(2, jobID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public List<Integer> getListResumeIDOfJob(int jobID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
@@ -301,8 +635,8 @@ public class JobApplicationDAO {
                 rs = preStm.executeQuery();
                 List<Integer> list = new ArrayList<>();
                 while (rs.next()) {
-                    int userID = rs.getInt("userID");
-                    list.add(userID);
+                    int resumeID = rs.getInt("resumeID");
+                    list.add(resumeID);
                 }
                 return list;
             }
@@ -331,8 +665,8 @@ public class JobApplicationDAO {
                 rs = preStm.executeQuery();
                 List<Integer> list = new ArrayList<>();
                 while (rs.next()) {
-                    int jobOrderID = rs.getInt("jobOrderID");
-                    list.add(jobOrderID);
+                    int jobApplicationID = rs.getInt("jobApplicationID");
+                    list.add(jobApplicationID);
                 }
                 return list;
             }
@@ -356,17 +690,18 @@ public class JobApplicationDAO {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
-               List<JobApplication> listJobApp = new ArrayList<>();
+                List<JobApplication> listJobApp = new ArrayList<>();
                 String getDataSQL = "";
                 String getDataSQL1 = this.SEARCHJOBORDER;
-                String queryForSearchSkill = 
-                "SELECT ja.jobApplicationID, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, "
-            + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.budget, j.paymentMethodID, pm.paymentMethodName, "
-            + "j.address, j.email, j.phone, j.description, j.lastModifiedDate "
-            + "FROM (((tblJobApplications ja LEFT JOIN tblJobs j ON ja.jobID = j.jobID) "
-            + "LEFT JOIN tblCategories c ON j.jobCategoryID = c.categoryID) "
-            + "left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID) "
-            + "left join tblJobSkills js on js.jobID = j.jobID ";
+
+                String queryForSearchSkill
+                        = "SELECT ja.jobApplicationID, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, "
+                        + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.budget, j.paymentMethodID, pm.paymentMethodName, "
+                        + "j.address, j.email, j.phone, j.description, j.lastModifiedDate "
+                        + "FROM (((tblJobApplications ja LEFT JOIN tblJobs j ON ja.jobID = j.jobID) "
+                        + "LEFT JOIN tblCategories c ON j.jobCategoryID = c.categoryID) "
+                        + "left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID) "
+                        + "left join tblJobSkills js on js.jobID = j.jobID ";
                 boolean checkCateID = false;
                 boolean checkSkillID = false;
 

@@ -1,3 +1,7 @@
+<%@page import="se1621.dto.JobSkills"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.sql.Date"%>
+<%@page import="se1621.dto.JobApplication"%>
 <%@page import="se1621.dto.ResumeSkill"%>
 <%@page import="se1621.dto.Resume"%>
 <%@page import="java.util.List"%>
@@ -155,7 +159,44 @@
             }
         %>
         <!-- CANDIDATES PROFILE END -->
+        <section class="section pt-0">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="section-title text-center mb-4 pb-2">
+                            <h4 class="title title-line pb-5">All Projects You've Accepted</h4>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-lg-12 mt-4 pt-2">
+                        <div class="row align-items-center">
+                            <div class="col-lg-12">
+                                <div class="show-results">
+                                    <div class="float-left">
+                                        <% List<JobApplication> listJobApplication = (List<JobApplication>) request.getAttribute("LIST_ALLJOBONGOING_APPLIED");
+                                            if (listJobApplication.isEmpty()) {
+                                                String message = (String) request.getAttribute("MESSAGE0");
+                                        %>
+                                        <h5 class="text-dark mb-0 pt-2 f-18"><%= message%></h5>
+                                        <%
+                                        } else {
+                                        %>
+                                        <h6><%= listJobApplication.get(0).getJob().getJobTitle() %></h6>
+                                            
+                                        <%
+                                            }
+                                        %>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <jsp:include page="./include/footer.jsp"></jsp:include>
             <!-- javascript -->
             <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>

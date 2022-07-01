@@ -87,20 +87,21 @@
                         <%
                             if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "US")) {
                         %>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>">Your Project Applied</a></li>   
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Posted</a></li>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Ongoing</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>">Project Applied</a></li>   
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Project Posted</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingPosted&userID=${sessionScope.LOGIN_USER.userID}">Project Ongoing(Posted)</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingApplied&userID=${sessionScope.LOGIN_USER.userID}">Project Ongoing(Applied)</a></li>
                         
                             <%
                             } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
                             %>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Posted</a></li>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Ongoing</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Project Posted</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingPosted&userID=${sessionScope.LOGIN_USER.userID}">Project Ongoing</a></li>
                         
                             <%
                             } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HRM")) {
                             %>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Posted</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Project Posted</a></li>
 
                         <%
                             }

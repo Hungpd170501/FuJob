@@ -6,7 +6,7 @@ name: Build and deploy WAR app to Azure Web App - FuJob
 on:
   push:
     branches:
-      - dev
+      - master
   workflow_dispatch:
 
 jobs:
@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'FuJob'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F73FA54F0F9248B983DFAB412F61E35D }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_13391CB380B94BA6B8221153973C7ACA }}
           package: '*.war'

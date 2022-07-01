@@ -2,44 +2,61 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package se1621.controller;
 
-import jakarta.servlet.ServletContext;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.Properties;
+import java.util.List;
+import se1621.dao.JobApplicationDAO;
+import se1621.dao.JobDAO;
+import se1621.dto.JobApplication;
 
-@MultipartConfig(maxFileSize = 16177215)
-public class MainController extends HttpServlet {
-
+/**
+ *
+ * @author quocb
+ */
+@WebServlet(name="DenyJobAppController", urlPatterns={"/DenyJobAppController"})
+public class DenyJobAppController extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     private static final String ERROR = "error.jsp";
-
+    private static final String SUCCESS = "MainController?action=SearchCandidateOfJob&JobIDCandidate=";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        try {
-            String action = request.getParameter("action");
-            ServletContext context = request.getServletContext();
-            Properties siteMapProperties = (Properties) context.getAttribute("SITE_MAP");
-            String siteMap = siteMapProperties.getProperty(action);
-            if (siteMap != null) {
-                url = siteMap;
+        try{
+            JobDAO jobDao = new JobDAO();
+            JobApplicationDAO jobApplicationDAO = new JobApplicationDAO();
+            int jobID = Integer.parseInt(request.getParameter("jobID"));
+            int resumeID = Integer.parseInt(request.getParameter("resumeID"));
+            boolean check = jobApplicationDAO.denyJobApplication(resumeID, jobID);
+            if(check){
+               url = SUCCESS + jobID;
             }
-        } catch (Exception e) {
-            log("Error at MainController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+        }catch(Exception ex){
+            log("Error at DenyJobAppController: " + ex.toString());
+        }finally{
+             request.getRequestDispatcher(url).forward(request, response);
         }
-    }    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    } 
 
-    /**
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -47,13 +64,12 @@ public class MainController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
-    }
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -61,13 +77,12 @@ public class MainController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

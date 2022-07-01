@@ -10,9 +10,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
+import se1621.dao.JobApplicationDAO;
+import se1621.dao.JobSkillsDAO;
 import se1621.dao.ResumeDAO;
 import se1621.dao.ResumeSkillDAO;
+import se1621.dto.JobApplication;
+import se1621.dto.JobSkills;
 import se1621.dto.Resume;
 import se1621.dto.ResumeSkill;
 
@@ -37,6 +42,32 @@ public class SearchResumeIDController extends HttpServlet {
             Resume resume = resumeDAO.getResumeByUserID(studentID);
             ResumeSkillDAO studentSkillDAO = new ResumeSkillDAO();
             List<ResumeSkill> listResumeSkill = studentSkillDAO.getStudentSkill(resumeID);
+            
+            
+            
+            List<JobApplication> listJobOrder = new ArrayList<>();
+            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
+            listJobOrder = jobOrderDAO.getListJobAccepcted(resumeID);
+            JobSkillsDAO jsDAO = new JobSkillsDAO();
+            List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
+            for (JobApplication jobApply : listJobOrder) {
+
+                List<JobSkills> ljk = new ArrayList<>();
+                for (JobSkills js : listJs) {
+                    if (jobApply.getJob().getJobID() == js.getJobID()) {
+                        ljk.add(js);
+                    }
+                    jobApply.getJob().setListJobSkills(ljk);
+                }
+            }
+            
+            if (!listJobOrder.isEmpty()) {
+                request.setAttribute("LIST_ALLJOBONGOING_APPLIED", listJobOrder);
+            } else {
+                request.setAttribute("LIST_ALLJOBONGOING_APPLIED", listJobOrder);
+                request.setAttribute("MESSAGE0", "YOU HAVEN'T ACCEPTED FOR ANY PROJECT");
+            }
+            
             if (resume!=null) {
                 request.setAttribute("RESUME", resume);
                 request.setAttribute("LIST_STUDENTSKILL", listResumeSkill);
