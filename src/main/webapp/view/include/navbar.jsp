@@ -34,7 +34,7 @@
                     <%
                     } else {
                     %>
-                    <a href="${pageContext.request.contextPath}/view/login.jsp"><i class="mdi mdi-account mr-2"></i>Login</a></li>
+                    <a style="height: 56.3px; font-size: 13px; text-transform: none; line-height: none; padding-top: 18px; font-weight: normal; color: #f8f9fc" href="${pageContext.request.contextPath}/view/login.jsp"><i class="mdi mdi-account mr-2"></i>Login</a></li>
                     <%
                         }
                     %>
