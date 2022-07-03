@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="se1621.dao.JobSkillsDAO"%>
 <%@page import="se1621.dto.JobSkills"%>
 <%@page import="java.util.Calendar"%>
@@ -22,39 +23,41 @@
         <jsp:include page="./include/navbar.jsp"></jsp:include>
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
         <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
+        <%
+            User hr = (User) request.getAttribute("HR");
+        %>
+        <!-- Start home -->
+        <section class="bg-half page-next-level">
 
-            <!-- Start home -->
-            <section class="bg-half page-next-level">
+            <div class="bg-overlay"></div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="text-center text-white">
+                            <h4 class="text-uppercase title mb-4">Project List view</h4>
+                            <ul class="page-next d-inline-block mb-0">
+                                <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
+                                <li><a href="#" class="text-uppercase font-weight-bold">Projects</a></li>
+                                <li>
+                                    <span class="text-uppercase text-white font-weight-bold">Projects Listing</span>
 
-                <div class="bg-overlay"></div>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-6">
-                            <div class="text-center text-white">
-                                <h4 class="text-uppercase title mb-4">Project List view</h4>
-                                <ul class="page-next d-inline-block mb-0">
-                                    <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
-                                    <li><a href="#" class="text-uppercase font-weight-bold">Projects</a></li>
-                                    <li>
-                                        <span class="text-uppercase text-white font-weight-bold">Projects Listing</span>
-
-                                    </li>
-                                </ul>
-                            </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- end home -->
+            </div>
+        </section>
+        <!-- end home -->
 
-            <div class="container">
-                <div class="home-form-position">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-10">
-                            <div class="home-registration-form job-list-reg-form bg-light shadow p-4 mb-3">
+        <div class="container">
+            <div class="home-form-position">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="home-registration-form job-list-reg-form bg-light shadow p-4 mb-3">
 
-                                <!-- START SEARCH -->
-                                <form class="registration-form" action="${pageContext.request.contextPath}/MainController">
+                            <!-- START SEARCH -->
+                            <form class="registration-form" action="${pageContext.request.contextPath}/MainController">
                                 <!--<form class="registration-form">-->
                                 <div class="row">
                                     <div class="col-lg-3 col-md-6">
@@ -94,7 +97,7 @@
                                             <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Find">
                                             <!-- name = action  -->
                                             <input type="hidden" name ="action" value="searchJobPost">
-                                            <input type="hidden" name ="hrID" value="${sessionScope.LOGIN_USER.userID}">
+                                            <input type="hidden" name ="hrID" value="<%= hr.getUserID()%>">
                                         </div>
                                     </div>
                                 </div>
@@ -112,8 +115,18 @@
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <div class="section-title text-center mb-4 pb-2">
+                            <%
+                                User loginUser = (User) session.getAttribute("LOGIN_USER");
+                                if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HRM")) {
+                            %>
+                            <h4 class="title title-line pb-5">Projects were posted by <%= hr.getFullName()%> </h4>
+                            <%
+                            } else {
+                            %>
                             <h4 class="title title-line pb-5">Available projects for you</h4>
-
+                            <%
+                                }
+                            %>
                             <p class="text-muted para-desc mx-auto mb-1">Tell us about your project. We'll quickly match you with the right freelancers.</p>
                         </div>
                     </div>
@@ -138,7 +151,6 @@
                                     String message = (String) request.getAttribute("MESSAGE");
                             %>
                             <div class="col-lg-12 text-warning text-center">
-
                                 <h3> <%=message%> </h3>
                             </div>
                             <%
@@ -225,6 +237,9 @@
                                                     <% if (job.getJobStatus() == 1) {
                                                     %>
                                                     <br>
+                                                    <div class="mt-3">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=EditJob&jobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">Edit Project</a>
+                                                    </div>
                                                     <div class="mt-3">
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>

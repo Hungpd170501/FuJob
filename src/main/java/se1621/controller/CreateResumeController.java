@@ -106,14 +106,14 @@ public class CreateResumeController extends HttpServlet {
                     checkValidation = false;
                     boolean checkUpdateResume = resumedao.updateResume(resume, resumeID);
                     if (checkUpdateResume) {
-                        request.setAttribute("MESSAGE", "Your Resume has been updated!");
+                        request.setAttribute("MESSAGE_RESUME", "Your Resume has been updated!");
                         url = SUCCESS + studentID;
                     }
                 }
                 if (checkValidation) {
                     boolean checkCreateResume = resumedao.createResume(resume);
                     if (checkCreateResume) {
-                        request.setAttribute("MESSAGE", "Create Resume Successfully!");
+                        request.setAttribute("MESSAGE_RESUME", "Create Resume Successfull!");
                         url = SUCCESS + studentID;
                     }
                 }

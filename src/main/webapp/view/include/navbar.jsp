@@ -21,15 +21,19 @@
                 </div>
             </div>
             <div class="float-right">
-                <ul class="topbar-list list-unstyled d-flex" style="margin: 11px 0px;">
-                    <li class="list-inline-item">
+                <ul class="navigation-menu">
+                    <li class="has-submenu">
                         <% if (loginUser != null) {
                         %>
-                        <a href="javascript:void(0);"><i class="mdi mdi-account mr-2"></i>${sessionScope.LOGIN_USER.fullName}</a></li>
-                    <li class="list-inline-item"><a href="${pageContext.request.contextPath}/MainController?action=Logout"><i class="mdi mdi-logout"></i>Logout</a></li>
-
+                        <a style="height: 56.3px; font-size: 13px; text-transform: none; line-height: none; padding-top: 18px; font-weight: normal; color: #f8f9fc" href="javascript:void(0);"><i class="mdi mdi-account-circle mr-2"></i>${sessionScope.LOGIN_USER.fullName}</a>
+                        <ul class="submenu" style="min-width: 130px">
+                            <li><a href="${pageContext.request.contextPath}/view/profile-user.jsp"><i class="mdi mdi-account mr-1"></i>Profile</a></li>
+                            <li><a href="${pageContext.request.contextPath}/MainController?action=Logout"><i class="mdi mdi-logout mr-1"></i>Logout</a></li>
+                        </ul>
+                    </li>
                     <%
-                    } else {%>
+                    } else {
+                    %>
                     <a href="${pageContext.request.contextPath}/view/login.jsp"><i class="mdi mdi-account mr-2"></i>Login</a></li>
                     <%
                         }
@@ -38,7 +42,7 @@
             </div>
             <div class="clearfix"></div>
         </div>
-    </div>
+    </div>           
     <!-- Tagline End -->
 
     <!-- Menu Start -->
@@ -71,10 +75,6 @@
         <div id="navigation">
             <!-- Navigation Menu-->   
             <ul class="navigation-menu">
-
-
-
-
                 <li></li>
                 <li><a href="${pageContext.request.contextPath}">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob">Project List</a></li>
@@ -91,16 +91,16 @@
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Project Posted</a></li>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingPosted&userID=${sessionScope.LOGIN_USER.userID}">Project Ongoing(Posted)</a></li>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingApplied&userID=${sessionScope.LOGIN_USER.userID}">Project Ongoing(Applied)</a></li>
-                        
-                            <%
-                            } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
-                            %>
+
+                        <%
+                        } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
+                        %>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Project Posted</a></li>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingPosted&userID=${sessionScope.LOGIN_USER.userID}">Project Ongoing</a></li>
-                        
-                            <%
-                            } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HRM")) {
-                            %>
+
+                        <%
+                        } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HRM")) {
+                        %>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Project Posted</a></li>
 
                         <%
@@ -125,7 +125,7 @@
                 %>
                 <li>
                     <div class="buy-button">
-                        <a href="${pageContext.request.contextPath}/view/post-a-job.jsp" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Post a Project</a>
+                        <a href="${pageContext.request.contextPath}/MainController?action=EmptyJob" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Post a Project</a>
                     </div>
                 </li>
                 <li class="has-submenu">
@@ -142,7 +142,7 @@
                 %>
                 <li>
                     <div class="buy-button">
-                        <a href="${pageContext.request.contextPath}/view/post-a-job.jsp" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Post a Project</a>
+                        <a href="${pageContext.request.contextPath}/MainController?action=EmptyJob" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Post a Project</a>
                     </div>
                 </li>
 
@@ -160,7 +160,7 @@
                 %>
                 <li>
                     <div class="buy-button">
-                        <a href="${pageContext.request.contextPath}/view/post-a-job.jsp" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Post a Project</a>
+                        <a href="${pageContext.request.contextPath}/MainController?action=EmptyJob" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Post a Project</a>
                     </div>
                 </li>
 

@@ -1,4 +1,8 @@
 
+<%@page import="java.util.List"%>
+<%@page import="se1621.dto.JobSkills"%>
+<%@page import="se1621.dto.Category"%>
+<%@page import="se1621.dto.Job"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.util.Calendar"%>
@@ -39,30 +43,39 @@
                 </div>
             </section>
             <!-- end home -->
+        <%
+            Job job = (Job) request.getAttribute("JOB");
+        %>
+        <!-- POST A JOB START -->
+        <section class="section">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="rounded shadow bg-white p-4">
+                            <div class="custom-form">
+                                <div id="message3"></div>
+                                <form action="/FuJob/MainController" method="POST">
+                                    <h4 class="text-dark mb-3" style="font-weight: 700">Post a New Project :</h4>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group app-label mt-2">
+                                                <label>Project Name<span class="text-danger">*</span></label>
+                                                <input id="jobtitle" name="jobTitle" type="text" class="form-control resume" required="" value="${requestScope.JOB.jobTitle}" placeholder="Enter your project name">
 
-            <!-- POST A JOB START -->
-            <section class="section">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-10">
-                            <div class="rounded shadow bg-white p-4">
-                                <div class="custom-form">
-                                    <div id="message3"></div>
-                                    <form action="/FuJob/MainController" method="POST">
-                                        <h4 class="text-dark mb-3" style="font-weight: 700">Post a New Project :</h4>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group app-label mt-2">
-                                                    <label>Project Name<span class="text-danger">*</span></label>
-                                                    <input id="jobtitle" name="jobTitle" type="text" class="form-control resume" required="" placeholder="Enter your project name">
-
-                                                </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group app-label mt-2">
-                                                    <label>Project Category</label><span class="text-danger">*</span>
-                                                    <div class="form-button p-1">
-                                                        <select class="form-control resume" name="categoryID" required="">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group app-label mt-2">
+                                                <label>Project Category</label><span class="text-danger">*</span>
+                                                <div class="form-button p-1">
+                                                    <select id="cateID" class="form-control resume" name="categoryID" required="">
+                                                        <%
+                                                            if (job.getCategory() != null) {
+                                                        %>
+                                                        <option id="" selected="selected" value="${requestScope.JOB.category.categoryID}">${requestScope.JOB.category.categoryName}</option>
+                                                        <%
+                                                            }
+                                                        %>
                                                         <c:forEach items="${chooseCategory.listCategory}" var="i">
                                                             <option value="${i.categoryID}">${i.categoryName}</option>
                                                         </c:forEach>
@@ -76,9 +89,25 @@
                                                 <label>Skill Required<span class="text-danger">*</span></label> 
                                                 <div class="form-button p-1">
                                                     <select class="form-control resume select2 select2-hidden-accessible" name="skillID" multiple="" data-placeholder="Select skill" style="width: 100%; border-color: #dee2e6" tabindex="-1" aria-hidden="true">
+                                                        <%
+                                                            List<JobSkills> listJobSkill = (List<JobSkills>) request.getAttribute("LIST_JOBSKILLS");
+                                                            if (!listJobSkill.isEmpty()) {
+                                                                for (JobSkills jobSkill : listJobSkill) {
+                                                        %>
+                                                        <option selected="selected" value="<%= jobSkill.getSkill().getSkillID() %>"><%= jobSkill.getSkill().getSkillName() %></option>
                                                         <c:forEach items="${chooseSkill.listSkill}" var="i">
                                                             <option value="${i.skillID}">${i.skillName}</option>
                                                         </c:forEach>
+                                                        <%
+                                                            }
+                                                            } else {
+                                                        %>
+                                                        <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                            <option value="${i.skillID}">${i.skillName}</option>
+                                                        </c:forEach>
+                                                        <%
+                                                            }
+                                                        %>     
                                                     </select> 
                                                 </div>
                                             </div>
@@ -89,13 +118,30 @@
                                                 <label>How do you want to pay?<span class="text-danger">*</span></label>
                                                 <div class="row form-button">
                                                     <div class="col-lg-7 p-1 col-md-6">
-                                                        <select class="form-control resume" name="paymentMethodID">
-                                                            <option value="1">Pay by the hour</option>
-                                                            <option value="2">Pay fixed price</option>
+                                                        <select id="paymentID" class="form-control resume" name="paymentMethodID">
+                                                            <%
+                                                                if (job.getPayMentMethod() != null) {
+                                                            %>
+                                                            <option selected="selected" value="${requestScope.JOB.payMentMethod.paymentMethodID}">${requestScope.JOB.payMentMethod.paymentMethodName}</option>    
+                                                            <%
+                                                                }
+                                                            %>
+                                                            <option value="2">Pay by Hour</option>
+                                                            <option value="1">Pay fixed Price</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-4 p-1 col-md-5" >
-                                                        <input id="budget" name="budget" type="number" step="0.5" min="1" class="form-control resume" required="" placeholder="100">
+                                                        <%
+                                                            if(job.getBudget()>0) {
+                                                        %>
+                                                        <input id="budget" name="budget" type="number" step="0.5" min="1" class="form-control resume" value="${requestScope.JOB.budget}" required="" placeholder="100">
+                                                        <%
+                                                            }else {
+                                                        %>
+                                                        <input id="budget" name="budget" type="number" step="0.5" min="1" class="form-control resume" value="" required="" placeholder="100">
+                                                        <%
+                                                            }
+                                                        %>
                                                     </div>
                                                     <div class="col-lg-1 p-2 col-md-1">
                                                         <h5>$</h5>
@@ -107,7 +153,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
                                                 <label>Email<span class="text-danger">*</span></label>
-                                                <input onchange="checkValidation()" id="email" name="email" type="email" class="form-control resume" required="" placeholder="abc@gmail.com">
+                                                <input onchange="checkValidation()" id="email" name="email" type="email" class="form-control resume" required="" value="${requestScope.JOB.email}" placeholder="abc@gmail.com">
                                                 <p id="errorEmail" class="text-danger h7"><p>
                                             </div>
                                         </div>
@@ -115,7 +161,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
                                                 <label>Phone<span class="text-danger">*</span></label>
-                                                <input onchange="checkValidation()" id="phone" name="phone" type="tel" class="form-control resume" required="" placeholder="0123456789">
+                                                <input onchange="checkValidation()" id="phone" name="phone" type="tel" class="form-control resume" value="${requestScope.JOB.phone}" required="" placeholder="0123456789">
                                                 <p id="errorPhone" class="text-danger h7"><p>
                                             </div>
                                         </div>
@@ -127,7 +173,7 @@
                                                     LocalDate localDate = LocalDate.now();
                                                 %>
                                                 <label>Expiry date<span class="text-danger">*</span></label>
-                                                <input min="<%=dtf.format(localDate)%>" id="expiriedDate" name="expiriedDate" type="date" class="form-control resume" required="" placeholder="dd/mm/yyyy">
+                                                <input min="<%=dtf.format(localDate)%>" id="expiriedDate" name="expiriedDate" type="date" class="form-control resume" value="${requestScope.JOB.expiriedDate}" required="" placeholder="dd/mm/yyyy">
                                                 <p id="errorExDate" class="text-danger h7"><p>
                                             </div>
                                         </div>
@@ -135,20 +181,21 @@
                                         <div class="col-md-8">
                                             <div class="form-group app-label mt-2">
                                                 <label>Address<span class="text-danger">*</span></label>
-                                                <input id="address" name="address" type="text" class="form-control resume" required="" placeholder="District 9, Ho Chi Minh City">
+                                                <input id="address" name="address" type="text" class="form-control resume" required="" value="${requestScope.JOB.address}" placeholder="District 9, Ho Chi Minh City">
                                             </div>
                                         </div>
 
                                         <div class="col-md-12">
                                             <div class="form-group app-label">
                                                 <label>Description<span class="text-danger">*</span> :</label>
-                                                <textarea id="description" name="description" type="text" class="form-control resume" required="" placeholder="Things needed for the job:"></textarea>
+                                                <textarea id="description" name="description" type="text" class="form-control resume" required="" placeholder="Things needed for the job:">${requestScope.JOB.description}</textarea>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-lg-12 mt-2">
+                                            <input type="hidden" name="jobID" value="<%= job.getJobID() %>">
                                             <input type="submit" id="postJobbtn" name="" class="submitBnt btn btn-primary" value="Post a Project">
                                             <input type="hidden" id="postJobbtn" name="action" class="submitBnt btn btn-primary" value="Post a Job">
                                         </div>
@@ -228,6 +275,14 @@
                 }
 
             }
+        </script>
+        <script>
+            $("#paymentID option").each(function () {
+                $(this).siblings('[value="' + this.value + '"]').remove();
+            });
+            $("#cateID option").each(function () {
+                $(this).siblings('[value="' + this.value + '"]').remove();
+            });
         </script>
     </body>
 </html>

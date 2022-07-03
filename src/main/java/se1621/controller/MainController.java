@@ -89,6 +89,14 @@ public class MainController extends HttpServlet {
     private static final String UNCOMPLETEJOB_CONTROLLER = "UncompteleJobController";
     private static final String COMPLETEJOB = "CompleteJob";
     private static final String COMPLETEJOB_CONTROLLER = "CompleteJobController";
+    private static final String EDITJOB = "EditJob";
+    private static final String EDITJOB_CONTROLLER = "EditJobController";
+    private static final String VERIFY_COMPANY = "Verify Company";
+    private static final String VERIFY_COMPANY_CONTROLLER = "VerifyCompanyController";
+    private static final String UPDATE_PROFILE = "Update Profile";
+    private static final String UPDATE_PROFILE_CONTROLLER = "UpdateProfileController";
+    private static final String EMPTYJOB = "EmptyJob";
+    private static final String SEND_EMPTY_JOB_CONTROLLER = "SendEmptyJobController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -171,6 +179,14 @@ public class MainController extends HttpServlet {
                 url = UNCOMPLETEJOB_CONTROLLER;
             } else if (COMPLETEJOB.equals(action)) {
                 url = COMPLETEJOB_CONTROLLER;
+            } else if (EDITJOB.equals(action)) {
+                url = EDITJOB_CONTROLLER;    
+            } else if (VERIFY_COMPANY.equals(action)) {
+                url = VERIFY_COMPANY_CONTROLLER;    
+            } else if (UPDATE_PROFILE.equals(action)) {
+                url = UPDATE_PROFILE_CONTROLLER;    
+            } else if (EMPTYJOB.equals(action)) {
+                url = SEND_EMPTY_JOB_CONTROLLER;    
             } else {
                 url = ERROR;
             }

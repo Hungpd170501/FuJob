@@ -38,6 +38,11 @@ public class PostJobController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            int jobID = 0;
+            String jobIDString = request.getParameter("jobID");
+            if (!jobIDString.isBlank()) {
+                jobID = Integer.parseInt(jobIDString);
+            }
             String jobTitle = request.getParameter("jobTitle");
             int categoryID = Integer.parseInt(request.getParameter("categoryID"));
             String[] skillID = request.getParameterValues("skillID");
@@ -55,7 +60,9 @@ public class PostJobController extends HttpServlet {
             HttpSession session = request.getSession();
             User loginUser = (User) session.getAttribute("LOGIN_USER");
             int userID = loginUser.getUserID();
-            Job job = Job.builder().userID(userID)
+            Job job = Job.builder()
+                    .jobID(jobID)
+                    .userID(userID)
                     .jobTitle(jobTitle)
                     .category(Category.builder().categoryID(categoryID).build())
                     .address(address)
@@ -67,27 +74,60 @@ public class PostJobController extends HttpServlet {
                     .description(description)
                     .build();
             JobDAO jobdao = new JobDAO();
-            boolean checkCreateJob = jobdao.createJob(job);
-            if (checkCreateJob) {
-                int jobID = jobdao.getJobIDJustCreate(userID);
-                JobSkillsDAO jobSkillsDAO = new JobSkillsDAO();
-                List<JobSkills> listSkillRequire = new ArrayList<>();
-                for (Integer skill : skillSet) {
-                    JobSkills skillRequire = JobSkills.builder().jobID(jobID).skill(Skill.builder().skillID(skill).build()).build();
-                    listSkillRequire.add(skillRequire);
+            JobSkillsDAO jsDAO = new JobSkillsDAO();
+            List<JobSkills> listJobSkills = new ArrayList<>();
+            List<JobSkills> listJs = jsDAO.getSkillRequire(jobID);
+            if (!listJs.isEmpty()) {
+                jsDAO.deleteJobSkills(jobID);
+            }
+            Job checkJob = jobdao.getJob(jobID);
+            if (checkJob.getJobID()>0) {
+                //neu job da ton tai thi tien hanh update
+                if (jobdao.updateJob(job)) {
+                    //update thanh cong thi set skill
+                    for (Integer skillId : skillSet) {
+                        JobSkills jobSkills = JobSkills.builder().jobID(jobID).skill(Skill.builder().skillID(skillId).build()).build();
+                        listJobSkills.add(jobSkills);
+                    }
+                    List<Boolean> listCheckCreateJobSkill = new ArrayList<>();
+                    for (JobSkills jobSkills : listJobSkills) {
+                        boolean checkCreateSkillRequire = jsDAO.createSkillRequire(jobSkills);
+                        if (checkCreateSkillRequire) {
+                            listCheckCreateJobSkill.add(checkCreateSkillRequire);
+                        }
+                    }
+                    if (!listCheckCreateJobSkill.contains(false)) {
+                        request.setAttribute("MESSAGE_JOB", "Update Job Successfully!");
+                        url = SUCCESS + jobID;
+                    }
+                } else {
+                    //update k thanh cong thi loi
+                    url = ERROR;
                 }
-                List<Boolean> listCheckCreateSkillRequire = new  ArrayList<>();
-                for (JobSkills skillRequire : listSkillRequire) {
-                    boolean checkCreateSkillRequire = jobSkillsDAO.createSkillRequire(skillRequire);
-                    if(checkCreateSkillRequire)
-                        listCheckCreateSkillRequire.add(checkCreateSkillRequire);
-                }
-                if(!listCheckCreateSkillRequire.contains(false)){
-                    request.setAttribute("MESSAGE", "Create Job Successfully!");
-                    url = SUCCESS + jobID;
+            } else {
+                //job chua ton tai thi tao moi
+                if (jobdao.createJob(job)) {
+                    jobID = jobdao.getJobIDJustCreate(userID);
+                    for (Integer skill : skillSet) {
+                        JobSkills jobSkills = JobSkills.builder().jobID(jobID).skill(Skill.builder().skillID(skill).build()).build();
+                        listJobSkills.add(jobSkills);
+                    }
+                    List<Boolean> listCheckCreateJobSkill = new ArrayList<>();
+                    for (JobSkills jobSkills : listJobSkills) {
+                        boolean checkCreateSkillRequire = jsDAO.createSkillRequire(jobSkills);
+                        if (checkCreateSkillRequire) {
+                            listCheckCreateJobSkill.add(checkCreateSkillRequire);
+                        }
+                    }
+                    if (!listCheckCreateJobSkill.contains(false)) {
+                        request.setAttribute("MESSAGE_JOB", "Create Job Successfully!");
+                        url = SUCCESS + jobID;
+                    }
+                } else {
+                    //tao k thanh cong thi loi
+                    url = ERROR;
                 }
             }
-
         } catch (Exception e) {
             log(e.getMessage());
         } finally {

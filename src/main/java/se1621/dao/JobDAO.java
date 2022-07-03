@@ -32,9 +32,11 @@ public class JobDAO {
             + " left join tblPaymentMethods pm on j.paymentMethodID = pm.paymentMethodID) ";
     private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJobs WHERE jobID = (SELECT MAX(jobID) FROM tblJobs) and jobStatus = 1 and userID = ?";
     //roi ne
-    private static final String SEARCHBYJOBID = "SELECT j.jobID, j.userID, j.jobTitle,j.jobCategoryID, j.budget, j.paymentMethodID, payment.paymentMethodName, j.address, j.email, j.phone, j.description, j.createdDate, j.lastModifiedDate, j.expiriedDate, j.jobStatus FROM tblJobs j "
-            + "            left join tblPaymentMethods payment on j.paymentMethodID = payment.paymentMethodID "
-            + "           WHERE jobID = ?";
+    private static final String SEARCHBYJOBID = "SELECT j.jobID, j.userID, j.jobTitle,j.jobCategoryID, c.categoryName, "
+            + "j.budget, j.paymentMethodID, payment.paymentMethodName, j.address, j.email, j.phone, j.description, j.createdDate, "
+            + "j.lastModifiedDate, j.expiriedDate, j.jobStatus  "
+            + "FROM (tblJobs j left join tblPaymentMethods payment on j.paymentMethodID = payment.paymentMethodID ) "
+            + "left join tblCategories c on c.categoryID = j.jobCategoryID WHERE jobID = ?";
     //roi ne
     private static final String VIEWALLJOB = "SELECT j.jobID,j.jobStatus, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate, pay.paymentMethodName"
             + "                        FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)"
@@ -61,6 +63,8 @@ public class JobDAO {
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
+    
+    private static final String UPDATE_JOB= "UPDATE tblJobs SET userID=?, jobTitle=?, jobCategoryID=?, address=?, paymentMethodID=?, email=?, expiriedDate=?, phone=?, budget=?, description=? WHERE jobID=?";
 
     // top recent job in index.jsp
     public List<Job> getRecentJobPosted() throws SQLException {
@@ -252,6 +256,7 @@ public class JobDAO {
                     int jobCategoryID = rs.getInt("jobCategoryID");
                     float budget = rs.getFloat("budget");
                     int paymentMethodID = rs.getInt("paymentMethodID");
+                    String categoryName = rs.getString("categoryName");
                     String paymentMethodName = rs.getString("paymentMethodName");
                     String address = rs.getString("address");
                     String email = rs.getString("email");
@@ -264,7 +269,7 @@ public class JobDAO {
                     job = Job.builder().jobID(jobID)
                             .userID(userID)
                             .jobTitle(jobTitle)
-                            .category(Category.builder().categoryID(jobCategoryID).build())
+                            .category(Category.builder().categoryID(jobCategoryID).categoryName(categoryName).build())
                             .budget(budget)
                             .payMentMethod(PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build())
                             .createdDate(createdDate)
@@ -668,6 +673,38 @@ public class JobDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(UPDATE_JOB_POST_COMPLETE);
                 preStm.setInt(1, jobPostID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean updateJob(Job job) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UPDATE_JOB);
+                preStm.setInt(1, job.getUserID());
+                preStm.setString(2, job.getJobTitle());
+                preStm.setInt(3, job.getCategory().getCategoryID());
+                preStm.setString(4, job.getAddress());
+                preStm.setInt(5, job.getPayMentMethod().getPaymentMethodID());
+                preStm.setString(6, job.getEmail());
+                preStm.setDate(7, job.getExpiriedDate());
+                preStm.setString(8, job.getPhone());
+                preStm.setFloat(9, job.getBudget());
+                preStm.setString(10, job.getDescription());
+                preStm.setInt(11, job.getJobID());
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

@@ -28,6 +28,7 @@ public class JobSkillsDAO {
     private static final String GET_JOBSKILLS_FOR_JOBAPPLY = "SELECT jk.jobSkillID, jk.jobID, jk.skillID, skill.skillName "
             + "    FROM (tblJobSkills jk left join tblSkills skill on jk.SkillID = skill.skillID)"
             + "    WHERE jk.jobID IN  (SELECT jobID FROM tblJobApplications WHERE jobApplicationStatus = 1)";
+    private  static final String DELETESKILL = "DELETE FROM tblJobSkills WHERE jobID = ? ";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -154,5 +155,30 @@ public class JobSkillsDAO {
             }
         }
         return listJobSkills;
+    }
+
+    public boolean deleteJobSkills(int jobID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(DELETESKILL);
+                preStm.setInt(1, jobID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 }

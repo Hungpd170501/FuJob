@@ -43,7 +43,7 @@ public class SearchResumeIDController extends HttpServlet {
             ResumeSkillDAO studentSkillDAO = new ResumeSkillDAO();
             List<ResumeSkill> listResumeSkill = studentSkillDAO.getStudentSkill(resumeID);
             
-            
+            String messResume = (String)request.getAttribute("MESSAGE_RESUME");
             
             List<JobApplication> listJobOrder = new ArrayList<>();
             JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
@@ -69,8 +69,10 @@ public class SearchResumeIDController extends HttpServlet {
             }
             
             if (resume!=null) {
+                
                 request.setAttribute("RESUME", resume);
                 request.setAttribute("LIST_STUDENTSKILL", listResumeSkill);
+                request.setAttribute("MESSAGE_RESUME", messResume);
                 url = SUCCESS;
             } else {
                 request.setAttribute("RESUME", resume);

@@ -29,6 +29,7 @@ public class UserDAO {
             + "r.createdDate, u.userStatus, (SELECT COUNT (*) FROM tblJobs j WHERE j.userID = u.userID) AS projectPosted  "
             + "FROM (tblUsers u left join tblRoles r on u.roleID = r.roleID) WHERE u.companyID = ?";
     private static final String UPDATE_USERSTATUS = "UPDATE tblUsers SET userStatus=? WHERE userID=?";
+    private static final String UPDATE_USERFULLNAME = "UPDATE tblUsers SET fullName=? WHERE userID=?";
     private Connection conn;
     private PreparedStatement preStm;
     private ResultSet rs;
@@ -301,6 +302,7 @@ public class UserDAO {
                     int userStatus = rs.getInt("userStatus");
                     Role role = new Role(roleID, roleName);
                     user = User.builder()
+                                .userID(userID)
                                 .fullName(fullName)
                                 .email(email)
                                 .role(role)
@@ -382,6 +384,28 @@ public class UserDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(UPDATE_USERSTATUS);
                 preStm.setInt(1, userStatus);
+                preStm.setInt(2, userID);
+                check = preStm.executeUpdate() > 0;
+            }
+        } catch (SQLException e) {
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    public boolean updateUserFullName(int userID, String userFullName) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UPDATE_USERFULLNAME);
+                preStm.setString(1, userFullName);
                 preStm.setInt(2, userID);
                 check = preStm.executeUpdate() > 0;
             }

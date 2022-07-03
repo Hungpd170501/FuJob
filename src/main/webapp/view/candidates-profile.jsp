@@ -54,6 +54,19 @@
                     </div>
                 </div>
             </div>
+            <%
+                String messResume = (String) request.getAttribute("MESSAGE_RESUME");
+                if (messResume != null) {
+            %>
+            <div class="col-5 mx-auto text-center alert alert-warning alert-dismissible fade show" role="alert">
+                <strong><%= messResume%></strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <%
+                }
+            %>
         </section>
         <!-- end home -->
 
@@ -183,8 +196,8 @@
                                         <%
                                         } else {
                                         %>
-                                        <h6><%= listJobApplication.get(0).getJob().getJobTitle() %></h6>
-                                            
+                                        <h6><%= listJobApplication.get(0).getJob().getJobTitle()%></h6>
+
                                         <%
                                             }
                                         %>

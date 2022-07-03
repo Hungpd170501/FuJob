@@ -81,7 +81,7 @@ public class CreateCompanyInfoController extends HttpServlet {
                 if (currentCompnayID == companyID) {
                     checkUpdate = dao.updateCompanyInfo(company);
                     if (checkUpdate) {
-                        request.setAttribute("MESSAGE", "Create Company Successfully!!");
+                        request.setAttribute("MESSAGE_COM", "Update Company Successfull!");
 
                         url = SUCCESS + companyID;
                     } else {
@@ -89,12 +89,11 @@ public class CreateCompanyInfoController extends HttpServlet {
                         comError.setCompanyNameError("Company name already exists!");
                     }
                 }
-            }
-            if (checkValidation) {
+            } else if (checkValidation) {
                 if (currentCompnayID == companyID) {
                     checkUpdate = dao.updateCompanyInfo(company);
                     if (checkUpdate) {
-                        request.setAttribute("MESSAGE", "Create Company Successfully!!");
+                        request.setAttribute("MESSAGE_COM", "Update Company Successfull!");
 
                         url = SUCCESS + companyID;
                     }
@@ -120,7 +119,7 @@ public class CreateCompanyInfoController extends HttpServlet {
                     boolean check = udao.updateCompanyID(user, companyID);
                     session.setAttribute("LOGIN_USER", user);
                     if (check) {
-                        request.setAttribute("MESSAGE", "Create Company Successfully!!");
+                        request.setAttribute("MESSAGE_COM", "Create Company Successfull!");
 
                         url = SUCCESS + companyID;
                     }

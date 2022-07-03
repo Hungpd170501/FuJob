@@ -55,6 +55,19 @@
             <!-- JOB DETAILS START -->
             <section class="section">
             <%
+                String messJob = (String) request.getAttribute("MESSAGE_JOB");
+                if (messJob != null) {
+            %>
+            <div class="col-5 mx-auto text-center alert alert-warning alert-dismissible fade show" role="alert">
+                <strong><%= messJob%></strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <%
+                }
+            %>    
+            <%
                 Job job = (Job) request.getAttribute("JOB");
                 if (job != null) {
             %>
@@ -158,7 +171,7 @@
                         <%
                         } else if (loginUser != null && !StringUtils.equals(loginUser.getRole().getRoleID(), "HR") && !StringUtils.equals(loginUser.getRole().getRoleID(), "HRM")) {
                             Boolean checkDupApplied = (Boolean) request.getAttribute("DUPLICATE_APPLIED");
-                            if(checkDupApplied) {
+                            if (checkDupApplied) {
                         %>
                         <div class="job-detail border rounded mt-4">
                             <button type="button" disabled class="btn btn-secondary btn-block">You Applied This Project</button>

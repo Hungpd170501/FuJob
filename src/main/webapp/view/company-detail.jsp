@@ -44,11 +44,24 @@
 
             <section class="section">
             <%
+                String messCom = (String) request.getAttribute("MESSAGE_COM");
+                if (messCom != null) {
+            %>
+            <div class="col-5 mx-auto text-center alert alert-warning alert-dismissible fade show" role="alert">
+                <strong><%= messCom%></strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <%
+                }
+            %>    
+            <%
                 CompanyInfo companyInfo = (CompanyInfo) request.getAttribute("COMPANYINFO");
-                if(companyInfo == null) {
+                if (companyInfo == null) {
                     String message = (String) request.getAttribute("MESSAGE");
             %>
-            <h3 class="text-center text-warning"><%= message %></h3>
+            <h3 class="text-center text-warning"><%= message%></h3>
             <a href="${pageContext.request.contextPath}/view/create-companyinfo.jsp"><p class="h5 text-center" style="text-decoration: underline">Create Your Company Information Now</p></a>
             <%
                 }
@@ -58,16 +71,35 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-sm-center">
-                            <img src="<%= companyInfo.getAvatar() %>" alt="" height="150" class="d-block mx-auto rounded-pill mb-4">
+                            <img src="<%= companyInfo.getAvatar()%>" alt="" height="150" class="d-block mx-auto rounded-pill mb-4">
                             <h4 class="mt-3"><a href="#" class="text-dark"> <%= companyInfo.getCompanyName()%> </a></h4>
                             <ul class="list-inline mb-0">
                                 <li class="list-inline-item mr-3">
                                     <p class="text-muted mb-0"><i class="mdi mdi-map-marker mr-2"></i><%= companyInfo.getAddress()%></p>
                                 </li>
-
+                                <%
+                                    if (companyInfo.getCompanyStatus() == 1) {
+                                %>
+                                <li class="list-inline-item">
+                                    <a href="#" class="text-danger mb-0" data-target="#formApplication" data-toggle="modal" data-placement="top" title="Click here to verify"><i class="text-danger mdi mdi-alert mdi-18px mr-2"></i>Not Verified</a>
+                                </li>
+                                <%
+                                    }
+                                    if (companyInfo.getCompanyStatus() == 2) {
+                                %>
+                                <li class="list-inline-item">
+                                    <p class="text-warning mb-0"><i class="mdi mdi-clock mdi-18px mr-2"></i>Pending</p>
+                                </li>
+                                <%
+                                    }
+                                    if (companyInfo.getCompanyStatus() == 3) {
+                                %>
                                 <li class="list-inline-item">
                                     <p class="text-success mb-0"><i class="mdi mdi-bookmark-check mdi-18px mr-2"></i>Verified</p>
                                 </li>
+                                <%
+                                    }
+                                %>
                             </ul>
 
                             <ul class="list-inline mb-2">
@@ -124,11 +156,36 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade" id="formApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header border-bottom-0">
+                                <h5 class="modal-title text-primary" id="exampleModalLabel">Upload your business license to verify</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form method="post" action="${pageContext.request.contextPath}/MainController" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <div class="form-group text-dark">
+                                        <label>Upload</label>
+                                        <input type="file" class="form-control" name="file">
+                                    </div>
+                                </div>
+                                <div class="modal-footer border-top-0 d-flex justify-content-center">
+                                    <input type="hidden" name="companyID" value="<%= companyInfo.getCompanyID()%>">
+                                    <input type="submit" class="btn btn-primary" value="Send">
+                                    <input type="hidden" name="action" value="Verify Company">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>        
                 <%
                     }
                 %>
         </section>
-
         <!-- EMPLOYERS DETAILS END -->
 
         <jsp:include page="./include/footer.jsp"></jsp:include>

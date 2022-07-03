@@ -20,14 +20,15 @@ import se1621.utils.DBUtils;
  */
 public class CompanyInfoDAO {
 
-    private static final String CREATECOMINFO = "INSERT INTO tblCompanies(companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar) VALUES(?,?,?,?,?,?,?,?,?,?)";
+    private static final String CREATECOMINFO = "INSERT INTO tblCompanies(companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar, companyStatus) VALUES(?,?,?,?,?,?,?,?,?,?,1)";
     private static final String GETLISTCOMPANY = "SELECT * FROM tblCompanies and companyStatus = 1";
     private static final String GETCOMID = "SELECT companyID FROM tblCompanies WHERE companyName=?";
     private static final String CHECK_DUPLICATE = "SELECT companyID FROM tblCompanies WHERE companyName=?";
-    private static final String SEARCH = "SELECT companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar, createdDate, lastModifiedDate FROM tblCompanies WHERE companyID = ? and companyStatus = 1";
+    private static final String SEARCH = "SELECT companyName, address, website, gmail, phone, typeCompany, establishedYear, numberOfEmployee, companyOverview, avatar, createdDate, lastModifiedDate, companyStatus FROM tblCompanies WHERE companyID = ?";
     private static final String UPDATE_COMPANYINFO = "UPDATE tblCompanies"
             + "   SET companyName = ? ,address = ? ,website = ? ,gmail = ? ,phone = ? ,typeCompany = ? ,establishedYear = ? ,numberOfEmployee = ? ,companyOverview = ? ,avatar = ? "
-            + "   WHERE companyID = ? and companyStatus = 1";
+            + "   WHERE companyID = ?";
+    private static final String UPDATE_BUSINESSLICENSE = "UPDATE tblCompanies SET businessLicense = ?, companyStatus = 2 WHERE companyID = ?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -211,6 +212,7 @@ public class CompanyInfoDAO {
                     String avatar = rs.getString("avatar");
                     Date createdDate = rs.getDate("createdDate");
                     Date lastModifiedDate = rs.getDate("lastModifiedDate");
+                    int companyStatus = rs.getInt("companyStatus");
                     companyInfo = CompanyInfo.builder()
                             .companyID(companyID)
                             .companyName(companyName)
@@ -225,7 +227,7 @@ public class CompanyInfoDAO {
                             .avatar(avatar)
                             .createdDate(createdDate)
                             .lastModifiedDate(lastModifiedDate)
-                            .companyStatus(1)
+                            .companyStatus(companyStatus)
                             .build();
                 }
             }
@@ -262,6 +264,29 @@ public class CompanyInfoDAO {
                 preStm.setString(9, company.getCompanyOverview());
                 preStm.setString(10, company.getAvatar());
                 preStm.setInt(11, company.getCompanyID());
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public boolean updateBusinessLicense(int companyID, String businessLicense) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UPDATE_BUSINESSLICENSE);
+                preStm.setString(1, businessLicense);
+                preStm.setInt(2, companyID);
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

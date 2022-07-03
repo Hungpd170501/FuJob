@@ -123,7 +123,7 @@
                             <% List<JobApplication> listJobApplication = (List<JobApplication>) request.getAttribute("LIST_ALLJOBONGOING_APPLIED");
                                 if (listJobApplication.isEmpty()) {
 
-                                    String message = (String) request.getAttribute("MESSAGE0");
+                                    String message = (String) request.getAttribute("MESSAGE");
                             %>
                             <div class="col-lg-12 text-warning text-center">
                                 <h3> <%=message%> </h3>

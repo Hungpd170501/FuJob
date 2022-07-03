@@ -28,6 +28,7 @@ public class CompanyInfo {
     private String avatar;
     private Date createdDate;
     private Date lastModifiedDate;
+    private String businessLicense;
     private int companyStatus;
 
 }
