@@ -51,7 +51,7 @@ public class OrderJobController extends HttpServlet {
                     .message(message)
                     .build();
             JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-            int jobOrderID = jobOrderDAO.getJobOrderID(userID, jobID); // neu user da apply ma huy chua
+            int jobOrderID = jobOrderDAO.getJobOrderID(resumeID, jobID); // neu user da apply ma huy chua
             if (jobOrderID > 0) { // tien hanh re apply (update)
                 boolean reApply = jobOrderDAO.reApply(jobOrder, jobOrderID);
                 if (reApply) {

@@ -25,7 +25,9 @@
                     <li class="list-inline-item">
                         <% if (loginUser != null) {
                         %>
-                        <a href="javascript:void(0);"><i class="mdi mdi-account mr-2"></i>${sessionScope.LOGIN_USER.fullName}</a></li>
+                        <a href="javascript:void(0);"><i class="mdi mdi-account mr-2"></i>${sessionScope.LOGIN_USER.fullName}</a>
+
+                    </li>
                     <li class="list-inline-item"><a href="${pageContext.request.contextPath}/MainController?action=Logout"><i class="mdi mdi-logout"></i>Logout</a></li>
 
                     <%
@@ -71,11 +73,6 @@
         <div id="navigation">
             <!-- Navigation Menu-->   
             <ul class="navigation-menu">
-
-
-
-
-                <li></li>
                 <li><a href="${pageContext.request.contextPath}">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob">Project List</a></li>
                     <% if (loginUser != null) {
@@ -87,20 +84,21 @@
                         <%
                             if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "US")) {
                         %>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>">Your Project Applied</a></li>   
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Posted</a></li>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Ongoing</a></li>
-                        
-                            <%
-                            } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
-                            %>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Posted</a></li>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Ongoing</a></li>
-                        
-                            <%
-                            } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HRM")) {
-                            %>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Your Project Posted</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>">Project Applied</a></li>   
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Project Posted</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingPosted&userID=${sessionScope.LOGIN_USER.userID}">Project Ongoing(Posted)</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingApplied&userID=${sessionScope.LOGIN_USER.userID}">Project Ongoing(Applied)</a></li>
+
+                        <%
+                        } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
+                        %>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Project Posted</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingPosted&userID=${sessionScope.LOGIN_USER.userID}">Project Ongoing</a></li>
+
+                        <%
+                        } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HRM")) {
+                        %>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Project Posted</a></li>
 
                         <%
                             }

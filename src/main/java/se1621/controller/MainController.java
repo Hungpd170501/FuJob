@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 @MultipartConfig(maxFileSize = 16177215)
 public class MainController extends HttpServlet {
 
@@ -76,6 +77,21 @@ public class MainController extends HttpServlet {
     private static final String CHECKCREATECOMPANY_CONTROLLER = "CheckCreateCompanyInfoController";
     private static final String REGISTERHR_CONTROLLER = "RegisterHRController";
     private static final String REGISTER_HR = "Register HR";
+    private static final String LISTJOBONGOING_POSTED_CONTROLLER = "ListJobOngoingPostedController";
+    private static final String LISTJOBONGOING_POSTED = "ListJobOngoingPosted";
+    private static final String LISTJOBONGOING_APPLIED_CONTROLLER = "ListJobOngoingAppliedController";
+    private static final String LISTJOBONGOING_APPLIED = "ListJobOngoingApplied";
+    private static final String DENYJOBAPP = "DenyJob";
+    private static final String DENYJOBAPPCONTROLLER = "DenyJobAppController";
+    private static final String ACCEPTJOB = "AcceptJob";
+    private static final String ACCEPTJOBCONTROLLER = "AcceptJobController";
+    private static final String UNCOMPLETEJOB = "UncompteleJob";
+    private static final String UNCOMPLETEJOB_CONTROLLER = "UncompteleJobController";
+    private static final String COMPLETEJOB = "CompleteJob";
+    private static final String COMPLETEJOB_CONTROLLER = "CompleteJobController";
+    private static final String UPDATE_FORM_APPLICATION = "Update application";
+    private static final String UPDATE_FORM_APPLICATION_CONTROLLER = "UpdateFormApplicationController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -121,30 +137,44 @@ public class MainController extends HttpServlet {
                 url = UNAPPLY_CONTROLLER;
             } else if (SEARCHCANDIDATEOFJOB.equals(action)) {
                 url = SEARCHCANDIDATEOFJOB_CONTROLLER;
-            }else if (UPDATE_JOB_CATEGORY.equals(action)) {
+            } else if (UPDATE_JOB_CATEGORY.equals(action)) {
                 url = UPDATE_JOB_CATEGORY_CONTROLLER;
             } else if (JOB_CATEGORY.equals(action)) {
                 url = JOB_CATEGORY_CONTROLLER;
-            }else if (ADMIN_INDEX.equals(action)) {
+            } else if (ADMIN_INDEX.equals(action)) {
                 url = ADMIN_INDEX_CONTROLLER;
             } else if (SEARCHJOBPOSTED.equals(action)) {
                 url = SEARCHJOBPOSTED_CONTROLLER;
             } else if (SEARCHJOBORDER.equals(action)) {
                 url = SEARCHJOBORDER_CONTROLLER;
             } else if (CHECKCREATERESUME.equals(action)) {
-                url = CHECKCREATERESUME_CONTROLLER;    
+                url = CHECKCREATERESUME_CONTROLLER;
             } else if (DELETEJOBPOST.equals(action)) {
                 url = DELETEJOBPOST_CONTROLLER;
             } else if (VIEWALLHR.equals(action)) {
                 url = VIEWALLHR_CONTROLLER;
             } else if (UPDATESTATUSHR.equals(action)) {
-                url = UPDATESTATUSHR_CONTROLLER;    
+                url = UPDATESTATUSHR_CONTROLLER;
             } else if (CHECKCREATECOMPANY.equals(action)) {
-                url = CHECKCREATECOMPANY_CONTROLLER;    
+                url = CHECKCREATECOMPANY_CONTROLLER;
             } else if (VIEW_RECENT_JOB.equals(action)) {
-                url = VIEW_RECENT_JOB_CONTROLLER;    
+                url = VIEW_RECENT_JOB_CONTROLLER;
             } else if (REGISTER_HR.equals(action)) {
-                url = REGISTERHR_CONTROLLER;    
+                url = REGISTERHR_CONTROLLER;
+            } else if (LISTJOBONGOING_POSTED.equals(action)) {
+                url = LISTJOBONGOING_POSTED_CONTROLLER;
+            } else if (LISTJOBONGOING_APPLIED.equals(action)) {
+                url = LISTJOBONGOING_APPLIED_CONTROLLER;
+            } else if (DENYJOBAPP.equals(action)) {
+                url = DENYJOBAPPCONTROLLER;
+            } else if (ACCEPTJOB.equals(action)) {
+                url = ACCEPTJOBCONTROLLER;
+            } else if (UNCOMPLETEJOB.equals(action)) {
+                url = UNCOMPLETEJOB_CONTROLLER;
+            } else if (COMPLETEJOB.equals(action)) {
+                url = COMPLETEJOB_CONTROLLER;
+            } else if (UPDATE_FORM_APPLICATION.equals(action)) {
+                url = UPDATE_FORM_APPLICATION_CONTROLLER;
             } else {
                 url = ERROR;
             }

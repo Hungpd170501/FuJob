@@ -1,4 +1,3 @@
-
 <%@page import="java.util.Calendar"%>
 <%@page import="java.sql.Date"%>
 <%@page import="se1621.dto.JobSkills"%>
@@ -21,7 +20,7 @@
         <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
         <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
             <!-- Start home -->
-            <section class="bg-half page-next-level"> 
+            <section class="bg-half page-next-level">
                 <div class="bg-overlay"></div>
                 <div class="container">
                     <div class="row justify-content-center">
@@ -95,7 +94,37 @@
                 </div>
             </div>
         </div>
+        <%
+            String messageUpdate = (String) request.getAttribute("UPDATE_MESSAGE");
+            if (messageUpdate != null) {
+        %>
+            
+        <div class="col-5 mx-auto text-center alert alert-warning alert-dismissible fade show" role="alert">
+            <strong><%= messageUpdate %></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
 
+        <%
+            }
+        %>
+        
+        <%
+            String messageCancel = (String) request.getAttribute("CANCEL_MESSAGE");
+            if (messageCancel != null) {
+        %>
+            
+        <div class="col-5 mx-auto text-center alert alert-warning alert-dismissible fade show" role="alert">
+            <strong><%= messageCancel %></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <%
+            }
+        %>
         <!-- JOB LIST START -->
         <section class="section pt-0">
             <div class="container">
@@ -118,8 +147,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row"> 
+                        <div class="row">
                             <% List<JobApplication> listJobApplication = (List<JobApplication>) request.getAttribute("LIST_ALLJOBORDER");
                                 if (listJobApplication.isEmpty()) {
 
@@ -145,12 +173,35 @@
                                             </div>
                                             <div class="col-lg-6 col-md-9">
                                                 <div class="job-list-desc">
-                                                    <h4 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="text-dark"><%= jobOrder.getJob().getJobTitle()%></a></h4>
-                                                        <%
-                                                            Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-                                                            long exDate = Math.abs(jobOrder.getJob().getExpiriedDate().getTime() - dateNow.getTime());
-                                                            long resultDate = exDate / (24 * 60 * 60 * 1000);
-                                                        %>
+                                                    <h4 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="text-dark"><%= jobOrder.getJob().getJobTitle()%>
+                                                            <% if (jobOrder.getJobApplicationStatus() == 1) {
+                                                            %>
+                                                            <br>
+                                                            <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: #C0C000"></i> 
+                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: #C0C000">Waiting</i>
+                                                            <%
+                                                            } else if (jobOrder.getJobApplicationStatus() == 3) {
+                                                            %>
+                                                            <br>
+                                                            <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
+                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Accepted</i>
+                                                            <%
+                                                            } else if (jobOrder.getJobApplicationStatus() == 5) {
+                                                            %>
+                                                            <br>
+                                                            <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: red"></i> 
+                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Rejected</i>
+                                                            <%
+                                                                }
+                                                            %>
+                                                        </a>
+                                                    </h4>
+
+                                                    <%
+                                                        Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                                                        long exDate = Math.abs(jobOrder.getJob().getExpiriedDate().getTime() - dateNow.getTime());
+                                                        long resultDate = exDate / (24 * 60 * 60 * 1000);
+                                                    %>
                                                     <p class="mb-2 text-muted"> <%= resultDate%> days left</p>
 
                                                     <%
@@ -160,7 +211,7 @@
                                                         }
                                                     %>
                                                     <p class="mb-4"><%= description%></p>
-                                                    <h6>Skills Require: 
+                                                    <h6>Skills Require:
                                                         <%
                                                             List<JobSkills> listJobSkills = jobOrder.getJob().getListJobSkills();
                                                             for (int i = 0; i < listJobSkills.size() - 1; i++) {
@@ -186,14 +237,42 @@
                                                     <div>
                                                         <p class=" "><i class="mr-2"></i>5 bids</p>
                                                     </div>
+                                                    <% if (jobOrder.getJobApplicationStatus() == 1) {
+                                                    %>
+                                                    <br>
                                                     <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation">
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', <%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getResumeID()%>, '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" type="button" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#EditformApplication" style="width: 50%">Edit form application</button>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)" type="button" style="width: 50%" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#confirmCancellation">
                                                             Cancel
                                                         </button>
+                                                    </div><%
+                                                    } else if (jobOrder.getJobApplicationStatus() == 3) {
+                                                    %>
+                                                    <br>
+                                                    <div class="mt-3">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#EditformApplication" style="width: 50%">Edit form application</button>
+                                                    </div>
+                                                    <%
+                                                    } else if (jobOrder.getJobApplicationStatus() == 5) {
+                                                    %>
+                                                    <br>
+                                                    <div class="mt-3">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#EditformApplication" style="width: 50%">Edit form application</button>
+                                                    </div>
+                                                    <%
+                                                        }
+                                                    %>
                                                 </div>
                                             </div>
                                         </div>
@@ -216,15 +295,54 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                            
+                            </div>
                             <%
-
                                         }
 
                                     }
                                 }
 
                             %>
+
+                            <div class="modal fade" id="EditformApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered " role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-bottom-0">
+                                            <h5 class="modal-title text-primary" id="exampleModalLabel">Application Form</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form method="post" action="${pageContext.request.contextPath}/MainController" enctype="multipart/form-data">
+                                            <div class="modal-body">
+                                                <div class="form-group text-dark">
+                                                    <label>Deal Price</label>
+                                                    <input type="text" id="dealPrice" class="form-control" name="priceDeal" placeholder="Enter price you want to deal">
+                                                </div>
+                                                <input type="hidden" id="JobID" class="form-control" name="jobID" placeholder="Enter price you want to deal">
+                                                <input type="hidden" id="ResumeID" class="form-control" name="resumeID" placeholder="Enter price you want to deal">
+                                                <div class="form-group text-dark">
+                                                    <label>Message</label>
+                                                    <textarea class="my-textarea form-control" id="msg" name="message" placeholder="Message for employer"></textarea>
+                                                </div>
+                                                <div class="form-group text-dark">
+
+                                                    <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="CV" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> Your CV </p></a>
+                                                </div>
+                                                <div class="form-group text-dark">
+                                                    <label>Change CV</label>
+                                                    <input type="file" class="form-control" name="file">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer border-top-0 d-flex justify-content-center">
+                                                <input type="submit" class="btn btn-primary" value="Update application">
+                                                <input type="hidden" name="action" value="Update application">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
                             <%                                if (listJobApplication.size() > 10) {
                             %>
                             <div class="smj col-12 text-center mt-4 pt-2">
@@ -239,15 +357,13 @@
             </div>
         </section>
         <!-- JOB LIST START -->
-
-
-
         <!-- footer start -->
         <jsp:include page="./include/footer.jsp"></jsp:include>
 
             <!-- Back to top -->
-            <a href="#" class="back-to-top rounded text-center" id="back-to-top"> 
-                <i class="mdi mdi-chevron-up d-block"> </i> 
+            <a href="#" class="back-to-top rounded text-center" id="back-to-top">
+                <i class="mdi mdi-chevron-up d-block"> </i>
+
             </a>
             <!-- Back to top -->
 
@@ -266,20 +382,32 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/ckeditor/ckeditor.js"></script>
+        <script>CKEDITOR.replace('message');</script>
         <script>
-                                                            function getJobOrderID(id, userID) {
-                                                                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=UnApply&jobOrderID=' + id + '&userID=' + userID);
-                                                            }
+            function getJobOrderID(id, resumeID) {
+                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=UnApply&jobOrderID=' + id + '&resumeID=' + resumeID);
+            }
         </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-                                                            $(".job-display").slice(0, 10).show();
-                                                            $(".smj").on("click", function () {
-                                                                $(".job-display:hidden").slice(0, 5).slideDown();
-                                                                if ($(".job-display:hidden").length == 0) {
-                                                                    $(".smj").fadeOut('slow');
-                                                                }
-                                                            });
+            $(".job-display").slice(0, 10).show();
+            $(".smj").on("click", function () {
+                $(".job-display:hidden").slice(0, 5).slideDown();
+                if ($(".job-display:hidden").length == 0) {
+                    $(".smj").fadeOut('slow');
+                }
+            });
+        </script>
+        <script>
+            function getJobOrder(priceDeal, jobID, resumeID, message, cvFile) {
+                $("#dealPrice").val(priceDeal);
+                $("#JobID").val(jobID);
+                $("#ResumeID").val(resumeID);
+                CKEDITOR.instances["msg"].setData(message);
+                document.getElementById('CV').setAttribute('href', cvFile);
+            }
         </script>
     </body>
 </html>
+

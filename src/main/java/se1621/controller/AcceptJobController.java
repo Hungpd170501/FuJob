@@ -6,44 +6,55 @@
 package se1621.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import se1621.dao.JobApplicationDAO;
+import se1621.dao.JobDAO;
 import se1621.dao.ResumeDAO;
+import se1621.dto.Job;
 import se1621.dto.Resume;
 
 /**
  *
- * @author HNGB
+ * @author quocb
  */
-@WebServlet(name="UnApplyController", urlPatterns={"/UnApplyController"})
-public class UnApplyController extends HttpServlet {
+@WebServlet(name="AcceptJobController", urlPatterns={"/AcceptJobController"})
+public class AcceptJobController extends HttpServlet {
    
-    private static final String ERROR = "job-list-applied.jsp";
-    private static final String SUCCESS = "MainController?action=SearchlistJobOrder&userID=";
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "MainController?action=ListJobOngoingPosted&userID=";
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        try {
-            int jobOrderID = Integer.parseInt(request.getParameter("jobOrderID"));
+        try{
+            JobDAO jobDao = new JobDAO();
+            JobApplicationDAO jobApplicationDAO = new JobApplicationDAO();
+            int jobID = Integer.parseInt(request.getParameter("jobID"));
             int resumeID = Integer.parseInt(request.getParameter("resumeID"));
-            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-            ResumeDAO resumeDAO = new ResumeDAO();
-            Resume resume = resumeDAO.getResumeByResumeID(resumeID);
-            boolean check = jobOrderDAO.delete(jobOrderID);
+            boolean check = jobApplicationDAO.acceptJobApplication(resumeID, jobID);
             if(check){
-               request.setAttribute("CANCEL_MESSAGE", "UnApply successfull");
-               url = SUCCESS + resume.getUserID();
-
+               jobDao.updateJobPostHaveEmployer(jobID);
+               Job job = jobDao.getJob(jobID);
+               url = SUCCESS + job.getUserID();
             }
-        } catch (Exception e) {
-            log("Error at DeleteController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+        }catch(Exception ex){
+            log("Error at AcceptJobAppController: " + ex.toString());
+        }finally{
+             request.getRequestDispatcher(url).forward(request, response);
         }
     } 
 

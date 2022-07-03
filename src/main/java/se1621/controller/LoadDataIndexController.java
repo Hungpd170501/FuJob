@@ -6,45 +6,25 @@
 package se1621.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import se1621.dao.JobApplicationDAO;
-import se1621.dao.ResumeDAO;
-import se1621.dto.Resume;
 
 /**
  *
- * @author HNGB
+ * @author lehad
  */
-@WebServlet(name="UnApplyController", urlPatterns={"/UnApplyController"})
-public class UnApplyController extends HttpServlet {
+@WebServlet(name="LoadDataIndexController", urlPatterns={"/LoadDataIndexController"})
+public class LoadDataIndexController extends HttpServlet {
    
-    private static final String ERROR = "job-list-applied.jsp";
-    private static final String SUCCESS = "MainController?action=SearchlistJobOrder&userID=";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-        try {
-            int jobOrderID = Integer.parseInt(request.getParameter("jobOrderID"));
-            int resumeID = Integer.parseInt(request.getParameter("resumeID"));
-            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-            ResumeDAO resumeDAO = new ResumeDAO();
-            Resume resume = resumeDAO.getResumeByResumeID(resumeID);
-            boolean check = jobOrderDAO.delete(jobOrderID);
-            if(check){
-               request.setAttribute("CANCEL_MESSAGE", "UnApply successfull");
-               url = SUCCESS + resume.getUserID();
-
-            }
-        } catch (Exception e) {
-            log("Error at DeleteController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
-        }
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

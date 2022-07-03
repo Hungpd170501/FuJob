@@ -7,41 +7,60 @@ package se1621.controller;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 import se1621.dao.JobApplicationDAO;
+import se1621.dao.JobDAO;
 import se1621.dao.ResumeDAO;
-import se1621.dto.Resume;
+import se1621.dto.Job;
+import se1621.dto.JobApplication;
+import se1621.dto.User;
+import se1621.service.FirebaseStoreServiceImpl;
 
 /**
  *
- * @author HNGB
+ * @author lehad
  */
-@WebServlet(name="UnApplyController", urlPatterns={"/UnApplyController"})
-public class UnApplyController extends HttpServlet {
+@MultipartConfig(maxFileSize = 16177215)
+@WebServlet(name="UpdateFormApplicationController", urlPatterns={"/UpdateFormApplicationController"})
+public class UpdateFormApplicationController extends HttpServlet {
    
-    private static final String ERROR = "job-list-applied.jsp";
+    private static final String ERROR = "/view/job-list-applied";
+//    private static final String SUCCESS = "/view/job-list-applied";
     private static final String SUCCESS = "MainController?action=SearchlistJobOrder&userID=";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            int jobOrderID = Integer.parseInt(request.getParameter("jobOrderID"));
+            HttpSession session = request.getSession();
+            User loginUser = (User) session.getAttribute("LOGIN_USER");
+            int userID = loginUser.getUserID();
             int resumeID = Integer.parseInt(request.getParameter("resumeID"));
-            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-            ResumeDAO resumeDAO = new ResumeDAO();
-            Resume resume = resumeDAO.getResumeByResumeID(resumeID);
-            boolean check = jobOrderDAO.delete(jobOrderID);
-            if(check){
-               request.setAttribute("CANCEL_MESSAGE", "UnApply successfull");
-               url = SUCCESS + resume.getUserID();
-
+            int jobID = Integer.parseInt(request.getParameter("jobID"));
+            String priceDeal = request.getParameter("priceDeal");
+            String message = request.getParameter("message");
+            Part filePart = request.getPart("file");
+            FirebaseStoreServiceImpl firebaseStoreServiceImpl = new FirebaseStoreServiceImpl();
+            String filename=firebaseStoreServiceImpl.uploadFile(filePart);
+            JobApplication jobApply = JobApplication.builder()
+                    .priceDeal(priceDeal)
+                    .message(message)
+                    .cvFile(filename)
+                    .build();
+            JobApplicationDAO jobApplicationDAO = new JobApplicationDAO();
+            boolean checkUpDate = jobApplicationDAO.updateFormApplicationOfResume(jobApply, resumeID, jobID);
+            if(checkUpDate){
+                request.setAttribute("UPDATE_MESSAGE", "Your form application has been updated!");
+                url = SUCCESS + userID;
             }
         } catch (Exception e) {
-            log("Error at DeleteController: " + e.toString());
+            log("error at UpdateFormApplicationController" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
