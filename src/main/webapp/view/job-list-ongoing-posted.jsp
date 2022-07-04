@@ -122,7 +122,6 @@
 
                             <% List<JobApplication> listJobApplication = (List<JobApplication>) request.getAttribute("LIST_ALLJOBONGOING_POSTED");
                                 if (listJobApplication.isEmpty()) {
-
                                     String message = (String) request.getAttribute("MESSAGE");
                             %>
                             <div class="col-lg-12 text-warning text-center">

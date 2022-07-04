@@ -16,6 +16,7 @@ import se1621.dto.CompanyInfo;
 import se1621.dto.Job;
 import se1621.dto.JobApplication;
 import se1621.dto.PayMentMethod;
+import se1621.dto.Resume;
 import se1621.utils.DBUtils;
 
 /**
@@ -34,6 +35,12 @@ public class JobApplicationDAO {
     private static final String UNCOMPLETE_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 7 WHERE jobApplicationID = ? AND jobApplicationStatus = 3";
     private static final String COMPLETE_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 6 WHERE jobApplicationID = ? AND jobApplicationStatus = 3";
     private static final String GETTALLUSERIDOFJOB = "SELECT resumeID FROM tblJobApplications WHERE jobID = ? and jobApplicationStatus = 1";
+    private static final String GETALLJOBAPPLICATIONOFJOB = "SELECT jo.jobApplicationID, jo.priceDeal, jo.message, jo.cvFile, re.address, re.avatar"
+            + ", re.createdDate, re.dateOfBirth, re.fullName, re.gender, re.gitHub, re.gmail, re.gpa, "
+            + "re.lastModifiedDate, re.linkedIn, re.major, re.overview, re.phone , re.website, re.resumeID, re.userID "
+            + "FROM tblJobApplications jo left join tblResumes re "
+            + " ON jo.resumeID = re.resumeID "
+            + "WHERE jo.jobID = ? AND re.resumeStatus = 1 AND jo.jobApplicationStatus = 1 ";
     private static final String GETTALLJOBORDERIDOFJOB = "SELECT jobApplicationID FROM tblJobApplications WHERE jobID = ?";
     private static final String GETALLJOBAPPLIED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.budget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
             + "                        jo.createdDate, c.categoryName, c.img, com.companyName, "
@@ -74,10 +81,37 @@ public class JobApplicationDAO {
             + "left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID) ";
 
     private static final String GETALLNUMBEROFJOBORDER = "SELECT COUNT (*) AS totalJobOrder FROM tblJobApplications";
+    private static final String UPDATE_FORM_APPLICATON_OF_RESUME = "UPDATE tblJobApplications SET priceDeal = ?, message = ?, cvFile = ? WHERE resumeID = ? and jobID = ?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
 
+    public boolean updateFormApplicationOfResume(JobApplication form, int resumeID, int jobID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UPDATE_FORM_APPLICATON_OF_RESUME);
+                preStm.setString(1, form.getPriceDeal());
+                preStm.setString(2, form.getMessage());
+                preStm.setString(3, form.getCvFile());
+                preStm.setInt(4, resumeID);
+                preStm.setInt(5, jobID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
     // tong so job da order
     public int getAllTotalJobOrder() throws SQLException {
         try {
@@ -245,6 +279,8 @@ public class JobApplicationDAO {
                     int jobID = rs.getInt("jobID");
                     int userID = rs.getInt("userID");
                     String priceDeal = rs.getString("priceDeal");
+                    String message = rs.getString("message");
+                    String cvFile = rs.getString("cvFile");
                     String jobTitle = rs.getString("jobTitle");
                     Date createdDate = rs.getDate("createdDate");
                     Date expiriedDate = rs.getDate("expiriedDate");
@@ -280,6 +316,8 @@ public class JobApplicationDAO {
                             .job(job)
                             .createdDate(createdDate)
                             .priceDeal(priceDeal)
+                            .cvFile(cvFile)
+                            .message(message)
                             .lastModifiedDate(createdDate)
                             .jobApplicationStatus(jobAppStatus)
                             .build();
@@ -303,7 +341,6 @@ public class JobApplicationDAO {
         }
         return null;
     }
-    
 
     public List<JobApplication> getListJobCompleteAndUncomplete(int userID) throws SQLException {
         try {
@@ -472,7 +509,8 @@ public class JobApplicationDAO {
                     int jobAppStatus = rs.getInt("jobApplicationStatus");
                     int jobStatus = rs.getInt("jobStatus");
                     PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
-                    Job job = Job.builder().jobID(jobID)
+                    Job job = Job.builder()
+                            .jobID(jobID)
                             .userID(userID)
                             .jobTitle(jobTitle)
                             .category(Category.builder().categoryID(categoryID).categoryName(categoryName).img(img).build())
@@ -641,6 +679,80 @@ public class JobApplicationDAO {
                 return list;
             }
 
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+
+    public List<JobApplication> getListApplicationOfJob(int jobID) throws SQLException {
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GETALLJOBAPPLICATIONOFJOB);
+                preStm.setInt(1, jobID);
+                rs = preStm.executeQuery();
+                List<JobApplication> listJobApplication = new ArrayList<>();
+                while (rs.next()) {
+                    int userID = rs.getInt("userID");
+                    int jobApplicationID = rs.getInt("jobApplicationID");
+                    String priceDeal = rs.getString("priceDeal");
+                    String message = rs.getString("message");
+                    String cvFile = rs.getString("cvFile");
+                    String address = rs.getString("address");
+                    String avatar = rs.getString("avatar");
+                    Date createdDate = rs.getDate("createdDate");
+                    Date dateOfBirth = rs.getDate("dateOfBirth");
+                    String fullName = rs.getString("fullName");
+                    String gender = rs.getString("gender");
+                    String gitHub = rs.getString("gitHub");
+                    String gmail = rs.getString("gmail");
+                    String gpa = rs.getString("gpa");
+                    Date lastModifiedDate = rs.getDate("lastModifiedDate");
+                    String linkedIn = rs.getString("linkedIn");
+                    String major = rs.getString("major");
+                    String overview = rs.getString("overview");
+                    String phone = rs.getString("phone");
+                    String website = rs.getString("website");
+                    int resumeID = rs.getInt("resumeID");
+                    listJobApplication.add(JobApplication.builder()
+                            .jobApplicationID(jobApplicationID)
+                            .priceDeal(priceDeal)
+                            .message(message)
+                            .cvFile(cvFile)
+                            .resumeID(resumeID)
+                            .resume(Resume.builder()
+                                    .userID(userID)
+                                    .address(address)
+                                    .avatar(avatar)
+                                    .createdDate(createdDate)
+                                    .dateOfBirth(dateOfBirth)
+                                    .fullName(fullName)
+                                    .gender(gender)
+                                    .gitHub(gitHub)
+                                    .gmail(gmail)
+                                    .gpa(gpa)
+                                    .lastModifiedDate(lastModifiedDate)
+                                    .linkedIn(linkedIn)
+                                    .major(major)
+                                    .overview(overview)
+                                    .phone(phone)
+                                    .website(website)
+                                    .build()
+                            ).build()
+                    );
+                }
+                return listJobApplication;
+            }
         } catch (Exception e) {
         } finally {
             if (rs != null) {

@@ -3,6 +3,7 @@ package se1621.dto;
 import lombok.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,4 +30,5 @@ public class Resume {
     private Date createdDate;
     private Date lastModifiedDate;
     private int resumeStatus;
+    List<ResumeSkill> listResumeSkills;
 }
