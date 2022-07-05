@@ -75,7 +75,6 @@
         <div id="navigation">
             <!-- Navigation Menu-->   
             <ul class="navigation-menu">
-                <li></li>
                 <li><a href="${pageContext.request.contextPath}">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJob">Project List</a></li>
                     <% if (loginUser != null) {

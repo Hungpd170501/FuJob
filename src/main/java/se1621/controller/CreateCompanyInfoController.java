@@ -81,7 +81,6 @@ public class CreateCompanyInfoController extends HttpServlet {
                     checkUpdate = dao.updateCompanyInfo(company);
                     if (checkUpdate) {
                         request.setAttribute("MESSAGE_COM", "Update Company Successfull!");
-
                         url = SUCCESS + companyID;
                     } else {
                         checkValidation = false;
@@ -93,7 +92,6 @@ public class CreateCompanyInfoController extends HttpServlet {
                     checkUpdate = dao.updateCompanyInfo(company);
                     if (checkUpdate) {
                         request.setAttribute("MESSAGE_COM", "Update Company Successfull!");
-
                         url = SUCCESS + companyID;
                     }
                 } else {
@@ -119,7 +117,6 @@ public class CreateCompanyInfoController extends HttpServlet {
                     session.setAttribute("LOGIN_USER", user);
                     if (check) {
                         request.setAttribute("MESSAGE_COM", "Create Company Successfull!");
-
                         url = SUCCESS + companyID;
                     }
                 }

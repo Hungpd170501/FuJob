@@ -11,7 +11,7 @@ public class DBUtils {
 
     private static DBUtils instance;
     private Connection connection;
-
+    
 //    private final String serverName = "fujob.database.windows.net";
 //    private final String dbName = "FuJobDB";
 //    private final String portNumber = "1433";
@@ -66,4 +66,5 @@ public class DBUtils {
         } catch (SQLException e) {
         }
     }
+
 }
