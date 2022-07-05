@@ -58,7 +58,9 @@ public class ListJobByIDController extends HttpServlet {
                     job.setListJobSkills(ljk);
                 }
             }
+            String messCancel = (String) request.getAttribute("MESSAGE_CANCEL");
             if (!listJob.isEmpty()) {
+                request.setAttribute("MESSAGE_CANCEL", messCancel);
                 request.setAttribute("HR", us);
                 request.setAttribute("LIST_JOBPOST", listJob);
                 url = SUCCESS;
