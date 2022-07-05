@@ -50,15 +50,19 @@ public class ChangePasswordController extends HttpServlet {
                     case 1:
                         switch (loginUser.getRole().getRoleID()) {
                             case US:
+                                request.setAttribute("MESSAGE_CHANGEPASS", "Change password successfully!");
                                 url = USER_PAGE;
                                 break;
                             case HR:
+                                request.setAttribute("MESSAGE_CHANGEPASS", "Change password successfully!");
                                 url = USER_PAGE;
                                 break;
                             case AD:
+                                request.setAttribute("MESSAGE_CHANGEPASS", "Change password successfully!");
                                 url = ADMIN_PAGE;
                                 break;
                             case HRM:
+                                request.setAttribute("MESSAGE_CHANGEPASS", "Change password successfully!");
                                 url = USER_PAGE;
                                 break;
                             default:

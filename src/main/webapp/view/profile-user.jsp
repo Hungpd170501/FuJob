@@ -4,7 +4,6 @@
     Author     : HNGB
 --%>
 
-<%@page import="se1621.utils.Helper"%>
 <%@page import="se1621.dto.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -37,10 +36,10 @@
         <%
             User us = (User) session.getAttribute("LOGIN_USER");
             String messUpdate = (String) request.getAttribute("MESSAGE_UPDATE");
-            if(messUpdate!=null) {
+            if (messUpdate != null) {
         %>
         <div class="col-5 mx-auto text-center alert alert-warning alert-dismissible fade show" role="alert">
-            <strong><%= messUpdate %></strong>
+            <strong><%= messUpdate%></strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -84,15 +83,16 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form method="post" action="${pageContext.request.contextPath}/MainController" enctype="multipart/form-data">
+                    <form method="post" action="${pageContext.request.contextPath}/MainController">
                         <div class="modal-body">
                             <div class="form-group text-dark">
-                                <label>Enter your password</label>
-                                <input onchange="getPassword()" id="passwordEnter" type="password" class="form-control" name="password" placeholder="Enter your current password:">
+                                <label>Enter your current password</label>
+                                <input id="passwordEnter" type="password" class="form-control" name="passwordEnter" placeholder="Enter your current password:">
                             </div>
                         </div>
                         <div class="modal-footer border-top-0 d-flex justify-content-center">
-                            <a onclick="checkPassword('<%= us.getPassword()%>')" href="" class="btn btn-primary" >Confirm</a>
+                            <input type="submit" class="btn btn-primary" value="Cofirm">
+                            <input type="hidden" name="action" value="CheckPasswordToChange">
                         </div>
                     </form>
                 </div>
@@ -113,19 +113,5 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-
-        <script>
-                                function getPassword() {
-                                    var pass = document.getElementById("passwordEnter").value;
-                                    var sha1 = require('sha1');
-                                    var hash = sha1(pass);
-                                    alert(hash);
-                                    return pass;
-                                }
-                                function checkPassword(pass) {
-                                    var passEnter = getPassword();
-                                    alert(passEnter);
-                                }
-        </script>
     </body>
 </html>

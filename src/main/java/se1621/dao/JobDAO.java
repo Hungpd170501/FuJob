@@ -451,17 +451,17 @@ public class JobDAO {
                 boolean checkSkillID = false;
 
                 if (searchJobCategoryID == 0 && searchSkillID == 0) {
-                    getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobStatus = 1 and userID =" + hrID;
+                    getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and userID =" + hrID;
                     checkCateID = true;
                     checkSkillID = true;
                 } else {
-                    getDataSQL = queryForSearchSkill + "WHERE jobTitle like ? and skillID = ? and jobCategoryID = ? and jobStatus = 1 and userID =" + hrID;
+                    getDataSQL = queryForSearchSkill + "WHERE jobTitle like ? and skillID = ? and jobCategoryID = ? and userID =" + hrID;
                     if (searchJobCategoryID == 0) {
-                        getDataSQL = queryForSearchSkill + " WHERE jobTitle like ? and skillID = ? and jobStatus = 1 and userID =" + hrID;
+                        getDataSQL = queryForSearchSkill + " WHERE jobTitle like ? and skillID = ? and userID =" + hrID;
                         checkCateID = true;
                     }
                     if (searchSkillID == 0) {
-                        getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobCategoryID = ? and jobStatus = 1 and userID =" + hrID;
+                        getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobCategoryID = ? and userID =" + hrID;
                         checkSkillID = true;
                     }
                 }

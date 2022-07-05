@@ -97,6 +97,10 @@ public class MainController extends HttpServlet {
     private static final String UPDATE_PROFILE_CONTROLLER = "UpdateProfileController";
     private static final String EMPTYJOB = "EmptyJob";
     private static final String SEND_EMPTY_JOB_CONTROLLER = "SendEmptyJobController";
+    private static final String UPDATE_FORM_APPLICATION = "Update application";
+    private static final String UPDATE_FORM_APPLICATION_CONTROLLER = "UpdateFormApplicationController";
+    private static final String CHECK_PASSWORD = "CheckPasswordToChange";
+    private static final String CHECKPASSWORD_CONTROLLER = "CheckPasswordController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -187,6 +191,10 @@ public class MainController extends HttpServlet {
                 url = UPDATE_PROFILE_CONTROLLER;    
             } else if (EMPTYJOB.equals(action)) {
                 url = SEND_EMPTY_JOB_CONTROLLER;    
+            } else if (UPDATE_FORM_APPLICATION.equals(action)) {
+                url = UPDATE_FORM_APPLICATION_CONTROLLER;
+            } else if (CHECK_PASSWORD.equals(action)) {
+                url = CHECKPASSWORD_CONTROLLER;
             } else {
                 url = ERROR;
             }

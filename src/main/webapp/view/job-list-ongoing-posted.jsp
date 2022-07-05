@@ -122,7 +122,6 @@
 
                             <% List<JobApplication> listJobApplication = (List<JobApplication>) request.getAttribute("LIST_ALLJOBONGOING_POSTED");
                                 if (listJobApplication.isEmpty()) {
-
                                     String message = (String) request.getAttribute("MESSAGE");
                             %>
                             <div class="col-lg-12 text-warning text-center">
@@ -150,7 +149,7 @@
                                                             %>
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
-                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Inprogress</i>
+                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">In progress</i>
                                                             <%
                                                             } else if (jobOrder.getJob().getJobStatus() == 5) {
                                                             %>
@@ -162,19 +161,12 @@
                                                             %>
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: red"></i> 
-                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Khong hoan thanh</i>
+                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Not completed</i>
                                                             <%
                                                                 }
                                                             %>
                                                         </a>
                                                     </h4>
-
-                                                    <%
-                                                        Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-                                                        long exDate = Math.abs(jobOrder.getJob().getExpiriedDate().getTime() - dateNow.getTime());
-                                                        long resultDate = exDate / (24 * 60 * 60 * 1000);
-                                                    %>
-                                                    <p class="mb-2 text-muted"> <%= resultDate%> days left</p>
 
                                                     <%
                                                         String description = jobOrder.getJob().getDescription();

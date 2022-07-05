@@ -32,6 +32,19 @@
             <div class="home-center">
                 <div class="home-desc-center">
                     <div class="container">
+                        <%
+                            String messChangePass = (String) request.getAttribute("MESSAGE_CHANGEPASS");
+                            if (messChangePass != null) {
+                        %>
+                        <div class="col-5 mx-auto text-center alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong><%= messChangePass%></strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <%
+                            }
+                        %>
                         <div class="row justify-content-center">
                             <div class="col-lg-12">
                                 <div class="title-heading text-center text-white">
@@ -127,12 +140,12 @@
                                                     / hour
                                                     <%                                                                }
                                                     %>  </p>
-                                                <%
-                                                            Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-                                                            long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
-                                                            long resultDate = exDate / (24 * 60 * 60 * 1000);
-                                                        %>
-                                                <p class="text-muted mb-1">Expiry Date: <%= resultDate %> days left</p>
+                                                    <%
+                                                        Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                                                        long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
+                                                        long resultDate = exDate / (24 * 60 * 60 * 1000);
+                                                    %>
+                                                <p class="text-muted mb-1">Expiry Date: <%= resultDate%> days left</p>
                                             </div>
                                         </div>
                                         <div class="apply-button p-3 border-top" style="text-align: center">

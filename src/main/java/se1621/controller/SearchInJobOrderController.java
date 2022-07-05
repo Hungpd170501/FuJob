@@ -10,10 +10,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import se1621.dao.JobApplicationDAO;
+import se1621.dao.JobSkillsDAO;
 import se1621.dao.ResumeDAO;
+import se1621.dto.Job;
 import se1621.dto.JobApplication;
+import se1621.dto.JobSkills;
 
 /**
  *
@@ -33,12 +37,12 @@ public class SearchInJobOrderController extends HttpServlet {
             String searchTitle = request.getParameter("searchTitle");
             int searchSkill = 0;
             String searchSkillString = request.getParameter("searchSkill");
-            if(!searchSkillString.isBlank()){
+            if (!searchSkillString.isBlank()) {
                 searchSkill = Integer.parseInt(searchSkillString);
             }
             int searchCate = 0;
             String searchCateString = request.getParameter("searchCate");
-            if(!searchCateString.isBlank()) {
+            if (!searchCateString.isBlank()) {
                 searchCate = Integer.parseInt(searchCateString);
             }
             int studentID = Integer.parseInt(request.getParameter("studentID"));
@@ -46,7 +50,18 @@ public class SearchInJobOrderController extends HttpServlet {
             int resumeID = resumeDAO.getResumeID(studentID);
             JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
             List<JobApplication> listJobOrder = jobOrderDAO.getJobOrder(searchTitle, searchSkill, searchCate, resumeID);
+            JobSkillsDAO jsDAO = new JobSkillsDAO();
+            List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
             if (!listJobOrder.isEmpty()) {
+                for (JobApplication jobApplication : listJobOrder) {
+                    List<JobSkills> ljk = new ArrayList<>();
+                    for (JobSkills js : listJs) {
+                        if (jobApplication.getJob().getJobID() == js.getJobID()) {
+                            ljk.add(js);
+                        }
+                        jobApplication.getJob().setListJobSkills(ljk);
+                    }
+                }
                 request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
                 url = SUCCESS;
             } else {

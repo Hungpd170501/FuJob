@@ -18,6 +18,7 @@ public class JobApplication {
     private int jobApplicationID;
     private int resumeID;
     Job job;
+    Resume resume;
     private String cvFile;
     private String priceDeal;
     private String message;

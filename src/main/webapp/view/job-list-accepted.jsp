@@ -168,13 +168,6 @@
                                                             %>
                                                         </a>
                                                     </h4>
-                                                    
-                                                    <%
-                                                        Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-                                                        long exDate = Math.abs(jobOrder.getJob().getExpiriedDate().getTime() - dateNow.getTime());
-                                                        long resultDate = exDate / (24 * 60 * 60 * 1000);
-                                                    %>
-                                                    <p class="mb-2 text-muted"> <%= resultDate%> days left</p>
 
                                                     <%
                                                         String description = jobOrder.getJob().getDescription();

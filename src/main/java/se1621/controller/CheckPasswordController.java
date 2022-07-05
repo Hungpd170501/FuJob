@@ -10,58 +10,37 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import se1621.dao.JobApplicationDAO;
-import se1621.dao.JobSkillsDAO;
-import se1621.dao.ResumeDAO;
-import se1621.dto.JobApplication;
-import se1621.dto.JobSkills;
+import jakarta.servlet.http.HttpSession;
+import se1621.dto.User;
+import se1621.utils.Helper;
 
 /**
  *
  * @author HNGB
  */
-@WebServlet(name = "ViewAllJobOrderController", urlPatterns = {"/ViewAllJobOrderController"})
-public class ViewAllJobOrderController extends HttpServlet {
+@WebServlet(name = "CheckPasswordController", urlPatterns = {"/CheckPasswordController"})
+public class CheckPasswordController extends HttpServlet {
 
-    private static final String ERROR = "/view/job-list-applied.jsp";
-    private static final String SUCCESS = "/view/job-list-applied.jsp";
+    String SUCCESS = "view/change-password.jsp";
+    String ERROR = "view/profile-user.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            int userID = Integer.parseInt(request.getParameter("userID"));
-            ResumeDAO resumeDAO = new ResumeDAO();
-            int resumeID = resumeDAO.getResumeID(userID);
-            List<JobApplication> listJobOrder = new ArrayList<>();
-            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-            listJobOrder = jobOrderDAO.getListJobApplied(resumeID);
-            JobSkillsDAO jsDAO = new JobSkillsDAO();
-            List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
-            for (JobApplication jobApply : listJobOrder) {
-                
-                List<JobSkills> ljk = new ArrayList<>();
-                for (JobSkills js : listJs) {
-                    if(jobApply.getJob().getJobID() == js.getJobID()){
-                                ljk.add(js);
-                    }
-                    jobApply.getJob().setListJobSkills(ljk);
-                }
-            }
-            String messApply = (String) request.getAttribute("MESSAGE");
-            if (!listJobOrder.isEmpty()) {
-                request.setAttribute("UPDATE_MESSAGE", messApply);
-                request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
+            String passwordEnter = request.getParameter("passwordEnter");
+            HttpSession session = request.getSession();
+            User loginUser = (User) session.getAttribute("LOGIN_USER");
+            Helper helper = new Helper();
+            if (loginUser != null && helper.checkPass(passwordEnter, loginUser.getPassword())) {
                 url = SUCCESS;
-            }else{
-                request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
-                request.setAttribute("MESSAGE", "YOU HAVEN'T APPLIED FOR ANY PROJECT");
+            }
+            else {
+                url = ERROR;
+                request.setAttribute("MESSAGE_UPDATE", "Incorrect password!");
             }
         } catch (Exception e) {
-            log("Error at View all job Controller" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
