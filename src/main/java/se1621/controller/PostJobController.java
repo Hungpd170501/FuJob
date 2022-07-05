@@ -97,7 +97,7 @@ public class PostJobController extends HttpServlet {
                         }
                     }
                     if (!listCheckCreateJobSkill.contains(false)) {
-                        request.setAttribute("MESSAGE_JOB", "Update Job Successfully!");
+                        request.setAttribute("MESSAGE_JOB", "Update Project Successfull!");
                         url = SUCCESS + jobID;
                     }
                 } else {
@@ -120,7 +120,7 @@ public class PostJobController extends HttpServlet {
                         }
                     }
                     if (!listCheckCreateJobSkill.contains(false)) {
-                        request.setAttribute("MESSAGE_JOB", "Create Job Successfully!");
+                        request.setAttribute("MESSAGE_JOB", "Post Project Successfull!");
                         url = SUCCESS + jobID;
                     }
                 } else {
