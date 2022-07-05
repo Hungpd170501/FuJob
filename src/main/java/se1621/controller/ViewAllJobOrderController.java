@@ -51,7 +51,7 @@ public class ViewAllJobOrderController extends HttpServlet {
                     jobApply.getJob().setListJobSkills(ljk);
                 }
             }
-            String messApply = (String) request.getAttribute("MESSAGE");
+            String messApply = (String) request.getAttribute("UPDATE_MESSAGE");
             if (!listJobOrder.isEmpty()) {
                 request.setAttribute("UPDATE_MESSAGE", messApply);
                 request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
