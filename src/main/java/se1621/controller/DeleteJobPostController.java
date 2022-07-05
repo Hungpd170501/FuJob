@@ -44,6 +44,7 @@ public class DeleteJobPostController extends HttpServlet {
                     jobApplicationDAO.delete(jobOrderID);
                 }
                url = SUCCESS + userID;
+               request.setAttribute("MESSAGE_CANCEL", "Cancel successfull!");
             }
         }catch(Exception ex){
             log("Error at DeleteJobPostController: " + ex.toString());

@@ -114,6 +114,19 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12">
+                        <%
+                            String messCancel = (String) request.getAttribute("MESSAGE_CANCEL");
+                            if (messCancel != null) {
+                        %>
+                        <div class="col-5 mx-auto text-center alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong><%= messCancel%></strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <%
+                            }
+                        %> 
                         <div class="section-title text-center mb-4 pb-2">
                             <%
                                 User loginUser = (User) session.getAttribute("LOGIN_USER");
