@@ -53,7 +53,7 @@ public class JobDAO {
     private static final String UPDATE_JOB_POST_UNCOMPLETE = "UPDATE tblJobs SET jobStatus=6 WHERE jobID=? AND jobStatus=3 ";
     private static final String UPDATE_JOB_POST_COMPLETE= "UPDATE tblJobs SET jobStatus=5 WHERE jobID=? AND jobStatus=3 ";
     
-    private static final String GETALLNUMBEROFJOBPOST = "SELECT COUNT (*) AS totalJob FROM tblJobs";
+    private static final String GETALLNUMBEROFJOBPOST = "SELECT COUNT (jobID) AS totalJob FROM tblJobs";
     //roi ne
     private static final String GETVIEWRECENTJOB = "SELECT TOP(8) j.jobID, j.jobTitle, j.address, j.budget, c.categoryName, c.img, j.paymentMethodID, j.createdDate, j.lastModifiedDate, j.expiriedDate, pay.paymentMethodName"
             + "                                    FROM ((((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) left join tblUsers u on j.userID = u.userID)"
