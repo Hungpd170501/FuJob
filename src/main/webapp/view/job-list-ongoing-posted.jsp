@@ -205,16 +205,16 @@
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">Xem thang nhan vien</a>
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', <%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getResumeID()%>, '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" type="button" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#EditformApplication" style="width: 50%">View form application</button>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="uncompleteJob(<%= jobOrder.getJobApplicationID()%>,<%= jobOrder.getJob().getJobID() %>)" type="button" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#confirmCancellation" style="width: 50%">
+                                                        <button onclick="uncompleteJob(<%= jobOrder.getJobApplicationID()%>,<%= jobOrder.getJob().getJobID()%>)" type="button" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#confirmCancellation" style="width: 50%">
                                                             Ko hoan thanh
                                                         </button>
                                                     </div>
                                                     <div class="mt-3">
 
-                                                        <button onclick="completeJob(<%= jobOrder.getJobApplicationID()%>,<%= jobOrder.getJob().getJobID() %>)" type="button" class="btn btn-primary-outline btn-sm" data-toggle="modal" data-target="#confirmAcceptaction" style="width: 50%">
+                                                        <button onclick="completeJob(<%= jobOrder.getJobApplicationID()%>,<%= jobOrder.getJob().getJobID()%>)" type="button" class="btn btn-primary-outline btn-sm" data-toggle="modal" data-target="#confirmAcceptaction" style="width: 50%">
                                                             Hoan thanh
                                                         </button>
                                                     </div>
@@ -247,38 +247,38 @@
                                 </div>
                             </div>
                             <div class="modal fade" id="confirmCancellation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title text-primary" id="exampleModalLongTitle">Cai job nay ko hoan thanh ha ?</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                        <a id="yesOption" href=""><button type="button" class="btn btn-primary">Yes</button></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                        <div class="modal fade" id="confirmAcceptaction" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title text-primary" id="exampleModalLongTitle">cai job nay hoan thanh roi ha?</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                        <a id="yesOption2" href=""><button type="button" class="btn btn-primary">Yes</button></a>
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-primary" id="exampleModalLongTitle">Cai job nay ko hoan thanh ha ?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                            <a id="yesOption" href=""><button type="button" class="btn btn-primary">Yes</button></a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>                                                                                    
-                            
+                            </div> 
+                            <div class="modal fade" id="confirmAcceptaction" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-primary" id="exampleModalLongTitle">cai job nay hoan thanh roi ha?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                            <a id="yesOption2" href=""><button type="button" class="btn btn-primary">Yes</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                                                                                    
+
 
                             <%
 
@@ -288,6 +288,45 @@
                                 }
 
                             %>
+
+                             <div class="modal fade" id="EditformApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered " role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-bottom-0">
+                                            <h5 class="modal-title text-primary" id="exampleModalLabel">Application Form</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form method="post" action="${pageContext.request.contextPath}/MainController" enctype="multipart/form-data">
+                                            <div class="modal-body">
+                                                <div class="form-group text-dark">
+                                                    <label>Deal Price</label>
+                                                    <input disabled type="text" id="dealPrice" class="form-control" name="priceDeal" placeholder="Enter price you want to deal">
+                                                </div>
+                                                <input type="hidden" id="JobID" class="form-control" name="jobID" placeholder="Enter price you want to deal">
+                                                <input type="hidden" id="ResumeID" class="form-control" name="resumeID" placeholder="Enter price you want to deal">
+                                                <div class="form-group text-dark">
+                                                    <label>Message</label>
+                                                    <textarea disabled class="my-textarea form-control" id="msg" name="message" placeholder="Message for employer"></textarea>
+                                                </div>
+                                                <div class="form-group text-dark">
+                                                    <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="CV" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i>CV</p></a>
+                                                </div>
+                                                <div class="form-group text-dark">
+                                                    <label>CV</label>
+                                                    <input disabled type="file" class="form-control" name="file">
+                                                </div>
+                                            </div>
+<!--                                            <div class="modal-footer border-top-0 d-flex justify-content-center">
+                                                <input type="submit" class="btn btn-primary" value="Update application">
+                                                <input type="hidden" name="action" value="Update application">
+                                            </div>-->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
                             <%                                if (listJobApplication.size() > 10) {
                             %>
                             <div class="smj col-12 text-center mt-4 pt-2">
@@ -330,10 +369,12 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-         <script>
-                                                        function uncompleteJob(jobAppID, jobID) {
-                                                            $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=UncompteleJob&jobAppID=' + jobAppID + '&jobID=' + jobID);
-                                                        }
+        <script src="${pageContext.request.contextPath}/asset/ckeditor/ckeditor.js"></script>
+        <script>CKEDITOR.replace('message');</script>
+        <script>
+                                                            function uncompleteJob(jobAppID, jobID) {
+                                                                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=UncompteleJob&jobAppID=' + jobAppID + '&jobID=' + jobID);
+                                                            }
         </script>
 
         <script>
@@ -343,13 +384,22 @@
         </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-                                                            $(".job-display").slice(0, 10).show();
-                                                            $(".smj").on("click", function () {
-                                                                $(".job-display:hidden").slice(0, 5).slideDown();
-                                                                if ($(".job-display:hidden").length == 0) {
-                                                                    $(".smj").fadeOut('slow');
-                                                                }
-                                                            });
+            $(".job-display").slice(0, 10).show();
+            $(".smj").on("click", function () {
+                $(".job-display:hidden").slice(0, 5).slideDown();
+                if ($(".job-display:hidden").length == 0) {
+                    $(".smj").fadeOut('slow');
+                }
+            });
+        </script>
+        <script>
+            function getJobOrder(priceDeal, jobID, resumeID, message, cvFile) {
+                $("#dealPrice").val(priceDeal);
+                $("#JobID").val(jobID);
+                $("#ResumeID").val(resumeID);
+                CKEDITOR.instances["msg"].setData(message);
+                document.getElementById('CV').setAttribute('href', cvFile);
+            }
         </script>
     </body>
 </html>

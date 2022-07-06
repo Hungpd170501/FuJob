@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="se1621.dto.JobSkills"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.sql.Date"%>
@@ -87,25 +88,28 @@
                     <div class="col-lg-12 mt-3">
                         <div class="border rounded p-4">
                             <p class="text-muted list-inline pt-3 border-top mb-0 "> ${requestScope.RESUME.overview} </p>
-
                             <ul class="list-inline pt-3 border-top mb-0 row mt-4">
                                 <li class="list-inline-item mr-3 col-md-6">
-                                    <p href="" class="text-muted f-15 mb-0 "><i class="mdi mdi-map-marker mr-2"></i>Address:  ${requestScope.RESUME.address}</p>
+                                    <p href="" class="f-15 mb-0 "><i class="mdi mdi-map-marker mr-2"></i>Address:  ${requestScope.RESUME.address}</p>
                                 </li>
-                                <li class="list-inline-item mr-3 col-md-3">
-                                    <p href="" class="text-muted f-15 mb-0"><i class="mdi mdi-email mr-2">Email: </i>${requestScope.RESUME.gmail}</p>
+                                <li class="list-inline-item mr-3 col-md-5">
+                                    <p href="" class="f-15 mb-0"><i class="mdi mdi-email mr-2"></i>Email: ${requestScope.RESUME.gmail}</p>
                                 </li>
 
                                 <li class="list-inline-item mr-3 col-md-6">
-                                    <p href="" class="text-muted f-15 mb-0"><i class="mdi mdi-cellphone-iphone mr-2"></i>Phone: ${requestScope.RESUME.phone}</p>
+                                    <p href="" class="f-15 mb-0"><i class="mdi mdi-cellphone-iphone mr-2"></i>Phone: ${requestScope.RESUME.phone}</p>
                                 </li>
-                                <li class="list-inline-item mr-3 col-md-3">
-                                    <p href="" class="text-muted f-15 mb-0 "><i class="mdi mdi-timetable mr-2"></i>Joined ${requestScope.RESUME.createdDate}</p>
+                                <%
+                                    SimpleDateFormat simpleformat = new SimpleDateFormat("dd MMM yyyy");
+                                    String date = simpleformat.format(resume.getCreatedDate());
+                                %>
+                                <li class="list-inline-item mr-3 col-md-5">
+                                    <p href="" class="f-15 mb-0 "><i class="mdi mdi-timetable mr-2"></i>Joined <%= date %></p>
                                 </li>
                             </ul>
                             <ul class="list-inline pt-3 border-top mb-0 row">
                                 <li class="list-inline-item mr-3 col-md-3">
-                                    <p href="" class="text-muted f-15 mb-0 "><i class=" mr-2"></i> Job Completed: 94%</p>                                  
+                                    <p href="" class="f-15 mb-0 "><i class=" mr-2"></i> Job Completed: 94%</p>                                  
                                 </li>
                             </ul>
                         </div>

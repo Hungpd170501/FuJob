@@ -492,6 +492,8 @@ public class JobApplicationDAO {
                     int jobApplicationID = rs.getInt("jobApplicationID");
                     int jobID = rs.getInt("jobID");
                     String priceDeal = rs.getString("priceDeal");
+                    String message = rs.getString("message");
+                    String cvFile = rs.getString("cvFile");
                     String jobTitle = rs.getString("jobTitle");
                     Date createdDate = rs.getDate("createdDate");
                     Date expiriedDate = rs.getDate("expiriedDate");
@@ -529,6 +531,8 @@ public class JobApplicationDAO {
                             .resumeID(userID).job(job)
                             .createdDate(createdDate)
                             .priceDeal(priceDeal)
+                            .message(message)
+                            .cvFile(cvFile)
                             .lastModifiedDate(createdDate)
                             .jobApplicationStatus(jobAppStatus)
                             .build();
