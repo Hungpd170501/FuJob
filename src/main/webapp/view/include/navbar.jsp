@@ -101,7 +101,7 @@
                         } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HRM")) {
                         %>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Project Posted</a></li>
-
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingPosted&userID=${sessionScope.LOGIN_USER.userID}">Project Ongoing</a></li>
                         <%
                             }
                         %>        

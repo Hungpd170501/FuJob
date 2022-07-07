@@ -11,7 +11,7 @@
 <html lang="en" class="no-js">
     <head>
         <jsp:include page="./include/header.jsp">
-            <jsp:param name="title" value="FuJob | Job List Apply"/>
+            <jsp:param name="title" value="FuJob | Projects Applied"/>
         </jsp:include>
     </head>
     <body>
@@ -244,7 +244,7 @@
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', <%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getResumeID()%>, '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" type="button" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#EditformApplication" style="width: 50%">Edit form application</button>
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', <%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getResumeID()%>, '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" type="button" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#EditformApplication" style="width: 50%">Edit Application Form</button>
                                                     </div>
                                                     <div class="mt-3">
                                                         <button onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)" type="button" style="width: 50%" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#confirmCancellation">
@@ -258,7 +258,7 @@
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#EditformApplication" style="width: 50%">Edit form application</button>
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#EditformApplication" style="width: 50%">Edit Application Form</button>
                                                     </div>
                                                     <%
                                                     } else if (jobOrder.getJobApplicationStatus() == 5) {
@@ -268,7 +268,7 @@
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#EditformApplication" style="width: 50%">Edit form application</button>
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#EditformApplication" style="width: 50%">Edit Application Form</button>
                                                     </div>
                                                     <%
                                                         }

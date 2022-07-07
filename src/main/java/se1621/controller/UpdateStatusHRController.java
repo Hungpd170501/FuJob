@@ -32,14 +32,15 @@ public class UpdateStatusHRController extends HttpServlet {
             UserDAO userDAO = new UserDAO();
             boolean checkUpdateStatus = userDAO.updateUserStatus(hrID, userStatus);
             if(checkUpdateStatus) {
-                request.setAttribute("MESSAGE", "ID = "+hrID+" updated successfully!");
+                request.setAttribute("MESSAGE_UPDATE", "ID = "+hrID+" updated successfully!");
                 url = SUCCESS + companyID;
             }
             else {
-                request.setAttribute("MESSAGE","ID = "+hrID+" Updated failed!");
+                request.setAttribute("MESSAGE_UPDATE","ID = "+hrID+" Updated failed!");
                 url = ERROR + companyID;
             }
         } catch (Exception e) {
+            log(e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

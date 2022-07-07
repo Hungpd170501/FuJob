@@ -9,7 +9,7 @@
 
     <head>
         <jsp:include page="./include/header.jsp">
-            <jsp:param name="title" value="FuJob | Create Company "/>
+            <jsp:param name="title" value="FuJob | Edit Company "/>
         </jsp:include>
     </head>
 
@@ -132,7 +132,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 mt-4">
-                                    <input type="submit" id="btnCreateCom" name="action" class="submitBnt btn btn-primary" value="Create CompanyInfo">
+                                    <input type="hidden" id="btnCreateCom1" name="action" class="submitBnt btn btn-primary" value="Create CompanyInfo">
+                                    <input type="submit" id="btnCreateCom" class="submitBnt btn btn-primary" value="Submit Company Info">
                                 </div>
                             </form>
                         </div>

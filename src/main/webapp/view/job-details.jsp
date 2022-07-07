@@ -187,7 +187,7 @@
                         } else {
                         %>        
                         <div class="job-detail border rounded mt-4">
-                            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Apply For Projects</a>
+                            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Apply For Project</a>
                         </div>
                         <%
                                     }

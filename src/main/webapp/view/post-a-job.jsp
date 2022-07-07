@@ -55,7 +55,17 @@
                             <div class="custom-form">
                                 <div id="message3"></div>
                                 <form action="/FuJob/MainController" method="POST">
+                                    <%
+                                        if(job.getJobID()>0){
+                                    %>
+                                        <h4 class="text-dark mb-3" style="font-weight: 700">Update Project :</h4>
+                                    <%
+                                        }else{
+                                    %>
                                     <h4 class="text-dark mb-3" style="font-weight: 700">Post a New Project :</h4>
+                                    <%
+                                        }
+                                    %>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group app-label mt-2">
@@ -94,13 +104,13 @@
                                                             if (!listJobSkill.isEmpty()) {
                                                                 for (JobSkills jobSkill : listJobSkill) {
                                                         %>
-                                                        <option selected="selected" value="<%= jobSkill.getSkill().getSkillID() %>"><%= jobSkill.getSkill().getSkillName() %></option>
+                                                        <option selected="selected" value="<%= jobSkill.getSkill().getSkillID()%>"><%= jobSkill.getSkill().getSkillName()%></option>
                                                         <c:forEach items="${chooseSkill.listSkill}" var="i">
                                                             <option value="${i.skillID}">${i.skillName}</option>
                                                         </c:forEach>
                                                         <%
                                                             }
-                                                            } else {
+                                                        } else {
                                                         %>
                                                         <c:forEach items="${chooseSkill.listSkill}" var="i">
                                                             <option value="${i.skillID}">${i.skillName}</option>
@@ -132,11 +142,11 @@
                                                     </div>
                                                     <div class="col-lg-4 p-1 col-md-5" >
                                                         <%
-                                                            if(job.getBudget()>0) {
+                                                            if (job.getBudget() > 0) {
                                                         %>
                                                         <input id="budget" name="budget" type="number" step="0.5" min="1" class="form-control resume" value="${requestScope.JOB.budget}" required="" placeholder="100">
                                                         <%
-                                                            }else {
+                                                        } else {
                                                         %>
                                                         <input id="budget" name="budget" type="number" step="0.5" min="1" class="form-control resume" value="" required="" placeholder="100">
                                                         <%
@@ -195,8 +205,18 @@
 
                                     <div class="row">
                                         <div class="col-lg-12 mt-2">
-                                            <input type="hidden" name="jobID" value="<%= job.getJobID() %>">
+                                            <input type="hidden" name="jobID" value="<%= job.getJobID()%>">
+                                            <%
+                                                if (job.getJobID() > 0) {
+                                            %>
+                                            <input type="submit" id="postJobbtn" name="" class="submitBnt btn btn-primary" value="Update Project">
+                                            <%
+                                                } else {
+                                            %>
                                             <input type="submit" id="postJobbtn" name="" class="submitBnt btn btn-primary" value="Post a Project">
+                                            <%
+                                                }
+                                            %>
                                             <input type="hidden" id="postJobbtn" name="action" class="submitBnt btn btn-primary" value="Post a Job">
                                         </div>
                                     </div>

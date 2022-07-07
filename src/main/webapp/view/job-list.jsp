@@ -13,7 +13,7 @@
 <html lang="en" class="no-js">
     <head>
         <jsp:include page="./include/header.jsp">
-            <jsp:param name="title" value="FuJob | Job List"/>
+            <jsp:param name="title" value="FuJob | Projects Listing"/>
         </jsp:include>
     </head>
     <body>
