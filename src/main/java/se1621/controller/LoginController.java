@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.apache.commons.lang3.StringUtils;
 import se1621.dao.UserDAO;
 import se1621.dto.User;
 import se1621.utils.Helper;
@@ -43,6 +44,7 @@ public class LoginController extends HttpServlet {
             if (loginUser != null && helper.checkPass(password, loginUser.getPassword())) {
                 HttpSession session = request.getSession();
                 session.setAttribute("LOGIN_USER", loginUser);
+                String referer= session.getAttribute("REFERER")!=null?"MainController?"+session.getAttribute("REFERER"):null;
                 switch (loginUser.getUserStatus()) {
                     case 0:
                         request.setAttribute("LOGIN_MESSAGE", "Your account has been deactivated. Please contact to FuJob Support to reactivate it!!");
@@ -53,16 +55,16 @@ public class LoginController extends HttpServlet {
                     case 1:
                         switch (loginUser.getRole().getRoleID()) {
                             case US:
-                                url = USER_PAGE;
+                                url = referer!=null?referer:USER_PAGE;
                                 break;
                             case HR:
-                                url = USER_PAGE;
+                                url = referer!=null?referer:USER_PAGE;
                                 break;
                             case AD:
                                 url = ADMIN_PAGE;
                                 break;
                             case HRM:
-                                url = USER_PAGE;
+                                url = referer!=null?referer:USER_PAGE;
                                 break;
                             default:
                                 request.setAttribute("LOGIN_MESSAGE", "Your role is not supported!");

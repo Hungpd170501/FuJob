@@ -2,7 +2,6 @@ package se1621.entity;
 
 import jakarta.persistence.*;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

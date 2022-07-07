@@ -44,7 +44,8 @@ public class EmailVerifyHandler extends HttpServlet {
                         HttpSession session = request.getSession();
                         userDAO.activeUserAccount(jwtTokenUtils.getEmailFromToken(token));
                         session.setAttribute("LOGIN_USER", user);
-                        url = SUCCESS;
+                        String referer = session.getAttribute("REFERER") != null ? "MainController?" + session.getAttribute("REFERER") : null;
+                        url = referer!=null?referer:SUCCESS;
                         EmailServiceImpl emailServiceIml = new EmailServiceImpl();
                         new Thread(() -> emailServiceIml.sendEmail(getServletContext(), user, "welcome")).start();
                     }

@@ -4,19 +4,12 @@
  */
 package se1621.filter;
 
-import java.io.IOException;
-import jakarta.servlet.Filter;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.FilterConfig;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
+import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
+
 import java.util.Properties;
 
 /**
- *
  * @author ACER
  */
 public class DispatcherFilter implements Filter {
@@ -28,23 +21,8 @@ public class DispatcherFilter implements Filter {
     public DispatcherFilter() {
     }
 
-    private void doBeforeProcessing(ServletRequest request, ServletResponse response)
-            throws IOException, ServletException {
-        if (debug) {
-            log("DispatcherFilter:DoBeforeProcessing");
-        }
-    }
-
-    private void doAfterProcessing(ServletRequest request, ServletResponse response)
-            throws IOException, ServletException {
-        if (debug) {
-            log("DispatcherFilter:DoAfterProcessing");
-        }
-    }
-
     public void doFilter(ServletRequest request, ServletResponse response,
-            FilterChain chain)
-            throws IOException, ServletException {
+            FilterChain chain) {
 
         HttpServletRequest req = (HttpServletRequest) request;
         String uri = req.getRequestURI();
@@ -53,8 +31,8 @@ public class DispatcherFilter implements Filter {
             ServletContext context = request.getServletContext();
             Properties siteMapProperties = (Properties) context.getAttribute("SITE_MAP");
             int lastIndex = uri.lastIndexOf("/");
-            String resouce = uri.substring(lastIndex + 1);
-            url = siteMapProperties.getProperty(resouce);
+            String resource = uri.substring(lastIndex + 1);
+            url=resource.isBlank()?"MainController?action=IndexController":siteMapProperties.getProperty(resource);
             if (url != null) {
                 req.getRequestDispatcher(url).forward(request, response);
             } else {
@@ -63,14 +41,6 @@ public class DispatcherFilter implements Filter {
         } catch (Throwable t) {
             log(t.getMessage());
         }
-    }
-
-    public FilterConfig getFilterConfig() {
-        return (this.filterConfig);
-    }
-
-    public void setFilterConfig(FilterConfig filterConfig) {
-        this.filterConfig = filterConfig;
     }
 
     public void destroy() {
@@ -90,10 +60,7 @@ public class DispatcherFilter implements Filter {
         if (filterConfig == null) {
             return ("DispatcherFilter()");
         }
-        StringBuffer sb = new StringBuffer("DispatcherFilter(");
-        sb.append(filterConfig);
-        sb.append(")");
-        return (sb.toString());
+        return ("DispatcherFilter(" + filterConfig + ")");
     }
 
     public void log(String msg) {
