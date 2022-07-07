@@ -65,7 +65,7 @@ public class IndexController extends HttpServlet {
             CompletableFuture<Void> future3 = CompletableFuture.runAsync(() -> {
                 try {
                     JobDAOImpl jopbDAOImpl = new JobDAOImpl();
-                    List<JobEntity> listJob = jopbDAOImpl.get8RecentJobPosted("FROM JobEntity j JOIN FETCH j.skills s WHERE s.skillStatus=1 ORDER BY j.lastModifiedDate DESC");
+                    List<JobEntity> listJob = jopbDAOImpl.get8RecentJobPosted("FROM JobEntity j WHERE j.jobStatus=1 ORDER BY j.lastModifiedDate DESC");
                     request.setAttribute("JOB_LIST", listJob);
                 } catch (Throwable t) {
                     log(t.getMessage());

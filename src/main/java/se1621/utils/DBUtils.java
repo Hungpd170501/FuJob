@@ -40,6 +40,7 @@ public class DBUtils {
                     instance = new DBUtils();
                 }
             } catch (SQLException ignored) {
+                instance = new DBUtils();
             }
         }
         return instance;
