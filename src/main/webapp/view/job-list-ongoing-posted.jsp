@@ -318,10 +318,6 @@
                                                     <input disabled type="file" class="form-control" name="file">
                                                 </div>
                                             </div>
-<!--                                            <div class="modal-footer border-top-0 d-flex justify-content-center">
-                                                <input type="submit" class="btn btn-primary" value="Update application">
-                                                <input type="hidden" name="action" value="Update application">
-                                            </div>-->
                                         </form>
                                     </div>
                                 </div>

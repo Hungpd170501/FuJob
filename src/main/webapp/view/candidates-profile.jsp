@@ -12,7 +12,7 @@
 
     <head>
         <jsp:include page="./include/header.jsp">
-            <jsp:param name="title" value="FuJob | Candidate Profile"/>
+            <jsp:param name="title" value="FuJob | Student Resume"/>
         </jsp:include>
     </head>
 
@@ -87,37 +87,35 @@
                 <div class="row">
                     <div class="col-lg-12 mt-3">
                         <div class="border rounded p-4">
-                            <p class="text-muted list-inline pt-3 border-top mb-0 "> ${requestScope.RESUME.overview} </p>
+                            <p class="list-inline pt-3 mb-0 "> ${requestScope.RESUME.overview} </p>
+
                             <ul class="list-inline pt-3 border-top mb-0 row mt-4">
                                 <li class="list-inline-item mr-3 col-md-6">
-                                    <p href="" class="f-15 mb-0 "><i class="mdi mdi-map-marker mr-2"></i>Address:  ${requestScope.RESUME.address}</p>
+                                    <p href="" class="f-15 mb-0 "><i class="mdi mdi-map-marker mr-2"></i><strong>Address:</strong>  ${requestScope.RESUME.address}</p>
                                 </li>
                                 <li class="list-inline-item mr-3 col-md-5">
-                                    <p href="" class="f-15 mb-0"><i class="mdi mdi-email mr-2"></i>Email: ${requestScope.RESUME.gmail}</p>
+                                    <p href="" class="f-15 mb-0"><i class="mdi mdi-email mr-2"></i><strong>Email:</strong> ${requestScope.RESUME.gmail}</p>
                                 </li>
 
                                 <li class="list-inline-item mr-3 col-md-6">
-                                    <p href="" class="f-15 mb-0"><i class="mdi mdi-cellphone-iphone mr-2"></i>Phone: ${requestScope.RESUME.phone}</p>
+                                    <p href="" class="f-15 mb-0"><i class="mdi mdi-cellphone-iphone mr-2"></i><strong>Phone:</strong> ${requestScope.RESUME.phone}</p>
                                 </li>
                                 <%
                                     SimpleDateFormat simpleformat = new SimpleDateFormat("dd MMM yyyy");
                                     String date = simpleformat.format(resume.getCreatedDate());
                                 %>
                                 <li class="list-inline-item mr-3 col-md-5">
-                                    <p href="" class="f-15 mb-0 "><i class="mdi mdi-timetable mr-2"></i>Joined <%= date %></p>
+                                    <p href="" class="f-15 mb-0 "><i class="mdi mdi-timetable mr-2"></i><strong>Joined:</strong> <%= date%></p>
                                 </li>
                             </ul>
                             <ul class="list-inline pt-3 border-top mb-0 row">
                                 <li class="list-inline-item mr-3 col-md-3">
-                                    <p href="" class="f-15 mb-0 "><i class=" mr-2"></i> Job Completed: 94%</p>                                  
+                                    <p href="" class="f-15 mb-0 "><i class=" mr-2"></i> Project Completed: 94%</p>                                  
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-
-
-
                 <div class = "row">
                     <div class ="col-lg-6">
                         <div class="row">
@@ -126,13 +124,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <!--                    <div class="col-lg-3"></div>-->
                             <div class="col-lg-12 mt-4 pt-5">
-                                <div class="border rounded candidates-profile-education text-center text-muted">
+                                <div class="border rounded candidates-profile-education text-center">
                                     <div class="profile-education-icon border rounded-pill bg-white text-primary">
                                         <i class="mdi mdi-36px mdi-school"></i>
                                     </div>
-                                    <h6 class="text-uppercase f-17 text-muted font-weight-bold " style="letter-spacing: 5px"> FPT UNIVERSITY</h6>
+                                    <h6 class="text-uppercase f-17 font-weight-bold " style="letter-spacing: 5px"> FPT UNIVERSITY</h6>
                                     <p class="border-top"></p>
                                     <p class="f-14 mb-1"> ${requestScope.RESUME.major} </p>
                                     <p class="pb-3 mb-0"> GPA: ${requestScope.RESUME.gpa} </p>                               
@@ -148,11 +145,13 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12 mt-4 pt-5">
-                                <div class="border rounded candidates-profile-education text-center text-muted">
+                                <div class="border rounded candidates-profile-education text-center">
                                     <div class="profile-education-icon border rounded-pill bg-white text-primary">
                                         <i class="mdi mdi-36px mdi-briefcase-check"></i>
                                     </div>
-                                    <p class="pb-3 mb-0">Skills:
+                                    <h6 class="text-uppercase f-17 font-weight-bold " style="letter-spacing: 5px"></h6>
+                                    <p class=""></p>
+                                    <p class="pb-4 mb-0">Skills:
                                         <%
                                             List<ResumeSkill> listStudentSkill = (List<ResumeSkill>) request.getAttribute("LIST_STUDENTSKILL");
                                             for (int i = 0; i < listStudentSkill.size() - 1; i++) {
@@ -163,7 +162,7 @@
                                         %>
                                         <%= listStudentSkill.get(listStudentSkill.size() - 1).getSkill().getSkillName()%>
                                     </p>
-                                    <p class="pb-3 mb-0">Website: ${requestScope.RESUME.website}</p>                               
+                                    <p class="pb-4 mb-0">Website: ${requestScope.RESUME.website}</p>                               
                                 </div>
                             </div>
                         </div>
