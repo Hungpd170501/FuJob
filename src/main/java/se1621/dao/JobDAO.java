@@ -126,7 +126,7 @@ public class JobDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(GETALLNUMBEROFJOBPOST);
                 rs = preStm.executeQuery();
-                while (rs.next()) {
+                if (rs.next()) {
                     return rs.getInt("totalJob");
                 }
             }
