@@ -47,7 +47,7 @@ public class IndexController extends HttpServlet {
             CompletableFuture<Void> future1 = CompletableFuture.runAsync(() -> {
                 try {
                     CategoryDAOImpl categoryDAOImpl = new CategoryDAOImpl();
-                    List<CategoryEntity> listCategory = categoryDAOImpl.getAll("CategoryEntity");
+                    List<CategoryEntity> listCategory = categoryDAOImpl.getAllUsingHQL("FROM CategoryEntity c WHERE c.categoryStatus=1 ORDER BY c.categoryName");
                     request.setAttribute("CATEGORY_LIST", listCategory);
                 } catch (Throwable t) {
                     log(t.getMessage());
@@ -56,7 +56,7 @@ public class IndexController extends HttpServlet {
             CompletableFuture<Void> future2 = CompletableFuture.runAsync(() -> {
                 try {
                     SkillDAOImpl skillDAOImpl = new SkillDAOImpl();
-                    List<SkillEntity> listSkill = skillDAOImpl.getAll("SkillEntity");
+                    List<SkillEntity> listSkill = skillDAOImpl.getAllUsingHQL("FROM SkillEntity s WHERE s.skillStatus=1 ORDER BY c.skillName");
                     request.setAttribute("SKILL_LIST", listSkill);
                 } catch (Throwable t) {
                     log(t.getMessage());

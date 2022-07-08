@@ -5,22 +5,32 @@
 package se1621.controller;
 
 import java.io.IOException;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
+import se1621.dao.JobApplicationDAO;
 import se1621.dao.JobDAO;
 import se1621.dao.JobSkillsDAO;
+import se1621.dao.UserDAO;
+import se1621.dao.v2.CategoryDAOImpl;
+import se1621.dao.v2.JobDAOImpl;
+import se1621.dao.v2.SkillDAOImpl;
 import se1621.dto.Job;
 import se1621.dto.JobSkills;
+import se1621.entity.CategoryEntity;
+import se1621.entity.JobEntity;
+import se1621.entity.SkillEntity;
 
-/**
- *
- * @author lehad
- */
+
 @WebServlet(name = "ViewAllJobController", urlPatterns = {"/ViewAllJobController"})
 public class ViewAllJobController extends HttpServlet {
 
@@ -32,26 +42,47 @@ public class ViewAllJobController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-
-            JobDAO jobDAO = new JobDAO();
-            List<Job>listJob = jobDAO.getListJob();
-            JobSkillsDAO jsDAO = new JobSkillsDAO();
-            List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
-            for (Job job : listJob) {
-                List<JobSkills> ljk = new ArrayList<>();
-                for (JobSkills js : listJs) {
-                    if(job.getJobID() == js.getJobID()){
-                                ljk.add(js);
-                    }
-                    job.setListJobSkills(ljk);
+            CompletableFuture<Void> future1 = CompletableFuture.runAsync(() -> {
+                try {
+                    CategoryDAOImpl categoryDAOImpl = new CategoryDAOImpl();
+                    List<CategoryEntity> listCategory = categoryDAOImpl.getAllUsingHQL("FROM CategoryEntity c WHERE c.categoryStatus=1 ORDER BY c.categoryName");
+                    request.setAttribute("CATEGORY_LIST", listCategory);
+                } catch (Throwable t) {
+                    log(t.getMessage());
                 }
-            }
-            if (!listJob.isEmpty()) {
-                request.setAttribute("LIST_ALLJOB", listJob);
-                url = SUCCESS;
-
-            }
-
+            });
+            CompletableFuture<Void> future2 = CompletableFuture.runAsync(() -> {
+                try {
+                    SkillDAOImpl skillDAOImpl = new SkillDAOImpl();
+                    List<SkillEntity> listSkill = skillDAOImpl.getAllUsingHQL("FROM SkillEntity s WHERE s.skillStatus=1 ORDER BY s.skillName");
+                    request.setAttribute("SKILL_LIST", listSkill);
+                } catch (Throwable t) {
+                    log(t.getMessage());
+                }
+            });
+            CompletableFuture<Void> future3 = CompletableFuture.runAsync(() -> {
+                try {
+                    JobDAO jobDAO = new JobDAO();
+                    List<Job> listJob = jobDAO.getListJob();
+                    JobSkillsDAO jsDAO = new JobSkillsDAO();
+                    List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
+                    //problem N+1
+                    for (Job job : listJob) {
+                        List<JobSkills> ljk = new ArrayList<>();
+                        for (JobSkills js : listJs) {
+                            if (job.getJobID() == js.getJobID()) {
+                                ljk.add(js);
+                            }
+                            job.setListJobSkills(ljk);
+                        }
+                    }
+                    request.setAttribute("LIST_ALLJOB", listJob);
+                } catch (Throwable t) {
+                    log(t.getMessage());
+                }
+            });
+            CompletableFuture.allOf(future1, future2, future3).get();
+            url = SUCCESS;
         } catch (Exception e) {
             log("Error at View all job Controller" + e.toString());
         } finally {
@@ -60,13 +91,14 @@ public class ViewAllJobController extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -77,10 +109,10 @@ public class ViewAllJobController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
