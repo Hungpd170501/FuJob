@@ -42,46 +42,21 @@ public class ViewAllJobController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            CompletableFuture<Void> future1 = CompletableFuture.runAsync(() -> {
-                try {
-                    CategoryDAOImpl categoryDAOImpl = new CategoryDAOImpl();
-                    List<CategoryEntity> listCategory = categoryDAOImpl.getAllUsingHQL("FROM CategoryEntity c WHERE c.categoryStatus=1 ORDER BY c.categoryName");
-                    request.setAttribute("CATEGORY_LIST", listCategory);
-                } catch (Throwable t) {
-                    log(t.getMessage());
-                }
-            });
-            CompletableFuture<Void> future2 = CompletableFuture.runAsync(() -> {
-                try {
-                    SkillDAOImpl skillDAOImpl = new SkillDAOImpl();
-                    List<SkillEntity> listSkill = skillDAOImpl.getAllUsingHQL("FROM SkillEntity s WHERE s.skillStatus=1 ORDER BY s.skillName");
-                    request.setAttribute("SKILL_LIST", listSkill);
-                } catch (Throwable t) {
-                    log(t.getMessage());
-                }
-            });
-            CompletableFuture<Void> future3 = CompletableFuture.runAsync(() -> {
-                try {
-                    JobDAO jobDAO = new JobDAO();
-                    List<Job> listJob = jobDAO.getListJob();
-                    JobSkillsDAO jsDAO = new JobSkillsDAO();
-                    List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
-                    //problem N+1
-                    for (Job job : listJob) {
-                        List<JobSkills> ljk = new ArrayList<>();
-                        for (JobSkills js : listJs) {
-                            if (job.getJobID() == js.getJobID()) {
-                                ljk.add(js);
-                            }
-                            job.setListJobSkills(ljk);
-                        }
+            JobDAO jobDAO = new JobDAO();
+            List<Job> listJob = jobDAO.getListJob();
+            JobSkillsDAO jsDAO = new JobSkillsDAO();
+            List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
+            //problem N+1
+            for (Job job : listJob) {
+                List<JobSkills> ljk = new ArrayList<>();
+                for (JobSkills js : listJs) {
+                    if (job.getJobID() == js.getJobID()) {
+                        ljk.add(js);
                     }
-                    request.setAttribute("LIST_ALLJOB", listJob);
-                } catch (Throwable t) {
-                    log(t.getMessage());
+                    job.setListJobSkills(ljk);
                 }
-            });
-            CompletableFuture.allOf(future1, future2, future3).get();
+            }
+            request.setAttribute("LIST_ALLJOB", listJob);
             url = SUCCESS;
         } catch (Exception e) {
             log("Error at View all job Controller" + e.toString());

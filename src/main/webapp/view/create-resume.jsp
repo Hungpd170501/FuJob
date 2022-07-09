@@ -159,14 +159,14 @@
                                                             for (ResumeSkill studentSkill : listResumeSkill) {
                                                     %>
                                                     <option selected="selected" value="<%= studentSkill.getSkill().getSkillID()%>" ><%= studentSkill.getSkill().getSkillName()%></option>
-                                                    <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                    <c:forEach items="${applicationScope.SKILL_LIST}" var="i">
                                                         <option value="${i.skillID}">${i.skillName}</option>
                                                     </c:forEach>
                                                     <%
                                                         }
                                                     } else {
                                                     %>
-                                                    <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                    <c:forEach items="${applicationScope.SKILL_LIST}" var="i">
                                                         <option value="${i.skillID}">${i.skillName}</option>
                                                     </c:forEach>    
                                                     <%

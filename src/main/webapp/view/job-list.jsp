@@ -63,7 +63,7 @@
                                                         <i class="fa fa-archive"></i>
                                                         <select class="demo-default" id="select-category" name="searchSkill">
                                                             <option value="">Skill</option>
-                                                            <c:forEach items="${requestScope.SKILL_LIST}" var="i">
+                                                            <c:forEach items="${applicationScope.SKILL_LIST}" var="i">
                                                                 <option value="${i.skillID}">${i.skillName}</option>
                                                             </c:forEach>
                                                         </select>
@@ -74,7 +74,7 @@
                                                         <i class="fa fa-list-alt"></i>
                                                         <select id="select-category" class="demo-default" name="searchCate">
                                                             <option value="">Categories...</option>
-                                                            <c:forEach items="${requestScope.CATEGORY_LIST}" var="i">
+                                                            <c:forEach items="${applicationScope.CATEGORY_LIST}" var="i">
                                                                 <option value="${i.categoryID}">${i.categoryName}</option>
                                                             </c:forEach>
                                                         </select>
