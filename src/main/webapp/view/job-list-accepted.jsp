@@ -162,7 +162,7 @@
                                                             %>
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: red"></i> 
-                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Khong hoan thanh</i>
+                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Not Completed</i>
                                                             <%
                                                                 }
                                                             %>

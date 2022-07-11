@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.BatchSize;
 
 @Builder
 @AllArgsConstructor
@@ -34,15 +35,17 @@ public class JobEntity{
     @Column(name = "jobTitle")
     private String jobTitle;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "jobCategoryID")
+    @BatchSize(size = 1)
     private CategoryEntity jobCategoryID;
 
     @Column(name = "budget")
     private Double budget;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "paymentMethodID")
+    @BatchSize(size = 1)
     private PaymentMethodEntity paymentMethod;
 
     @Column(name = "address", length = 100)

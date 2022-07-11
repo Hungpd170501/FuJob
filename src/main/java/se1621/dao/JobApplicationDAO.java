@@ -80,7 +80,7 @@ public class JobApplicationDAO {
             + "LEFT JOIN tblCategories c ON j.jobCategoryID = c.categoryID) "
             + "left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID) ";
 
-    private static final String GETALLNUMBEROFJOBORDER = "SELECT COUNT (*) AS totalJobOrder FROM tblJobApplications";
+    private static final String GETALLNUMBEROFJOBORDER = "SELECT COUNT (jobApplicationID) AS totalJobOrder FROM tblJobApplications";
     private static final String UPDATE_FORM_APPLICATON_OF_RESUME = "UPDATE tblJobApplications SET priceDeal = ?, message = ?, cvFile = ? WHERE resumeID = ? and jobID = ?";
     Connection conn;
     PreparedStatement preStm;

@@ -16,5 +16,8 @@ public interface JobDAO {
     public void save(JobEntity jobEntity);
 
     public List<JobEntity> getAll(String JobEntityName);
+    public List<JobEntity> getAllUsingHQL(String hql);
+
+    public List<JobEntity> get8RecentJobPosted(String hql);
 
 }

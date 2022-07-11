@@ -7,7 +7,7 @@
 
     <head>
         <jsp:include page="./include/header.jsp">
-            <jsp:param name="title" value="FuJob | Home Page"/>
+            <jsp:param name="title" value="FuJob | Human Resource Listing"/>
         </jsp:include>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
     </head>
@@ -45,6 +45,19 @@
                         </div>
                     </div>
                 </div>
+            <%
+                String messUpdate = (String) request.getAttribute("MESSAGE_UPDATE");
+                if (messUpdate != null) {
+            %>
+            <div class="col-5 mx-auto text-center alert alert-warning alert-dismissible fade show" role="alert">
+                <strong><%= messUpdate%></strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <%
+                }
+            %>       
             <% List<User> listUser = (List<User>) request.getAttribute("LIST_USER");
                     String message = (String) request.getAttribute("MESSAGE");
                     if(message == null){
@@ -60,7 +73,7 @@
                 <div class="col-12 text-center">
                     <a class="btn btn-primary" data-toggle="modal" data-target="#formAddNewHR">Add New</a>
                 </div>
-                    <form action="${pageContext.request.contextPath}/MainController" method="POST">
+                    
                     <table id="example" class=" table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr>
@@ -81,6 +94,7 @@
                                             if (user.getRole().getRoleID().equals("HR")) {
                             %>
                             <tr>
+                        <form action="${pageContext.request.contextPath}/MainController" method="POST">
                                 <td><%= user.getUserID()%></td>
                                 <td><%= user.getFullName()%></td>
                                 <td><%= user.getEmail()%></td>
@@ -90,7 +104,7 @@
                                     <%
                                         if (user.getUserStatus() == 1) {
                                     %>
-                                    <select style="background-color: rgba(0, 0, 0, 0);border: none">
+                                    <select name="userStatus" style="background-color: rgba(0, 0, 0, 0);border: none">
                                         <option selected="selected" value="1">Active</option>
                                         <option value="0">Deactivates</option>
                                     </select>    
@@ -107,10 +121,10 @@
                                     %>
                                 </td>
                                     <input type="hidden" name="companyID" value="<%= user.getCompanyID() %>">
-                                    <input type="hidden" name="hrID" value="<%= user.getUserID() %>">
+                                    <input type="hidden" name="hrID" value="<%= user.getUserID()%>">
                                     <input type="hidden" name="action" value="UpdateStatusHR">
                                 <td><input type="submit" class="btn btn-primary" value="Update"></td>
-                                
+                             </form>   
                             </tr>
                             <%          }
                                         }
@@ -119,7 +133,7 @@
                             %>
                         </tbody>
                     </table>
-                    </form>
+                    
             </div>
         </section>   
 

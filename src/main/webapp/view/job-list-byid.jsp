@@ -14,7 +14,7 @@
 <html lang="en" class="no-js">
     <head>
         <jsp:include page="./include/header.jsp">
-            <jsp:param name="title" value="FuJob | Job List"/>
+            <jsp:param name="title" value="FuJob | Projects Posted "/>
         </jsp:include>
     </head>
     <body>
@@ -34,12 +34,12 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6">
                         <div class="text-center text-white">
-                            <h4 class="text-uppercase title mb-4">Project List view</h4>
+                            <h4 class="text-uppercase title mb-4">List Posted Projects</h4>
                             <ul class="page-next d-inline-block mb-0">
                                 <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
                                 <li><a href="#" class="text-uppercase font-weight-bold">Projects</a></li>
                                 <li>
-                                    <span class="text-uppercase text-white font-weight-bold">Projects Listing</span>
+                                    <span class="text-uppercase text-white font-weight-bold">Posted Projects Listing</span>
 
                                 </li>
                             </ul>
@@ -136,7 +136,7 @@
                             <%
                             } else {
                             %>
-                            <h4 class="title title-line pb-5">Available projects for you</h4>
+                            <h4 class="title title-line pb-5">List of projects posted</h4>
                             <%
                                 }
                             %>
@@ -190,19 +190,19 @@
                                                             %>
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
-                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Dang dang</i>
+                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Published</i>
                                                             <%
                                                             } else if (job.getJobStatus() == 3) {
                                                             %>
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
-                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Co nhan vien </i>
+                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Handed Over</i>
                                                             <%
                                                             } else if (job.getJobStatus() == 4) {
                                                             %>
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: red"></i> 
-                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Qua thoi gian</i>
+                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Posting Expired</i>
                                                             <%
                                                                 }
                                                             %>
@@ -275,7 +275,7 @@
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingPosted&userID=<%= job.getUserID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">Do xem cai job ongoing do</a>
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingPosted&userID=<%= job.getUserID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Progress</a>
                                                     </div>
                                                     <%
                                                     } else if (job.getJobStatus() == 4) {

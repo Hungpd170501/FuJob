@@ -22,7 +22,7 @@ import se1621.dto.User;
 @WebServlet(name="ViewAllHRController", urlPatterns={"/ViewAllHRController"})
 public class ViewAllHRController extends HttpServlet {
     private static final String ERROR = "/view/humanresource-list.jsp";
-    private static final String SUCCESS = "/MainController?action=ViewAllHR&companyID=";
+    private static final String SUCCESS = "/view/humanresource-list.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

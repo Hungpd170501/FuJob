@@ -166,7 +166,11 @@
                             if (loginUser == null) {
                         %>
                         <div class="job-detail border rounded mt-4">
-                            <a href="${pageContext.request.contextPath}/view/login.jsp" class="btn btn-primary btn-block">Apply For Projects</a>
+<%--                            <a href="${pageContext.request.contextPath}/ApplyJobWithoutLogin?referer=${pageContext.request.queryString}" class="btn btn-primary btn-block">Apply For Projects</a>--%>
+                            <form action="ApplyJobWithoutLogin" method="post">
+                                <input type="submit" value="Apply For Projects" class="btn btn-primary btn-block"/>
+                                <input type="hidden" name="referer" value="${pageContext.request.queryString}">
+                            </form>
                         </div>
                         <%
                         } else if (loginUser != null && !StringUtils.equals(loginUser.getRole().getRoleID(), "HR") && !StringUtils.equals(loginUser.getRole().getRoleID(), "HRM")) {
@@ -187,7 +191,7 @@
                         } else {
                         %>        
                         <div class="job-detail border rounded mt-4">
-                            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Apply For Projects</a>
+                            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Apply For Project</a>
                         </div>
                         <%
                                     }

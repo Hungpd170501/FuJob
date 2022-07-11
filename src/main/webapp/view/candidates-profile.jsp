@@ -9,7 +9,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-
     <head>
         <jsp:include page="./include/header.jsp">
             <jsp:param name="title" value="FuJob | Student Resume"/>

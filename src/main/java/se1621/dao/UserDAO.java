@@ -23,8 +23,8 @@ public class UserDAO {
     private static final String UPDATECOMID = "UPDATE tblUsers SET fullName=?, email=?, roleID=?, companyID=? WHERE userID=?";
     private static final String GETUSER = "SELECT fullName, email, u.roleID, r.roleName, companyID, r.createdDate, userStatus "
             + "FROM (tblUsers u left join tblRoles r on u.roleID = r.roleID) WHERE userID =?";
-    private static final String GETALLTOTALUSER_NONAD = "SELECT COUNT (*) AS totalUser FROM tblUsers "
-            + "WHERE roleID = 'US' or roleID = 'HR' or roleID ='HRM' ";
+    private static final String GETALLTOTALUSER_NONAD = "SELECT COUNT (userID) AS totalUser FROM tblUsers "
+            + "WHERE roleID <> 'AD';";
     private static final String GETLISTUSERBYCOMPANYID = "SELECT u.userID, u.fullName, u.email, u.roleID, r.roleName, u.companyID, "
             + "r.createdDate, u.userStatus, (SELECT COUNT (*) FROM tblJobs j WHERE j.userID = u.userID) AS projectPosted  "
             + "FROM (tblUsers u left join tblRoles r on u.roleID = r.roleID) WHERE u.companyID = ?";

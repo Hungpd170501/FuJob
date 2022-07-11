@@ -127,7 +127,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="mt-3">
-                                                    <button onclick="getJobOrder('<%= jobAplication.getPriceDeal()%>', '<%= jobAplication.getMessage()%>', '<%= jobAplication.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View form application</button>
+                                                    <button onclick="getJobOrder('<%= jobAplication.getPriceDeal()%>', '<%= jobAplication.getMessage()%>', '<%= jobAplication.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">Application Form</button>
                                                 </div>
                                             </div>
                                         </div>

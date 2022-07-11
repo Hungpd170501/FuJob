@@ -8,7 +8,7 @@
 
     <head>
         <jsp:include page="./include/header.jsp">
-            <jsp:param name="title" value="FuJob | Create Resume"/>
+            <jsp:param name="title" value="FuJob | Edit Resume"/>
         </jsp:include>
         <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
             <link rel="stylesheet" href="https://unpkg.com/filepond@^4/dist/filepond.css" type="text/css"/>
