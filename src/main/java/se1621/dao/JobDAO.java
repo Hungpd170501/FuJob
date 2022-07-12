@@ -23,22 +23,22 @@ import se1621.dto.PayMentMethod;
 public class JobDAO {
 
     private static final String CREATEJOB = "INSERT INTO tblJobs(userID, jobTitle, jobCategoryID,"
-            + " budget, paymentMethodID, expiriedDate, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,1)";
+            + " minBudget, maxBudget, paymentMethodID, expiriedDate, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,1)";
     //xong ne
     private String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
             + "j.jobCategoryID, c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, "
-            + "pm.paymentMethodName, j.budget, j.expiriedDate "
+            + "pm.paymentMethodName, j.minBudget, j.maxBudget, j.expiriedDate "
             + "FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)"
             + " left join tblPaymentMethods pm on j.paymentMethodID = pm.paymentMethodID) ";
     private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJobs WHERE jobID = (SELECT MAX(jobID) FROM tblJobs) and jobStatus = 1 and userID = ?";
     //roi ne
     private static final String SEARCHBYJOBID = "SELECT j.jobID, j.userID, j.jobTitle,j.jobCategoryID, c.categoryName, "
-            + "j.budget, j.paymentMethodID, payment.paymentMethodName, j.address, j.email, j.phone, j.description, j.createdDate, "
+            + "j.minBudget, j.maxBudget, j.paymentMethodID, payment.paymentMethodName, j.address, j.email, j.phone, j.description, j.createdDate, "
             + "j.lastModifiedDate, j.expiriedDate, j.jobStatus  "
             + "FROM (tblJobs j left join tblPaymentMethods payment on j.paymentMethodID = payment.paymentMethodID ) "
             + "left join tblCategories c on c.categoryID = j.jobCategoryID WHERE jobID = ?";
     //roi ne
-    private static final String VIEWALLJOB = "SELECT j.jobID,ISNULL(jobAply.bids,0) AS bids,j.jobStatus, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate, pay.paymentMethodName "
+    private static final String VIEWALLJOB = "SELECT j.jobID,ISNULL(jobAply.bids,0) AS bids,j.jobStatus, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.minBudget, j.maxBudget, j.expiriedDate, pay.paymentMethodName "
             + "                                    FROM (((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) "
             + "            						left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID ) "
             + "									left join (select jobID, COUNT(jobID) AS bids  "
@@ -49,7 +49,7 @@ public class JobDAO {
             + "                                    WHERE j.jobStatus = 1 ORDER BY jobID DESC";
 
     //sua roi
-    private static final String VIEWHRJOB = "SELECT j.jobID,ISNULL(jobApp.bids,0) AS bids, j.jobStatus, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate, p.paymentMethodName "
+    private static final String VIEWHRJOB = "SELECT j.jobID,ISNULL(jobApp.bids,0) AS bids, j.jobStatus, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.minBudget, j.maxBudget, j.expiriedDate, p.paymentMethodName "
             + "                                  FROM (((tblJobs j left join tblCategories c "
             + "								  on j.jobCategoryID = c.categoryID) "
             + "								  left join tblPaymentMethods p "
@@ -68,7 +68,7 @@ public class JobDAO {
 
     private static final String GETALLNUMBEROFJOBPOST = "SELECT COUNT (jobID) AS totalJob FROM tblJobs";
     //roi ne
-    private static final String GETVIEWRECENTJOB = "SELECT TOP(8) j.jobID, j.jobTitle, j.address, j.budget, c.categoryName, c.img, j.paymentMethodID, j.createdDate, j.lastModifiedDate, j.expiriedDate, pay.paymentMethodName"
+    private static final String GETVIEWRECENTJOB = "SELECT TOP(8) j.jobID, j.jobTitle, j.address, j.minBudget, j.maxBudget, c.categoryName, c.img, j.paymentMethodID, j.createdDate, j.lastModifiedDate, j.expiriedDate, pay.paymentMethodName"
             + "                                    FROM ((((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) left join tblUsers u on j.userID = u.userID)"
             + "                                    left join tblCompanies com on u.companyID = com.companyID)"
             + "									left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
@@ -77,7 +77,7 @@ public class JobDAO {
     PreparedStatement preStm;
     private ResultSet rs;
 
-    private static final String UPDATE_JOB = "UPDATE tblJobs SET userID=?, jobTitle=?, jobCategoryID=?, address=?, paymentMethodID=?, email=?, expiriedDate=?, phone=?, budget=?, description=? WHERE jobID=?";
+    private static final String UPDATE_JOB = "UPDATE tblJobs SET userID=?, jobTitle=?, jobCategoryID=?, address=?, paymentMethodID=?, email=?, expiriedDate=?, phone=?, minBudget=?, maxBudget=? , description=? WHERE jobID=?";
 
     // top recent job in index.jsp
     public List<Job> getRecentJobPosted() throws SQLException {
@@ -92,7 +92,8 @@ public class JobDAO {
                     String jobTitle = rs.getString("jobTitle");
                     String address = rs.getString("address");
                     String categoryName = rs.getString("categoryName");
-                    float budget = rs.getFloat("budget");
+                    float minBudget = rs.getFloat("minBudget");
+                    float maxBudget = rs.getFloat("maxBudget");
                     int paymentMethodID = rs.getInt("paymentMethodID");
                     String paymentMethodName = rs.getString("paymentMethodName");
                     String img = rs.getString("img");
@@ -105,7 +106,8 @@ public class JobDAO {
                             .jobID(jobID)
                             .jobTitle(jobTitle)
                             .address(address)
-                            .budget(budget)
+                            .minBudget(minBudget)
+                            .maxBudget(maxBudget)
                             .payMentMethod(payMent)
                             .category(category)
                             .createdDate(createdDate)
@@ -171,13 +173,14 @@ public class JobDAO {
                 preStm.setInt(1, job.getUserID());
                 preStm.setString(2, job.getJobTitle());
                 preStm.setInt(3, job.getCategory().getCategoryID());
-                preStm.setFloat(4, job.getBudget());
-                preStm.setInt(5, job.getPayMentMethod().getPaymentMethodID());
-                preStm.setDate(6, job.getExpiriedDate());
-                preStm.setString(7, job.getAddress());
-                preStm.setString(8, job.getEmail());
-                preStm.setString(9, job.getPhone());
-                preStm.setString(10, job.getDescription());
+                preStm.setFloat(4, job.getMinBudget());
+                preStm.setFloat(5, job.getMaxBudget());
+                preStm.setInt(6, job.getPayMentMethod().getPaymentMethodID());
+                preStm.setDate(7, job.getExpiriedDate());
+                preStm.setString(8, job.getAddress());
+                preStm.setString(9, job.getEmail());
+                preStm.setString(10, job.getPhone());
+                preStm.setString(11, job.getDescription());
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -214,7 +217,8 @@ public class JobDAO {
                     Date expiriedDate = rs.getDate("expiriedDate");
                     int paymentMethodID = rs.getInt("paymentMethodID");
                     String paymentMethodName = rs.getString("paymentMethodName");
-                    float budget = rs.getFloat("budget");
+                    float minBudget = rs.getFloat("minBudget");                    
+                    float maxBudget = rs.getFloat("maxBudget");                    
                     String categoryName = rs.getString("categoryName");
                     String img = rs.getString("img");
                     int status = rs.getInt("jobStatus");
@@ -231,7 +235,8 @@ public class JobDAO {
                             .createdDate(createdDate)
                             .expiriedDate(expiriedDate)
                             .payMentMethod(payment)
-                            .budget(budget)
+                            .minBudget(minBudget)
+                            .maxBudget(maxBudget)
                             .jobStatus(status)
                             .bids(bids)
                             .build();
@@ -269,8 +274,9 @@ public class JobDAO {
                     int userID = rs.getInt("userID");
                     String jobTitle = rs.getString("jobTitle");
                     int jobCategoryID = rs.getInt("jobCategoryID");
-                    float budget = rs.getFloat("budget");
                     int paymentMethodID = rs.getInt("paymentMethodID");
+                    float minBudget = rs.getFloat("minBudget");
+                    float maxBudget = rs.getFloat("maxBudget");
                     String categoryName = rs.getString("categoryName");
                     String paymentMethodName = rs.getString("paymentMethodName");
                     String address = rs.getString("address");
@@ -285,7 +291,8 @@ public class JobDAO {
                             .userID(userID)
                             .jobTitle(jobTitle)
                             .category(Category.builder().categoryID(jobCategoryID).categoryName(categoryName).build())
-                            .budget(budget)
+                            .minBudget(minBudget)
+                            .maxBudget(maxBudget)
                             .payMentMethod(PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build())
                             .createdDate(createdDate)
                             .lastModifiedDate(lastModifiedDate)
@@ -351,7 +358,7 @@ public class JobDAO {
                 String getDataSQL1 = this.SEARCHALL_JOBTITLE_SKILL_CATEGORY;
                 String queryForSearchSkill = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, j.jobCategoryID, "
                         + "c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, pm.paymentMethodName, "
-                        + "j.budget, j.expiriedDate "
+                        + "j.minBudget,j.maxBudget, j.expiriedDate "
                         + "FROM (((tblJobSkills js left join tblJobs j on j.jobID = js.jobID)) "
                         + "left join tblCategories c on c.categoryID = j.jobCategoryID) left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID ";
                 boolean checkCateID = false;
@@ -399,7 +406,8 @@ public class JobDAO {
                     int jobCategoryID = rs.getInt("jobCategoryID");
                     String categoryName = rs.getString("categoryName");
                     String img = rs.getString("img");
-                    float budget = rs.getFloat("budget");
+                    float minBudget = rs.getFloat("minBudget");
+                    float maxBudget = rs.getFloat("maxBudget");
                     int paymentMethodID = rs.getInt("paymentMethodID");
                     String paymentMethodName = rs.getString("paymentMethodName");
                     String address = rs.getString("address");
@@ -418,7 +426,8 @@ public class JobDAO {
                             .userID(userID)
                             .jobTitle(jobTitle)
                             .category(category)
-                            .budget(budget)
+                            .minBudget(minBudget)
+                            .maxBudget(maxBudget)
                             .payMentMethod(payment)
                             .createdDate(createdDate)
                             .lastModifiedDate(lastModifiedDate)
@@ -459,7 +468,7 @@ public class JobDAO {
                 String getDataSQL1 = this.SEARCHALL_JOBTITLE_SKILL_CATEGORY;
                 String queryForSearchSkill = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, j.jobCategoryID, "
                         + "c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, pm.paymentMethodName, "
-                        + "j.budget, j.expiriedDate "
+                        + "j.minBudget, j.maxBudget, j.expiriedDate "
                         + "FROM (((tblJobSkills js left join tblJobs j on j.jobID = js.jobID)) "
                         + "left join tblCategories c on c.categoryID = j.jobCategoryID) left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID ";
                 boolean checkCateID = false;
@@ -507,7 +516,8 @@ public class JobDAO {
                     int jobCategoryID = rs.getInt("jobCategoryID");
                     String categoryName = rs.getString("categoryName");
                     String img = rs.getString("img");
-                    float budget = rs.getFloat("budget");
+                    float minBudget = rs.getFloat("minBudget");
+                    float maxBudget = rs.getFloat("maxBudget");
                     int paymentMethodID = rs.getInt("paymentMethodID");
                     String paymentMethodName = rs.getString("paymentMethodName");
                     String address = rs.getString("address");
@@ -526,7 +536,8 @@ public class JobDAO {
                             .userID(userID)
                             .jobTitle(jobTitle)
                             .category(category)
-                            .budget(budget)
+                            .minBudget(minBudget)
+                            .maxBudget(maxBudget)
                             .payMentMethod(payment)
                             .createdDate(createdDate)
                             .lastModifiedDate(lastModifiedDate)
@@ -575,7 +586,8 @@ public class JobDAO {
                     Date expiriedDate = rs.getDate("expiriedDate");
                     int paymentMethodID = rs.getInt("paymentMethodID");
                     String paymentMethodName = rs.getString("paymentMethodName");
-                    float budget = rs.getFloat("budget");
+                    float minBudget = rs.getFloat("minBudget");
+                    float maxBudget = rs.getFloat("maxBudget");
                     String categoryName = rs.getString("categoryName");
                     String img = rs.getString("img");
                     int status = rs.getInt("jobStatus");
@@ -593,7 +605,8 @@ public class JobDAO {
                             .createdDate(createdDate)
                             .expiriedDate(expiriedDate)
                             .payMentMethod(payment)
-                            .budget(budget)
+                            .minBudget(minBudget)
+                            .maxBudget(maxBudget)
                             .jobStatus(status)
                             .bids(bids)
                             .build();
@@ -719,9 +732,10 @@ public class JobDAO {
                 preStm.setString(6, job.getEmail());
                 preStm.setDate(7, job.getExpiriedDate());
                 preStm.setString(8, job.getPhone());
-                preStm.setFloat(9, job.getBudget());
-                preStm.setString(10, job.getDescription());
-                preStm.setInt(11, job.getJobID());
+                preStm.setFloat(9, job.getMinBudget());
+                preStm.setFloat(10, job.getMaxBudget());
+                preStm.setString(11, job.getDescription());
+                preStm.setInt(12, job.getJobID());
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

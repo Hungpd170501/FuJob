@@ -94,6 +94,10 @@ File: main stylesheet
     color: #8492a6 !important;
 }
 
+.text-green{
+    color: green !important;
+}
+
 .list-inline-item:not(:last-child) {
     margin-right: 5px;
     margin-bottom: 5px;

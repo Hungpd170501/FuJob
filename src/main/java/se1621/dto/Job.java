@@ -17,7 +17,8 @@ public class Job {
     private String jobTitle;
     CompanyInfo company;
     Category category;
-    private float budget;
+    private float minBudget;
+    private float maxBudget;
     private String address;
     private String email;
     private String phone;

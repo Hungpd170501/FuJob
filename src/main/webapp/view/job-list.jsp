@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="se1621.dao.JobSkillsDAO"%>
 <%@page import="se1621.dto.JobSkills"%>
 <%@page import="java.util.Calendar"%>
@@ -44,45 +45,45 @@
 
                                 <!-- START SEARCH -->
                                 <form class="registration-form" action="${pageContext.request.contextPath}/MainController">
-                                            <!--<form class="registration-form">-->
-                                            <div class="row">
-                                                <div class="col-lg-3 col-md-6">
-                                                    <div class="registration-form-box">
-                                                        <i class="fa fa-briefcase"></i>
-                                                        <input type="text" name="searchTitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-6">
-                                                    <div class="registration-form-box">
-                                                        <i class="fa fa-archive"></i>
-                                                        <select class="demo-default" id="select-category" name="searchSkill">
-                                                            <option value="">Skill</option>
-                                                            <c:forEach items="${applicationScope.SKILL_LIST}" var="i">
-                                                                <option value="${i.skillID}">${i.skillName}</option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-6">
-                                                    <div class="registration-form-box">
-                                                        <i class="fa fa-list-alt"></i>
-                                                        <select id="select-category" class="demo-default" name="searchCate">
-                                                            <option value="">Categories...</option>
-                                                            <c:forEach items="${applicationScope.CATEGORY_LIST}" var="i">
-                                                                <option value="${i.categoryID}">${i.categoryName}</option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 col-md-6">
-                                                    <div class="registration-form-box">
-                                                        <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Find">
-                                                        <!-- name = action  -->
-                                                        <input type="hidden" name ="action" value="Search_title_exper_cate">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
+                                <!--<form class="registration-form">-->
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="registration-form-box">
+                                            <i class="fa fa-briefcase"></i>
+                                            <input type="text" name="searchTitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="registration-form-box">
+                                            <i class="fa fa-archive"></i>
+                                            <select class="demo-default" id="select-category" name="searchSkill">
+                                                <option value="">Skill</option>
+                                                <c:forEach items="${applicationScope.SKILL_LIST}" var="i">
+                                                    <option value="${i.skillID}">${i.skillName}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="registration-form-box">
+                                            <i class="fa fa-list-alt"></i>
+                                            <select id="select-category" class="demo-default" name="searchCate">
+                                                <option value="">Categories...</option>
+                                                <c:forEach items="${applicationScope.CATEGORY_LIST}" var="i">
+                                                    <option value="${i.categoryID}">${i.categoryName}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="registration-form-box">
+                                            <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Find">
+                                            <!-- name = action  -->
+                                            <input type="hidden" name ="action" value="Search_title_exper_cate">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                             <!-- END SEARCH -->
                         </div>
                     </div>
@@ -157,13 +158,18 @@
                                             </div>
                                             <div class="col-lg-6 col-md-9">
                                                 <div class="job-list-desc">
-                                                    <h4 class="painting-name mb-1" style="font-weight: 700"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark"><%= job.getJobTitle()%></a></h4>
+                                                    <h4 class="painting-name mb-1" style="font-weight: 700"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="text-dark mb-5"><%= job.getJobTitle()%></a></h4>
                                                         <%
                                                             Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
                                                             long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
                                                             long resultDate = exDate / (24 * 60 * 60 * 1000);
                                                         %>
-                                                    <p class="mb-2 text-muted"> <%= resultDate%> days left</p>
+                                                    <h6 class="mb-4 mt-3" >Date Posted: <%
+                                                        String pattern = "dd-MM-yyyy";
+                                                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                                                        String date = simpleDateFormat.format(job.getCreatedDate());%>
+                                                        <%= date%></h6>
+                                                    
                                                     <%
                                                         String description = job.getDescription();
                                                         if (description.length() > 200 || description.isBlank()) {
@@ -182,6 +188,10 @@
                                                         %>
                                                         <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
                                                     </h6>
+                                                    <h6>Payment Method: 
+                                                        <%= job.getPayMentMethod().getPaymentMethodName()                                                       
+                                                        %>
+                                                    </h6>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
                                                         </li>
@@ -191,11 +201,12 @@
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
                                                     <div>
-                                                        <p class=" mb-5"><i class="mr-2"></i><%= job.getBids() %> bid(s)</p>
+                                                        <h6 class=" mb-1"><i class="mr-2"></i><%= job.getBids()%> bid(s)</h6>
                                                     </div>
+                                                        <h6 class="mb-4 text-green"> <%= resultDate%> days left</h6>
                                                     <div>
                                                         <h5 class="painting-id" data-format="money" style="display: none"> <%= job.getJobID()%> </h5>
-                                                        <h5 class="painting-price mb-5" data-format="money">  <i class="mr-2"></i> <%= job.getBudget()%>$ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) {
+                                                        <h5 class="painting-price mb-5" data-format="money">  <i class="mr-2"></i> <%= job.getMinBudget()%>$ -<%= job.getMaxBudget()%>$ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) {
                                                             %>
                                                             / hour
                                                             <%
@@ -203,6 +214,7 @@
                                                             %> 
                                                         </h5>
                                                     </div>
+                                                        
                                                     <div class="mt-3">
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
                                                     </div>

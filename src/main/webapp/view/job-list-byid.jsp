@@ -225,7 +225,7 @@
                                                         <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
                                                     </h6>
                                                     <h6>
-                                                        <%= job.getPayMentMethod().getPaymentMethodName()%>: <%= job.getBudget()%>$ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) {
+                                                        <%= job.getPayMentMethod().getPaymentMethodName()%>: <%= job.getMinBudget()%>$ - <%= job.getMaxBudget()%>$ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) {
                                                         %>
                                                         / hour
                                                         <%
