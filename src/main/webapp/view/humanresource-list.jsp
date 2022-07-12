@@ -59,9 +59,9 @@
                 }
             %>       
             <% List<User> listUser = (List<User>) request.getAttribute("LIST_USER");
-                    String message = (String) request.getAttribute("MESSAGE");
-                    if(message == null){
-                        message = "";
+                String message = (String) request.getAttribute("MESSAGE");
+                if (message == null) {
+                    message = "";
                 }
             %>
             <div class="col-lg-12 text-warning text-center">
@@ -73,67 +73,45 @@
                 <div class="col-12 text-center">
                     <a class="btn btn-primary" data-toggle="modal" data-target="#formAddNewHR">Add New</a>
                 </div>
-                    
-                    <table id="example" class=" table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Full Name</th>
-                                <th>Email</th>
-                                <th>Creation Date</th>
-                                <th>Project Posted</th>
-                                <th>Status</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                                if (listUser != null) {
-                                    if (listUser.size() > 0) {
-                                        for (User user : listUser) {
-                                            if (user.getRole().getRoleID().equals("HR")) {
-                            %>
-                            <tr>
-                        <form action="${pageContext.request.contextPath}/MainController" method="POST">
-                                <td><%= user.getUserID()%></td>
-                                <td><%= user.getFullName()%></td>
-                                <td><%= user.getEmail()%></td>
-                                <td><%= user.getCreatedDate()%></td>
-                                <td><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=<%= user.getUserID() %>"><%= user.getProjectPosted()%></a></td>
-                                <td>
-                                    <%
-                                        if (user.getUserStatus() == 1) {
-                                    %>
-                                    <select name="userStatus" style="background-color: rgba(0, 0, 0, 0);border: none">
-                                        <option selected="selected" value="1">Active</option>
-                                        <option value="0">Deactivates</option>
-                                    </select>    
-                                    <%
-                                        }
-                                        if (user.getUserStatus() == 0) {
-                                    %>
-                                    <select name="userStatus" style="background-color: rgba(0, 0, 0, 0);border: none">
-                                        <option value="1">Active</option>
-                                        <option selected="selected" value="0">Deactivates</option>
-                                    </select>    
-                                    <%
-                                        }
-                                    %>
-                                </td>
-                                    <input type="hidden" name="companyID" value="<%= user.getCompanyID() %>">
-                                    <input type="hidden" name="hrID" value="<%= user.getUserID()%>">
-                                    <input type="hidden" name="action" value="UpdateStatusHR">
-                                <td><input type="submit" class="btn btn-primary" value="Update"></td>
-                             </form>   
-                            </tr>
-                            <%          }
-                                        }
-                                    }
+
+                <table id="example" class=" table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Creation Date</th>
+                            <th>Project Posted</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            if (listUser != null) {
+                                if (listUser.size() > 0) {
+                                    for (User user : listUser) {
+                                        if (user.getRole().getRoleID().equals("HR")) {
+                        %>
+                        <tr>
+                    <form action="${pageContext.request.contextPath}/MainController" method="POST">
+                        <td><%= user.getUserID()%></td>
+                        <td><%= user.getFullName()%></td>
+                        <td><%= user.getEmail()%></td>
+                        <td><%= user.getCreatedDate()%></td>
+                        <td><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=<%= user.getUserID()%>"><%= user.getProjectPosted()%></a></td>
+                        <input type="hidden" name="companyID" value="<%= user.getCompanyID()%>">
+                        <input type="hidden" name="hrID" value="<%= user.getUserID()%>">
+                        <td><a onclick="getHRID(<%= user.getUserID()%>)" class="btn btn-primary" data-toggle="modal" data-target="#formChangePassHR">Change Password</a></td>
+                    </form>   
+                    </tr>
+                    <%          }
                                 }
-                            %>
-                        </tbody>
-                    </table>
-                    
+                            }
+                        }
+                    %>
+                    </tbody>
+                </table>
+
             </div>
         </section>   
 
@@ -156,17 +134,55 @@
                                 <label>Email Login<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="email" placeholder="Enter HR Email to Login" required="">
                             </div>
+                            <div class="form-group text-dark">
+                                <label>Password<span class="text-danger">*</span></label>
+                                <input id="password" type="password" class="form-control" name="password" placeholder="Enter HR password" required="">
+                            </div>
+                            <div class="form-group text-dark">
+                                <label>Confirm Password<span class="text-danger">*</span></label>
+                                <input oninput="checkConfirmPass()" id="confirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="Enter HR password" required="">
+                                <p id="errorConfirmPass" class="text-danger h7"><p>
+                            </div>
                             <input type="hidden" name="companyID" value="${sessionScope.LOGIN_USER.companyID}">
                             <input type="hidden" name="roleID" value="HR">
-                            <input type="hidden" name="password" value="1">
                         </div>
                         <div class="modal-footer border-top-0 d-flex justify-content-center">
-                            <input type="submit" name="action" class="btn btn-primary" value="Register HR">
+                            <input id="registerHR" type="submit" name="action" class="btn btn-primary" value="Register HR">
                         </div>
                     </form>
                 </div>
             </div>
-        </div>   
+        </div>
+        <div class="modal fade" id="formChangePassHR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title text-primary" id="exampleModalLabel">Change Human Resource Password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST" action="${pageContext.request.contextPath}/MainController">
+                        <div class="modal-body">
+                            <div class="form-group text-dark">
+                                <label>New Password<span class="text-danger">*</span></label>
+                                <input id="newPassword" type="password" class="form-control" name="password" placeholder="Enter HR password" required="">
+                            </div>
+                            <div class="form-group text-dark">
+                                <label>Confirm Password<span class="text-danger">*</span></label>
+                                <input oninput="checkConfirmPassChange()" id="confirmPasswordChange" type="password" class="form-control" name="confirmPassword" placeholder="Enter HR password" required="">
+                                <p id="errorConfirmPassChange" class="text-danger h7"><p>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-top-0 d-flex justify-content-center">
+                            <input type="hidden" name="action" value="changePassHR">
+                            <input type="hidden" id="hrID" name="hrID" value="">
+                            <input id="changePassBtn" type="submit" class="btn btn-primary" value="Change">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>                     
         <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/bootstrap.bundle.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/jquery.easing.min.js"></script>
@@ -185,9 +201,37 @@
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
         <script>
-                        $(document).ready(function () {
-                            $('#example').DataTable();
-                        });
-        </script>   
+                                        $(document).ready(function () {
+                                            $('#example').DataTable();
+                                        });
+        </script>
+        <script>
+            function checkConfirmPass() {
+                var pass = document.getElementById('password').value
+                var confirmPass = document.getElementById('confirmPassword').value
+                if (confirmPass != pass) {
+                    $('#errorConfirmPass').text('Confirm Password is not match Password!');
+                    document.getElementById('registerHR').disabled = true;
+                } else {
+                    $('#errorConfirmPass').text('');
+                    document.getElementById('registerHR').disabled = false;
+                }
+            }
+            function checkConfirmPassChange() {
+                var pass = document.getElementById('newPassword').value
+                var confirmPass = document.getElementById('confirmPasswordChange').value
+                if (confirmPass != pass) {
+                    $('#errorConfirmPassChange').text('Confirm Password is not match Password!');
+                    document.getElementById('changePassBtn').disabled = true;
+                } else {
+                    $('#errorConfirmPassChange').text('');
+                    document.getElementById('changePassBtn').disabled = false;
+                }
+            }
+            
+            function getHRID(hrID) {
+                $('#hrID').val(hrID);
+            }
+        </script> 
     </body>
 </html>

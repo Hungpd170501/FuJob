@@ -367,7 +367,7 @@
         </script>
         <script>
             function getJobPostID(id, userID) {
-                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=DeleteJobPost&jobPostID=' + id + '&userID=${sessionScope.LOGIN_USER.userID}');
+                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=DeleteJobPost&jobPostID=' + id + '&userID=' + userID);
             }
         </script>
     </body>

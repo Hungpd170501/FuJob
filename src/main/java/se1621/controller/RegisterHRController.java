@@ -15,7 +15,6 @@ import se1621.dao.UserDAO;
 import se1621.dto.Error.UserError;
 import se1621.dto.Role;
 import se1621.dto.User;
-import se1621.service.EmailServiceImpl;
 import se1621.utils.Helper;
 
 /**
@@ -26,7 +25,7 @@ import se1621.utils.Helper;
 public class RegisterHRController extends HttpServlet {
    
     private static final String ERROR = "/view/humanresource-list.jsp";
-    private static final String SUCCESS = "/view/signup-detail.jsp";
+    private static final String SUCCESS = "/MainController?action=ViewAllHR&companyID=";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -56,12 +55,15 @@ public class RegisterHRController extends HttpServlet {
                         .build();
                 boolean checkSignup = dao.registerHR(user);
                 if (checkSignup) {
-                    EmailServiceImpl emailServiceIml = new EmailServiceImpl();
-                    new Thread(() -> emailServiceIml.sendEmail(getServletContext(), user, "verify")).start();
-                    url = SUCCESS;
+                    request.setAttribute("MESSAGE_UPDATE", "Added New HR Successfull!");
+                    url = SUCCESS + companyID;
+                } else {
+                    request.setAttribute("MESSAGE_UPDATE", "Added New HR UnSuccessfull!");
+                    url = SUCCESS + companyID;
                 }
             } else {
-                request.setAttribute("USER_ERROR", userError);
+                request.setAttribute("MESSAGE_UPDATE", userError.getEmailError());
+                url = SUCCESS + companyID;
             }
         } catch (Exception e) {
             log("Error at SignUpController:"+e);
