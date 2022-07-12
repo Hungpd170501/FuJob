@@ -68,7 +68,7 @@
                                                 <i class="fa fa-archive"></i>
                                                 <select class="demo-default" id="select-category" name="searchSkill">
                                                     <option value="">Skill...</option>
-                                                    <c:forEach items="${requestScope.SKILL_LIST}" var="i">
+                                                    <c:forEach items="${applicationScope.SKILL_LIST}" var="i">
                                                         <option value="${i.skillID}">${i.skillName}</option>
                                                     </c:forEach>
                                                 </select>
@@ -79,7 +79,7 @@
                                                 <i class="fa fa-list-alt"></i>
                                                 <select id="select-category" class="demo-default" name="searchCate">
                                                     <option value="">Categories...</option>
-                                                    <c:forEach items="${requestScope.CATEGORY_LIST}" var="i">
+                                                    <c:forEach items="${applicationScope.CATEGORY_LIST}" var="i">
                                                         <option value="${i.categoryID}">${i.categoryName}</option>
                                                     </c:forEach>
                                                 </select>
@@ -176,7 +176,7 @@
         </div>
 
         <div class="row">
-            <c:forEach items="${requestScope.CATEGORY_LIST}" var="c">
+            <c:forEach items="${applicationScope.CATEGORY_LIST}" var="c">
                 <div class="job-display col-lg-3 col-md-6 mt-4 pt-2" style="display: none">
                     <a href="${pageContext.request.contextPath}/MainController?action=Search_title_exper_cate&searchTitle=${""}&searchSkill=${""}&searchCate=${c.categoryID}">
                         <div class="popu-category-box bg-light rounded text-center p-4"

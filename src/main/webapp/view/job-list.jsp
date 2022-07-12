@@ -20,9 +20,6 @@
 
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
-        <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
-        <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
-
             <!-- Start home -->
             <section class="bg-half page-next-level"> 
                 <div class="bg-overlay"></div>
@@ -66,7 +63,7 @@
                                                         <i class="fa fa-archive"></i>
                                                         <select class="demo-default" id="select-category" name="searchSkill">
                                                             <option value="">Skill</option>
-                                                            <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                            <c:forEach items="${applicationScope.SKILL_LIST}" var="i">
                                                                 <option value="${i.skillID}">${i.skillName}</option>
                                                             </c:forEach>
                                                         </select>
@@ -77,7 +74,7 @@
                                                         <i class="fa fa-list-alt"></i>
                                                         <select id="select-category" class="demo-default" name="searchCate">
                                                             <option value="">Categories...</option>
-                                                            <c:forEach items="${chooseCategory.listCategory}" var="i">
+                                                            <c:forEach items="${applicationScope.CATEGORY_LIST}" var="i">
                                                                 <option value="${i.categoryID}">${i.categoryName}</option>
                                                             </c:forEach>
                                                         </select>

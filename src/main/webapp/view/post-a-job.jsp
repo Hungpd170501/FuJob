@@ -15,8 +15,7 @@
         <jsp:include page="./include/header.jsp">
             <jsp:param name="title" value="FuJob | Post Job "/>
         </jsp:include>
-        <jsp:useBean id="chooseCategory" class="se1621.dao.CategoryDAO" scope="request"></jsp:useBean>
-        <jsp:useBean id="chooseSkill" class="se1621.dao.SkillDAO" scope="request"></jsp:useBean>
+
         </head>
 
         <body>
@@ -86,7 +85,7 @@
                                                         <%
                                                             }
                                                         %>
-                                                        <c:forEach items="${chooseCategory.listCategory}" var="i">
+                                                        <c:forEach items="${applicationScope.CATEGORY_LIST}" var="i">
                                                             <option value="${i.categoryID}">${i.categoryName}</option>
                                                         </c:forEach>
                                                     </select>
@@ -105,14 +104,14 @@
                                                                 for (JobSkills jobSkill : listJobSkill) {
                                                         %>
                                                         <option selected="selected" value="<%= jobSkill.getSkill().getSkillID()%>"><%= jobSkill.getSkill().getSkillName()%></option>
-                                                        <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                        <c:forEach items="${applicationScope.SKILL_LIST}" var="i">
                                                             <option value="${i.skillID}">${i.skillName}</option>
                                                         </c:forEach>
                                                         <%
                                                             }
                                                         } else {
                                                         %>
-                                                        <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                        <c:forEach items="${applicationScope.SKILL_LIST}" var="i">
                                                             <option value="${i.skillID}">${i.skillName}</option>
                                                         </c:forEach>
                                                         <%

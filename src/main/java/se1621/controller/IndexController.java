@@ -46,24 +46,6 @@ public class IndexController extends HttpServlet {
         try {
             CompletableFuture<Void> future1 = CompletableFuture.runAsync(() -> {
                 try {
-                    CategoryDAOImpl categoryDAOImpl = new CategoryDAOImpl();
-                    List<CategoryEntity> listCategory = categoryDAOImpl.getAll("CategoryEntity");
-                    request.setAttribute("CATEGORY_LIST", listCategory);
-                } catch (Throwable t) {
-                    log(t.getMessage());
-                }
-            });
-            CompletableFuture<Void> future2 = CompletableFuture.runAsync(() -> {
-                try {
-                    SkillDAOImpl skillDAOImpl = new SkillDAOImpl();
-                    List<SkillEntity> listSkill = skillDAOImpl.getAll("SkillEntity");
-                    request.setAttribute("SKILL_LIST", listSkill);
-                } catch (Throwable t) {
-                    log(t.getMessage());
-                }
-            });
-            CompletableFuture<Void> future3 = CompletableFuture.runAsync(() -> {
-                try {
                     JobDAOImpl jopbDAOImpl = new JobDAOImpl();
                     List<JobEntity> listJob = jopbDAOImpl.get8RecentJobPosted("FROM JobEntity j WHERE j.jobStatus=1 ORDER BY j.lastModifiedDate DESC");
                     request.setAttribute("JOB_LIST", listJob);
@@ -71,7 +53,7 @@ public class IndexController extends HttpServlet {
                     log(t.getMessage());
                 }
             });
-            CompletableFuture<Void> future4 = CompletableFuture.runAsync(() -> {
+            CompletableFuture<Void> future2 = CompletableFuture.runAsync(() -> {
                 JobApplicationDAO jobApplicationDAO=new JobApplicationDAO();
                 try {
                     request.setAttribute("TOTAL_JOB_APPLICATION",jobApplicationDAO.getAllTotalJobOrder());
@@ -79,7 +61,7 @@ public class IndexController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
             });
-            CompletableFuture<Void> future5 = CompletableFuture.runAsync(() -> {
+            CompletableFuture<Void> future3 = CompletableFuture.runAsync(() -> {
                 try {
                     JobDAO jobDAO = new JobDAO();
                     request.setAttribute("TOTAL_JOB_POST", jobDAO.getAllTotalJobPost());
@@ -87,7 +69,7 @@ public class IndexController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
             });
-            CompletableFuture<Void> future6 = CompletableFuture.runAsync(() -> {
+            CompletableFuture<Void> future4 = CompletableFuture.runAsync(() -> {
                 try {
                     UserDAO userDAO = new UserDAO();
                     request.setAttribute("TOTAL_USER_EXCEPT_AD", userDAO.getAllTotalUser_NonAD());
@@ -95,7 +77,7 @@ public class IndexController extends HttpServlet {
                     log(t.getMessage());
                 }
             });
-            CompletableFuture.allOf(future1, future2, future3, future4, future5, future6).get();
+            CompletableFuture.allOf(future1, future2, future3, future4).get();
             url=USER_PAGE;
         } catch (Exception e) {
             log("Error at IndexController: " + e.toString());
