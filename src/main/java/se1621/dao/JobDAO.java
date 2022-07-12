@@ -38,21 +38,34 @@ public class JobDAO {
             + "FROM (tblJobs j left join tblPaymentMethods payment on j.paymentMethodID = payment.paymentMethodID ) "
             + "left join tblCategories c on c.categoryID = j.jobCategoryID WHERE jobID = ?";
     //roi ne
-    private static final String VIEWALLJOB = "SELECT j.jobID,j.jobStatus, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate, pay.paymentMethodName"
-            + "                        FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)"
-            + "						left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID )"
-            + "                        WHERE j.jobStatus = 1 ORDER BY jobID DESC";
+    private static final String VIEWALLJOB = "SELECT j.jobID,ISNULL(jobAply.bids,0) AS bids,j.jobStatus, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate, pay.paymentMethodName "
+            + "                                    FROM (((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) "
+            + "            						left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID ) "
+            + "									left join (select jobID, COUNT(jobID) AS bids  "
+            + "												FROM tblJobApplications  "
+            + "													WHERE jobApplicationStatus = 1  "
+            + "													GROUP BY jobID) AS jobAply  "
+            + "													on jobAply.jobID = j.jobID ) "
+            + "                                    WHERE j.jobStatus = 1 ORDER BY jobID DESC";
 
     //sua roi
-    private static final String VIEWHRJOB = "SELECT j.jobID,j.jobStatus, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate, p.paymentMethodName"
-            + "                      FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) left join tblPaymentMethods p on p.paymentMethodID = j.paymentMethodID) "
-            + "                    WHERE (j.jobStatus = 1 OR  j.jobStatus = 3 OR  j.jobStatus = 4)AND j.userID=? ORDER BY createdDate DESC";
+    private static final String VIEWHRJOB = "SELECT j.jobID,ISNULL(jobApp.bids,0) AS bids, j.jobStatus, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.budget, j.expiriedDate, p.paymentMethodName "
+            + "                                  FROM (((tblJobs j left join tblCategories c "
+            + "								  on j.jobCategoryID = c.categoryID) "
+            + "								  left join tblPaymentMethods p "
+            + "								  on p.paymentMethodID = j.paymentMethodID) "
+            + "								  left join (select jobID, COUNT(jobID) AS bids "
+            + "								FROM tblJobApplications "
+            + "								WHERE jobApplicationStatus = 1 "
+            + "								GROUP BY jobID) AS jobApp "
+            + "								on j.jobID = jobApp.jobID) "
+            + "                               WHERE (j.jobStatus = 1 OR  j.jobStatus = 3 OR  j.jobStatus = 4)AND j.userID= ? ORDER BY createdDate DESC";
 
     private static final String DELETEJOBPOST = "UPDATE tblJobs SET jobStatus=0 WHERE jobID=?";
     private static final String UPDATE_JOB_POST_HAVE_EMPLOYER = "UPDATE tblJobs SET jobStatus=3 WHERE jobID=? AND jobStatus=1 ";
     private static final String UPDATE_JOB_POST_UNCOMPLETE = "UPDATE tblJobs SET jobStatus=6 WHERE jobID=? AND jobStatus=3 ";
-    private static final String UPDATE_JOB_POST_COMPLETE= "UPDATE tblJobs SET jobStatus=5 WHERE jobID=? AND jobStatus=3 ";
-    
+    private static final String UPDATE_JOB_POST_COMPLETE = "UPDATE tblJobs SET jobStatus=5 WHERE jobID=? AND jobStatus=3 ";
+
     private static final String GETALLNUMBEROFJOBPOST = "SELECT COUNT (jobID) AS totalJob FROM tblJobs";
     //roi ne
     private static final String GETVIEWRECENTJOB = "SELECT TOP(8) j.jobID, j.jobTitle, j.address, j.budget, c.categoryName, c.img, j.paymentMethodID, j.createdDate, j.lastModifiedDate, j.expiriedDate, pay.paymentMethodName"
@@ -63,8 +76,8 @@ public class JobDAO {
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
-    
-    private static final String UPDATE_JOB= "UPDATE tblJobs SET userID=?, jobTitle=?, jobCategoryID=?, address=?, paymentMethodID=?, email=?, expiriedDate=?, phone=?, budget=?, description=? WHERE jobID=?";
+
+    private static final String UPDATE_JOB = "UPDATE tblJobs SET userID=?, jobTitle=?, jobCategoryID=?, address=?, paymentMethodID=?, email=?, expiriedDate=?, phone=?, budget=?, description=? WHERE jobID=?";
 
     // top recent job in index.jsp
     public List<Job> getRecentJobPosted() throws SQLException {
@@ -205,6 +218,7 @@ public class JobDAO {
                     String categoryName = rs.getString("categoryName");
                     String img = rs.getString("img");
                     int status = rs.getInt("jobStatus");
+                    int bids = rs.getInt("bids");
                     Category category = Category.builder().categoryName(categoryName).img(img).build();
                     PayMentMethod payment = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder()
@@ -219,6 +233,7 @@ public class JobDAO {
                             .payMentMethod(payment)
                             .budget(budget)
                             .jobStatus(status)
+                            .bids(bids)
                             .build();
                     listJob.add(job);
                 }
@@ -564,6 +579,7 @@ public class JobDAO {
                     String categoryName = rs.getString("categoryName");
                     String img = rs.getString("img");
                     int status = rs.getInt("jobStatus");
+                    int bids = rs.getInt("bids");
                     Category category = Category.builder().categoryName(categoryName).img(img).build();
                     PayMentMethod payment = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder()
@@ -579,6 +595,7 @@ public class JobDAO {
                             .payMentMethod(payment)
                             .budget(budget)
                             .jobStatus(status)
+                            .bids(bids)
                             .build();
                     listHrJob.add(job);
                 }
@@ -643,7 +660,7 @@ public class JobDAO {
         }
         return check;
     }
-    
+
     public boolean updateJobPostUncomplete(int jobPostID) throws SQLException {
         boolean check = false;
         try {
@@ -665,7 +682,7 @@ public class JobDAO {
         }
         return check;
     }
-    
+
     public boolean updateJobPostComplete(int jobPostID) throws SQLException {
         boolean check = false;
         try {
@@ -719,6 +736,5 @@ public class JobDAO {
         }
         return check;
     }
-    
-    
+
 }

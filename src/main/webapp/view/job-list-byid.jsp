@@ -243,11 +243,12 @@
                                             </div>
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
-                                                    <div>
-                                                        <p class=" "><i class="mr-2"></i>5 bids</p>
-                                                    </div>
+                                                    
                                                     <% if (job.getJobStatus() == 1) {
                                                     %>
+                                                    <div>
+                                                        <p class=" "><i class="mr-2"></i><%= job.getBids() %>  bid(s)</p>
+                                                    </div>
                                                     <br>
                                                     <div class="mt-3">
                                                         <a href="${pageContext.request.contextPath}/MainController?action=EditJob&jobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">Edit Project</a>

@@ -197,7 +197,7 @@
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
                                                     <div>
-                                                        <p class=" mb-5"><i class="mr-2"></i>5 bids</p>
+                                                        <p class=" mb-5"><i class="mr-2"></i><%= job.getBids() %> bid(s)</p>
                                                     </div>
                                                     <div>
                                                         <h5 class="painting-id" data-format="money" style="display: none"> <%= job.getJobID()%> </h5>
