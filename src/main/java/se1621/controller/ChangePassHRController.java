@@ -11,6 +11,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import se1621.dao.UserDAO;
+import se1621.utils.Helper;
 
 /**
  *
@@ -19,14 +21,29 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name="ChangePassHRController", urlPatterns={"/ChangePassHRController"})
 public class ChangePassHRController extends HttpServlet {
    
-    
+    private String SUCCESS = "/MainController?action=ViewAllHR&companyID=";
+    private String ERROR = "/view/error.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = ERROR;
         try {
-            
+            String password = request.getParameter("password");
+            String email = request.getParameter("email");
+            int companyID = Integer.parseInt(request.getParameter("companyID"));
+            UserDAO userDAO = new UserDAO();
+            boolean checkChange = userDAO.updateUserPassword(email, Helper.hashPassword(password));
+            if(checkChange) {
+                request.setAttribute("MESSAGE_UPDATE", email + " has changed password!");
+                url = SUCCESS + companyID;
+            }else {
+                request.setAttribute("MESSAGE_UPDATE", "Password change failed!");
+                url = SUCCESS + companyID;
+            }
         } catch (Exception e) {
+            log("Error at View all job Controller" + e.toString());
         } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     } 
 

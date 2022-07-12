@@ -42,13 +42,18 @@ public class JobApplicationDAO {
             + " ON jo.resumeID = re.resumeID "
             + "WHERE jo.jobID = ? AND re.resumeStatus = 1 AND jo.jobApplicationStatus = 1 ";
     private static final String GETTALLJOBORDERIDOFJOB = "SELECT jobApplicationID FROM tblJobApplications WHERE jobID = ?";
-    private static final String GETALLJOBAPPLIED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.budget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
-            + "                        jo.createdDate, c.categoryName, c.img, com.companyName, "
-            + "                        j.createdDate, j.expiriedDate, j.lastModifiedDate, j.budget,j.userID, j.address, j.email, j.phone, j.description "
-            + "                        FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
-            + "                        left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
-            + "                        WHERE jo.resumeID= ? and (jo.jobApplicationStatus = 1 OR "
-            + "                        jo.jobApplicationStatus =  3 OR jo.jobApplicationStatus =  5 ) ORDER BY jo.lastModifiedDate DESC";
+    private static final String GETALLJOBAPPLIED = "SELECT jo.jobApplicationID,ISNULL(jobApp.bids,0) AS bids,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.budget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message, " +
+"                                    jo.createdDate, c.categoryName, c.img, com.companyName, " +
+"                                    j.createdDate, j.expiriedDate, j.lastModifiedDate, j.budget,j.userID, j.address, j.email, j.phone, j.description " +
+"                                    FROM (((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) " +
+"                                    left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID) " +
+"									left join (select jobID, COUNT(jobID) AS bids " +
+"									FROM tblJobApplications " +
+"									WHERE jobApplicationStatus = 1 " +
+"									GROUP BY jobID) AS jobApp " +
+"									on jo.jobID = jobApp.jobID) " +
+"                                    WHERE jo.resumeID= ? and (jo.jobApplicationStatus = 1 OR " +
+"                                    jo.jobApplicationStatus =  3 OR jo.jobApplicationStatus =  5 ) ORDER BY jo.lastModifiedDate DESC";
     private static final String GETALLJOBACCEPTED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.budget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
             + "                        jo.createdDate, c.categoryName, c.img, com.companyName, "
             + "                        j.createdDate, j.expiriedDate, j.lastModifiedDate, j.budget, j.address, j.email, j.phone, j.description "
@@ -296,6 +301,7 @@ public class JobApplicationDAO {
                     String img = rs.getString("img");
                     String companyName = rs.getString("companyName");
                     int jobAppStatus = rs.getInt("jobApplicationStatus");
+                    int bids = rs.getInt("bids");
                     PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder().jobID(jobID)
                             .userID(userID)
@@ -309,6 +315,7 @@ public class JobApplicationDAO {
                             .phone(phone)
                             .expiriedDate(expiriedDate)
                             .description(description)
+                            .bids(bids)
                             .build();
                     JobApplication listJobOrder = JobApplication.builder()
                             .jobApplicationID(jobApplicationID)

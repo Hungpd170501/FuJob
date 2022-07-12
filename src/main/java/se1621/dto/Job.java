@@ -28,4 +28,5 @@ public class Job {
     List<JobSkills> listJobSkills;
     private int jobStatus;
     private PayMentMethod payMentMethod;
+    private int bids;
 }

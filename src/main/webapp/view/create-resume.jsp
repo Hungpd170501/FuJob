@@ -27,14 +27,7 @@
                     <div class="col-md-6">
                         <div class="text-center text-white">
                             <h4 class="text-uppercase title mb-4">Create Resume</h4>
-                            <ul class="page-next d-inline-block mb-0">
-                                <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
-                                <li><a href="#" class="text-uppercase font-weight-bold">Pages</a></li> 
-                                <li><a href="#" class="text-uppercase font-weight-bold">Candidates</a></li> 
-                                <li>
-                                    <span class="text-uppercase text-white font-weight-bold">Create Resume</span> 
-                                </li> 
-                            </ul>
+                            
                         </div>
                     </div>
                 </div>
@@ -159,14 +152,14 @@
                                                             for (ResumeSkill studentSkill : listResumeSkill) {
                                                     %>
                                                     <option selected="selected" value="<%= studentSkill.getSkill().getSkillID()%>" ><%= studentSkill.getSkill().getSkillName()%></option>
-                                                    <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                    <c:forEach items="${applicationScope.SKILL_LIST}" var="i">
                                                         <option value="${i.skillID}">${i.skillName}</option>
                                                     </c:forEach>
                                                     <%
                                                         }
                                                     } else {
                                                     %>
-                                                    <c:forEach items="${chooseSkill.listSkill}" var="i">
+                                                    <c:forEach items="${applicationScope.SKILL_LIST}" var="i">
                                                         <option value="${i.skillID}">${i.skillName}</option>
                                                     </c:forEach>    
                                                     <%

@@ -32,8 +32,8 @@ import se1621.dto.UserGoogle;
 @WebServlet(name = "LoginGoogleHandler", urlPatterns = {"/LoginGoogleHandler"})
 public class LoginGoogleHandler extends HttpServlet {
 
-    private final static String ADMIN_PAGE = "/AdminIndexController";
-    private final static String USER_PAGE = "/view/index.jsp";
+    private final static String ADMIN_PAGE = "MainController?action=AdminIndex";
+    private final static String USER_PAGE = "MainController?action=IndexController";
     private final static String SIGNUP_PAGE = "MainController?action=SignUp&email=";
     private final static String ERROR = "/view/login.jsp";
     public static String GOOGLE_CLIENT_ID = "674216776597-dsnqcp414vcta1d1mi4aa5umrmakucjd.apps.googleusercontent.com";

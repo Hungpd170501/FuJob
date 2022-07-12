@@ -31,10 +31,9 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String uri = httpServletRequest.getRequestURI();
         try {
-            ServletContext context = request.getServletContext();
-            Properties authenticationProperties = (Properties) context.getAttribute("AUTHENTICATION_LIST");
-            int lastIndex = uri.lastIndexOf("/");
-            String resource = uri.substring(lastIndex + 1);
+            Properties authenticationProperties = (Properties) request.getServletContext().getAttribute("AUTHENTICATION_LIST");
+            String resource = uri.substring(uri.lastIndexOf("/") + 1);
+            resource=(StringUtils.equals(resource,"MainController"))?httpServletRequest.getParameter("action"):resource;
             HttpSession session = httpServletRequest.getSession(false);
             String rule = authenticationProperties.getProperty(resource);
             if (rule == null||rule.equals("allowed")) {

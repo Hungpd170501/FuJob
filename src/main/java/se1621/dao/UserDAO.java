@@ -41,7 +41,7 @@ public class UserDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(GETALLTOTALUSER_NONAD);
                 rs = preStm.executeQuery();
-                while(rs.next()){
+                if(rs.next()){
                     return rs.getInt("totalUser");
                 }
             }

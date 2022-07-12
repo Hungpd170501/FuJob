@@ -66,13 +66,13 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group position-relative">                                               
-                                                    <label>Freelancer </label>
+                                                    <label>Student </label>
                                                     <input type="radio" name="roleID" required="" value="US">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group position-relative">                                               
-                                                    <label>Human Resource </label>
+                                                    <label>Company </label>
                                                     <input type="radio" name="roleID" required="" value="HR">
                                                 </div>
                                             </div>

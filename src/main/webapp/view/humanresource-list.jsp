@@ -7,7 +7,7 @@
 
     <head>
         <jsp:include page="./include/header.jsp">
-            <jsp:param name="title" value="FuJob | Human Resource Listing"/>
+            <jsp:param name="title" value="FuJob | Manage Human Resource"/>
         </jsp:include>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
     </head>
@@ -22,13 +22,7 @@
                         <div class="col-md-6">
                             <div class="text-center text-white">
                                 <h4 class="text-uppercase title mb-4">Manage Human Resource</h4>
-                                <ul class="page-next d-inline-block mb-0">
-                                    <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
-                                    <li><a href="#" class="text-uppercase font-weight-bold">Your company</a></li> 
-                                    <li>
-                                        <span class="text-uppercase text-white font-weight-bold">Your Human Resource</span> 
-                                    </li>
-                                </ul>
+                                
                             </div>
                         </div>
                     </div>
@@ -101,7 +95,7 @@
                         <td><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=<%= user.getUserID()%>"><%= user.getProjectPosted()%></a></td>
                         <input type="hidden" name="companyID" value="<%= user.getCompanyID()%>">
                         <input type="hidden" name="hrID" value="<%= user.getUserID()%>">
-                        <td><a onclick="getHRID(<%= user.getUserID()%>)" class="btn btn-primary" data-toggle="modal" data-target="#formChangePassHR">Change Password</a></td>
+                        <td><a onclick="getEmailHR('<%= user.getEmail() %>')" class="btn btn-primary" data-toggle="modal" data-target="#formChangePassHR">Change Password</a></td>
                     </form>   
                     </tr>
                     <%          }
@@ -176,7 +170,8 @@
                         </div>
                         <div class="modal-footer border-top-0 d-flex justify-content-center">
                             <input type="hidden" name="action" value="changePassHR">
-                            <input type="hidden" id="hrID" name="hrID" value="">
+                            <input type="hidden" id="emailC" name="email" value="">
+                            <input type="hidden" name="companyID" value="${sessionScope.LOGIN_USER.companyID}">
                             <input id="changePassBtn" type="submit" class="btn btn-primary" value="Change">
                         </div>
                     </form>
@@ -229,8 +224,8 @@
                 }
             }
             
-            function getHRID(hrID) {
-                $('#hrID').val(hrID);
+            function getEmailHR(email) {
+                $('#emailC').val(email);       
             }
         </script> 
     </body>
