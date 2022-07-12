@@ -34,14 +34,7 @@
                     <div class="col-md-6">
                         <div class="text-center text-white">
                             <h4 class="text-uppercase title mb-4">List Posted Projects</h4>
-                            <ul class="page-next d-inline-block mb-0">
-                                <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
-                                <li><a href="#" class="text-uppercase font-weight-bold">Projects</a></li>
-                                <li>
-                                    <span class="text-uppercase text-white font-weight-bold">Posted Projects Listing</span>
-
-                                </li>
-                            </ul>
+                            
                         </div>
                     </div>
                 </div>
@@ -232,7 +225,7 @@
                                                         <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
                                                     </h6>
                                                     <h6>
-                                                        <%= job.getPayMentMethod().getPaymentMethodName()%>: <%= job.getBudget()%>$ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) {
+                                                        <%= job.getPayMentMethod().getPaymentMethodName()%>: <%= job.getMinBudget()%>$ - <%= job.getMaxBudget()%>$ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) {
                                                         %>
                                                         / hour
                                                         <%
@@ -243,11 +236,12 @@
                                             </div>
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
-                                                    <div>
-                                                        <p class=" "><i class="mr-2"></i>5 bids</p>
-                                                    </div>
+                                                    
                                                     <% if (job.getJobStatus() == 1) {
                                                     %>
+                                                    <div>
+                                                        <p class=" "><i class="mr-2"></i><%= job.getBids() %>  bid(s)</p>
+                                                    </div>
                                                     <br>
                                                     <div class="mt-3">
                                                         <a href="${pageContext.request.contextPath}/MainController?action=EditJob&jobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">Edit Project</a>
@@ -366,7 +360,7 @@
         </script>
         <script>
             function getJobPostID(id, userID) {
-                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=DeleteJobPost&jobPostID=' + id + '&userID=${sessionScope.LOGIN_USER.userID}');
+                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=DeleteJobPost&jobPostID=' + id + '&userID=' + userID);
             }
         </script>
     </body>

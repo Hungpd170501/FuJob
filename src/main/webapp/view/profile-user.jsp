@@ -4,6 +4,7 @@
     Author     : HNGB
 --%>
 
+<%@page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="se1621.dto.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -66,7 +67,13 @@
                                 <input type="text" class="form-control col-md-10" value="${sessionScope.LOGIN_USER.email}" readonly="">
                             </div>
                         </div>
-                        <div class="col-md-6 mx-auto"><a href="#" data-toggle="modal" data-target="#formPassword"><i class="mdi mdi-key mr-1"></i><u>Change Password</u></a></div>       
+                            <%
+                            if (us != null && StringUtils.equals(us.getRole().getRoleID(), "HR")==false){
+                            %>
+                        <div class="col-md-6 mx-auto"><a href="#" data-toggle="modal" data-target="#formPassword"><i class="mdi mdi-key mr-1"></i><u>Change Password</u></a></div>  
+                            <%
+                                }
+                            %>
                         <input type="hidden" name="userID" value="${sessionScope.LOGIN_USER.userID}">   
                         <div class="mt-5 text-center"><input class="btn btn-primary profile-button" name="action" type="submit" value="Update Profile"></div>
                     </div>

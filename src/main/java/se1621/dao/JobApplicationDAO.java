@@ -42,39 +42,44 @@ public class JobApplicationDAO {
             + " ON jo.resumeID = re.resumeID "
             + "WHERE jo.jobID = ? AND re.resumeStatus = 1 AND jo.jobApplicationStatus = 1 ";
     private static final String GETTALLJOBORDERIDOFJOB = "SELECT jobApplicationID FROM tblJobApplications WHERE jobID = ?";
-    private static final String GETALLJOBAPPLIED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.budget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
+    private static final String GETALLJOBAPPLIED = "SELECT jo.jobApplicationID,ISNULL(jobApp.bids,0) AS bids,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.minBudget, j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message, " +
+"                                    jo.createdDate, c.categoryName, c.img, com.companyName, " +
+"                                    j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget, j.maxBudget,j.userID, j.address, j.email, j.phone, j.description " +
+"                                    FROM (((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) " +
+"                                    left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID) " +
+"									left join (select jobID, COUNT(jobID) AS bids " +
+"									FROM tblJobApplications " +
+"									WHERE jobApplicationStatus = 1 " +
+"									GROUP BY jobID) AS jobApp " +
+"									on jo.jobID = jobApp.jobID) " +
+"                                    WHERE jo.resumeID= ? and (jo.jobApplicationStatus = 1 OR " +
+"                                    jo.jobApplicationStatus =  3 OR jo.jobApplicationStatus =  5 ) ORDER BY jo.lastModifiedDate DESC";
+    private static final String GETALLJOBACCEPTED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
             + "                        jo.createdDate, c.categoryName, c.img, com.companyName, "
-            + "                        j.createdDate, j.expiriedDate, j.lastModifiedDate, j.budget,j.userID, j.address, j.email, j.phone, j.description "
-            + "                        FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
-            + "                        left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
-            + "                        WHERE jo.resumeID= ? and (jo.jobApplicationStatus = 1 OR "
-            + "                        jo.jobApplicationStatus =  3 OR jo.jobApplicationStatus =  5 ) ORDER BY jo.lastModifiedDate DESC";
-    private static final String GETALLJOBACCEPTED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.budget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
-            + "                        jo.createdDate, c.categoryName, c.img, com.companyName, "
-            + "                        j.createdDate, j.expiriedDate, j.lastModifiedDate, j.budget, j.address, j.email, j.phone, j.description "
+            + "                        j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description "
             + "                        FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
             + "                        left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
             + "                        WHERE jo.resumeID=? and (jo.jobApplicationStatus = 3 OR "
             + "                        jo.jobApplicationStatus =  6 OR jo.jobApplicationStatus =  7 ) ORDER BY jo.lastModifiedDate DESC";
 
-    private static final String GETALLJOBCOMPLEANDUNCOMPLETE = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.budget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
+    private static final String GETALLJOBCOMPLEANDUNCOMPLETE = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.minBudget, j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
             + "                        jo.createdDate, c.categoryName, c.img, com.companyName, "
-            + "                        j.createdDate, j.expiriedDate, j.lastModifiedDate, j.budget, j.address, j.email, j.phone, j.description "
+            + "                        j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description "
             + "                        FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
             + "                        left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
             + "                        WHERE jo.resumeID=? and ( "
             + "                        jo.jobApplicationStatus =  6 OR jo.jobApplicationStatus =  7 ) ORDER BY jo.lastModifiedDate DESC";
 
-    private static final String GETALLJOBONGOINGPOSTED = " SELECT jo.jobApplicationID,jo.resumeID,jo.jobApplicationStatus, j.jobID,j.userID,j.jobStatus, j.jobTitle, j.jobCategoryID, j.budget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
+    private static final String GETALLJOBONGOINGPOSTED = " SELECT jo.jobApplicationID,jo.resumeID,jo.jobApplicationStatus, j.jobID,j.userID,j.jobStatus, j.jobTitle, j.jobCategoryID, j.minBudget, j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
             + "                                               jo.createdDate, c.categoryName, c.img, com.companyName, "
-            + "                                              j.createdDate, j.expiriedDate, j.lastModifiedDate, j.budget, j.address, j.email, j.phone, j.description "
+            + "                                              j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description "
             + "                                            FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
             + "                                                left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
             + "                                               WHERE j.userID=? and (j.jobStatus = 3 OR j.jobStatus = 5 OR j.jobStatus=6)"
             + "                                             ORDER BY jo.lastModifiedDate DESC ";
     private static final String UPDATE_STATUS = "UPDATE tblJobApplications SET cvFile = ?, priceDeal = ?, message = ?, jobApplicationStatus = 1 WHERE jobApplicationID = ? and resumeID = ? and jobID = ?";
     private String SEARCHJOBORDER = "SELECT ja.jobApplicationID, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, ja.jobApplicationStatus, "
-            + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.budget, j.paymentMethodID, pm.paymentMethodName, "
+            + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.minBudget,j.maxBudget, j.paymentMethodID, pm.paymentMethodName, "
             + "j.address, j.email, j.phone, j.description, j.lastModifiedDate "
             + "FROM (((tblJobApplications ja LEFT JOIN tblJobs j ON ja.jobID = j.jobID) "
             + "LEFT JOIN tblCategories c ON j.jobCategoryID = c.categoryID) "
@@ -284,7 +289,8 @@ public class JobApplicationDAO {
                     String jobTitle = rs.getString("jobTitle");
                     Date createdDate = rs.getDate("createdDate");
                     Date expiriedDate = rs.getDate("expiriedDate");
-                    int budget = rs.getInt("budget");
+                    int minBudget = rs.getInt("minBudget");
+                    int maxBudget = rs.getInt("maxBudget");
                     int paymentMethodID = rs.getInt("paymentMethodID");
                     String paymentMethodName = rs.getString("paymentMethodName");
                     String address = rs.getString("address");
@@ -296,6 +302,7 @@ public class JobApplicationDAO {
                     String img = rs.getString("img");
                     String companyName = rs.getString("companyName");
                     int jobAppStatus = rs.getInt("jobApplicationStatus");
+                    int bids = rs.getInt("bids");
                     PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder().jobID(jobID)
                             .userID(userID)
@@ -304,11 +311,13 @@ public class JobApplicationDAO {
                             .company(CompanyInfo.builder().companyName(companyName).build())
                             .address(address)
                             .email(email)
-                            .budget(budget)
+                            .minBudget(minBudget)
+                            .maxBudget(maxBudget)
                             .payMentMethod(payMent)
                             .phone(phone)
                             .expiriedDate(expiriedDate)
                             .description(description)
+                            .bids(bids)
                             .build();
                     JobApplication listJobOrder = JobApplication.builder()
                             .jobApplicationID(jobApplicationID)
@@ -357,7 +366,8 @@ public class JobApplicationDAO {
                     String jobTitle = rs.getString("jobTitle");
                     Date createdDate = rs.getDate("createdDate");
                     Date expiriedDate = rs.getDate("expiriedDate");
-                    int budget = rs.getInt("budget");
+                    int minBudget = rs.getInt("minBudget");
+                    int maxBudget = rs.getInt("maxBudget");
                     int paymentMethodID = rs.getInt("paymentMethodID");
                     String paymentMethodName = rs.getString("paymentMethodName");
                     String address = rs.getString("address");
@@ -377,7 +387,8 @@ public class JobApplicationDAO {
                             .company(CompanyInfo.builder().companyName(companyName).build())
                             .address(address)
                             .email(email)
-                            .budget(budget)
+                            .minBudget(minBudget)
+                            .maxBudget(maxBudget)
                             .payMentMethod(payMent)
                             .phone(phone)
                             .expiriedDate(expiriedDate)
@@ -426,7 +437,8 @@ public class JobApplicationDAO {
                     String jobTitle = rs.getString("jobTitle");
                     Date createdDate = rs.getDate("createdDate");
                     Date expiriedDate = rs.getDate("expiriedDate");
-                    int budget = rs.getInt("budget");
+                    int minBudget = rs.getInt("minBudget");
+                    int maxBudget = rs.getInt("maxBudget");
                     int paymentMethodID = rs.getInt("paymentMethodID");
                     String paymentMethodName = rs.getString("paymentMethodName");
                     String address = rs.getString("address");
@@ -446,7 +458,8 @@ public class JobApplicationDAO {
                             .company(CompanyInfo.builder().companyName(companyName).build())
                             .address(address)
                             .email(email)
-                            .budget(budget)
+                            .minBudget(minBudget)
+                            .maxBudget(maxBudget)
                             .payMentMethod(payMent)
                             .phone(phone)
                             .expiriedDate(expiriedDate)
@@ -497,7 +510,8 @@ public class JobApplicationDAO {
                     String jobTitle = rs.getString("jobTitle");
                     Date createdDate = rs.getDate("createdDate");
                     Date expiriedDate = rs.getDate("expiriedDate");
-                    int budget = rs.getInt("budget");
+                    int minBudget = rs.getInt("minBudget");
+                    int maxBudget = rs.getInt("maxBudget");
                     int paymentMethodID = rs.getInt("paymentMethodID");
                     String paymentMethodName = rs.getString("paymentMethodName");
                     String address = rs.getString("address");
@@ -519,7 +533,8 @@ public class JobApplicationDAO {
                             .company(CompanyInfo.builder().companyName(companyName).build())
                             .address(address)
                             .email(email)
-                            .budget(budget)
+                            .minBudget(minBudget)
+                            .maxBudget(maxBudget)
                             .payMentMethod(payMent)
                             .phone(phone)
                             .expiriedDate(expiriedDate)
@@ -863,7 +878,8 @@ public class JobApplicationDAO {
                     String message = rs.getString("message");
                     String priceDeal = rs.getString("priceDeal");
                     String jobTitle = rs.getString("jobTitle");
-                    float budget = rs.getFloat("budget");
+                    float minBudget = rs.getFloat("minBudget");
+                    float maxBudget = rs.getFloat("maxBudget");
                     int payID = rs.getInt("paymentMethodID");
                     String payName = rs.getString("paymentMethodName");
                     String address = rs.getString("address");
@@ -883,7 +899,8 @@ public class JobApplicationDAO {
                             .address(address)
                             .email(email)
                             .phone(phone)
-                            .budget(budget)
+                            .minBudget(minBudget)
+                            .maxBudget(maxBudget)
                             .payMentMethod(PayMentMethod.builder().paymentMethodID(payID).paymentMethodName(payName).build())
                             .description(description)
                             .expiriedDate(expiriedDate)

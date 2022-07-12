@@ -52,7 +52,8 @@ public class PostJobController extends HttpServlet {
                 skillSet.add(Integer.parseInt(skill));
             }
             Date expiriedDate = Date.valueOf(request.getParameter("expiriedDate"));
-            float budget = Float.parseFloat(request.getParameter("budget"));
+            float minBudget = Float.parseFloat(request.getParameter("minBudget"));
+            float maxBudget = Float.parseFloat(request.getParameter("maxBudget"));
             String address = request.getParameter("address");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
@@ -70,7 +71,8 @@ public class PostJobController extends HttpServlet {
                     .email(email)
                     .expiriedDate(expiriedDate)
                     .phone(phone)
-                    .budget(budget)
+                    .minBudget(minBudget)
+                    .maxBudget(maxBudget)
                     .description(description)
                     .build();
             JobDAO jobdao = new JobDAO();

@@ -26,13 +26,7 @@
                         <div class="col-md-6">
                             <div class="text-center text-white">
                                 <h4 class="text-uppercase title mb-4">Projects List view</h4>
-                                <ul class="page-next d-inline-block mb-0">
-                                    <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
-                                    <li><a href="#" class="text-uppercase font-weight-bold">Projects</a></li> 
-                                    <li>
-                                        <span class="text-uppercase text-white font-weight-bold">Your Projects Applied</span> 
-                                    </li>
-                                </ul>
+                                
                             </div>
                         </div>
                     </div>
@@ -222,7 +216,7 @@
                                                         <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
                                                     </h6>
                                                     <h6>
-                                                        <%= jobOrder.getJob().getPayMentMethod().getPaymentMethodName()%>: <%= jobOrder.getJob().getBudget()%>$ <% if (jobOrder.getJob().getPayMentMethod().getPaymentMethodID() == 2) {
+                                                        <%= jobOrder.getJob().getPayMentMethod().getPaymentMethodName()%>: <%= jobOrder.getJob().getMinBudget()%>$ - <%= jobOrder.getJob().getMaxBudget()%>$<% if (jobOrder.getJob().getPayMentMethod().getPaymentMethodID() == 2) {
                                                         %>
                                                         / hour
                                                         <%
@@ -233,11 +227,11 @@
                                             </div>
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
-                                                    <div>
-                                                        <p class=" "><i class="mr-2"></i>5 bids</p>
-                                                    </div>
                                                     <% if (jobOrder.getJobApplicationStatus() == 1) {
                                                     %>
+                                                    <div>
+                                                        <p class=" "><i class="mr-2"></i><%= jobOrder.getJob().getBids() %> bid(s)</p>
+                                                    </div>
                                                     <br>
                                                     <div class="mt-3">
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
