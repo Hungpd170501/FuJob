@@ -3,6 +3,7 @@
     Created on : Jun 1, 2022, 7:52:12 AM
     Author     : HNGB
 --%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="se1621.dao.JobApplicationDAO"%>
 <%@page import="se1621.dto.JobApplication"%>
 <%@page import="se1621.dao.ResumeDAO"%>
@@ -86,6 +87,11 @@
                             </div>
                             <div class="col-lg-7" style="margin-top: 30px">
                                 <div class="job-detail-com-desc overflow-hidden d-block">
+                                    <p class=" mb-3"><h7  style="font-weight: 700"> Date posted: </h7><%
+                                        String pattern = "dd-MM-yyyy";
+                                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+                                        String date = simpleDateFormat.format(job.getCreatedDate());%>
+                                        <%= date%> </p>
                                     <p class=" mb-3"><h7  style="font-weight: 700"> Category: </h7><%= job.getCategory().getCategoryName()%></p>
                                     <p class=" mb-3"><h7 style="font-weight: 700">Skill require: </h7> 
                                         <%
@@ -98,9 +104,10 @@
                                     %>
                                     <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
                                     </p>
-                                    <p class=" mb-3"><h7 style="font-weight: 700"> Budget: </h7><%= job.getBudget()%> $ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) { %> 
+                                    <p class=" mb-3"><h7 style="font-weight: 700"> Budget: </h7><%= job.getMinBudget()%> $ - <%= job.getMaxBudget()%> $ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) { %> 
                                     / hour
                                     <% } %></p>
+                                    <p class=" mb-3"><h7 style="font-weight: 700"> Payment Method: </h7><%= job.getPayMentMethod().getPaymentMethodName() %></p>
                                     <%
                                         Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
                                         long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());

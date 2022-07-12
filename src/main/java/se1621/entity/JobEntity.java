@@ -40,8 +40,11 @@ public class JobEntity{
     @BatchSize(size = 1)
     private CategoryEntity jobCategoryID;
 
-    @Column(name = "budget")
-    private Double budget;
+    @Column(name = "minBudget")
+    private Double minBudget;
+    
+    @Column(name = "maxBudget")
+    private Double maxBudget;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "paymentMethodID")
