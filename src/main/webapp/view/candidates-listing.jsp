@@ -27,7 +27,6 @@
                         <div class="col-md-6">
                             <div class="text-center text-white">
                                 <h4 class="text-uppercase title mb-4">Candidates Listing</h4>
-                                
                             </div>
                         </div>
                     </div>

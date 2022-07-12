@@ -6,7 +6,6 @@
 package se1621.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import se1621.dao.JobApplicationDAO;
 import se1621.dao.JobSkillsDAO;
-import se1621.dao.ResumeDAO;
 import se1621.dto.JobApplication;
 import se1621.dto.JobSkills;
 

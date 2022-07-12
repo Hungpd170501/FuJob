@@ -149,7 +149,7 @@
                         <li style="list-style: none"> 
                             <div class="job-display col-lg-12 mt-4 pt-1">
                                 <div class="job-list-box border rounded" >
-                                    <div class="p-3" style="width: 1098px; height: 298px">
+                                    <div class="p-3" style="width: 1098px; height: 338px">
                                         <div class="row align-items-center">
                                             <div class="col-lg-3">
                                                 <div class="company-logo-img">
