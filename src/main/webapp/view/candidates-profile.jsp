@@ -44,12 +44,12 @@
                     <div class="col-md-6">
                         <div class="candidates-profile-details text-center">
                             <img id="image" src="${requestScope.RESUME.avatar}" height="150" alt="" class="d-block mx-auto shadow rounded-pill mb-4">
-                            <h5 class="text-white mb-2"> <%=resume.getFullName()%> </h5>
-                            <p class="text-white-50 h6 mb-2"><%=resume.getMajor()%></p>
-                            <ul class="list-unstyled social-icon social mb-0">
+                            <h4 class="text-white mb-2"> <%=resume.getFullName()%> </h4>
+                            <p class="text-white mb-2"><%=resume.getMajor()%></p>
+                            <ul class="list-unstyled social-icon  mb-0">
                                 <li class="list-inline-item"><a href="${requestScope.RESUME.website}" class="rounded"><i class="mdi mdi-web"></i></a></li>
                                 <li class="list-inline-item"><a href="${requestScope.RESUME.linkedIn}" class="rounded"><i class="mdi mdi-linkedin"></i></a></li>
-                                <li class="list-inline-item"><a href="${requestScope.RESUME.gitHub}" class="rounded"><i class="mdi mdi-github-circle"></i></a></li>
+                                <li class="list-inline-item"><a href="${requestScope.RESUME.gitHub}" class="rounded"><i class="mdi mdi-github-box"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                                     String date = simpleformat.format(resume.getCreatedDate());
                                 %>
                                 <li class="list-inline-item mr-3 col-md-5">
-                                    <p href="" class="f-15 mb-0 "><i class="mdi mdi-timetable mr-2"></i><strong>Joined:</strong> <%= date %></p>
+                                    <p href="" class="f-15 mb-0 "><i class="mdi mdi-timetable mr-2"></i><strong>Joined:</strong> <%= date%></p>
                                 </li>
                             </ul>
                             <ul class="list-inline pt-3 border-top mb-0 row">
@@ -179,44 +179,8 @@
             }
         %>
         <!-- CANDIDATES PROFILE END -->
-        <section class="section pt-0">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <div class="section-title text-center mb-4 pb-2">
-                            <h4 class="title title-line pb-5">All Projects You've Accepted</h4>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-12 mt-4 pt-2">
-                        <div class="row align-items-center">
-                            <div class="col-lg-12">
-                                <div class="show-results">
-                                    <div class="float-left">
-                                        <% List<JobApplication> listJobApplication = (List<JobApplication>) request.getAttribute("LIST_ALLJOBONGOING_APPLIED");
-                                            if (listJobApplication.isEmpty()) {
-                                                String message = (String) request.getAttribute("MESSAGE0");
-                                        %>
-                                        <h5 class="text-dark mb-0 pt-2 f-18"><%= message%></h5>
-                                        <%
-                                        } else {
-                                        %>
-                                        <h6><%= listJobApplication.get(0).getJob().getJobTitle()%></h6>
-
-                                        <%
-                                            }
-                                        %>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
+     
         <jsp:include page="./include/footer.jsp"></jsp:include>
             <!-- javascript -->
             <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>

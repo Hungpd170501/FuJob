@@ -3,6 +3,7 @@
     Created on : Jun 1, 2022, 7:52:12 AM
     Author     : HNGB
 --%>
+<%@page import="se1621.dto.ResumeSkill"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="se1621.dao.JobApplicationDAO"%>
 <%@page import="se1621.dto.JobApplication"%>
@@ -106,13 +107,13 @@
                                     </p>
                                     <p class=" mb-3"><h7 style="font-weight: 700"> Budget: </h7><%= job.getMinBudget()%> $ - <%= job.getMaxBudget()%> $ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) { %> 
                                     / hour
-                                    <% } %></p>
-                                    <p class=" mb-3"><h7 style="font-weight: 700"> Payment Method: </h7><%= job.getPayMentMethod().getPaymentMethodName() %></p>
-                                    <%
-                                        Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-                                        long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
-                                        long resultDate = exDate / (24 * 60 * 60 * 1000);
-                                    %>
+                                    <% }%></p>
+                                    <p class=" mb-3"><h7 style="font-weight: 700"> Payment Method: </h7><%= job.getPayMentMethod().getPaymentMethodName()%></p>
+                                        <%
+                                            Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                                            long exDate = Math.abs(job.getExpiriedDate().getTime() - dateNow.getTime());
+                                            long resultDate = exDate / (24 * 60 * 60 * 1000);
+                                        %>
                                     <p class=" mb-3"><h7 style="font-weight: 700"> Expiry Date: </h7><%= resultDate%> days left</p>
                                 </div>
                             </div> 
@@ -173,7 +174,7 @@
                             if (loginUser == null) {
                         %>
                         <div class="job-detail border rounded mt-4">
-<%--                            <a href="${pageContext.request.contextPath}/ApplyJobWithoutLogin?referer=${pageContext.request.queryString}" class="btn btn-primary btn-block">Apply For Projects</a>--%>
+                            <%--                            <a href="${pageContext.request.contextPath}/ApplyJobWithoutLogin?referer=${pageContext.request.queryString}" class="btn btn-primary btn-block">Apply For Projects</a>--%>
                             <form action="ApplyJobWithoutLogin" method="post">
                                 <input type="submit" value="Apply For Projects" class="btn btn-primary btn-block"/>
                                 <input type="hidden" name="referer" value="${pageContext.request.queryString}">
@@ -207,8 +208,61 @@
                         %>
                     </div>
                 </div>
-                <!--Application Form-->        
-            </div>
+                <!--Application Form-->    
+                <div class="row" style="margin-top: 10px">
+                    <div class="col-lg-12">
+                        <div class="job-detail border rounded mt-2 p-4"> 
+                            <% String messageEvaluation = (String) request.getAttribute("MESSAGE_EVALUATION");%>
+                            <div>
+                                <h5 class="text-dark"  style="font-weight: 700"><%= messageEvaluation%></h5>
+                            </div>
+                            <% List<JobApplication> listJobApplication = (List<JobApplication>) request.getAttribute("LIST_EVALUATION");
+                                if (listJobApplication != null) {
+                                    for (JobApplication jobApp : listJobApplication) {
+                            %>
+                            <div class="job-detail-location pt-4 border-top">
+                                <div class="job-detail-desc">
+                                    <div class="row">
+                                        <div class="col-md-9 ">
+                                            <div class="float-left mr-4">
+                                                <img src="<%= jobApp.getResume().getAvatar()%>" alt="" class="img-fluid d-block rounded" height="50" style="width:150px;height:150px">
+                                            </div>
+                                            <div class="candidates-list-desc overflow-hidden job-single-meta  pt-2 p-3">
+                                                <h4 class="mb-3"><a class="text-dark" href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&studentID=<%= jobApp.getResume().getUserID()%>"><%= jobApp.getResume().getFullName()%></a></h4>
+                                                <p class=" mb-3"><h7  style="font-weight: 700"> <%= jobApp.getMessage()%> </h7></p>
+                                                <p class=" mb-3"><h7 style="font-weight: 700">Skill: </h7> 
+                                                    <%
+                                                        List<ResumeSkill> listResumeSkills = jobApp.getResume().getListResumeSkills();
+                                                        for (int i = 0; i < listResumeSkills.size() - 1; i++) {
+                                                    %>
+                                                    <%= listResumeSkills.get(i).getSkill().getSkillName()%>,
+                                                <%
+                                                    }
+                                                %>
+                                                <%= listResumeSkills.get(listResumeSkills.size() - 1).getSkill().getSkillName()%>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="candidates-list-fav-btn text-right">        
+                                                <div class="candidates-listing-btn mt-4">
+                                                    <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&studentID=<%= jobApp.getResume().getUserID()%>" class="btn btn-primary-outline btn-sm " style="width: 50%">View Profile</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%
+                                        }
+                                    }
+                                %>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
         </section>
         <!-- JOB DETAILS END -->
 
