@@ -32,6 +32,7 @@ public class JobApplicationDAO {
     private static final String DELETE = "UPDATE tblJobApplications SET jobApplicationStatus = 0 WHERE jobApplicationID = ? ";
     private static final String DENY_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 5 WHERE resumeID = ? AND jobID = ? AND jobApplicationStatus = 1 ";
     private static final String ACCEPT_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 3 WHERE resumeID = ? AND jobID = ? AND jobApplicationStatus = 1 ";
+    private static final String UNAPLLYWHENJOBHAVECANDIDATES_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 5 WHERE jobID = ? AND jobApplicationStatus = 1 ";
     private static final String UNCOMPLETE_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 7 WHERE jobApplicationID = ? AND jobApplicationStatus = 3";
     private static final String COMPLETE_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 6 WHERE jobApplicationID = ? AND jobApplicationStatus = 3";
     private static final String GETTALLUSERIDOFJOB = "SELECT resumeID FROM tblJobApplications WHERE jobID = ? and jobApplicationStatus = 1";
@@ -668,6 +669,27 @@ public class JobApplicationDAO {
                 preStm = conn.prepareStatement(ACCEPT_JOBAPPLICATION);
                 preStm.setInt(1, resumeID);
                 preStm.setInt(2, jobID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    public boolean unApplyWhenJobHaveCandidates( int jobID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UNAPLLYWHENJOBHAVECANDIDATES_JOBAPPLICATION);
+                preStm.setInt(1, jobID);
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
