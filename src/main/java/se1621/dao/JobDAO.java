@@ -23,14 +23,24 @@ import se1621.dto.PayMentMethod;
 public class JobDAO {
 
     private static final String CREATEJOB = "INSERT INTO tblJobs(userID, jobTitle, jobCategoryID,"
-            + " minBudget, maxBudget, paymentMethodID, expiriedDate, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,1)";
+            + " minBudget, maxBudget, paymentMethodID, expiriedDate, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,1)";
     //xong ne
-    private String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
-            + "j.jobCategoryID, c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, "
-            + "pm.paymentMethodName, j.minBudget, j.maxBudget, j.expiriedDate "
-            + "FROM ((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID)"
-            + " left join tblPaymentMethods pm on j.paymentMethodID = pm.paymentMethodID) ";
-    private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJobs WHERE jobID = (SELECT MAX(jobID) FROM tblJobs) and jobStatus = 1 and userID = ?";
+    private String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID,ISNULL(jobAply.bids,0) AS bids, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
+            + "            j.jobCategoryID, c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, "
+            + "            pm.paymentMethodName, j.minBudget, j.maxBudget, j.expiriedDate "
+            + "            FROM (((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) "
+            + "             left join tblPaymentMethods pm on j.paymentMethodID = pm.paymentMethodID) "
+            + "			 left join (select jobID, COUNT(jobID) AS bids  "
+            + "              FROM tblJobApplications  "
+            + "                WHERE jobApplicationStatus = 1  "
+            + "                 GROUP BY jobID) AS jobAply  "
+            + "            on jobAply.jobID = j.jobID )";
+    private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJobs WHERE jobID = (SELECT MAX(jobID) FROM tblJobs) and jobStatus = 1 and userID = ?"
+            + "left join (select jobID, COUNT(jobID) AS bids  "
+            + "												FROM tblJobApplications  "
+            + "													WHERE jobApplicationStatus = 1  "
+            + "													GROUP BY jobID) AS jobAply  "
+            + "													on jobAply.jobID = j.jobID )";
     //roi ne
     private static final String SEARCHBYJOBID = "SELECT j.jobID, j.userID, j.jobTitle,j.jobCategoryID, c.categoryName, "
             + "j.minBudget, j.maxBudget, j.paymentMethodID, payment.paymentMethodName, j.address, j.email, j.phone, j.description, j.createdDate, "
@@ -217,8 +227,8 @@ public class JobDAO {
                     Date expiriedDate = rs.getDate("expiriedDate");
                     int paymentMethodID = rs.getInt("paymentMethodID");
                     String paymentMethodName = rs.getString("paymentMethodName");
-                    float minBudget = rs.getFloat("minBudget");                    
-                    float maxBudget = rs.getFloat("maxBudget");                    
+                    float minBudget = rs.getFloat("minBudget");
+                    float maxBudget = rs.getFloat("maxBudget");
                     String categoryName = rs.getString("categoryName");
                     String img = rs.getString("img");
                     int status = rs.getInt("jobStatus");
@@ -356,11 +366,16 @@ public class JobDAO {
                 List<Job> listJob = new ArrayList<>();
                 String getDataSQL = "";
                 String getDataSQL1 = this.SEARCHALL_JOBTITLE_SKILL_CATEGORY;
-                String queryForSearchSkill = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, j.jobCategoryID, "
-                        + "c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, pm.paymentMethodName, "
-                        + "j.minBudget,j.maxBudget, j.expiriedDate "
-                        + "FROM (((tblJobSkills js left join tblJobs j on j.jobID = js.jobID)) "
-                        + "left join tblCategories c on c.categoryID = j.jobCategoryID) left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID ";
+                String queryForSearchSkill = "SELECT j.jobID,ISNULL(jobAply.bids,0) AS bids, j.userID, j.jobTitle, j.lastModifiedDate, j.address, j.jobCategoryID, "
+                        + "                         c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, pm.paymentMethodName, "
+                        + "                         j.minBudget,j.maxBudget, j.expiriedDate "
+                        + "                         FROM ((((tblJobSkills js left join tblJobs j on j.jobID = js.jobID)) "
+                        + "                         left join tblCategories c on c.categoryID = j.jobCategoryID) left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID "
+                        + "                         left join (select jobID, COUNT(jobID) AS bids  "
+                        + "                        FROM tblJobApplications  "
+                        + "                       	WHERE jobApplicationStatus = 1  "
+                        + "                       		GROUP BY jobID) AS jobAply  "
+                        + "                      	on jobAply.jobID = j.jobID )";
                 boolean checkCateID = false;
                 boolean checkSkillID = false;
 
@@ -418,6 +433,7 @@ public class JobDAO {
                     Date lastModifiedDate = rs.getDate("lastModifiedDate");
                     Date expiriedDate = rs.getDate("expiriedDate");
                     int jobStatus = 1;
+                    int bids = rs.getInt("bids");
 
                     Category category = Category.builder().categoryID(jobCategoryID).categoryName(categoryName).img(img).build();
                     PayMentMethod payment = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
@@ -437,6 +453,7 @@ public class JobDAO {
                             .email(email)
                             .phone(phone)
                             .description(description)
+                            .bids(bids)
                             .build()
                     );
                 }
@@ -466,26 +483,31 @@ public class JobDAO {
                 List<Job> listJob = new ArrayList<>();
                 String getDataSQL = "";
                 String getDataSQL1 = this.SEARCHALL_JOBTITLE_SKILL_CATEGORY;
-                String queryForSearchSkill = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, j.jobCategoryID, "
+                String queryForSearchSkill = "SELECT j.jobID,ISNULL(jobAply.bids,0) AS bids, j.userID, j.jobTitle, j.lastModifiedDate, j.address, j.jobCategoryID, "
                         + "c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, pm.paymentMethodName, "
-                        + "j.minBudget, j.maxBudget, j.expiriedDate "
-                        + "FROM (((tblJobSkills js left join tblJobs j on j.jobID = js.jobID)) "
-                        + "left join tblCategories c on c.categoryID = j.jobCategoryID) left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID ";
+                        + "j.minBudget, j.maxBudget, j.expiriedDate, j.jobStatus "
+                        + "FROM ((((tblJobSkills js left join tblJobs j on j.jobID = js.jobID)) "
+                        + "left join tblCategories c on c.categoryID = j.jobCategoryID) left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID "
+                        + " left join (select jobID, COUNT(jobID) AS bids  "
+                        + "           FROM tblJobApplications  "
+                        + "              WHERE jobApplicationStatus = 1 "
+                        + "                GROUP BY jobID) AS jobAply "
+                        + "        on jobAply.jobID = j.jobID )";
                 boolean checkCateID = false;
                 boolean checkSkillID = false;
 
                 if (searchJobCategoryID == 0 && searchSkillID == 0) {
-                    getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and userID =" + hrID;
+                    getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and userID =" + hrID + " and jobStatus IN (1,3,4)";
                     checkCateID = true;
                     checkSkillID = true;
                 } else {
-                    getDataSQL = queryForSearchSkill + "WHERE jobTitle like ? and skillID = ? and jobCategoryID = ? and userID =" + hrID;
+                    getDataSQL = queryForSearchSkill + "WHERE jobTitle like ? and skillID = ? and jobCategoryID = ? and userID =" + hrID + " and jobStatus IN (1,3,4)";
                     if (searchJobCategoryID == 0) {
-                        getDataSQL = queryForSearchSkill + " WHERE jobTitle like ? and skillID = ? and userID =" + hrID;
+                        getDataSQL = queryForSearchSkill + " WHERE jobTitle like ? and skillID = ? and userID =" + hrID + " and jobStatus IN (1,3,4)";
                         checkCateID = true;
                     }
                     if (searchSkillID == 0) {
-                        getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobCategoryID = ? and userID =" + hrID;
+                        getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobCategoryID = ? and userID =" + hrID + " and jobStatus IN (1,3,4)";
                         checkSkillID = true;
                     }
                 }
@@ -527,6 +549,7 @@ public class JobDAO {
                     Date createdDate = rs.getDate("createdDate");
                     Date lastModifiedDate = rs.getDate("lastModifiedDate");
                     Date expiriedDate = rs.getDate("expiriedDate");
+                    int bids = rs.getInt("bids");
                     int jobStatus = 1;
 
                     Category category = Category.builder().categoryID(jobCategoryID).categoryName(categoryName).img(img).build();
@@ -547,6 +570,7 @@ public class JobDAO {
                             .email(email)
                             .phone(phone)
                             .description(description)
+                            .bids(bids)
                             .build()
                     );
                 }

@@ -145,7 +145,7 @@
                                         <div class="form-group app-label">
                                             <label class="text-muted">Skills<span class="text-danger">*</span></label> 
                                             <div class="form-button">
-                                                <select class="form-control resume select2 select2-hidden-accessible" name="skillID" multiple="" data-placeholder="Select skill" style="width: 100%; border-color: #dee2e6" tabindex="-1" aria-hidden="true">
+                                                <select class="form-control resume select2 select2-hidden-accessible" name="skillID" multiple="" data-placeholder="Select skill" style="width: 100%; border-color: #dee2e6" tabindex="-1" aria-hidden="true" required="">
                                                     <%
                                                         List<ResumeSkill> listResumeSkill = (List<ResumeSkill>) request.getAttribute("LIST_STUDENTSKILL");
                                                         if (!listResumeSkill.isEmpty()) {
