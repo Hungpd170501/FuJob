@@ -849,7 +849,7 @@ public class JobApplicationDAO {
 
                 String queryForSearchSkill
                         = "SELECT ja.jobApplicationID, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, ja.jobApplicationStatus, "
-                        + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.budget, j.paymentMethodID, pm.paymentMethodName, "
+                        + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.minBudget, j.maxBudget, j.paymentMethodID, pm.paymentMethodName, "
                         + "j.address, j.email, j.phone, j.description, j.lastModifiedDate "
                         + "FROM (((tblJobApplications ja LEFT JOIN tblJobs j ON ja.jobID = j.jobID) "
                         + "LEFT JOIN tblCategories c ON j.jobCategoryID = c.categoryID) "
@@ -859,17 +859,17 @@ public class JobApplicationDAO {
                 boolean checkSkillID = false;
 
                 if (searchJobCategoryID == 0 && searchSkillID == 0) {
-                    getDataSQL = getDataSQL1 + "WHERE jobTitle like ?  and resumeID =" + resumeID;
+                    getDataSQL = getDataSQL1 + "WHERE jobTitle like ?  and resumeID =" + resumeID + " and jobApplicationStatus IN (1,3,5)";
                     checkCateID = true;
                     checkSkillID = true;
                 } else {
-                    getDataSQL = queryForSearchSkill + "WHERE jobTitle like ? and skillID = ? and jobCategoryID = ? and userID =" + resumeID;
+                    getDataSQL = queryForSearchSkill + "WHERE jobTitle like ? and skillID = ? and jobCategoryID = ? and resumeID =" + resumeID + " and jobApplicationStatus IN (1,3,5)";
                     if (searchJobCategoryID == 0) {
-                        getDataSQL = queryForSearchSkill + " WHERE jobTitle like ? and skillID = ?  and userID =" + resumeID;
+                        getDataSQL = queryForSearchSkill + " WHERE jobTitle like ? and skillID = ?  and resumeID =" + resumeID +" and jobApplicationStatus IN (1,3,5)";
                         checkCateID = true;
                     }
                     if (searchSkillID == 0) {
-                        getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobCategoryID = ?  and userID =" + resumeID;
+                        getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobCategoryID = ?  and resumeID =" + resumeID + " and jobApplicationStatus IN (1,3,5)";
                         checkSkillID = true;
                     }
                 }
