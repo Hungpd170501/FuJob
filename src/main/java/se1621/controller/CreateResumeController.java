@@ -41,8 +41,8 @@ public class CreateResumeController extends HttpServlet {
         String url = ERROR;
         try {
             Part filePart = request.getPart("avatar");
-            FirebaseStoreServiceImpl firebaseStoreServiceImpl = new FirebaseStoreServiceImpl(); 
-            String filename=firebaseStoreServiceImpl.uploadFile(filePart);
+            FirebaseStoreServiceImpl firebaseStoreServiceImpl = new FirebaseStoreServiceImpl();
+            String filename = firebaseStoreServiceImpl.uploadFile(filePart);
             String fullName = request.getParameter("fullname");
             String gender = request.getParameter("gender");
             Date dateOfBirth = Date.valueOf(request.getParameter("dateofbirth"));
@@ -65,61 +65,63 @@ public class CreateResumeController extends HttpServlet {
             User loginUser = (User) session.getAttribute("LOGIN_USER");
             int studentID = loginUser.getUserID();
             Resume resume = Resume.builder()
-                                          .avatar(filename)
-                                          .userID(studentID)
-                                          .fullName(fullName)
-                                          .gender(gender)
-                                          .dateOfBirth(dateOfBirth)
-                                          .gmail(gmail)
-                                          .phone(phone)
-                                          .address(address)
-                                          .major(major)
-                                          .gpa(gpa)
-                                          .website(website)
-                                          .gitHub(gitHub)
-                                          .linkedIn(linkedIn)
-                                          .overview(overview)
-                                          .build();
+                    .avatar(filename)
+                    .userID(studentID)
+                    .fullName(fullName)
+                    .gender(gender)
+                    .dateOfBirth(dateOfBirth)
+                    .gmail(gmail)
+                    .phone(phone)
+                    .address(address)
+                    .major(major)
+                    .gpa(gpa)
+                    .website(website)
+                    .gitHub(gitHub)
+                    .linkedIn(linkedIn)
+                    .overview(overview)
+                    .build();
             ResumeSkillDAO resumeSkillDAO = new ResumeSkillDAO();
             List<ResumeSkill> listStudentSkill = new ArrayList<>();
             ResumeDAO resumeDAO = new ResumeDAO();
-            int resumeID = resumeDAO.getResumeID(studentID);
-            if(resumeSkillDAO.checkStudentHaveSkill(resumeID)) {
-                resumeSkillDAO.deleteStudetnSkill(resumeID);
-            }
-            for (Integer skill : skillSet) {
-                ResumeSkill studentSkill = ResumeSkill.builder().resumeID(resumeID).skill(Skill.builder().skillID(skill).build()).build();
-                listStudentSkill.add(studentSkill);
-            }
-            List<Boolean> listCheckCreateStudentSkill = new ArrayList<>();
-            for (ResumeSkill studentSkill : listStudentSkill) {
-                boolean checkCreateStudentSkill = resumeSkillDAO.createStudetnSkill(studentSkill);
-                if (checkCreateStudentSkill) {
-                    listCheckCreateStudentSkill.add(checkCreateStudentSkill);
-                }
-            }
-            if (!listCheckCreateStudentSkill.contains(false)) {
-
-                ResumeDAO resumedao = new ResumeDAO();
-                boolean checkValidation = true;
-                if (resumeID!=0) {
-                    checkValidation = false;
-                    boolean checkUpdateResume = resumedao.updateResume(resume, resumeID);
-                    if (checkUpdateResume) {
+            int resumeID = resumeDAO.getResumeID(studentID);//kiem tra xem co resume chua
+            ResumeDAO resumedao = new ResumeDAO();
+            if (resumeID != 0) { //neu co resume
+                boolean checkUpdateResume = resumedao.updateResume(resume, resumeID); //update
+                if (checkUpdateResume) { //update thanh cong
+                    resumeSkillDAO.deleteStudetnSkill(resumeID); //xoa skill cu
+                    for (Integer skill : skillSet) { //add skill moi vao list
+                        ResumeSkill studentSkill = ResumeSkill.builder().resumeID(resumeID).skill(Skill.builder().skillID(skill).build()).build();
+                        listStudentSkill.add(studentSkill);
+                    }
+                    List<Boolean> listCheckCreateStudentSkill = new ArrayList<>();
+                    for (ResumeSkill studentSkill : listStudentSkill) {
+                        boolean checkCreateStudentSkill = resumeSkillDAO.createStudetnSkill(studentSkill);//tao skill moi vao db
+                        listCheckCreateStudentSkill.add(checkCreateStudentSkill);//moi skill tao thanh cong se tra ve true
+                    }
+                    if (!listCheckCreateStudentSkill.contains(false)) { //neu khong co cai false nao (true het)
                         request.setAttribute("MESSAGE_RESUME", "Your Resume has been updated!");
                         url = SUCCESS + studentID;
                     }
                 }
-                if (checkValidation) {
-                    boolean checkCreateResume = resumedao.createResume(resume);
-                    if (checkCreateResume) {
+            } else { //neu chua co resume
+                boolean checkCreateResume = resumedao.createResume(resume); //tao resume
+                if (checkCreateResume) {
+                    resumeID = resumeDAO.getResumeID(studentID);
+                    for (Integer skill : skillSet) { //add skill moi vao list
+                        ResumeSkill studentSkill = ResumeSkill.builder().resumeID(resumeID).skill(Skill.builder().skillID(skill).build()).build();
+                        listStudentSkill.add(studentSkill);
+                    }
+                    List<Boolean> listCheckCreateStudentSkill = new ArrayList<>();
+                    for (ResumeSkill studentSkill : listStudentSkill) {
+                        boolean checkCreateStudentSkill = resumeSkillDAO.createStudetnSkill(studentSkill);//tao skill moi vao db
+                        listCheckCreateStudentSkill.add(checkCreateStudentSkill);//moi skill tao thanh cong se tra ve true
+                    }
+                    if (!listCheckCreateStudentSkill.contains(false)) {
                         request.setAttribute("MESSAGE_RESUME", "Create Resume Successfull!");
                         url = SUCCESS + studentID;
                     }
                 }
-
             }
-
         } catch (Exception e) {
             log(e.getMessage());
         } finally {

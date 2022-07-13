@@ -234,11 +234,11 @@ public class ResumeDAO {
                 preStm.setString(6, resume.getGmail());
                 preStm.setString(7, resume.getPhone());
                 preStm.setString(8, resume.getAddress());
-                preStm.setString(9, resume.getGitHub());
-                preStm.setString(10, resume.getMajor());
-                preStm.setString(11, resume.getGpa());
-                preStm.setString(12, resume.getLinkedIn());
-                preStm.setString(13, resume.getWebsite());
+                preStm.setString(9, resume.getMajor());
+                preStm.setString(10, resume.getGpa());
+                preStm.setString(11, resume.getWebsite());
+                preStm.setString(12, resume.getGitHub());
+                preStm.setString(13, resume.getLinkedIn());
                 preStm.setString(14, resume.getOverview());
 
                 check = preStm.executeUpdate() > 0 ? true : false;
