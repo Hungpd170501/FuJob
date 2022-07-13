@@ -9,7 +9,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-
     <head>
         <jsp:include page="./include/header.jsp">
             <jsp:param name="title" value="FuJob | Student Resume"/>
@@ -105,7 +104,7 @@
                                     String date = simpleformat.format(resume.getCreatedDate());
                                 %>
                                 <li class="list-inline-item mr-3 col-md-5">
-                                    <p href="" class="f-15 mb-0 "><i class="mdi mdi-timetable mr-2"></i><strong>Joined:</strong> <%= date %></p>
+                                    <p href="" class="f-15 mb-0 "><i class="mdi mdi-timetable mr-2"></i><strong>Joined:</strong> <%= date%></p>
                                 </li>
                             </ul>
                             <ul class="list-inline pt-3 border-top mb-0 row">
@@ -116,9 +115,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
                 <div class = "row">
                     <div class ="col-lg-6">
                         <div class="row">
@@ -127,7 +123,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <!--                    <div class="col-lg-3"></div>-->
                             <div class="col-lg-12 mt-4 pt-5">
                                 <div class="border rounded candidates-profile-education text-center">
                                     <div class="profile-education-icon border rounded-pill bg-white text-primary">

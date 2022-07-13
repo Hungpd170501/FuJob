@@ -50,14 +50,14 @@
                                                 <p class="float-right forgot-pass"><a href="${pageContext.request.contextPath}/view/recovery_password.jsp" class="text-dark font-weight-bold">Forgot password ?</a></p>
                                                 <div class="form-group">
                                                     <div class="custom-control m-0 custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                                        <label class="custom-control-label" for="customCheck1">Remember me</label>
+                                                        <input type="checkbox" class="custom-control-input" value="lsRememberMe" id="rememberMe"> 
+                                                        <label class="custom-control-label" for="rememberMe">Remember me</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- Nut LOGIN -->
                                             <div class="col-lg-12 mb-0">
-                                                <input type="submit" name="action" class="btn btn-primary w-100" value="Login"/>
+                                                <input type="submit" name="action" class="btn btn-primary w-100" value="Login" onclick="lsRememberMe()">
                                             </div>
                                             <div class="col-lg-12 mt-4 text-center">
                                                 <h6>Or Login With</h6>
@@ -106,6 +106,7 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/remember-me.js"></script>
 
 <!--        <script src="https://www.google.com/recaptcha/api.js?render=6LeCa7IeAAAAAFhlitWRqflibLyvju1K_P5U52dj"></script>
         <script>
