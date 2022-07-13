@@ -27,7 +27,7 @@
                         <div class="col-md-6">
                             <div class="text-center text-white">
                                 <h4 class="text-uppercase title mb-4">Projects List view</h4>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -192,14 +192,45 @@
                                             </div>
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
+                                                    <% if (jobOrder.getJobApplicationStatus() == 3) {
+                                                    %>
+                                                    <br>
+                                                    <div class="mt-3">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
+                                                    </div>
+                                                    <%
+                                                    } else if (jobOrder.getJobApplicationStatus() == 6) {
+                                                    %>
+                                                    <br>
                                                     <div class="mt-3">
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirmCancellation">
-                                                            Cancel
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', <%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getResumeID()%>, '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')"
+                                                                type="button" class="btn btn-sm btn-primary-outline"
+                                                                data-toggle="modal" data-target="#EditformApplication"
+                                                                style="width: 50%">View Application Form
                                                         </button>
                                                     </div>
+                                                    <%
+                                                    } else if (jobOrder.getJobApplicationStatus() == 7) {
+                                                    %>
+                                                    <br>
+                                                    <div class="mt-3">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', <%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getResumeID()%>, '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')"
+                                                                type="button" class="btn btn-sm btn-primary-outline"
+                                                                data-toggle="modal" data-target="#EditformApplication"
+                                                                style="width: 50%">View Application Form
+                                                        </button>
+                                                    </div>
+                                                    <%
+                                                        }
+                                                    %>
+                                                    
+                                                    
                                                 </div>
                                             </div>
                                         </div>
