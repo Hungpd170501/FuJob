@@ -40,6 +40,7 @@ public class ListJobOngoingPostedController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            //user tao job
             int userID = Integer.parseInt(request.getParameter("userID"));
             List<JobApplication> listJobOrder = new ArrayList<>();
             JobApplicationDAO jobOrderDAO = new JobApplicationDAO();

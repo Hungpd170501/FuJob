@@ -504,6 +504,7 @@ public class JobApplicationDAO {
                 while (rs.next()) {
                     int jobApplicationID = rs.getInt("jobApplicationID");
                     int jobID = rs.getInt("jobID");
+                    int resumeID=rs.getInt("resumeID");
                     String priceDeal = rs.getString("priceDeal");
                     String message = rs.getString("message");
                     String cvFile = rs.getString("cvFile");
@@ -543,7 +544,7 @@ public class JobApplicationDAO {
                             .build();
                     JobApplication listJobOrder = JobApplication.builder()
                             .jobApplicationID(jobApplicationID)
-                            .resumeID(userID).job(job)
+                            .resumeID(resumeID).job(job)
                             .createdDate(createdDate)
                             .priceDeal(priceDeal)
                             .message(message)
