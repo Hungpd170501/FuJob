@@ -35,12 +35,7 @@ public class JobDAO {
             + "                WHERE jobApplicationStatus = 1  "
             + "                 GROUP BY jobID) AS jobAply  "
             + "            on jobAply.jobID = j.jobID )";
-    private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJobs WHERE jobID = (SELECT MAX(jobID) FROM tblJobs) and jobStatus = 1 and userID = ?"
-            + "left join (select jobID, COUNT(jobID) AS bids  "
-            + "												FROM tblJobApplications  "
-            + "													WHERE jobApplicationStatus = 1  "
-            + "													GROUP BY jobID) AS jobAply  "
-            + "													on jobAply.jobID = j.jobID )";
+    private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJobs WHERE jobID = (SELECT MAX(jobID) FROM tblJobs) and jobStatus = 1 and userID = ?";
     //roi ne
     private static final String SEARCHBYJOBID = "SELECT j.jobID, j.userID, j.jobTitle,j.jobCategoryID, c.categoryName, "
             + "j.minBudget, j.maxBudget, j.paymentMethodID, payment.paymentMethodName, j.address, j.email, j.phone, j.description, j.createdDate, "
