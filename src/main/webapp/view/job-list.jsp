@@ -109,6 +109,7 @@
                                 <h5 class="text-dark mb-0 pt-2 f-18">Showing projects</h5>
                             </div>
                             <div class="registration-form-box float-right">
+                                <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-bid', 'desc')"> Highest bid first </button>
                                 <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-name', 'asc')"> Sort projects name </button>
                                 <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-price', 'asc')"> Lowest budget first </button>
                                 <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-price', 'desc')"> Highest budget first </button>
@@ -201,7 +202,7 @@
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
                                                     <div>
-                                                        <h6 class=" mb-1"><i class="mr-2"></i><%= job.getBids()%> bid(s)</h6>
+                                                        <h6 class="painting-bid mb-1"><i class="mr-2"></i><%= job.getBids()%> bid(s)</h6>
                                                     </div>
                                                         <h6 class="mb-4 text-green"> <%= resultDate%> days left</h6>
                                                     <div>

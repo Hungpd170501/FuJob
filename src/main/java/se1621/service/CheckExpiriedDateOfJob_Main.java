@@ -4,13 +4,17 @@
  */
 package se1621.service;
 
+import java.util.Date;
+import java.util.List;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
+import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
+import org.quartz.impl.matchers.GroupMatcher;
 
 /**
  *
@@ -21,15 +25,14 @@ public class CheckExpiriedDateOfJob_Main {
     public static void main(String[] args) {
         try {
             JobDetail job = JobBuilder.newJob(CheckExpiriedDateOfJob.class)
-                    .withIdentity("job1", "group1").build();
+                    .withIdentity("job", "group").build();
             Trigger trigger = TriggerBuilder.newTrigger()
-                    .withIdentity("cronTrigger1", "group1")
+                    .withIdentity("cronTrigger", "group")
                     .withSchedule(CronScheduleBuilder
                             .cronSchedule("0/10 * * * * ?")).build();
             Scheduler scheduler = new StdSchedulerFactory().getScheduler();
             scheduler.start();
             scheduler.scheduleJob(job, trigger);
-            
         } catch (Exception e) {
             e.printStackTrace();
         }

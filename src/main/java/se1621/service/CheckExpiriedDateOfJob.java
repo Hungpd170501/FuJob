@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package se1621.service;
+import java.util.Date;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -12,6 +13,6 @@ import org.quartz.JobExecutionException;
  */
 public class CheckExpiriedDateOfJob implements Job{
     public void execute (JobExecutionContext context)throws JobExecutionException{
-        System.out.println("Job is checking.");
+        System.out.println("Job is checking " + new Date());
     }
 }
