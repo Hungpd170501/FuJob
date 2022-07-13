@@ -206,7 +206,7 @@ CREATE TABLE tblEvaluateCompletion (
 	content Nvarchar(3000),
 	createdDate datetime,
 	lastModifiedDate datetime,
-	evaluateCompletionStatus bit,
+	evaluateCompletionStatus tinyint,
 );
 
 -----------------
