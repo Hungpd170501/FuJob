@@ -23,7 +23,7 @@ import se1621.dto.PayMentMethod;
 public class JobDAO {
 
     private static final String CREATEJOB = "INSERT INTO tblJobs(userID, jobTitle, jobCategoryID,"
-            + " minBudget, maxBudget, paymentMethodID, expiriedDate, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,1)";
+            + " minBudget, maxBudget, paymentMethodID, expiriedDate, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,1)";
     //xong ne
     private String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
             + "j.jobCategoryID, c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, "

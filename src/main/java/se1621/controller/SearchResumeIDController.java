@@ -45,30 +45,30 @@ public class SearchResumeIDController extends HttpServlet {
             
             String messResume = (String)request.getAttribute("MESSAGE_RESUME");
             
-            List<JobApplication> listJobOrder = new ArrayList<>();
-            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-            listJobOrder = jobOrderDAO.getListJobAccepcted(resumeID);
-            JobSkillsDAO jsDAO = new JobSkillsDAO();
-            List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
-            for (JobApplication jobApply : listJobOrder) {
-
-                List<JobSkills> ljk = new ArrayList<>();
-                for (JobSkills js : listJs) {
-                    if (jobApply.getJob().getJobID() == js.getJobID()) {
-                        ljk.add(js);
-                    }
-                    jobApply.getJob().setListJobSkills(ljk);
-                }
-            }
+//            List<JobApplication> listJobOrder = new ArrayList<>();
+//            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
+//            listJobOrder = jobOrderDAO.getListJobAccepcted(resumeID);
+//            JobSkillsDAO jsDAO = new JobSkillsDAO();
+////            List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
+////            for (JobApplication jobApply : listJobOrder) {
+////
+////                List<JobSkills> ljk = new ArrayList<>();
+////                for (JobSkills js : listJs) {
+////                    if (jobApply.getJob().getJobID() == js.getJobID()) {
+////                        ljk.add(js);
+////                    }
+////                    jobApply.getJob().setListJobSkills(ljk);
+////                }
+////            }
+//            
+//            if (!listJobOrder.isEmpty()) {
+//                request.setAttribute("LIST_ALLJOBONGOING_APPLIED", listJobOrder);
+//            } else {
+//                request.setAttribute("LIST_ALLJOBONGOING_APPLIED", listJobOrder);
+//                request.setAttribute("MESSAGE0", "YOU HAVEN'T ACCEPTED FOR ANY PROJECT");
+//            }
             
-            if (!listJobOrder.isEmpty()) {
-                request.setAttribute("LIST_ALLJOBONGOING_APPLIED", listJobOrder);
-            } else {
-                request.setAttribute("LIST_ALLJOBONGOING_APPLIED", listJobOrder);
-                request.setAttribute("MESSAGE0", "YOU HAVEN'T ACCEPTED FOR ANY PROJECT");
-            }
-            
-            if (resume!=null) {
+            if (resume.getResumeID()!=0) {
                 
                 request.setAttribute("RESUME", resume);
                 request.setAttribute("LIST_STUDENTSKILL", listResumeSkill);
