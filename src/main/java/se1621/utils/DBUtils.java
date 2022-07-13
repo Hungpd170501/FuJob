@@ -14,6 +14,15 @@ public class DBUtils {
     private static HikariConfig config = new HikariConfig();
     private static HikariDataSource ds;
     private static DBUtils instance;
+    public Connection getConnection() throws SQLException {
+        return ds.getConnection();
+    }
+    public static DBUtils getInstance() {
+        if (instance == null) {
+            instance = new DBUtils();
+        }
+        return instance;
+    }
     private DBUtils() {
         config.setJdbcUrl("jdbc:sqlserver://fujob2.database.windows.net:1433;database=FuJobDB;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;");
         config.setUsername("se150222");
@@ -24,54 +33,25 @@ public class DBUtils {
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
         ds = new HikariDataSource(config);
     }
-    
-    public Connection getConnection() throws SQLException {
-        return ds.getConnection();
-    }
 
-    public static DBUtils getInstance() {
-        if (instance == null) {
-            instance = new DBUtils();
-        }
-        return instance;
-    }
-
-//    private static DBUtils instance;
-//    private Connection connection;
-//
-//    public Connection getConnection() {
-//        return connection;
-//    }
-//
-//    public static DBUtils getInstance() {
-//        if (instance == null) {
-//            instance = new DBUtils();
-//        } else {
-//            try {
-//                if (instance.getConnection().isClosed()) {
-//                    instance = new DBUtils();
-//                }
-//            } catch (SQLException e) {
-//            }
-//        }
-//        return instance;
-//    }
-//
-//    private final String serverName = "localhost";
-//    private final String dbName = "FuJobDB_1";
-//    private final String portNumber = "1433";
+// private final String dbName = "FuJobDB_1";
 //    private final String userID = "sa";
-//    private final String password = "1";
-//
+//    private final String password = "Hngiabao2211";
 //    private DBUtils() {
-//        String url = "jdbc:jtds:sqlserver://" + serverName + ":" + portNumber + "/" + dbName;
-//        try {
-//            Class.forName("net.sourceforge.jtds.jdbc.Driver");
-//        } catch (ClassNotFoundException e) {
-//        }
-//        try {
-//            this.connection = DriverManager.getConnection(url, userID, password);
-//        } catch (SQLException e) {
-//        }
+//        config.setMaximumPoolSize(10);
+//        config.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//        config.setConnectionTimeout(1000L);
+//        config.setJdbcUrl("jdbc:sqlserver://localhost:1433;database="+ dbName +";trustServerCertificate=true;");
+//        config.setUsername(userID);
+//        config.setPassword(password);
+//        config.addDataSourceProperty("autoReconnect", true);
+//        config.addDataSourceProperty("cachePrepStmts", true);
+//        config.addDataSourceProperty("prepStmtCacheSize", 250);
+//        config.addDataSourceProperty("prepStmtCacheSqlLimit", 2048);
+//        config.addDataSourceProperty("useServerPrepStmts", true);
+//        config.addDataSourceProperty("cacheResultSetMetadata", true);
+//        ds = new HikariDataSource(config);
 //    }
+
+   
 }

@@ -9,7 +9,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-
     <head>
         <jsp:include page="./include/header.jsp">
             <jsp:param name="title" value="FuJob | Student Resume"/>
@@ -22,7 +21,7 @@
 
         <%
             Resume resume = (Resume) request.getAttribute("RESUME");
-            if (resume == null) {
+            if (resume.getResumeID() == 0) {
                 String message = (String) request.getAttribute("MESSAGE");
         %>
         <section class="bg-half page-next-level"> 
@@ -33,8 +32,7 @@
             <a href="${pageContext.request.contextPath}/MainController?action=CheckCreateResume&studentID=${sessionScope.LOGIN_USER.userID}"><p class="h5" style="text-decoration: underline">Create Your Resume Now</p></a>
         </section>
         <%
-            }
-            if (resume != null) {
+        } else {
         %>
         <!-- Start home -->
         <section class="bg-half page-next-level"> 
@@ -116,9 +114,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
                 <div class = "row">
                     <div class ="col-lg-6">
                         <div class="row">
@@ -127,7 +122,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <!--                    <div class="col-lg-3"></div>-->
                             <div class="col-lg-12 mt-4 pt-5">
                                 <div class="border rounded candidates-profile-education text-center">
                                     <div class="profile-education-icon border rounded-pill bg-white text-primary">
@@ -174,13 +168,123 @@
                 </div>
             </div>         
 
-        </section>  
+        </section> 
+                                
+        <section class="section pt-0">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="section-title text-center  pb-2">
+                            <h4 class="title title-line pb-5">All Projects Completed</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <% List<JobApplication> listJobApplication = (List<JobApplication>) request.getAttribute("LIST_ALLJOBONGOING_APPLIED");
+                        if (listJobApplication.isEmpty()) {
+
+                            String message = (String) request.getAttribute("MESSAGE0");
+                    %>
+                    <div class="col-lg-12 text-warning text-center">
+                        <h3> <%=message%> </h3>
+                    </div>
+                    <%
+                        }
+                        if (listJobApplication != null) {
+                            if (listJobApplication.size() > 0) {
+                                for (JobApplication jobOrder : listJobApplication) {
+                    %>
+                    <div class="job-display col-lg-12  pt-2" >
+                        <div class="job-list-box border rounded">
+                            <div class="p-3">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-3">
+                                        <div class="company-logo-img">
+                                            <img src="<%= jobOrder.getJob().getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:200px;height:200px">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-9">
+                                        <div class="job-list-desc">
+                                            <h4 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="text-dark"><%= jobOrder.getJob().getJobTitle()%>
+                                                    <% if (jobOrder.getJobApplicationStatus() == 3) {
+                                                    %>
+                                                    <br>
+                                                    <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
+                                                    <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Inprogress</i>
+                                                    <%
+                                                    } else if (jobOrder.getJobApplicationStatus() == 6) {
+                                                    %>
+                                                    <br>
+                                                    <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
+                                                    <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Completed</i>
+                                                    <%
+                                                    } else if (jobOrder.getJobApplicationStatus() == 7) {
+                                                    %>
+                                                    <br>
+                                                    <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: red"></i> 
+                                                    <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Not Completed</i>
+                                                    <%
+                                                        }
+                                                    %>
+                                                </a>
+                                            </h4>
+
+                                            <%
+                                                String description = jobOrder.getJob().getDescription();
+                                                if (description.length() > 200 || description.isBlank()) {
+                                                    description = description.substring(0, 197) + ". . .";
+                                                }
+                                            %>
+                                            <p class="mb-4"><%= description%></p>
+                                            <h6>
+                                                <%= jobOrder.getJob().getPayMentMethod().getPaymentMethodName()%>: <%= jobOrder.getJob().getMinBudget()%>$ - <%= jobOrder.getJob().getMaxBudget()%>$ <% if (jobOrder.getJob().getPayMentMethod().getPaymentMethodID() == 2) {
+                                                %>
+                                                / hour
+                                                <%
+                                                    }
+                                                %>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="job-list-button-sm text-right">
+                                            <div class="mt-3">
+                                                <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+
+                    <%
+
+                                }
+
+                            }
+                        }
+
+                    %>
+                    <%                                if (listJobApplication.size() > 10) {
+                    %>
+                    <div class="smj col-12 text-center mt-4 pt-2">
+                        <a class="btn btn-primary-outline">Show more</a>
+                    </div>
+                    <%
+                        }
+                    %>
+                </div>
+            </div>
+        </section>           
         <%
             }
         %>
         <!-- CANDIDATES PROFILE END -->
-        
-     
+
         <jsp:include page="./include/footer.jsp"></jsp:include>
             <!-- javascript -->
             <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>

@@ -3,7 +3,7 @@
 <%@page import="java.util.Calendar" %>
 <%@ page import="se1621.entity.JobEntity" %>
 <%@ page import="java.time.Duration" %>
-<%@page contentType="text/html" pageEncoding="windows-1258" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -137,7 +137,7 @@
                                         <p class="text-muted f-14 mb-1">Date posted: <%= DateTimeFormatter.ofPattern("dd-MM-yyyy")
                                                                  .withZone(ZoneId.systemDefault()).format(job.getCreatedDate()) %><br></p>
                                         <p class="text-muted f-14 mb-1">Address: ${jobItem.address}<br></p>
-                                        <p class="text-muted mb-1">Budget:${jobItem.minBudget}$ - ${jobItem.maxBudget}         
+                                        <p class="text-muted mb-1">Budget: ${jobItem.minBudget}$ - ${jobItem.maxBudget}         
                                             $<%=(job.getPaymentMethod().getPaymentMethodID() == 2) ? "/ hour" : ""%>
                                         </p>
                                         <p class="text-muted mb-1">Expiry

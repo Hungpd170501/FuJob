@@ -181,7 +181,7 @@
                             </form>
                         </div>
                         <%
-                        } else if (loginUser != null && !StringUtils.equals(loginUser.getRole().getRoleID(), "HR") && !StringUtils.equals(loginUser.getRole().getRoleID(), "HRM")) {
+                        } else if (loginUser != null && !StringUtils.equals(loginUser.getRole().getRoleID(), "HR") && !StringUtils.equals(loginUser.getRole().getRoleID(), "HRM") && job.getJobStatus() == 1  ) {
                             Boolean checkDupApplied = (Boolean) request.getAttribute("DUPLICATE_APPLIED");
                             if (checkDupApplied) {
                         %>

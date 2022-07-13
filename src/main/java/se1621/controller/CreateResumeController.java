@@ -41,7 +41,7 @@ public class CreateResumeController extends HttpServlet {
         String url = ERROR;
         try {
             Part filePart = request.getPart("avatar");
-            FirebaseStoreServiceImpl firebaseStoreServiceImpl = new FirebaseStoreServiceImpl();
+            FirebaseStoreServiceImpl firebaseStoreServiceImpl = new FirebaseStoreServiceImpl(); 
             String filename=firebaseStoreServiceImpl.uploadFile(filePart);
             String fullName = request.getParameter("fullname");
             String gender = request.getParameter("gender");

@@ -45,17 +45,19 @@ public class SearchResumeIDController extends HttpServlet {
             
             String messResume = (String)request.getAttribute("MESSAGE_RESUME");
             
-//            List<JobApplication> listJobOrder = new ArrayList<>();
-//            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-//            listJobOrder = jobOrderDAO.getListJobAccepcted(resumeID);
-//            if (!listJobOrder.isEmpty()) {
-//                request.setAttribute("LIST_ALLJOBONGOING_APPLIED", listJobOrder);
-//            } else {
-//                request.setAttribute("LIST_ALLJOBONGOING_APPLIED", listJobOrder);
-//                request.setAttribute("MESSAGE0", "YOU HAVEN'T ACCEPTED FOR ANY PROJECT");
-//            }
-//            
-            if (resume!=null) {
+            List<JobApplication> listJobOrder = new ArrayList<>();
+            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
+            listJobOrder = jobOrderDAO.getListJobAccepcted(resumeID);
+
+            if (!listJobOrder.isEmpty()) {
+                request.setAttribute("LIST_ALLJOBONGOING_APPLIED", listJobOrder);
+            } else {
+                request.setAttribute("LIST_ALLJOBONGOING_APPLIED", listJobOrder);
+                request.setAttribute("MESSAGE0", "HAVEN'T COMPLETED FOR ANY PROJECT");
+            }
+
+            
+            if (resume.getResumeID()!=0) {
                 
                 request.setAttribute("RESUME", resume);
                 request.setAttribute("LIST_STUDENTSKILL", listResumeSkill);

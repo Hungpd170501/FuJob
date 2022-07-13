@@ -16,9 +16,9 @@
             <jsp:param name="title" value="FuJob | Post Job "/>
         </jsp:include>
 
-        </head>
+    </head>
 
-        <body>
+    <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
 
@@ -30,12 +30,7 @@
                         <div class="col-md-6">
                             <div class="text-center text-white">
                                 <h4 class="text-uppercase title mb-4">Create A new Project</h4>
-                                <ul class="page-next d-inline-block mb-0">
-                                    <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
-                                    <li>
-                                        <span class="text-uppercase text-white font-weight-bold">Post A Project</span> 
-                                    </li> 
-                                </ul>
+
                             </div>
                         </div>
                     </div>
@@ -55,11 +50,11 @@
                                 <div id="message3"></div>
                                 <form action="/FuJob/MainController" method="POST">
                                     <%
-                                        if(job.getJobID()>0){
+                                        if (job.getJobID() > 0) {
                                     %>
-                                        <h4 class="text-dark mb-3" style="font-weight: 700">Update Project :</h4>
+                                    <h4 class="text-dark mb-3" style="font-weight: 700">Update Project :</h4>
                                     <%
-                                        }else{
+                                    } else {
                                     %>
                                     <h4 class="text-dark mb-3" style="font-weight: 700">Post a New Project :</h4>
                                     <%
@@ -124,9 +119,11 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group app-label mt-2">
-                                                <label>How do you want to pay?<span class="text-danger">*</span></label>
+                                                <label>Payment Method<span class="text-danger">*</span> 
+                                                    <span class="ml-5">Min - Max ($)<span class="text-danger">*</span></span>
+                                                </label>
                                                 <div class="row form-button">
-                                                    <div class="col-lg-7 p-1 col-md-6">
+                                                    <div class="col-lg-6 p-1 col-md-6">
                                                         <select id="paymentID" class="form-control resume" name="paymentMethodID">
                                                             <%
                                                                 if (job.getPayMentMethod() != null) {
@@ -136,24 +133,34 @@
                                                                 }
                                                             %>
                                                             <option value="2">Pay by Hour</option>
-                                                            <option value="1">Pay fixed Price</option>
+                                                            <option value="1">Pay by Project</option>
                                                         </select>
                                                     </div>
-                                                    <div class="col-lg-4 p-1 col-md-5" >
+                                                    <div class="col-lg-3 p-1 col-md-5" >
                                                         <%
-                                                            if (job.getBudget() > 0) {
+                                                            if (job.getMinBudget() > 0) {
                                                         %>
-                                                        <input id="budget" name="budget" type="number" step="0.5" min="1" class="form-control resume" value="${requestScope.JOB.budget}" required="" placeholder="100">
+                                                        <input id="minBudget" name="minBudget" type="number" step="0.5" min="0.5" class="form-control resume" value="${requestScope.JOB.minBudget}" required="" placeholder="0.5">
                                                         <%
                                                         } else {
                                                         %>
-                                                        <input id="budget" name="budget" type="number" step="0.5" min="1" class="form-control resume" value="" required="" placeholder="100">
+                                                        <input id="minBudget" name="minBudget" type="number" step="0.5" min="0.5" class="form-control resume" value="" required="" placeholder="0.5">
                                                         <%
                                                             }
                                                         %>
-                                                    </div>
-                                                    <div class="col-lg-1 p-2 col-md-1">
-                                                        <h5>$</h5>
+                                                    </div>    
+                                                    <div class="col-lg-3 p-1 col-md-5" >    
+                                                        <%
+                                                            if (job.getMaxBudget() > 0) {
+                                                        %>
+                                                        <input id="maxBudget" name="maxBudget" type="number" step="0.5" min="1" class="form-control resume" value="${requestScope.JOB.maxBudget}" required="" placeholder="10">
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <input id="maxBudget" name="maxBudget" type="number" step="0.5" min="1" class="form-control resume" value="" required="" placeholder="10">
+                                                        <%
+                                                            }
+                                                        %>
                                                     </div>
                                                 </div>
                                             </div>
@@ -210,7 +217,7 @@
                                             %>
                                             <input type="submit" id="postJobbtn" name="" class="submitBnt btn btn-primary" value="Update Project">
                                             <%
-                                                } else {
+                                            } else {
                                             %>
                                             <input type="submit" id="postJobbtn" name="" class="submitBnt btn btn-primary" value="Post a Project">
                                             <%
@@ -301,6 +308,20 @@
             });
             $("#cateID option").each(function () {
                 $(this).siblings('[value="' + this.value + '"]').remove();
+            });
+        </script>
+        <script>
+            $('#minBudget').change(function () {
+                var maxValue = document.getElementById("maxBudget").value;
+                $('#minBudget').attr({
+                    "max": maxValue
+                });
+            });
+            $('#maxBudget').change(function () {
+                var minValue = document.getElementById("minBudget").value;
+                $('#maxBudget').attr({
+                    "min": minValue
+                });
             });
         </script>
     </body>

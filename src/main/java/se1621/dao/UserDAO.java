@@ -19,7 +19,7 @@ public class UserDAO {
 
     private static final String CHECK_DUPLICATE = "SELECT userID FROM tblUsers WHERE email=?";
     private static final String SINGUP = "INSERT INTO tblUsers(fullName, email, password, roleID, userStatus) VALUES(?,?,?,?,2)";
-    private static final String REGISTER_HR = "INSERT INTO tblUsers(fullName, email, password, roleID, userStatus, companyID) VALUES(?,?,?,?,2,?)";
+    private static final String REGISTER_HR = "INSERT INTO tblUsers(fullName, email, password, roleID, userStatus, companyID) VALUES(?,?,?,?,1,?)";
     private static final String UPDATECOMID = "UPDATE tblUsers SET fullName=?, email=?, roleID=?, companyID=? WHERE userID=?";
     private static final String GETUSER = "SELECT fullName, email, u.roleID, r.roleName, companyID, r.createdDate, userStatus "
             + "FROM (tblUsers u left join tblRoles r on u.roleID = r.roleID) WHERE userID =?";

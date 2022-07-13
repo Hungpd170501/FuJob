@@ -20,7 +20,7 @@
             </div>
 
             <!-- Hero Start -->
-            <section class="vh-85" style="background: url('https://via.placeholder.com/2000X1333//88929f/5a6270C/O https://placeholder.com/') center center;">
+            <section class="vh-85" style="background: url('${pageContext.request.contextPath}/asset/images/background-home.jpg') center center;">
                 <div class="home-center">
                     <div class="home-desc-center">
                         <div class="container">
@@ -66,13 +66,13 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group position-relative">                                               
-                                                    <label>Freelancer </label>
+                                                    <label>Student </label>
                                                     <input type="radio" name="roleID" required="" value="US">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group position-relative">                                               
-                                                    <label>Human Resource </label>
+                                                    <label>Company </label>
                                                     <input type="radio" name="roleID" required="" value="HR">
                                                 </div>
                                             </div>

@@ -12,7 +12,7 @@
 <html lang="en" class="no-js">
     <head>
         <jsp:include page="./include/header.jsp">
-            <jsp:param name="title" value="FuJob | Job List Apply"/>
+            <jsp:param name="title" value="FuJob | Job List Accepted"/>
         </jsp:include>
     </head>
     <body>
@@ -27,13 +27,7 @@
                         <div class="col-md-6">
                             <div class="text-center text-white">
                                 <h4 class="text-uppercase title mb-4">Projects List view</h4>
-                                <ul class="page-next d-inline-block mb-0">
-                                    <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
-                                    <li><a href="#" class="text-uppercase font-weight-bold">Projects</a></li> 
-                                    <li>
-                                        <span class="text-uppercase text-white font-weight-bold">Your Projects Applied</span> 
-                                    </li>
-                                </ul>
+                                
                             </div>
                         </div>
                     </div>

@@ -12,61 +12,36 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import se1621.dao.UserDAO;
-import se1621.dto.Error.UserError;
-import se1621.dto.Role;
-import se1621.dto.User;
 import se1621.utils.Helper;
 
 /**
  *
  * @author HNGB
  */
-@WebServlet(name="RegisterHRController", urlPatterns={"/RegisterHRController"})
-public class RegisterHRController extends HttpServlet {
+@WebServlet(name="ChangePassHRController", urlPatterns={"/ChangePassHRController"})
+public class ChangePassHRController extends HttpServlet {
    
-    private static final String ERROR = "/view/humanresource-list.jsp";
-    private static final String SUCCESS = "/MainController?action=ViewAllHR&companyID=";
+    private String SUCCESS = "/MainController?action=ViewAllHR&companyID=";
+    private String ERROR = "/view/error.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String fullName = request.getParameter("fullName");
-            String email = request.getParameter("email");
             String password = request.getParameter("password");
+            String email = request.getParameter("email");
             int companyID = Integer.parseInt(request.getParameter("companyID"));
-            String roleID = request.getParameter("roleID");
-            UserDAO dao = new UserDAO();
-            UserError userError = new UserError();
-            boolean checkValidation = true;
-            boolean checkDuplicate = dao.checkDuplicateEmail(email);
-
-            if (checkDuplicate) {
-                checkValidation = false;
-                userError.setEmailError("Email duplicated!");
-            }
-            if (checkValidation) {
-                User user = User.builder()
-                        .password(Helper.hashPassword(password))
-                        .fullName(fullName)
-                        .role(new Role(roleID, ""))
-                        .email(email)
-                        .companyID(companyID)
-                        .build();
-                boolean checkSignup = dao.registerHR(user);
-                if (checkSignup) {
-                    request.setAttribute("MESSAGE_UPDATE", "Added New HR Successfull!");
-                    url = SUCCESS + companyID;
-                } else {
-                    request.setAttribute("MESSAGE_UPDATE", "Added New HR UnSuccessfull!");
-                    url = SUCCESS + companyID;
-                }
-            } else {
-                request.setAttribute("MESSAGE_UPDATE", userError.getEmailError());
+            UserDAO userDAO = new UserDAO();
+            boolean checkChange = userDAO.updateUserPassword(email, Helper.hashPassword(password));
+            if(checkChange) {
+                request.setAttribute("MESSAGE_UPDATE", email + " has changed password!");
+                url = SUCCESS + companyID;
+            }else {
+                request.setAttribute("MESSAGE_UPDATE", "Password change failed!");
                 url = SUCCESS + companyID;
             }
         } catch (Exception e) {
-            log("Error at SignUpController:"+e);
+            log("Error at View all job Controller" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

@@ -34,14 +34,7 @@
                     <div class="col-md-6">
                         <div class="text-center text-white">
                             <h4 class="text-uppercase title mb-4">List Posted Projects</h4>
-                            <ul class="page-next d-inline-block mb-0">
-                                <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
-                                <li><a href="#" class="text-uppercase font-weight-bold">Projects</a></li>
-                                <li>
-                                    <span class="text-uppercase text-white font-weight-bold">Posted Projects Listing</span>
-
-                                </li>
-                            </ul>
+                            
                         </div>
                     </div>
                 </div>
@@ -367,7 +360,7 @@
         </script>
         <script>
             function getJobPostID(id, userID) {
-                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=DeleteJobPost&jobPostID=' + id + '&userID=${sessionScope.LOGIN_USER.userID}');
+                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=DeleteJobPost&jobPostID=' + id + '&userID=' + userID);
             }
         </script>
     </body>
