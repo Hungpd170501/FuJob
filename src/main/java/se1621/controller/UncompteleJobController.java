@@ -12,9 +12,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import se1621.dao.EvaluateCompletionDAO;
 import se1621.dao.JobApplicationDAO;
 import se1621.dao.JobDAO;
+import se1621.dto.EvaluateCompletion;
 import se1621.dto.Job;
+import se1621.dto.Resume;
+import se1621.dto.User;
 
 /**
  *
@@ -32,6 +37,7 @@ public class UncompteleJobController extends HttpServlet {
      */
     private static final String ERROR = "error.jsp";
     private static final String SUCCESS = "MainController?action=ListJobOngoingPosted&userID=";
+    private static final int UNCOMPLETED=4;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -40,12 +46,28 @@ public class UncompteleJobController extends HttpServlet {
         try{
             JobDAO jobDao = new JobDAO();
             JobApplicationDAO jobApplicationDAO = new JobApplicationDAO();
+            String content=request.getParameter("message");
+            int ratingValue=Integer.parseInt(request.getParameter("rating"));
             int jobID = Integer.parseInt(request.getParameter("jobID"));
-            int jobAppID = Integer.parseInt(request.getParameter("jobAppID"));
+            int jobAppID = Integer.parseInt(request.getParameter("jobApplicationID"));
+            int resumeID = Integer.parseInt(request.getParameter("resumeID"));
             boolean check = jobApplicationDAO.uncompleteJobApp(jobAppID);
             if(check){
                Job job = jobDao.getJob(jobID);
                jobDao.updateJobPostUncomplete(jobID);
+                HttpSession session = request.getSession();
+                User loginUser= (User) session.getAttribute("LOGIN_USER");
+                EvaluateCompletionDAO evaluateCompletionDAO=new EvaluateCompletionDAO();
+               evaluateCompletionDAO.saveEvaluateCompletion
+                       (EvaluateCompletion
+                       .builder()
+                       .reviewer(loginUser)
+                       .job(Job.builder().jobID(jobID).build())
+                       .resume(Resume.builder().resumeID(resumeID).build())
+                       .ratingValue(ratingValue)
+                       .content(content)
+                               .evaluateCompletionStatus(UNCOMPLETED)
+                               .build());
                url = SUCCESS + job.getUserID();
             }
         }catch(Exception ex){

@@ -52,6 +52,4 @@ public class DBUtils {
         config.addDataSourceProperty("cacheResultSetMetadata", true);
         ds = new HikariDataSource(config);
     }
-
 }
-

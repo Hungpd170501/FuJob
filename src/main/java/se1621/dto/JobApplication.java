@@ -25,4 +25,5 @@ public class JobApplication {
     private Date createdDate;
     private Date lastModifiedDate;
     private int jobApplicationStatus;
+    EvaluateCompletion evaluateCompletion;
 }

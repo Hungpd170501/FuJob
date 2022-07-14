@@ -206,7 +206,7 @@ CREATE TABLE tblEvaluateCompletion (
 	content Nvarchar(3000),
 	createdDate datetime,
 	lastModifiedDate datetime,
-	evaluateCompletionStatus bit,
+	evaluateCompletionStatus tinyint,
 );
 
 -----------------
@@ -224,7 +224,7 @@ GO
 IF OBJECT_ID(N'lastUpdateEvaluateCompletion', N'TR') IS NOT NULL  
     DROP TRIGGER lastUpdateSkill;  
 GO
-CREATE TRIGGER lastUpdateSkill on dbo.tblEvaluateCompletion
+CREATE TRIGGER lastUpdateEvaluateCompletion on dbo.tblEvaluateCompletion
 	FOR  UPDATE , INSERT  AS 
 	UPDATE dbo.tblEvaluateCompletion
 SET lastModifiedDate = GetDate()
