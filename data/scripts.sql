@@ -189,6 +189,61 @@ CREATE TABLE tblPaymentMethods (
 GO
 
 
+
+
+
+
+IF OBJECT_ID('dbo.tblEvaluateCompletion', 'u') IS NOT NULL 
+   DROP TABLE dbo.tblSkills;  
+GO
+
+CREATE TABLE tblEvaluateCompletion (
+	evaluateCompletionID INT IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+	reviewerID INT NOT NULL,
+	jobID INT NOT NULL,
+	resumeID INT NOT NULL,
+	ratingValue INT,
+	content Nvarchar(3000),
+	createdDate datetime,
+	lastModifiedDate datetime,
+	evaluateCompletionStatus bit,
+);
+
+-----------------
+ALTER TABLE tblEvaluateCompletion ADD CONSTRAINT fk_EvaluateCompletion_reviewerID
+FOREIGN KEY(reviewerID) REFERENCES tblUsers(userID)
+GO
+ALTER TABLE tblEvaluateCompletion ADD CONSTRAINT fk_EvaluateCompletion_jobID
+FOREIGN KEY(jobID) REFERENCES tblJobs(jobID)
+GO
+ALTER TABLE tblEvaluateCompletion ADD CONSTRAINT fk_EvaluateCompletion_resumeID
+FOREIGN KEY(resumeID) REFERENCES tblResumes (resumeID)
+GO
+
+----------------
+IF OBJECT_ID(N'lastUpdateEvaluateCompletion', N'TR') IS NOT NULL  
+    DROP TRIGGER lastUpdateSkill;  
+GO
+CREATE TRIGGER lastUpdateSkill on dbo.tblEvaluateCompletion
+	FOR  UPDATE , INSERT  AS 
+	UPDATE dbo.tblEvaluateCompletion
+SET lastModifiedDate = GetDate()
+WHERE evaluateCompletionID IN (SELECT evaluateCompletionID FROM inserted);
+GO
+
+IF OBJECT_ID(N'createdDateEvaluateCompletion', N'TR') IS NOT NULL  
+    DROP TRIGGER createdDateSkill;  
+GO
+CREATE TRIGGER createdDateEvaluateCompletion on dbo.tblEvaluateCompletion
+	FOR INSERT  AS 
+	UPDATE dbo.tblEvaluateCompletion
+SET createdDate = GetDate()
+WHERE evaluateCompletionID IN (SELECT evaluateCompletionID FROM inserted);
+GO
+
+
+
+
 --Referential Integrity Constraints
 ALTER TABLE tblJobs ADD CONSTRAINT fk_Jobs_paymentMethodID
 FOREIGN KEY(paymentMethodID) REFERENCES tblPaymentMethods(paymentMethodID)

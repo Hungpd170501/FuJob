@@ -3,7 +3,7 @@
 <%@page import="java.util.Calendar" %>
 <%@ page import="se1621.entity.JobEntity" %>
 <%@ page import="java.time.Duration" %>
-<%@page contentType="text/html" pageEncoding="windows-1258" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">

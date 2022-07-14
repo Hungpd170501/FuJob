@@ -48,6 +48,7 @@ public class AcceptJobController extends HttpServlet {
             boolean check = jobApplicationDAO.acceptJobApplication(resumeID, jobID);
             if(check){
                jobDao.updateJobPostHaveEmployer(jobID);
+               jobApplicationDAO.unApplyWhenJobHaveCandidates(jobID);
                Job job = jobDao.getJob(jobID);
                url = SUCCESS + job.getUserID();
             }

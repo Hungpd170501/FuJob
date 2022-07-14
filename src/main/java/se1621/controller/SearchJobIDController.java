@@ -4,7 +4,6 @@
  */
 package se1621.controller;
 
-
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import se1621.dao.CategoryDAO;
@@ -20,11 +20,14 @@ import se1621.dao.JobApplicationDAO;
 import se1621.dao.JobDAO;
 import se1621.dao.JobSkillsDAO;
 import se1621.dao.ResumeDAO;
+import se1621.dao.ResumeSkillDAO;
 import se1621.dao.UserDAO;
 import se1621.dto.Category;
 import se1621.dto.CompanyInfo;
 import se1621.dto.Job;
+import se1621.dto.JobApplication;
 import se1621.dto.JobSkills;
+import se1621.dto.ResumeSkill;
 import se1621.dto.User;
 
 /**
@@ -49,14 +52,35 @@ public class SearchJobIDController extends HttpServlet {
             CategoryDAO categoryDAO = new CategoryDAO();
             UserDAO userDAO = new UserDAO();
             JobSkillsDAO jobSkillsDAO = new JobSkillsDAO();
+            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
+            ResumeDAO resumeDAO = new ResumeDAO();
             List<JobSkills> listJobSkills = jobSkillsDAO.getSkillRequire(jobIDSearch);
             HttpSession session = request.getSession();
             User loginUser = (User) session.getAttribute("LOGIN_USER");
+            
+            List<JobApplication> listJobApplication = new ArrayList<>();
+            listJobApplication = jobOrderDAO.getListApplicationOfJob(jobIDSearch);
+            ResumeSkillDAO jsDAO = new ResumeSkillDAO();
+            List<ResumeSkill> listJs = jsDAO.getResumeSkillForAllResume();
+            for (JobApplication jobApply : listJobApplication) { 
+                List<ResumeSkill> ljk = new ArrayList<>();
+                for (ResumeSkill js : listJs) {
+                    if(jobApply.getResumeID() == js.getResumeID()){
+                                ljk.add(js);
+                    }
+                    jobApply.getResume().setListResumeSkills(ljk);
+                }
+            }
+            
             if (loginUser != null && !StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
-                JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-                ResumeDAO resumeDAO = new ResumeDAO();
                 boolean checkDuplicateUserOrderJob = jobOrderDAO.checkDuplicateJobOrderByOneUser(resumeDAO.getResumeID(loginUser.getUserID()), job.getJobID());
-                    request.setAttribute("DUPLICATE_APPLIED", checkDuplicateUserOrderJob);
+                request.setAttribute("DUPLICATE_APPLIED", checkDuplicateUserOrderJob);
+            }
+            if (!listJobApplication.isEmpty()) {
+                request.setAttribute("LIST_EVALUATION", listJobApplication);
+                request.setAttribute("MESSAGE_EVALUATION", listJobApplication.size() + " freelancers are bidding for this job");
+            } else{
+                request.setAttribute("MESSAGE_EVALUATION", "Currently this project does not have anyone bidding");
             }
             if (job != null) {
                 int userID = job.getUserID();
@@ -69,6 +93,8 @@ public class SearchJobIDController extends HttpServlet {
                 request.setAttribute("LIST_SKILLREQUIRE", listJobSkills);
                 url = SUCCESS;
             }
+
+
         } catch (Exception e) {
             log("Error at SearchCompanyIDController: " + e.toString());
         } finally {

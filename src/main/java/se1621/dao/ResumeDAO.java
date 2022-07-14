@@ -21,7 +21,7 @@ import se1621.utils.DBUtils;
 public class ResumeDAO {
     private static final String GETRESUME_BYUSERID = "SELECT resumeID, userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, major, gpa, website, gitHub, linkedIn, overview, createdDate, lastModifiedDate FROM tblResumes WHERE userID = ? and resumeStatus = 1";
     private static final String GETRESUME_BYRESUMEID ="SELECT resumeID, userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, major, gpa, website, gitHub, linkedIn, overview, createdDate, lastModifiedDate FROM tblResumes WHERE resumeID = ? and resumeStatus = 1";
-    private static final String CREATERESUME = "INSERT INTO tblResumes( userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, major, gpa, website, gitHub, linkedIn, overview, createdDate, lastModifiedDate, resumeStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1)";
+    private static final String CREATERESUME = "INSERT INTO tblResumes( userID, avatar, fullName, gender, dateOfBirth, gmail, phone, address, major, gpa, website, gitHub, linkedIn, overview, resumeStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,1)";
     private static final String CHECK_DUPLICATE = "SELECT resumeID FROM tblResumes WHERE userID=?";
     private static final String UPDATERESUME = "UPDATE tblResumes SET avatar=?, fullName=?, gender=?, dateOfBirth=?, gmail=?, "
             + "phone=?, address=?, major=?, gpa=?, "
@@ -236,9 +236,9 @@ public class ResumeDAO {
                 preStm.setString(8, resume.getAddress());
                 preStm.setString(9, resume.getMajor());
                 preStm.setString(10, resume.getGpa());
-                preStm.setString(11, resume.getLinkedIn());
-                preStm.setString(12, resume.getWebsite());
-                preStm.setString(13, resume.getGitHub());
+                preStm.setString(11, resume.getWebsite());
+                preStm.setString(12, resume.getGitHub());
+                preStm.setString(13, resume.getLinkedIn());
                 preStm.setString(14, resume.getOverview());
 
                 check = preStm.executeUpdate() > 0 ? true : false;

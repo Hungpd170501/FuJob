@@ -32,6 +32,7 @@ public class JobApplicationDAO {
     private static final String DELETE = "UPDATE tblJobApplications SET jobApplicationStatus = 0 WHERE jobApplicationID = ? ";
     private static final String DENY_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 5 WHERE resumeID = ? AND jobID = ? AND jobApplicationStatus = 1 ";
     private static final String ACCEPT_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 3 WHERE resumeID = ? AND jobID = ? AND jobApplicationStatus = 1 ";
+    private static final String UNAPLLYWHENJOBHAVECANDIDATES_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 5 WHERE jobID = ? AND jobApplicationStatus = 1 ";
     private static final String UNCOMPLETE_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 7 WHERE jobApplicationID = ? AND jobApplicationStatus = 3";
     private static final String COMPLETE_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 6 WHERE jobApplicationID = ? AND jobApplicationStatus = 3";
     private static final String GETTALLUSERIDOFJOB = "SELECT resumeID FROM tblJobApplications WHERE jobID = ? and jobApplicationStatus = 1";
@@ -682,6 +683,27 @@ public class JobApplicationDAO {
         }
         return check;
     }
+    public boolean unApplyWhenJobHaveCandidates( int jobID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UNAPLLYWHENJOBHAVECANDIDATES_JOBAPPLICATION);
+                preStm.setInt(1, jobID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 
     public List<Integer> getListResumeIDOfJob(int jobID) throws SQLException {
         try {
@@ -827,7 +849,7 @@ public class JobApplicationDAO {
 
                 String queryForSearchSkill
                         = "SELECT ja.jobApplicationID, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, ja.jobApplicationStatus, "
-                        + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.budget, j.paymentMethodID, pm.paymentMethodName, "
+                        + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.minBudget, j.maxBudget, j.paymentMethodID, pm.paymentMethodName, "
                         + "j.address, j.email, j.phone, j.description, j.lastModifiedDate "
                         + "FROM (((tblJobApplications ja LEFT JOIN tblJobs j ON ja.jobID = j.jobID) "
                         + "LEFT JOIN tblCategories c ON j.jobCategoryID = c.categoryID) "
@@ -837,17 +859,17 @@ public class JobApplicationDAO {
                 boolean checkSkillID = false;
 
                 if (searchJobCategoryID == 0 && searchSkillID == 0) {
-                    getDataSQL = getDataSQL1 + "WHERE jobTitle like ?  and resumeID =" + resumeID;
+                    getDataSQL = getDataSQL1 + "WHERE jobTitle like ?  and resumeID =" + resumeID + " and jobApplicationStatus IN (1,3,5)";
                     checkCateID = true;
                     checkSkillID = true;
                 } else {
-                    getDataSQL = queryForSearchSkill + "WHERE jobTitle like ? and skillID = ? and jobCategoryID = ? and userID =" + resumeID;
+                    getDataSQL = queryForSearchSkill + "WHERE jobTitle like ? and skillID = ? and jobCategoryID = ? and resumeID =" + resumeID + " and jobApplicationStatus IN (1,3,5)";
                     if (searchJobCategoryID == 0) {
-                        getDataSQL = queryForSearchSkill + " WHERE jobTitle like ? and skillID = ?  and userID =" + resumeID;
+                        getDataSQL = queryForSearchSkill + " WHERE jobTitle like ? and skillID = ?  and resumeID =" + resumeID +" and jobApplicationStatus IN (1,3,5)";
                         checkCateID = true;
                     }
                     if (searchSkillID == 0) {
-                        getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobCategoryID = ?  and userID =" + resumeID;
+                        getDataSQL = getDataSQL1 + "WHERE jobTitle like ? and jobCategoryID = ?  and resumeID =" + resumeID + " and jobApplicationStatus IN (1,3,5)";
                         checkSkillID = true;
                     }
                 }

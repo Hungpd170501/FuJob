@@ -29,7 +29,7 @@
                         <div class="col-md-6">
                             <div class="text-center text-white">
                                 <h4 class="text-uppercase title mb-4">Project List view</h4>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -103,17 +103,18 @@
                     </div>
                 </div>
                 <div class="row align-items-center">
+                    <div class="float-left">
+                        <h5 class="text-dark mb-0 pt-2 f-18">Showing projects</h5>
+                    </div>
                     <div class="col-lg-12">
                         <div class="show-results">
-                            <div class="float-left">
-                                <h5 class="text-dark mb-0 pt-2 f-18">Showing projects</h5>
-                            </div>
                             <div class="registration-form-box float-right">
                                 <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-bid', 'desc')"> Highest bid first </button>
                                 <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-name', 'asc')"> Sort projects name </button>
                                 <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-price', 'asc')"> Lowest budget first </button>
                                 <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-price', 'desc')"> Highest budget first </button>
-                                <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-id', 'desc')"> Newest </button>
+                                <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-id', 'desc')"> Newest project first </button>
+                                <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-id', 'asc')"> Oldest project first </button>
                             </div>
 
                         </div>
@@ -154,7 +155,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-lg-3">
                                                 <div class="company-logo-img">
-                                                    <img loading="lazy" src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:250px;height:266px">
+                                                    <img loading="lazy" src="<%= job.getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:250px;height:250px">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-9">
@@ -170,7 +171,7 @@
                                                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
                                                         String date = simpleDateFormat.format(job.getCreatedDate());%>
                                                         <%= date%></h6>
-                                                    
+
                                                     <%
                                                         String description = job.getDescription();
                                                         if (description.length() > 200 || description.isBlank()) {
@@ -190,8 +191,7 @@
                                                         <%= listJobSkills.get(listJobSkills.size() - 1).getSkill().getSkillName()%>
                                                     </h6>
                                                     <h6>Payment Method: 
-                                                        <%= job.getPayMentMethod().getPaymentMethodName()                                                       
-                                                        %>
+                                                        <%= job.getPayMentMethod().getPaymentMethodName()%>
                                                     </h6>
                                                     <ul class="list-inline mb-0">
                                                         <li class="list-inline-item mr-3">
@@ -204,7 +204,7 @@
                                                     <div>
                                                         <h6 class="painting-bid mb-1"><i class="mr-2"></i><%= job.getBids()%> bid(s)</h6>
                                                     </div>
-                                                        <h6 class="mb-4 text-green"> <%= resultDate%> days left</h6>
+                                                    <h6 class="mb-4 text-green"> <%= resultDate%> days left</h6>
                                                     <div>
                                                         <h5 class="painting-id" data-format="money" style="display: none"> <%= job.getJobID()%> </h5>
                                                         <h5 class="painting-price mb-5" data-format="money">  <i class="mr-2"></i> <%= job.getMinBudget()%>$ -<%= job.getMaxBudget()%>$ <% if (job.getPayMentMethod().getPaymentMethodID() == 2) {
@@ -215,7 +215,7 @@
                                                             %> 
                                                         </h5>
                                                     </div>
-                                                        
+
                                                     <div class="mt-3">
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
                                                     </div>
