@@ -61,7 +61,7 @@ public class JobApplicationDAO {
             + "                        FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
             + "                        left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
             + "                        WHERE jo.resumeID=? and (jo.jobApplicationStatus = 3 OR "
-            + "                        jo.jobApplicationStatus =  6 OR jo.jobApplicationStatus =  7 ) ORDER BY jo.lastModifiedDate DESC";
+            + "                        jo.jobApplicationStatus =  6 OR jo.jobApplicationStatus =  7 ) and j.jobStatus IN (3,5,6) ORDER BY jo.lastModifiedDate DESC";
 
     private static final String GETALLJOBCOMPLEANDUNCOMPLETE = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.minBudget, j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
             + "                        jo.createdDate, c.categoryName, c.img, com.companyName, "
@@ -76,7 +76,7 @@ public class JobApplicationDAO {
             + "                                              j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description "
             + "                                            FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
             + "                                                left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
-            + "                                               WHERE j.userID=? and (j.jobStatus = 3 OR j.jobStatus = 5 OR j.jobStatus=6)"
+            + "                                               WHERE j.userID=? and (j.jobStatus = 3 OR j.jobStatus = 5 OR j.jobStatus=6) AND jo.jobApplicationStatus IN (3,6,7) "
             + "                                             ORDER BY jo.lastModifiedDate DESC ";
     private static final String UPDATE_STATUS = "UPDATE tblJobApplications SET cvFile = ?, priceDeal = ?, message = ?, jobApplicationStatus = 1 WHERE jobApplicationID = ? and resumeID = ? and jobID = ?";
     private String SEARCHJOBORDER = "SELECT ja.jobApplicationID,ISNULL(jobAply.bids,0) AS bids, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, ja.jobApplicationStatus, "
