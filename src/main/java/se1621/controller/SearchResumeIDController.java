@@ -47,7 +47,8 @@ public class SearchResumeIDController extends HttpServlet {
             
             List<JobApplication> listJobOrder = new ArrayList<>();
             JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-            listJobOrder = jobOrderDAO.getListJobAccepcted(resumeID);
+            listJobOrder = jobOrderDAO.getListJobCompleteAndUncomplete(resumeID);
+            
 
             if (!listJobOrder.isEmpty()) {
                 request.setAttribute("LIST_ALLJOBONGOING_APPLIED", listJobOrder);

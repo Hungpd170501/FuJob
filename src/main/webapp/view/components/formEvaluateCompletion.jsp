@@ -1,3 +1,4 @@
+
 <form method="post" action="${pageContext.request.contextPath}/MainController">
     <div class="modal fade" id="confirmCancellation" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -18,16 +19,16 @@
                                 <div class="w-100">
                                     <h5>Add a Evaluation:</h5>
                                     <div class="rating stars">
-<!--                                        <input type="radio" name="rating" value="5" id="5*">
-                                        <label for="5*" class="rate">☆<div class="face face-5"></div></label>
-                                        <input type="radio" name="rating" value="4" id="4*">
-                                        <label for="4*" class="rate">☆<div class="face face-4"></div></label>
-                                        <input type="radio" name="rating" value="3" id="3*">
-                                        <label for="3*" class="rate">☆<div class="face face-3"></div></label>
-                                        <input type="radio" name="rating" value="2" id="2*">
-                                        <label for="2*" class="rate">☆<div class="face face-2"></div></label>
-                                        <input type="radio" name="rating" value="1" id="1*">
-                                        <label for="1*" class="rate">☆<div class="face face-1"></div></label>-->
+                                     <input type="radio" name="rating" value="5" id="5-star">
+                                        <label for="5-star" class="rate">?<div class="face face-5"></div></label>
+                                        <input type="radio" name="rating" value="4" id="4-star">
+                                        <label for="4-star" class="rate">?<div class="face face-4"></div></label>
+                                        <input type="radio" name="rating" value="3" id="3-star">
+                                        <label for="3-star" class="rate">?<div class="face face-3"></div></label>
+                                        <input type="radio" name="rating" value="2" id="2-star">
+                                        <label for="2-star" class="rate">?<div class="face face-2"></div></label>
+                                        <input type="radio" name="rating" value="1" id="1-star">
+                                        <label for="1-star" class="rate">?<div class="face face-1"></div></label>
                                     </div>
                                     <div class="form-outline">
                                         <label class="form-label" for="textAreaExample">Could you tell us what when wrong?</label>

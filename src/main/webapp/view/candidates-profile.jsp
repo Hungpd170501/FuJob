@@ -13,6 +13,13 @@
         <jsp:include page="./include/header.jsp">
             <jsp:param name="title" value="FuJob | Student Resume"/>
         </jsp:include>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            .checked {
+                color: orange;
+            }
+        </style>
     </head>
 
     <body>
@@ -169,7 +176,7 @@
             </div>         
 
         </section> 
-                                
+
         <section class="section pt-0">
             <div class="container">
                 <div class="row justify-content-center">
@@ -202,56 +209,56 @@
                                 <div class="row align-items-center">
                                     <div class="col-lg-3">
                                         <div class="company-logo-img">
-                                            <img src="<%= jobOrder.getJob().getCategory().getImg()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:200px;height:200px">
+                                            <% if (jobOrder.getResume().getAvatar() == null) {
+                                            %>
+                                            <img src="<%= jobOrder.getJob().getCompany().getAvatar()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:200px;height:200px">
+                                            <%
+                                            } else {
+                                            %>
+                                            <img src="<%= jobOrder.getResume().getAvatar()%>" alt="" class="img-fluid img-thumbnail mx-auto d-block" style="width:200px;height:200px">
+                                            <%
+                                                }
+                                            %>
+
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-9">
                                         <div class="job-list-desc">
-                                            <h4 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="text-dark"><%= jobOrder.getJob().getJobTitle()%>
-                                                    <% if (jobOrder.getJobApplicationStatus() == 3) {
-                                                    %>
-                                                    <br>
-                                                    <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
-                                                    <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Inprogress</i>
-                                                    <%
-                                                    } else if (jobOrder.getJobApplicationStatus() == 6) {
-                                                    %>
-                                                    <br>
-                                                    <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
-                                                    <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Completed</i>
-                                                    <%
-                                                    } else if (jobOrder.getJobApplicationStatus() == 7) {
-                                                    %>
-                                                    <br>
-                                                    <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: red"></i> 
-                                                    <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Not Completed</i>
-                                                    <%
-                                                        }
-                                                    %>
+                                            <% if (jobOrder.getResume().getAvatar() == null) {
+                                            %>
+                                            <h4 class="mb-2"><a href="" class="text-dark"><%= jobOrder.getJob().getCompany().getCompanyName()%>
                                                 </a>
                                             </h4>
-
                                             <%
-                                                String description = jobOrder.getJob().getDescription();
-                                                if (description.length() > 200 || description.isBlank()) {
-                                                    description = description.substring(0, 197) + ". . .";
+                                            } else {
+                                            %>
+                                            <h4 class="mb-2"><a href="" class="text-dark"><%= jobOrder.getResume().getFullName()%>
+                                                </a>
+                                            </h4>
+                                            <%
                                                 }
                                             %>
-                                            <p class="mb-4"><%= description%></p>
-                                            <h6>
-                                                <%= jobOrder.getJob().getPayMentMethod().getPaymentMethodName()%>: <%= jobOrder.getJob().getMinBudget()%>$ - <%= jobOrder.getJob().getMaxBudget()%>$ <% if (jobOrder.getJob().getPayMentMethod().getPaymentMethodID() == 2) {
-                                                %>
-                                                / hour
-                                                <%
-                                                    }
-                                                %>
-                                            </h6>
+                                            <% for (int i = 0; i < jobOrder.getEvaluateCompletion().getRatingValue(); i++) {
+                                            %>
+                                            <span class="fa fa-star checked"></span>
+                                            <%
+                                                }
+                                                for (int j = jobOrder.getEvaluateCompletion().getRatingValue(); j < 5; j++) {
+                                            %>
+                                            <span class="fa fa-star"></span>
+                                            <%
+                                                }
+                                            %>
+                                            
+
+                                            <h6 class="mt-4"><%= jobOrder.getEvaluateCompletion().getContent()%></h6>
+
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="job-list-button-sm text-right">
                                             <div class="mt-3">
-                                                <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
+                                                <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary">View Detail Job</a>
                                             </div>
                                         </div>
                                     </div>
@@ -291,7 +298,6 @@
         <script src="${pageContext.request.contextPath}/asset/js/bootstrap.bundle.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/jquery.easing.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/plugins.js"></script>
-
         <!-- selectize js -->
         <script src="${pageContext.request.contextPath}/asset/js/selectize.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/jquery.nice-select.min.js"></script>

@@ -234,20 +234,37 @@
                                                     } else if (jobOrder.getJob().getJobStatus() == 5) {
                                                     %>
                                                     <br>
-                                                    <i class="mdi mdi-bookmark-check mt-4"
-                                                       style="font-size: 25px; color: green"></i>
-                                                    <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Completed</i>
+                                                    <div class="mt-3">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>"
+                                                           class="btn btn-sm btn-primary-outline" style="width: 50%">View
+                                                            Detail</a>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', <%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getResumeID()%>, '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')"
+                                                                type="button" class="btn btn-sm btn-primary-outline"
+                                                                data-toggle="modal" data-target="#EditformApplication"
+                                                                style="width: 50%">View Application Form
+                                                        </button>
+                                                    </div>
                                                     <%
                                                     } else if (jobOrder.getJob().getJobStatus() == 6) {
                                                     %>
                                                     <br>
-                                                    <i class="mdi mdi-bookmark-check mt-4"
-                                                       style="font-size: 25px; color: red"></i>
-                                                    <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Not
-                                                        completed</i>
-                                                        <%
-                                                            }
-                                                        %>
+                                                    <div class="mt-3">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>"
+                                                           class="btn btn-sm btn-primary-outline" style="width: 50%">View
+                                                            Detail</a>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', <%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getResumeID()%>, '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')"
+                                                                type="button" class="btn btn-sm btn-primary-outline"
+                                                                data-toggle="modal" data-target="#EditformApplication"
+                                                                style="width: 50%">View Application Form
+                                                        </button>
+                                                    </div>
+                                                    <%
+                                                        }
+                                                    %>
                                                 </div>
                                             </div>
                                         </div>
@@ -322,16 +339,16 @@
                                                             <div class="w-100">
                                                                 <h5>Add a Evaluation:</h5>
                                                                 <div class="rating stars">
-                                                                    <!--                                                            <input type="radio" name="rating" value="5" id="5*">
-                                                                                                                                <label for="5*" class="rate">☆<div class="face face-5"></div></label>
-                                                                                                                                <input type="radio" name="rating" value="4" id="4*">
-                                                                                                                                <label for="4*" class="rate">☆<div class="face face-4"></div></label>
-                                                                                                                                <input type="radio" name="rating" value="3" id="3*">
-                                                                                                                                <label for="3*" class="rate">☆<div class="face face-3"></div></label>
-                                                                                                                                <input type="radio" name="rating" value="2" id="2*">
-                                                                                                                                <label for="2*" class="rate">☆<div class="face face-2"></div></label>
-                                                                                                                                <input type="radio" name="rating" value="1" id="1*">
-                                                                                                                                <label for="1*" class="rate">☆<div class="face face-1"></div></label>-->
+                                                                    <input type="radio" name="rating" value="5" id="5-star">
+                                                                    <label for="5-star" class="rate">☆<div class="face face-5"></div></label>
+                                                                    <input type="radio" name="rating" value="4" id="4-star">
+                                                                    <label for="4-star" class="rate">☆<div class="face face-4"></div></label>
+                                                                    <input type="radio" name="rating" value="3" id="3-star">
+                                                                    <label for="3-star" class="rate">☆<div class="face face-3"></div></label>
+                                                                    <input type="radio" name="rating" value="2" id="2-star">
+                                                                    <label for="2-star" class="rate">☆<div class="face face-2"></div></label>
+                                                                    <input type="radio" name="rating" value="1" id="1-star">
+                                                                    <label for="1-star" class="rate">☆<div class="face face-1"></div></label>
                                                                 </div>
                                                                 <div class="form-outline">
                                                                     <label class="form-label" for="textAreaExample">Could you tell us what when wrong?</label>
@@ -410,7 +427,6 @@
                                     </div>
                                 </div>
                             </form>
-
                             <% if (listJobApplication.size() > 10) {
                             %>
                             <div class="smj col-12 text-center mt-4 pt-2">
