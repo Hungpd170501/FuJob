@@ -237,7 +237,7 @@
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', <%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getResumeID()%>, '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" type="button" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#EditformApplication" style="width: 50%">Edit Application Form</button>
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" type="button" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
                                                     <div class="mt-3">
                                                         <button onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)" type="button" style="width: 50%" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#confirmCancellation">
@@ -251,7 +251,7 @@
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#EditformApplication" style="width: 50%">Edit Application Form</button>
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
                                                     <%
                                                     } else if (jobOrder.getJobApplicationStatus() == 5) {
@@ -261,7 +261,7 @@
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#EditformApplication" style="width: 50%">Edit Application Form</button>
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
                                                     <%
                                                         }
@@ -297,44 +297,34 @@
 
                             %>
 
-                            <div class="modal fade" id="EditformApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered " role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header border-bottom-0">
-                                            <h5 class="modal-title text-primary" id="exampleModalLabel">Application Form</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <form method="post" action="${pageContext.request.contextPath}/MainController" enctype="multipart/form-data">
-                                            <div class="modal-body">
-                                                <div class="form-group text-dark">
-                                                    <label>Deal Price</label>
-                                                    <input type="text" id="dealPrice" class="form-control" name="priceDeal" placeholder="Enter price you want to deal">
-                                                </div>
-                                                <input type="hidden" id="JobID" class="form-control" name="jobID" placeholder="Enter price you want to deal">
-                                                <input type="hidden" id="ResumeID" class="form-control" name="resumeID" placeholder="Enter price you want to deal">
-                                                <div class="form-group text-dark">
-                                                    <label>Message</label>
-                                                    <textarea class="my-textarea form-control" id="msg" name="message" placeholder="Message for employer"></textarea>
-                                                </div>
-                                                <div class="form-group text-dark">
+                            <div class="modal fade" id="ViewformApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered " role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header border-bottom-0 bg-warning">
+                                        <h5 class="modal-title text-white" id="exampleModalLabel">Application Form</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
 
-                                                    <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="CV" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> Your CV </p></a>
-                                                </div>
-                                                <div class="form-group text-dark">
-                                                    <label>Change CV</label>
-                                                    <input type="file" class="form-control" name="file">
-                                                </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class=" col-6 form-group text-dark mb-0">
+                                                <label style="font-size: 16px">Deal Price: </label>
+                                                <p style="display: inline-block" id="dealPrice"></p>
                                             </div>
-                                            <div class="modal-footer border-top-0 d-flex justify-content-center">
-                                                <input type="submit" class="btn btn-primary" value="Update application">
-                                                <input type="hidden" name="action" value="Update application">
+                                            <div class="col-6 form-group text-dark">
+                                                <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="CV" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View CV </p></a>
                                             </div>
-                                        </form>
+                                        </div>
+                                        <div class="form-group text-dark">
+                                            <label style="font-size: 16px">Message: </label>
+                                            <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="msg"></p></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
                             <%                                if (listJobApplication.size() > 10) {
                             %>
@@ -393,11 +383,9 @@
             });
         </script>
         <script>
-            function getJobOrder(priceDeal, jobID, resumeID, message, cvFile) {
-                $("#dealPrice").val(priceDeal);
-                $("#JobID").val(jobID);
-                $("#ResumeID").val(resumeID);
-                CKEDITOR.instances["msg"].setData(message);
+            function getJobOrder(priceDeal, message, cvFile) {
+                $("#dealPrice").html(priceDeal);
+                $("#msg").html(message);
                 document.getElementById('CV').setAttribute('href', cvFile);
             }
         </script>

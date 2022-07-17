@@ -19,12 +19,12 @@
                 <form method="post" action="${pageContext.request.contextPath}/MainController" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="form-group text-dark">
-                            <label>Deal Price</label>
-                            <input type="text" class="form-control" name="salaryDeal" placeholder="Enter price you want to deal">
+                            <label>Deal Price ($)<span class="text-danger">*</span></label>
+                            <input id="deal" type="number" step="0.5" required="" class="form-control" name="salaryDeal" placeholder="Enter price you want to deal">
                         </div>
                         <div class="form-group text-dark">
-                            <label>Message</label>
-                            <textarea class="form-control" name="message" placeholder="Message for employer"></textarea>
+                            <label>Message<span class="text-danger">*</span></label>
+                            <textarea class="form-control" required="" name="message" placeholder="Message for employer"></textarea>
                         </div>
                         <div class="form-group text-dark">
                             <label>Upload CV</label>
@@ -43,4 +43,12 @@
     </div>
         <script src="${pageContext.request.contextPath}/asset/ckeditor/ckeditor.js"></script>
         <script>CKEDITOR.replace('message');</script>
+        <script>
+            function getBudget(min, max) {
+                $('#deal').attr({
+                   "min" : min,
+                   "max" : max
+                });
+            }
+        </script>
 </body>

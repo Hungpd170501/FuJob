@@ -19,18 +19,31 @@
         <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
         <jsp:include page="./include/navbar.jsp"></jsp:include>
-        <!-- Start home -->
-        <section class="bg-half page-next-level"> 
-            <div class="bg-overlay"></div>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <div class="text-center text-white">
-                            <h4 class="text-uppercase title mb-4">Create Resume</h4>
-                            
+            <!-- Start home -->
+            <section class="bg-half page-next-level"> 
+                <div class="bg-overlay"></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="text-center text-white">
+                                <h4 class="text-uppercase title mb-4">Create Resume</h4>
+
+                            </div>
                         </div>
                     </div>
+                <%
+                    String messResume = (String) request.getAttribute("MESSAGE_RESUME");
+                    if (messResume != null) {
+                %>
+                <div class="col-5 mx-auto text-center alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong><%= messResume%></strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <%
+                    }
+                %>
             </div>
         </section>
         <!-- end home -->
@@ -308,7 +321,7 @@
                     $('#errorWebsite').text('');
                     checkW = true;
                 }
-                
+
                 //checkGit
                 if (gitHub !== '') {
                     if (validURL(gitHub) == false) {
@@ -322,7 +335,7 @@
                     $('#errorGitHub').text('');
                     checkG = true;
                 }
-                
+
                 //checkLinkedIn
                 if (linkedIn !== '') {
                     if (validURL(linkedIn) == false) {
@@ -336,7 +349,7 @@
                     $('#errorLinkedIn').text('');
                     checkL = true;
                 }
-                if (checkPhone == true && checkM == true && checkW == true && checkG == true && checkL == true|| regex.test(phoneNumber) == true && checkEmail == true && validURL(website) == true && validURL(gitHub) == true && validURL(linkedIn) == true) {
+                if (checkPhone == true && checkM == true && checkW == true && checkG == true && checkL == true || regex.test(phoneNumber) == true && checkEmail == true && validURL(website) == true && validURL(gitHub) == true && validURL(linkedIn) == true) {
                     document.getElementById('submitResume').disabled = false;
                 }
 
