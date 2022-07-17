@@ -271,6 +271,47 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal fade" id="EditformApplication" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered " role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-bottom-0">
+                                            <h5 class="modal-title text-primary" id="exampleModalLabel">Application Form</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form method="post" action="${pageContext.request.contextPath}/MainController"
+                                              enctype="multipart/form-data">
+                                            <div class="modal-body">
+                                                <div class="form-group text-dark">
+                                                    <label>Deal Price</label>
+                                                    <input disabled type="text" id="dealPrice" class="form-control"
+                                                           name="priceDeal" placeholder="Enter price you want to deal">
+                                                </div>
+                                                <input type="hidden" id="JobID" class="form-control" name="jobID"
+                                                       placeholder="Enter price you want to deal">
+                                                <input type="hidden" id="ResumeID" class="form-control" name="resumeID"
+                                                       placeholder="Enter price you want to deal">
+                                                <div class="form-group text-dark">
+                                                    <label>Message</label>
+                                                    <textarea disabled class="my-textarea form-control" id="msg" name="message"
+                                                              placeholder="Message for employer"></textarea>
+                                                </div>
+                                                <div class="form-group text-dark">
+                                                    <a class="" target="_blank" rel="noopener noreferrer" type="text" id="CV"
+                                                       href=""><p style="text-decoration: underline"><i
+                                                                class="mdi mdi-link-variant"></i>CV</p></a>
+                                                </div>
+<!--                                                <div class="form-group text-dark">
+                                                    <label>CV</label>
+                                                    <input disabled type="file" class="form-control" name="file">
+                                                </div>-->
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                             <%
                                         }
 
@@ -386,47 +427,6 @@
                                     </div>
                                 </div>
                             </form>
-                            <div class="modal fade" id="EditformApplication" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered " role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header border-bottom-0">
-                                            <h5 class="modal-title text-primary" id="exampleModalLabel">Application Form</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <form method="post" action="${pageContext.request.contextPath}/MainController"
-                                              enctype="multipart/form-data">
-                                            <div class="modal-body">
-                                                <div class="form-group text-dark">
-                                                    <label>Deal Price</label>
-                                                    <input disabled type="text" id="dealPrice" class="form-control"
-                                                           name="priceDeal" placeholder="Enter price you want to deal">
-                                                </div>
-                                                <input type="hidden" id="JobID" class="form-control" name="jobID"
-                                                       placeholder="Enter price you want to deal">
-                                                <input type="hidden" id="ResumeID" class="form-control" name="resumeID"
-                                                       placeholder="Enter price you want to deal">
-                                                <div class="form-group text-dark">
-                                                    <label>Message</label>
-                                                    <textarea disabled class="my-textarea form-control" id="msg" name="message"
-                                                              placeholder="Message for employer"></textarea>
-                                                </div>
-                                                <div class="form-group text-dark">
-                                                    <a class="" target="_blank" rel="noopener noreferrer" type="text" id="CV"
-                                                       href=""><p style="text-decoration: underline"><i
-                                                                class="mdi mdi-link-variant"></i>CV</p></a>
-                                                </div>
-                                                <div class="form-group text-dark">
-                                                    <label>CV</label>
-                                                    <input disabled type="file" class="form-control" name="file">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
                             <% if (listJobApplication.size() > 10) {
                             %>
                             <div class="smj col-12 text-center mt-4 pt-2">
