@@ -38,31 +38,36 @@ public class OrderJobController extends HttpServlet {
             int jobID = Integer.parseInt(request.getParameter("jobID"));
             Part filePart = request.getPart("file");
             FirebaseStoreServiceImpl firebaseStoreServiceImpl = new FirebaseStoreServiceImpl();
-            String filename=firebaseStoreServiceImpl.uploadFile(filePart);
+            String filename = firebaseStoreServiceImpl.uploadFile(filePart);
             String salaryDeal = request.getParameter("salaryDeal");
             String message = request.getParameter("message");
             ResumeDAO resumeDAO = new ResumeDAO();
             int resumeID = resumeDAO.getResumeID(userID);
-            JobApplication jobOrder = JobApplication.builder()
-                    .resumeID(resumeID)
-                    .job(Job.builder().jobID(jobID).build())
-                    .cvFile(filename)
-                    .priceDeal(salaryDeal)
-                    .message(message)
-                    .build();
-            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-            int jobOrderID = jobOrderDAO.getJobOrderID(resumeID, jobID); // neu user da apply ma huy chua
-            if (jobOrderID > 0) { // tien hanh re apply (update)
-                boolean reApply = jobOrderDAO.reApply(jobOrder, jobOrderID);
-                if (reApply) {
-                    request.setAttribute("MESSAGE", "Send application successfully!");
-                    url = SUCCESS + userID;
-                }
-            } else { // neu chua apply
-                boolean apply = jobOrderDAO.orderJob(jobOrder);
-                if (apply) {// cho apply cai moi
-                    request.setAttribute("MESSAGE", "Send application successfully!");
-                    url = SUCCESS + userID;
+            if (resumeID == 0) {
+                url = "/MainController?action=CheckCreateResume&studentID=" + userID;
+                request.setAttribute("MESSAGE_RESUME", "Please create resume before apply project!");
+            } else {
+                JobApplication jobOrder = JobApplication.builder()
+                        .resumeID(resumeID)
+                        .job(Job.builder().jobID(jobID).build())
+                        .cvFile(filename)
+                        .priceDeal(salaryDeal)
+                        .message(message)
+                        .build();
+                JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
+                int jobOrderID = jobOrderDAO.getJobOrderID(resumeID, jobID); // neu user da apply ma huy chua
+                if (jobOrderID > 0) { // tien hanh re apply (update)
+                    boolean reApply = jobOrderDAO.reApply(jobOrder, jobOrderID);
+                    if (reApply) {
+                        request.setAttribute("MESSAGE", "Send application successfully!");
+                        url = SUCCESS + userID;
+                    }
+                } else { // neu chua apply
+                    boolean apply = jobOrderDAO.orderJob(jobOrder);
+                    if (apply) {// cho apply cai moi
+                        request.setAttribute("MESSAGE", "Send application successfully!");
+                        url = SUCCESS + userID;
+                    }
                 }
             }
 

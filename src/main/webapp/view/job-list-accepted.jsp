@@ -12,7 +12,7 @@
 <html lang="en" class="no-js">
     <head>
         <jsp:include page="./include/header.jsp">
-            <jsp:param name="title" value="FuJob | Job List Accepted"/>
+            <jsp:param name="title" value="FuJob | Project Applied (In Progress)"/>
         </jsp:include>
     </head>
     <body>
@@ -26,7 +26,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="text-center text-white">
-                                <h4 class="text-uppercase title mb-4">Projects List view</h4>
+                                <h4 class="text-uppercase title mb-4">Project Applied (In Progress)</h4>
 
                             </div>
                         </div>
@@ -196,41 +196,36 @@
                                                     %>
                                                     <br>
                                                     <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
                                                     <%
                                                     } else if (jobOrder.getJobApplicationStatus() == 6) {
                                                     %>
                                                     <br>
                                                     <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', <%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getResumeID()%>, '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')"
-                                                                type="button" class="btn btn-sm btn-primary-outline"
-                                                                data-toggle="modal" data-target="#EditformApplication"
-                                                                style="width: 50%">View Application Form
-                                                        </button>
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
                                                     <%
                                                     } else if (jobOrder.getJobApplicationStatus() == 7) {
                                                     %>
                                                     <br>
                                                     <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary">View Detail</a>
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', <%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getResumeID()%>, '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')"
-                                                                type="button" class="btn btn-sm btn-primary-outline"
-                                                                data-toggle="modal" data-target="#EditformApplication"
-                                                                style="width: 50%">View Application Form
-                                                        </button>
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
                                                     <%
                                                         }
                                                     %>
-                                                    
-                                                    
+
+
                                                 </div>
                                             </div>
                                         </div>
@@ -255,8 +250,35 @@
                                 </div>
                             </div>
 
-                            <%
+                            <div class="modal fade" id="ViewformApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered " role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-bottom-0 bg-warning">
+                                            <h5 class="modal-title text-white" id="exampleModalLabel">Application Form</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
 
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class=" col-6 form-group text-dark mb-0">
+                                                    <label style="font-size: 16px">Deal Price: </label>
+                                                    <p style="display: inline-block" id="dealPrice"></p>
+                                                </div>
+                                                <div class="col-6 form-group text-dark">
+                                                    <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="CV" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View CV </p></a>
+                                                </div>
+                                            </div>
+                                            <div class="form-group text-dark">
+                                                <label style="font-size: 16px">Message: </label>
+                                                <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="msg"></p></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%
                                         }
 
                                     }
@@ -306,19 +328,26 @@
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
         <script>
-                                                            function getJobOrderID(id, userID) {
-                                                                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=UnApply&jobOrderID=' + id + '&userID=' + userID);
-                                                            }
+                                                        function getJobOrderID(id, userID) {
+                                                            $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=UnApply&jobOrderID=' + id + '&userID=' + userID);
+                                                        }
         </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-                                                            $(".job-display").slice(0, 10).show();
-                                                            $(".smj").on("click", function () {
-                                                                $(".job-display:hidden").slice(0, 5).slideDown();
-                                                                if ($(".job-display:hidden").length == 0) {
-                                                                    $(".smj").fadeOut('slow');
-                                                                }
-                                                            });
+                                                        $(".job-display").slice(0, 10).show();
+                                                        $(".smj").on("click", function () {
+                                                            $(".job-display:hidden").slice(0, 5).slideDown();
+                                                            if ($(".job-display:hidden").length == 0) {
+                                                                $(".smj").fadeOut('slow');
+                                                            }
+                                                        });
+        </script>
+        <script>
+            function getJobOrder(priceDeal, message, cvFile) {
+                $("#dealPrice").html(priceDeal);
+                $("#msg").html(message);
+                document.getElementById('CV').setAttribute('href', cvFile);
+            }
         </script>
     </body>
 </html>

@@ -199,7 +199,7 @@
                         } else {
                         %>        
                         <div class="job-detail border rounded mt-4">
-                            <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Apply For Project</a>
+                            <a onclick="getBudget(<%=job.getMinBudget()%>, <%= job.getMaxBudget()%>)" href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formApplication">Apply For Project</a>
                         </div>
                         <%
                                     }

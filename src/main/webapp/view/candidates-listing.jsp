@@ -130,30 +130,28 @@
                         <div class="modal fade" id="ViewformApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered " role="document">
                                 <div class="modal-content">
-                                    <div class="modal-header border-bottom-0">
-                                        <h5 class="modal-title text-primary" id="exampleModalLabel">Application Form</h5>
+                                    <div class="modal-header border-bottom-0 bg-warning">
+                                        <h5 class="modal-title text-white" id="exampleModalLabel">Application Form</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form method="post" action="${pageContext.request.contextPath}/MainController" enctype="multipart/form-data">
-                                        <div class="modal-body">
-                                            <div class="form-group text-dark">
-                                                <label>Deal Price</label>
-                                                <input type="text" id="dealPrice" class="form-control" name="priceDeal" placeholder="Enter price you want to deal" disabled>
+
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class=" col-6 form-group text-dark mb-0">
+                                                <label style="font-size: 16px">Deal Price: </label>
+                                                <p style="display: inline-block" id="dealPrice"></p>
                                             </div>
-                                            <div class="form-group text-dark">
-                                                <label>Message</label>
-                                                <textarea class="my-textarea form-control" id="msg" name="message" placeholder="Message for employer" disabled></textarea>
-                                            </div>
-                                            <div class="form-group text-dark">
+                                            <div class="col-6 form-group text-dark">
                                                 <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="CV" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View CV </p></a>
                                             </div>
                                         </div>
-
-                                        <input type="hidden" name="jobID" value="${requestScope.JOB.jobID}">
-                                        <input type="hidden" name="userID" value="${sessionScope.LOGIN_USER.userID}">
-                                    </form>
+                                        <div class="form-group text-dark">
+                                            <label style="font-size: 16px">Message: </label>
+                                            <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="msg"></p></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>                    
@@ -245,8 +243,8 @@
         </script>
         <script>
             function getJobOrder(priceDeal, message, cvFile) {
-                $("#dealPrice").val(priceDeal);
-                CKEDITOR.instances["msg"].setData(message);
+                $("#dealPrice").html(priceDeal);
+                $("#msg").html(message);
                 document.getElementById('CV').setAttribute('href', cvFile);
             }
         </script>

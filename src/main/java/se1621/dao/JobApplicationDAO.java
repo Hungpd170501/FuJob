@@ -57,7 +57,8 @@ public class JobApplicationDAO {
             + "									on jo.jobID = jobApp.jobID) "
             + "                                    WHERE jo.resumeID= ? and (jo.jobApplicationStatus = 1 OR "
             + "                                    jo.jobApplicationStatus =  3 OR jo.jobApplicationStatus =  5 ) ORDER BY jo.lastModifiedDate DESC";
-    private static final String GETALLJOBACCEPTED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
+    private static final String GETALLJOBACCEPTED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.userID, "
+            + "                         j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
             + "                        jo.createdDate, c.categoryName, c.img, com.companyName, "
             + "                        j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description "
             + "                        FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
@@ -446,18 +447,21 @@ public class JobApplicationDAO {
         return null;
     }
 
-    public List<JobApplication> getListJobAccepcted(int userID) throws SQLException {
+    public List<JobApplication> getListJobAccepcted(int resumeID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(GETALLJOBACCEPTED);
-                preStm.setInt(1, userID);
+                preStm.setInt(1, resumeID);
                 rs = preStm.executeQuery();
                 List<JobApplication> list = new ArrayList<>();
                 while (rs.next()) {
                     int jobApplicationID = rs.getInt("jobApplicationID");
                     int jobID = rs.getInt("jobID");
                     String priceDeal = rs.getString("priceDeal");
+                    String mess = rs.getString("message");
+                    String cvFile = rs.getString("cvFile");
+                    int hrID = rs.getInt("userID");
                     String jobTitle = rs.getString("jobTitle");
                     Date createdDate = rs.getDate("createdDate");
                     Date expiriedDate = rs.getDate("expiriedDate");
@@ -476,7 +480,7 @@ public class JobApplicationDAO {
                     int jobAppStatus = rs.getInt("jobApplicationStatus");
                     PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder().jobID(jobID)
-                            .userID(userID)
+                            .userID(hrID)
                             .jobTitle(jobTitle)
                             .category(Category.builder().categoryID(categoryID).categoryName(categoryName).img(img).build())
                             .company(CompanyInfo.builder().companyName(companyName).build())
@@ -491,9 +495,11 @@ public class JobApplicationDAO {
                             .build();
                     JobApplication listJobOrder = JobApplication.builder()
                             .jobApplicationID(jobApplicationID)
-                            .resumeID(userID).job(job)
+                            .resumeID(resumeID).job(job)
                             .createdDate(createdDate)
                             .priceDeal(priceDeal)
+                            .message(mess)
+                            .cvFile(cvFile)
                             .lastModifiedDate(createdDate)
                             .jobApplicationStatus(jobAppStatus)
                             .build();
