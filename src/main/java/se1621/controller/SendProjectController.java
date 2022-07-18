@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import se1621.dao.JobApplicationDAO;
+import se1621.dao.JobDAO;
 import se1621.dao.SubmitJobDAO;
 import se1621.dto.JobApplication;
 import se1621.dto.SubmitJob;
@@ -51,8 +52,12 @@ public class SendProjectController extends HttpServlet {
             boolean checkSubmit = submitJobDAO.submitJob(submitJob);
             if(checkSubmit){
                 JobApplicationDAO jaDAO = new JobApplicationDAO();
+                JobDAO jobDAO = new JobDAO();
+                int jobID = jobDAO.getJobIDByJobApplicationID(jobApplicationID);
+                // Khi submit project jobStatus == 8
+                boolean checkUpdateJobStatus = jobDAO.updateJobStatus(jobID, 8);
                 boolean checkUpdateStatus = jaDAO.updateJobApplicationStatus(jobApplicationID, 8);
-                if(checkUpdateStatus){
+                if(checkUpdateStatus && checkUpdateJobStatus){
                     request.setAttribute("MESSAGE_UPDATE", "Submit Successfull!");
                     url = SUCCESS + userID;
                 }

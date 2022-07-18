@@ -164,8 +164,15 @@
                                                             <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Not
                                                                 completed</i>
                                                                 <%
-                                                                    }
+                                                                } else if (jobOrder.getJob().getJobStatus() == 8) {
                                                                 %>
+                                                            <br>
+                                                            <i class="mdi mdi-bookmark-check mt-4"
+                                                               style="font-size: 25px; color: orange"></i>
+                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: orange">Product Received</i>
+                                                            <%
+                                                                }
+                                                            %>
                                                         </a>
                                                     </h4>
 
@@ -218,25 +225,9 @@
                                                                 style="width: 50%">View Application Form
                                                         </button>
                                                     </div>
-                                                                  
-                                                    <div class="mt-3">
-                                                        <button onclick="getSubmitProductjobFile('<%= jobOrder.getSubmitJob().getJobFile() %>', '<%= jobOrder.getSubmitJob().getMessageSubmit() %>')"
-                                                                type="button" class="btn btn-sm btn-primary-outline"
-                                                                data-toggle="modal" data-target="#ViewProductSubmissionForm"
-                                                                style="width: 50%">View Submission
-                                                        </button>
-                                                    </div>
                                                     <div class="mt-3">
                                                         <button onclick="unCompleteJob(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getResumeID()%>)" type="button" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#confirmCancellation" style="width: 50%">
                                                             Not Complete
-                                                        </button>
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <button onclick="completeJob(<%=jobOrder.getJobApplicationID()%>, <%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getResumeID()%>)"
-                                                                type="button" class="btn btn-primary-outline btn-sm"
-                                                                data-toggle="modal" data-target="#confirmAcceptaction"
-                                                                style="width: 50%">
-                                                            Complete
                                                         </button>
                                                     </div>
                                                     <%
@@ -255,6 +246,13 @@
                                                                 style="width: 50%">View Application Form
                                                         </button>
                                                     </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getSubmitProductjobFile('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit()%>')"
+                                                                type="button" class="btn btn-sm btn-primary-outline"
+                                                                data-toggle="modal" data-target="#ViewProductSubmissionForm"
+                                                                style="width: 50%">View Submission
+                                                        </button>
+                                                    </div>
                                                     <%
                                                     } else if (jobOrder.getJob().getJobStatus() == 6) {
                                                     %>
@@ -271,6 +269,52 @@
                                                                 style="width: 50%">View Application Form
                                                         </button>
                                                     </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getSubmitProductjobFile('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit()%>')"
+                                                                type="button" class="btn btn-sm btn-primary-outline"
+                                                                data-toggle="modal" data-target="#ViewProductSubmissionForm"
+                                                                style="width: 50%">View Submission
+                                                        </button>
+                                                    </div>
+                                                    <%
+                                                    } else if (jobOrder.getJob().getJobStatus() == 8) {
+                                                    %>
+
+                                                    <br>
+                                                    <div class="mt-3">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>"
+                                                           class="btn btn-sm btn-primary-outline" style="width: 50%">View
+                                                            Detail</a>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')"
+                                                                type="button" class="btn btn-sm btn-primary-outline"
+                                                                data-toggle="modal" data-target="#ViewformApplication"
+                                                                style="width: 50%">View Application Form
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="mt-3">
+                                                        <button onclick="getSubmitProductjobFile('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit()%>')"
+                                                                type="button" class="btn btn-sm btn-primary-outline"
+                                                                data-toggle="modal" data-target="#ViewProductSubmissionForm"
+                                                                style="width: 50%">View Submission
+                                                        </button>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="unCompleteJob(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getResumeID()%>)" type="button" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#confirmCancellation" style="width: 50%">
+                                                            Not Complete
+                                                        </button>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="completeJob(<%=jobOrder.getJobApplicationID()%>, <%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getResumeID()%>)"
+                                                                type="button" class="btn btn-primary-outline btn-sm"
+                                                                data-toggle="modal" data-target="#confirmAcceptaction"
+                                                                style="width: 50%">
+                                                            Complete
+                                                        </button>
+                                                    </div>
+
                                                     <%
                                                         }
                                                     %>
@@ -516,8 +560,8 @@
                 $("#completeJob_jobID").val(jobID);
                 $("#completeJob_resumeID").val(resumeID);
             }
-            function getSubmitProductjobFile(jobFile, messageSubmit){
-                document.getElementById('product').setAttribute('href',jobFile);
+            function getSubmitProductjobFile(jobFile, messageSubmit) {
+                document.getElementById('product').setAttribute('href', jobFile);
                 $("#msgSubmit").html(messageSubmit);
             }
         </script>

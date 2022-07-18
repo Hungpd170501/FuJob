@@ -78,6 +78,8 @@ public class JobDAO {
             + "                                    left join tblCompanies com on u.companyID = com.companyID)"
             + "									left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
             + "                                 WHERE j.jobStatus = 1 ORDER BY createdDate DESC";
+    private final static String UPDATE_JOB_STATUS = "UPDATE tblJobs SET jobStatus = ? WHERE jobID = ?";
+    private final static String GET_JOBID_BY_JOBAPPLYCATIONID = "SELECT jobID FROM tbljobApplications WHERE jobApplicationID = ?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -755,6 +757,56 @@ public class JobDAO {
                 preStm.setFloat(10, job.getMaxBudget());
                 preStm.setString(11, job.getDescription());
                 preStm.setInt(12, job.getJobID());
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+
+    public int getJobIDByJobApplicationID(int jobApplicationID) throws SQLException {
+        int jobID = 0;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GET_JOBID_BY_JOBAPPLYCATIONID);
+                preStm.setInt(1, jobApplicationID);
+                rs = preStm.executeQuery();
+                if (rs.next()) {
+                    jobID = rs.getInt("jobID");
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return jobID;
+    }
+
+    public boolean updateJobStatus(int jobID, int jobStatus) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UPDATE_JOB_STATUS);
+                preStm.setInt(1, jobStatus);
+                preStm.setInt(2, jobID);
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
