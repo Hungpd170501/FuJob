@@ -15,8 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import se1621.dao.JobApplicationDAO;
 import se1621.dao.JobSkillsDAO;
+import se1621.dao.SubmitJobDAO;
 import se1621.dto.JobApplication;
 import se1621.dto.JobSkills;
+import se1621.dto.SubmitJob;
 
 /**
  *
