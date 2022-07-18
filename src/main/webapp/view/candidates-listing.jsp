@@ -114,6 +114,9 @@
                                                     </button>
                                                 </div>
                                                 <div class="mt-3">
+                                                    <a href="#" onclick="denyJobApp(<%= jobAplication.getResumeID()%>,<%= jobID%>)" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#formCancel" style="width: 50%">Decline</a>
+                                                </div>
+                                                <div class="mt-3">
                                                     <button onclick="acceptJobApp(<%= jobAplication.getResumeID()%>,<%= jobID%>)" type="button" class="btn btn-primary-outline btn-sm" data-toggle="modal" data-target="#confirmAcceptaction" style="width: 50%">
                                                         Accept
                                                     </button>
@@ -188,6 +191,29 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal fade" id="formCancel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header border-bottom-0">
+                                        <h5 class="modal-title text-primary" id="exampleModalLabel">Rejection Form</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form method="post" action="" enctype="multipart/form-data" id="formRejection">
+                                        <div class="modal-body">
+                                            <div class="form-group text-dark">
+                                                <label>Your Reason<span class="text-danger">*<span></label>
+                                                <textarea class="form-control" name="reasonCancel" id="reasonCancel" placeholder="Reason you reject this application"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer  d-flex justify-content-center">
+                                            <input type="submit" class="btn btn-primary" value="Send" style="width: 165px">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         <%
 
                                     }
@@ -232,10 +258,9 @@
         <script>CKEDITOR.replace('message');</script>
         <script>
             function denyJobApp(resumeID, jobID) {
-                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=DenyJob&jobID=' + jobID + '&resumeID=' + resumeID);
+                $('#formRejection').attr('action', '${pageContext.request.contextPath}/MainController?action=DenyJob&jobID=' + jobID + '&resumeID=' + resumeID);
             }
         </script>
-
         <script>
             function acceptJobApp(resumeID, jobID) {
                 $('#yesOption2').attr('href', '${pageContext.request.contextPath}/MainController?action=AcceptJob&jobID=' + jobID + '&resumeID=' + resumeID);

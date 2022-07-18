@@ -66,7 +66,7 @@ public class JobDAO {
             + "								on j.jobID = jobApp.jobID) "
             + "                               WHERE (j.jobStatus = 1 OR  j.jobStatus = 3 OR  j.jobStatus = 4)AND j.userID= ? ORDER BY createdDate DESC";
 
-    private static final String DELETEJOBPOST = "UPDATE tblJobs SET jobStatus=0 WHERE jobID=?";
+    private static final String DELETEJOBPOST = "UPDATE tblJobs SET jobStatus=0, reasonCancel = ? WHERE jobID=?";
     private static final String UPDATE_JOB_POST_HAVE_EMPLOYER = "UPDATE tblJobs SET jobStatus=3 WHERE jobID=? AND jobStatus=1 ";
     private static final String UPDATE_JOB_POST_UNCOMPLETE = "UPDATE tblJobs SET jobStatus=6 WHERE jobID=? AND jobStatus=3 ";
     private static final String UPDATE_JOB_POST_COMPLETE = "UPDATE tblJobs SET jobStatus=5 WHERE jobID=? AND jobStatus=3 ";
@@ -649,13 +649,14 @@ public class JobDAO {
         return null;
     }
 
-    public boolean deleteJobPost(int jobPostID) throws SQLException {
+    public boolean deleteJobPost(int jobPostID, String reasonCancel) throws SQLException {
         boolean check = false;
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(DELETEJOBPOST);
-                preStm.setInt(1, jobPostID);
+                preStm.setString(1, reasonCancel);
+                preStm.setInt(2, jobPostID);
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

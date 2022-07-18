@@ -26,7 +26,7 @@
                         <div class="col-md-6">
                             <div class="text-center text-white">
                                 <h4 class="text-uppercase title mb-4">Projects List view</h4>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -91,9 +91,9 @@
             String messageUpdate = (String) request.getAttribute("UPDATE_MESSAGE");
             if (messageUpdate != null) {
         %>
-            
+
         <div class="col-5 mx-auto text-center alert alert-warning alert-dismissible fade show" role="alert">
-            <strong><%= messageUpdate %></strong>
+            <strong><%= messageUpdate%></strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -102,14 +102,14 @@
         <%
             }
         %>
-        
+
         <%
             String messageCancel = (String) request.getAttribute("CANCEL_MESSAGE");
             if (messageCancel != null) {
         %>
-            
+
         <div class="col-5 mx-auto text-center alert alert-warning alert-dismissible fade show" role="alert">
-            <strong><%= messageCancel %></strong>
+            <strong><%= messageCancel%></strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -179,6 +179,12 @@
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
                                                             <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Accepted</i>
                                                             <%
+                                                            } else if (jobOrder.getJobApplicationStatus() == 2) {
+                                                            %>
+                                                            <br>
+                                                            <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: red"></i> 
+                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">This project has been deleted</i>
+                                                            <%
                                                             } else if (jobOrder.getJobApplicationStatus() == 5) {
                                                             %>
                                                             <br>
@@ -230,7 +236,7 @@
                                                     <% if (jobOrder.getJobApplicationStatus() == 1) {
                                                     %>
                                                     <div>
-                                                        <p class=" "><i class="mr-2"></i><%= jobOrder.getJob().getBids() %> bid(s)</p>
+                                                        <p class=" "><i class="mr-2"></i><%= jobOrder.getJob().getBids()%> bid(s)</p>
                                                     </div>
                                                     <br>
                                                     <div class="mt-3">
@@ -243,7 +249,11 @@
                                                         <button onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)" type="button" style="width: 50%" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#confirmCancellation">
                                                             Cancel
                                                         </button>
-                                                    </div><%
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <a onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)" href="#" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#formUnapply" style="width: 50%">Unapply</a>
+                                                    </div>
+                                                    <%
                                                     } else if (jobOrder.getJobApplicationStatus() == 3) {
                                                     %>
                                                     <br>
@@ -263,6 +273,10 @@
                                                     <div class="mt-3">
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getRejectionFrm('<%= jobOrder.getReasonRejection()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewFormRejection" style="width: 50%">View Rejection Form</button>
+                                                    </div>
+
                                                     <%
                                                         }
                                                     %>
@@ -289,6 +303,77 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal fade" id="formUnapply" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-bottom-0">
+                                            <h5 class="modal-title text-primary" id="exampleModalLabel">Cancellation Form</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form id="formUnapplyToSendhref" method="post" action="" enctype="multipart/form-data">
+                                            <div class="modal-body">
+                                                <div class="form-group text-dark">
+                                                    <label>Your Reason<span class="text-danger">*</span></label>
+                                                    <textarea class="form-control" name="reasonUnaplly" id="reasonUnaplly" placeholder="Reason you cancel your application"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer  d-flex justify-content-center">
+                                                <input type="submit" class="btn btn-primary" value="Send" style="width: 165px">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="ViewformApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered " role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-bottom-0 bg-warning">
+                                            <h5 class="modal-title text-white" id="exampleModalLabel">Application Form</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class=" col-6 form-group text-dark mb-0">
+                                                    <label style="font-size: 16px">Deal Price: </label>
+                                                    <p style="display: inline-block" id="dealPrice"></p>
+                                                </div>
+                                                <div class="col-6 form-group text-dark">
+                                                    <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="CV" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View CV </p></a>
+                                                </div>
+                                            </div>
+                                            <div class="form-group text-dark">
+                                                <label style="font-size: 16px">Message: </label>
+                                                <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="msg"></p></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="ViewFormRejection" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered " role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-bottom-0 bg-warning">
+                                            <h5 class="modal-title text-white" id="exampleModalLabel">Rejection Form</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="form-group text-dark">
+                                                <label style="font-size: 16px">Message: </label>
+                                                <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="msg2"></p></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <%
                                         }
 
@@ -297,34 +382,9 @@
 
                             %>
 
-                            <div class="modal fade" id="ViewformApplication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered " role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header border-bottom-0 bg-warning">
-                                        <h5 class="modal-title text-white" id="exampleModalLabel">Application Form</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
 
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class=" col-6 form-group text-dark mb-0">
-                                                <label style="font-size: 16px">Deal Price: </label>
-                                                <p style="display: inline-block" id="dealPrice"></p>
-                                            </div>
-                                            <div class="col-6 form-group text-dark">
-                                                <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="CV" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View CV </p></a>
-                                            </div>
-                                        </div>
-                                        <div class="form-group text-dark">
-                                            <label style="font-size: 16px">Message: </label>
-                                            <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="msg"></p></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+
 
                             <%                                if (listJobApplication.size() > 10) {
                             %>
@@ -369,7 +429,7 @@
         <script>CKEDITOR.replace('message');</script>
         <script>
             function getJobOrderID(id, resumeID) {
-                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=UnApply&jobOrderID=' + id + '&resumeID=' + resumeID);
+                $('#formUnapplyToSendhref').attr('action', '${pageContext.request.contextPath}/MainController?action=UnApply&jobOrderID=' + id + '&resumeID=' + resumeID);
             }
         </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -387,6 +447,11 @@
                 $("#dealPrice").html(priceDeal);
                 $("#msg").html(message);
                 document.getElementById('CV').setAttribute('href', cvFile);
+            }
+        </script>
+        <script>
+            function getRejectionFrm(message) {
+                $("#msg2").html(message);
             }
         </script>
     </body>

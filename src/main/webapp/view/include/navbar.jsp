@@ -87,11 +87,11 @@
                             if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "US")) {
                         %>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>">Project Applied</a></li>   
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Project Posted</a></li>
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingPosted&userID=${sessionScope.LOGIN_USER.userID}">Project Posted (In Progress)</a></li>
+                        <!--<li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Project Posted</a></li>-->
+                        <!--<li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingPosted&userID=${sessionScope.LOGIN_USER.userID}">Project Posted (In Progress)</a></li>-->
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingApplied&userID=${sessionScope.LOGIN_USER.userID}">Project Applied (In Progress)</a></li>
 
-                        <%
+                        <% 
                         } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
                         %>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Project Posted</a></li>
@@ -103,7 +103,7 @@
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Project Posted</a></li>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingPosted&userID=${sessionScope.LOGIN_USER.userID}">Project Ongoing</a></li>
                         <%
-                            }
+                            } 
                         %>        
                     </ul>
                 </li>
@@ -114,19 +114,17 @@
                 <li>
                     <a href="${pageContext.request.contextPath}/view/about.jsp">contact</a>
                 </li>
-                <li></li>
-
-                <li></li>
+                
 
 
                 <%
                     if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "US")) {
                 %>
-                <li>
+                <!--<li>
                     <div class="buy-button">
                         <a href="${pageContext.request.contextPath}/MainController?action=EmptyJob" class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Post a Project</a>
                     </div>
-                </li>
+               </li></li>-->
                 <li class="has-submenu">
                     <div class="buy-button">
                         <div class="btn btn-primary"><i class="mdi mdi-cloud-upload"></i> Your Resume</div>

@@ -34,7 +34,7 @@
                     <div class="col-md-6">
                         <div class="text-center text-white">
                             <h4 class="text-uppercase title mb-4">List Posted Projects</h4>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -236,11 +236,11 @@
                                             </div>
                                             <div class="col-lg-3 col-md-3">
                                                 <div class="job-list-button-sm text-right">
-                                                    
+
                                                     <% if (job.getJobStatus() == 1) {
                                                     %>
                                                     <div>
-                                                        <p class=" "><i class="mr-2"></i><%= job.getBids() %>  bid(s)</p>
+                                                        <p class=" "><i class="mr-2"></i><%= job.getBids()%>  bid(s)</p>
                                                     </div>
                                                     <br>
                                                     <div class="mt-3">
@@ -250,12 +250,9 @@
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>
                                                     <div class="mt-3">
-
-                                                        <button onclick="getJobPostID(<%= job.getJobID()%>, <%= job.getUserID()%>)" type="button" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#confirmCancellation"style="width: 50%" >
-                                                            Cancel
-                                                        </button>
-
+                                                        <a onclick="getJobPostID(<%=job.getJobID()%>, <%= job.getUserID()%>)" href="#" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#formCancel" style="width: 50%">Cancel</a>
                                                     </div>
+                                                    
                                                     <div class="mt-3">
 
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchCandidateOfJob&JobIDCandidate=<%= job.getJobID()%>" class="btn btn-sm btn-primary-outline"style="width: 50%">List candidate</a>
@@ -289,6 +286,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="modal fade" id="confirmCancellation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
@@ -306,6 +304,31 @@
                                     </div>
                                 </div>
                             </div> 
+
+                            <div class="modal fade" id="formCancel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-bottom-0">
+                                            <h5 class="modal-title text-primary" id="exampleModalLabel">Cancellation Form</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form id="FormCancellation" method="post" action="" enctype="multipart/form-data">
+                                            <div class="modal-body">
+                                                <div class="form-group text-dark">
+                                                    <label>Your Reason<span class="text-danger">*</span></label>
+                                                    <textarea class="form-control" name="reasonCancel" id="reasonCancel" placeholder="Reason you cancel this project"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer  d-flex justify-content-center">
+                                                <input type="submit" class="btn btn-primary" value="Send" style="width: 165px">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
                             <%
                                         }
 
@@ -358,11 +381,17 @@
                                                                 }
                                                             });
         </script>
+
         <script>
             function getJobPostID(id, userID) {
-                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=DeleteJobPost&jobPostID=' + id + '&userID=' + userID);
+                $('#FormCancellation').attr('action', '${pageContext.request.contextPath}/MainController?action=DeleteJobPost&jobPostID=' + id + '&userID=' + userID);
             }
         </script>
+        
+
+        <script>CKEDITOR.replace('message');</script>
+
+
     </body>
 
 </html>

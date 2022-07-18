@@ -31,10 +31,11 @@ public class UnApplyController extends HttpServlet {
         try {
             int jobOrderID = Integer.parseInt(request.getParameter("jobOrderID"));
             int resumeID = Integer.parseInt(request.getParameter("resumeID"));
+            String reasonUnaplly = request.getParameter("reasonUnaplly");
             JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
             ResumeDAO resumeDAO = new ResumeDAO();
             Resume resume = resumeDAO.getResumeByResumeID(resumeID);
-            boolean check = jobOrderDAO.delete(jobOrderID);
+            boolean check = jobOrderDAO.unApply(jobOrderID,reasonUnaplly);
             if(check){
                request.setAttribute("CANCEL_MESSAGE", "UnApply successfull");
                url = SUCCESS + resume.getUserID();

@@ -37,8 +37,9 @@ public class DeleteJobPostController extends HttpServlet {
             JobApplicationDAO jobApplicationDAO = new JobApplicationDAO();
             int jobPostID = Integer.parseInt(request.getParameter("jobPostID"));
             int userID = Integer.parseInt(request.getParameter("userID"));
+            String reasonCancel = request.getParameter("reasonCancel");
             List<Integer> listJobOrderID = jobApplicationDAO.getListJobOrderOfJob(jobPostID);
-            boolean check = jobDao.deleteJobPost(jobPostID);
+            boolean check = jobDao.deleteJobPost(jobPostID,reasonCancel);
             if(check){
                 for (Integer jobOrderID : listJobOrderID) {
                     jobApplicationDAO.delete(jobOrderID);

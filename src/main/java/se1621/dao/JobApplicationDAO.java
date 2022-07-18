@@ -31,10 +31,11 @@ public class JobApplicationDAO {
     private static final String CHECKDUPLICATE = "SELECT jobApplicationID FROM tbljobApplications WHERE resumeID=? and jobID=? and jobApplicationStatus in (1,3,5,6)";
 
     private static final String CHECKDUPLICATE_NONSTATUS = "SELECT jobApplicationID FROM tblJobApplications WHERE resumeID = ? and jobID = ? and jobApplicationStatus = 0";
-    private static final String DELETE = "UPDATE tblJobApplications SET jobApplicationStatus = 0 WHERE jobApplicationID = ? ";
-    private static final String DENY_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 5 WHERE resumeID = ? AND jobID = ? AND jobApplicationStatus = 1 ";
+    private static final String DELETE = "UPDATE tblJobApplications SET jobApplicationStatus = 2 WHERE jobApplicationID = ? ";
+    private static final String UNAPLLY = "UPDATE tblJobApplications SET jobApplicationStatus = 0 , reasonUnaplly = ? WHERE jobApplicationID = ? ";
+    private static final String DENY_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 5, reasonRejection = ? WHERE resumeID = ? AND jobID = ? AND jobApplicationStatus = 1 ";
     private static final String ACCEPT_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 3 WHERE resumeID = ? AND jobID = ? AND jobApplicationStatus = 1 ";
-    private static final String UNAPLLYWHENJOBHAVECANDIDATES_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 5 WHERE jobID = ? AND jobApplicationStatus = 1 ";
+    private static final String UNAPLLYWHENJOBHAVECANDIDATES_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 5, reasonRejection = ? WHERE jobID = ? AND jobApplicationStatus = 1 ";
     private static final String UNCOMPLETE_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 7 WHERE jobApplicationID = ? AND jobApplicationStatus = 3";
     private static final String COMPLETE_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 6 WHERE jobApplicationID = ? AND jobApplicationStatus = 3";
     private static final String GETTALLUSERIDOFJOB = "SELECT resumeID FROM tblJobApplications WHERE jobID = ? and jobApplicationStatus = 1";
@@ -45,7 +46,7 @@ public class JobApplicationDAO {
             + " ON jo.resumeID = re.resumeID "
             + "WHERE jo.jobID = ? AND re.resumeStatus = 1 AND jo.jobApplicationStatus = 1 ";
     private static final String GETTALLJOBORDERIDOFJOB = "SELECT jobApplicationID FROM tblJobApplications WHERE jobID = ?";
-    private static final String GETALLJOBAPPLIED = "SELECT jo.jobApplicationID,ISNULL(jobApp.bids,0) AS bids,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.minBudget, j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message, "
+    private static final String GETALLJOBAPPLIED = "SELECT jo.jobApplicationID,ISNULL(jobApp.bids,0) AS bids,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.minBudget, j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile,jo.reasonRejection, jo.priceDeal, jo.message, "
             + "                                    jo.createdDate , c.categoryName, c.img, com.companyName, "
             + "                                    j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget, j.maxBudget,j.userID, j.address, j.email, j.phone, j.description "
             + "                                    FROM (((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
@@ -55,7 +56,7 @@ public class JobApplicationDAO {
             + "									WHERE jobApplicationStatus = 1 "
             + "									GROUP BY jobID) AS jobApp "
             + "									on jo.jobID = jobApp.jobID) "
-            + "                                    WHERE jo.resumeID= ? and (jo.jobApplicationStatus = 1 OR "
+            + "                                    WHERE jo.resumeID= ? and (jo.jobApplicationStatus = 1 OR jo.jobApplicationStatus = 2 OR "
             + "                                    jo.jobApplicationStatus =  3 OR jo.jobApplicationStatus =  5 ) ORDER BY jo.lastModifiedDate DESC";
     private static final String GETALLJOBACCEPTED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.userID, "
             + "                         j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
@@ -314,6 +315,7 @@ public class JobApplicationDAO {
                     String companyName = rs.getString("companyName");
                     int jobAppStatus = rs.getInt("jobApplicationStatus");
                     int bids = rs.getInt("bids");
+                    String reasonRejection = rs.getString("reasonRejection");
                     PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder().jobID(jobID)
                             .userID(userID)
@@ -338,6 +340,7 @@ public class JobApplicationDAO {
                             .priceDeal(priceDeal)
                             .cvFile(cvFile)
                             .message(message)
+                            .reasonRejection(reasonRejection)
                             .lastModifiedDate(createdDate)
                             .jobApplicationStatus(jobAppStatus)
                             .build();
@@ -623,15 +626,39 @@ public class JobApplicationDAO {
         }
         return check;
     }
+    
+    public boolean unApply(int jobOrderID, String reasonUnaplly) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UNAPLLY);
+                preStm.setString(1, reasonUnaplly);
+                preStm.setInt(2, jobOrderID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 
-    public boolean denyJobApplication(int resumeID, int jobID) throws SQLException {
+    public boolean denyJobApplication(int resumeID, int jobID, String reasonReject) throws SQLException {
         boolean check = false;
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(DENY_JOBAPPLICATION);
-                preStm.setInt(1, resumeID);
-                preStm.setInt(2, jobID);
+                preStm.setString(1, reasonReject);
+                preStm.setInt(2, resumeID);
+                preStm.setInt(3, jobID);
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -714,13 +741,14 @@ public class JobApplicationDAO {
         return check;
     }
 
-    public boolean unApplyWhenJobHaveCandidates(int jobID) throws SQLException {
+    public boolean unApplyWhenJobHaveCandidates(int jobID, String reasonRejection) throws SQLException {
         boolean check = false;
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(UNAPLLYWHENJOBHAVECANDIDATES_JOBAPPLICATION);
-                preStm.setInt(1, jobID);
+                preStm.setString(1, reasonRejection);
+                preStm.setInt(2, jobID);
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

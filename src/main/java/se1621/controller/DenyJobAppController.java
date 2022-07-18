@@ -43,7 +43,8 @@ public class DenyJobAppController extends HttpServlet {
             JobApplicationDAO jobApplicationDAO = new JobApplicationDAO();
             int jobID = Integer.parseInt(request.getParameter("jobID"));
             int resumeID = Integer.parseInt(request.getParameter("resumeID"));
-            boolean check = jobApplicationDAO.denyJobApplication(resumeID, jobID);
+            String reasonReject = request.getParameter("reasonCancel");
+            boolean check = jobApplicationDAO.denyJobApplication(resumeID, jobID,reasonReject);
             if(check){
                url = SUCCESS + jobID;
             }
