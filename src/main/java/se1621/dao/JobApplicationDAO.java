@@ -63,8 +63,8 @@ public class JobApplicationDAO {
             + "                        j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description "
             + "                        FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
             + "                        left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
-            + "                        WHERE jo.resumeID=? and (jo.jobApplicationStatus = 3 OR "
-            + "                        jo.jobApplicationStatus =  6 OR jo.jobApplicationStatus =  7 ) and j.jobStatus IN (3,5,6) ORDER BY jo.lastModifiedDate DESC";
+            + "                        WHERE jo.resumeID=? and jo.jobApplicationStatus IN (3,6,7,8)"
+            + "                        and j.jobStatus IN (3,5,6) ORDER BY jo.lastModifiedDate DESC";
 
     private static final String GETALLJOBCOMPLEANDUNCOMPLETE = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message, "
             + "                                            jo.createdDate, c.categoryName, c.img, com.companyName,com.avatar as avatarCompany , resumeEvaluate.avatar as avatarEvalua, resumeEvaluate.fullName as nameEvaluate,  "
@@ -81,7 +81,7 @@ public class JobApplicationDAO {
             + "                                              j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description "
             + "                                            FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
             + "                                                left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
-            + "                                               WHERE j.userID=? and (j.jobStatus = 3 OR j.jobStatus = 5 OR j.jobStatus=6) AND jo.jobApplicationStatus IN (3,6,7) "
+            + "                                               WHERE j.userID=? and (j.jobStatus = 3 OR j.jobStatus = 5 OR j.jobStatus=6) AND jo.jobApplicationStatus IN (3,6,7,8) "
             + "                                             ORDER BY jo.lastModifiedDate DESC ";
     private static final String UPDATE_STATUS = "UPDATE tblJobApplications SET cvFile = ?, priceDeal = ?, message = ?, jobApplicationStatus = 1 WHERE jobApplicationID = ? and resumeID = ? and jobID = ?";
     private String SEARCHJOBORDER = "SELECT ja.jobApplicationID,ISNULL(jobAply.bids,0) AS bids, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, ja.jobApplicationStatus, "
@@ -98,6 +98,7 @@ public class JobApplicationDAO {
 
     private static final String GETALLNUMBEROFJOBORDER = "SELECT COUNT (jobApplicationID) AS totalJobOrder FROM tblJobApplications";
     private static final String UPDATE_FORM_APPLICATON_OF_RESUME = "UPDATE tblJobApplications SET priceDeal = ?, message = ?, cvFile = ? WHERE resumeID = ? and jobID = ?";
+    private static final String UPDATE_STATUS_APPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = ? WHERE jobApplicationID = ?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -993,5 +994,28 @@ public class JobApplicationDAO {
             }
         }
         return null;
+    }
+    
+    public boolean updateJobApplicationStatus(int jobApplicationID, int jobApplicationStatus) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UPDATE_STATUS_APPLICATION);
+                preStm.setInt(1, jobApplicationStatus);
+                preStm.setInt(2, jobApplicationID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
     }
 }
