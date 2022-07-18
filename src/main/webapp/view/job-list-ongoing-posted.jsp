@@ -136,7 +136,7 @@
                                                          style="width:250px;height:250px">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-md-9">
+                                            <div class="col-lg-5 col-md-9">
                                                 <div class="job-list-desc">
                                                     <h4 class="mb-2"><a
                                                             href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>"
@@ -208,7 +208,7 @@
                                                     </h6>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3 col-md-3">
+                                            <div class="col-lg-4 col-md-3">
                                                 <div class="job-list-button-sm text-right">
                                                     <% if (jobOrder.getJob().getJobStatus() == 3) {
                                                     %>
@@ -217,6 +217,9 @@
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>"
                                                            class="btn btn-sm btn-primary-outline" style="width: 50%">View
                                                             Detail</a>
+                                                    </div>
+                                                    <div class="candidates-listing-btn mt-4">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&studentID=<%= jobOrder.getResume().getUserID()%>" class="btn btn-primary-outline btn-sm " style="width: 50%">Student Profile</a>
                                                     </div>
                                                     <div class="mt-3">
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')"
@@ -238,6 +241,9 @@
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>"
                                                            class="btn btn-sm btn-primary-outline" style="width: 50%">View
                                                             Detail</a>
+                                                    </div>
+                                                    <div class="candidates-listing-btn mt-4">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&studentID=<%= jobOrder.getResume().getUserID()%>" class="btn btn-primary-outline btn-sm " style="width: 50%">Student Profile</a>
                                                     </div>
                                                     <div class="mt-3">
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')"
@@ -262,6 +268,9 @@
                                                            class="btn btn-sm btn-primary-outline" style="width: 50%">View
                                                             Detail</a>
                                                     </div>
+                                                    <div class="candidates-listing-btn mt-4">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&studentID=<%= jobOrder.getResume().getUserID()%>" class="btn btn-primary-outline btn-sm " style="width: 50%">Student Profile</a>
+                                                    </div>
                                                     <div class="mt-3">
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')"
                                                                 type="button" class="btn btn-sm btn-primary-outline"
@@ -285,6 +294,9 @@
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>"
                                                            class="btn btn-sm btn-primary-outline" style="width: 50%">View
                                                             Detail</a>
+                                                    </div>
+                                                    <div class="candidates-listing-btn mt-4">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&studentID=<%= jobOrder.getResume().getUserID()%>" class="btn btn-primary-outline btn-sm " style="width: 50%">Student Profile</a>
                                                     </div>
                                                     <div class="mt-3">
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')"
