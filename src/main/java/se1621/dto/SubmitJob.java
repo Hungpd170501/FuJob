@@ -4,28 +4,32 @@
  */
 package se1621.dto;
 
-import lombok.*;
-
 import java.sql.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+/**
+ *
+ * @author lehad
+ */
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class JobApplication {
+public class SubmitJob {
+    private int submitJobID;
     private int jobApplicationID;
-    private int resumeID;
-    Job job;
-    Resume resume;
-    SubmitJob submitJob;
-    private String cvFile;
-    private String priceDeal;
-    private String message;
+    private String messageSubmit;
+    private String jobFile;
     private Date createdDate;
     private Date lastModifiedDate;
-    private int jobApplicationStatus;
-    private String reasonRejection;
-    EvaluateCompletion evaluateCompletion;
+    private int submitJobStatus;
+
 }
+

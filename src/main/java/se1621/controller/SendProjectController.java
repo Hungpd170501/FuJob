@@ -11,63 +11,59 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 import se1621.dao.JobApplicationDAO;
-import se1621.dao.JobSkillsDAO;
+import se1621.dao.JobDAO;
 import se1621.dao.SubmitJobDAO;
 import se1621.dto.JobApplication;
-import se1621.dto.JobSkills;
 import se1621.dto.SubmitJob;
+import se1621.dto.User;
+import se1621.service.FirebaseStoreServiceImpl;
 
 /**
  *
- * @author quocb
+ * @author HNGB
  */
-@WebServlet(name="ListJobOngoingPostedController", urlPatterns={"/ListJobOngoingPostedController"})
-public class ListJobOngoingPostedController extends HttpServlet {
+@WebServlet(name="SendProjectController", urlPatterns={"/SendProjectController"})
+public class SendProjectController extends HttpServlet {
    
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private static final String ERROR = "/view/job-list-ongoing-posted.jsp";
-    private static final String SUCCESS = "/view/job-list-ongoing-posted.jsp";
-    
+    String SUCCESS = "/MainController?action=ListJobOngoingApplied&userID=";
+    String ERROR = "/view/error.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        try {
-            //user tao job
-            int userID = Integer.parseInt(request.getParameter("userID"));
-            List<JobApplication> listJobOrder = new ArrayList<>();
-            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-            listJobOrder = jobOrderDAO.getListJobOngoingPosted(userID);
-            JobSkillsDAO jsDAO = new JobSkillsDAO();
-            List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
-            for (JobApplication jobApply : listJobOrder) {
-
-                List<JobSkills> ljk = new ArrayList<>();
-                for (JobSkills js : listJs) {
-                    if (jobApply.getJob().getJobID() == js.getJobID()) {
-                        ljk.add(js);
-                    }
-                    jobApply.getJob().setListJobSkills(ljk);
+        try{
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("LOGIN_USER");
+            int userID = user.getUserID();
+            int jobApplicationID = Integer.parseInt(request.getParameter("jobApplicationID"));
+            String message = request.getParameter("messageSubmit");
+            Part filePart = request.getPart("fileProject");
+            FirebaseStoreServiceImpl firebaseStoreServiceImpl = new FirebaseStoreServiceImpl();
+            String filename = firebaseStoreServiceImpl.uploadFile(filePart);
+            SubmitJob submitJob = SubmitJob.builder()
+                    .jobApplicationID(jobApplicationID)
+                    .messageSubmit(message)
+                    .jobFile(filename)
+                    .build();
+            SubmitJobDAO submitJobDAO = new SubmitJobDAO();
+            boolean checkSubmit = submitJobDAO.submitJob(submitJob);
+            if(checkSubmit){
+                JobApplicationDAO jaDAO = new JobApplicationDAO();
+                JobDAO jobDAO = new JobDAO();
+                int jobID = jobDAO.getJobIDByJobApplicationID(jobApplicationID);
+                // Khi submit project jobStatus == 8
+                boolean checkUpdateJobStatus = jobDAO.updateJobStatus(jobID, 8);
+                boolean checkUpdateStatus = jaDAO.updateJobApplicationStatus(jobApplicationID, 8);
+                if(checkUpdateStatus && checkUpdateJobStatus){
+                    request.setAttribute("MESSAGE_UPDATE", "Submit Successfull!");
+                    url = SUCCESS + userID;
                 }
             }
-            if (!listJobOrder.isEmpty()) {
-                request.setAttribute("LIST_ALLJOBONGOING_POSTED", listJobOrder);
-                url = SUCCESS;
-            } else {
-                request.setAttribute("LIST_ALLJOBONGOING_POSTED", listJobOrder);
-                request.setAttribute("MESSAGE", "YOU HAVEN'T ACCEPTED FOR ANY PROJECT");
-            }
-        } catch (Exception e) {
-            log("Error at View all job Controller" + e.toString());
+        }catch(Exception e){
+            log("Error at SearchCompanyIDController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

@@ -245,11 +245,11 @@
                                                     <div class="mt-3">
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" type="button" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
-                                                    <div class="mt-3">
+<!--                                                    <div class="mt-3">
                                                         <button onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)" type="button" style="width: 50%" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#confirmCancellation">
                                                             Cancel
                                                         </button>
-                                                    </div>
+                                                    </div>-->
                                                     <div class="mt-3">
                                                         <a onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)" href="#" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#formUnapply" style="width: 50%">Unapply</a>
                                                     </div>

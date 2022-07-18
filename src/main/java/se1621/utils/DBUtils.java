@@ -23,6 +23,21 @@ public class DBUtils {
         }
         return instance;
     }
+
+//    private DBUtils() {
+//        config.setJdbcUrl("jdbc:sqlserver://fujob2.database.windows.net:1433;database=FuJobDB;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;");
+//        config.setUsername("se150222");
+//        config.setPassword("jmpemldekukpuual@1");
+//        config.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//        config.addDataSourceProperty("cachePrepStmts", "true");
+//        config.addDataSourceProperty("prepStmtCacheSize", "250");
+//        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+//        ds = new HikariDataSource(config);
+//    }
+
+    private final String dbName = "FuJobDB";
+    private final String userID = "sa";
+    private final String password = "Hngiabao2211";
     private DBUtils() {
         config.setJdbcUrl("jdbc:sqlserver://fujob2.database.windows.net:1433;database=FuJobDB;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;");
         config.setUsername("se150222");

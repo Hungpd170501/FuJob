@@ -45,7 +45,7 @@ public class AcceptJobController extends HttpServlet {
             JobApplicationDAO jobApplicationDAO = new JobApplicationDAO();
             int jobID = Integer.parseInt(request.getParameter("jobID"));
             int resumeID = Integer.parseInt(request.getParameter("resumeID"));
-            String reasonRejection = "Thank you for your interest in this project. However, we have found the right person for this project and we have decided to decline your application. See you again and hope we will cooperate in the future";
+            String reasonRejection = "Thank you for your interest in this project. However, we have found the right person for this project and we have decided to reject your application. See you again and hope we will cooperate in the future";
             boolean check = jobApplicationDAO.acceptJobApplication(resumeID, jobID);
             if(check){
                jobDao.updateJobPostHaveEmployer(jobID);

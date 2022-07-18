@@ -109,12 +109,10 @@
                                                     <%
                                                         int jobID = (Integer) request.getAttribute("JOBIDCANDIDATE");
                                                     %>
-                                                    <button onclick="denyJobApp(<%= jobAplication.getResumeID()%>,<%= jobID%>)" type="button" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#confirmCancellation" style="width: 50%">
-                                                        Deny
-                                                    </button>
+                                                  
                                                 </div>
                                                 <div class="mt-3">
-                                                    <a href="#" onclick="denyJobApp(<%= jobAplication.getResumeID()%>,<%= jobID%>)" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#formCancel" style="width: 50%">Decline</a>
+                                                    <a href="#" onclick="denyJobApp(<%= jobAplication.getResumeID()%>,<%= jobID%>)" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#formCancel" style="width: 50%">Deny</a>
                                                 </div>
                                                 <div class="mt-3">
                                                     <button onclick="acceptJobApp(<%= jobAplication.getResumeID()%>,<%= jobID%>)" type="button" class="btn btn-primary-outline btn-sm" data-toggle="modal" data-target="#confirmAcceptaction" style="width: 50%">

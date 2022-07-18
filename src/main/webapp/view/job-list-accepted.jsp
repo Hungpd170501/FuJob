@@ -93,6 +93,19 @@
         <section class="section pt-0">
             <div class="container">
                 <div class="row justify-content-center">
+                    <%
+                        String messResume = (String) request.getAttribute("MESSAGE_UPDATE");
+                        if (messResume != null) {
+                    %>
+                    <div class="col-5 mx-auto text-center alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong><%= messResume%></strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <%
+                        }
+                    %>
                     <div class="col-12">
                         <div class="section-title text-center mb-4 pb-2">
                             <h4 class="title title-line pb-5">All Projects You've Accepted</h4>
@@ -143,7 +156,7 @@
                                                             %>
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
-                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Inprogress</i>
+                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">In Progress</i>
                                                             <%
                                                             } else if (jobOrder.getJobApplicationStatus() == 6) {
                                                             %>
@@ -156,6 +169,12 @@
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: red"></i> 
                                                             <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Not Completed</i>
+                                                            <%
+                                                            } else if(jobOrder.getJobApplicationStatus() == 8) { 
+                                                            %>
+                                                            <br>
+                                                            <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: orange"></i> 
+                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: orange">Pending Review</i>
                                                             <%
                                                                 }
                                                             %>
@@ -201,6 +220,9 @@
                                                     <div class="mt-3">
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getJobApplicatonID(<%= jobOrder.getJobApplicationID()%>)" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#SubmitProject" style="width: 50%">Submit Project</button>
+                                                    </div>
                                                     <%
                                                     } else if (jobOrder.getJobApplicationStatus() == 6) {
                                                     %>
@@ -210,6 +232,9 @@
                                                     </div>
                                                     <div class="mt-3">
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getSubmitJob('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit() %>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewSubmission" style="width: 50%">View Submission</button>
                                                     </div>
                                                     <%
                                                     } else if (jobOrder.getJobApplicationStatus() == 7) {
@@ -221,11 +246,25 @@
                                                     <div class="mt-3">
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getSubmitJob('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit() %>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewSubmission" style="width: 50%">View Submission</button>
+                                                    </div>
+                                                    <%
+                                                    } else if (jobOrder.getJobApplicationStatus() == 8) {
+                                                    %>
+                                                    <br>
+                                                    <div class="mt-3">
+                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getSubmitJob('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit() %>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewSubmission" style="width: 50%">View Submission</button>
+                                                    </div>
                                                     <%
                                                         }
                                                     %>
-
-
                                                 </div>
                                             </div>
                                         </div>
@@ -278,6 +317,60 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="modal fade" id="SubmitProject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-bottom-0">
+                                            <h5 class="modal-title text-primary" id="exampleModalLabel">Submit Project</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form method="post" action="${pageContext.request.contextPath}/MainController" enctype="multipart/form-data">
+                                            <div class="modal-body">
+                                                <div class="form-group text-dark">
+                                                    <label>Message<span class="text-danger">*</span></label>
+                                                    <textarea class="form-control" required="" name="messageSubmit" placeholder="Message for employer"></textarea>
+                                                </div>
+                                                <div class="form-group text-dark">
+                                                    <label>Project File</label>
+                                                    <input type="file" class="form-control" name="fileProject">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer border-top-0 d-flex justify-content-center">
+                                                <input type="submit" class="btn btn-primary" value="Send">
+                                                <input type="hidden" class="btn btn-primary" name="action" value="SendProject">
+                                            </div>
+                                            <input type="hidden" id="jobApplicationID" name="jobApplicationID" value="">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="ViewSubmission" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered " role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-bottom-0 bg-warning">
+                                            <h5 class="modal-title text-white" id="exampleModalLabel">View Product</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-6 form-group text-dark">
+                                                    <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="jobFile" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View Product </p></a>
+                                                </div>
+                                            </div>
+                                            <div class="form-group text-dark">
+                                                <label style="font-size: 16px">Message: </label>
+                                                <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="messageJob"></p></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                
                             <%
                                         }
 
@@ -328,25 +421,36 @@
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
         <script>
-                                                        function getJobOrderID(id, userID) {
-                                                            $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=UnApply&jobOrderID=' + id + '&userID=' + userID);
-                                                        }
+                                                            function getJobOrderID(id, userID) {
+                                                                $('#yesOption').attr('href', '${pageContext.request.contextPath}/MainController?action=UnApply&jobOrderID=' + id + '&userID=' + userID);
+                                                            }
         </script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-                                                        $(".job-display").slice(0, 10).show();
-                                                        $(".smj").on("click", function () {
-                                                            $(".job-display:hidden").slice(0, 5).slideDown();
-                                                            if ($(".job-display:hidden").length == 0) {
-                                                                $(".smj").fadeOut('slow');
-                                                            }
-                                                        });
+                                                            $(".job-display").slice(0, 10).show();
+                                                            $(".smj").on("click", function () {
+                                                                $(".job-display:hidden").slice(0, 5).slideDown();
+                                                                if ($(".job-display:hidden").length == 0) {
+                                                                    $(".smj").fadeOut('slow');
+                                                                }
+                                                            });
         </script>
         <script>
             function getJobOrder(priceDeal, message, cvFile) {
                 $("#dealPrice").html(priceDeal);
                 $("#msg").html(message);
                 document.getElementById('CV').setAttribute('href', cvFile);
+            }
+        </script>
+        <script>
+            function getJobApplicatonID(jobApplicationID) {
+                $('#jobApplicationID').val(jobApplicationID);
+            }
+        </script>
+        <script>
+            function getSubmitJob(jobFile, messageSubmit){
+                document.getElementById('jobFile').setAttribute('href',jobFile);
+                $("#messageJob").html(messageSubmit);
             }
         </script>
     </body>

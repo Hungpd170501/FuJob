@@ -194,7 +194,7 @@ GO
 
 
 IF OBJECT_ID('dbo.tblEvaluateCompletion', 'u') IS NOT NULL 
-   DROP TABLE dbo.tblSkills;  
+   DROP TABLE dbo.tblEvaluateCompletion;  
 GO
 
 CREATE TABLE tblEvaluateCompletion (
