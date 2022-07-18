@@ -260,7 +260,7 @@
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getJobApplicatonID(<%= jobOrder.getJobApplicationID()%>)" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewSubmission" style="width: 50%">View Submission</button>
+                                                        <button onclick="getSubmitJob('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit() %>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewSubmission" style="width: 50%">View Submission</button>
                                                     </div>
                                                     <%
                                                         }
@@ -360,12 +360,12 @@
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-6 form-group text-dark">
-                                                    <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="CV" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View Product </p></a>
+                                                    <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="jobFile" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View Product </p></a>
                                                 </div>
                                             </div>
                                             <div class="form-group text-dark">
                                                 <label style="font-size: 16px">Message: </label>
-                                                <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="msg"></p></div>
+                                                <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="messageJob"></p></div>
                                             </div>
                                         </div>
                                     </div>
@@ -445,6 +445,12 @@
         <script>
             function getJobApplicatonID(jobApplicationID) {
                 $('#jobApplicationID').val(jobApplicationID);
+            }
+        </script>
+        <script>
+            function getSubmitJob(jobFile, messageSubmit){
+                document.getElementById('jobFile').setAttribute('href',jobFile);
+                $("#messageJob").html(messageSubmit);
             }
         </script>
     </body>

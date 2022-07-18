@@ -5,9 +5,11 @@
 package se1621.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import se1621.dto.SubmitJob;
 import se1621.utils.DBUtils;
@@ -17,46 +19,11 @@ import se1621.utils.DBUtils;
  * @author lehad
  */
 public class SubmitJobDAO {
-    private final static String GET_LIST_SUBMIT_JOB = "";
     private final static String SUBMIT_JOB = "INSERT INTO tblSubmitJob (jobApplicationID, messageSubmit, jobFile, submitJobStatus) "
             + "VALUES (?,?,?,1)";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
-    public List<SubmitJob> getListSubmitJob (int jobApplycationID){
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-     
-        
-        
-        
-        
-        
-        
-        
-        
-    
-        
-        
-        
-        
-        
-        return null;
-    }
-    
     public boolean submitJob(SubmitJob submitJob) throws SQLException {
         boolean check = false;
         conn = null;

@@ -19,6 +19,7 @@ public class JobApplication {
     private int resumeID;
     Job job;
     Resume resume;
+    SubmitJob submitJob;
     private String cvFile;
     private String priceDeal;
     private String message;

@@ -1,3 +1,4 @@
+<%@page import="se1621.dto.SubmitJob"%>
 <%@page import="se1621.dto.JobSkills" %>
 <%@page import="se1621.dto.JobApplication" %>
 <%@page import="java.util.List" %>
@@ -217,6 +218,14 @@
                                                                 style="width: 50%">View Application Form
                                                         </button>
                                                     </div>
+                                                                  
+                                                    <div class="mt-3">
+                                                        <button onclick="getSubmitProductjobFile('<%= jobOrder.getSubmitJob().getJobFile() %>', '<%= jobOrder.getSubmitJob().getMessageSubmit() %>')"
+                                                                type="button" class="btn btn-sm btn-primary-outline"
+                                                                data-toggle="modal" data-target="#ViewProductSubmissionForm"
+                                                                style="width: 50%">View Submission
+                                                        </button>
+                                                    </div>
                                                     <div class="mt-3">
                                                         <button onclick="unCompleteJob(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getResumeID()%>)" type="button" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#confirmCancellation" style="width: 50%">
                                                             Not Complete
@@ -294,6 +303,30 @@
                                             <div class="form-group text-dark">
                                                 <label style="font-size: 16px">Message: </label>
                                                 <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="msg"></p></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="ViewProductSubmissionForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered " role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-bottom-0 bg-warning">
+                                            <h5 class="modal-title text-white" id="exampleModalLabel">Product Submission Form</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-12 form-group text-dark">
+                                                    <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="product" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View Product </p></a>
+                                                </div>
+                                            </div>
+                                            <div class="form-group text-dark">
+                                                <label style="font-size: 16px">Message: </label>
+                                                <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="msgSubmit"></p></div>
                                             </div>
                                         </div>
                                     </div>
@@ -482,6 +515,10 @@
                 $("#completeJob_jobApplicationID").val(jobApplication);
                 $("#completeJob_jobID").val(jobID);
                 $("#completeJob_resumeID").val(resumeID);
+            }
+            function getSubmitProductjobFile(jobFile, messageSubmit){
+                document.getElementById('product').setAttribute('href',jobFile);
+                $("#msgSubmit").html(messageSubmit);
             }
         </script>
         <script src="${pageContext.request.contextPath}/asset/ckeditor/ckeditor.js"></script>

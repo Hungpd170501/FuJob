@@ -30,4 +30,6 @@ public class SubmitJob {
     private Date createdDate;
     private Date lastModifiedDate;
     private int submitJobStatus;
+
 }
+

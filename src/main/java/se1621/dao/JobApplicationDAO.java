@@ -18,6 +18,7 @@ import se1621.dto.Job;
 import se1621.dto.JobApplication;
 import se1621.dto.PayMentMethod;
 import se1621.dto.Resume;
+import se1621.dto.SubmitJob;
 import se1621.dto.User;
 import se1621.utils.DBUtils;
 
@@ -57,14 +58,16 @@ public class JobApplicationDAO {
             + "									on jo.jobID = jobApp.jobID) "
             + "                                    WHERE jo.resumeID= ? and (jo.jobApplicationStatus = 1 OR "
             + "                                    jo.jobApplicationStatus =  3 OR jo.jobApplicationStatus =  5 ) ORDER BY jo.lastModifiedDate DESC";
-    private static final String GETALLJOBACCEPTED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.userID, "
-            + "                         j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
-            + "                        jo.createdDate, c.categoryName, c.img, com.companyName, "
-            + "                        j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description "
-            + "                        FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
-            + "                        left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
-            + "                        WHERE jo.resumeID=? and jo.jobApplicationStatus IN (3,6,7,8)"
-            + "                        and j.jobStatus IN (3,5,6) ORDER BY jo.lastModifiedDate DESC";
+    private static final String GETALLJOBACCEPTED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.userID, " +
+"								j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message," +
+"								jo.createdDate, c.categoryName, c.img, com.companyName, " +
+"                                j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description, " +
+"								sb.messageSubmit, sb.jobFile, sb.submitJobID, sb.submitJobStatus" +
+"                                FROM (((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) " +
+"                                left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)" +
+"								left join tblSubmitJob sb on sb.jobApplicationID = jo.jobApplicationID)" +
+"                                WHERE jo.resumeID=? and jo.jobApplicationStatus IN (3,6,7,8)" +
+"                                and j.jobStatus IN (3,5,6) ORDER BY jo.lastModifiedDate DESC";
 
     private static final String GETALLJOBCOMPLEANDUNCOMPLETE = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message, "
             + "                                            jo.createdDate, c.categoryName, c.img, com.companyName,com.avatar as avatarCompany , resumeEvaluate.avatar as avatarEvalua, resumeEvaluate.fullName as nameEvaluate,  "
@@ -76,13 +79,16 @@ public class JobApplicationDAO {
             + "											   left join tblResumes resumeEvaluate on resumeEvaluate.userID = us.userID) "
             + "           									WHERE jo.resumeID=? and ( jo.jobApplicationStatus =  6 OR jo.jobApplicationStatus =  7 ) ORDER BY jo.lastModifiedDate DESC";
 
-    private static final String GETALLJOBONGOINGPOSTED = " SELECT jo.jobApplicationID,jo.resumeID,jo.jobApplicationStatus, j.jobID,j.userID,j.jobStatus, j.jobTitle, j.jobCategoryID, j.minBudget, j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
-            + "                                               jo.createdDate, c.categoryName, c.img, com.companyName, "
-            + "                                              j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description "
-            + "                                            FROM ((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
-            + "                                                left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
-            + "                                               WHERE j.userID=? and (j.jobStatus = 3 OR j.jobStatus = 5 OR j.jobStatus=6) AND jo.jobApplicationStatus IN (3,6,7,8) "
-            + "                                             ORDER BY jo.lastModifiedDate DESC ";
+    private static final String GETALLJOBONGOINGPOSTED = " SELECT jo.jobApplicationID,jo.resumeID,jo.jobApplicationStatus, j.jobID,j.userID,j.jobStatus, j.jobTitle, j.jobCategoryID, j.minBudget, j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message, "
+            + "                                                                                   jo.createdDate, c.categoryName, c.img, com.companyName, "
+            + "                                                                                  j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description, "
+            + "                                                                                 sb.submitJobID,sb.messageSubmit, sb.jobFile, sb.createdDate, sb.lastModifiedDate, sb.submitJobStatus "
+            + "                                                                                FROM (((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
+            + "                                                                                left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID) "
+            + "                                                                                 left join tblSubmitJob sb on sb.jobApplicationID = jo.jobApplicationID) "
+            + "                                                                                   WHERE j.userID = ? and (j.jobStatus = 3 OR j.jobStatus = 5 OR j.jobStatus=6) AND jo.jobApplicationStatus IN (3,6,7,8) "
+            + "                                                                                 ORDER BY jo.lastModifiedDate DESC ";
+
     private static final String UPDATE_STATUS = "UPDATE tblJobApplications SET cvFile = ?, priceDeal = ?, message = ?, jobApplicationStatus = 1 WHERE jobApplicationID = ? and resumeID = ? and jobID = ?";
     private String SEARCHJOBORDER = "SELECT ja.jobApplicationID,ISNULL(jobAply.bids,0) AS bids, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, ja.jobApplicationStatus, "
             + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.minBudget,j.maxBudget, j.paymentMethodID, pm.paymentMethodName, "
@@ -479,6 +485,10 @@ public class JobApplicationDAO {
                     String img = rs.getString("img");
                     String companyName = rs.getString("companyName");
                     int jobAppStatus = rs.getInt("jobApplicationStatus");
+                    int submitJobID = rs.getInt("submitJobID");
+                    String messageSubmit = rs.getString("messageSubmit");
+                    String jobFile = rs.getString("jobFile");
+                    int submitJobStatus = rs.getInt("submitJobStatus");
                     PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder().jobID(jobID)
                             .userID(hrID)
@@ -494,8 +504,15 @@ public class JobApplicationDAO {
                             .expiriedDate(expiriedDate)
                             .description(description)
                             .build();
+                    SubmitJob sbJob = SubmitJob.builder()
+                            .submitJobID(submitJobID)
+                            .messageSubmit(messageSubmit)
+                            .jobFile(jobFile)
+                            .submitJobStatus(submitJobStatus)
+                            .build();
                     JobApplication listJobOrder = JobApplication.builder()
                             .jobApplicationID(jobApplicationID)
+                            .submitJob(sbJob)
                             .resumeID(resumeID).job(job)
                             .createdDate(createdDate)
                             .priceDeal(priceDeal)
@@ -556,6 +573,11 @@ public class JobApplicationDAO {
                     String companyName = rs.getString("companyName");
                     int jobAppStatus = rs.getInt("jobApplicationStatus");
                     int jobStatus = rs.getInt("jobStatus");
+                    // Data of SubmitJobDTO
+                    int submitJobID = rs.getInt("submitJobID");
+                    String messageSubmit = rs.getString("messageSubmit");
+                    String jobFile = rs.getString("jobFile");
+                    int submitJobStatus = rs.getInt("submitJobStatus");
                     PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder()
                             .jobID(jobID)
@@ -573,9 +595,17 @@ public class JobApplicationDAO {
                             .description(description)
                             .jobStatus(jobStatus)
                             .build();
+                    SubmitJob sbJob = SubmitJob.builder()
+                            .submitJobID(submitJobID)
+                            .messageSubmit(messageSubmit)
+                            .jobFile(jobFile)
+                            .submitJobStatus(submitJobStatus)
+                            .build();
                     JobApplication listJobOrder = JobApplication.builder()
                             .jobApplicationID(jobApplicationID)
-                            .resumeID(resumeID).job(job)
+                            .resumeID(resumeID)
+                            .job(job)
+                            .submitJob(sbJob)
                             .createdDate(createdDate)
                             .priceDeal(priceDeal)
                             .message(message)
