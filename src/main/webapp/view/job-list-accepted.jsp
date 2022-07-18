@@ -234,7 +234,7 @@
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getJobApplicatonID(<%= jobOrder.getJobApplicationID()%>)" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#SubmitProject" style="width: 50%">Submit Project</button>
+                                                        <button onclick="getSubmitJob('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit() %>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewSubmission" style="width: 50%">View Submission</button>
                                                     </div>
                                                     <%
                                                     } else if (jobOrder.getJobApplicationStatus() == 7) {
@@ -247,7 +247,7 @@
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getJobApplicatonID(<%= jobOrder.getJobApplicationID()%>)" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#SubmitProject" style="width: 50%">Submit Project</button>
+                                                        <button onclick="getSubmitJob('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit() %>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewSubmission" style="width: 50%">View Submission</button>
                                                     </div>
                                                     <%
                                                     } else if (jobOrder.getJobApplicationStatus() == 8) {
