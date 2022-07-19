@@ -14,6 +14,11 @@
         <jsp:include page="./include/header.jsp">
             <jsp:param name="title" value="FuJob | Project Applied (In Progress)"/>
         </jsp:include>
+        <style>
+            .checked {
+                color: orange;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="./components/loader.jsp"></jsp:include>
@@ -170,7 +175,7 @@
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: red"></i> 
                                                             <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Not Completed</i>
                                                             <%
-                                                            } else if(jobOrder.getJobApplicationStatus() == 8) { 
+                                                            } else if (jobOrder.getJobApplicationStatus() == 8) {
                                                             %>
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: orange"></i> 
@@ -234,7 +239,10 @@
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getSubmitJob('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit() %>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewSubmission" style="width: 50%">View Submission</button>
+                                                        <button onclick="getSubmitJob('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewSubmission" style="width: 50%">View Submission</button>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getFeedBack('<%= jobOrder.getEvaluateCompletion().getRatingValue()%>', '<%= jobOrder.getEvaluateCompletion().getContent()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#viewFeedBack" style="width: 50%">View Feedback</button>
                                                     </div>
                                                     <%
                                                     } else if (jobOrder.getJobApplicationStatus() == 7) {
@@ -247,7 +255,10 @@
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getSubmitJob('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit() %>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewSubmission" style="width: 50%">View Submission</button>
+                                                        <button onclick="getSubmitJob('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewSubmission" style="width: 50%">View Submission</button>
+                                                    </div>
+                                                    <div class="mt-3">
+                                                        <button onclick="getFeedBack('<%= jobOrder.getEvaluateCompletion().getRatingValue()%>', '<%= jobOrder.getEvaluateCompletion().getContent()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#viewFeedBack" style="width: 50%">View Feedback</button>
                                                     </div>
                                                     <%
                                                     } else if (jobOrder.getJobApplicationStatus() == 8) {
@@ -260,7 +271,7 @@
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <button onclick="getSubmitJob('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit() %>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewSubmission" style="width: 50%">View Submission</button>
+                                                        <button onclick="getSubmitJob('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewSubmission" style="width: 50%">View Submission</button>
                                                     </div>
                                                     <%
                                                         }
@@ -370,7 +381,39 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                
+                            </div>
+                            <div class="modal fade" id="viewFeedBack" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-warning">
+                                            <h5 class="modal-title text-white" id="exampleModalLongTitle">Feed back</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container text-dark">
+                                                <div class="row d-flex justify-content-center">
+                                                    <div class="d-flex flex-start w-100">
+                                                        <!-- <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp" alt="avatar" width="65" height="65" /> -->
+                                                        <div class="w-100">
+                                                            <h5 class = "d-inline-block">Evaluation:</h5>
+                                                            <div id="star" class="rating stars d-inline-block">
+                                                                
+                                                            </div>
+                                                            <div class="form-group text-dark">
+                                                                <label style="font-size: 16px">Message: </label>
+                                                                <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="contentFeedback"></p></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>               
                             <%
                                         }
 
@@ -448,9 +491,22 @@
             }
         </script>
         <script>
-            function getSubmitJob(jobFile, messageSubmit){
-                document.getElementById('jobFile').setAttribute('href',jobFile);
+            function getSubmitJob(jobFile, messageSubmit) {
+                document.getElementById('jobFile').setAttribute('href', jobFile);
                 $("#messageJob").html(messageSubmit);
+            }
+        </script>
+        <script>
+            function getFeedBack(rate, content) {
+                $("#contentFeedback").html(content);
+                var x='';
+                for (let i = 1; i <= rate; i++) {
+                    x += '<span class="fa fa-star checked"></span>';
+                }
+                for (let i = rate; i<5; i++){
+                    x += '<span class="fa fa-star"></span>';
+                }
+                $('#star').html (x);
             }
         </script>
     </body>
