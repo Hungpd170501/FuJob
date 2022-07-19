@@ -116,7 +116,6 @@
                                 <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-id', 'desc')"> Newest project first </button>
                                 <button class="btn btn-sm btn-primary-outline" onclick="sortList('painting-id', 'asc')"> Oldest project first </button>
                             </div>
-
                         </div>
                     </div>
                 </div>

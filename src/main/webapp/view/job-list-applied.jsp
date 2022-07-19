@@ -382,10 +382,6 @@
 
                             %>
 
-
-
-
-
                             <%                                if (listJobApplication.size() > 10) {
                             %>
                             <div class="smj col-12 text-center mt-4 pt-2">
