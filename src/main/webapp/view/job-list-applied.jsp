@@ -470,6 +470,7 @@
                 if(cvFile == "null"){
                     document.getElementById("CVp").style.display = "none";
                 }else {
+                    document.getElementById("CVp").style.display = "block";
                     document.getElementById('CV').setAttribute('href', cvFile);
                 }
                 

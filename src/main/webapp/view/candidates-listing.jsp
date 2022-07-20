@@ -109,7 +109,7 @@
                                                     <%
                                                         int jobID = (Integer) request.getAttribute("JOBIDCANDIDATE");
                                                     %>
-                                                  
+
                                                 </div>
                                                 <div class="mt-3">
                                                     <a href="#" onclick="denyJobApp(<%= jobAplication.getResumeID()%>,<%= jobID%>)" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#formCancel" style="width: 50%">Deny</a>
@@ -145,7 +145,7 @@
                                                 <p style="display: inline-block" id="dealPrice"></p>
                                             </div>
                                             <div class="col-6 form-group text-dark">
-                                                <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="CV" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View CV </p></a>
+                                                <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="CV" href="" ><p id="CVp" style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View CV </p></a>
                                             </div>
                                         </div>
                                         <div class="form-group text-dark">
@@ -202,85 +202,91 @@
                                         <div class="modal-body">
                                             <div class="form-group text-dark">
                                                 <label>Your Reason<span class="text-danger">*<span></label>
-                                                <textarea class="form-control" name="reasonCancel" id="reasonCancel" placeholder="Reason you reject this application"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer  d-flex justify-content-center">
-                                            <input type="submit" class="btn btn-primary" value="Send" style="width: 165px">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <%
+                                                            <textarea class="form-control" name="reasonCancel" id="reasonCancel" placeholder="Reason you reject this application"></textarea>
+                                                            </div>
+                                                            </div>
+                                                            <div class="modal-footer  d-flex justify-content-center">
+                                                                <input type="submit" class="btn btn-primary" value="Send" style="width: 165px">
+                                                            </div>                    
+                                                            </form>    
+                                                            </div>
+                                                            </div>
+                                                            </div>
+                                                            <%
 
-                                    }
+                                                                        }
 
-                                }
-                            }
+                                                                    }
+                                                                }
 
-                        %>
-                        <%                                if (listJobApplication.size() > 10) {
-                        %>
-                        <div class="smj col-12 text-center mt-4 pt-2">
-                            <a class="btn btn-primary-outline">Show more</a>
-                        </div>
-                        <%
-                            }
-                        %>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- CANDIDATES LISTING END -->
+                                                            %>
+                                                            <%                                if (listJobApplication.size() > 10) {
+                                                            %>
+                                                            <div class="smj col-12 text-center mt-4 pt-2">
+                                                                <a class="btn btn-primary-outline">Show more</a>
+                                                            </div>
+                                                            <%
+                                                                }
+                                                            %>
+                                                            </div>
+                                                            </div>
+                                                            </div>
+                                                            </section>
+                                                            <!-- CANDIDATES LISTING END -->
 
 
 
-        <jsp:include page="./include/footer.jsp"></jsp:include>
-            <!-- javascript -->
-            <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
-        <script src="${pageContext.request.contextPath}/asset/js/bootstrap.bundle.min.js"></script>
-        <script src="${pageContext.request.contextPath}/asset/js/jquery.easing.min.js"></script>
-        <script src="${pageContext.request.contextPath}/asset/js/plugins.js"></script>
+                                                            <jsp:include page="./include/footer.jsp"></jsp:include>
+                                                                <!-- javascript -->
+                                                                <script src="${pageContext.request.contextPath}/asset/js/jquery.min.js"></script>
+                                                            <script src="${pageContext.request.contextPath}/asset/js/bootstrap.bundle.min.js"></script>
+                                                            <script src="${pageContext.request.contextPath}/asset/js/jquery.easing.min.js"></script>
+                                                            <script src="${pageContext.request.contextPath}/asset/js/plugins.js"></script>
 
-        <!-- selectize js -->
-        <script src="${pageContext.request.contextPath}/asset/js/selectize.min.js"></script>
-        <script src="${pageContext.request.contextPath}/asset/js/jquery.nice-select.min.js"></script>
+                                                            <!-- selectize js -->
+                                                            <script src="${pageContext.request.contextPath}/asset/js/selectize.min.js"></script>
+                                                            <script src="${pageContext.request.contextPath}/asset/js/jquery.nice-select.min.js"></script>
 
-        <script src="${pageContext.request.contextPath}/asset/js/owl.carousel.min.js"></script>
-        <script src="${pageContext.request.contextPath}/asset/js/counter.int.js"></script>
+                                                            <script src="${pageContext.request.contextPath}/asset/js/owl.carousel.min.js"></script>
+                                                            <script src="${pageContext.request.contextPath}/asset/js/counter.int.js"></script>
 
-        <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
-        <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-        <script src="${pageContext.request.contextPath}/asset/ckeditor/ckeditor.js"></script>
-        <script>CKEDITOR.replace('message');</script>
-        <script>
-            function denyJobApp(resumeID, jobID) {
-                $('#formRejection').attr('action', '${pageContext.request.contextPath}/MainController?action=DenyJob&jobID=' + jobID + '&resumeID=' + resumeID);
-            }
-        </script>
-        <script>
-            function acceptJobApp(resumeID, jobID) {
-                $('#yesOption2').attr('href', '${pageContext.request.contextPath}/MainController?action=AcceptJob&jobID=' + jobID + '&resumeID=' + resumeID);
-            }
-        </script>
-        <script>
-            function getJobOrder(priceDeal, message, cvFile) {
-                $("#dealPrice").html(priceDeal);
-                $("#msg").html(message);
-                document.getElementById('CV').setAttribute('href', cvFile);
-            }
-        </script>
+                                                            <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
+                                                            <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
+                                                            <script src="${pageContext.request.contextPath}/asset/ckeditor/ckeditor.js"></script>
+                                                            <script>CKEDITOR.replace('message');</script>
+                                                            <script>
+                                                                function denyJobApp(resumeID, jobID) {
+                                                                    $('#formRejection').attr('action', '${pageContext.request.contextPath}/MainController?action=DenyJob&jobID=' + jobID + '&resumeID=' + resumeID);
+                                                                }
+                                                            </script>
+                                                            <script>
+                                                                function acceptJobApp(resumeID, jobID) {
+                                                                    $('#yesOption2').attr('href', '${pageContext.request.contextPath}/MainController?action=AcceptJob&jobID=' + jobID + '&resumeID=' + resumeID);
+                                                                }
+                                                            </script>
+                                                            <script>
+                                                                function getJobOrder(priceDeal, message, cvFile) {
+                                                                    $("#dealPrice").html(priceDeal);
+                                                                    $("#msg").html(message);
+                                                                    if (cvFile == "null") {
+                                                                        document.getElementById("CVp").style.display = "none";
+                                                                    } else {
+                                                                        document.getElementById("CVp").style.display = "block";
+                                                                        document.getElementById('CV').setAttribute('href', cvFile);
+                                                                    }
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(".job-display").slice(0, 10).show();
-            $(".smj").on("click", function () {
-                $(".job-display:hidden").slice(0, 5).slideDown();
-                if ($(".job-display:hidden").length == 0) {
-                    $(".smj").fadeOut('slow');
-                }
-            });
-        </script>
-    </body>
-</html>
+                                                                }
+                                                            </script>
+
+                                                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                                            <script>
+                                                                $(".job-display").slice(0, 10).show();
+                                                                $(".smj").on("click", function () {
+                                                                    $(".job-display:hidden").slice(0, 5).slideDown();
+                                                                    if ($(".job-display:hidden").length == 0) {
+                                                                        $(".smj").fadeOut('slow');
+                                                                    }
+                                                                });
+                                                            </script>
+                                                            </body>
+                                                            </html>

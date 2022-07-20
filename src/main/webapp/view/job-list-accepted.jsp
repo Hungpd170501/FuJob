@@ -45,49 +45,49 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
                             <div class="p-4 mb-3">
-<!--                            <div class="home-registration-form job-list-reg-form bg-light shadow p-4 mb-3">
-                                 START SEARCH 
-                                <form class="registration-form" action="${pageContext.request.contextPath}/MainController">
-                                <form class="registration-form">
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="registration-form-box">
-                                            <i class="fa fa-briefcase"></i>
-                                            <input type="text" name="searchTitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="registration-form-box">
-                                            <i class="fa fa-archive"></i>
-                                            <select class="demo-default" id="select-category" name="searchSkill" >
-                                                <option value="">Skill...</option>
-                                                <c:forEach items="${applicationScope.SKILL_LIST}" var="i">
-                                                    <option value="${i.skillID}">${i.skillName}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="registration-form-box">
-                                            <i class="fa fa-list-alt"></i>
-                                            <select id="select-category" class="demo-default" name="searchCate">
-                                                <option value="">Categories...</option>
-                                                <c:forEach items="${applicationScope.CATEGORY_LIST}" var="i">
-                                                    <option value="${i.categoryID}">${i.categoryName}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="registration-form-box">
-                                            <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Find">
-                                             name = action  
-                                            <input type="hidden" name ="action" value="SearchJobOrder">
-                                            <input type="hidden" name ="studentID" value="${sessionScope.LOGIN_USER.userID}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>-->
+                                <!--                            <div class="home-registration-form job-list-reg-form bg-light shadow p-4 mb-3">
+                                                                 START SEARCH 
+                                                                <form class="registration-form" action="${pageContext.request.contextPath}/MainController">
+                                                                <form class="registration-form">
+                                                                <div class="row">
+                                                                    <div class="col-lg-3 col-md-6">
+                                                                        <div class="registration-form-box">
+                                                                            <i class="fa fa-briefcase"></i>
+                                                                            <input type="text" name="searchTitle" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Title...">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-3 col-md-6">
+                                                                        <div class="registration-form-box">
+                                                                            <i class="fa fa-archive"></i>
+                                                                            <select class="demo-default" id="select-category" name="searchSkill" >
+                                                                                <option value="">Skill...</option>
+                            <c:forEach items="${applicationScope.SKILL_LIST}" var="i">
+                                <option value="${i.skillID}">${i.skillName}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="registration-form-box">
+                        <i class="fa fa-list-alt"></i>
+                        <select id="select-category" class="demo-default" name="searchCate">
+                            <option value="">Categories...</option>
+                            <c:forEach items="${applicationScope.CATEGORY_LIST}" var="i">
+                                <option value="${i.categoryID}">${i.categoryName}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="registration-form-box">
+                        <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Find">
+                         name = action  
+                        <input type="hidden" name ="action" value="SearchJobOrder">
+                        <input type="hidden" name ="studentID" value="${sessionScope.LOGIN_USER.userID}">
+                    </div>
+                </div>
+            </div>
+        </form>-->
                             <!-- END SEARCH -->
                         </div>
                     </div>
@@ -342,7 +342,7 @@
                                                             <p style="display: inline-block" id="dealPrice"></p>
                                                         </div>
                                                         <div class="col-6 form-group text-dark">
-                                                            <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="CV" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View CV </p></a>
+                                                            <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="CV" href="" ><p id="CVp" style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View CV </p></a>
                                                         </div>
                                                     </div>
                                                     <div class="form-group text-dark">
@@ -510,7 +510,13 @@
             function getJobOrder(priceDeal, message, cvFile) {
                 $("#dealPrice").html(priceDeal);
                 $("#msg").html(message);
-                document.getElementById('CV').setAttribute('href', cvFile);
+                if(cvFile == "null"){
+                    document.getElementById("CVp").style.display = "none";
+                }else {
+                    document.getElementById("CVp").style.display = "block";
+                    document.getElementById('CV').setAttribute('href', cvFile);
+                }
+                
             }
         </script>
         <script>
@@ -538,11 +544,11 @@
             }
         </script>
         <script>
-            $(document).ready(function() {
-            $('#statusFilter').on('change', function() {
-            $('#paintings').data('list').filter(this.value);
+            $(document).ready(function () {
+                $('#statusFilter').on('change', function () {
+                    $('#paintings').data('list').filter(this.value);
+                });
             });
-                    });
         </script>
     </body>
 </html>

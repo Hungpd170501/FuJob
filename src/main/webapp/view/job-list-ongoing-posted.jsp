@@ -377,7 +377,7 @@
                                                     <p style="display: inline-block" id="dealPrice"></p>
                                                 </div>
                                                 <div class="col-6 form-group text-dark">
-                                                    <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="CV" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View CV </p></a>
+                                                    <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="CV" href="" ><p id="CVp" style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View CV </p></a>
                                                 </div>
                                             </div>
                                             <div class="form-group text-dark">
@@ -586,7 +586,13 @@
             function getJobOrder(priceDeal, message, cvFile) {
                 $("#dealPrice").html(priceDeal);
                 $("#msg").html(message);
-                document.getElementById('CV').setAttribute('href', cvFile);
+                if(cvFile == "null"){
+                    document.getElementById("CVp").style.display = "none";
+                }else {
+                    document.getElementById("CVp").style.display = "block";
+                    document.getElementById('CV').setAttribute('href', cvFile);
+                }
+                
             }
             function unCompleteJob(jobApplication, jobID, resumeID) {
                 $("#unCompleteJob_jobApplicationID").val(jobApplication);
