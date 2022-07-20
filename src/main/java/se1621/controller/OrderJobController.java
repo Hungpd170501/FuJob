@@ -39,6 +39,9 @@ public class OrderJobController extends HttpServlet {
             Part filePart = request.getPart("file");
             FirebaseStoreServiceImpl firebaseStoreServiceImpl = new FirebaseStoreServiceImpl();
             String filename = firebaseStoreServiceImpl.uploadFile(filePart);
+            if(filePart.getSize()<= 0){
+                filename = null;
+            }
             String salaryDeal = request.getParameter("salaryDeal");
             String message = request.getParameter("message");
             ResumeDAO resumeDAO = new ResumeDAO();

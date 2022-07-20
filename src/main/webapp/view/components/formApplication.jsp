@@ -26,9 +26,16 @@
                             <label>Message<span class="text-danger">*</span></label>
                             <textarea id="message" class="form-control" name="message" placeholder="Message for employer" required ></textarea>
                         </div>
-                        <div class="form-group text-dark">
-                            <label>Upload CV</label>
-                            <input type="file" class="form-control" name="file">
+                        <div class="row form-group text-dark">
+                            <div class="col-6">
+                                <input onchange="showUpload()" type="radio" id="cvDefault" name="chooseCV" value="CVdefault">
+                                <label>CV Default (Your Resume)</label>
+                            </div>
+                            <div class="col-6">
+                                <input onchange="showUpload()" type="radio" id="upCv" name="chooseCV" value="upCv">
+                                <label>Upload Another CV</label>
+                            </div>
+                            <input id="file" type="hidden" class="form-control" name="file">
                         </div>
                     </div>
                     <div class="modal-footer border-top-0 d-flex justify-content-center">
@@ -51,5 +58,15 @@
             });
         }
 
+    </script>
+    <script>
+        function showUpload(){
+            var chooseCv = $('input[name="chooseCV"]:checked').val();
+            if(chooseCv == 'upCv'){
+                document.getElementById("file").type = "file";
+            } else {
+                document.getElementById("file").type = "hidden";
+            }
+        }
     </script>
 </body>
