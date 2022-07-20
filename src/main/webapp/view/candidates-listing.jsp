@@ -207,13 +207,12 @@
                                                             </div>
                                                             <div class="modal-footer  d-flex justify-content-center">
                                                                 <input type="submit" class="btn btn-primary" value="Send" style="width: 165px">
-                                                            </div>                    
-                                                            </form>    
+                                                            </div>
+                                                            </form>
                                                             </div>
                                                             </div>
                                                             </div>
                                                             <%
-
                                                                         }
 
                                                                     }
@@ -277,7 +276,6 @@
 
                                                                 }
                                                             </script>
-
                                                             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                                                             <script>
                                                                 $(".job-display").slice(0, 10).show();

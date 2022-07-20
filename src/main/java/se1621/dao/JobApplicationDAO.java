@@ -297,6 +297,7 @@ public class JobApplicationDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(GETALLJOBAPPLIED);
                 preStm.setInt(1, resumeID);
+
                 rs = preStm.executeQuery();
                 List<JobApplication> list = new ArrayList<>();
                 while (rs.next()) {
