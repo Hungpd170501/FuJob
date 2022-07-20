@@ -137,10 +137,31 @@
                                     <div class="float-left">
                                         <h5 class="text-dark mb-0 pt-2 f-18">Showing result</h5>
                                     </div>
+                                    <div class="cell-md-4 mt-4 float-right">
+                                        <select class="form-control resume" id="statusFilter" data-filter="false">
+                                            <option value="" selected>All</option>
+                                            <option value="Waiting">Waiting</option>
+                                            <option value="Accepted">Accepted</option>
+                                            <option value="Rejected">Rejected</option>
+                                            <option value="This project has been deleted">This project has been deleted</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
+                            <ul id="paintings"
+                                data-role="list"
+                                data-sort-class="painting"
+                                data-sort-dir="desc"
+                                data-cls-list="unstyled-list row flex-justify-center mt-4"
+                                data-cls-list-item="cell-sm-6 cell-md-4"
+                                data-filter-class="painting-author"
+                                data-show-pagination="true"
+                                data-items="10"
+                                data-items-steps="all, 3, 10"
+                                data-show-list-info="true"
+                                >
                             <% List<JobApplication> listJobApplication = (List<JobApplication>) request.getAttribute("LIST_ALLJOBORDER");
                                 if (listJobApplication.isEmpty()) {
 
@@ -155,9 +176,10 @@
                                     if (listJobApplication.size() > 0) {
                                         for (JobApplication jobOrder : listJobApplication) {
                             %>
-                            <div class="job-display col-lg-12 mt-4 pt-2" style="display: none">
+                            <li style="list-style: none">
+                            <div class="job-display col-lg-12 mt-4 pt-2">
                                 <div class="job-list-box border rounded">
-                                    <div class="p-3">
+                                    <div class="p-3" style="width: 1100px">
                                         <div class="row align-items-center">
                                             <div class="col-lg-3">
                                                 <div class="company-logo-img">
@@ -171,25 +193,25 @@
                                                             %>
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: #C0C000"></i> 
-                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: #C0C000">Waiting</i>
+                                                            <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: #C0C000">Waiting</i>
                                                             <%
                                                             } else if (jobOrder.getJobApplicationStatus() == 3) {
                                                             %>
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
-                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Accepted</i>
+                                                            <i class="painting-author" class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Accepted</i>
                                                             <%
                                                             } else if (jobOrder.getJobApplicationStatus() == 2) {
                                                             %>
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: red"></i> 
-                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">This project has been deleted</i>
+                                                            <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">This project has been deleted</i>
                                                             <%
                                                             } else if (jobOrder.getJobApplicationStatus() == 5) {
                                                             %>
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: red"></i> 
-                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Rejected</i>
+                                                            <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Rejected</i>
                                                             <%
                                                                 }
                                                             %>
@@ -286,6 +308,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </li>
                             <!-- Modal -->
                             <div class="modal fade" id="confirmCancellation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -390,6 +413,7 @@
                             <%
                                 }
                             %>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -422,13 +446,14 @@
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
         <script src="${pageContext.request.contextPath}/asset/ckeditor/ckeditor.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/metro.min.js"></script>
         <script>CKEDITOR.replace('message');</script>
         <script>
             function getJobOrderID(id, resumeID) {
                 $('#formUnapplyToSendhref').attr('action', '${pageContext.request.contextPath}/MainController?action=UnApply&jobOrderID=' + id + '&resumeID=' + resumeID);
             }
         </script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(".job-display").slice(0, 10).show();
             $(".smj").on("click", function () {
@@ -437,7 +462,7 @@
                     $(".smj").fadeOut('slow');
                 }
             });
-        </script>
+        </script>-->
         <script>
             function getJobOrder(priceDeal, message, cvFile) {
                 $("#dealPrice").html(priceDeal);
@@ -449,6 +474,13 @@
             function getRejectionFrm(message) {
                 $("#msg2").html(message);
             }
+        </script>
+        <script>
+            $(document).ready(function() {
+            $('#statusFilter').on('change', function() {
+            $('#paintings').data('list').filter(this.value);
+            });
+                    });
         </script>
     </body>
 </html>

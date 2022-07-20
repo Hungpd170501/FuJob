@@ -44,10 +44,11 @@
                 <div class="home-form-position">
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
-                            <div class="home-registration-form job-list-reg-form bg-light shadow p-4 mb-3">
-                                <!-- START SEARCH -->
+                            <div class="p-4 mb-3">
+<!--                            <div class="home-registration-form job-list-reg-form bg-light shadow p-4 mb-3">
+                                 START SEARCH 
                                 <form class="registration-form" action="${pageContext.request.contextPath}/MainController">
-                                <!--<form class="registration-form">-->
+                                <form class="registration-form">
                                 <div class="row">
                                     <div class="col-lg-3 col-md-6">
                                         <div class="registration-form-box">
@@ -80,13 +81,13 @@
                                     <div class="col-lg-3 col-md-6">
                                         <div class="registration-form-box">
                                             <input type="submit" id="submit" class="submitBnt btn btn-primary btn-block" value="Find">
-                                            <!-- name = action  -->
+                                             name = action  
                                             <input type="hidden" name ="action" value="SearchJobOrder">
                                             <input type="hidden" name ="studentID" value="${sessionScope.LOGIN_USER.userID}">
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </form>-->
                             <!-- END SEARCH -->
                         </div>
                     </div>

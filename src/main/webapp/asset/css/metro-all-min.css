@@ -20931,7 +20931,7 @@ input[type=button].loading .load-caption,input[type=reset].loading .load-caption
     width:0;
     pointer-events:none
 }
-.chat .message .message-item .message-text.--next{
+.chat .message .message-item .message-text.-next{
     padding-top:10px
 }
 .chat .message .message-item .message-text.-next::before{

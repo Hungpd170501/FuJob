@@ -145,12 +145,32 @@
                                     <div class="float-left">
                                         <h5 class="text-dark mb-0 pt-2 f-18">Showing result</h5>
                                     </div>
+                                    <div class="cell-md-4 mt-4 float-right">
+                                        <select class="form-control resume" id="statusFilter" data-filter="false">
+                                            <option value="" selected>All</option>
+                                            <option value="Published">Published</option>
+                                            <option value="Handed Over">Handed Over</option>
+                                            <option value="Posting Expired">Posting Expired</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <!-- them display -->
 
                         <div class="row" > 
+                            <ul id="paintings"
+                                data-role="list"
+                                data-sort-class="painting"
+                                data-sort-dir="desc"
+                                data-cls-list="unstyled-list row flex-justify-center mt-4"
+                                data-cls-list-item="cell-sm-6 cell-md-4"
+                                data-filter-class="painting-author"
+                                data-show-pagination="true"
+                                data-items="10"
+                                data-items-steps="all, 3, 10"
+                                data-show-list-info="true"
+                                >
                             <% List<Job> listJob = (List<Job>) request.getAttribute("LIST_JOBPOST");
                                 if (listJob == null || listJob.isEmpty()) {
                                     String message = (String) request.getAttribute("MESSAGE");
@@ -164,10 +184,11 @@
                                     if (listJob.size() > 0) {
                                         for (Job job : listJob) {
                             %>
-                            <div class="job-display col-lg-12 mt-4 pt-1" style="display: none">
+                            <li style="list-style: none">
+                            <div class="job-display col-lg-12 mt-4 pt-1">
 
                                 <div class="job-list-box border rounded" >
-                                    <div class="p-3">
+                                    <div class="p-3" style="width: 1100px">
                                         <div class="row align-items-center">
                                             <div class="col-lg-3">
                                                 <div class="company-logo-img">
@@ -182,19 +203,19 @@
                                                             %>
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
-                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Published</i>
+                                                            <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Published</i>
                                                             <%
                                                             } else if (job.getJobStatus() == 3) {
                                                             %>
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
-                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Handed Over</i>
+                                                            <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Handed Over</i>
                                                             <%
                                                             } else if (job.getJobStatus() == 4) {
                                                             %>
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: red"></i> 
-                                                            <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Posting Expired</i>
+                                                            <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Posting Expired</i>
                                                             <%
                                                                 }
                                                             %>
@@ -286,7 +307,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            </li>
                             <div class="modal fade" id="confirmCancellation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
@@ -344,6 +365,7 @@
                             <%
                                 }
                             %>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -371,7 +393,8 @@
 
         <script src="${pageContext.request.contextPath}/asset/js/app.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/home.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="${pageContext.request.contextPath}/asset/js/metro.min.js"></script>
+<!--        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
                                                             $(".job-display").slice(0, 10).show();
                                                             $(".smj").on("click", function () {
@@ -380,14 +403,20 @@
                                                                     $(".smj").fadeOut('slow');
                                                                 }
                                                             });
-        </script>
+        </script>-->
 
         <script>
             function getJobPostID(id, userID) {
                 $('#FormCancellation').attr('action', '${pageContext.request.contextPath}/MainController?action=DeleteJobPost&jobPostID=' + id + '&userID=' + userID);
             }
         </script>
-        
+        <script>
+            $(document).ready(function() {
+            $('#statusFilter').on('change', function() {
+            $('#paintings').data('list').filter(this.value);
+            });
+                    });
+        </script>
 
         <script>CKEDITOR.replace('message');</script>
 
