@@ -36,9 +36,9 @@ public class DBUtils {
 //    }
 
 
-    private final String dbName = "FuJobDB";
+    private final String dbName = "FuJobDB_1";
     private final String userID = "sa";
-    private final String password = "Hngiabao2211";
+    private final String password = "1472580369";
     private DBUtils() {
         config.setMaximumPoolSize(10);
         config.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
