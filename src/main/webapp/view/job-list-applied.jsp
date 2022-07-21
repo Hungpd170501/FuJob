@@ -25,7 +25,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="text-center text-white">
-                                <h4 class="text-uppercase title mb-4">Projects List view</h4>
+                                <h4 class="text-uppercase title mb-4">Projects Applied</h4>
 
                             </div>
                         </div>
@@ -141,9 +141,7 @@
                                         <select class="form-control resume" id="statusFilter" data-filter="false">
                                             <option value="" selected>All</option>
                                             <option value="Waiting">Waiting</option>
-                                            <option value="Accepted">Accepted</option>
-                                            <option value="Rejected">Rejected</option>
-                                            <option value="This project has been deleted">This project has been deleted</option>
+                                            <option value="Application Closed">Application Closed</option>
                                         </select>
                                     </div>
                                 </div>
@@ -192,26 +190,14 @@
                                                             <% if (jobOrder.getJobApplicationStatus() == 1) {
                                                             %>
                                                             <br>
-                                                            <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: #C0C000"></i> 
+                                                            <i class="mdi mdi-timelapse mt-4" style="font-size: 25px; color: #C0C000"></i> 
                                                             <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: #C0C000">Waiting</i>
-                                                            <%
-                                                            } else if (jobOrder.getJobApplicationStatus() == 3) {
-                                                            %>
-                                                            <br>
-                                                            <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
-                                                            <i class="painting-author" class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Accepted</i>
-                                                            <%
-                                                            } else if (jobOrder.getJobApplicationStatus() == 2) {
-                                                            %>
-                                                            <br>
-                                                            <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: red"></i> 
-                                                            <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">This project has been deleted</i>
                                                             <%
                                                             } else if (jobOrder.getJobApplicationStatus() == 5) {
                                                             %>
                                                             <br>
-                                                            <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: red"></i> 
-                                                            <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Rejected</i>
+                                                            <i class="mdi mdi-close-box mt-4" style="font-size: 25px; color: red"></i> 
+                                                            <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Application Closed</i>
                                                             <%
                                                                 }
                                                             %>
@@ -262,9 +248,6 @@
                                                     </div>
                                                     <br>
                                                     <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
-                                                    </div>
-                                                    <div class="mt-3">
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" type="button" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>
 <!--                                                    <div class="mt-3">
@@ -273,25 +256,12 @@
                                                         </button>
                                                     </div>-->
                                                     <div class="mt-3">
-                                                        <a onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)" href="#" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#formUnapply" style="width: 50%">Unapply</a>
-                                                    </div>
-                                                    <%
-                                                    } else if (jobOrder.getJobApplicationStatus() == 3) {
-                                                    %>
-                                                    <br>
-                                                    <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
+                                                        <a onclick="getJobOrderID(<%= jobOrder.getJobApplicationID()%>, <%= jobOrder.getResumeID()%>)" href="#" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#formUnapply" style="width: 50%">Retract</a>
                                                     </div>
                                                     <%
                                                     } else if (jobOrder.getJobApplicationStatus() == 5) {
                                                     %>
                                                     <br>
-                                                    <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
-                                                    </div>
                                                     <div class="mt-3">
                                                         <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
                                                     </div>

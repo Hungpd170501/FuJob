@@ -89,7 +89,8 @@
                         <li><a href="${pageContext.request.contextPath}/MainController?action=SearchlistJobOrder&userID=<%= loginUser.getUserID()%>">Project Applied</a></li>   
                         <!--<li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Project Posted</a></li>-->
                         <!--<li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingPosted&userID=${sessionScope.LOGIN_USER.userID}">Project Posted (In Progress)</a></li>-->
-                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingApplied&userID=${sessionScope.LOGIN_USER.userID}">Project Applied (In Progress)</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingApplied&userID=${sessionScope.LOGIN_USER.userID}">Current Work</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ViewStPastWork&userID=${sessionScope.LOGIN_USER.userID}">Past Work</a></li>
 
                         <% 
                         } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {

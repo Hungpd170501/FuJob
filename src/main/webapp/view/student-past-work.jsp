@@ -12,7 +12,7 @@
 <html lang="en" class="no-js">
     <head>
         <jsp:include page="./include/header.jsp">
-            <jsp:param name="title" value="FuJob | Current Work"/>
+            <jsp:param name="title" value="FuJob | Past Work"/>
         </jsp:include>
         <style>
             .checked {
@@ -31,15 +31,13 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="text-center text-white">
-                                <h4 class="text-uppercase title mb-4">Current Work</h4>
+                                <h4 class="text-uppercase title mb-4">Past Work</h4>
 
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- end home -->
-            <!--SEARCH-->
             <div class="container">
                 <div class="home-form-position">
                     <div class="row justify-content-center">
@@ -50,7 +48,7 @@
                     </div>
                 </div>
             </div>
-
+            <!-- end home -->
             <!-- JOB LIST START -->
             <section class="section pt-0">
                 <div class="container">
@@ -70,7 +68,7 @@
                     %>
                     <div class="col-12">
                         <div class="section-title text-center mb-4 pb-2">
-                            <h4 class="title title-line pb-5">All Current Works</h4>
+                            <h4 class="title title-line pb-5">All Past Works</h4>
                         </div>
                     </div>
                 </div>
@@ -87,9 +85,8 @@
                                     <div class="cell-md-4 mt-4 float-right">
                                         <select class="form-control resume" id="statusFilter" data-filter="false">
                                             <option value="" selected>All</option>
-                                            <option value="In Progress">In Progress</option>
-                                            <option value="Pending Review">Pending Review</option>
-                                            <option value="Submission Rejected<">Submission Rejected</option>
+                                            <option value="Complete">Complete</option>
+                                            <option value="7">Incomplete</option>
                                         </select>
                                     </div>
                                 </div>
@@ -109,7 +106,7 @@
                                 data-items-steps="all, 3, 10"
                                 data-show-list-info="true"
                                 >
-                                <% List<JobApplication> listJobApplication = (List<JobApplication>) request.getAttribute("LIST_ALLJOBONGOING_APPLIED");
+                                <% List<JobApplication> listJobApplication = (List<JobApplication>) request.getAttribute("LIST_ST_PAST_WORK");
                                     if (listJobApplication.isEmpty()) {
 
                                         String message = (String) request.getAttribute("MESSAGE");
@@ -136,23 +133,18 @@
                                                     <div class="col-lg-6 col-md-9">
                                                         <div class="job-list-desc">
                                                             <h4 class="mb-2"><a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>" class="text-dark"><%= jobOrder.getJob().getJobTitle()%>
-                                                                    <% if (jobOrder.getJobApplicationStatus() == 3) {
+                                                                    <% if (jobOrder.getJobApplicationStatus() == 6) {
                                                                     %>
                                                                     <br>
                                                                     <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
-                                                                    <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">In Progress</i>
+                                                                    <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Complete</i>
                                                                     <%
-                                                                    } else if (jobOrder.getJobApplicationStatus() == 8) {
-                                                                    %>
-                                                                    <br>
-                                                                    <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: orange"></i> 
-                                                                    <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: orange">Pending Review</i>
-                                                                    <%
-                                                                    } else if (jobOrder.getJobApplicationStatus() == 9) {
+                                                                    } else if (jobOrder.getJobApplicationStatus() == 7) {
                                                                     %>
                                                                     <br>
                                                                     <i class="mdi mdi-close-box mt-4" style="font-size: 25px; color: red"></i> 
-                                                                    <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Submission Rejected</i>
+                                                                    <i style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Incomplete</i>
+                                                                    <i class="painting-author" style="display: none">7</i>
                                                                     <%
                                                                         }
                                                                     %>
@@ -189,30 +181,8 @@
                                                     </div>
                                                     <div class="col-lg-3 col-md-3">
                                                         <div class="job-list-button-sm text-right">
-                                                            <% if (jobOrder.getJobApplicationStatus() == 3) {
-                                                            %>
-                                                            <br>
-                                                            <div class="mt-3">
-                                                                <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
-                                                            </div>
-                                                            <div class="mt-3">
-                                                                <button onclick="getJobApplicatonID(<%= jobOrder.getJobApplicationID()%>)" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#SubmitProject" style="width: 50%">Submit Project</button>
-                                                            </div>
                                                             <%
-                                                            } else if (jobOrder.getJobApplicationStatus() == 9) {
-                                                            %>
-                                                            <br>
-                                                            <div class="mt-3">
-                                                                <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
-                                                            </div>
-                                                            <div class="mt-3">
-                                                                <button onclick="editJob('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit()%>', '<%= jobOrder.getJobApplicationID() %>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#EditSubmission" style="width: 50%">Edit Submission</button>
-                                                            </div>
-                                                            <div class="mt-3">
-                                                                <button onclick="getFeedBack('<%= jobOrder.getEvaluateCompletion().getRatingValue()%>', '<%= jobOrder.getEvaluateCompletion().getContent()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#viewFeedBack" style="width: 50%">View Feedback</button>
-                                                            </div>
-                                                            <%
-                                                            } else if (jobOrder.getJobApplicationStatus() == 8) {
+                                                                if (jobOrder.getJobApplicationStatus() == 6) {
                                                             %>
                                                             <br>
                                                             <div class="mt-3">
@@ -220,6 +190,22 @@
                                                             </div>
                                                             <div class="mt-3">
                                                                 <button onclick="getSubmitJob('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewSubmission" style="width: 50%">View Submission</button>
+                                                            </div>
+                                                            <div class="mt-3">
+                                                                <button onclick="getFeedBack('<%= jobOrder.getEvaluateCompletion().getRatingValue()%>', '<%= jobOrder.getEvaluateCompletion().getContent()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#viewFeedBack" style="width: 50%">View Feedback</button>
+                                                            </div>
+                                                            <%
+                                                            } else if (jobOrder.getJobApplicationStatus() == 7) {
+                                                            %>
+                                                            <br>
+                                                            <div class="mt-3">
+                                                                <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewformApplication" style="width: 50%">View Application Form</button>
+                                                            </div>
+                                                            <div class="mt-3">
+                                                                <button onclick="getSubmitJob('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#ViewSubmission" style="width: 50%">View Submission</button>
+                                                            </div>
+                                                            <div class="mt-3">
+                                                                <button onclick="getFeedBack('<%= jobOrder.getEvaluateCompletion().getRatingValue()%>', '<%= jobOrder.getEvaluateCompletion().getContent()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#viewFeedBack" style="width: 50%">View Feedback</button>
                                                             </div>
                                                             <%
                                                                 }
@@ -295,7 +281,7 @@
                                                         </div>
                                                         <div class="form-group text-dark">
                                                             <label>Project File</label>
-                                                            <input type="file" class="form-control" name="fileProject" required="">
+                                                            <input type="file" class="form-control" name="fileProject">
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer border-top-0 d-flex justify-content-center">
@@ -362,39 +348,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal fade" id="EditSubmission" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header border-bottom-0">
-                                                    <h5 class="modal-title text-primary" id="exampleModalLabel">Edit Project</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <form method="post" action="${pageContext.request.contextPath}/MainController" enctype="multipart/form-data">
-                                                    <div class="modal-body">
-                                                        <div class="form-group text-dark">
-                                                            <label>Message<span class="text-danger">*</span></label>
-                                                            <textarea class="form-control" id="messageEditSubmit" required="" name="messageEditSubmit" placeholder="Message for employer"></textarea>
-                                                        </div>
-                                                        <div class="col-6 form-group text-dark">
-                                                            <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="fileEditProject" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> Submitted file </p></a>
-                                                        </div>
-                                                        <div class="form-group text-dark">
-                                                            <label>Upload new File</label>
-                                                            <input type="file" class="form-control" name="fileEditProject" required="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer border-top-0 d-flex justify-content-center">
-                                                        <input type="submit" class="btn btn-primary" value="Send">
-                                                        <input type="hidden" class="btn btn-primary" name="action" value="EditSubmission">
-                                                    </div>
-                                                    <input type="hidden" id="jobApplicationIDEdit" name="jobApplicationID" value="">
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>                
+                                    </div> 
                                 </li> 
                                 <%
                                             }
@@ -525,13 +479,6 @@
                         div[i].style.display = "none";
                     }
                 }
-            }
-        </script>
-        <script>
-            function editJob(jobFile, messageSubmit, jobApplicationID) {
-                document.getElementById('jobApplicationIDEdit').value = jobApplicationID;
-                document.getElementById('fileEditProject').setAttribute('href', jobFile);
-                document.getElementById('messageEditSubmit').textContent = messageSubmit;
             }
         </script>
     </body>
