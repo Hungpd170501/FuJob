@@ -111,8 +111,9 @@
                                     <div class="cell-md-4 mt-4 float-right">
                                         <select class="form-control resume" id="statusFilter" data-filter="false">
                                             <option value="" selected>All</option>
-                                            <option value="In Progress">In Progress</option>
-                                            <option value="Need To Review">Need To Review</option>
+                                            <option value="Complete">Complete</option>
+                                            <option value="7">Incomplete</option>
+                                            <option value="Expired">Expired</option>
                                         </select>
                                     </div>
                                 </div>
@@ -162,19 +163,20 @@
                                                             <h4 class="mb-2"><a
                                                                     href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= jobOrder.getJob().getJobID()%>"
                                                                     class="text-dark"><%= jobOrder.getJob().getJobTitle()%>
-                                                                    <% if (jobOrder.getJob().getJobStatus() == 3) {
+                                                                    <% if (jobOrder.getJob().getJobStatus() == 5) {
                                                                     %>
                                                                     <br>
                                                                     <i class="mdi mdi-bookmark-check mt-4"
                                                                        style="font-size: 25px; color: green"></i>
-                                                                    <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">In Progress</i>
+                                                                    <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Complete</i>
                                                                     <%
-                                                                    } else if (jobOrder.getJob().getJobStatus() == 8) {
+                                                                    } else if (jobOrder.getJob().getJobStatus() == 6) {
                                                                     %>
                                                                     <br>
                                                                     <i class="mdi mdi-bookmark-check mt-4"
-                                                                       style="font-size: 25px; color: orange"></i>
-                                                                    <i  class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: orange">Need To Review</i>
+                                                                       style="font-size: 25px; color: red"></i>
+                                                                    <i  style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Incomplete</i>
+                                                                    <i class="painting-author" style="display: none">7</i>
                                                                     <%
                                                                         }
                                                                     %>
@@ -215,7 +217,7 @@
                                                     </div>
                                                     <div class="col-lg-4 col-md-3">
                                                         <div class="job-list-button-sm text-right">
-                                                            <% if (jobOrder.getJob().getJobStatus() == 3) {
+                                                            <% if (jobOrder.getJob().getJobStatus() == 5) {
                                                             %>
                                                             <br>
                                                             <div class="candidates-listing-btn mt-4">
@@ -234,11 +236,11 @@
                                                                 </button>
                                                             </div>   
                                                             <%
-                                                            } else if (jobOrder.getJob().getJobStatus() == 8) {
+                                                            } else if (jobOrder.getJob().getJobStatus() == 6) {
                                                             %>
 
                                                             <br>
-
+                                                            
                                                             <div class="candidates-listing-btn mt-4">
                                                                 <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&studentID=<%= jobOrder.getResume().getUserID()%>" class="btn btn-primary-outline btn-sm " style="width: 50%">Student Profile</a>
                                                             </div>
@@ -251,7 +253,7 @@
                                                             </div>
 
                                                             <div class="mt-3">
-                                                                <button onclick="getSubmitProductjobFile('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit()%>','<%= jobOrder.getJobApplicationID()%>','<%= jobOrder.getJob().getJobID()%>','<%= jobOrder.getJob().getUserID()%>')"
+                                                                <button onclick="getSubmitProductjobFile('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit()%>')"
                                                                         type="button" class="btn btn-sm btn-primary-outline"
                                                                         data-toggle="modal" data-target="#ViewProductSubmissionForm"
                                                                         style="width: 50%">View Submission
@@ -262,7 +264,7 @@
                                                                     End Project
                                                                 </button>
                                                             </div> 
-
+                                                            
 
                                                             <%
                                                                 }
@@ -323,23 +325,6 @@
                                                     <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="msgSubmit"></p></div>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                <input type="hidden" name="action" value="DeleteJobBecauseChangeRequirement">
-                                                <input type="hidden" id="jobPostID_FromEndJob" name="jobPostID" value="">
-                                                <input type="hidden" id="userID_FromEndJob" name="userID" value="">
-                                                <input type="hidden" id="jobApplicationID_FromEndJob" name="jobApplicationID" value="">
-                                                <button onclick="setZIndex()" id="YesShowForm1" type="button" class="btn btn-primary" 
-                                                        class="close" data-dismiss="modal" aria-label="Close"
-                                                        data-toggle="modal" data-target="#confirmAcceptaction" " >
-                                                    Accept 
-                                                </button>
-                                                <button onclick="setZIndex()" id="YesShowForm2" type="button" class="btn btn-primary-red" 
-                                                        class="close" data-dismiss="modal" aria-label="Close"
-                                                        data-toggle="modal" data-target="#confirmReject" " >
-                                                    Reject
-                                                </button>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -398,47 +383,6 @@
                                                     <input type="hidden" id="unCompleteJob_jobApplicationID" name="jobApplicationID" value="">
                                                     <input type="hidden" id="unCompleteJob_resumeID" name="resumeID" value="">
                                                     <input type="hidden" name="action" value="UncompteleJob">
-                                                    <input type="submit" value="Yes" class="btn btn-primary">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <form method="post" action="${pageContext.request.contextPath}/MainController" >
-                                    <div class="modal fade" id="confirmReject" tabindex="-1" role="dialog"
-                                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title text-primary" id="exampleModalLongTitle">This Project Is Not
-                                                        Complete?</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="container text-dark">
-                                                        <div class="row d-flex justify-content-center">
-                                                            <div class="d-flex flex-start w-100">
-                                                                <!-- <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp" alt="avatar" width="65" height="65" /> -->
-                                                                <div class="w-100">
-                                                                    <div class="form-outline">
-                                                                        <label class="form-label" for="textAreaExample">Could you tell us what when wrong?</label>
-                                                                        <textarea class="form-control" id="textAreaExample"
-                                                                                  name="message"
-                                                                                  placeholder=""></textarea>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                                    <input type="hidden" id="rejectJob_jobID" name="jobID" value="">
-                                                    <input type="hidden" id="rejectJob_jobApplicationID" name="jobApplicationID" value="">
-                                                    <input type="hidden" id="rejectJob_userID" name="userID" value="">
-                                                    <input type="hidden" name="action" value="RejectSubmit">
                                                     <input type="submit" value="Yes" class="btn btn-primary">
                                                 </div>
                                             </div>
@@ -542,17 +486,17 @@
                                                     <input type="hidden" id="jobPostID_FromEndJob" name="jobPostID" value="">
                                                     <input type="hidden" id="userID_FromEndJob" name="userID" value="">
                                                     <input type="hidden" id="jobApplicationID_FromEndJob" name="jobApplicationID" value="">
-                                                    <input id="YesDeleteJob" type="submit" value="End Project" class="btn btn-primary">
+                                                    <input id="YesDeleteJob" type="submit" value="Yes" class="btn btn-primary">
 
                                                     <button onclick="setZIndex()" id="YesShowForm1" type="button" class="btn btn-primary" 
                                                             class="close" data-dismiss="modal" aria-label="Close"
                                                             data-toggle="modal" data-target="#confirmCancellation" style="display: none" >
-                                                        End Project
+                                                        Test
                                                     </button>
                                                     <button onclick="setZIndex()" id="YesShowForm2" type="button" class="btn btn-primary" 
                                                             class="close" data-dismiss="modal" aria-label="Close"
                                                             data-toggle="modal" data-target="#confirmAcceptaction   " style="display: none" >
-                                                        End Project
+                                                        Test2
                                                     </button>
 
                                                 </div>
@@ -689,12 +633,9 @@
                 $("#completeJob_jobID").val(jobID);
                 $("#completeJob_resumeID").val(resumeID);
             }
-            function getSubmitProductjobFile(jobFile, messageSubmit,jobApplyId, jobID, userID) {
+            function getSubmitProductjobFile(jobFile, messageSubmit) {
                 document.getElementById('product').setAttribute('href', jobFile);
                 $("#msgSubmit").html(messageSubmit);
-                $("#rejectJob_jobApplicationID").val(jobApplyId);
-                $("#rejectJob_jobID").val(jobID);
-                $("#rejectJob_userID").val(userID);
             }
         </script>
         <script src="${pageContext.request.contextPath}/asset/ckeditor/ckeditor.js"></script>

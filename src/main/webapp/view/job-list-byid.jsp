@@ -145,14 +145,14 @@
                                     <div class="float-left">
                                         <h5 class="text-dark mb-0 pt-2 f-18">Showing result</h5>
                                     </div>
-                                    <div class="cell-md-4 mt-4 float-right">
+<!--                                    <div class="cell-md-4 mt-4 float-right">
                                         <select class="form-control resume" id="statusFilter" data-filter="false">
                                             <option value="" selected>All</option>
                                             <option value="Published">Published</option>
                                             <option value="Handed Over">Handed Over</option>
                                             <option value="Posting Expired">Posting Expired</option>
                                         </select>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                         </div>
@@ -203,19 +203,7 @@
                                                             %>
                                                             <br>
                                                             <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
-                                                            <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Published</i>
-                                                            <%
-                                                            } else if (job.getJobStatus() == 3) {
-                                                            %>
-                                                            <br>
-                                                            <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: green"></i> 
-                                                            <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Handed Over</i>
-                                                            <%
-                                                            } else if (job.getJobStatus() == 4) {
-                                                            %>
-                                                            <br>
-                                                            <i class="mdi mdi-bookmark-check mt-4" style="font-size: 25px; color: red"></i> 
-                                                            <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: red">Posting Expired</i>
+                                                            <i class="painting-author" style="font-style: normal;font-size: 20px ; font-weight: bold; color: green">Open</i>
                                                             <%
                                                                 }
                                                             %>
@@ -271,32 +259,12 @@
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <a onclick="getJobPostID(<%=job.getJobID()%>, <%= job.getUserID()%>)" href="#" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#formCancel" style="width: 50%">Cancel</a>
+                                                        <a onclick="getJobPostID(<%=job.getJobID()%>, <%= job.getUserID()%>)" href="#" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#formCancel" style="width: 50%">Delete</a>
                                                     </div>
                                                     
                                                     <div class="mt-3">
 
                                                         <a href="${pageContext.request.contextPath}/MainController?action=SearchCandidateOfJob&JobIDCandidate=<%= job.getJobID()%>" class="btn btn-sm btn-primary-outline"style="width: 50%">List candidate</a>
-                                                    </div>
-                                                    <%
-                                                    } else if (job.getJobStatus() == 3) {
-                                                    %>
-                                                    <br>
-                                                    <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingPosted&userID=<%= job.getUserID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Progress</a>
-                                                    </div>
-                                                    <%
-                                                    } else if (job.getJobStatus() == 4) {
-                                                    %>
-                                                    <br>
-                                                    <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">View Detail</a>
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <a href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=<%= job.getJobID()%>" class="btn btn-sm btn-primary-outline" style="width: 50%">Dang lai</a>
                                                     </div>
                                                     <%
                                                         }
