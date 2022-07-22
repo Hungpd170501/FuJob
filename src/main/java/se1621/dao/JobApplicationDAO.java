@@ -60,7 +60,7 @@ public class JobApplicationDAO {
             + "									GROUP BY jobID) AS jobApp "
             + "									on jo.jobID = jobApp.jobID) "
             + "                                    WHERE jo.resumeID= ? and jo.jobApplicationStatus IN (1, 5) ORDER BY jo.lastModifiedDate DESC";
-    private static final String GETALLJOBACCEPTED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.userID, "
+    private static final String GETALLJOBACCEPTED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.userID, jo.reasonRejectSubmit,"
             + "								j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
             + "								jo.createdDate, c.categoryName, c.img, com.companyName, "
             + "                                j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description, "
@@ -514,6 +514,7 @@ public class JobApplicationDAO {
                     String messageSubmit = rs.getString("messageSubmit");
                     String jobFile = rs.getString("jobFile");
                     int submitJobStatus = rs.getInt("submitJobStatus");
+                    String reasonRejectSubmit = rs.getString("reasonRejectSubmit");
                     PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder().jobID(jobID)
                             .userID(hrID)
@@ -545,6 +546,7 @@ public class JobApplicationDAO {
                             .cvFile(cvFile)
                             .lastModifiedDate(createdDate)
                             .jobApplicationStatus(jobAppStatus)
+                            .reasonRejectionSubmmit(reasonRejectSubmit)
                             .build();
                     list.add(listJobOrder);
                 }

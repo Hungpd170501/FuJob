@@ -209,7 +209,7 @@
                                                                 <button onclick="editJob('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit()%>', '<%= jobOrder.getJobApplicationID() %>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#EditSubmission" style="width: 50%">Edit Submission</button>
                                                             </div>
                                                             <div class="mt-3">
-                                                                <button onclick="getFeedBack('<%= jobOrder.getEvaluateCompletion().getRatingValue()%>', '<%= jobOrder.getEvaluateCompletion().getContent()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#viewFeedBack" style="width: 50%">View Feedback</button>
+                                                                <button onclick="getFeedBack('<%= jobOrder.getReasonRejectionSubmmit() %>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#viewFeedBack" style="width: 50%">View Feedback</button>
                                                             </div>
                                                             <%
                                                             } else if (jobOrder.getJobApplicationStatus() == 8) {
@@ -347,10 +347,6 @@
                                                             <div class="d-flex flex-start w-100">
                                                                 <!-- <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp" alt="avatar" width="65" height="65" /> -->
                                                                 <div class="w-100">
-                                                                    <h5 class = "d-inline-block">Evaluation:</h5>
-                                                                    <div id="star" class="rating stars d-inline-block">
-
-                                                                    </div>
                                                                     <div class="form-group text-dark">
                                                                         <label style="font-size: 16px">Message: </label>
                                                                         <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="contentFeedback"></p></div>
@@ -487,16 +483,8 @@
             }
         </script>
         <script>
-            function getFeedBack(rate, content) {
-                $("#contentFeedback").html(content);
-                var x = '';
-                for (let i = 1; i <= rate; i++) {
-                    x += '<span class="fa fa-star checked"></span>';
-                }
-                for (let i = rate; i < 5; i++) {
-                    x += '<span class="fa fa-star"></span>';
-                }
-                $('#star').html(x);
+            function getFeedBack(reason) {
+                $("#contentFeedback").html(reason);
             }
         </script>
         <script>
