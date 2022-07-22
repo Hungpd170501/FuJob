@@ -251,7 +251,7 @@
                                                             </div>
 
                                                             <div class="mt-3">
-                                                                <button onclick="getSubmitProductjobFile('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit()%>','<%= jobOrder.getJobApplicationID()%>','<%= jobOrder.getJob().getJobID()%>','<%= jobOrder.getJob().getUserID()%>')"
+                                                                <button onclick="getSubmitProductjobFile('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit()%>', '<%= jobOrder.getJobApplicationID()%>', '<%= jobOrder.getJob().getJobID()%>', '<%= jobOrder.getJob().getUserID()%>','<%= jobOrder.getResumeID()%>')"
                                                                         type="button" class="btn btn-sm btn-primary-outline"
                                                                         data-toggle="modal" data-target="#ViewProductSubmissionForm"
                                                                         style="width: 50%">View Submission
@@ -544,14 +544,14 @@
                                                     <input type="hidden" id="jobApplicationID_FromEndJob" name="jobApplicationID" value="">
                                                     <input id="YesDeleteJob" type="submit" value="End Project" class="btn btn-primary">
 
-                                                    <button onclick="setZIndex()" id="YesShowForm1" type="button" class="btn btn-primary" 
+                                                    <button onclick="setZIndex()" id="YesShowForm12" type="button" class="btn btn-primary" 
                                                             class="close" data-dismiss="modal" aria-label="Close"
                                                             data-toggle="modal" data-target="#confirmCancellation" style="display: none" >
                                                         End Project
                                                     </button>
-                                                    <button onclick="setZIndex()" id="YesShowForm2" type="button" class="btn btn-primary" 
+                                                    <button onclick="setZIndex()" id="YesShowForm13" type="button" class="btn btn-primary" 
                                                             class="close" data-dismiss="modal" aria-label="Close"
-                                                            data-toggle="modal" data-target="#confirmAcceptaction   " style="display: none" >
+                                                            data-toggle="modal" data-target="#confirmAcceptaction" style="display: none" >
                                                         End Project
                                                     </button>
 
@@ -689,12 +689,15 @@
                 $("#completeJob_jobID").val(jobID);
                 $("#completeJob_resumeID").val(resumeID);
             }
-            function getSubmitProductjobFile(jobFile, messageSubmit,jobApplyId, jobID, userID) {
+            function getSubmitProductjobFile(jobFile, messageSubmit, jobApplyId, jobID, userID,resumeID) {
                 document.getElementById('product').setAttribute('href', jobFile);
                 $("#msgSubmit").html(messageSubmit);
                 $("#rejectJob_jobApplicationID").val(jobApplyId);
                 $("#rejectJob_jobID").val(jobID);
                 $("#rejectJob_userID").val(userID);
+                $("#completeJob_jobApplicationID").val(jobApplyId);
+                $("#completeJob_jobID").val(jobID);
+                $("#completeJob_resumeID").val(resumeID);
             }
         </script>
         <script src="${pageContext.request.contextPath}/asset/ckeditor/ckeditor.js"></script>
@@ -711,16 +714,16 @@
                 var chooseOption = $('input[name="chooseOption"]:checked').val();
                 if (chooseOption == 'DeleteJob') {
                     document.getElementById("YesDeleteJob").type = "submit";
-                    document.getElementById("YesShowForm1").style = "display: none";
-                    document.getElementById("YesShowForm2").style = "display: none";
+                    document.getElementById("YesShowForm12").style.display = "none";
+                    document.getElementById("YesShowForm13").style.display = "none";
                 } else if (chooseOption == 'FreelancerInComplete') {
                     document.getElementById("YesDeleteJob").type = "hidden";
-                    document.getElementById("YesShowForm1").style = "";
-                    document.getElementById("YesShowForm2").style = "display: none";
+                    document.getElementById("YesShowForm12").style.display = "block";
+                    document.getElementById("YesShowForm13").style.display = "none";
                 } else {
                     document.getElementById("YesDeleteJob").type = "hidden";
-                    document.getElementById("YesShowForm2").style = "";
-                    document.getElementById("YesShowForm1").style = "display: none";
+                    document.getElementById("YesShowForm13").style.display = "inline";
+                    document.getElementById("YesShowForm12").style.display = "none";
                 }
             }
         </script>

@@ -89,7 +89,7 @@ public class JobApplicationDAO {
             + "                                                                                            left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID) "
             + "                                                                                             left join tblSubmitJob sb on sb.jobApplicationID = jo.jobApplicationID) "
             + "																							 left join tblResumes resumeUs on resumeUs.resumeID = jo.resumeID ) "
-            + "                                                                                               WHERE j.userID = ? and j.jobStatus IN (3,8) AND jo.jobApplicationStatus IN (3,8)"
+            + "                                                                                               WHERE j.userID = ? and j.jobStatus IN (3,8) AND jo.jobApplicationStatus IN (3,8,9)"
             + "                                                                                            ORDER BY jo.lastModifiedDate DESC ";
     private static final String GETALLJOBPASTPOSTED = " SELECT jo.jobApplicationID,jo.resumeID,resumeUs.userID as userIDofResume,jo.jobApplicationStatus, j.jobID,j.userID,j.jobStatus, j.jobTitle, j.jobCategoryID, j.minBudget, j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message, "
             + "                                                                                               jo.createdDate, c.categoryName, c.img, com.companyName, "
