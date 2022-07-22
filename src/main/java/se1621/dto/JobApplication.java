@@ -27,5 +27,6 @@ public class JobApplication {
     private Date lastModifiedDate;
     private int jobApplicationStatus;
     private String reasonRejection;
+    private String reasonRejectionSubmmit;
     EvaluateCompletion evaluateCompletion;
 }
