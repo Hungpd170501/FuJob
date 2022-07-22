@@ -69,6 +69,7 @@ public class ViewStudentPastWorkController extends HttpServlet {
             } else {
                 request.setAttribute("LIST_ST_PAST_WORK", listPastWork);
                 request.setAttribute("MESSAGE", "NO WORK PAST TO DISPLAY!");
+                url = SUCCESS;
             }
         } catch (Exception e) {
             log("Error at View all job Controller" + e.toString());
