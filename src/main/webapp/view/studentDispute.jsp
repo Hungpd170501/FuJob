@@ -153,7 +153,7 @@
                                                         %>
                                                         <br>
                                                         <div class="mt-3">
-                                                            <button onclick="" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#sendEvidence" style="width: 50%">Send Evidence</button>
+                                                            <button onclick="getDisputeI(<%= dispute.getDisputeID()%>)" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#sendEvidence" style="width: 50%">Send Evidence</button>
                                                         </div>
                                                         <%
                                                         } else {
@@ -210,22 +210,22 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form method="post" action="${pageContext.request.contextPath}/MainController">
+                                            <form method="post" action="${pageContext.request.contextPath}/MainController" enctype="multipart/form-data">
                                                 <div class="modal-body">
                                                     <div class="form-group text-dark ckarea">
                                                         <label>Tell Your Story<span class="text-danger">*</span></label>
-                                                        <textarea id="messageCancelDispute" class="form-control" name="messageCancelDispute" placeholder="Message for employer" required ></textarea>
+                                                        <textarea id="userStory" class="form-control" name="userStory" placeholder="Tell us your story..." required ></textarea>
                                                     </div>
                                                     <div class="form-group text-dark">
                                                         <label>Evidence File</label>
-                                                        <input type="file" class="form-control" name="fileProject" required="">
+                                                        <input type="file" class="form-control" name="fileEvidence" required="">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer border-top-0 d-flex justify-content-center">
                                                     <input type="submit" class="btn btn-primary" value="Send">
                                                     <input type="hidden" name="action" value="SendEvidence">
                                                 </div>
-                                                <input type="hidden" id="disputeID" name="disputeID" value="">
+                                                <input type="hidden" id="disputeI" name="disputeID" value="">
                                             </form>
                                         </div>
                                     </div>
@@ -275,9 +275,15 @@
         <script src="${pageContext.request.contextPath}/asset/js/metro.min.js"></script>
         <script src="${pageContext.request.contextPath}/asset/ckeditor/ckeditor.js"></script>
         <script>CKEDITOR.replace('messageCancelDispute');</script>
+        <script>CKEDITOR.replace('userStory');</script>
         <script>
             function getDisputeID(disputeID) {
                 $('#disputeID').val(disputeID);
+            }
+        </script>
+        <script>
+            function getDisputeI(disputeID) {
+                $('#disputeI').val(disputeID);
             }
         </script>
     </body>
