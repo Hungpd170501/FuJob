@@ -91,6 +91,7 @@
                         <!--<li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingPosted&userID=${sessionScope.LOGIN_USER.userID}">Project Posted (In Progress)</a></li>-->
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingApplied&userID=${sessionScope.LOGIN_USER.userID}">Current Work</a></li>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ViewStPastWork&userID=${sessionScope.LOGIN_USER.userID}">Past Work</a></li>
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ViewJobStDispute&userID=${sessionScope.LOGIN_USER.userID}">Dispute</a></li>
 
                         <% 
                         } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {

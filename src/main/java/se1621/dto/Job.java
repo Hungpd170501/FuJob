@@ -30,4 +30,5 @@ public class Job {
     private int jobStatus;
     private PayMentMethod payMentMethod;
     private int bids;
+    private int disputeStatus;
 }

@@ -87,7 +87,7 @@ public class JobDAO {
     private ResultSet rs;
 
     private static final String UPDATE_JOB = "UPDATE tblJobs SET userID=?, jobTitle=?, jobCategoryID=?, address=?, paymentMethodID=?, email=?, expiriedDate=?, phone=?, minBudget=?, maxBudget=? , description=? WHERE jobID=?";
-
+    private final static String UPDATE_DISPUTE_STATUS = "UPDATE tblJobs SET disputeStatus = ? WHERE jobID = ?";
     // top recent job in index.jsp
     public List<Job> getRecentJobPosted() throws SQLException {
         try {
@@ -893,6 +893,29 @@ public class JobDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(UPDATE_JOB_STATUS);
                 preStm.setInt(1, jobStatus);
+                preStm.setInt(2, jobID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    public boolean updateDisputeStatus(int disputeStatus, int jobID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UPDATE_DISPUTE_STATUS);
+                preStm.setInt(1, disputeStatus);
                 preStm.setInt(2, jobID);
                 check = preStm.executeUpdate() > 0 ? true : false;
             }

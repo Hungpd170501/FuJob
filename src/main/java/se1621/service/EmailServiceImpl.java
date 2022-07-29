@@ -46,4 +46,153 @@ public class EmailServiceImpl implements EmailService {
             emailUtils.sendEmail(host, port, user, pass, repliient.getEmail(), subject, content);
         } catch (Exception e) {};
     }
+
+    @Override
+    public void sendEmail(ServletContext context, User recipient, String nameReporter, String subject, String messageDispute, String jobTitle) {
+        String host = context.getInitParameter("host");
+        String port = context.getInitParameter("port");
+        String user = context.getInitParameter("user");
+        String pass = context.getInitParameter("pass");
+        try {
+            String content ="<center>\n" +
+"        <table style=\"max-width:570px; font-family:Arial,sans-serif; box-sizing: border-box;\">\n" +
+"            <tr>\n" +
+"            </tr>\n" +
+"            <tr>\n" +
+"                <td style=\"word-break: break-word; text-align:left\\\">\n" +
+"                    <h1 style=\"color: #2f3133; font-size: 19px; font-weight: bold;\"> Hi " + recipient.getFullName() +",\n" +
+"                    </h1>\n" +
+"                </td>\n" +
+"                \n" +
+"            </tr>\n" +
+"            <tr>\n" +
+"                <td style=\"text-align:left; font-size: 16px;\">\n" +
+"                    <p style=\"color:#74787e;line-height:1.5em;margin-top:20\">"+ nameReporter +" has a dispute with you in the following project:</p>\n" +
+"                    <p style=\"color:#ee8c03;line-height:1.5em;margin-top:20\">"+jobTitle+"</p>\n" +
+"                    <p style=\"color:#74787e;line-height:1.5em;margin-top:20\">With message: </p>\n" +
+"                    <p style=\"color:#74787e;line-height:1.5em;margin-top:20\">\""+messageDispute+"\"</p>\n" +
+"                    <p style=\"color:#74787e;line-height:1.5em;margin-top:20\">We will give you 3 days to reconcile yourself. If no consensus is reached, we will deal with the terms of the website!</p>\n" +
+"                    <p style=\"color:#74787e;line-height:1.5em;margin-top:0\"> Regards, <br> The FuJob<sup>®</sup>\n" +
+"                        Team </p>\n" +
+"                </td>\n" +
+"            </tr>\n" +
+"            <tr>\n" +
+"                <td style=\"text-align:left; font-size: 16px; ;padding:0px 35px; word-break:break-word\">\n" +
+"                    <table width=\"100%\" cellpadding=\"20\" cellspacing=\"0\">\n" +
+"                        <tbody>\n" +
+"                            <tr>\n" +
+"                                <td align=\"center\">\n" +
+"                                    <table cellpadding=\"0\" cellspacing=\"0\">\n" +
+"                                        <tbody>\n" +
+"                                            <tr style=\"font-size:0pt;line-height:0pt;text-align:left\">\n" +
+"                                                <td width=\"50\"> <a href=\"https://www.facebook.com\"\n" +
+"                                                        target=\"_blank\"> <img\n" +
+"                                                            src=\"https://ci6.googleusercontent.com/proxy/ar0u61ZlE5KcjjPLlWpOzNYiIDf6Y36MSanKxMjCvai0-BwHjGNkXysRF_gP1YqGDgHF_nMxBshl_C5TlukDKarwL0RNOnZlo5OpbKV4UUbjzXYXswxScl8=s0-d-e1-ft#https://www.worldhappiness.com/wp-content/uploads/facebook-circled.png\"\n" +
+"                                                            width=\"50\" height=\"50\" alt=\"Facebook\"> </a> </td>\n" +
+"                                                <td style=\"font-size:0pt;line-height:0pt;text-align:left\"\n" +
+"                                                    width=\"50\"> <a href=\"https://twitter.com\" target=\"_blank\">\n" +
+"                                                        <img src=\"https://ci4.googleusercontent.com/proxy/H0r_tJCPO4tH_ANsF6XU4f18QYDfcrEjfv9llRzspmeHeaITbYqeTXvSsjVPWhqyHKXmIE-B6Q4GhYY05UVMOJOoaMVcwBt1J3OA2E4touhVvlaCaLqV6w=s0-d-e1-ft#https://www.worldhappiness.com/wp-content/uploads/twitter-circled.png\"\n" +
+"                                                            width=\"50\" height=\"50\" alt=\"Twitter\"> </a> </td>\n" +
+"                                                <td style=\"font-size:0pt;line-height:0pt;text-align:left;padding:4px\"\n" +
+"                                                    width=\"44\"> <a href=\"https://www.youtube.com\" target=\"_blank\">\n" +
+"                                                        <img src=\"https://ci3.googleusercontent.com/proxy/WPIeLc6vGeHaODEcjoPxh8kW-7Xg8CRG4DLM36K_2GcrwxP0NpDXuXDBTxviwpOrcaAHJDRs3ELCBrFeXputLUvcnhIIIQI7xQPUHaSrVQ=s0-d-e1-ft#https://img.icons8.com/flat_round/64/000000/youtube-play.png\"\n" +
+"                                                            width=\"43\" height=\"43\" alt=\"Youtube\"> </a> </td>\n" +
+"                                                <td style=\"font-size:0pt;line-height:0pt;text-align:left\"\n" +
+"                                                    width=\"41\"> <a href=\"https://www.instagram.com\"\n" +
+"                                                        target=\"_blank\"> <img\n" +
+"                                                            src=\"https://ci5.googleusercontent.com/proxy/9TnPMzHVMsv52kwLnEtC7zKWG3euehio24UnVM-kYsK9fqzfZkJVPP1lTBLEDoDcZdK7BsOSbNaU8rQr1bynLkdOwPR5yDDXTGBHqr04AxDLEHnE9z9eS3k=s0-d-e1-ft#https://www.worldhappiness.com/wp-content/uploads/linkedin-circled.png\"\n" +
+"                                                            width=\"50\" height=\"50\" alt=\"Instagram\"> </a> </td>\n" +
+"                                            </tr>\n" +
+"                                        </tbody>\n" +
+"                                    </table>\n" +
+"                                </td>\n" +
+"                            </tr>\n" +
+"                        </tbody>\n" +
+"                    </table>\n" +
+"                    <p style=\"color:#bbbfc3;font-size:12px;line-height:1.5em;margin-top:0; text-align: center;\">© 2022\n" +
+"                        FuJob. All rights reserved.</p>\n" +
+"                    <p style=\"color:#bbbfc3;font-size:12px;line-height:1.5em;margin-top:0; text-align: center;\">\n" +
+"                        District 9, HCM City. </p>\n" +
+"                </td>\n" +
+"            </tr>\n" +
+"        </table>\n" +
+"    </center>";
+            EmailUtils emailUtils= new EmailUtils();
+            emailUtils.sendEmail(host, port, user, pass, recipient.getEmail(), subject, content);
+        } catch (Exception e) {};
+    }
+    
+    @Override
+    public void sendEmailCancelDispute(ServletContext context, User recipient, String nameReporter, String subject, String messageDispute, String jobTitle) {
+        String host = context.getInitParameter("host");
+        String port = context.getInitParameter("port");
+        String user = context.getInitParameter("user");
+        String pass = context.getInitParameter("pass");
+        try {
+            String content ="<center>\n" +
+"        <table style=\"max-width:570px; font-family:Arial,sans-serif; box-sizing: border-box;\">\n" +
+"            <tr>\n" +
+"            </tr>\n" +
+"            <tr>\n" +
+"                <td style=\"word-break: break-word; text-align:left\\\">\n" +
+"                    <h1 style=\"color: #2f3133; font-size: 19px; font-weight: bold;\"> Hi " + recipient.getFullName() +",\n" +
+"                    </h1>\n" +
+"                </td>\n" +
+"                \n" +
+"            </tr>\n" +
+"            <tr>\n" +
+"                <td style=\"text-align:left; font-size: 16px;\">\n" +
+"                    <p style=\"color:#74787e;line-height:1.5em;margin-top:20\">"+ nameReporter +" has canceled a dispute with you in the following project:</p>\n" +
+"                    <p style=\"color:#ee8c03;line-height:1.5em;margin-top:20\">"+jobTitle+"</p>\n" +
+"                    <p style=\"color:#74787e;line-height:1.5em;margin-top:20\">With message: </p>\n" +
+"                    <p style=\"color:#74787e;line-height:1.5em;margin-top:20\">\""+messageDispute+"\"</p>\n" +
+"                    <p style=\"color:#74787e;line-height:1.5em;margin-top:0\"> Regards, <br> The FuJob<sup>®</sup>\n" +
+"                        Team </p>\n" +
+"                </td>\n" +
+"            </tr>\n" +
+"            <tr>\n" +
+"                <td style=\"text-align:left; font-size: 16px; ;padding:0px 35px; word-break:break-word\">\n" +
+"                    <table width=\"100%\" cellpadding=\"20\" cellspacing=\"0\">\n" +
+"                        <tbody>\n" +
+"                            <tr>\n" +
+"                                <td align=\"center\">\n" +
+"                                    <table cellpadding=\"0\" cellspacing=\"0\">\n" +
+"                                        <tbody>\n" +
+"                                            <tr style=\"font-size:0pt;line-height:0pt;text-align:left\">\n" +
+"                                                <td width=\"50\"> <a href=\"https://www.facebook.com\"\n" +
+"                                                        target=\"_blank\"> <img\n" +
+"                                                            src=\"https://ci6.googleusercontent.com/proxy/ar0u61ZlE5KcjjPLlWpOzNYiIDf6Y36MSanKxMjCvai0-BwHjGNkXysRF_gP1YqGDgHF_nMxBshl_C5TlukDKarwL0RNOnZlo5OpbKV4UUbjzXYXswxScl8=s0-d-e1-ft#https://www.worldhappiness.com/wp-content/uploads/facebook-circled.png\"\n" +
+"                                                            width=\"50\" height=\"50\" alt=\"Facebook\"> </a> </td>\n" +
+"                                                <td style=\"font-size:0pt;line-height:0pt;text-align:left\"\n" +
+"                                                    width=\"50\"> <a href=\"https://twitter.com\" target=\"_blank\">\n" +
+"                                                        <img src=\"https://ci4.googleusercontent.com/proxy/H0r_tJCPO4tH_ANsF6XU4f18QYDfcrEjfv9llRzspmeHeaITbYqeTXvSsjVPWhqyHKXmIE-B6Q4GhYY05UVMOJOoaMVcwBt1J3OA2E4touhVvlaCaLqV6w=s0-d-e1-ft#https://www.worldhappiness.com/wp-content/uploads/twitter-circled.png\"\n" +
+"                                                            width=\"50\" height=\"50\" alt=\"Twitter\"> </a> </td>\n" +
+"                                                <td style=\"font-size:0pt;line-height:0pt;text-align:left;padding:4px\"\n" +
+"                                                    width=\"44\"> <a href=\"https://www.youtube.com\" target=\"_blank\">\n" +
+"                                                        <img src=\"https://ci3.googleusercontent.com/proxy/WPIeLc6vGeHaODEcjoPxh8kW-7Xg8CRG4DLM36K_2GcrwxP0NpDXuXDBTxviwpOrcaAHJDRs3ELCBrFeXputLUvcnhIIIQI7xQPUHaSrVQ=s0-d-e1-ft#https://img.icons8.com/flat_round/64/000000/youtube-play.png\"\n" +
+"                                                            width=\"43\" height=\"43\" alt=\"Youtube\"> </a> </td>\n" +
+"                                                <td style=\"font-size:0pt;line-height:0pt;text-align:left\"\n" +
+"                                                    width=\"41\"> <a href=\"https://www.instagram.com\"\n" +
+"                                                        target=\"_blank\"> <img\n" +
+"                                                            src=\"https://ci5.googleusercontent.com/proxy/9TnPMzHVMsv52kwLnEtC7zKWG3euehio24UnVM-kYsK9fqzfZkJVPP1lTBLEDoDcZdK7BsOSbNaU8rQr1bynLkdOwPR5yDDXTGBHqr04AxDLEHnE9z9eS3k=s0-d-e1-ft#https://www.worldhappiness.com/wp-content/uploads/linkedin-circled.png\"\n" +
+"                                                            width=\"50\" height=\"50\" alt=\"Instagram\"> </a> </td>\n" +
+"                                            </tr>\n" +
+"                                        </tbody>\n" +
+"                                    </table>\n" +
+"                                </td>\n" +
+"                            </tr>\n" +
+"                        </tbody>\n" +
+"                    </table>\n" +
+"                    <p style=\"color:#bbbfc3;font-size:12px;line-height:1.5em;margin-top:0; text-align: center;\">© 2022\n" +
+"                        FuJob. All rights reserved.</p>\n" +
+"                    <p style=\"color:#bbbfc3;font-size:12px;line-height:1.5em;margin-top:0; text-align: center;\">\n" +
+"                        District 9, HCM City. </p>\n" +
+"                </td>\n" +
+"            </tr>\n" +
+"        </table>\n" +
+"    </center>";
+            EmailUtils emailUtils= new EmailUtils();
+            emailUtils.sendEmail(host, port, user, pass, recipient.getEmail(), subject, content);
+        } catch (Exception e) {};
+    }
 }
