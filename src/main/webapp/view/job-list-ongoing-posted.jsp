@@ -333,7 +333,7 @@
                                                 </div>
                                                 <div class="modal-footer border-top-0 d-flex justify-content-center">
                                                     <input type="submit" class="btn btn-primary" value="Send">
-                                                    <input type="hidden" name="action" value="StudentSendDispute">
+                                                    <input type="hidden" name="action" value="HRSendDispute">
                                                 </div>
                                                 <input type="hidden" id="jobApplicationIDDispute" name="jobApplicationID" value="">
                                                 <input type="hidden" name="studentID" value="${sessionScope.LOGIN_USER.userID}">
@@ -685,6 +685,7 @@
         <script src="${pageContext.request.contextPath}/asset/ckeditor/ckeditor.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/metro.min.js"></script>
         <script>CKEDITOR.replace('message');</script>
+        <script>CKEDITOR.replace('messageDispute');</script>
         <!--        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script>
                                                                     $(".job-display").slice(0, 10).show();

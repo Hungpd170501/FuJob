@@ -1,4 +1,5 @@
 
+<%@page import="se1621.dto.User"%>
 <%@page import="se1621.dto.Disputes"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.sql.Date"%>
@@ -55,6 +56,7 @@
                 <div class="container">
                     <div class="row justify-content-center">
                     <%
+                        User us = (User) session.getAttribute("LOGIN_USER");
                         String messResume = (String) request.getAttribute("MESSAGE_UPDATE");
                         if (messResume != null) {
                     %>
@@ -95,6 +97,7 @@
                                 if (listDispute != null) {
                                     if (listDispute.size() > 0) {
                                         for (Disputes dispute : listDispute) {
+                                            if (dispute.getDisStatus() == 1) {
                             %>
                             <li style="list-style: none">
                                 <div class="job-display col-lg-12 mt-4 pt-2">
@@ -149,13 +152,24 @@
                                                             Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
                                                             long dayBetween = dateNow.getTime() - dispute.getCreatedDate().getTime();
                                                             long dayResult = dayBetween / (24 * 60 * 60 * 1000);
-                                                            if (dayResult > 3) {
+                                                            if (dispute.getUser().getUserID() == us.getUserID()) {
+                                                                if (dayResult > 3) {
                                                         %>
                                                         <br>
+                                                        <%
+                                                            if(dispute.getEvidence().getEvidenceID()>0){
+                                                        %>
+                                                            <div class="mt-3">
+                                                                <button onclick="viewEvidence('<%= dispute.getEvidence().getMessage() %>', '<%= dispute.getEvidence().getEvidenceFile() %>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#viewEvidence" style="width: 50%">View Evidence</button>
+                                                            </div>
+                                                        <%
+                                                            } else {
+                                                        %>
                                                         <div class="mt-3">
                                                             <button onclick="getDisputeI(<%= dispute.getDisputeID()%>)" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#sendEvidence" style="width: 50%">Send Evidence</button>
                                                         </div>
                                                         <%
+                                                            }
                                                         } else {
                                                         %>
                                                         <br>
@@ -163,6 +177,16 @@
                                                             <button onclick="getDisputeID(<%= dispute.getDisputeID()%>)" class="btn btn-sm btn-danger-outline" data-toggle="modal" data-target="#CancelDispute" style="width: 50%">Cancel</button>
                                                         </div>
                                                         <%
+                                                            }
+                                                        } else {
+                                                            if (dayResult > 3) {
+                                                        %>
+                                                        <br>
+                                                        <div class="mt-3">
+                                                            <button onclick="getDisputeI(<%= dispute.getDisputeID()%>)" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#sendEvidence" style="width: 50%">Send Evidence</button>
+                                                        </div>
+                                                        <%
+                                                                }
                                                             }
                                                         %>
                                                     </div>
@@ -229,11 +253,35 @@
                                             </form>
                                         </div>
                                     </div>
-                                </div>                 
+                                </div>
+                                <div class="modal fade" id="viewEvidence" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered " role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header border-bottom-0 bg-warning">
+                                                    <h5 class="modal-title text-white" id="exampleModalLabel">Your Sent Evidence</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-6 form-group text-dark">
+                                                            <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="evidenceFile" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View Evidence You Sent</p></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group text-dark">
+                                                        <label style="font-size: 16px">Your Story: </label>
+                                                        <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="yourStory"></p></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                
                             </li> 
                             <%
+                                            }
                                         }
-
                                     }
                                 }
 
@@ -284,6 +332,12 @@
         <script>
             function getDisputeI(disputeID) {
                 $('#disputeI').val(disputeID);
+            }
+        </script>
+        <script>
+            function viewEvidence(yourStory, evidenceFile) {
+                document.getElementById('evidenceFile').setAttribute('href', evidenceFile);
+                $("#yourStory").html(yourStory);
             }
         </script>
     </body>
