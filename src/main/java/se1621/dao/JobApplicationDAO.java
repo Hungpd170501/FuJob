@@ -81,7 +81,7 @@ public class JobApplicationDAO {
             + "											   left join tblResumes resumeEvaluate on resumeEvaluate.userID = us.userID) "
             + "           									WHERE jo.resumeID=? and ( jo.jobApplicationStatus =  6 OR jo.jobApplicationStatus =  7 ) ORDER BY jo.lastModifiedDate DESC";
 
-    private static final String GETALLJOBONGOINGPOSTED = " SELECT jo.jobApplicationID,jo.resumeID,resumeUs.userID as userIDofResume,jo.jobApplicationStatus, j.jobID,j.userID,j.jobStatus, j.jobTitle, j.jobCategoryID, j.minBudget, j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message, "
+    private static final String GETALLJOBONGOINGPOSTED = " SELECT jo.jobApplicationID,jo.resumeID,resumeUs.userID as userIDofResume,jo.jobApplicationStatus, j.jobID,j.userID,j.jobStatus, j.jobTitle, j.jobCategoryID,j.disputeStatus, j.minBudget, j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message, "
             + "                                                                                               jo.createdDate, c.categoryName, c.img, com.companyName, "
             + "                                                                                               j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description, "
             + "                                                                                           sb.submitJobID,sb.messageSubmit, sb.jobFile, sb.createdDate, sb.lastModifiedDate, sb.submitJobStatus "
@@ -619,6 +619,7 @@ public class JobApplicationDAO {
                     String jobFile = rs.getString("jobFile");
                     int submitJobStatus = rs.getInt("submitJobStatus");
                     int userIDofResume = rs.getInt("userIDofResume");
+                    int disputeStatus = rs.getInt("disputeStatus");
                     PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder()
                             .jobID(jobID)
@@ -632,6 +633,7 @@ public class JobApplicationDAO {
                             .maxBudget(maxBudget)
                             .payMentMethod(payMent)
                             .phone(phone)
+                            .disputeStatus(disputeStatus)
                             .expiriedDate(expiriedDate)
                             .description(description)
                             .jobStatus(jobStatus)

@@ -144,6 +144,7 @@
                                     if (listJobApplication != null) {
                                         if (listJobApplication.size() > 0) {
                                             for (JobApplication jobOrder : listJobApplication) {
+                                                if (jobOrder.getJob().getDisputeStatus() != 1) {
                                 %>
                                 <li style="list-style: none">
                                     <div class="job-display col-lg-12 mt-4 pt-2">
@@ -221,18 +222,21 @@
                                                             <div class="candidates-listing-btn mt-4">
                                                                 <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&studentID=<%= jobOrder.getResume().getUserID()%>" class="btn btn-primary-outline btn-sm " style="width: 50%">Student Profile</a>
                                                             </div>
-                                                            <div class="mt-3">
+<!--                                                            <div class="mt-3">
                                                                 <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')"
                                                                         type="button" class="btn btn-sm btn-primary-outline"
                                                                         data-toggle="modal" data-target="#ViewformApplication"
                                                                         style="width: 50%">View Application Form
                                                                 </button>
-                                                            </div>
+                                                            </div>-->
                                                             <div class="mt-3">
                                                                 <button onclick="endProject(<%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getJob().getUserID()%>, <%= jobOrder.getJobApplicationID()%>,<%= jobOrder.getResumeID()%>)" type="button" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#formEndProject" style="width: 50%">
                                                                     End Project
                                                                 </button>
-                                                            </div>   
+                                                            </div>
+                                                            <div class="mt-3">
+                                                                <button onclick="getJobApplicatonIDtoDispute(<%= jobOrder.getJobApplicationID()%>)" class="btn btn-sm btn-danger-outline" data-toggle="modal" data-target="#Dispute" style="width: 50%">Dispute</button>
+                                                            </div>
                                                             <%
                                                             } else if (jobOrder.getJob().getJobStatus() == 8) {
                                                             %>
@@ -242,16 +246,16 @@
                                                             <div class="candidates-listing-btn mt-4">
                                                                 <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&studentID=<%= jobOrder.getResume().getUserID()%>" class="btn btn-primary-outline btn-sm " style="width: 50%">Student Profile</a>
                                                             </div>
-                                                            <div class="mt-3">
+<!--                                                            <div class="mt-3">
                                                                 <button onclick="getJobOrder('<%= jobOrder.getPriceDeal()%>', '<%= jobOrder.getMessage()%>', '<%= jobOrder.getCvFile()%>')"
                                                                         type="button" class="btn btn-sm btn-primary-outline"
                                                                         data-toggle="modal" data-target="#ViewformApplication"
                                                                         style="width: 50%">View Application Form
                                                                 </button>
-                                                            </div>
+                                                            </div>-->
 
                                                             <div class="mt-3">
-                                                                <button onclick="getSubmitProductjobFile('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit()%>', '<%= jobOrder.getJobApplicationID()%>', '<%= jobOrder.getJob().getJobID()%>', '<%= jobOrder.getJob().getUserID()%>','<%= jobOrder.getResumeID()%>')"
+                                                                <button onclick="getSubmitProductjobFile('<%= jobOrder.getSubmitJob().getJobFile()%>', '<%= jobOrder.getSubmitJob().getMessageSubmit()%>', '<%= jobOrder.getJobApplicationID()%>', '<%= jobOrder.getJob().getJobID()%>', '<%= jobOrder.getJob().getUserID()%>', '<%= jobOrder.getResumeID()%>')"
                                                                         type="button" class="btn btn-sm btn-primary-outline"
                                                                         data-toggle="modal" data-target="#ViewProductSubmissionForm"
                                                                         style="width: 50%">View Submission
@@ -262,7 +266,9 @@
                                                                     End Project
                                                                 </button>
                                                             </div> 
-
+                                                            <div class="mt-3">
+                                                                <button onclick="getJobApplicatonIDtoDispute(<%= jobOrder.getJobApplicationID()%>)" class="btn btn-sm btn-danger-outline" data-toggle="modal" data-target="#Dispute" style="width: 50%">Dispute</button>
+                                                            </div>
 
                                                             <%
                                                                 }
@@ -302,6 +308,39 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="modal fade" id="Dispute" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header border-bottom-0">
+                                                <h5 class="modal-title text-primary" id="exampleModalLabel">Dispute Form</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form method="post" action="${pageContext.request.contextPath}/MainController">
+                                                <div class="modal-body">
+                                                    <div class="form-group text-dark">
+                                                        <label>Title<span class="text-danger">*</span></label>
+                                                        <input id="titleDispute" type="text" required="" class="form-control" name="titleDispute" placeholder="Enter the title...">
+                                                    </div>
+                                                    <div class="form-group text-dark ckarea">
+                                                        <label>Message<span class="text-danger">*</span></label>
+                                                        <textarea id="messageDispute" class="form-control" name="messageDispute" placeholder="Message for employer" required ></textarea>
+                                                    </div>
+                                                    <div class="form-group text-dark ckarea">
+                                                        <label class="text-warning font-italic">This message will be sent to the freelancer of this project!</label>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer border-top-0 d-flex justify-content-center">
+                                                    <input type="submit" class="btn btn-primary" value="Send">
+                                                    <input type="hidden" name="action" value="StudentSendDispute">
+                                                </div>
+                                                <input type="hidden" id="jobApplicationIDDispute" name="jobApplicationID" value="">
+                                                <input type="hidden" name="studentID" value="${sessionScope.LOGIN_USER.userID}">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div> 
                                 <div class="modal fade" id="ViewProductSubmissionForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered " role="document">
                                         <div class="modal-content">
@@ -344,8 +383,8 @@
                                     </div>
                                 </div>
                                 <%
+                                                }
                                             }
-
                                         }
                                     }
 
@@ -689,7 +728,7 @@
                 $("#completeJob_jobID").val(jobID);
                 $("#completeJob_resumeID").val(resumeID);
             }
-            function getSubmitProductjobFile(jobFile, messageSubmit, jobApplyId, jobID, userID,resumeID) {
+            function getSubmitProductjobFile(jobFile, messageSubmit, jobApplyId, jobID, userID, resumeID) {
                 document.getElementById('product').setAttribute('href', jobFile);
                 $("#msgSubmit").html(messageSubmit);
                 $("#rejectJob_jobApplicationID").val(jobApplyId);
@@ -727,6 +766,10 @@
                 }
             }
         </script>
-
+        <script>
+            function getJobApplicatonIDtoDispute(jobApplicationID) {
+                $('#jobApplicationIDDispute').val(jobApplicationID);
+            }
+        </script>
     </body>
 </html>

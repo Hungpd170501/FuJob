@@ -145,6 +145,7 @@
                                     if (listJobApplication != null) {
                                         if (listJobApplication.size() > 0) {
                                             for (JobApplication jobOrder : listJobApplication) {
+                                                if (jobOrder.getJob().getDisputeStatus() != 1) {
                                 %>
                                 <li style="list-style: none">
                                     <div class="job-display col-lg-12 mt-4 pt-2">
@@ -234,13 +235,16 @@
                                                                 <button onclick="endProject(<%= jobOrder.getJob().getJobID()%>, <%= jobOrder.getJob().getUserID()%>, <%= jobOrder.getJobApplicationID()%>,<%= jobOrder.getResumeID()%>)" type="button" class="btn btn-primary-outline-red btn-sm" data-toggle="modal" data-target="#formEndProject" style="width: 50%">
                                                                     End Project
                                                                 </button>
-                                                            </div>   
+                                                            </div>  
+                                                            <div class="mt-3">
+                                                                <button onclick="getJobApplicatonIDtoDispute(<%= jobOrder.getJobApplicationID()%>)" class="btn btn-sm btn-danger-outline" data-toggle="modal" data-target="#Dispute" style="width: 50%">Dispute</button>
+                                                            </div>
                                                             <%
                                                             } else if (jobOrder.getJob().getJobStatus() == 6) {
                                                             %>
 
                                                             <br>
-                                                            
+
                                                             <div class="candidates-listing-btn mt-4">
                                                                 <a href="${pageContext.request.contextPath}/MainController?action=SearchResumeID&studentID=<%= jobOrder.getResume().getUserID()%>" class="btn btn-primary-outline btn-sm " style="width: 50%">Student Profile</a>
                                                             </div>
@@ -264,7 +268,9 @@
                                                                     End Project
                                                                 </button>
                                                             </div> 
-                                                            
+                                                            <div class="mt-3">
+                                                                <button onclick="getJobApplicatonIDtoDispute(<%= jobOrder.getJobApplicationID()%>)" class="btn btn-sm btn-danger-outline" data-toggle="modal" data-target="#Dispute" style="width: 50%">Dispute</button>
+                                                            </div>
 
                                                             <%
                                                                 }
@@ -329,8 +335,8 @@
                                     </div>
                                 </div>
                                 <%
+                                                }
                                             }
-
                                         }
                                     }
 

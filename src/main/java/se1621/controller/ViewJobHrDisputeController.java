@@ -6,6 +6,7 @@
 package se1621.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,21 +14,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import se1621.dao.EvaluateCompletionDAO;
+import se1621.dao.DisputeDAO;
 import se1621.dao.JobApplicationDAO;
 import se1621.dao.JobSkillsDAO;
-import se1621.dao.SubmitJobDAO;
-import se1621.dto.EvaluateCompletion;
+import se1621.dao.ResumeDAO;
+import se1621.dto.Disputes;
 import se1621.dto.JobApplication;
 import se1621.dto.JobSkills;
-import se1621.dto.SubmitJob;
 
 /**
  *
  * @author quocb
  */
-@WebServlet(name="ListJobOngoingPostedController", urlPatterns={"/ListJobOngoingPostedController"})
-public class ListJobOngoingPostedController extends HttpServlet {
+@WebServlet(name="ViewJobHrDisputeController", urlPatterns={"/ViewJobHrDisputeController"})
+public class ViewJobHrDisputeController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,47 +36,56 @@ public class ListJobOngoingPostedController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String ERROR = "/view/job-list-ongoing-posted.jsp";
-    private static final String SUCCESS = "/view/job-list-ongoing-posted.jsp";
+    private static final String ERROR = "/view/error.jsp";
+    private static final String SUCCESS = "/view/studentDispute.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            //user tao job
             int userID = Integer.parseInt(request.getParameter("userID"));
-            List<JobApplication> listJobOrder = new ArrayList<>();
-            JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-            listJobOrder = jobOrderDAO.getListJobOngoingPosted(userID);
-            JobSkillsDAO jsDAO = new JobSkillsDAO();
-            List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
-            for (JobApplication jobApply : listJobOrder) {
+            DisputeDAO disputeDAO = new DisputeDAO();
+            List<Disputes> listDispute = disputeDAO.getListDisputeByUserID(userID);//lay list dispute
+            if (!listDispute.isEmpty()) {//neu co (luc huy tranh chap thi van con hang dispute)
+                ResumeDAO resumeDAO = new ResumeDAO();
+                int resumeID = resumeDAO.getResumeID(userID);
+                List<JobApplication> listJobOrderDispute = new ArrayList<>();
+                JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
+                listJobOrderDispute = jobOrderDAO.getListJobAppDispute(resumeID); //lay cac job dang tranh chap cua hoc sinh
+                if (listJobOrderDispute.isEmpty()) { //neu k co job dang tranh chap
+                    List<JobApplication> listEmpty = new ArrayList<>(); //tao list rong de gui qua
+                    request.setAttribute("LIST_ST_JOB_DISPUTE", listEmpty);
+                    request.setAttribute("MESSAGE", "NO DISPUTE TO DISPLAY!");
+                    url = SUCCESS;
+                } else {
+                    JobSkillsDAO jsDAO = new JobSkillsDAO();
+                    List<JobSkills> listJs = jsDAO.getJobSkillForAllJob(); //lay all list job skill
+                    for (JobApplication jobApply : listJobOrderDispute) {
 
-                List<JobSkills> ljk = new ArrayList<>();
-                for (JobSkills js : listJs) {
-                    if (jobApply.getJob().getJobID() == js.getJobID()) {
-                        ljk.add(js);
+                        List<JobSkills> ljk = new ArrayList<>();
+                        for (JobSkills js : listJs) {
+                            if (jobApply.getJob().getJobID() == js.getJobID()) {//neu jobskill va jobApplied co chung jobID
+                                ljk.add(js);
+                            }
+                            jobApply.getJob().setListJobSkills(ljk); //gan cac skill cho jobApplied
+                        }
                     }
-                    jobApply.getJob().setListJobSkills(ljk);
-                }
-            }
-            EvaluateCompletionDAO ecDAO = new EvaluateCompletionDAO();
-            List<EvaluateCompletion> listEc = new ArrayList<>();
-            listEc = ecDAO.getAllEvaluate();
-            for (JobApplication jobApply : listJobOrder) {
-                for (EvaluateCompletion ec : listEc) {
-                    if(jobApply.getJob().getJobID() == ec.getJob().getJobID() && jobApply.getResumeID() == ec.getResume().getResumeID()){
-                        jobApply.setEvaluateCompletion(ec);
+                    for (Disputes dispute : listDispute) {
+                        for (JobApplication jobApply : listJobOrderDispute) {
+                            if (dispute.getJobApplication().getJobApplicationID() == jobApply.getJobApplicationID()) {//neu dispute va jobApplied co chung jobAppID
+                                dispute.setJobApplication(jobApply); //gan jobAppli cho dispute
+                            }
+                        }
                     }
+                    request.setAttribute("LIST_ST_JOB_DISPUTE", listDispute);
+                    url = SUCCESS;
                 }
-            }
-            if (!listJobOrder.isEmpty()) {
-                request.setAttribute("LIST_ALLJOBONGOING_POSTED", listJobOrder);
-                url = SUCCESS;
+
             } else {
-                request.setAttribute("LIST_ALLJOBONGOING_POSTED", listJobOrder);
-                request.setAttribute("MESSAGE", "YOU HAVEN'T ACCEPTED FOR ANY PROJECT");
+                request.setAttribute("LIST_ST_JOB_DISPUTE", listDispute);
+                request.setAttribute("MESSAGE", "NO DISPUTE TO DISPLAY!");
+                url = SUCCESS;
             }
         } catch (Exception e) {
             log("Error at View all job Controller" + e.toString());

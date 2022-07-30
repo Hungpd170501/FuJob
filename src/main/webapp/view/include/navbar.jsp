@@ -99,7 +99,7 @@
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobByID&userID=${sessionScope.LOGIN_USER.userID}">Open Project</a></li>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ListJobOngoingPosted&userID=${sessionScope.LOGIN_USER.userID}">Work In Progress</a></li>
                         <li><a href="${pageContext.request.contextPath}/MainController?action=ViewCompanyPastWork&userID=${sessionScope.LOGIN_USER.userID}">Past Projects</a></li>
-
+                        <li><a href="${pageContext.request.contextPath}/MainController?action=ViewJobHrDispute&userID=${sessionScope.LOGIN_USER.userID}">Dispute</a></li>
                         <%
                         } else if (loginUser != null && StringUtils.equals(loginUser.getRole().getRoleID(), "HRM")) {
                         %>
