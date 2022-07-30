@@ -685,6 +685,7 @@
         <script src="${pageContext.request.contextPath}/asset/ckeditor/ckeditor.js"></script>
         <script src="${pageContext.request.contextPath}/asset/js/metro.min.js"></script>
         <script>CKEDITOR.replace('message');</script>
+        <script>CKEDITOR.replace('messageDispute');</script>
         <!--        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script>
                                                                     $(".job-display").slice(0, 10).show();
