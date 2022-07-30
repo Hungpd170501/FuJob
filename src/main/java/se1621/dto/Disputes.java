@@ -32,4 +32,5 @@ public class Disputes {
     private Date createdDate;
     private Date lastModifiedDate;
     private int disStatus;
+    private Evidences evidence;
 }

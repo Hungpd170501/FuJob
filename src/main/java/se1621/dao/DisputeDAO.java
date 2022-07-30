@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import se1621.dto.Disputes;
+import se1621.dto.Evidences;
 import se1621.dto.JobApplication;
 import se1621.dto.User;
 import se1621.utils.DBUtils;
@@ -24,11 +25,13 @@ public class DisputeDAO {
 
     private static final String CHECK_DUPLICATE_DISPUTE = "SELECT disputeID FROM tblDisputes WHERE userID = ? and jobApplicationID = ?";
     private static final String CREATE_DISPUTE = "INSERT INTO tblDisputes (title, message, jobApplicationID, userID, disputeStatus) VALUES (?,?,?,?,1)";
-    private static final String GET_LIST_DISPUTE = "SELECT d.disputeID,ja.resumeID,r.userID as studentID,j.disputeStatus, d.title, d.message, d.jobApplicationID, d.userID as creatorID, d.createdDate, d.lastModifiedDate, d.disputeStatus as disStatus "
-            + "FROM (((tblDisputes d left join tblJobApplications ja on ja.jobApplicationID = d.jobApplicationID) left join  "
-            + "tblJobs j on j.jobID = ja.jobID) "
-            + "left join tblResumes as r on r.resumeID = ja.resumeID ) "
-            + "WHERE r.userID = ? AND j.disputeStatus = 1 order by d.createdDate desc";
+    private static final String GET_LIST_DISPUTE = "SELECT d.disputeID,ja.resumeID,r.userID as studentID,j.disputeStatus, d.title, d.message, d.jobApplicationID, d.userID as creatorID, d.createdDate, d.lastModifiedDate, d.disputeStatus as disStatus, "
+            + "  evidenceID, e.message as messEvi, e.evidenceFile         "
+            + "FROM ((((tblDisputes d left join tblJobApplications ja on ja.jobApplicationID = d.jobApplicationID) left join  "
+            + "           tblJobs j on j.jobID = ja.jobID) "
+            + "            left join tblResumes as r on r.resumeID = ja.resumeID ) "
+            + "			left join tblEvidences e on d.disputeID = e.disputeID)"
+            + "          WHERE r.userID = ? AND j.disputeStatus = 1 order by d.createdDate desc";
     private static final String INSERT_REASON_CANCEL = "UPDATE tblDisputes SET reasonCancelDispute = ? WHERE disputeID = ?";
     private static final String GET_DISPUTE_BY_DISPUTEID = "SELECT title, message, jobApplicationID, userID, createdDate, lastModifiedDate, reasonCancelDispute "
             + " FROM tblDisputes WHERE disputeID = ?";
@@ -111,6 +114,14 @@ public class DisputeDAO {
                     Date lastModifiedDate = rs.getDate("lastModifiedDate");
                     int disStatus = rs.getInt("disStatus");
                     int creatorID = rs.getInt("creatorID");
+                    String messEvi = rs.getString("messEvi");
+                    String evidenceFile = rs.getString("evidenceFile");
+                    int evidenceID = rs.getInt("evidenceID");
+                    Evidences evidence = Evidences.builder()
+                            .evidenceID(evidenceID)
+                            .message(messEvi)
+                            .evidenceFile(evidenceFile)
+                            .build();
                     Disputes dispute = Disputes.builder()
                             .disputeID(disputeID)
                             .user(User.builder().userID(creatorID).build())
@@ -120,6 +131,7 @@ public class DisputeDAO {
                             .createdDate(createdDate)
                             .lastModifiedDate(lastModifiedDate)
                             .disStatus(disStatus)
+                            .evidence(evidence)
                             .build();
                     listDispute.add(dispute);
                 }
