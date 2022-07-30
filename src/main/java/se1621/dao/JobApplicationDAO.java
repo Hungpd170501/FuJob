@@ -101,7 +101,7 @@ public class JobApplicationDAO {
             + "																							 left join tblResumes resumeUs on resumeUs.resumeID = jo.resumeID ) "
             + "                                                                                               WHERE j.userID = ? and j.jobStatus IN (5,6) AND jo.jobApplicationStatus IN (6,7)"
             + "                                                                                            ORDER BY jo.lastModifiedDate DESC ";
-   
+
     private static final String UPDATE_STATUS = "UPDATE tblJobApplications SET cvFile = ?, priceDeal = ?, message = ?, jobApplicationStatus = 1 WHERE jobApplicationID = ? and resumeID = ? and jobID = ?";
     private String SEARCHJOBORDER = "SELECT ja.jobApplicationID,ISNULL(jobAply.bids,0) AS bids, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, ja.jobApplicationStatus, "
             + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.minBudget,j.maxBudget, j.paymentMethodID, pm.paymentMethodName, "
@@ -114,7 +114,7 @@ public class JobApplicationDAO {
             + "              WHERE jobApplicationStatus = 1 "
             + "                GROUP BY jobID) AS jobAply "
             + "        on jobAply.jobID = j.jobID )";
-    
+
     private static final String GET_LIST_ST_PAST_WORK = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.userID, "
             + "						j.disputeStatus, j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
             + "								jo.createdDate, c.categoryName, c.img, com.companyName, "
@@ -128,7 +128,7 @@ public class JobApplicationDAO {
     private static final String GETALLNUMBEROFJOBORDER = "SELECT COUNT (jobApplicationID) AS totalJobOrder FROM tblJobApplications";
     private static final String UPDATE_FORM_APPLICATON_OF_RESUME = "UPDATE tblJobApplications SET priceDeal = ?, message = ?, cvFile = ? WHERE resumeID = ? and jobID = ?";
     private static final String UPDATE_STATUS_APPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = ? WHERE jobApplicationID = ?";
-    
+
     private static final String GET_JOBAPPLICATION_DISPUTE = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.userID, "
             + "								j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
             + "								jo.createdDate, c.categoryName, c.img, com.companyName, "
@@ -149,6 +149,10 @@ public class JobApplicationDAO {
             + "								left join tblSubmitJob sb on sb.jobApplicationID = jo.jobApplicationID)"
             + "                                WHERE j.userID= ? and j.disputeStatus = 1"
             + "                                ORDER BY jo.lastModifiedDate DESC";
+
+    private static final String GET_JA_BY_JAID = "SELECT r.userID"
+            + " FROM tblJobApplications ja left join tblResumes r on ja.resumeID = r.resumeID"
+            + " WHERE ja.jobApplicationID = ?";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -686,6 +690,7 @@ public class JobApplicationDAO {
         }
         return null;
     }
+
     public List<JobApplication> getListPastProjects(int userID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -801,6 +806,7 @@ public class JobApplicationDAO {
         }
         return check;
     }
+
     public boolean endProject(int jobOrderID) throws SQLException {
         boolean check = false;
         try {
@@ -822,8 +828,6 @@ public class JobApplicationDAO {
         }
         return check;
     }
-    
-    
 
     public boolean unApply(int jobOrderID, String reasonUnaplly) throws SQLException {
         boolean check = false;
@@ -893,6 +897,7 @@ public class JobApplicationDAO {
         }
         return check;
     }
+
     public boolean rejectJobApp(int jobAppID, String reasonRejectSubmit) throws SQLException {
         boolean check = false;
         try {
@@ -937,7 +942,6 @@ public class JobApplicationDAO {
         }
         return check;
     }
-    
 
     public boolean acceptJobApplication(int resumeID, int jobID) throws SQLException {
         boolean check = false;
@@ -1266,7 +1270,7 @@ public class JobApplicationDAO {
         }
         return check;
     }
-    
+
     public List<JobApplication> getListStudentPastWork(int resumeID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -1302,7 +1306,7 @@ public class JobApplicationDAO {
                     String messageSubmit = rs.getString("messageSubmit");
                     String jobFile = rs.getString("jobFile");
                     int submitJobStatus = rs.getInt("submitJobStatus");
-                    int disputeStatus = rs.getInt("disputeStatus"); 
+                    int disputeStatus = rs.getInt("disputeStatus");
                     PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder().jobID(jobID)
                             .userID(hrID)
@@ -1355,7 +1359,7 @@ public class JobApplicationDAO {
         }
         return null;
     }
-    
+
     public List<JobApplication> getListJobAppDispute(int resumeID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -1443,6 +1447,7 @@ public class JobApplicationDAO {
         }
         return null;
     }
+
     public List<JobApplication> getListJobAppHRDispute(int resumeID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -1529,5 +1534,36 @@ public class JobApplicationDAO {
             }
         }
         return null;
+    }
+
+    public JobApplication getJobOrderByJobApplicationID(int jobApplicationID) throws SQLException {
+        JobApplication ja = null;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GET_JA_BY_JAID);
+                preStm.setInt(1, jobApplicationID);
+                rs = preStm.executeQuery();
+                if (rs.next()) {
+                    int studentID = rs.getInt("userID");
+                    ja = JobApplication.builder()
+                            .resume(Resume.builder().userID(studentID).build())
+                            .build();
+                }
+            }
+
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return ja;
     }
 }

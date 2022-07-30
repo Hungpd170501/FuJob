@@ -14,6 +14,7 @@ import java.util.List;
 import se1621.dto.Disputes;
 import se1621.dto.Evidences;
 import se1621.dto.JobApplication;
+import se1621.dto.Resume;
 import se1621.dto.User;
 import se1621.utils.DBUtils;
 
@@ -40,10 +41,12 @@ public class DisputeDAO {
             + "            left join tblResumes as r on r.resumeID = ja.resumeID ) "
             + "			left join tblEvidences e on d.disputeID = e.disputeID)"
             + "          WHERE j.userID = ? AND j.disputeStatus = 1 order by d.createdDate desc";
-    
+
     private static final String INSERT_REASON_CANCEL = "UPDATE tblDisputes SET reasonCancelDispute = ?, disputeStatus = 0 WHERE disputeID = ?";
-    private static final String GET_DISPUTE_BY_DISPUTEID = "SELECT title, message, jobApplicationID, userID, createdDate, lastModifiedDate, reasonCancelDispute "
-            + " FROM tblDisputes WHERE disputeID = ?";
+    private static final String GET_DISPUTE_BY_DISPUTEID = "SELECT d.title, d.message, d.jobApplicationID, d.userID, d.createdDate, d.lastModifiedDate, d.reasonCancelDispute, r.userID as studentID" +
+"             FROM ((tblDisputes d left join tblJobApplications ja on d.jobApplicationID = ja.jobApplicationID)" +
+"			 left join tblResumes r on r.resumeID = ja.resumeID)" +
+"			 WHERE d.disputeID = ?";
     private static final String DELETE_DISPUTE = "DELETE FROM tblDisputes WHERE userID = ? and jobApplicationID = ?";
     private Connection conn;
     private PreparedStatement preStm;
@@ -161,6 +164,7 @@ public class DisputeDAO {
         }
         return null;
     }
+
     public List<Disputes> getListDisputeHrByUserID(int userID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -217,8 +221,6 @@ public class DisputeDAO {
         return null;
     }
 
-   
-
     public boolean InsertReasonCancel(String message, int disputeID) throws SQLException {
         boolean check = false;
         try {
@@ -260,11 +262,12 @@ public class DisputeDAO {
                     String reason = rs.getString("reasonCancelDispute");
                     Date createdDate = rs.getDate("createdDate");
                     Date lastModifiedDate = rs.getDate("lastModifiedDate");
+                    int studentID = rs.getInt("studentID");
                     dispute = Disputes.builder()
                             .disputeID(disputeID)
                             .title(title)
                             .message(message)
-                            .jobApplication(JobApplication.builder().jobApplicationID(jobApplicationID).build())
+                            .jobApplication(JobApplication.builder().jobApplicationID(jobApplicationID).resume(Resume.builder().userID(studentID).build()).build())
                             .reasonCancelDispute(reason)
                             .createdDate(createdDate)
                             .lastModifiedDate(lastModifiedDate)

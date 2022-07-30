@@ -14,10 +14,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import se1621.dao.DisputeDAO;
+import se1621.dao.JobApplicationDAO;
 import se1621.dao.JobDAO;
 import se1621.dao.UserDAO;
 import se1621.dto.Disputes;
 import se1621.dto.Job;
+import se1621.dto.JobApplication;
 import se1621.dto.User;
 import se1621.service.EmailServiceImpl;
 
@@ -44,7 +46,7 @@ public class HrCancelDisputeController extends HttpServlet {
         String url = ERROR;
         try {
             HttpSession session = request.getSession();
-            User student = (User) session.getAttribute("LOGIN_USER");
+            User hr = (User) session.getAttribute("LOGIN_USER");
             int disputeID = Integer.parseInt(request.getParameter("disputeID"));
             String messageCancel = request.getParameter("messageCancelDispute");
             DisputeDAO disputeDAO = new DisputeDAO();
@@ -55,13 +57,13 @@ public class HrCancelDisputeController extends HttpServlet {
                 int jobID = jobDAO.getJobIDByJobApplicationID(dispute.getJobApplication().getJobApplicationID());
                 Job job = jobDAO.getJob(jobID);
                 UserDAO usDAO = new UserDAO();
-                User hr = usDAO.getUser(job.getUserID());
+                User student = usDAO.getUser(dispute.getJobApplication().getResume().getUserID());
                 boolean checkUpdateStatus = jobDAO.updateDisputeStatus(0, jobID);
                 if (checkUpdateStatus) {
                     EmailServiceImpl emailServiceIml = new EmailServiceImpl();
-                    new Thread(() -> emailServiceIml.sendEmail(getServletContext(), hr, student.getFullName(), "CANCEL DISPUTE", messageCancel, job.getJobTitle())).start();
+                    new Thread(() -> emailServiceIml.sendEmailCancelDispute(getServletContext(), student, hr.getFullName(), "CANCEL DISPUTE", messageCancel, job.getJobTitle())).start();
                     request.setAttribute("MESSAGE_UPDATE", "Dispute Canceled!");
-                    url = SUCCESS + student.getUserID();
+                    url = SUCCESS + hr.getUserID();
                 }
             }
         } catch (Exception e) {

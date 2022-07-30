@@ -50,7 +50,7 @@ public class StudentCancelDisputeController extends HttpServlet {
                 boolean checkUpdateStatus = jobDAO.updateDisputeStatus(0, jobID);
                 if (checkUpdateStatus) {
                     EmailServiceImpl emailServiceIml = new EmailServiceImpl();
-                    new Thread(() -> emailServiceIml.sendEmail(getServletContext(), hr, student.getFullName(), "CANCEL DISPUTE", messageCancel, job.getJobTitle())).start();
+                    new Thread(() -> emailServiceIml.sendEmailCancelDispute(getServletContext(), hr, student.getFullName(), "CANCEL DISPUTE", messageCancel, job.getJobTitle())).start();
                     request.setAttribute("MESSAGE_UPDATE", "Dispute Canceled!");
                     url = SUCCESS + student.getUserID();
                 }
