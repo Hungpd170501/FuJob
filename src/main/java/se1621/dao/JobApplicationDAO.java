@@ -139,6 +139,16 @@ public class JobApplicationDAO {
             + "								left join tblSubmitJob sb on sb.jobApplicationID = jo.jobApplicationID)"
             + "                                WHERE jo.resumeID=? and j.disputeStatus = 1"
             + "                                ORDER BY jo.lastModifiedDate DESC";
+    private static final String GET_JOBAPPLICATION_HR_DISPUTE = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.userID, "
+            + "								j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
+            + "								jo.createdDate, c.categoryName, c.img, com.companyName, "
+            + "                                j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description, "
+            + "								sb.messageSubmit, sb.jobFile, sb.submitJobID, sb.submitJobStatus"
+            + "                                FROM (((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
+            + "                                left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
+            + "								left join tblSubmitJob sb on sb.jobApplicationID = jo.jobApplicationID)"
+            + "                                WHERE j.userID= ? and j.disputeStatus = 1"
+            + "                                ORDER BY jo.lastModifiedDate DESC";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -1351,6 +1361,93 @@ public class JobApplicationDAO {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(GET_JOBAPPLICATION_DISPUTE);
+                preStm.setInt(1, resumeID);
+                rs = preStm.executeQuery();
+                List<JobApplication> list = new ArrayList<>();
+                while (rs.next()) {
+                    int jobApplicationID = rs.getInt("jobApplicationID");
+                    int jobID = rs.getInt("jobID");
+                    String priceDeal = rs.getString("priceDeal");
+                    String mess = rs.getString("message");
+                    String cvFile = rs.getString("cvFile");
+                    int hrID = rs.getInt("userID");
+                    String jobTitle = rs.getString("jobTitle");
+                    Date createdDate = rs.getDate("createdDate");
+                    Date expiriedDate = rs.getDate("expiriedDate");
+                    int minBudget = rs.getInt("minBudget");
+                    int maxBudget = rs.getInt("maxBudget");
+                    int paymentMethodID = rs.getInt("paymentMethodID");
+                    String paymentMethodName = rs.getString("paymentMethodName");
+                    String address = rs.getString("address");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String description = rs.getString("description");
+                    int categoryID = rs.getInt("jobCategoryID");
+                    String categoryName = rs.getString("categoryName");
+                    String img = rs.getString("img");
+                    String companyName = rs.getString("companyName");
+                    int jobAppStatus = rs.getInt("jobApplicationStatus");
+                    int submitJobID = rs.getInt("submitJobID");
+                    String messageSubmit = rs.getString("messageSubmit");
+                    String jobFile = rs.getString("jobFile");
+                    int submitJobStatus = rs.getInt("submitJobStatus");
+                    PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
+                    Job job = Job.builder().jobID(jobID)
+                            .userID(hrID)
+                            .jobTitle(jobTitle)
+                            .category(Category.builder().categoryID(categoryID).categoryName(categoryName).img(img).build())
+                            .company(CompanyInfo.builder().companyName(companyName).build())
+                            .address(address)
+                            .email(email)
+                            .minBudget(minBudget)
+                            .maxBudget(maxBudget)
+                            .payMentMethod(payMent)
+                            .phone(phone)
+                            .expiriedDate(expiriedDate)
+                            .description(description)
+                            .disputeStatus(1)
+                            .build();
+                    SubmitJob sbJob = SubmitJob.builder()
+                            .submitJobID(submitJobID)
+                            .messageSubmit(messageSubmit)
+                            .jobFile(jobFile)
+                            .submitJobStatus(submitJobStatus)
+                            .build();
+                    JobApplication listJobOrder = JobApplication.builder()
+                            .jobApplicationID(jobApplicationID)
+                            .submitJob(sbJob)
+                            .resumeID(resumeID).job(job)
+                            .createdDate(createdDate)
+                            .priceDeal(priceDeal)
+                            .message(mess)
+                            .cvFile(cvFile)
+                            .lastModifiedDate(createdDate)
+                            .jobApplicationStatus(jobAppStatus)
+                            .build();
+                    list.add(listJobOrder);
+                }
+                return list;
+            }
+
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+    public List<JobApplication> getListJobAppHRDispute(int resumeID) throws SQLException {
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GET_JOBAPPLICATION_HR_DISPUTE);
                 preStm.setInt(1, resumeID);
                 rs = preStm.executeQuery();
                 List<JobApplication> list = new ArrayList<>();

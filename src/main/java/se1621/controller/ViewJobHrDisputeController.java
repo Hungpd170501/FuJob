@@ -37,7 +37,7 @@ public class ViewJobHrDisputeController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private static final String ERROR = "/view/error.jsp";
-    private static final String SUCCESS = "/view/studentDispute.jsp";
+    private static final String SUCCESS = "/view/hrDispute.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -46,13 +46,13 @@ public class ViewJobHrDisputeController extends HttpServlet {
         try {
             int userID = Integer.parseInt(request.getParameter("userID"));
             DisputeDAO disputeDAO = new DisputeDAO();
-            List<Disputes> listDispute = disputeDAO.getListDisputeByUserID(userID);//lay list dispute
+            List<Disputes> listDispute = disputeDAO.getListDisputeHrByUserID(userID);//lay list dispute
             if (!listDispute.isEmpty()) {//neu co (luc huy tranh chap thi van con hang dispute)
                 ResumeDAO resumeDAO = new ResumeDAO();
                 int resumeID = resumeDAO.getResumeID(userID);
                 List<JobApplication> listJobOrderDispute = new ArrayList<>();
                 JobApplicationDAO jobOrderDAO = new JobApplicationDAO();
-                listJobOrderDispute = jobOrderDAO.getListJobAppDispute(resumeID); //lay cac job dang tranh chap cua hoc sinh
+                listJobOrderDispute = jobOrderDAO.getListJobAppHRDispute(userID); //lay cac job dang tranh chap cua hoc sinh
                 if (listJobOrderDispute.isEmpty()) { //neu k co job dang tranh chap
                     List<JobApplication> listEmpty = new ArrayList<>(); //tao list rong de gui qua
                     request.setAttribute("LIST_ST_JOB_DISPUTE", listEmpty);
