@@ -23,7 +23,7 @@ public class DisputeDAO {
 
     private static final String CHECK_DUPLICATE_DISPUTE = "SELECT disputeID FROM tblDisputes WHERE userID = ? and jobApplicationID = ?";
     private static final String CREATE_DISPUTE = "INSERT INTO tblDisputes (title, message, jobApplicationID, userID) VALUES (?,?,?,?)";
-    private static final String GET_LIST_DISPUTE = "SELECT d.disputeID,ja.resumeID,r.userID as studentID,j.disputeStatus, d.title, d.message, d.jobApplicationID, d.userID as creatorID, d.createdDate, d.lastModifiedDate "
+    private static final String GET_LIST_DISPUTE = "SELECT d.disputeID,ja.resumeID,r.userID as studentID,j.disputeStatus, d.title, d.message, d.jobApplicationID, d.userID as creatorID, d.createdDate, d.lastModifiedDate, d.disputeStatus as disStatus "
             + "FROM (((tblDisputes d left join tblJobApplications ja on ja.jobApplicationID = d.jobApplicationID) left join  "
             + "tblJobs j on j.jobID = ja.jobID) "
             + "left join tblResumes as r on r.resumeID = ja.resumeID ) "
@@ -108,6 +108,7 @@ public class DisputeDAO {
                     int jobApplicationID = rs.getInt("jobApplicationID");
                     Date createdDate = rs.getDate("createdDate");
                     Date lastModifiedDate = rs.getDate("lastModifiedDate");
+                    int disStatus = rs.getInt("disStatus");
                     Disputes dispute = Disputes.builder()
                             .disputeID(disputeID)
                             .title(title)
@@ -115,6 +116,7 @@ public class DisputeDAO {
                             .jobApplication(JobApplication.builder().jobApplicationID(jobApplicationID).build())
                             .createdDate(createdDate)
                             .lastModifiedDate(lastModifiedDate)
+                            .disStatus(disStatus)
                             .build();
                     listDispute.add(dispute);
                 }

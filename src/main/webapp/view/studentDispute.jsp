@@ -95,6 +95,7 @@
                                 if (listDispute != null) {
                                     if (listDispute.size() > 0) {
                                         for (Disputes dispute : listDispute) {
+                                            if (dispute.getDisStatus() == 1) {
                             %>
                             <li style="list-style: none">
                                 <div class="job-display col-lg-12 mt-4 pt-2">
@@ -232,8 +233,8 @@
                                 </div>                 
                             </li> 
                             <%
+                                            }
                                         }
-
                                     }
                                 }
 
