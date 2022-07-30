@@ -196,7 +196,7 @@
                                                                 <button onclick="getFeedBack('<%= jobOrder.getEvaluateCompletion().getRatingValue()%>', '<%= jobOrder.getEvaluateCompletion().getContent()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#viewFeedBack" style="width: 50%">View Feedback</button>
                                                             </div>
                                                             <div class="mt-3">
-                                                                <button onclick="getJobApplicatonID(<%= jobOrder.getJobApplicationID()%>)" class="btn btn-sm btn-danger-outline" data-toggle="modal" data-target="#Dispute" style="width: 50%">Dispute</button>
+                                                                <button onclick="getJobApplicatonIDDispute(<%= jobOrder.getJobApplicationID()%>)" class="btn btn-sm btn-danger-outline" data-toggle="modal" data-target="#Dispute" style="width: 50%">Dispute</button>
                                                             </div>
                                                             <%
                                                             } else if (jobOrder.getJobApplicationStatus() == 7) {
@@ -212,7 +212,7 @@
                                                                 <button onclick="getFeedBack('<%= jobOrder.getEvaluateCompletion().getRatingValue()%>', '<%= jobOrder.getEvaluateCompletion().getContent()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#viewFeedBack" style="width: 50%">View Feedback</button>
                                                             </div>
                                                             <div class="mt-3">
-                                                                <button onclick="getJobApplicatonID(<%= jobOrder.getJobApplicationID()%>)" class="btn btn-sm btn-danger-outline" data-toggle="modal" data-target="#Dispute" style="width: 50%">Dispute</button>
+                                                                <button onclick="getJobApplicatonIDDispute(<%= jobOrder.getJobApplicationID()%>)" class="btn btn-sm btn-danger-outline" data-toggle="modal" data-target="#Dispute" style="width: 50%">Dispute</button>
                                                             </div>
                                                             <%
                                                                 }
@@ -384,7 +384,7 @@
                                                         <input type="submit" class="btn btn-primary" value="Send">
                                                         <input type="hidden" name="action" value="StudentSendDispute">
                                                     </div>
-                                                    <input type="hidden" id="jobApplicationID" name="jobApplicationID" value="">
+                                                    <input type="hidden" id="jobApplicationIDtoDispute" name="jobApplicationID" value="">
                                                     <input type="hidden" name="studentID" value="${sessionScope.LOGIN_USER.userID}">
                                                 </form>
                                             </div>
@@ -473,6 +473,11 @@
         <script>
             function getJobApplicatonID(jobApplicationID) {
                 $('#jobApplicationID').val(jobApplicationID);
+            }
+        </script>
+        <script>
+            function getJobApplicatonIDDispute(jobApplicationID) {
+                $('#jobApplicationIDtoDispute').val(jobApplicationID);
             }
         </script>
         <script>
