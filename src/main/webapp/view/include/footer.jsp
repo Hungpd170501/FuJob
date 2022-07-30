@@ -16,6 +16,7 @@
                 <p class="text-white mb-4 footer-list-title">About</p>
                 <ul class="list-unstyled footer-list">
                     <li><a href="${pageContext.request.contextPath}/view/about.jsp"" class="text-foot"><i class="mdi mdi-chevron-right"></i> About Us</a></li>     
+                    <li><a href="${pageContext.request.contextPath}/view/disputeSolution.jsp"" class="text-foot"><i class="mdi mdi-chevron-right"></i> Dispute Resolution</a></li>
                 </ul>
             </div>
             <div class="col-lg-2 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
