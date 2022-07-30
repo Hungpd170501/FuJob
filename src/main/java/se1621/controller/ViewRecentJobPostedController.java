@@ -36,7 +36,7 @@ public class ViewRecentJobPostedController extends HttpServlet {
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error in ViewRecentJobController" + e.toString());
+            log("Error in ViewRecentJobController" + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

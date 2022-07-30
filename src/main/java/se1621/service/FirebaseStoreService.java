@@ -6,5 +6,5 @@ package se1621.service;
 
 
 public interface FirebaseStoreService {
-    public <T> String uploadFile(T file);
+    <T> String uploadFile(T file);
 }

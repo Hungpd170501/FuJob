@@ -25,7 +25,7 @@ public class JobDAO {
     private static final String CREATEJOB = "INSERT INTO tblJobs(userID, jobTitle, jobCategoryID,"
             + " minBudget, maxBudget, paymentMethodID, expiriedDate, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,1)";
     //xong ne
-    private String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID,ISNULL(jobAply.bids,0) AS bids, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
+    private final String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID,ISNULL(jobAply.bids,0) AS bids, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
             + "            j.jobCategoryID, c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, "
             + "            pm.paymentMethodName, j.minBudget, j.maxBudget, j.expiriedDate "
             + "            FROM (((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) "
@@ -188,7 +188,7 @@ public class JobDAO {
                 preStm.setString(9, job.getEmail());
                 preStm.setString(10, job.getPhone());
                 preStm.setString(11, job.getDescription());
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -659,7 +659,7 @@ public class JobDAO {
                 preStm = conn.prepareStatement(DELETEJOBPOST);
                 preStm.setString(1, reasonCancel);
                 preStm.setInt(2, jobPostID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -681,7 +681,7 @@ public class JobDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(UPDATE_JOB_POST_HAVE_EMPLOYER);
                 preStm.setInt(1, jobPostID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -703,7 +703,7 @@ public class JobDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(UPDATE_JOB_POST_UNCOMPLETE);
                 preStm.setInt(1, jobPostID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -725,7 +725,7 @@ public class JobDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(UPDATE_JOB_POST_COMPLETE);
                 preStm.setInt(1, jobPostID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -758,7 +758,7 @@ public class JobDAO {
                 preStm.setFloat(10, job.getMaxBudget());
                 preStm.setString(11, job.getDescription());
                 preStm.setInt(12, job.getJobID());
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -808,7 +808,7 @@ public class JobDAO {
                 preStm = conn.prepareStatement(UPDATE_JOB_STATUS);
                 preStm.setInt(1, jobStatus);
                 preStm.setInt(2, jobID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();

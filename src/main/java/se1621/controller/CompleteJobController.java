@@ -72,7 +72,7 @@ public class CompleteJobController extends HttpServlet {
                url = SUCCESS + job.getUserID();
             }
         }catch(Exception ex){
-            log("Error at DenyJobAppController: " + ex.toString());
+            log("Error at DenyJobAppController: " + ex);
         }finally{
              request.getRequestDispatcher(url).forward(request, response);
         }

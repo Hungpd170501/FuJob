@@ -64,7 +64,7 @@ public class SearchJobTitle_Exper_CateController extends HttpServlet {
                 request.setAttribute("MESSAGE", "NO PROJECT TO DISPLAY");
             }
         } catch (Exception e) {
-            log("Error at View all job Controller" + e.toString());
+            log("Error at View all job Controller" + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.BatchSize;
 
 @Builder
 @AllArgsConstructor
@@ -36,12 +37,14 @@ public class UserEntity {
     @Column(name = "email", length = 50)
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "roleID")
+    @BatchSize(size = 1)
     private RoleEntity role;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "companyID")
+    @BatchSize(size = 1)
     private CompanyEntity companyID;
 
     @Column(name = "createdDate")

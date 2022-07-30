@@ -13,6 +13,6 @@ import se1621.entity.SkillEntity;
  */
 public interface SkillDAO {
 
-    public void save(SkillEntity skillEntity);
-    public List<SkillEntity> getAll(String skillEntityName);
+    void save(SkillEntity skillEntity);
+    List<SkillEntity> getAll(String skillEntityName);
 }

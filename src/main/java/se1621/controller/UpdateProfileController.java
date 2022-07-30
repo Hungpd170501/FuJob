@@ -42,7 +42,7 @@ public class UpdateProfileController extends HttpServlet {
                 request.setAttribute("MESSAGE_UPDATE", "Update failed!");
             }
         } catch (Exception e) {
-            log("Error at View all job Controller" + e.toString());
+            log("Error at View all job Controller" + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

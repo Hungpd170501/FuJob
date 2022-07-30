@@ -80,7 +80,7 @@ public class IndexController extends HttpServlet {
             CompletableFuture.allOf(future1, future2, future3, future4).get();
             url=USER_PAGE;
         } catch (Exception e) {
-            log("Error at IndexController: " + e.toString());
+            log("Error at IndexController: " + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

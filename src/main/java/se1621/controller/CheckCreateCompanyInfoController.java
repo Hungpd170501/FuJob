@@ -53,7 +53,7 @@ public class CheckCreateCompanyInfoController extends HttpServlet {
                 request.setAttribute("COMPANYINFO", company);
             }
         } catch (Exception e) {
-            log("Error at CheckCompanyController" + e.toString());
+            log("Error at CheckCompanyController" + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

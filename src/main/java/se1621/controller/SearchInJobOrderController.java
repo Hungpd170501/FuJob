@@ -70,7 +70,7 @@ public class SearchInJobOrderController extends HttpServlet {
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at Search JobOrderController" + toString());
+            log("Error at Search JobOrderController" + this);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

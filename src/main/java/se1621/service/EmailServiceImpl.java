@@ -44,6 +44,6 @@ public class EmailServiceImpl implements EmailService {
             }
             EmailUtils emailUtils= new EmailUtils();
             emailUtils.sendEmail(host, port, user, pass, repliient.getEmail(), subject, content);
-        } catch (Exception e) {};
+        } catch (Exception e) {}
     }
 }

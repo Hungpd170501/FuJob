@@ -15,7 +15,7 @@ import se1621.utils.HibernateUtils;
  * @author ACER
  */
 public class CategoryDAOImpl extends BaseDAOImpl implements  CategoryDAO{
-    private Session session=HibernateUtils.getSession();
+    private final Session session=HibernateUtils.getSession();
     @Override
     public void save(CategoryEntity categoryEntity) {
         super.saveEntity(categoryEntity);

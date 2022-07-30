@@ -116,7 +116,6 @@ public class JwtTokenUtils {
 
     public String generateVerifyEmailToken(User userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put(CLAIM_KEY_USERNAME, Helper.hashPassword(userDetails.getFullName()));
         claims.put(CLAIM_KEY_PASSWORD, Helper.hashPassword(userDetails.getPassword()));
         claims.put(CLAIM_KEY_EMAIL, userDetails.getEmail());
         claims.put(CLAIM_KEY_CREATED, new Date());

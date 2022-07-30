@@ -59,7 +59,7 @@ public class ViewAllJobController extends HttpServlet {
             request.setAttribute("LIST_ALLJOB", listJob);
             url = SUCCESS;
         } catch (Exception e) {
-            log("Error at View all job Controller" + e.toString());
+            log("Error at View all job Controller" + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

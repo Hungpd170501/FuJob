@@ -39,7 +39,7 @@ public class EmailVerifyHandler extends HttpServlet {
                     User user = userDAO.checkUserByEmail(jwtTokenUtils.getEmailFromToken(token));
                     Helper helper = new Helper();
                     if ((user == null || !helper.checkPass(user.getPassword(), jwtTokenUtils.getPasswordFromToken(token)))
-                            || !helper.checkPass(user.getFullName(), jwtTokenUtils.getUsernameFromToken(token)) || user.getUserStatus() == 0) {
+                            || user.getUserStatus() == 0) {
                     } else {
                         HttpSession session = request.getSession();
                         userDAO.activeUserAccount(jwtTokenUtils.getEmailFromToken(token));
@@ -55,7 +55,7 @@ public class EmailVerifyHandler extends HttpServlet {
                 request.setAttribute("LOGIN_MESSAGE", "It looks like you clicked on an invalid email verification link or your account has been deactivated. Please try again!");
             }
         } catch (Exception e) {
-            log("Error at RecoveryPasswordHandler: " + e.toString());
+            log("Error at RecoveryPasswordHandler: " + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

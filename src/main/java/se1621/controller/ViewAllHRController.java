@@ -40,7 +40,7 @@ public class ViewAllHRController extends HttpServlet {
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at View all job Controller" + e.toString());
+            log("Error at View all job Controller" + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

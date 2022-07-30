@@ -76,7 +76,7 @@ public class ResumeSkillDAO {
                 preStm.setInt(1, resumeSkill.getResumeID());
                 preStm.setInt(2, resumeSkill.getSkill().getSkillID());
 
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -134,7 +134,7 @@ public class ResumeSkillDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(DELETESKILL);
                 preStm.setInt(1, resumeID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();

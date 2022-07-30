@@ -13,32 +13,32 @@ import java.util.List;
  */
 public interface BaseDAO {
         //save an entity object
-    public <T> void saveEntity(T entity);
+        <T> void saveEntity(T entity);
 
     // delete an entity object
 
-    public <T> void deleteEntity(T entity);
+    <T> void deleteEntity(T entity);
 
     //Delete an entity object based on entity type and ID
-    public <T> void deleteEntityById(Class<T> entityClass, Serializable id);
+    <T> void deleteEntityById(Class<T> entityClass, Serializable id);
 
     //modify an entity object
-    public <T> void updateEntity(T entity);
+    <T> void updateEntity(T entity);
 
     //Query all instances of an entity
 
-    public <T> List<T> getAllEntity(String entityName);
+    <T> List<T> getAllEntity(String entityName);
 
     // An entity object obtained by the primary key
 
-    public <T> T getEntityById(Class<T> entityClass, Serializable id);
+    <T> T getEntityById(Class<T> entityClass, Serializable id);
 
 
     // paging
-    public <T> List<T> getbyPage(String hql, int pageNo, int pageSize, int real);
+    <T> List<T> getbyPage(String hql, int pageNo, int pageSize, int real);
 
     //most page number
-    public <T> int realPage(String hql);
+    <T> int realPage(String hql);
 
 
 }

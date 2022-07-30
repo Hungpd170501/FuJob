@@ -28,8 +28,8 @@ import se1621.dto.ResumeSkill;
 @WebServlet(name = "SearchResumeIDController", urlPatterns = {"/SearchResumeIDController"})
 public class SearchResumeIDController extends HttpServlet {
 
-    private static String ERROR = "/view/candidates-profile.jsp";
-    private static String SUCCESS = "/view/candidates-profile.jsp";
+    private static final String ERROR = "/view/candidates-profile.jsp";
+    private static final String SUCCESS = "/view/candidates-profile.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -70,7 +70,7 @@ public class SearchResumeIDController extends HttpServlet {
                 request.setAttribute("MESSAGE", "YOU'VE NOT CREATED YOUR RESUME");
             }
         } catch (Exception e) {
-            log("Error at SearchResumeIDController: " + e.toString());
+            log("Error at SearchResumeIDController: " + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

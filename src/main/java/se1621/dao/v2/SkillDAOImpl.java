@@ -16,7 +16,7 @@ import se1621.utils.HibernateUtils;
  * @author ACER
  */
 public class SkillDAOImpl extends BaseDAOImpl implements SkillDAO {
-    private Session session=HibernateUtils.getSession();
+    private final Session session=HibernateUtils.getSession();
     @Override
     public void save(SkillEntity skillEntity) {
         super.saveEntity(skillEntity);

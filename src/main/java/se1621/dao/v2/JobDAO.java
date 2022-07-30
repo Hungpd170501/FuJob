@@ -13,11 +13,11 @@ import se1621.entity.JobEntity;
  */
 public interface JobDAO {
 
-    public void save(JobEntity jobEntity);
+    void save(JobEntity jobEntity);
 
-    public List<JobEntity> getAll(String JobEntityName);
-    public List<JobEntity> getAllUsingHQL(String hql);
+    List<JobEntity> getAll(String JobEntityName);
+    List<JobEntity> getAllUsingHQL(String hql);
 
-    public List<JobEntity> get8RecentJobPosted(String hql);
+    List<JobEntity> get8RecentJobPosted(String hql);
 
 }

@@ -33,7 +33,7 @@ public class SubmitJobDAO {
                 preStm.setInt(1, submitJob.getJobApplicationID());
                 preStm.setString(2, submitJob.getMessageSubmit());
                 preStm.setString(3, submitJob.getJobFile());
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,7 +62,7 @@ public class SubmitJobDAO {
                 preStm.setString(1, submitJob.getMessageSubmit());
                 preStm.setString(2, submitJob.getJobFile());
                 preStm.setInt(3, submitJob.getJobApplicationID());
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();

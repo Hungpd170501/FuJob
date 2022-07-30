@@ -25,37 +25,41 @@
                         <span class="sidebar-menu-text">Dashboard</span>
                     </a>
                 </li>
-
+                <li class="sidebar-menu-item " data-title="Account" data-placement="right" data-container="body"
+                    data-boundary="window">
+                    <a class="sidebar-menu-button" href="${pageContext.request.contextPath}/MainController?action=UserList"
+                       >
+                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_box</i>
+                        <span class="sidebar-menu-text">Users</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu-item " data-title="Company" data-placement="right" data-container="body"
+                    data-boundary="window">
+                    <a class="sidebar-menu-button" href="${pageContext.request.contextPath}/MainController?action=CompanyList">
+                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">business</i>
+                        <span class="sidebar-menu-text">Companies</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu-item " data-title="Job" data-placement="right" data-container="body"
+                    data-boundary="window">
+                    <a class="sidebar-menu-button" href="${pageContext.request.contextPath}/MainController?action=JobList">
+                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">work</i>
+                        <span class="sidebar-menu-text">Projects</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu-item " data-title="Job" data-placement="right" data-container="body"
+                    data-boundary="window">
+                    <a class="sidebar-menu-button" href="${pageContext.request.contextPath}/MainController?action=JobList">
+                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">receipt</i>
+                        <span class="sidebar-menu-text">Disputes</span>
+                    </a>
+                </li>
                 <li class="sidebar-menu-item " data-title="Category" data-placement="right"
                     data-container="body" data-boundary="window">
                     <a class="sidebar-menu-button" href="#sm_category" data-toggle="tab" role="tab"
                        aria-controls="sm_category">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">category</i>
-                        <span class="sidebar-menu-text">Category</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu-item " data-title="Job" data-placement="right" data-container="body"
-                    data-boundary="window">
-                    <a class="sidebar-menu-button" href="#sm_job" data-toggle="tab" role="tab"
-                       aria-controls="sm_job">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">work</i>
-                        <span class="sidebar-menu-text">Job</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu-item " data-title="Company" data-placement="right" data-container="body"
-                    data-boundary="window">
-                    <a class="sidebar-menu-button" href="#sm_company" data-toggle="tab" role="tab"
-                       aria-controls="#sm_company">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">business</i>
-                        <span class="sidebar-menu-text">Company</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu-item " data-title="Account" data-placement="right" data-container="body"
-                    data-boundary="window">
-                    <a class="sidebar-menu-button" href="#sm_account" data-toggle="tab" role="tab"
-                       aria-controls="sm_account">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_box</i>
-                        <span class="sidebar-menu-text">Account</span>
+                        <span class="sidebar-menu-text">Others</span>
                     </a>
                 </li>
                 <li class="sidebar-menu-item " data-title="Messaging" data-placement="right"
@@ -101,27 +105,7 @@
                                 <li class="sidebar-menu-item">
                                     <a class="sidebar-menu-button"
                                        href="${pageContext.request.contextPath}/MainController?action=JobCategory">
-                                        <span class="sidebar-menu-text">Job Category</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="tab-pane " id="sm_job">
-                    <div class="sidebar-heading">Job</div>
-                    <ul class="sidebar-menu">
-                        <li class="sidebar-menu-item open">
-                            <a class="sidebar-menu-button" data-toggle="collapse" href="#job_menu">
-                                <span
-                                        class="material-icons sidebar-menu-icon sidebar-menu-icon--left">work</span>
-                                Job
-                                <span class="ml-auto sidebar-menu-toggle-icon"></span>
-                            </a>
-                            <ul class="sidebar-submenu collapse sm-indent" id="job_menu">
-                                <li class="sidebar-menu-item">
-                                    <a class="sidebar-menu-button" href="compact-ecommerce.html">
-                                        <span class="sidebar-menu-text">Job Post Management</span>
+                                        <span class="sidebar-menu-text">Project Category</span>
                                     </a>
                                 </li>
                             </ul>
@@ -173,35 +157,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="tab-pane " id="sm_account">
-                    <div class="sidebar-heading">Account</div>
-                    <ul class="sidebar-menu">
-                        <li class="sidebar-menu-item open">
-                            <a class="sidebar-menu-button" data-toggle="collapse" href="#account_menu">
-                                <span
-                                        class="material-icons sidebar-menu-icon sidebar-menu-icon--left">account_box</span>
-                                Account
-                                <span class="ml-auto sidebar-menu-toggle-icon"></span>
-                            </a>
-                            <ul class="sidebar-submenu collapse sm-indent" id="account_menu">
-                                <li class="sidebar-menu-item">
-                                    <a class="sidebar-menu-button" href="user-list.html">
-                                        <span class="sidebar-menu-text">User Management</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-menu-item">
-                                    <a class="sidebar-menu-button"
-                                       href="compact-edit-account.html">
-                                        <span class="sidebar-menu-text">Edit Account</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
                 </br>
-
-
             </div>
         </div>
         <!--// END drawer-->

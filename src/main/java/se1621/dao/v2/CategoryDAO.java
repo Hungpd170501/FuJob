@@ -12,6 +12,6 @@ import se1621.entity.CategoryEntity;
  * @author ACER
  */
 public interface CategoryDAO {
-    public void save(CategoryEntity categoryEntity);
-    public List<CategoryEntity> getAll(String categoryEntityName);
+    void save(CategoryEntity categoryEntity);
+    List<CategoryEntity> getAll(String categoryEntityName);
 }

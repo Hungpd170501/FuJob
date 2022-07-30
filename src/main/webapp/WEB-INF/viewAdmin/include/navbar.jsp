@@ -4,7 +4,7 @@
         <span class="material-icons">menu</span>
     </button>
     <!-- Navbar Brand -->
-    <a href="${pageContext.request.contextPath}/" class="navbar-brand mr-16pt">
+    <a href="${pageContext.request.contextPath}/MainController?action=AdminIndex" class="navbar-brand mr-16pt">
         <img class="navbar-brand-icon mr-0 mr-lg-8pt"
              src="${pageContext.request.contextPath}/asset/images/Logo/Logo/Untitled-3.png" width="70" alt="FuJob">
         <span class="d-none d-lg-block"></span>
@@ -16,7 +16,7 @@
                 <img width="32" height="32" class="rounded-circle mr-8pt"
                      src="${pageContext.request.contextPath}/asset/images/people/50/guy-3.jpg" alt="account"/>
                 <span class="flex d-flex flex-column mr-8pt">
-                    <span class="navbar-text-100">Laza Bogdan</span>
+                    <span class="navbar-text-100">${sessionScope.LOGIN_USER.fullName}</span>
                     <small class="navbar-text-50">Administrator</small>
                 </span>
             </a>

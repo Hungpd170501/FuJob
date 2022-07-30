@@ -31,7 +31,7 @@ public class MainController extends HttpServlet {
                 url = siteMap;
             }
         } catch (Exception e) {
-            log("Error at MainController: " + e.toString());
+            log("Error at MainController: " + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

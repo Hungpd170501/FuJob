@@ -91,7 +91,7 @@ public class JobApplicationDAO {
             + "                                                                                            ORDER BY jo.lastModifiedDate DESC ";
 
     private static final String UPDATE_STATUS = "UPDATE tblJobApplications SET cvFile = ?, priceDeal = ?, message = ?, jobApplicationStatus = 1 WHERE jobApplicationID = ? and resumeID = ? and jobID = ?";
-    private String SEARCHJOBORDER = "SELECT ja.jobApplicationID,ISNULL(jobAply.bids,0) AS bids, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, ja.jobApplicationStatus, "
+    private final String SEARCHJOBORDER = "SELECT ja.jobApplicationID,ISNULL(jobAply.bids,0) AS bids, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, ja.jobApplicationStatus, "
             + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.minBudget,j.maxBudget, j.paymentMethodID, pm.paymentMethodName, "
             + "j.address, j.email, j.phone, j.description, j.lastModifiedDate "
             + "FROM ((((tblJobApplications ja LEFT JOIN tblJobs j ON ja.jobID = j.jobID) "
@@ -131,7 +131,7 @@ public class JobApplicationDAO {
                 preStm.setString(3, form.getCvFile());
                 preStm.setInt(4, resumeID);
                 preStm.setInt(5, jobID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -188,7 +188,7 @@ public class JobApplicationDAO {
                 preStm.setString(3, jobOrder.getCvFile());
                 preStm.setString(4, jobOrder.getPriceDeal());
                 preStm.setString(5, jobOrder.getMessage());
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -221,7 +221,7 @@ public class JobApplicationDAO {
                 preStm.setInt(4, jobOrderID);
                 preStm.setInt(5, jobOrder.getResumeID());
                 preStm.setInt(6, jobOrder.getJob().getJobID());
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -655,7 +655,7 @@ public class JobApplicationDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(DELETE);
                 preStm.setInt(1, jobOrderID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -678,7 +678,7 @@ public class JobApplicationDAO {
                 preStm = conn.prepareStatement(UNAPLLY);
                 preStm.setString(1, reasonUnaplly);
                 preStm.setInt(2, jobOrderID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -702,7 +702,7 @@ public class JobApplicationDAO {
                 preStm.setString(1, reasonReject);
                 preStm.setInt(2, resumeID);
                 preStm.setInt(3, jobID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -724,7 +724,7 @@ public class JobApplicationDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(UNCOMPLETE_JOBAPPLICATION);
                 preStm.setInt(1, jobAppID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -746,7 +746,7 @@ public class JobApplicationDAO {
             if (conn != null) {
                 preStm = conn.prepareStatement(COMPLETE_JOBAPPLICATION);
                 preStm.setInt(1, jobAppID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -769,7 +769,7 @@ public class JobApplicationDAO {
                 preStm = conn.prepareStatement(ACCEPT_JOBAPPLICATION);
                 preStm.setInt(1, resumeID);
                 preStm.setInt(2, jobID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -792,7 +792,7 @@ public class JobApplicationDAO {
                 preStm = conn.prepareStatement(UNAPLLYWHENJOBHAVECANDIDATES_JOBAPPLICATION);
                 preStm.setString(1, reasonRejection);
                 preStm.setInt(2, jobID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1074,7 +1074,7 @@ public class JobApplicationDAO {
                 preStm = conn.prepareStatement(UPDATE_STATUS_APPLICATION);
                 preStm.setInt(1, jobApplicationStatus);
                 preStm.setInt(2, jobApplicationID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();

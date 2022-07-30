@@ -42,7 +42,7 @@ public class UnApplyController extends HttpServlet {
 
             }
         } catch (Exception e) {
-            log("Error at DeleteController: " + e.toString());
+            log("Error at DeleteController: " + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

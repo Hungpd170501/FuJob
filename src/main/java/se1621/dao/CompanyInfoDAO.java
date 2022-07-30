@@ -53,7 +53,7 @@ public class CompanyInfoDAO {
                 preStm.setString(9, company.getCompanyOverview());
                 preStm.setString(10, company.getAvatar());
 
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } finally {
             if (rs != null) {
@@ -264,7 +264,7 @@ public class CompanyInfoDAO {
                 preStm.setString(9, company.getCompanyOverview());
                 preStm.setString(10, company.getAvatar());
                 preStm.setInt(11, company.getCompanyID());
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -287,7 +287,7 @@ public class CompanyInfoDAO {
                 preStm = conn.prepareStatement(UPDATE_BUSINESSLICENSE);
                 preStm.setString(1, businessLicense);
                 preStm.setInt(2, companyID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();

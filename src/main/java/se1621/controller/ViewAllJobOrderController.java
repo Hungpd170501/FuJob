@@ -61,7 +61,7 @@ public class ViewAllJobOrderController extends HttpServlet {
                 request.setAttribute("MESSAGE", "YOU HAVEN'T APPLIED FOR ANY PROJECT");
             }
         } catch (Exception e) {
-            log("Error at View all job Controller" + e.toString());
+            log("Error at View all job Controller" + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

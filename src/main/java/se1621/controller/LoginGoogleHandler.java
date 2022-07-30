@@ -123,7 +123,7 @@ public class LoginGoogleHandler extends HttpServlet {
             }
         } catch (Exception e) {
             request.setAttribute("LOGIN_MESSAGE", "Opp Something wrong!");
-            log("Error at LoginGoogleHandler: " + e.toString());
+            log("Error at LoginGoogleHandler: " + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

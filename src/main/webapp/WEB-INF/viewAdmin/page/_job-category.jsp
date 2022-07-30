@@ -1,4 +1,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div class="border-bottom-2 py-32pt position-relative z-1">
+    <div
+            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left">
+        <div class="flex d-flex flex-column flex-sm-row align-items-center mb-24pt mb-md-0">
+
+            <div class="mb-24pt mb-sm-0 mr-sm-24pt">
+                <h2 class="mb-0">Project Categories Management</h2>
+                <ol class="breadcrumb p-0 m-0">
+                    <li class="breadcrumb-item"><a
+                            href="${pageContext.request.contextPath}/MainController?action=AdminIndex">Home</a></li>
+                    <li class="breadcrumb-item active">
+                        Project Category
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container page__container">
     <div class="page-section">
 
@@ -8,7 +26,7 @@
         <div class="row mb-32pt">
             <div class="col-lg-4">
                 <div class="page-separator">
-                    <div class="page-separator__text">Add a new Job Category</div>
+                    <div class="page-separator__text">Add a new Project Category</div>
                 </div>
                 <div class="flex" style="max-width: 100%">
                     <form method="POST" id="create-job-category-form">
@@ -93,40 +111,40 @@
     </div>
 </div>
 <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity=""
-        crossorigin="anonymous"></script>
+crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity=""
-        crossorigin="anonymous"></script>
+crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.6/bootstrap-growl.min.js" integrity=""></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js" integrity=""></script>
 <script>
-    $(document).ready(function () {
-        $('#create').on('click', function () {
-            var name = $('#categoryName').val();
-            console.log("success");
+$(document).ready(function () {
+$('#create').on('click', function () {
+var name = $('#categoryName').val();
+console.log("success");
 
-            $.ajax({
-                url: '/AddJobCategoryController?name=' + name,
-                type: "POST",
-                success: function (data, status, xhr) {
-                    console.log(data + ", status" + status);
-//                    $('#authorTable').append('<tr id=' + data.id + '><td data-target=name>' + data.categoryName + '</td><td>'  + '</td><td>'  + '</td><td>'  + '</td><td>'  + '</td><td> <button type="button" data-id='  + ' class="edit btn btn-primary btn-sm">Edit</button><button id="deleteBtn" type="button" data-id='  + ' class="delete btn btn-danger btn-sm">Delete</button></td></tr>');
-                    $.bootstrapGrowl("another message, yay!", {
-                        ele: 'body', // which element to append to
-                        type: 'info', // (null, 'info', 'error', 'success')
-                        offset: {from: 'top', amount: 20}, // 'top', or 'bottom'
-                        align: 'right', // ('left', 'right', or 'center')
-                        width: 250, // (integer, or 'auto')
-                        delay: 4000,
-                        allow_dismiss: true,
-                        stackup_spacing: 10 // spacing between consecutively stacked growls.
-                    });
-                },
-                error: function (jqXhr, textStatus, errorMessage) { // error callback 
-                    console.log(errorMessage);
-                }
-            });
-        });
-    });
+$.ajax({
+url: '/AddJobCategoryController?name=' + name,
+type: "POST",
+success: function (data, status, xhr) {
+console.log(data + ", status" + status);
+// $('#authorTable').append('<tr id=' + data.id + '><td data-target=name>' + data.categoryName + '</td><td>' + '</td><td>' + '</td><td>' + '</td><td>' + '</td><td> <button type="button" data-id=' + ' class="edit btn btn-primary btn-sm">Edit</button><button id="deleteBtn" type="button" data-id=' + ' class="delete btn btn-danger btn-sm">Delete</button></td></tr>');
+$.bootstrapGrowl("another message, yay!", {
+ele: 'body', // which element to append to
+type: 'info', // (null, 'info', 'error', 'success')
+offset: {from: 'top', amount: 20}, // 'top', or 'bottom'
+align: 'right', // ('left', 'right', or 'center')
+width: 250, // (integer, or 'auto')
+delay: 4000,
+allow_dismiss: true,
+stackup_spacing: 10 // spacing between consecutively stacked growls.
+});
+},
+error: function (jqXhr, textStatus, errorMessage) { // error callback
+console.log(errorMessage);
+}
+});
+});
+});
 </script>-->

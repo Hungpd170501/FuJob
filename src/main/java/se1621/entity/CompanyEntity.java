@@ -65,6 +65,9 @@ public class CompanyEntity {
 
     @Column(name = "companyStatus")
     private Integer companyStatus;
+    
+    @Column(name = "businessLicense", length = 2000)
+    private String businessLicense;
 
     @OneToMany(mappedBy = "companyID")
     private Set<UserEntity> users;

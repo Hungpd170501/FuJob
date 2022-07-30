@@ -96,7 +96,7 @@ public class SearchJobIDController extends HttpServlet {
 
 
         } catch (Exception e) {
-            log("Error at SearchCompanyIDController: " + e.toString());
+            log("Error at SearchCompanyIDController: " + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

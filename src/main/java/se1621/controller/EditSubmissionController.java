@@ -68,7 +68,7 @@ public class EditSubmissionController extends HttpServlet {
                 }
             }
         } catch (Exception e) {
-            log("Error at EditSubmissionController: " + e.toString());
+            log("Error at EditSubmissionController: " + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

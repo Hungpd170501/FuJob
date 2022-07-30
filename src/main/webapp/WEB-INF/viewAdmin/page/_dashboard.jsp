@@ -1,3 +1,21 @@
+<div class="border-bottom-2 py-32pt position-relative z-1">
+    <div
+            class="container page__container d-flex flex-column flex-md-row align-items-center text-center text-sm-left">
+        <div class="flex d-flex flex-column flex-sm-row align-items-center mb-24pt mb-md-0">
+
+            <div class="mb-24pt mb-sm-0 mr-sm-24pt">
+                <h2 class="mb-0">Dashboard</h2>
+                <ol class="breadcrumb p-0 m-0">
+                    <li class="breadcrumb-item"><a
+                            href="${pageContext.request.contextPath}/MainController?action=AdminIndex">Home</a></li>
+                    <li class="breadcrumb-item active">
+                        Dashboard
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container page__container">
     <div class="page-section">
         <div class="row mb-lg-8pt">
@@ -337,7 +355,7 @@
                                 <div><strong>Developers Meeting</strong></div>
 
                                 <div class="lh-1 mb-16pt"><small class="text-50">Tuesday 17:30 -
-                                                                                 18:30</small></div>
+                                    18:30</small></div>
 
                                 <div class="avatar-group mb-16pt">
 
@@ -362,8 +380,8 @@
                                 </div>
 
                                 <p class="mb-0 text-50">Moreover the striking, brilliant and vivid colors
-                                                        are the reason why we are attracted to the posters that we
-                                                        see.</p>
+                                    are the reason why we are attracted to the posters that we
+                                    see.</p>
 
                             </div>
                         </div>
@@ -441,7 +459,7 @@
 
                                     <div class="d-flex flex-column">
                                         <p class="mb-0"><strong class="js-lists-values-name">Billy
-                                                                                             Nunez</strong></p>
+                                            Nunez</strong></p>
                                         <small
                                                 class="js-lists-values-email text-50">annabell.kris@yahoo.com</small>
                                     </div>
@@ -461,7 +479,7 @@
                                 <div class="media-body">
                                     <div class="d-flex flex-column">
                                         <small class="js-lists-values-company"><strong>Frontend Matter
-                                                                                       Inc.</strong></small>
+                                            Inc.</strong></small>
                                         <small
                                                 class="js-lists-values-location text-50">Leuschkefurt</small>
                                     </div>
@@ -499,7 +517,7 @@
 
                                     <div class="d-flex flex-column">
                                         <p class="mb-0"><strong class="js-lists-values-name">Tony
-                                                                                             Parks</strong></p>
+                                            Parks</strong></p>
                                         <small
                                                 class="js-lists-values-email text-50">vida_glover@gmail.com</small>
                                     </div>
@@ -519,7 +537,7 @@
                                 <div class="media-body">
                                     <div class="d-flex flex-column">
                                         <small class="js-lists-values-company"><strong>Huma Huma
-                                                                                       Inc.</strong></small>
+                                            Inc.</strong></small>
                                         <small
                                                 class="js-lists-values-location text-50">Mayerberg</small>
                                     </div>
@@ -559,7 +577,7 @@
 
                                     <div class="d-flex flex-column">
                                         <p class="mb-0"><strong class="js-lists-values-name">Gilbert
-                                                                                             Barrett</strong></p>
+                                            Barrett</strong></p>
                                         <small
                                                 class="js-lists-values-email text-50">paolo.zieme@gmail.com</small>
                                     </div>
@@ -604,7 +622,7 @@
 
                                     <div class="d-flex flex-column">
                                         <p class="mb-0"><strong class="js-lists-values-name">Ollie
-                                                                                             Wallace</strong></p>
+                                            Wallace</strong></p>
                                         <small
                                                 class="js-lists-values-email text-50">lorna_kirlin@nora.biz</small>
                                     </div>

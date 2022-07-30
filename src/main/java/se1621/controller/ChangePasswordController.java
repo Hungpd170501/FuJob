@@ -78,7 +78,7 @@ public class ChangePasswordController extends HttpServlet {
             }
         } catch (Exception e) {
             request.setAttribute("LOGIN_MESSAGE", "Something wrong!!");
-            log("Error at LoginController: " + e.toString());
+            log("Error at LoginController: " + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

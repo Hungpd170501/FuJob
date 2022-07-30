@@ -15,7 +15,7 @@ import se1621.utils.HibernateUtils;
  * @author ACER
  */
 public class JobDAOImpl extends BaseDAOImpl implements  JobDAO{
-    private Session session=HibernateUtils.getSession();
+    private final Session session=HibernateUtils.getSession();
     @Override
     public void save(JobEntity jobEntity) {
         super.saveEntity(jobEntity);

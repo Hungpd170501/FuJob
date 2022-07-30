@@ -72,7 +72,7 @@ public class SearchInJobPostedController extends HttpServlet {
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at Search JobPostedController" + toString());
+            log("Error at Search JobPostedController" + this);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

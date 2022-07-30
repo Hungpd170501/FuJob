@@ -60,7 +60,7 @@ public class UpdateFormApplicationController extends HttpServlet {
                 url = SUCCESS + userID;
             }
         } catch (Exception e) {
-            log("error at UpdateFormApplicationController" + e.toString());
+            log("error at UpdateFormApplicationController" + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

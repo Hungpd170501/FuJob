@@ -48,7 +48,7 @@ public class DeleteJobPostController extends HttpServlet {
                request.setAttribute("MESSAGE_CANCEL", "Cancel successfull!");
             }
         }catch(Exception ex){
-            log("Error at DeleteJobPostController: " + ex.toString());
+            log("Error at DeleteJobPostController: " + ex);
         }finally{
              request.getRequestDispatcher(url).forward(request, response);
         }

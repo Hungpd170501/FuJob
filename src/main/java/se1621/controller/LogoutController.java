@@ -33,7 +33,7 @@ public class LogoutController extends HttpServlet {
                 url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at LogoutController:" + e.toString());
+            log("Error at LogoutController:" + e);
         } finally {
             response.sendRedirect(url);
         }

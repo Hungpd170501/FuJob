@@ -146,7 +146,7 @@ public class UserDAO {
         return check;
     }
 
-    public User checkLogin(String email, String password) throws SQLException, Exception {
+    public User checkLogin(String email, String password) throws Exception {
         User user = null;
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -179,7 +179,7 @@ public class UserDAO {
         return user;
     }
 
-    public User checkUserByEmail(String email) throws SQLException, Exception {
+    public User checkUserByEmail(String email) throws Exception {
         User user = null;
         try {
             conn = DBUtils.getInstance().getConnection();

@@ -241,7 +241,7 @@ public class ResumeDAO {
                 preStm.setString(13, resume.getLinkedIn());
                 preStm.setString(14, resume.getOverview());
 
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -310,7 +310,7 @@ public class ResumeDAO {
                 preStm.setString(12, resume.getLinkedIn());
                 preStm.setString(13, resume.getOverview());
                 preStm.setInt(14, resumeID);
-                check = preStm.executeUpdate() > 0 ? true : false;
+                check = preStm.executeUpdate() > 0;
             }
         } catch (Exception e) {
             e.printStackTrace();

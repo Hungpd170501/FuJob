@@ -8,8 +8,11 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import se1621.dao.v2.CategoryDAOImpl;
+import se1621.dao.v2.RoleDAO;
+import se1621.dao.v2.RoleDAOImpl;
 import se1621.dao.v2.SkillDAOImpl;
 import se1621.entity.CategoryEntity;
+import se1621.entity.RoleEntity;
 import se1621.entity.SkillEntity;
 import se1621.utils.DBUtils;
 import se1621.utils.FirebaseUtils;
@@ -96,8 +99,17 @@ public class ContextListener implements ServletContextListener {
                 log(t.getMessage());
             }
         });
+        CompletableFuture<Void> future13 = CompletableFuture.runAsync(() -> {
+            try {
+                RoleDAO roleDAO = new RoleDAOImpl();
+                List<RoleEntity> listRole = roleDAO.getAll("RoleEntity");
+                context.setAttribute("ROLE_LIST", listRole);
+            } catch (Throwable t) {
+                log(t.getMessage());
+            }
+        });
         try {
-            CompletableFuture.allOf(future11, future12).get();
+            CompletableFuture.allOf(future11, future12, future13).get();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }

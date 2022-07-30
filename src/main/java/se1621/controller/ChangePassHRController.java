@@ -21,8 +21,8 @@ import se1621.utils.Helper;
 @WebServlet(name="ChangePassHRController", urlPatterns={"/ChangePassHRController"})
 public class ChangePassHRController extends HttpServlet {
    
-    private String SUCCESS = "/MainController?action=ViewAllHR&companyID=";
-    private String ERROR = "/view/error.jsp";
+    private final String SUCCESS = "/MainController?action=ViewAllHR&companyID=";
+    private final String ERROR = "/view/error.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -41,7 +41,7 @@ public class ChangePassHRController extends HttpServlet {
                 url = SUCCESS + companyID;
             }
         } catch (Exception e) {
-            log("Error at View all job Controller" + e.toString());
+            log("Error at View all job Controller" + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
