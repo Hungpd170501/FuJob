@@ -1,4 +1,5 @@
 
+<%@page import="se1621.dto.User"%>
 <%@page import="se1621.dto.Disputes"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.sql.Date"%>
@@ -55,6 +56,7 @@
                 <div class="container">
                     <div class="row justify-content-center">
                     <%
+                        User us = (User) session.getAttribute("LOGIN_USER");
                         String messResume = (String) request.getAttribute("MESSAGE_UPDATE");
                         if (messResume != null) {
                     %>
@@ -150,7 +152,8 @@
                                                             Date dateNow = new java.sql.Date(Calendar.getInstance().getTime().getTime());
                                                             long dayBetween = dateNow.getTime() - dispute.getCreatedDate().getTime();
                                                             long dayResult = dayBetween / (24 * 60 * 60 * 1000);
-                                                            if (dayResult > 3) {
+                                                            if (dispute.getUser().getUserID() == us.getUserID()) {
+                                                                if (dayResult > 3) {
                                                         %>
                                                         <br>
                                                         <div class="mt-3">
@@ -164,6 +167,16 @@
                                                             <button onclick="getDisputeID(<%= dispute.getDisputeID()%>)" class="btn btn-sm btn-danger-outline" data-toggle="modal" data-target="#CancelDispute" style="width: 50%">Cancel</button>
                                                         </div>
                                                         <%
+                                                            }
+                                                        } else {
+                                                            if (dayResult > 3) {
+                                                        %>
+                                                        <br>
+                                                        <div class="mt-3">
+                                                            <button onclick="getDisputeI(<%= dispute.getDisputeID()%>)" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#sendEvidence" style="width: 50%">Send Evidence</button>
+                                                        </div>
+                                                        <%
+                                                                }
                                                             }
                                                         %>
                                                     </div>
