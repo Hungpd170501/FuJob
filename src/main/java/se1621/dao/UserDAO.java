@@ -26,7 +26,7 @@ public class UserDAO {
     private static final String GETALLTOTALUSER_NONAD = "SELECT COUNT (userID) AS totalUser FROM tblUsers "
             + "WHERE roleID <> 'AD';";
     private static final String GETLISTUSERBYCOMPANYID = "SELECT u.userID, u.fullName, u.email, u.roleID, r.roleName, u.companyID, "
-            + "r.createdDate, u.userStatus, (SELECT COUNT (*) FROM tblJobs j WHERE j.userID = u.userID) AS projectPosted  "
+            + "r.createdDate, u.userStatus, (SELECT COUNT (*) FROM tblJobs j WHERE j.userID = u.userID and j.jobStatus IN (1)) AS projectPosted  "
             + "FROM (tblUsers u left join tblRoles r on u.roleID = r.roleID) WHERE u.companyID = ?";
     private static final String UPDATE_USERSTATUS = "UPDATE tblUsers SET userStatus=? WHERE userID=?";
     private static final String UPDATE_USERFULLNAME = "UPDATE tblUsers SET fullName=? WHERE userID=?";
