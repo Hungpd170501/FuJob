@@ -157,13 +157,13 @@
                                                         %>
                                                         <br>
                                                         <%
-                                                            if(dispute.getEvidence().getEvidenceID()>0){
+                                                            if (dispute.getEvidence().getEvidenceID() > 0) {
                                                         %>
-                                                            <div class="mt-3">
-                                                                <button onclick="viewEvidence('<%= dispute.getEvidence().getMessage() %>', '<%= dispute.getEvidence().getEvidenceFile() %>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#viewEvidence" style="width: 50%">View Evidence</button>
-                                                            </div>
+                                                        <div class="mt-3">
+                                                            <button onclick="viewEvidence('<%= dispute.getEvidence().getMessage()%>', '<%= dispute.getEvidence().getEvidenceFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#viewEvidence" style="width: 50%">View Evidence</button>
+                                                        </div>
                                                         <%
-                                                            } else {
+                                                        } else {
                                                         %>
                                                         <div class="mt-3">
                                                             <button onclick="getDisputeI(<%= dispute.getDisputeID()%>)" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#sendEvidence" style="width: 50%">Send Evidence</button>
@@ -182,9 +182,21 @@
                                                             if (dayResult > 3) {
                                                         %>
                                                         <br>
+                                                        <%
+                                                            if (dispute.getEvidence().getEvidenceID() > 0) {
+                                                        %>
+                                                        <div class="mt-3">
+                                                            <button onclick="viewEvidence('<%= dispute.getEvidence().getMessage()%>', '<%= dispute.getEvidence().getEvidenceFile()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#viewEvidence" style="width: 50%">View Evidence</button>
+                                                        </div>
+                                                        <%
+                                                        } else {
+                                                        %>
                                                         <div class="mt-3">
                                                             <button onclick="getDisputeI(<%= dispute.getDisputeID()%>)" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#sendEvidence" style="width: 50%">Send Evidence</button>
                                                         </div>
+                                                        <%
+                                                            }
+                                                        %>
                                                         <%
                                                                 }
                                                             }
@@ -255,29 +267,29 @@
                                     </div>
                                 </div>
                                 <div class="modal fade" id="viewEvidence" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered " role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header border-bottom-0 bg-warning">
-                                                    <h5 class="modal-title text-white" id="exampleModalLabel">Your Sent Evidence</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
+                                    <div class="modal-dialog modal-dialog-centered " role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header border-bottom-0 bg-warning">
+                                                <h5 class="modal-title text-white" id="exampleModalLabel">Your Sent Evidence</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
 
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-6 form-group text-dark">
-                                                            <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="evidenceFile" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View Evidence You Sent</p></a>
-                                                        </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-6 form-group text-dark">
+                                                        <a class=""  target="_blank" rel="noopener noreferrer" type="text" id="evidenceFile" href="" ><p style="text-decoration: underline"> <i class="mdi mdi-link-variant"></i> View Evidence You Sent</p></a>
                                                     </div>
-                                                    <div class="form-group text-dark">
-                                                        <label style="font-size: 16px">Your Story: </label>
-                                                        <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="yourStory"></p></div>
-                                                    </div>
+                                                </div>
+                                                <div class="form-group text-dark">
+                                                    <label style="font-size: 16px">Your Story: </label>
+                                                    <div style="height: 100px" class="form-control overflow-auto"><p  disabled="" id="yourStory"></p></div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>                
+                                    </div>
+                                </div>                
                             </li> 
                             <%
                                             }

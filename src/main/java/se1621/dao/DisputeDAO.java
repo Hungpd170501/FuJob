@@ -32,14 +32,14 @@ public class DisputeDAO {
             + "FROM ((((tblDisputes d left join tblJobApplications ja on ja.jobApplicationID = d.jobApplicationID) left join  "
             + "           tblJobs j on j.jobID = ja.jobID) "
             + "            left join tblResumes as r on r.resumeID = ja.resumeID ) "
-            + "			left join tblEvidences e on d.disputeID = e.disputeID)"
+            + "			left join tblEvidences e on d.disputeID = e.disputeID AND e.userID = r.userID)"
             + "          WHERE r.userID = ? AND j.disputeStatus = 1 order by d.createdDate desc";
     private static final String GET_LIST_HR_DISPUTE = "SELECT d.disputeID,ja.resumeID,r.userID as studentID,j.disputeStatus, d.title, d.message, d.jobApplicationID, d.userID as creatorID, d.createdDate, d.lastModifiedDate, d.disputeStatus as disStatus, "
             + "  evidenceID, e.message as messEvi, e.evidenceFile         "
             + "FROM ((((tblDisputes d left join tblJobApplications ja on ja.jobApplicationID = d.jobApplicationID) left join  "
             + "           tblJobs j on j.jobID = ja.jobID) "
             + "            left join tblResumes as r on r.resumeID = ja.resumeID ) "
-            + "			left join tblEvidences e on d.disputeID = e.disputeID)"
+            + "			left join tblEvidences e on d.disputeID = e.disputeID AND e.userID = j.userID )"
             + "          WHERE j.userID = ? AND j.disputeStatus = 1 order by d.createdDate desc";
 
     private static final String INSERT_REASON_CANCEL = "UPDATE tblDisputes SET reasonCancelDispute = ?, disputeStatus = 0 WHERE disputeID = ?";
@@ -164,7 +164,7 @@ public class DisputeDAO {
         }
         return null;
     }
-
+    
     public List<Disputes> getListDisputeHrByUserID(int userID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
