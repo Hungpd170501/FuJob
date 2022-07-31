@@ -80,8 +80,11 @@
                         <div class="row align-items-center">
                             <div class="col-lg-12">
                                 <div class="show-results">
-                                    <div class="float-left registration-form-box">
-                                        <input style="width: 150%" type="text" id="searchjs" onkeyup="myFunction()" placeholder="Search project name..">
+                                    <!--                                    <div class="float-left registration-form-box">
+                                                                            <input style="width: 150%" type="text" id="searchjs" onkeyup="myFunction()" placeholder="Search project name..">
+                                                                        </div>-->
+                                    <div class="float-left">
+                                        <h5 class="text-dark mb-0 pt-2 f-18">Showing result</h5>
                                     </div>
                                     <!-- Select tình trang JOB -->
                                     <div class="cell-md-4 mt-4 float-right">
