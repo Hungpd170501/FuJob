@@ -4,10 +4,6 @@
  */
 package se1621.controller.admin;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,10 +13,11 @@ import se1621.dao.v2.UserDAOImpl;
 import se1621.entity.RoleEntity;
 import se1621.entity.UserEntity;
 
-import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.groupingBy;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 @WebServlet(name = "UserController", urlPatterns = {"/UserController"})
 public class UserController extends HttpServlet {
@@ -28,26 +25,30 @@ public class UserController extends HttpServlet {
     private static final String ERROR = "/view/error.jsp";
     private static final String SUCCESS = "/WEB-INF/viewAdmin/users-list.jsp";
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
             UserDAOImpl userDAOImpl = new UserDAOImpl();
             List<UserEntity> listAllUser = userDAOImpl.getAll("UserEntity");
-            Map<RoleEntity, List<UserEntity>> listUserByRoles = listAllUser.stream().filter(e -> e.getRole() != null).collect(groupingBy(UserEntity::getRole, toList()));
+            Map<RoleEntity, List<UserEntity>> listUserByRoles
+                    = listAllUser.stream()
+                    .filter(e -> e.getRole() != null)
+                    .collect(groupingBy(UserEntity::getRole, toList()));
             listUserByRoles.forEach((key, value) -> {
-                        request.setAttribute("COUNT_TOTAL_" + key.getRoleID(), value.size());
-                        Map<Integer, Long> map = value.stream().filter(entity -> entity.getUserStatus() != null).collect(groupingBy(UserEntity::getUserStatus, counting()));
-                        if (map.size() != 3) {
-                            for (int i = 0; i <= 2; i++)
-                                map.putIfAbsent(i, 0L);
-                        }
-                        for (var entry : map.entrySet()) {
-                            request.setAttribute(key.getRoleID() + "_" + entry.getKey(), entry.getValue());
-                        }
-                    }
-            );
+                request.setAttribute("COUNT_TOTAL_" + key.getRoleID(), value.size());
+                Map<Integer, Long> map
+                        = value.stream()
+                        .filter(entity -> entity.getUserStatus() != null)
+                        .collect(groupingBy(UserEntity::getUserStatus, counting()));
+                if (map.size() != 3) {
+                    for (int i = 0; i <= 2; i++)
+                        map.putIfAbsent(i, 0L);
+                }
+                for (var entry : map.entrySet()) {
+                    request.setAttribute(key.getRoleID() + "_" + entry.getKey(), entry.getValue());
+                }
+            });
             request.setAttribute("COUNT_USER_LIST", listAllUser.size());
             request.setAttribute("USER_LIST", listAllUser);
             url = SUCCESS;
@@ -69,8 +70,7 @@ public class UserController extends HttpServlet {
      * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -83,8 +83,7 @@ public class UserController extends HttpServlet {
      * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
 

@@ -64,9 +64,11 @@ public class JobDAO {
             + "								WHERE jobApplicationStatus = 1 "
             + "								GROUP BY jobID) AS jobApp "
             + "								on j.jobID = jobApp.jobID) "
-            + "                               WHERE (j.jobStatus = 1 OR  j.jobStatus = 3 OR  j.jobStatus = 4)AND j.userID= ? ORDER BY createdDate DESC";
+            + "                               WHERE (j.jobStatus = 1 )AND j.userID= ? ORDER BY createdDate DESC";
+   
 
     private static final String DELETEJOBPOST = "UPDATE tblJobs SET jobStatus=0, reasonCancel = ? WHERE jobID=?";
+    private static final String REJECTJOBPOST = "UPDATE tblJobs SET jobStatus=3 WHERE jobID=?";
     private static final String UPDATE_JOB_POST_HAVE_EMPLOYER = "UPDATE tblJobs SET jobStatus=3 WHERE jobID=? AND jobStatus=1 ";
     private static final String UPDATE_JOB_POST_UNCOMPLETE = "UPDATE tblJobs SET jobStatus=6 WHERE jobID=? AND jobStatus IN (3,8) ";
     private static final String UPDATE_JOB_POST_COMPLETE = "UPDATE tblJobs SET jobStatus=5 WHERE jobID=? AND jobStatus=8 ";
@@ -85,7 +87,7 @@ public class JobDAO {
     private ResultSet rs;
 
     private static final String UPDATE_JOB = "UPDATE tblJobs SET userID=?, jobTitle=?, jobCategoryID=?, address=?, paymentMethodID=?, email=?, expiriedDate=?, phone=?, minBudget=?, maxBudget=? , description=? WHERE jobID=?";
-
+    private final static String UPDATE_DISPUTE_STATUS = "UPDATE tblJobs SET disputeStatus = ? WHERE jobID = ?";
     // top recent job in index.jsp
     public List<Job> getRecentJobPosted() throws SQLException {
         try {
@@ -355,6 +357,7 @@ public class JobDAO {
         }
         return jobID;
     }
+    
 
     public List<Job> searchAllJobTile_Skill_Category(String searchJobTitle, int searchSkillID, int searchJobCategoryID) throws SQLException {
         try {
@@ -650,6 +653,67 @@ public class JobDAO {
         }
         return null;
     }
+    public List<Job> getListHrPastJob(int userID) throws SQLException {
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(VIEWHRJOB);
+                preStm.setInt(1, userID);
+                rs = preStm.executeQuery();
+                List<Job> listHrJob = new ArrayList<>();
+                while (rs.next()) {
+                    int jobID = rs.getInt("jobID");
+                    String jobTitle = rs.getString("jobTitle");
+                    Date lastModifiedDate = rs.getDate("lastModifiedDate");
+                    String address = rs.getString("address");
+                    String description = rs.getString("description");
+                    Date createdDate = rs.getDate("createdDate");
+                    Date expiriedDate = rs.getDate("expiriedDate");
+                    int paymentMethodID = rs.getInt("paymentMethodID");
+                    String paymentMethodName = rs.getString("paymentMethodName");
+                    float minBudget = rs.getFloat("minBudget");
+                    float maxBudget = rs.getFloat("maxBudget");
+                    String categoryName = rs.getString("categoryName");
+                    String img = rs.getString("img");
+                    int status = rs.getInt("jobStatus");
+                    int bids = rs.getInt("bids");
+                    Category category = Category.builder().categoryName(categoryName).img(img).build();
+                    PayMentMethod payment = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
+                    Job job = Job.builder()
+                            .userID(userID)
+                            .jobID(jobID)
+                            .jobTitle(jobTitle)
+                            .address(address)
+                            .category(category)
+                            .description(description)
+                            .lastModifiedDate(lastModifiedDate)
+                            .createdDate(createdDate)
+                            .expiriedDate(expiriedDate)
+                            .payMentMethod(payment)
+                            .minBudget(minBudget)
+                            .maxBudget(maxBudget)
+                            .jobStatus(status)
+                            .bids(bids)
+                            .build();
+                    listHrJob.add(job);
+                }
+                return listHrJob;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
 
     public boolean deleteJobPost(int jobPostID, String reasonCancel) throws SQLException {
         boolean check = false;
@@ -660,6 +724,28 @@ public class JobDAO {
                 preStm.setString(1, reasonCancel);
                 preStm.setInt(2, jobPostID);
                 check = preStm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+   
+    public boolean rejectJobPost(int jobID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(REJECTJOBPOST);
+                preStm.setInt(1, jobID);
+                check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -809,6 +895,29 @@ public class JobDAO {
                 preStm.setInt(1, jobStatus);
                 preStm.setInt(2, jobID);
                 check = preStm.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    public boolean updateDisputeStatus(int disputeStatus, int jobID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UPDATE_DISPUTE_STATUS);
+                preStm.setInt(1, disputeStatus);
+                preStm.setInt(2, jobID);
+                check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
             e.printStackTrace();

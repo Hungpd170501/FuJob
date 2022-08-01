@@ -18,7 +18,8 @@
                 </li>
                 <li class="sidebar-menu-item" data-title="Dashboards" data-placement="right"
                     data-boundary="window">
-                    <a class="sidebar-menu-button" href="${pageContext.request.contextPath}/MainController?action=AdminIndex"
+                    <a class="sidebar-menu-button"
+                       href="${pageContext.request.contextPath}/MainController?action=AdminIndex"
                        aria-controls="sm_dashboards"
                        aria-selected="true">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dashboard</i>
@@ -27,29 +28,33 @@
                 </li>
                 <li class="sidebar-menu-item " data-title="Account" data-placement="right" data-container="body"
                     data-boundary="window">
-                    <a class="sidebar-menu-button" href="${pageContext.request.contextPath}/MainController?action=UserList"
-                       >
+                    <a class="sidebar-menu-button"
+                       href="${pageContext.request.contextPath}/MainController?action=UserList"
+                    >
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_box</i>
                         <span class="sidebar-menu-text">Users</span>
                     </a>
                 </li>
                 <li class="sidebar-menu-item " data-title="Company" data-placement="right" data-container="body"
                     data-boundary="window">
-                    <a class="sidebar-menu-button" href="${pageContext.request.contextPath}/MainController?action=CompanyList">
+                    <a class="sidebar-menu-button"
+                       href="${pageContext.request.contextPath}/MainController?action=CompanyList">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">business</i>
                         <span class="sidebar-menu-text">Companies</span>
                     </a>
                 </li>
                 <li class="sidebar-menu-item " data-title="Job" data-placement="right" data-container="body"
                     data-boundary="window">
-                    <a class="sidebar-menu-button" href="${pageContext.request.contextPath}/MainController?action=JobList">
+                    <a class="sidebar-menu-button"
+                       href="${pageContext.request.contextPath}/MainController?action=JobList">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">work</i>
                         <span class="sidebar-menu-text">Projects</span>
                     </a>
                 </li>
                 <li class="sidebar-menu-item " data-title="Job" data-placement="right" data-container="body"
                     data-boundary="window">
-                    <a class="sidebar-menu-button" href="${pageContext.request.contextPath}/MainController?action=JobList">
+                    <a class="sidebar-menu-button"
+                       href="${pageContext.request.contextPath}/MainController?action=DisputeList">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">receipt</i>
                         <span class="sidebar-menu-text">Disputes</span>
                     </a>
@@ -62,14 +67,14 @@
                         <span class="sidebar-menu-text">Others</span>
                     </a>
                 </li>
-                <li class="sidebar-menu-item " data-title="Messaging" data-placement="right"
+<!--                <li class="sidebar-menu-item " data-title="Messaging" data-placement="right"
                     data-container="body" data-boundary="window">
                     <a class="sidebar-menu-button" href="#sm_messaging" data-toggle="tab" role="tab"
                        aria-controls="#sm_messaging">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">message</i>
                         <span class="sidebar-menu-text">Messaging</span>
                     </a>
-                </li>
+                </li>-->
             </ul>
         </div>
 

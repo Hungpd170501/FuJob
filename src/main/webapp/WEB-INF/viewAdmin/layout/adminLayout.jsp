@@ -4,7 +4,7 @@
 <html lang="en" dir="ltr">
 <head>
     <jsp:include page="/WEB-INF/viewAdmin/include/head.jsp">
-        <jsp:param name="title" value="FuJob | Admin Dashboard"/>
+        <jsp:param name="title" value="FuJob | Admin Page"/>
     </jsp:include>
 </head>
 <body class="layout-compact layout-sticky-subnav layout-compact">

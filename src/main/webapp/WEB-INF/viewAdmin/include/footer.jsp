@@ -5,12 +5,12 @@
                  width="80" alt="FuJob">
         </p>
         <p class="measure-lead-max text-muted mb-0 small">FuJob is a beautifully crafted user interface for
-                                                          modern Business Admin Web Applications, with examples for many
-                                                          pages needed for Customer
-                                                          Relationship Management, Enterprise Resource Planning, FuJobn
-                                                          Resources, Content Management
-                                                          System, Project Management, Tasks, eCommerce, Messaging and
-                                                          Account Management.</p>
+            modern Business Admin Web Applications, with examples for many
+            pages needed for Customer
+            Relationship Management, Enterprise Resource Planning, FuJobn
+            Resources, Content Management
+            System, Project Management, Tasks, eCommerce, Messaging and
+            Account Management.</p>
     </div>
     <div class="pb-16pt pb-lg-24pt">
         <div class="container page__container">

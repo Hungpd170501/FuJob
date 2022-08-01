@@ -30,6 +30,7 @@ public class UserDAO {
             + "FROM (tblUsers u left join tblRoles r on u.roleID = r.roleID) WHERE u.companyID = ?";
     private static final String UPDATE_USERSTATUS = "UPDATE tblUsers SET userStatus=? WHERE userID=?";
     private static final String UPDATE_USERFULLNAME = "UPDATE tblUsers SET fullName=? WHERE userID=?";
+    private static final String CREATE_USER = "INSERT INTO tblUsers(fullName, email, password, roleID, userStatus) VALUES(?,?,?,?,1)";
     private Connection conn;
     private PreparedStatement preStm;
     private ResultSet rs;
@@ -119,6 +120,7 @@ public class UserDAO {
         }
         return check;
     }
+    
     
     public boolean registerHR(User user) throws SQLException, ClassNotFoundException {
         boolean check = false;
@@ -410,6 +412,31 @@ public class UserDAO {
                 check = preStm.executeUpdate() > 0;
             }
         } catch (SQLException e) {
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    public boolean createUser(User user) throws SQLException, ClassNotFoundException {
+        boolean check = false;
+        conn = null;
+        preStm = null;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(CREATE_USER);
+                preStm.setString(1, user.getFullName());
+                preStm.setString(2, user.getEmail());
+                preStm.setString(3, user.getPassword());
+                preStm.setString(4, user.getRole().getRoleID());
+                check = preStm.executeUpdate() > 0;
+            }
         } finally {
             if (preStm != null) {
                 preStm.close();

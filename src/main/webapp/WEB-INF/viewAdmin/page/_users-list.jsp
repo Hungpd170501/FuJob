@@ -102,10 +102,10 @@
                         </div>
                         <div class="form-group text-dark">
                             <label>Role:</label>
-                            <select class="form-select form-control" aria-label="Default select example">
-                                <option selected>Student</option>
-                                <option value="1">Human Resources Manager</option>
-                                <option value="2">Administrator</option>
+                            <select class="form-select form-control" aria-label="Default select example" name="roleID">
+                                <option value="US" selected>Student</option>
+                                <option value="HRM">Human Resources Manager</option>
+                                <option value="AD">Administrator</option>
                             </select>
                         </div>
                         <div class="form-group text-dark">
@@ -121,11 +121,14 @@
                             <p>
                         </div>
                     </div>
+                        <div class="modal-footer border-top-0 d-flex justify-content-center">
+                            <input type="submit" name="action" class="btn btn-primary" value="Create Account">
+                        </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
             </div>
         </div>
 
@@ -459,12 +462,20 @@
                                 </td>
                                 <td class="text-right pl-0">
                                     <c:if test="${pageScope.item.userStatus == 1 && pageScope.item.fullName != sessionScope.LOGIN_USER.fullName}">
-                                        <a href="" class="ml-2 text-danger">Deactive
-                                        </a>
+                                        <form method="POST" action="${pageContext.request.contextPath}/MainController">
+                                            <input type="hidden" name="action" value="UpdateUserStatus">
+                                            <input type="hidden" name="userID" value="${pageScope.item.userID}">
+                                            <input type="hidden" name="status" value="0">
+                                            <input type="submit" class="text-danger" style="border: 0; background: 0;" value="Deactivate">   
+                                        </form>
                                     </c:if>
                                     <c:if test="${pageScope.item.userStatus != 1}">
-                                        <a href="" class="ml-2 text-success">Active
-                                        </a>
+                                        <form method="POST" action="${pageContext.request.contextPath}/MainController">
+                                            <input type="hidden" name="action" value="UpdateUserStatus">
+                                            <input type="hidden" name="userID" value="${pageScope.item.userID}">
+                                            <input type="hidden" name="status" value="1">
+                                            <input type="submit" class="text-success" style="border: 0; background: 0;" value="Activate">   
+                                        </form>
                                     </c:if>
 
                                     <div class="btn-group">

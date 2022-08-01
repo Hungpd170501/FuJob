@@ -29,7 +29,6 @@
                         <div class="col-md-6">
                             <div class="text-center text-white">
                                 <h4 class="text-uppercase title mb-4">Project List view</h4>
-
                             </div>
                         </div>
                     </div>

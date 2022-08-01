@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link href="https://unpkg.com/bootstrap-table@1.20.2/dist/bootstrap-table.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
@@ -70,9 +71,28 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Companies</p>
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Projects</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        ${requestScope.COUNT_COMPANY_LIST}
+                                        ${requestScope.COUNT_JOB_LIST}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <i class="material-icons text-50">more_vert</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Project</p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        ${requestScope.COUNT_TODAY_JOB}
                                     </h5>
                                 </div>
                             </div>
@@ -89,28 +109,9 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Awaiting</p>
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Open Projects</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        ${requestScope.COUNT_TOTAL_COMPANY_1}
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <i class="material-icons text-50" style="color: blue;">more_vert</i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Verified</p>
-                                    <h5 class="font-weight-bolder mb-0">
-                                        ${requestScope.COUNT_TOTAL_COMPANY_3}
+                                        ${requestScope.COUNT_OPEN_JOB_LIST}
                                     </h5>
                                 </div>
                             </div>
@@ -127,9 +128,9 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Inactive</p>
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Completed</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        ${requestScope.COUNT_TOTAL_COMPANY_0}
+                                        ${empty requestScope.COUNT_JOB_COMPLETED ?"0":requestScope.COUNT_JOB_COMPLETED}
                                     </h5>
                                 </div>
                             </div>
@@ -141,252 +142,19 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-8">
-                <div class="row">
-                    <div class="col-md-6">
-
-                        <div class="card mb-md-0 ml-n2">
-                            <div class="card-header pb-0 border-0 d-flex mt-1">
-                                <div class="flex">
-                                    <div class="h2 mb-0">${requestScope.COUNT_USER_LIST}</div>
-                                    <p class="mb-0"><strong>Total users</strong></p>
-                                </div>
-                                <i class="material-icons text-50">more_vert</i>
-                            </div>
-                            <div class="card-body">
-                                <div class="text-50 mb-16pt">
-
-                                    <div class="mb-4pt">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <small class="flex lh-24pt">Students</small>
-                                            <small class="lh-24pt">${requestScope.COUNT_TOTAL_US}</small>
-                                        </p>
-                                        <div class="progress"
-                                             style="height: 4px;">
-                                            <div class="progress-bar bg-primary"
-                                                 role="progressbar"
-                                                 style="width: ${requestScope.COUNT_TOTAL_US / requestScope.COUNT_USER_LIST * 100}%;"
-                                                 aria-valuenow="${requestScope.COUNT_TOTAL_US}"
-                                                 aria-valuemin="0"
-                                                 aria-valuemax="${requestScope.COUNT_USER_LIST}"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-4pt">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <small class="flex lh-24pt">HR/HRM</small>
-                                            <small class="lh-24pt">${requestScope.COUNT_TOTAL_HR + requestScope.COUNT_TOTAL_HRM}</small>
-                                        </p>
-                                        <div class="progress"
-                                             style="height: 4px;">
-                                            <div class="progress-bar bg-primary"
-                                                 role="progressbar"
-                                                 style="width: ${((requestScope.COUNT_TOTAL_HR + requestScope.COUNT_TOTAL_HRM)/requestScope.COUNT_USER_LIST)*100}%;"
-                                                 aria-valuenow="${requestScope.COUNT_TOTAL_HR + requestScope.COUNT_TOTAL_HRM}"
-                                                 aria-valuemin="0"
-                                                 aria-valuemax="${requestScope.COUNT_USER_LIST}"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-4pt">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <small class="flex lh-24pt">Administrators</small>
-                                            <small class="lh-24pt">${requestScope.COUNT_TOTAL_AD}</small>
-                                        </p>
-                                        <div class="progress"
-                                             style="height: 4px;">
-                                            <div class="progress-bar bg-primary"
-                                                 role="progressbar"
-                                                 style="width: ${requestScope.COUNT_TOTAL_AD / requestScope.COUNT_USER_LIST * 100}%;"
-                                                 aria-valuenow="${requestScope.COUNT_TOTAL_AD}"
-                                                 aria-valuemin="0"
-                                                 aria-valuemax="${requestScope.COUNT_USER_LIST}"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-6">
-
-                        <div class="card mb-md-0">
-                            <div class="card-header pb-0 border-0 d-flex mt-1">
-                                <div class="flex">
-                                    <div class="h2 mb-0">${requestScope.COUNT_TOTAL_US}</div>
-                                    <p class="mb-0"><strong>Students</strong></p>
-                                </div>
-                                <i class="material-icons text-50">more_vert</i>
-                            </div>
-                            <div class="card-body">
-                                <div class="text-50 mb-16pt">
-
-                                    <div class="mb-4pt">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <small class="flex lh-24pt">Active</small>
-                                            <small class="lh-24pt">${requestScope.US_1}</small>
-                                        </p>
-                                        <div class="progress"
-                                             style="height: 4px;">
-                                            <div class="progress-bar bg-primary"
-                                                 role="progressbar"
-                                                 style="width: ${requestScope.US_1 / requestScope.COUNT_TOTAL_US * 100}%;"
-                                                 aria-valuenow="${requestScope.US_1}"
-                                                 aria-valuemin="0"
-                                                 aria-valuemax="${requestScope.COUNT_TOTAL_US}"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-4pt">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <small class="flex lh-24pt">Inactive</small>
-                                            <small class="lh-24pt">${requestScope.US_0}</small>
-                                        </p>
-                                        <div class="progress"
-                                             style="height: 4px;">
-                                            <div class="progress-bar bg-primary"
-                                                 role="progressbar"
-                                                 style="width: ${requestScope.US_0 / requestScope.COUNT_TOTAL_US * 100}%;"
-                                                 aria-valuenow="${requestScope.US_0}"
-                                                 aria-valuemin="0"
-                                                 aria-valuemax="${requestScope.COUNT_TOTAL_US}"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-4pt">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <small class="flex lh-24pt">Pending requests</small>
-                                            <small class="lh-24pt">${requestScope.US_2}</small>
-                                        </p>
-                                        <div class="progress"
-                                             style="height: 4px;">
-                                            <div class="progress-bar bg-primary"
-                                                 role="progressbar"
-                                                 style="width: ${requestScope.US_2 / requestScope.COUNT_TOTAL_US * 100}%;"
-                                                 aria-valuenow="${requestScope.US_2}"
-                                                 aria-valuemin="0"
-                                                 aria-valuemax="${requestScope.COUNT_TOTAL_US}"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="col-md-12">
-
-                        <div class="card mb-md-0">
-                            <div class="card-header pb-0 border-0 d-flex mt-1">
-                                <div class="flex row">
-                                    <div class="col-auto d-flex flex-column">
-                                        <div class="h2 mb-0">${requestScope.COUNT_TOTAL_HR}</div>
-                                        <p class="mb-0"><strong>HR</strong></p>
-                                    </div>
-                                    <div class="col-auto border-left d-flex flex-column">
-                                        <div class="h2 mb-0">${requestScope.COUNT_TOTAL_HRM}</div>
-                                        <p class="mb-0"><strong>HRM</strong></p>
-                                    </div>
-                                </div>
-                                <i class="material-icons text-50">more_vert</i>
-                            </div>
-                            <div class="card-body">
-                                <div class="text-50 mb-16pt">
-
-                                    <div class="mb-4pt">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <small class="flex lh-24pt">Active</small>
-                                            <small class="lh-24pt">${requestScope.HR_1 + requestScope.HRM_1}</small>
-                                        </p>
-                                        <div class="progress"
-                                             style="height: 4px;">
-                                            <div class="progress-bar bg-primary"
-                                                 role="progressbar"
-                                                 style="width: ${(requestScope.HR_1 + requestScope.HRM_1) / (requestScope.COUNT_TOTAL_HR+requestScope.COUNT_TOTAL_HRM) * 100}%;"
-                                                 aria-valuenow="${requestScope.HR_1 + requestScope.HRM_1}"
-                                                 aria-valuemin="0"
-                                                 aria-valuemax="${(requestScope.COUNT_TOTAL_HR+requestScope.COUNT_TOTAL_HRM)}"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-4pt">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <small class="flex lh-24pt">Inactive</small>
-                                            <small class="lh-24pt">8</small>
-                                        </p>
-                                        <div class="progress"
-                                             style="height: 4px;">
-                                            <div class="progress-bar bg-primary"
-                                                 role="progressbar"
-                                                 style="width: ${requestScope.HR_0 + requestScope.HRM_0}%;"
-                                                 aria-valuenow="${requestScope.HR_0 + requestScope.HRM_0}"
-                                                 aria-valuemin="0"
-                                                 aria-valuemax="${(requestScope.COUNT_TOTAL_HR+requestScope.COUNT_TOTAL_HRM)}"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-4pt">
-                                        <p class="d-flex align-items-center mb-0">
-                                            <small class="flex lh-24pt">Pending requests</small>
-                                            <small class="lh-24pt">${requestScope.HR_2 + requestScope.HRM_2}</small>
-                                        </p>
-                                        <div class="progress"
-                                             style="height: 4px;">
-                                            <div class="progress-bar bg-primary"
-                                                 role="progressbar"
-                                                 style="width: ${(requestScope.HR_2 + requestScope.HRM_2) / (requestScope.COUNT_TOTAL_HR+requestScope.COUNT_TOTAL_HRM) * 100}%;"
-                                                 aria-valuenow="${requestScope.HR_2 + requestScope.HRM_2}"
-                                                 aria-valuemin="0"
-                                                 aria-valuemax="${requestScope.COUNT_TOTAL_HR+requestScope.COUNT_TOTAL_HRM}"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
         <div class="page-separator mt-4">
             <div class="page-separator__text">OPEN PROJECTS</div>
         </div>
-        <div class="toolbar mb-2">
-            <div class="form-inline">
-                <span class="mr10">STATUS:</span>
-                <select class="form-control mr10">
-                    <option selected>All</option>
-                    <option value="2">Pending</option>
-                    <option value="1">Active</option>
-                    <option value="0">Inactive</option>
-                </select>
-                <span class="mr10 ml-3">ROLE: </span>
-                <select class="form-control mr10">
-                    <option selected>All</option>
-                    <option value="1">Human Resources</option>
-                    <option value="2">Human Resources Manager</option>
-                    <option value="3">Student</option>
-                    <option value="3">Administration</option>
-                </select>
-                <button id="build" class="btn btn-light ml-3">Rebuild Table</button>
-            </div>
-        </div>
-        <div class="row mb-32pt d-flex align-items-center">
+        <div class="row mb-32pt d-flex align-items-center mb-4">
             <div class="flex" style="max-width: 100%">
 
                 <div class="card m-0">
-                    <table id="table" data-toggle="table" data-pagination="true"
+                    <table id="open-projects-table" data-toggle="table" data-pagination="true"
                            data-toggle="table"
                            data-toolbar="#toolbar"
                            data-show-jump-to="true"
                            data-show-search-clear-button="true"
-                           data-page-size="25"
+                           data-page-size="10"
                            data-remember-order="true"
                            data-show-columns="true"
                            data-show-columns-toggle-all="true"
@@ -401,19 +169,49 @@
                         <thead>
                         <tr>
                             <th style="width: 51px;" data-sortable="true">
-                                <a>#</a>
+                                <a>Id</a>
                             </th>
                             <th data-sortable="true">
-                                <a>Name</a>
+                                <a>Project Name</a>
                             </th>
                             <th data-sortable="true">
-                                <a>Email</a>
+                                <a>Client</a>
                             </th>
-                            <th data-sortable="true" data-filter-control="select">
-                                <a>Role</a>
+                            <th data-sortable="true">
+                                <a>Bids</a>
                             </th>
-                            <th style="width: 120px;" data-sortable="true" data-searchable="false">
-                                <a>Created</a>
+                            <th style="width: 120px;" data-sortable="true">
+                                <a>Company</a>
+                            </th>
+                            <th data-sortable="true">
+                                Category
+                            </th>
+                            <th data-sortable="true">
+                                Budget
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                Payment Method
+                            </th>
+                            <th data-sortable="true">
+                                Address
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                Email
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                Phone
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                Description
+                            </th>
+                            <th data-sortable="true">
+                                Created Date
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                Last Modified Date
+                            </th>
+                            <th data-sortable="true">
+                                Expiried Date
                             </th>
                             <th style="width: 120px;" data-sortable="true" data-searchable="false">
                                 <a>Status</a>
@@ -422,10 +220,10 @@
                             </th>
                         </tr>
                         </thead>
-                        <tbody class="list" id="search">
-                        <c:forEach items="${requestScope.USER_LIST}" var="item">
+                        <tbody class="list" id="open-project-search">
+                        <c:forEach items="${requestScope.OPEN_JOB_LIST}" var="item">
                             <tr>
-                                <td class="js-lists-values-id small">${pageScope.item.userID}</td>
+                                <td>${pageScope.item.jobID}</td>
                                 <td>
                                     <div class="media flex-nowrap align-items-center"
                                          style="white-space: nowrap;">
@@ -434,54 +232,40 @@
                                                                                     </div>-->
                                         <div class="media-body">
                                             <div class="d-flex flex-column">
-                                                <p class="mb-0"><strong
-                                                        class="js-lists-values-username">${pageScope.item.fullName}</strong>
+                                                <p class="mb-0 text-info">${pageScope.item.jobTitle}
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="js-lists-values-email">${pageScope.item.email}</td>
-                                <td class="js-lists-values-role-name">${pageScope.item.role.roleID}</td>
+                                <td class="text-info">@${pageScope.item.user.fullName}</td>
+                                <td class="text-info">${fn:length(pageScope.item.jobApplications)}</td>
                                 <td>
                                     <p class="mb-0"><strong
-                                            class="js-lists-values-date text-50">${pageScope.item.createdDate}</strong>
+                                            class="js-lists-values-date text-50">${pageScope.item.user.companyID.companyName}</strong>
                                     </p>
                                 </td>
+                                <td>${pageScope.item.jobCategoryID.categoryName}</td>
+                                <td>${pageScope.item.minBudget}$ - ${pageScope.item.maxBudget}$</td>
+                                <td>${pageScope.item.paymentMethod.paymentMethodName}</td>
+                                <td>${pageScope.item.address}</td>
+                                <td>${pageScope.item.email}</td>
+                                <td>${pageScope.item.phone}</td>
+                                <td>${pageScope.item.description}</td>
+                                <td>${pageScope.item.createdDate}</td>
+                                <td>${pageScope.item.lastModifiedDate}</td>
+                                <td>${pageScope.item.expiriedDate}</td>
+
                                 <td>
-                                    <c:if test="${pageScope.item.userStatus == 0}">
-                                        <p class="mb-0 text-danger"><strong
-                                                class="js-lists-values-activity">Inactive</strong></p>
-                                    </c:if>
-                                    <c:if test="${pageScope.item.userStatus == 1}">
-                                        <p class="mb-0 text-success"><strong
-                                                class="js-lists-values-activity">Active</strong></p>
-                                    </c:if>
-                                    <c:if test="${pageScope.item.userStatus == 2}">
-                                        <p class="mb-0 text-warning"><strong
-                                                class="js-lists-values-activity">Pending</strong></p>
-                                    </c:if>
+                                    <p class="mb-0 text-success">Open</p>
                                 </td>
                                 <td class="text-right pl-0">
-                                    <c:if test="${pageScope.item.userStatus == 1 && pageScope.item.fullName != sessionScope.LOGIN_USER.fullName}">
-                                        <a href="" class="ml-2 text-danger">Deactive
-                                        </a>
-                                    </c:if>
-                                    <c:if test="${pageScope.item.userStatus != 1}">
-                                        <a href="" class="ml-2 text-success">Active
-                                        </a>
-                                    </c:if>
-
-                                    <div class="btn-group">
-                                        <button type="button" class="btn  dropdown-toggle"
-                                                data-toggle="dropdown" aria-haspopup="true"
-                                                data-boundary="viewport"
-                                                aria-expanded="false"></button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" data-toggle="modal" data-target="#profile">View
-                                                Profile</a>
-                                        </div>
-                                    </div>
+                                    <form method="POST" action="${pageContext.request.contextPath}/MainController">
+                                                    <input type="hidden" name="action" value="UpdateJobStatus">
+                                                    <input type="hidden" name="jobID" value="${pageScope.item.jobID}">
+                                                    <input type="hidden" name="status" value="0">
+                                                    <input type="submit" class="text-danger" style="border: 0; background: 0;" value="Deactivate">   
+                                    </form>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -495,36 +279,16 @@
         <div class="page-separator mt-4">
             <div class="page-separator__text">WORK IN PROGRESS</div>
         </div>
-        <div class="toolbar mb-2">
-            <div class="form-inline">
-                <span class="mr10">STATUS:</span>
-                <select class="form-control mr10">
-                    <option selected>All</option>
-                    <option value="2">Pending</option>
-                    <option value="1">Active</option>
-                    <option value="0">Inactive</option>
-                </select>
-                <span class="mr10 ml-3">ROLE: </span>
-                <select class="form-control mr10">
-                    <option selected>All</option>
-                    <option value="1">Human Resources</option>
-                    <option value="2">Human Resources Manager</option>
-                    <option value="3">Student</option>
-                    <option value="3">Administration</option>
-                </select>
-                <button id="build" class="btn btn-light ml-3">Rebuild Table</button>
-            </div>
-        </div>
-        <div class="row mb-32pt d-flex align-items-center">
+        <div class="row mb-32pt d-flex align-items-center mb-4">
             <div class="flex" style="max-width: 100%">
 
                 <div class="card m-0">
-                    <table id="table" data-toggle="table" data-pagination="true"
+                    <table id="ongoing-projects-table" data-toggle="table" data-pagination="true"
                            data-toggle="table"
                            data-toolbar="#toolbar"
                            data-show-jump-to="true"
                            data-show-search-clear-button="true"
-                           data-page-size="25"
+                           data-page-size="10"
                            data-remember-order="true"
                            data-show-columns="true"
                            data-show-columns-toggle-all="true"
@@ -539,31 +303,58 @@
                         <thead>
                         <tr>
                             <th style="width: 51px;" data-sortable="true">
-                                <a>#</a>
+                                <a>Id</a>
                             </th>
                             <th data-sortable="true">
-                                <a>Name</a>
+                                <a>Project Name</a>
                             </th>
                             <th data-sortable="true">
-                                <a>Email</a>
+                                <a>Client</a>
                             </th>
-                            <th data-sortable="true" data-filter-control="select">
-                                <a>Role</a>
+                            <th style="width: 120px;" data-sortable="true">
+                                <a>Company</a>
                             </th>
-                            <th style="width: 120px;" data-sortable="true" data-searchable="false">
-                                <a>Created</a>
+                            <th data-sortable="true">
+                                Category
                             </th>
-                            <th style="width: 120px;" data-sortable="true" data-searchable="false">
+                            <th data-sortable="true">
+                                <a>Student</a>
+                            </th>
+                            <th data-sortable="true">
+                                Awarded Bid
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                Payment Method
+                            </th>
+                            <th data-sortable="true">
+                                Address
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                Email
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                Phone
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                Description
+                            </th>
+                            <th data-sortable="true">
+                                Created Date
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                Last Modified Date
+                            </th>
+                            <th style="width: 120px;" data-sortable="true" data-searchable="false" data-visible="false">
                                 <a>Status</a>
                             </th>
                             <th style="width: 20px;" class="pl-0" data-sortable="true" data-searchable="false">Action
                             </th>
                         </tr>
                         </thead>
-                        <tbody class="list" id="search">
-                        <c:forEach items="${requestScope.USER_LIST}" var="item">
+                        <tbody class="list" id="ongoing-project-search">
+                        <c:forEach items="${requestScope.ONGOING_JOB_LIST}" var="item">
                             <tr>
-                                <td class="js-lists-values-id small">${pageScope.item.userID}</td>
+                                <td>${pageScope.item.jobID}</td>
                                 <td>
                                     <div class="media flex-nowrap align-items-center"
                                          style="white-space: nowrap;">
@@ -572,54 +363,47 @@
                                                                                     </div>-->
                                         <div class="media-body">
                                             <div class="d-flex flex-column">
-                                                <p class="mb-0"><strong
-                                                        class="js-lists-values-username">${pageScope.item.fullName}</strong>
+                                                <p class="mb-0 text-info">${pageScope.item.jobTitle}
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="js-lists-values-email">${pageScope.item.email}</td>
-                                <td class="js-lists-values-role-name">${pageScope.item.role.roleID}</td>
+                                <td class="text-info">@${pageScope.item.user.fullName}</td>
                                 <td>
                                     <p class="mb-0"><strong
-                                            class="js-lists-values-date text-50">${pageScope.item.createdDate}</strong>
+                                            class="js-lists-values-date text-50">${pageScope.item.user.companyID.companyName}</strong>
                                     </p>
                                 </td>
-                                <td>
-                                    <c:if test="${pageScope.item.userStatus == 0}">
-                                        <p class="mb-0 text-danger"><strong
-                                                class="js-lists-values-activity">Inactive</strong></p>
+                                <td>${pageScope.item.jobCategoryID.categoryName}</td>
+                                <c:forEach items="${pageScope.item.jobApplications}" var="jobApplicationItem">
+                                    <c:if test="${pageScope.jobApplicationItem.jobApplicationStatus != 0}">
+                                        <td class="text-info">
+                                            <a href=""
+                                               class="ml-2 text-info">@${pageScope.jobApplicationItem.resume.user.fullName}
+                                            </a>
+                                        </td>
+                                        <td>${pageScope.jobApplicationItem.priceDeal}$</td>
                                     </c:if>
-                                    <c:if test="${pageScope.item.userStatus == 1}">
-                                        <p class="mb-0 text-success"><strong
-                                                class="js-lists-values-activity">Active</strong></p>
-                                    </c:if>
-                                    <c:if test="${pageScope.item.userStatus == 2}">
-                                        <p class="mb-0 text-warning"><strong
-                                                class="js-lists-values-activity">Pending</strong></p>
-                                    </c:if>
-                                </td>
-                                <td class="text-right pl-0">
-                                    <c:if test="${pageScope.item.userStatus == 1 && pageScope.item.fullName != sessionScope.LOGIN_USER.fullName}">
-                                        <a href="" class="ml-2 text-danger">Deactive
-                                        </a>
-                                    </c:if>
-                                    <c:if test="${pageScope.item.userStatus != 1}">
-                                        <a href="" class="ml-2 text-success">Active
-                                        </a>
-                                    </c:if>
+                                </c:forEach>
+                                <td>${pageScope.item.paymentMethod.paymentMethodName}</td>
+                                <td>${pageScope.item.address}</td>
+                                <td>${pageScope.item.email}</td>
+                                <td>${pageScope.item.phone}</td>
+                                <td>${pageScope.item.description}</td>
+                                <td>${pageScope.item.createdDate}</td>
+                                <td>${pageScope.item.lastModifiedDate}</td>
 
-                                    <div class="btn-group">
-                                        <button type="button" class="btn  dropdown-toggle"
-                                                data-toggle="dropdown" aria-haspopup="true"
-                                                data-boundary="viewport"
-                                                aria-expanded="false"></button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" data-toggle="modal" data-target="#profile">View
-                                                Profile</a>
-                                        </div>
-                                    </div>
+                                <td>
+                                    <p class="mb-0 text-success">In Progress</p>
+                                </td>
+                                                                <td class="text-right pl-0">
+                                    <form method="POST" action="${pageContext.request.contextPath}/MainController">
+                                                    <input type="hidden" name="action" value="UpdateJobStatus">
+                                                    <input type="hidden" name="jobID" value="${pageScope.item.jobID}">
+                                                    <input type="hidden" name="status" value="0">
+                                                    <input type="submit" class="text-danger" style="border: 0; background: 0;" value="Deactivate">   
+                                    </form>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -631,24 +415,17 @@
 
 
         <div class="page-separator mt-4">
-            <div class="page-separator__text">PAST PROJECTS</div>
+            <div class="page-separator__text">CLOSED PROJECTS</div>
         </div>
         <div class="toolbar mb-2">
             <div class="form-inline">
                 <span class="mr10">STATUS:</span>
                 <select class="form-control mr10">
                     <option selected>All</option>
-                    <option value="2">Pending</option>
-                    <option value="1">Active</option>
-                    <option value="0">Inactive</option>
-                </select>
-                <span class="mr10 ml-3">ROLE: </span>
-                <select class="form-control mr10">
-                    <option selected>All</option>
-                    <option value="1">Human Resources</option>
-                    <option value="2">Human Resources Manager</option>
-                    <option value="3">Student</option>
-                    <option value="3">Administration</option>
+                    <option value="6">Uncompleted</option>
+                    <option value="5">Completed</option>
+                    <option value="4">Expired</option>
+                    <option value="Deleted">Inactive</option>
                 </select>
                 <button id="build" class="btn btn-light ml-3">Rebuild Table</button>
             </div>
@@ -662,7 +439,7 @@
                            data-toolbar="#toolbar"
                            data-show-jump-to="true"
                            data-show-search-clear-button="true"
-                           data-page-size="25"
+                           data-page-size="10"
                            data-remember-order="true"
                            data-show-columns="true"
                            data-show-columns-toggle-all="true"
@@ -677,31 +454,65 @@
                         <thead>
                         <tr>
                             <th style="width: 51px;" data-sortable="true">
-                                <a>#</a>
+                                <a>Id</a>
                             </th>
                             <th data-sortable="true">
-                                <a>Name</a>
+                                <a>Project Name</a>
                             </th>
                             <th data-sortable="true">
-                                <a>Email</a>
+                                <a>Client</a>
                             </th>
-                            <th data-sortable="true" data-filter-control="select">
-                                <a>Role</a>
+                            <th style="width: 120px;" data-sortable="true">
+                                <a>Company</a>
                             </th>
-                            <th style="width: 120px;" data-sortable="true" data-searchable="false">
-                                <a>Created</a>
+                            <th data-sortable="true">
+                                Category
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                <a>Student</a>
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                Awarded Bid
+                            </th>
+                            <th data-sortable="true">
+                                Budget
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                <a>Bids</a>
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                Payment Method
+                            </th>
+                            <th data-sortable="true">
+                                Address
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                Email
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                Phone
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                Description
+                            </th>
+                            <th data-sortable="true">
+                                Created Date
+                            </th>
+                            <th data-sortable="true" data-visible="false">
+                                Last Modified Date
                             </th>
                             <th style="width: 120px;" data-sortable="true" data-searchable="false">
                                 <a>Status</a>
                             </th>
-                            <th style="width: 20px;" class="pl-0" data-sortable="true" data-searchable="false">Action
+                            <th data-searchable="false" data-visible="false">
+                                <a>Action</a>
                             </th>
                         </tr>
                         </thead>
-                        <tbody class="list" id="search">
-                        <c:forEach items="${requestScope.USER_LIST}" var="item">
+                        <tbody class="list" id="search-closed-job">
+                        <c:forEach items="${requestScope.CLOSED_JOB_LIST}" var="itemClosed">
                             <tr>
-                                <td class="js-lists-values-id small">${pageScope.item.userID}</td>
+                                <td>${pageScope.itemClosed.jobID}</td>
                                 <td>
                                     <div class="media flex-nowrap align-items-center"
                                          style="white-space: nowrap;">
@@ -710,54 +521,83 @@
                                                                                     </div>-->
                                         <div class="media-body">
                                             <div class="d-flex flex-column">
-                                                <p class="mb-0"><strong
-                                                        class="js-lists-values-username">${pageScope.item.fullName}</strong>
+                                                <p class="mb-0 text-info">${pageScope.itemClosed.jobTitle}
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="js-lists-values-email">${pageScope.item.email}</td>
-                                <td class="js-lists-values-role-name">${pageScope.item.role.roleID}</td>
+                                <td class="text-info">@${pageScope.itemClosed.user.fullName}</td>
                                 <td>
-                                    <p class="mb-0"><strong
-                                            class="js-lists-values-date text-50">${pageScope.item.createdDate}</strong>
-                                    </p>
-                                </td>
-                                <td>
-                                    <c:if test="${pageScope.item.userStatus == 0}">
-                                        <p class="mb-0 text-danger"><strong
-                                                class="js-lists-values-activity">Inactive</strong></p>
+                                    <c:if test="${pageScope.itemClosed.user.companyID != null}">
+                                        ${pageScope.itemClosed.user.companyID.companyName}
                                     </c:if>
-                                    <c:if test="${pageScope.item.userStatus == 1}">
-                                        <p class="mb-0 text-success"><strong
-                                                class="js-lists-values-activity">Active</strong></p>
-                                    </c:if>
-                                    <c:if test="${pageScope.item.userStatus == 2}">
-                                        <p class="mb-0 text-warning"><strong
-                                                class="js-lists-values-activity">Pending</strong></p>
+                                    <c:if test="${pageScope.itemClosed.user.companyID == null}">
+                                        N/A
                                     </c:if>
                                 </td>
-                                <td class="text-right pl-0">
-                                    <c:if test="${pageScope.item.userStatus == 1 && pageScope.item.fullName != sessionScope.LOGIN_USER.fullName}">
-                                        <a href="" class="ml-2 text-danger">Deactive
-                                        </a>
-                                    </c:if>
-                                    <c:if test="${pageScope.item.userStatus != 1}">
-                                        <a href="" class="ml-2 text-success">Active
-                                        </a>
-                                    </c:if>
+                                <td>${pageScope.itemClosed.jobCategoryID.categoryName}</td>
+                                <c:if test="${pageScope.itemClosed.jobStatus == 5 || pageScope.itemClosed.jobStatus == 6}">
+                                    <c:forEach items="${pageScope.itemClosed.jobApplications}" var="jobApplicationItem">
+                                        <c:if test="${pageScope.jobApplicationItem.jobApplicationStatus != 0}">
+                                            <td class="text-info">
+                                                <a href=""
+                                                   class="ml-2 text-info">@${pageScope.jobApplicationItem.resume.user.fullName}
+                                                </a>
+                                            </td>
+                                            <td>${pageScope.jobApplicationItem.priceDeal}$</td>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${pageScope.itemClosed.jobStatus != 5 && pageScope.itemClosed.jobStatus != 6}">
+                                    <td>N/A</td>
+                                    <td>N/A</td>
+                                </c:if>
+                                <td>${pageScope.itemClosed.minBudget}$ - ${pageScope.itemClosed.maxBudget}$</td>
+                                <td class="text-info">${fn:length(pageScope.item.jobApplications)}</td>
+                                <td>${pageScope.itemClosed.paymentMethod.paymentMethodName}</td>
+                                <td>${pageScope.itemClosed.address}</td>
+                                <td>${pageScope.itemClosed.email}</td>
+                                <td>${pageScope.itemClosed.phone}</td>
+                                <td>${pageScope.itemClosed.description}</td>
+                                <td>${pageScope.itemClosed.createdDate}</td>
+                                <td>${pageScope.itemClosed.lastModifiedDate}</td>
 
-                                    <div class="btn-group">
-                                        <button type="button" class="btn  dropdown-toggle"
-                                                data-toggle="dropdown" aria-haspopup="true"
-                                                data-boundary="viewport"
-                                                aria-expanded="false"></button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" data-toggle="modal" data-target="#profile">View
-                                                Profile</a>
+                                <td>
+                                    <c:if test="${pageScope.itemClosed.jobStatus == 5}">
+                                        <p class="mb-0 text-success">Completed</p>
+                                    </c:if>
+                                    <c:if test="${pageScope.itemClosed.jobStatus == 6}">
+                                        <p class="mb-0 text-danger">Uncompleted</p>
+                                    </c:if>
+                                    <c:if test="${pageScope.itemClosed.jobStatus == 4}">
+                                        <p class="mb-0 text-warning">Expired</p>
+                                    </c:if>
+                                    <c:if test="${pageScope.itemClosed.jobStatus != 4 && pageScope.itemClosed.jobStatus != 5 && pageScope.itemClosed.jobStatus != 6}">
+                                        <p class="mb-0 text-secondary">Deleted</p>
+                                    </c:if>
+                                </td>
+
+                                <td class="text-right pl-0">
+
+
+                                    <a href="" class="ml-2 text-secondary">View Detail
+                                    </a>
+
+                                    <c:if test="${pageScope.itemClosed.jobStatus == 5 && pageScope.itemClosed.jobStatus == 6}">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn  dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                    data-boundary="viewport"
+                                                    aria-expanded="false"></button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" data-toggle="modal" data-target="">View
+                                                    Evaluation</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="">View
+                                                    Product</a>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -766,8 +606,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
 <script>

@@ -28,7 +28,7 @@
                         </div>
                         <div class="row form-group text-dark">
                             <div class="col-6">
-                                <input onchange="showUpload()" type="radio" id="cvDefault" name="chooseCV" value="CVdefault">
+                                <input checked="checked" onchange="showUpload()" type="radio" id="cvDefault" name="chooseCV" value="CVdefault">
                                 <label>CV Default (Your Resume)</label>
                             </div>
                             <div class="col-6">

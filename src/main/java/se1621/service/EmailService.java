@@ -14,4 +14,6 @@ import se1621.dto.User;
 public interface EmailService {
 
     void sendEmail(ServletContext context, User repliient, String type);
+    void sendEmail(ServletContext context, User recipient, String nameReporter, String subject, String messageDispute, String jobTitle);
+    void sendEmailCancelDispute(ServletContext context, User recipient, String nameReporter, String subject, String messageDispute, String jobTitle);
 }

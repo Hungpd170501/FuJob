@@ -28,8 +28,9 @@ public class JobEntity{
     @Column(name = "jobID", nullable = false)
     private Integer jobID;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "userID", nullable = false)
+    @BatchSize(size = 1)
     private UserEntity user;
 
     @Column(name = "jobTitle")
@@ -85,4 +86,15 @@ public class JobEntity{
 
     @OneToMany(mappedBy = "job")
     private Set<JobApplicationEntity> jobApplications;
+
+    @Column(name = "reasonCancel", length = 2000)
+    private String reasonCancel;
+
+    @Column(name = "disputeStatus")
+    private Boolean disputeStatus;
+
+    @OneToMany(mappedBy = "job")
+    @BatchSize(size = 1)
+    private Set<EvaluateCompletionEntity> tblEvaluateCompletions;
+
 }

@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.BatchSize;
 
 @Builder
 @AllArgsConstructor
@@ -28,8 +29,9 @@ public class ResumeEntity {
     @Column(name = "resumeID", nullable = false)
     private Integer resumeID;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "userID", nullable = false)
+    @BatchSize(size = 1)
     private UserEntity user;
 
     @Column(name = "avatar", length = 2000)
@@ -91,4 +93,8 @@ public class ResumeEntity {
 
     @OneToMany(mappedBy = "resume")
     private Set<JobApplicationEntity> jobApplications;
+
+    @OneToMany(mappedBy = "resume")
+    private Set<EvaluateCompletionEntity> EvaluateCompletions;
+
 }

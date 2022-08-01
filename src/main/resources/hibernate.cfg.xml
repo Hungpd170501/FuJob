@@ -19,5 +19,9 @@
         <mapping class="se1621.entity.RoleEntity"/>
         <mapping class="se1621.entity.SkillEntity"/>
         <mapping class="se1621.entity.UserEntity"/>
+        <mapping class="se1621.entity.DisputeEntity"/>
+        <mapping class="se1621.entity.EvidenceEntity"/>
+        <mapping class="se1621.entity.EvaluateCompletionEntity"/>
+        <mapping class="se1621.entity.SubmitJobEntity"/>
     </session-factory>
 </hibernate-configuration>

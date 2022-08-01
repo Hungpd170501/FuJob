@@ -32,12 +32,14 @@ public class JobApplicationDAO {
     private static final String CHECKDUPLICATE = "SELECT jobApplicationID FROM tbljobApplications WHERE resumeID=? and jobID=? and jobApplicationStatus in (1,3,5,6)";
 
     private static final String CHECKDUPLICATE_NONSTATUS = "SELECT jobApplicationID FROM tblJobApplications WHERE resumeID = ? and jobID = ? and jobApplicationStatus = 0";
-    private static final String DELETE = "UPDATE tblJobApplications SET jobApplicationStatus = 2 WHERE jobApplicationID = ? ";
+    private static final String DELETE = "UPDATE tblJobApplications SET jobApplicationStatus = 0 WHERE jobApplicationID = ? ";
+    private static final String ENDPROJECT = "UPDATE tblJobApplications SET jobApplicationStatus = 10 WHERE jobApplicationID = ? ";
     private static final String UNAPLLY = "UPDATE tblJobApplications SET jobApplicationStatus = 0 , reasonUnaplly = ? WHERE jobApplicationID = ? ";
     private static final String DENY_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 5, reasonRejection = ? WHERE resumeID = ? AND jobID = ? AND jobApplicationStatus = 1 ";
     private static final String ACCEPT_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 3 WHERE resumeID = ? AND jobID = ? AND jobApplicationStatus = 1 ";
     private static final String UNAPLLYWHENJOBHAVECANDIDATES_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 5, reasonRejection = ? WHERE jobID = ? AND jobApplicationStatus = 1 ";
     private static final String UNCOMPLETE_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 7 WHERE jobApplicationID = ? AND jobApplicationStatus IN (3,8)";
+    private static final String REJECT_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 9, reasonRejectSubmit = ? WHERE jobApplicationID = ? AND jobApplicationStatus IN (3,8)";
     private static final String COMPLETE_JOBAPPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = 6 WHERE jobApplicationID = ? AND jobApplicationStatus IN (3,8)";
     private static final String GETTALLUSERIDOFJOB = "SELECT resumeID FROM tblJobApplications WHERE jobID = ? and jobApplicationStatus = 1";
     private static final String GETALLJOBAPPLICATIONOFJOB = "SELECT jo.jobApplicationID, jo.priceDeal, jo.message, jo.cvFile, re.address, re.avatar"
@@ -58,7 +60,7 @@ public class JobApplicationDAO {
             + "									GROUP BY jobID) AS jobApp "
             + "									on jo.jobID = jobApp.jobID) "
             + "                                    WHERE jo.resumeID= ? and jo.jobApplicationStatus IN (1, 5) ORDER BY jo.lastModifiedDate DESC";
-    private static final String GETALLJOBACCEPTED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.userID, "
+    private static final String GETALLJOBACCEPTED = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.userID, jo.reasonRejectSubmit, j.disputeStatus, "
             + "								j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
             + "								jo.createdDate, c.categoryName, c.img, com.companyName, "
             + "                                j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description, "
@@ -87,9 +89,19 @@ public class JobApplicationDAO {
             + "                                                                                            left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID) "
             + "                                                                                             left join tblSubmitJob sb on sb.jobApplicationID = jo.jobApplicationID) "
             + "																							 left join tblResumes resumeUs on resumeUs.resumeID = jo.resumeID ) "
-            + "                                                                                               WHERE j.userID = ? and j.jobStatus IN (3,5,6,8) AND jo.jobApplicationStatus IN (3,6,7,8)  "
+            + "                                                                                               WHERE j.userID = ? and j.jobStatus IN (3,8) AND jo.jobApplicationStatus IN (3,8,9)"
             + "                                                                                            ORDER BY jo.lastModifiedDate DESC ";
-
+    private static final String GETALLJOBPASTPOSTED = " SELECT jo.jobApplicationID,jo.resumeID,resumeUs.userID as userIDofResume,jo.jobApplicationStatus, j.jobID,j.userID,j.jobStatus, j.jobTitle, j.jobCategoryID, j.minBudget, j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message, "
+            + "                                                                                               jo.createdDate, c.categoryName, c.img, com.companyName, "
+            + "                                                                                               j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description, "
+            + "                                                                                           sb.submitJobID,sb.messageSubmit, sb.jobFile, sb.createdDate, sb.lastModifiedDate, sb.submitJobStatus "
+            + "                                                                                            FROM ((((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
+            + "                                                                                            left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID) "
+            + "                                                                                             left join tblSubmitJob sb on sb.jobApplicationID = jo.jobApplicationID) "
+            + "																							 left join tblResumes resumeUs on resumeUs.resumeID = jo.resumeID ) "
+            + "                                                                                               WHERE j.userID = ? and j.jobStatus IN (5,6) AND jo.jobApplicationStatus IN (6,7)"
+            + "                                                                                            ORDER BY jo.lastModifiedDate DESC ";
+   
     private static final String UPDATE_STATUS = "UPDATE tblJobApplications SET cvFile = ?, priceDeal = ?, message = ?, jobApplicationStatus = 1 WHERE jobApplicationID = ? and resumeID = ? and jobID = ?";
     private final String SEARCHJOBORDER = "SELECT ja.jobApplicationID,ISNULL(jobAply.bids,0) AS bids, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, ja.jobApplicationStatus, "
             + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.minBudget,j.maxBudget, j.paymentMethodID, pm.paymentMethodName, "
@@ -104,7 +116,7 @@ public class JobApplicationDAO {
             + "        on jobAply.jobID = j.jobID )";
     
     private static final String GET_LIST_ST_PAST_WORK = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.userID, "
-            + "								j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
+            + "						j.disputeStatus, j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
             + "								jo.createdDate, c.categoryName, c.img, com.companyName, "
             + "                                j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description, "
             + "								sb.messageSubmit, sb.jobFile, sb.submitJobID, sb.submitJobStatus"
@@ -116,6 +128,17 @@ public class JobApplicationDAO {
     private static final String GETALLNUMBEROFJOBORDER = "SELECT COUNT (jobApplicationID) AS totalJobOrder FROM tblJobApplications";
     private static final String UPDATE_FORM_APPLICATON_OF_RESUME = "UPDATE tblJobApplications SET priceDeal = ?, message = ?, cvFile = ? WHERE resumeID = ? and jobID = ?";
     private static final String UPDATE_STATUS_APPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = ? WHERE jobApplicationID = ?";
+    
+    private static final String GET_JOBAPPLICATION_DISPUTE = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.userID, "
+            + "								j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
+            + "								jo.createdDate, c.categoryName, c.img, com.companyName, "
+            + "                                j.createdDate, j.expiriedDate, j.lastModifiedDate, j.minBudget,j.maxBudget, j.address, j.email, j.phone, j.description, "
+            + "								sb.messageSubmit, sb.jobFile, sb.submitJobID, sb.submitJobStatus"
+            + "                                FROM (((((tblJobApplications jo left join (tblJobs j left join tblCategories  c on j.jobCategoryID = c.categoryID ) on jo.jobID = j.jobID ) "
+            + "                                left join tblUsers us on us.userID = j.userID ) left join tblCompanies com on com.companyID = us.companyID)left join tblPaymentMethods pay on pay.paymentMethodID = j.paymentMethodID)"
+            + "								left join tblSubmitJob sb on sb.jobApplicationID = jo.jobApplicationID)"
+            + "                                WHERE jo.resumeID=? and j.disputeStatus = 1"
+            + "                                ORDER BY jo.lastModifiedDate DESC";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -502,6 +525,8 @@ public class JobApplicationDAO {
                     String messageSubmit = rs.getString("messageSubmit");
                     String jobFile = rs.getString("jobFile");
                     int submitJobStatus = rs.getInt("submitJobStatus");
+                    String reasonRejectSubmit = rs.getString("reasonRejectSubmit");
+                    int disputeStatus = rs.getInt("disputeStatus");
                     PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder().jobID(jobID)
                             .userID(hrID)
@@ -516,6 +541,7 @@ public class JobApplicationDAO {
                             .phone(phone)
                             .expiriedDate(expiriedDate)
                             .description(description)
+                            .disputeStatus(disputeStatus)
                             .build();
                     SubmitJob sbJob = SubmitJob.builder()
                             .submitJobID(submitJobID)
@@ -533,6 +559,7 @@ public class JobApplicationDAO {
                             .cvFile(cvFile)
                             .lastModifiedDate(createdDate)
                             .jobApplicationStatus(jobAppStatus)
+                            .reasonRejectionSubmmit(reasonRejectSubmit)
                             .build();
                     list.add(listJobOrder);
                 }
@@ -647,6 +674,99 @@ public class JobApplicationDAO {
         }
         return null;
     }
+    public List<JobApplication> getListPastProjects(int userID) throws SQLException {
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GETALLJOBPASTPOSTED);
+                preStm.setInt(1, userID);
+                rs = preStm.executeQuery();
+                List<JobApplication> list = new ArrayList<>();
+                while (rs.next()) {
+                    int jobApplicationID = rs.getInt("jobApplicationID");
+                    int jobID = rs.getInt("jobID");
+                    int resumeID = rs.getInt("resumeID");
+                    String priceDeal = rs.getString("priceDeal");
+                    String message = rs.getString("message");
+                    String cvFile = rs.getString("cvFile");
+                    String jobTitle = rs.getString("jobTitle");
+                    Date createdDate = rs.getDate("createdDate");
+                    Date expiriedDate = rs.getDate("expiriedDate");
+                    int minBudget = rs.getInt("minBudget");
+                    int maxBudget = rs.getInt("maxBudget");
+                    int paymentMethodID = rs.getInt("paymentMethodID");
+                    String paymentMethodName = rs.getString("paymentMethodName");
+                    String address = rs.getString("address");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String description = rs.getString("description");
+                    int categoryID = rs.getInt("jobCategoryID");
+                    String categoryName = rs.getString("categoryName");
+                    String img = rs.getString("img");
+                    String companyName = rs.getString("companyName");
+                    int jobAppStatus = rs.getInt("jobApplicationStatus");
+                    int jobStatus = rs.getInt("jobStatus");
+                    // Data of SubmitJobDTO
+                    int submitJobID = rs.getInt("submitJobID");
+                    String messageSubmit = rs.getString("messageSubmit");
+                    String jobFile = rs.getString("jobFile");
+                    int submitJobStatus = rs.getInt("submitJobStatus");
+                    int userIDofResume = rs.getInt("userIDofResume");
+                    PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
+                    Job job = Job.builder()
+                            .jobID(jobID)
+                            .userID(userID)
+                            .jobTitle(jobTitle)
+                            .category(Category.builder().categoryID(categoryID).categoryName(categoryName).img(img).build())
+                            .company(CompanyInfo.builder().companyName(companyName).build())
+                            .address(address)
+                            .email(email)
+                            .minBudget(minBudget)
+                            .maxBudget(maxBudget)
+                            .payMentMethod(payMent)
+                            .phone(phone)
+                            .expiriedDate(expiriedDate)
+                            .description(description)
+                            .jobStatus(jobStatus)
+                            .build();
+                    SubmitJob sbJob = SubmitJob.builder()
+                            .submitJobID(submitJobID)
+                            .messageSubmit(messageSubmit)
+                            .jobFile(jobFile)
+                            .submitJobStatus(submitJobStatus)
+                            .build();
+                    JobApplication listJobOrder = JobApplication.builder()
+                            .jobApplicationID(jobApplicationID)
+                            .resumeID(resumeID)
+                            .resume(Resume.builder().userID(userIDofResume).build())
+                            .job(job)
+                            .submitJob(sbJob)
+                            .createdDate(createdDate)
+                            .priceDeal(priceDeal)
+                            .message(message)
+                            .cvFile(cvFile)
+                            .lastModifiedDate(createdDate)
+                            .jobApplicationStatus(jobAppStatus)
+                            .build();
+                    list.add(listJobOrder);
+                }
+                return list;
+            }
+
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
 
     public boolean delete(int jobOrderID) throws SQLException {
         boolean check = false;
@@ -669,6 +789,29 @@ public class JobApplicationDAO {
         }
         return check;
     }
+    public boolean endProject(int jobOrderID) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(ENDPROJECT);
+                preStm.setInt(1, jobOrderID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    
 
     public boolean unApply(int jobOrderID, String reasonUnaplly) throws SQLException {
         boolean check = false;
@@ -738,6 +881,28 @@ public class JobApplicationDAO {
         }
         return check;
     }
+    public boolean rejectJobApp(int jobAppID, String reasonRejectSubmit) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(REJECT_JOBAPPLICATION);
+                preStm.setString(1, reasonRejectSubmit);
+                preStm.setInt(2, jobAppID);
+                check = preStm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
 
     public boolean completeJobApp(int jobAppID) throws SQLException {
         boolean check = false;
@@ -760,6 +925,7 @@ public class JobApplicationDAO {
         }
         return check;
     }
+    
 
     public boolean acceptJobApplication(int resumeID, int jobID) throws SQLException {
         boolean check = false;
@@ -1124,6 +1290,7 @@ public class JobApplicationDAO {
                     String messageSubmit = rs.getString("messageSubmit");
                     String jobFile = rs.getString("jobFile");
                     int submitJobStatus = rs.getInt("submitJobStatus");
+                    int disputeStatus = rs.getInt("disputeStatus"); 
                     PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
                     Job job = Job.builder().jobID(jobID)
                             .userID(hrID)
@@ -1138,6 +1305,95 @@ public class JobApplicationDAO {
                             .phone(phone)
                             .expiriedDate(expiriedDate)
                             .description(description)
+                            .disputeStatus(disputeStatus)
+                            .build();
+                    SubmitJob sbJob = SubmitJob.builder()
+                            .submitJobID(submitJobID)
+                            .messageSubmit(messageSubmit)
+                            .jobFile(jobFile)
+                            .submitJobStatus(submitJobStatus)
+                            .build();
+                    JobApplication listJobOrder = JobApplication.builder()
+                            .jobApplicationID(jobApplicationID)
+                            .submitJob(sbJob)
+                            .resumeID(resumeID).job(job)
+                            .createdDate(createdDate)
+                            .priceDeal(priceDeal)
+                            .message(mess)
+                            .cvFile(cvFile)
+                            .lastModifiedDate(createdDate)
+                            .jobApplicationStatus(jobAppStatus)
+                            .build();
+                    list.add(listJobOrder);
+                }
+                return list;
+            }
+
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+    
+    public List<JobApplication> getListJobAppDispute(int resumeID) throws SQLException {
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(GET_JOBAPPLICATION_DISPUTE);
+                preStm.setInt(1, resumeID);
+                rs = preStm.executeQuery();
+                List<JobApplication> list = new ArrayList<>();
+                while (rs.next()) {
+                    int jobApplicationID = rs.getInt("jobApplicationID");
+                    int jobID = rs.getInt("jobID");
+                    String priceDeal = rs.getString("priceDeal");
+                    String mess = rs.getString("message");
+                    String cvFile = rs.getString("cvFile");
+                    int hrID = rs.getInt("userID");
+                    String jobTitle = rs.getString("jobTitle");
+                    Date createdDate = rs.getDate("createdDate");
+                    Date expiriedDate = rs.getDate("expiriedDate");
+                    int minBudget = rs.getInt("minBudget");
+                    int maxBudget = rs.getInt("maxBudget");
+                    int paymentMethodID = rs.getInt("paymentMethodID");
+                    String paymentMethodName = rs.getString("paymentMethodName");
+                    String address = rs.getString("address");
+                    String email = rs.getString("email");
+                    String phone = rs.getString("phone");
+                    String description = rs.getString("description");
+                    int categoryID = rs.getInt("jobCategoryID");
+                    String categoryName = rs.getString("categoryName");
+                    String img = rs.getString("img");
+                    String companyName = rs.getString("companyName");
+                    int jobAppStatus = rs.getInt("jobApplicationStatus");
+                    int submitJobID = rs.getInt("submitJobID");
+                    String messageSubmit = rs.getString("messageSubmit");
+                    String jobFile = rs.getString("jobFile");
+                    int submitJobStatus = rs.getInt("submitJobStatus");
+                    PayMentMethod payMent = PayMentMethod.builder().paymentMethodID(paymentMethodID).paymentMethodName(paymentMethodName).build();
+                    Job job = Job.builder().jobID(jobID)
+                            .userID(hrID)
+                            .jobTitle(jobTitle)
+                            .category(Category.builder().categoryID(categoryID).categoryName(categoryName).img(img).build())
+                            .company(CompanyInfo.builder().companyName(companyName).build())
+                            .address(address)
+                            .email(email)
+                            .minBudget(minBudget)
+                            .maxBudget(maxBudget)
+                            .payMentMethod(payMent)
+                            .phone(phone)
+                            .expiriedDate(expiriedDate)
+                            .description(description)
+                            .disputeStatus(1)
                             .build();
                     SubmitJob sbJob = SubmitJob.builder()
                             .submitJobID(submitJobID)

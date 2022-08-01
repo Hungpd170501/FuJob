@@ -96,9 +96,9 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Awaiting</p>
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Pending</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        ${requestScope.COUNT_TOTAL_COMPANY_1}
+                                        ${requestScope.COUNT_TOTAL_COMPANY_2}
                                     </h5>
                                 </div>
                             </div>
@@ -158,8 +158,9 @@
                 <span class="mr10">STATUS:</span>
                 <select class="form-control mr10">
                     <option selected>All</option>
-                    <option value="2">Verified</option>
-                    <option value="1">Pending</option>
+                    <option value="3">Verified</option>
+                    <option value="2">Pending</option>
+                    <option value="1">Not Verified</option>
                     <option value="0">Inactive</option>
                 </select>
                 <button id="build" class="btn btn-light ml-3">Rebuild Table</button>
@@ -244,9 +245,6 @@
                                 <td>
                                     <div class="media flex-nowrap align-items-center"
                                          style="white-space: nowrap;">
-                                        <!--                                            <div class="avatar avatar-32pt mr-8pt">
-                                                                                        <span class="avatar-title rounded-circle"></span>
-                                                                                    </div>-->
                                         <div class="media-body">
                                             <div class="d-flex flex-column">
                                                 <p class="mb-0"><strong
@@ -299,27 +297,49 @@
                                 </td>
                                 <td class="text-right pl-0">
                                     <c:if test="${pageScope.item.companyStatus == 1 || pageScope.item.companyStatus == 3}">
-                                        <a href="" class="ml-2 text-danger"><strong>Deactive</strong>
-                                        </a>
+                                        <form method="POST" action="${pageContext.request.contextPath}/MainController">
+                                            <input type="hidden" name="action" value="UpdateCompanyStatus">
+                                            <input type="hidden" name="companyID" value="${pageScope.item.companyID}">
+                                            <input type="hidden" name="status" value="0">
+                                            <input type="submit" class="text-danger" style="border: 0; background: 0;" value="Deactivate">   
+                                        </form>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn  dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                    data-boundary="viewport"
+                                                    aria-expanded="false"></button>
+                                            <div class="dropdown-menu">
+                                                <form method="POST" action="${pageContext.request.contextPath}/MainController">
+                                                    <input type="hidden" name="action" value="UpdateCompanyStatus">
+                                                    <input type="hidden" name="companyID" value="${pageScope.item.companyID}">
+                                                    <input type="hidden" name="status" value="3">
+                                                    <input type="submit" class="" style="border: 0; background: 0;" value="Verify">   
+                                                </form>
+                                            </div>
+                                        </div>
                                     </c:if>
                                     <c:if test="${pageScope.item.companyStatus == 2}">
-                                        <a href="" class="ml-2 text-warning"><strong>Verify</strong>
-                                        </a>
+                                        <form method="POST" action="${pageContext.request.contextPath}/MainController">
+                                                    <input type="hidden" name="action" value="UpdateCompanyStatus">
+                                                    <input type="hidden" name="companyID" value="${pageScope.item.companyID}">
+                                                    <input type="hidden" name="status" value="3">
+                                                    <input type="submit" class="text-success" style="border: 0; background: 0;" value="Verify">   
+                                         </form>
+                                        <form method="POST" action="${pageContext.request.contextPath}/MainController">
+                                                    <input type="hidden" name="action" value="UpdateCompanyStatus">
+                                                    <input type="hidden" name="companyID" value="${pageScope.item.companyID}">
+                                                    <input type="hidden" name="status" value="1">
+                                                    <input type="submit" class="text-danger" style="border: 0; background: 0;" value="Deny">   
+                                         </form>
                                     </c:if>
                                     <c:if test="${pageScope.item.companyStatus == 0}">
-                                        <a href="" class="ml-2 text-success"><strong>Active</strong>
-                                        </a>
+                                        <form method="POST" action="${pageContext.request.contextPath}/MainController">
+                                                    <input type="hidden" name="action" value="UpdateCompanyStatus">
+                                                    <input type="hidden" name="companyID" value="${pageScope.item.companyID}">
+                                                    <input type="hidden" name="status" value="3">
+                                                    <input type="submit" class="text-success" style="border: 0; background: 0;" value="Activate">   
+                                         </form>
                                     </c:if>
-                                    <!--                                <div class="btn-group">
-                                                                        <button type="button" class="btn  dropdown-toggle"
-                                                                                data-toggle="dropdown" aria-haspopup="true"
-                                                                                data-boundary="viewport"
-                                                                                aria-expanded="false"></button>
-                                                                        <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" data-toggle="modal" data-target="#profile">View
-                                                                                Profile</a>
-                                                                        </div>
-                                                                    </div>-->
                                 </td>
                             </tr>
                         </c:forEach>
@@ -384,12 +404,6 @@
     function customViewFormatter(data) {
         var template = $('#profileTemplate').html();
         var view = '';
-//     $("#table tr").each(function() {
-//  var text = $(this).html();
-////  div.html(text);
-////  $(this).html(div);
-//  view += template.replace('%NAME%', "abc");
-//});
         $.each(data, function (i, row) {
             view += template.replace('%NAME%', row.name)
                 .replace('%WEBSITE%', row.website)

@@ -42,7 +42,7 @@ public class UserEntity {
     @BatchSize(size = 1)
     private RoleEntity role;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "companyID")
     @BatchSize(size = 1)
     private CompanyEntity companyID;
@@ -61,4 +61,11 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "user")
     private Set<JobEntity> jobs;
+
+    @OneToMany(mappedBy = "user")
+    private Set<EvidenceEntity> Evidences;
+
+    @OneToMany(mappedBy = "reviewer")
+    private Set<EvaluateCompletionEntity> EvaluateCompletion;
+
 }

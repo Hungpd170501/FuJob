@@ -119,6 +119,7 @@
                                     if (listJobApplication != null) {
                                         if (listJobApplication.size() > 0) {
                                             for (JobApplication jobOrder : listJobApplication) {
+                                                if (jobOrder.getJob().getDisputeStatus() != 1) {
                                 %>
                                 <li style="list-style: none">
                                     <div class="job-display col-lg-12 mt-4 pt-2">
@@ -194,6 +195,9 @@
                                                             <div class="mt-3">
                                                                 <button onclick="getFeedBack('<%= jobOrder.getEvaluateCompletion().getRatingValue()%>', '<%= jobOrder.getEvaluateCompletion().getContent()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#viewFeedBack" style="width: 50%">View Feedback</button>
                                                             </div>
+                                                            <div class="mt-3">
+                                                                <button onclick="getJobApplicatonIDDispute(<%= jobOrder.getJobApplicationID()%>)" class="btn btn-sm btn-danger-outline" data-toggle="modal" data-target="#Dispute" style="width: 50%">Dispute</button>
+                                                            </div>
                                                             <%
                                                             } else if (jobOrder.getJobApplicationStatus() == 7) {
                                                             %>
@@ -206,6 +210,9 @@
                                                             </div>
                                                             <div class="mt-3">
                                                                 <button onclick="getFeedBack('<%= jobOrder.getEvaluateCompletion().getRatingValue()%>', '<%= jobOrder.getEvaluateCompletion().getContent()%>')" class="btn btn-sm btn-primary-outline" data-toggle="modal" data-target="#viewFeedBack" style="width: 50%">View Feedback</button>
+                                                            </div>
+                                                            <div class="mt-3">
+                                                                <button onclick="getJobApplicatonIDDispute(<%= jobOrder.getJobApplicationID()%>)" class="btn btn-sm btn-danger-outline" data-toggle="modal" data-target="#Dispute" style="width: 50%">Dispute</button>
                                                             </div>
                                                             <%
                                                                 }
@@ -348,11 +355,45 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
+
+                                    <div class="modal fade" id="Dispute" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header border-bottom-0">
+                                                    <h5 class="modal-title text-primary" id="exampleModalLabel">Dispute Form</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" action="${pageContext.request.contextPath}/MainController">
+                                                    <div class="modal-body">
+                                                        <div class="form-group text-dark">
+                                                            <label>Title<span class="text-danger">*</span></label>
+                                                            <input id="titleDispute" type="text" required="" class="form-control" name="titleDispute" placeholder="Enter the title...">
+                                                        </div>
+                                                        <div class="form-group text-dark ckarea">
+                                                            <label>Message<span class="text-danger">*</span></label>
+                                                            <textarea id="messageDispute" class="form-control" name="messageDispute" placeholder="Message for employer" required ></textarea>
+                                                        </div>
+                                                        <div class="form-group text-dark ckarea">
+                                                            <label class="text-warning font-italic">This message will be sent to the owner of this project!</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer border-top-0 d-flex justify-content-center">
+                                                        <input type="submit" class="btn btn-primary" value="Send">
+                                                        <input type="hidden" name="action" value="StudentSendDispute">
+                                                    </div>
+                                                    <input type="hidden" id="jobApplicationIDtoDispute" name="jobApplicationID" value="">
+                                                    <input type="hidden" name="studentID" value="${sessionScope.LOGIN_USER.userID}">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>                 
                                 </li> 
                                 <%
+                                                }
                                             }
-
                                         }
                                     }
 
@@ -432,6 +473,11 @@
         <script>
             function getJobApplicatonID(jobApplicationID) {
                 $('#jobApplicationID').val(jobApplicationID);
+            }
+        </script>
+        <script>
+            function getJobApplicatonIDDispute(jobApplicationID) {
+                $('#jobApplicationIDtoDispute').val(jobApplicationID);
             }
         </script>
         <script>

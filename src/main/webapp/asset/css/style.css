@@ -162,7 +162,7 @@ File: main stylesheet
     padding: 6px 20px;
 }
 
-.btn.btn-primary, .btn.btn-secondary, .btn.btn-success, .btn.btn-danger, .btn.btn-info, .btn.btn-warning, .btn.btn-dark {
+.btn.btn-primary, .btn.btn-secondary, .btn.btn-success, .btn.btn-danger, .btn.btn-info, .btn.btn-warning, .btn.btn-dark, .btn.btn-primary-red {
     color: #ffffff !important;
 }
 
@@ -181,9 +181,16 @@ File: main stylesheet
     background: #2f55d4;
     border: 1px solid #2f55d4;
 }
+.btn.btn-primary-red {
+    background: #c90c0c;
+    border: 1px solid #c90c0c;
+}
 
 .btn.btn-primary:hover, .btn.btn-primary:focus, .btn.btn-primary:active, .btn.btn-primary.active, .btn.btn-primary.focus {
     background-color: #2443ac !important;
+}
+.btn.btn-primary-red:hover, .btn.btn-primary-red:focus, .btn.btn-primary-red:active, .btn.btn-primary-red.active, .btn.btn-primary-red.focus {
+    background-color: #c90c0c !important;
 }
 
 .btn.btn-primary-outline {

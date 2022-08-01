@@ -29,6 +29,8 @@ public class CompanyInfoDAO {
             + "   SET companyName = ? ,address = ? ,website = ? ,gmail = ? ,phone = ? ,typeCompany = ? ,establishedYear = ? ,numberOfEmployee = ? ,companyOverview = ? ,avatar = ? "
             + "   WHERE companyID = ?";
     private static final String UPDATE_BUSINESSLICENSE = "UPDATE tblCompanies SET businessLicense = ?, companyStatus = 2 WHERE companyID = ?";
+    private static final String UPDATE_COMPANY_STATUS = "UPDATE tblCompanies SET companyStatus=? WHERE companyID=?";
+
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -291,6 +293,28 @@ public class CompanyInfoDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (preStm != null) {
+                preStm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return check;
+    }
+    
+    public boolean updateCompanyStatus(int companyID, int userStatus) throws SQLException {
+        boolean check = false;
+        try {
+            conn = DBUtils.getInstance().getConnection();
+            if (conn != null) {
+                preStm = conn.prepareStatement(UPDATE_COMPANY_STATUS);
+                preStm.setInt(1, userStatus);
+                preStm.setInt(2, companyID);
+                check = preStm.executeUpdate() > 0;
+            }
+        } catch (SQLException e) {
         } finally {
             if (preStm != null) {
                 preStm.close();

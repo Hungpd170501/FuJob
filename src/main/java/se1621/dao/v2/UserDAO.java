@@ -13,7 +13,6 @@ import se1621.entity.UserEntity;
  */
 public interface UserDAO {
     void save(UserEntity userEntity);
-
     List<UserEntity> getAll(String userEntityName);
     List<UserEntity> getAllUsingHQL(String hql);
 
