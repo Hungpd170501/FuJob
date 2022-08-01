@@ -13,9 +13,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import se1621.dao.EvaluateCompletionDAO;
 import se1621.dao.JobApplicationDAO;
 import se1621.dao.JobSkillsDAO;
 import se1621.dao.SubmitJobDAO;
+import se1621.dto.EvaluateCompletion;
 import se1621.dto.JobApplication;
 import se1621.dto.JobSkills;
 import se1621.dto.SubmitJob;
@@ -57,6 +59,16 @@ public class ListJobOngoingPostedController extends HttpServlet {
                         ljk.add(js);
                     }
                     jobApply.getJob().setListJobSkills(ljk);
+                }
+            }
+            EvaluateCompletionDAO ecDAO = new EvaluateCompletionDAO();
+            List<EvaluateCompletion> listEc = new ArrayList<>();
+            listEc = ecDAO.getAllEvaluate();
+            for (JobApplication jobApply : listJobOrder) {
+                for (EvaluateCompletion ec : listEc) {
+                    if(jobApply.getJob().getJobID() == ec.getJob().getJobID() && jobApply.getResumeID() == ec.getResume().getResumeID()){
+                        jobApply.setEvaluateCompletion(ec);
+                    }
                 }
             }
             if (!listJobOrder.isEmpty()) {

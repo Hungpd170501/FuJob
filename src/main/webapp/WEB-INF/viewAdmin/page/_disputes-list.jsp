@@ -277,19 +277,6 @@
         <div class="page-separator mt-4">
             <div class="page-separator__text">RESOLVED DISPUTES</div>
         </div>
-        <div class="toolbar mb-2">
-            <div class="form-inline">
-                <span class="mr10">STATUS:</span>
-                <select class="form-control mr10">
-                    <option selected>All</option>
-                    <option value="6">Uncompleted</option>
-                    <option value="5">Completed</option>
-                    <option value="4">Expired</option>
-                    <option value="Deleted">Inactive</option>
-                </select>
-                <button id="build" class="btn btn-light ml-3">Rebuild Table</button>
-            </div>
-        </div>
         <div class="row mb-32pt d-flex align-items-center">
             <div class="flex" style="max-width: 100%">
 

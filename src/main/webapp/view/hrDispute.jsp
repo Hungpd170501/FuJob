@@ -144,6 +144,7 @@
                                                                 }
                                                             %>
                                                         </h6>
+
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3">
@@ -230,7 +231,7 @@
                                                 </div>
                                                 <div class="modal-footer border-top-0 d-flex justify-content-center">
                                                     <input type="submit" class="btn btn-primary" value="Send">
-                                                    <input type="hidden" name="action" value="StudentCancelDispute">
+                                                    <input type="hidden" name="action" value="HrCancelDispute">
                                                 </div>
                                                 <input type="hidden" id="disputeID" name="disputeID" value="">
                                             </form>
@@ -259,7 +260,7 @@
                                                 </div>
                                                 <div class="modal-footer border-top-0 d-flex justify-content-center">
                                                     <input type="submit" class="btn btn-primary" value="Send">
-                                                    <input type="hidden" name="action" value="SendEvidence">
+                                                    <input type="hidden" name="action" value="HrSendEvidence">
                                                 </div>
                                                 <input type="hidden" id="disputeI" name="disputeID" value="">
                                             </form>
