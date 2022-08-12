@@ -16,7 +16,10 @@ import se1621.entity.JobEntity;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
@@ -29,6 +32,7 @@ public class JobController extends HttpServlet {
 
     private static final String ERROR = "/view/error.jsp";
     private static final String SUCCESS = "/WEB-INF/viewAdmin/projects-list.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;

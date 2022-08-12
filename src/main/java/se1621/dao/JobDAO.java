@@ -4,37 +4,22 @@
  */
 package se1621.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import se1621.utils.DBUtils;
 import se1621.dto.Category;
 import se1621.dto.Job;
 import se1621.dto.PayMentMethod;
+import se1621.utils.DBUtils;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
  * @author ACER
  */
 public class JobDAO {
 
     private static final String CREATEJOB = "INSERT INTO tblJobs(userID, jobTitle, jobCategoryID,"
             + " minBudget, maxBudget, paymentMethodID, expiriedDate, address, email, phone, description, jobStatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,1)";
-    //xong ne
-    private final String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID,ISNULL(jobAply.bids,0) AS bids, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
-            + "            j.jobCategoryID, c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, "
-            + "            pm.paymentMethodName, j.minBudget, j.maxBudget, j.expiriedDate "
-            + "            FROM (((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) "
-            + "             left join tblPaymentMethods pm on j.paymentMethodID = pm.paymentMethodID) "
-            + "			 left join (select jobID, COUNT(jobID) AS bids  "
-            + "              FROM tblJobApplications  "
-            + "                WHERE jobApplicationStatus = 1  "
-            + "                 GROUP BY jobID) AS jobAply  "
-            + "            on jobAply.jobID = j.jobID )";
     private static final String GETJOBIDJUSTCREATE = "SELECT jobID FROM tblJobs WHERE jobID = (SELECT MAX(jobID) FROM tblJobs) and jobStatus = 1 and userID = ?";
     //roi ne
     private static final String SEARCHBYJOBID = "SELECT j.jobID, j.userID, j.jobTitle,j.jobCategoryID, c.categoryName, "
@@ -52,7 +37,6 @@ public class JobDAO {
             + "													GROUP BY jobID) AS jobAply  "
             + "													on jobAply.jobID = j.jobID ) "
             + "                                    WHERE j.jobStatus = 1 ORDER BY jobID DESC";
-
     //sua roi
     private static final String VIEWHRJOB = "SELECT j.jobID,ISNULL(jobApp.bids,0) AS bids, j.jobStatus, j.jobTitle, j.lastModifiedDate, j.address, c.categoryName, c.img, j.description , j.createdDate, j.paymentMethodID, j.minBudget, j.maxBudget, j.expiriedDate, p.paymentMethodName "
             + "                                  FROM (((tblJobs j left join tblCategories c "
@@ -65,14 +49,11 @@ public class JobDAO {
             + "								GROUP BY jobID) AS jobApp "
             + "								on j.jobID = jobApp.jobID) "
             + "                               WHERE (j.jobStatus = 1 )AND j.userID= ? ORDER BY createdDate DESC";
-   
-
     private static final String DELETEJOBPOST = "UPDATE tblJobs SET jobStatus=0, reasonCancel = ? WHERE jobID=?";
     private static final String REJECTJOBPOST = "UPDATE tblJobs SET jobStatus=3 WHERE jobID=?";
     private static final String UPDATE_JOB_POST_HAVE_EMPLOYER = "UPDATE tblJobs SET jobStatus=3 WHERE jobID=? AND jobStatus=1 ";
     private static final String UPDATE_JOB_POST_UNCOMPLETE = "UPDATE tblJobs SET jobStatus=6 WHERE jobID=? AND jobStatus IN (3,8) ";
     private static final String UPDATE_JOB_POST_COMPLETE = "UPDATE tblJobs SET jobStatus=5 WHERE jobID=? AND jobStatus=8 ";
-
     private static final String GETALLNUMBEROFJOBPOST = "SELECT COUNT (jobID) AS totalJob FROM tblJobs";
     //roi ne
     private static final String GETVIEWRECENTJOB = "SELECT TOP(8) j.jobID, j.jobTitle, j.address, j.minBudget, j.maxBudget, c.categoryName, c.img, j.paymentMethodID, j.createdDate, j.lastModifiedDate, j.expiriedDate, pay.paymentMethodName"
@@ -82,12 +63,23 @@ public class JobDAO {
             + "                                 WHERE j.jobStatus = 1 ORDER BY createdDate DESC";
     private final static String UPDATE_JOB_STATUS = "UPDATE tblJobs SET jobStatus = ? WHERE jobID = ?";
     private final static String GET_JOBID_BY_JOBAPPLYCATIONID = "SELECT jobID FROM tbljobApplications WHERE jobApplicationID = ?";
+    private static final String UPDATE_JOB = "UPDATE tblJobs SET userID=?, jobTitle=?, jobCategoryID=?, address=?, paymentMethodID=?, email=?, expiriedDate=?, phone=?, minBudget=?, maxBudget=? , description=? WHERE jobID=?";
+    private final static String UPDATE_DISPUTE_STATUS = "UPDATE tblJobs SET disputeStatus = ? WHERE jobID = ?";
+    //xong ne
+    private final String SEARCHALL_JOBTITLE_SKILL_CATEGORY = "SELECT j.jobID,ISNULL(jobAply.bids,0) AS bids, j.userID, j.jobTitle, j.lastModifiedDate, j.address, "
+            + "            j.jobCategoryID, c.categoryName, c.img, j.description , j.email, j.phone, j.createdDate, j.paymentMethodID, "
+            + "            pm.paymentMethodName, j.minBudget, j.maxBudget, j.expiriedDate "
+            + "            FROM (((tblJobs j left join tblCategories c on j.jobCategoryID = c.categoryID) "
+            + "             left join tblPaymentMethods pm on j.paymentMethodID = pm.paymentMethodID) "
+            + "			 left join (select jobID, COUNT(jobID) AS bids  "
+            + "              FROM tblJobApplications  "
+            + "                WHERE jobApplicationStatus = 1  "
+            + "                 GROUP BY jobID) AS jobAply  "
+            + "            on jobAply.jobID = j.jobID )";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
 
-    private static final String UPDATE_JOB = "UPDATE tblJobs SET userID=?, jobTitle=?, jobCategoryID=?, address=?, paymentMethodID=?, email=?, expiriedDate=?, phone=?, minBudget=?, maxBudget=? , description=? WHERE jobID=?";
-    private final static String UPDATE_DISPUTE_STATUS = "UPDATE tblJobs SET disputeStatus = ? WHERE jobID = ?";
     // top recent job in index.jsp
     public List<Job> getRecentJobPosted() throws SQLException {
         try {
@@ -357,7 +349,7 @@ public class JobDAO {
         }
         return jobID;
     }
-    
+
 
     public List<Job> searchAllJobTile_Skill_Category(String searchJobTitle, int searchSkillID, int searchJobCategoryID) throws SQLException {
         try {
@@ -653,6 +645,7 @@ public class JobDAO {
         }
         return null;
     }
+
     public List<Job> getListHrPastJob(int userID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
@@ -737,7 +730,7 @@ public class JobDAO {
         }
         return check;
     }
-   
+
     public boolean rejectJobPost(int jobID) throws SQLException {
         boolean check = false;
         try {
@@ -908,7 +901,7 @@ public class JobDAO {
         }
         return check;
     }
-    
+
     public boolean updateDisputeStatus(int disputeStatus, int jobID) throws SQLException {
         boolean check = false;
         try {

@@ -37,7 +37,8 @@
             </div>
             <div class="float-right">
                 <ul class="topbar-list list-unstyled d-flex" style="margin: 11px 0px;">
-                    <li class="list-inline-item"><a href="javascript:void(0);"><i class="mdi mdi-account mr-2"></i>Benny Simpson</a></li>
+                    <li class="list-inline-item"><a href="javascript:void(0);"><i class="mdi mdi-account mr-2"></i>Benny
+                        Simpson</a></li>
                     <li class="list-inline-item">
                         <select id="select-lang" class="demo-default">
                             <option value="">Language</option>
@@ -59,8 +60,8 @@
         <!-- Logo container-->
         <div>
             <a href="index.html" class="logo">
-                <img src="images/logo-light.png" alt="" class="logo-light" height="18" />
-                <img src="images/logo-dark.png" alt="" class="logo-dark" height="18" />
+                <img src="images/logo-light.png" alt="" class="logo-light" height="18"/>
+                <img src="images/logo-dark.png" alt="" class="logo-dark" height="18"/>
             </a>
         </div>
         <div class="buy-button">
@@ -103,27 +104,31 @@
                         <li><a href="team.html">Team</a></li>
                         <li><a href="faq.html">Faqs</a></li>
                         <li><a href="pricing.html">Pricing plans</a></li>
-                        <li class="has-submenu"><a href="javascript:void(0)"> Candidates</a><span class="submenu-arrow"></span>
+                        <li class="has-submenu"><a href="javascript:void(0)"> Candidates</a><span
+                                class="submenu-arrow"></span>
                             <ul class="submenu">
                                 <li><a href="candidates-listing.html">Candidates Listing</a></li>
                                 <li><a href="candidates-profile.html">Candidates Profile</a></li>
                                 <li><a href="create-resume.html">Create Resume</a></li>
                             </ul>
                         </li>
-                        <li class="has-submenu"><a href="javascript:void(0)"> Blog</a><span class="submenu-arrow"></span>
+                        <li class="has-submenu"><a href="javascript:void(0)"> Blog</a><span
+                                class="submenu-arrow"></span>
                             <ul class="submenu">
                                 <li><a href="blog-grid.html">Blogs</a></li>
                                 <li><a href="blog-sidebar.html">Blog Sidebar</a></li>
                                 <li><a href="blog-details.html">Blog Details</a></li>
                             </ul>
                         </li>
-                        <li class="has-submenu"><a href="javascript:void(0)"> Employers</a><span class="submenu-arrow"></span>
+                        <li class="has-submenu"><a href="javascript:void(0)"> Employers</a><span
+                                class="submenu-arrow"></span>
                             <ul class="submenu">
                                 <li><a href="employers-list.html">Employers List</a></li>
                                 <li><a href="company-detail.html">Company Detail</a></li>
                             </ul>
                         </li>
-                        <li class="has-submenu"><a href="javascript:void(0)"> User Pages</a><span class="submenu-arrow"></span>
+                        <li class="has-submenu"><a href="javascript:void(0)"> User Pages</a><span
+                                class="submenu-arrow"></span>
                             <ul class="submenu">
                                 <li><a href="login.html">Login</a></li>
                                 <li><a href="signup.html">Signup</a></li>
@@ -178,7 +183,9 @@
                                 <div class="col-lg-3 col-md-6">
                                     <div class="registration-form-box">
                                         <i class="fa fa-briefcase"></i>
-                                        <input type="text" id="exampleInputName1" class="form-control rounded registration-input-box" placeholder="Job keybords...">
+                                        <input type="text" id="exampleInputName1"
+                                               class="form-control rounded registration-input-box"
+                                               placeholder="Job keybords...">
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-6">
@@ -449,7 +456,8 @@
                                 </div>
                                 <div class="col-lg-3 col-md-6">
                                     <div class="registration-form-box">
-                                        <input type="submit" id="submit" name="send" class="submitBnt btn btn-primary btn-block" value="Submit">
+                                        <input type="submit" id="submit" name="send"
+                                               class="submitBnt btn btn-primary btn-block" value="Submit">
                                     </div>
                                 </div>
                             </div>
@@ -485,7 +493,8 @@
                 <div class="left-sidebar">
                     <div class="accordion" id="accordionExample">
                         <div class="card rounded mt-4">
-                            <a data-toggle="collapse" href="#collapseOne" class="job-list" aria-expanded="true" aria-controls="collapseOne">
+                            <a data-toggle="collapse" href="#collapseOne" class="job-list" aria-expanded="true"
+                               aria-controls="collapseOne">
                                 <div class="card-header" id="headingOne">
                                     <h6 class="mb-0 text-dark f-18">Date Posted</h6>
                                 </div>
@@ -493,35 +502,46 @@
                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
                                 <div class="card-body p-0">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio1">Last Hour</label>
+                                        <input type="radio" id="customRadio1" name="customRadio"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio1">Last
+                                            Hour</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio2">Last 24 hours</label>
+                                        <input type="radio" id="customRadio2" name="customRadio"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio2">Last 24
+                                            hours</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio3">Last 7 days</label>
+                                        <input type="radio" id="customRadio3" name="customRadio"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio3">Last 7
+                                            days</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio4">Last 14 days</label>
+                                        <input type="radio" id="customRadio4" name="customRadio"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio4">Last 14
+                                            days</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio5">Last 30 days</label>
+                                        <input type="radio" id="customRadio5" name="customRadio"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio5">Last 30
+                                            days</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- collapse one end -->
                         <div class="card rounded mt-4">
-                            <a data-toggle="collapse" href="#collapsetwo" class="job-list" aria-expanded="true" aria-controls="collapsetwo">
+                            <a data-toggle="collapse" href="#collapsetwo" class="job-list" aria-expanded="true"
+                               aria-controls="collapsetwo">
                                 <div class="card-header" id="headingtwo">
                                     <h6 class="mb-0 text-dark f-18">Categories</h6>
                                 </div>
@@ -529,40 +549,52 @@
                             <div id="collapsetwo" class="collapse show" aria-labelledby="headingtwo">
                                 <div class="card-body p-0">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio7" name="customRadio1" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio7">Digital & Creative</label>
+                                        <input type="radio" id="customRadio7" name="customRadio1"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio7">Digital &
+                                            Creative</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio8" name="customRadio1" class="custom-control-input">
+                                        <input type="radio" id="customRadio8" name="customRadio1"
+                                               class="custom-control-input">
                                         <label class="custom-control-label ml-1 text-muted" for="customRadio8">Accountancy</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio9" name="customRadio1" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio9">Banking</label>
+                                        <input type="radio" id="customRadio9" name="customRadio1"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted"
+                                               for="customRadio9">Banking</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio10" name="customRadio1" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio10">IT Contractor</label>
+                                        <input type="radio" id="customRadio10" name="customRadio1"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio10">IT
+                                            Contractor</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio11" name="customRadio1" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio11">Graduate</label>
+                                        <input type="radio" id="customRadio11" name="customRadio1"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted"
+                                               for="customRadio11">Graduate</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio12" name="customRadio1" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio12">Estate Agency</label>
+                                        <input type="radio" id="customRadio12" name="customRadio1"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio12">Estate
+                                            Agency</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- collapse one end -->
                         <div class="card rounded mt-4">
-                            <a data-toggle="collapse" href="#collapsethree" class="job-list" aria-expanded="true" aria-controls="collapsethree">
+                            <a data-toggle="collapse" href="#collapsethree" class="job-list" aria-expanded="true"
+                               aria-controls="collapsethree">
                                 <div class="card-header" id="headingthree">
                                     <h6 class="mb-0 text-dark f-18">Experince</h6>
                                 </div>
@@ -570,23 +602,31 @@
                             <div id="collapsethree" class="collapse show" aria-labelledby="headingthree">
                                 <div class="card-body p-0">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio13" name="customRadio2" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio13">1Year to 2Year</label>
+                                        <input type="radio" id="customRadio13" name="customRadio2"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio13">1Year to
+                                            2Year</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio14" name="customRadio2" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio14">2Year to 3Year</label>
+                                        <input type="radio" id="customRadio14" name="customRadio2"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio14">2Year to
+                                            3Year</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio15" name="customRadio2" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio15">3Year to 4Year</label>
+                                        <input type="radio" id="customRadio15" name="customRadio2"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio15">3Year to
+                                            4Year</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio16" name="customRadio2" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio16">IT Contractor</label>
+                                        <input type="radio" id="customRadio16" name="customRadio2"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio16">IT
+                                            Contractor</label>
                                     </div>
                                 </div>
                             </div>
@@ -594,7 +634,8 @@
                         <!-- collapse one end -->
 
                         <div class="card rounded mt-4">
-                            <a data-toggle="collapse" href="#collapsefour" class="job-list" aria-expanded="true" aria-controls="collapsefour">
+                            <a data-toggle="collapse" href="#collapsefour" class="job-list" aria-expanded="true"
+                               aria-controls="collapsefour">
                                 <div class="card-header" id="headingfour">
                                     <h6 class="mb-0 text-dark f-18">Gender</h6>
                                 </div>
@@ -602,18 +643,24 @@
                             <div id="collapsefour" class="collapse show" aria-labelledby="headingfour">
                                 <div class="card-body p-0">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio17" name="customRadio3" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio17">Male</label>
+                                        <input type="radio" id="customRadio17" name="customRadio3"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted"
+                                               for="customRadio17">Male</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio18" name="customRadio3" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio18">Female</label>
+                                        <input type="radio" id="customRadio18" name="customRadio3"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted"
+                                               for="customRadio18">Female</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio19" name="customRadio3" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio19">Others</label>
+                                        <input type="radio" id="customRadio19" name="customRadio3"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted"
+                                               for="customRadio19">Others</label>
                                     </div>
                                 </div>
                             </div>
@@ -621,7 +668,8 @@
                         <!-- collapse one end -->
 
                         <div class="card rounded mt-4">
-                            <a data-toggle="collapse" href="#collapsefive" class="job-list collapsed" aria-expanded="false" aria-controls="collapsefive">
+                            <a data-toggle="collapse" href="#collapsefive" class="job-list collapsed"
+                               aria-expanded="false" aria-controls="collapsefive">
                                 <div class="card-header" id="headingfive">
                                     <h6 class="mb-0 text-dark f-18">Offerd Salary</h6>
                                 </div>
@@ -629,28 +677,38 @@
                             <div id="collapsefive" class="collapse" aria-labelledby="headingfive">
                                 <div class="card-body p-0">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio20" name="customRadio4" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio20">$1k - $20k</label>
+                                        <input type="radio" id="customRadio20" name="customRadio4"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio20">$1k -
+                                            $20k</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio21" name="customRadio4" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio21">$21k - $30k</label>
+                                        <input type="radio" id="customRadio21" name="customRadio4"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio21">$21k -
+                                            $30k</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio22" name="customRadio4" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio22">$31k - $40k</label>
+                                        <input type="radio" id="customRadio22" name="customRadio4"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio22">$31k -
+                                            $40k</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio23" name="customRadio4" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio23">$41k - $50k</label>
+                                        <input type="radio" id="customRadio23" name="customRadio4"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio23">$41k -
+                                            $50k</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio24" name="customRadio4" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio24">$51k - $60k</label>
+                                        <input type="radio" id="customRadio24" name="customRadio4"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio24">$51k -
+                                            $60k</label>
                                     </div>
                                 </div>
                             </div>
@@ -658,7 +716,8 @@
                         <!-- collapse one end -->
 
                         <div class="card rounded mt-4">
-                            <a data-toggle="collapse" href="#collapsesix" class="job-list collapsed" aria-expanded="false" aria-controls="collapsesix">
+                            <a data-toggle="collapse" href="#collapsesix" class="job-list collapsed"
+                               aria-expanded="false" aria-controls="collapsesix">
                                 <div class="card-header" id="headingsix">
                                     <h6 class="mb-0 text-dark f-18">Job Type</h6>
                                 </div>
@@ -666,32 +725,40 @@
                             <div id="collapsesix" class="collapse" aria-labelledby="headingsix">
                                 <div class="card-body p-0">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio25" name="customRadio5" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio25">Part Time</label>
+                                        <input type="radio" id="customRadio25" name="customRadio5"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio25">Part
+                                            Time</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio26" name="customRadio5" class="custom-control-input">
+                                        <input type="radio" id="customRadio26" name="customRadio5"
+                                               class="custom-control-input">
                                         <label class="custom-control-label ml-1 text-muted" for="customRadio26">Internship</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio27" name="customRadio5" class="custom-control-input">
-                                        <label class="custom-control-label ml-1 text-muted" for="customRadio27">Full Time</label>
+                                        <input type="radio" id="customRadio27" name="customRadio5"
+                                               class="custom-control-input">
+                                        <label class="custom-control-label ml-1 text-muted" for="customRadio27">Full
+                                            Time</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio28" name="customRadio5" class="custom-control-input">
+                                        <input type="radio" id="customRadio28" name="customRadio5"
+                                               class="custom-control-input">
                                         <label class="custom-control-label ml-1 text-muted" for="customRadio28">Freelance</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio29" name="customRadio5" class="custom-control-input">
+                                        <input type="radio" id="customRadio29" name="customRadio5"
+                                               class="custom-control-input">
                                         <label class="custom-control-label ml-1 text-muted" for="customRadio29">Temporary</label>
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio30" name="customRadio5" class="custom-control-input">
+                                        <input type="radio" id="customRadio30" name="customRadio5"
+                                               class="custom-control-input">
                                         <label class="custom-control-label ml-1 text-muted" for="customRadio30">Volunteer</label>
                                     </div>
                                 </div>
@@ -708,7 +775,8 @@
                         <div class="list-grid-item rounded">
                             <div class="grid-item-content p-3">
                                 <ul class="list-inline mb-0">
-                                    <li class="list-inline-item f-15"><span class="badge badge-success">Part Time</span></li>
+                                    <li class="list-inline-item f-15"><span class="badge badge-success">Part Time</span>
+                                    </li>
                                     <li class="list-inline-item float-right">
                                         <div class="grid-fev-icon">
                                             <a href="" class="text-danger"><i class="mdi mdi-heart"></i></a>
@@ -736,7 +804,8 @@
                         <div class="list-grid-item rounded">
                             <div class="grid-item-content p-3">
                                 <ul class="list-inline mb-0">
-                                    <li class="list-inline-item f-15"><span class="badge badge-success">Full Time</span></li>
+                                    <li class="list-inline-item f-15"><span class="badge badge-success">Full Time</span>
+                                    </li>
                                     <li class="list-inline-item float-right">
                                         <div class="grid-fev-icon">
                                             <a href="" class="text-danger"><i class="mdi mdi-heart"></i></a>
@@ -764,7 +833,8 @@
                         <div class="list-grid-item rounded">
                             <div class="grid-item-content p-3">
                                 <ul class="list-inline mb-0">
-                                    <li class="list-inline-item f-15"><span class="badge badge-success">Full Time</span></li>
+                                    <li class="list-inline-item f-15"><span class="badge badge-success">Full Time</span>
+                                    </li>
                                     <li class="list-inline-item float-right">
                                         <div class="grid-fev-icon">
                                             <a href="" class="text-danger"><i class="mdi mdi-heart"></i></a>
@@ -792,7 +862,8 @@
                         <div class="list-grid-item rounded">
                             <div class="grid-item-content p-3">
                                 <ul class="list-inline mb-0">
-                                    <li class="list-inline-item f-15"><span class="badge badge-success">Full Time</span></li>
+                                    <li class="list-inline-item f-15"><span class="badge badge-success">Full Time</span>
+                                    </li>
                                     <li class="list-inline-item float-right">
                                         <div class="grid-fev-icon">
                                             <a href="" class="text-danger"><i class="mdi mdi-heart"></i></a>
@@ -820,7 +891,8 @@
                         <div class="list-grid-item rounded">
                             <div class="grid-item-content p-3">
                                 <ul class="list-inline mb-0">
-                                    <li class="list-inline-item f-15"><span class="badge badge-success">Full Time</span></li>
+                                    <li class="list-inline-item f-15"><span class="badge badge-success">Full Time</span>
+                                    </li>
                                     <li class="list-inline-item float-right">
                                         <div class="grid-fev-icon">
                                             <a href="" class="text-danger"><i class="mdi mdi-heart"></i></a>
@@ -848,7 +920,8 @@
                         <div class="list-grid-item rounded">
                             <div class="grid-item-content p-3">
                                 <ul class="list-inline mb-0">
-                                    <li class="list-inline-item f-15"><span class="badge badge-success">Part Time</span></li>
+                                    <li class="list-inline-item f-15"><span class="badge badge-success">Part Time</span>
+                                    </li>
                                     <li class="list-inline-item float-right">
                                         <div class="grid-fev-icon">
                                             <a href="" class="text-danger"><i class="mdi mdi-heart"></i></a>
@@ -876,7 +949,8 @@
                         <div class="list-grid-item rounded">
                             <div class="grid-item-content p-3">
                                 <ul class="list-inline mb-0">
-                                    <li class="list-inline-item f-15"><span class="badge badge-success">Full Time</span></li>
+                                    <li class="list-inline-item f-15"><span class="badge badge-success">Full Time</span>
+                                    </li>
                                     <li class="list-inline-item float-right">
                                         <div class="grid-fev-icon">
                                             <a href="" class="text-danger"><i class="mdi mdi-heart"></i></a>
@@ -904,7 +978,8 @@
                         <div class="list-grid-item rounded">
                             <div class="grid-item-content p-3">
                                 <ul class="list-inline mb-0">
-                                    <li class="list-inline-item f-15"><span class="badge badge-success">Part Time</span></li>
+                                    <li class="list-inline-item f-15"><span class="badge badge-success">Part Time</span>
+                                    </li>
                                     <li class="list-inline-item float-right">
                                         <div class="grid-fev-icon">
                                             <a href="" class="text-danger"><i class="mdi mdi-heart"></i></a>
@@ -932,7 +1007,8 @@
                         <div class="list-grid-item rounded">
                             <div class="grid-item-content p-3">
                                 <ul class="list-inline mb-0">
-                                    <li class="list-inline-item f-15"><span class="badge badge-success">Full Time</span></li>
+                                    <li class="list-inline-item f-15"><span class="badge badge-success">Full Time</span>
+                                    </li>
                                     <li class="list-inline-item float-right">
                                         <div class="grid-fev-icon">
                                             <a href="" class="text-danger"><i class="mdi mdi-heart"></i></a>
@@ -999,9 +1075,12 @@
                 <form>
                     <div class="form-group mb-0">
                         <div class="input-group mb-0">
-                            <input name="email" id="email" type="email" class="form-control" placeholder="Your email :" required="" aria-describedby="newssubscribebtn">
+                            <input name="email" id="email" type="email" class="form-control" placeholder="Your email :"
+                                   required="" aria-describedby="newssubscribebtn">
                             <div class="input-group-append">
-                                <button class="btn btn-primary submitBnt" type="submit" id="newssubscribebtn">Subscribe</button>
+                                <button class="btn btn-primary submitBnt" type="submit" id="newssubscribebtn">
+                                    Subscribe
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -1018,7 +1097,8 @@
         <div class="row">
             <div class="col-lg-3 col-12 mb-0 mb-md-4 pb-0 pb-md-2">
                 <a href="javascript:void(0)"><img src="images/logo-light.png" height="20" alt=""></a>
-                <p class="mt-4">At vero eos et accusamus et iusto odio dignissim os ducimus qui blanditiis praesentium</p>
+                <p class="mt-4">At vero eos et accusamus et iusto odio dignissim os ducimus qui blanditiis
+                    praesentium</p>
                 <ul class="social-icon social list-inline mb-0">
                     <li class="list-inline-item"><a href="#" class="rounded"><i class="mdi mdi-facebook"></i></a></li>
                     <li class="list-inline-item"><a href="#" class="rounded"><i class="mdi mdi-twitter"></i></a></li>
@@ -1070,7 +1150,8 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <div class="">
-                    <p class="mb-0">� 2019 -2020 Jobya. Design with <i class="mdi mdi-heart text-danger"></i> by Themesdesign.</p>
+                    <p class="mb-0">� 2019 -2020 Jobya. Design with <i class="mdi mdi-heart text-danger"></i> by
+                        Themesdesign.</p>
                 </div>
             </div>
         </div>

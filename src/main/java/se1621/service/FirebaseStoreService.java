@@ -5,6 +5,10 @@
 package se1621.service;
 
 
+import jakarta.servlet.http.Part;
+
+import java.io.IOException;
+
 public interface FirebaseStoreService {
-    <T> String uploadFile(T file);
+    <T> String uploadFile(Part part) throws IOException;
 }

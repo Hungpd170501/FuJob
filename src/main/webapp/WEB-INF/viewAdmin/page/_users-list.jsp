@@ -121,9 +121,9 @@
                             <p>
                         </div>
                     </div>
-                        <div class="modal-footer border-top-0 d-flex justify-content-center">
-                            <input type="submit" name="action" class="btn btn-primary" value="Create Account">
-                        </div>
+                    <div class="modal-footer border-top-0 d-flex justify-content-center">
+                        <input type="submit" name="action" class="btn btn-primary" value="Create Account">
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -466,7 +466,8 @@
                                             <input type="hidden" name="action" value="UpdateUserStatus">
                                             <input type="hidden" name="userID" value="${pageScope.item.userID}">
                                             <input type="hidden" name="status" value="0">
-                                            <input type="submit" class="text-danger" style="border: 0; background: 0;" value="Deactivate">   
+                                            <input type="submit" class="text-danger" style="border: 0; background: 0;"
+                                                   value="Deactivate">
                                         </form>
                                     </c:if>
                                     <c:if test="${pageScope.item.userStatus != 1}">
@@ -474,7 +475,8 @@
                                             <input type="hidden" name="action" value="UpdateUserStatus">
                                             <input type="hidden" name="userID" value="${pageScope.item.userID}">
                                             <input type="hidden" name="status" value="1">
-                                            <input type="submit" class="text-success" style="border: 0; background: 0;" value="Activate">   
+                                            <input type="submit" class="text-success" style="border: 0; background: 0;"
+                                                   value="Activate">
                                         </form>
                                     </c:if>
 

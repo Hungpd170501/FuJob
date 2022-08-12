@@ -12,11 +12,12 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Job {
+    CompanyInfo company;
+    Category category;
+    List<JobSkills> listJobSkills;
     private int jobID;
     private int userID;
     private String jobTitle;
-    CompanyInfo company;
-    Category category;
     private float minBudget;
     private float maxBudget;
     private String address;
@@ -26,7 +27,6 @@ public class Job {
     private Date createdDate;
     private Date lastModifiedDate;
     private Date expiriedDate;
-    List<JobSkills> listJobSkills;
     private int jobStatus;
     private PayMentMethod payMentMethod;
     private int bids;

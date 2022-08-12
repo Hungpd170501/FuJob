@@ -14,7 +14,6 @@ import com.google.firebase.cloud.StorageClient;
 import java.io.IOException;
 
 /**
- *
  * @author ACER
  */
 public class FirebaseUtils {
@@ -39,7 +38,6 @@ public class FirebaseUtils {
         return FirebaseApp.getInstance();
     }
 
-    //Init bean firebase authentication
     public FirebaseAuth getAuth() throws IOException {
         return FirebaseAuth.getInstance(getFirebaseApp());
     }

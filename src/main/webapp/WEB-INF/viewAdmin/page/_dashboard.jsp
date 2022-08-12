@@ -105,7 +105,8 @@
 
                                 </div>
                                 <div class="text-center">
-                                    <a href="${pageContext.request.contextPath}/MainController?action=UserList" class="btn btn-outline-secondary">View users</a>
+                                    <a href="${pageContext.request.contextPath}/MainController?action=UserList"
+                                       class="btn btn-outline-secondary">View users</a>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +132,8 @@
                                         </p>
                                         <div class="progress" style="height: 4px;">
                                             <div class="progress-bar bg-primary" role="progressbar"
-                                                 style="width: ${requestScope.COUNT_TOTAL_COMPANY_3 / requestScope.COUNT_COMPANY_LIST * 100}%;" aria-valuenow="37" aria-valuemin="0"
+                                                 style="width: ${requestScope.COUNT_TOTAL_COMPANY_3 / requestScope.COUNT_COMPANY_LIST * 100}%;"
+                                                 aria-valuenow="37" aria-valuemin="0"
                                                  aria-valuemax="100"></div>
                                         </div>
                                     </div>
@@ -143,7 +145,8 @@
                                         </p>
                                         <div class="progress" style="height: 4px;">
                                             <div class="progress-bar bg-primary" role="progressbar"
-                                                 style="width: ${requestScope.COUNT_TOTAL_COMPANY_2 / requestScope.COUNT_COMPANY_LIST * 100}%;" aria-valuenow="22" aria-valuemin="0"
+                                                 style="width: ${requestScope.COUNT_TOTAL_COMPANY_2 / requestScope.COUNT_COMPANY_LIST * 100}%;"
+                                                 aria-valuenow="22" aria-valuemin="0"
                                                  aria-valuemax="100"></div>
                                         </div>
                                     </div>
@@ -155,7 +158,8 @@
                                         </p>
                                         <div class="progress" style="height: 4px;">
                                             <div class="progress-bar bg-primary" role="progressbar"
-                                                 style="width: ${requestScope.COUNT_TOTAL_COMPANY_1 / requestScope.COUNT_COMPANY_LIST * 100}%;" aria-valuenow="13" aria-valuemin="0"
+                                                 style="width: ${requestScope.COUNT_TOTAL_COMPANY_1 / requestScope.COUNT_COMPANY_LIST * 100}%;"
+                                                 aria-valuenow="13" aria-valuemin="0"
                                                  aria-valuemax="100"></div>
                                         </div>
                                     </div>
@@ -167,14 +171,16 @@
                                         </p>
                                         <div class="progress" style="height: 4px;">
                                             <div class="progress-bar bg-primary" role="progressbar"
-                                                 style="width: ${requestScope.COUNT_TOTAL_COMPANY_0 / requestScope.COUNT_COMPANY_LIST * 100}%;" aria-valuenow="26" aria-valuemin="0"
+                                                 style="width: ${requestScope.COUNT_TOTAL_COMPANY_0 / requestScope.COUNT_COMPANY_LIST * 100}%;"
+                                                 aria-valuenow="26" aria-valuemin="0"
                                                  aria-valuemax="100"></div>
                                         </div>
                                     </div>
 
                                 </div>
                                 <div class="text-center">
-                                    <a href="${pageContext.request.contextPath}/MainController?action=CompanyList" class="btn btn-outline-secondary">View companies</a>
+                                    <a href="${pageContext.request.contextPath}/MainController?action=CompanyList"
+                                       class="btn btn-outline-secondary">View companies</a>
                                 </div>
                             </div>
                         </div>
@@ -246,7 +252,8 @@
 
                                 </div>
                                 <div class="text-center">
-                                    <a href="${pageContext.request.contextPath}/MainController?action=ProjectList" class="btn btn-outline-secondary">View Projects</a>
+                                    <a href="${pageContext.request.contextPath}/MainController?action=ProjectList"
+                                       class="btn btn-outline-secondary">View Projects</a>
                                 </div>
                             </div>
                         </div>
@@ -313,7 +320,8 @@
 
                                 </div>
                                 <div class="text-center">
-                                    <a href="${pageContext.request.contextPath}/MainController?action=DisputeList" class="btn btn-outline-secondary">View Disputes</a>
+                                    <a href="${pageContext.request.contextPath}/MainController?action=DisputeList"
+                                       class="btn btn-outline-secondary">View Disputes</a>
                                 </div>
                             </div>
                         </div>

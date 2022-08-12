@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
  * @author ACER
  */
 public class JwtTokenUtils {
@@ -24,17 +23,6 @@ public class JwtTokenUtils {
     static final String CLAIM_KEY_EMAIL = "email";
     private final Long expiration = 900L;
     private final String SECRET_KEY = Constant.TOKEN_SECRET_KEY;
-
-    public String getUsernameFromToken(String token) {
-        String username;
-        try {
-            final Claims claims = getClaimsFromToken(token);
-            username = claims.getSubject();
-        } catch (Exception e) {
-            username = null;
-        }
-        return username;
-    }
 
     public String getPasswordFromToken(String token) {
         String password;
@@ -48,14 +36,14 @@ public class JwtTokenUtils {
     }
 
     public String getEmailFromToken(String token) {
-        String password;
+        String email;
         try {
             final Claims claims = getClaimsFromToken(token);
-            password = (String) claims.get(CLAIM_KEY_EMAIL);
+            email = (String) claims.get(CLAIM_KEY_EMAIL);
         } catch (Exception e) {
-            password = null;
+            email = null;
         }
-        return password;
+        return email;
     }
 
     public Date getCreatedDateFromToken(String token) {
@@ -105,14 +93,13 @@ public class JwtTokenUtils {
     //    private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
 //        return (lastPasswordReset != null && created.before(lastPasswordReset));
 //    }
-    public String generateToken(User userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put(CLAIM_KEY_USERNAME, userDetails.getFullName());
-        claims.put(CLAIM_KEY_PASSWORD, Helper.hashPassword(userDetails.getPassword()));
-        claims.put(CLAIM_KEY_EMAIL, userDetails.getEmail());
-        claims.put(CLAIM_KEY_CREATED, new Date());
-        return generateToken(claims);
-    }
+//    public String generateToken(User userDetails) {
+//        Map<String, Object> claims = new HashMap<>();
+//        claims.put(CLAIM_KEY_PASSWORD, Helper.hashPassword(userDetails.getPassword()));
+//        claims.put(CLAIM_KEY_EMAIL, userDetails.getEmail());
+//        claims.put(CLAIM_KEY_CREATED, new Date());
+//        return generateToken(claims);
+//    }
 
     public String generateVerifyEmailToken(User userDetails) {
         Map<String, Object> claims = new HashMap<>();
@@ -162,7 +149,8 @@ public class JwtTokenUtils {
             Jwts.parser()
                     .setSigningKey(SECRET_KEY)
                     .parseClaimsJws(compactToken);
-        } catch (ExpiredJwtException | MalformedJwtException | SignatureException | UnsupportedJwtException | IllegalArgumentException e) {
+        } catch (ExpiredJwtException | MalformedJwtException | SignatureException | UnsupportedJwtException |
+                 IllegalArgumentException e) {
             check = false;
         }
         return check;

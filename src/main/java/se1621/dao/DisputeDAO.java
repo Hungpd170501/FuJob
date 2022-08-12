@@ -4,22 +4,14 @@
  */
 package se1621.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import se1621.dto.Disputes;
-import se1621.dto.Evidences;
-import se1621.dto.JobApplication;
-import se1621.dto.Resume;
-import se1621.dto.User;
+import se1621.dto.*;
 import se1621.utils.DBUtils;
 
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author HNGB
  */
 public class DisputeDAO {
@@ -44,9 +36,9 @@ public class DisputeDAO {
 
     private static final String INSERT_REASON_CANCEL = "UPDATE tblDisputes SET reasonCancelDispute = ?, disputeStatus = 0 WHERE disputeID = ?";
     private static final String GET_DISPUTE_BY_DISPUTEID = "SELECT d.title, d.message, d.jobApplicationID, d.userID, d.createdDate, d.lastModifiedDate, d.reasonCancelDispute, r.userID as studentID" +
-"             FROM ((tblDisputes d left join tblJobApplications ja on d.jobApplicationID = ja.jobApplicationID)" +
-"			 left join tblResumes r on r.resumeID = ja.resumeID)" +
-"			 WHERE d.disputeID = ?";
+            "             FROM ((tblDisputes d left join tblJobApplications ja on d.jobApplicationID = ja.jobApplicationID)" +
+            "			 left join tblResumes r on r.resumeID = ja.resumeID)" +
+            "			 WHERE d.disputeID = ?";
     private static final String DELETE_DISPUTE = "DELETE FROM tblDisputes WHERE userID = ? and jobApplicationID = ?";
     private Connection conn;
     private PreparedStatement preStm;
@@ -164,7 +156,7 @@ public class DisputeDAO {
         }
         return null;
     }
-    
+
     public List<Disputes> getListDisputeHrByUserID(int userID) throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();

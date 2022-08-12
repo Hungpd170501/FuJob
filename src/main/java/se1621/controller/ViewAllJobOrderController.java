@@ -4,22 +4,22 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 import se1621.dao.JobApplicationDAO;
 import se1621.dao.JobSkillsDAO;
 import se1621.dao.ResumeDAO;
 import se1621.dto.JobApplication;
 import se1621.dto.JobSkills;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author HNGB
  */
 @WebServlet(name = "ViewAllJobOrderController", urlPatterns = {"/ViewAllJobOrderController"})
@@ -42,11 +42,11 @@ public class ViewAllJobOrderController extends HttpServlet {
             JobSkillsDAO jsDAO = new JobSkillsDAO();
             List<JobSkills> listJs = jsDAO.getJobSkillForAllJob();
             for (JobApplication jobApply : listJobOrder) {
-                
+
                 List<JobSkills> ljk = new ArrayList<>();
                 for (JobSkills js : listJs) {
-                    if(jobApply.getJob().getJobID() == js.getJobID()){
-                                ljk.add(js);
+                    if (jobApply.getJob().getJobID() == js.getJobID()) {
+                        ljk.add(js);
                     }
                     jobApply.getJob().setListJobSkills(ljk);
                 }
@@ -56,7 +56,7 @@ public class ViewAllJobOrderController extends HttpServlet {
                 request.setAttribute("UPDATE_MESSAGE", messApply);
                 request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
                 url = SUCCESS;
-            }else{
+            } else {
                 request.setAttribute("LIST_ALLJOBORDER", listJobOrder);
                 request.setAttribute("MESSAGE", "YOU HAVEN'T APPLIED FOR ANY PROJECT");
             }
@@ -68,13 +68,14 @@ public class ViewAllJobOrderController extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -85,10 +86,10 @@ public class ViewAllJobOrderController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

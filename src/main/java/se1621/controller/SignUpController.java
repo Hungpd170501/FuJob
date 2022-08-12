@@ -4,21 +4,21 @@
  */
 package se1621.controller;
 
-import se1621.dto.Error.UserError;
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import se1621.dao.UserDAO;
+import se1621.dto.Error.UserError;
 import se1621.dto.Role;
 import se1621.dto.User;
 import se1621.service.EmailServiceImpl;
 import se1621.utils.Helper;
 
+import java.io.IOException;
+
 /**
- *
  * @author HNGB
  */
 @WebServlet(name = "SignUpController", urlPatterns = {"/SignUpController"})
@@ -62,20 +62,21 @@ public class SignUpController extends HttpServlet {
                 request.setAttribute("USER_ERROR", userError);
             }
         } catch (Exception e) {
-            log("Error at SignUpController:"+e);
+            log("Error at SignUpController:" + e);
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -86,10 +87,10 @@ public class SignUpController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

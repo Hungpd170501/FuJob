@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>se1621</groupId>
@@ -13,7 +14,7 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
         <dependency>
@@ -162,17 +163,17 @@
         </dependency>
         <!--Add by duylh-->
         <dependency>
-          <groupId>org.quartz-scheduler</groupId>
-          <artifactId>quartz</artifactId>
-          <version>2.2.1</version>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.1</version>
         </dependency>
         <dependency>
-          <groupId>org.quartz-scheduler</groupId>
-          <artifactId>quartz-jobs</artifactId>
-          <version>2.2.1</version>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jobs</artifactId>
+            <version>2.2.1</version>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -180,7 +181,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <release>11</release> 
+                    <release>11</release>
                     <encoding>UTF-8</encoding>
                     <annotationProcessorPaths>
                         <path>
@@ -191,10 +192,10 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-            <plugin> 
-                <groupId>com.microsoft.azure</groupId>  
-                <artifactId>azure-webapp-maven-plugin</artifactId>  
-                <version>2.2.0</version>  
+            <plugin>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>azure-webapp-maven-plugin</artifactId>
+                <version>2.2.0</version>
                 <configuration>
                     <subscriptionId>9a52cf31-99f6-47c3-a1e3-be66c64c3baf</subscriptionId>
                     <resourceGroup>SE150222</resourceGroup>
@@ -202,7 +203,7 @@
                     <pricingTier>F1</pricingTier>
                     <region>East Asia</region>
                     <runtime>
-                        <os>windows</os>      
+                        <os>windows</os>
                         <webContainer>Java SE</webContainer>
                         <javaVersion>Java 11</javaVersion>
                     </runtime>
@@ -218,7 +219,7 @@
                         </resources>
                     </deployment>
                 </configuration>
-            </plugin> 
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>

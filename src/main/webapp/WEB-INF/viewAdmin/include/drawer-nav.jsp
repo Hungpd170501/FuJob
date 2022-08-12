@@ -67,14 +67,14 @@
                         <span class="sidebar-menu-text">Others</span>
                     </a>
                 </li>
-<!--                <li class="sidebar-menu-item " data-title="Messaging" data-placement="right"
-                    data-container="body" data-boundary="window">
-                    <a class="sidebar-menu-button" href="#sm_messaging" data-toggle="tab" role="tab"
-                       aria-controls="#sm_messaging">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">message</i>
-                        <span class="sidebar-menu-text">Messaging</span>
-                    </a>
-                </li>-->
+                <!--                <li class="sidebar-menu-item " data-title="Messaging" data-placement="right"
+                                    data-container="body" data-boundary="window">
+                                    <a class="sidebar-menu-button" href="#sm_messaging" data-toggle="tab" role="tab"
+                                       aria-controls="#sm_messaging">
+                                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">message</i>
+                                        <span class="sidebar-menu-text">Messaging</span>
+                                    </a>
+                                </li>-->
             </ul>
         </div>
 

@@ -4,18 +4,18 @@
  */
 package se1621.dao;
 
+import se1621.dto.JobSkills;
+import se1621.dto.Skill;
+import se1621.utils.DBUtils;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import se1621.dto.JobSkills;
-import se1621.dto.Skill;
-import se1621.utils.DBUtils;
 
 /**
- *
  * @author lehad
  */
 public class JobSkillsDAO {
@@ -28,7 +28,7 @@ public class JobSkillsDAO {
     private static final String GET_JOBSKILLS_FOR_JOBAPPLY = "SELECT jk.jobSkillID, jk.jobID, jk.skillID, skill.skillName "
             + "    FROM (tblJobSkills jk left join tblSkills skill on jk.SkillID = skill.skillID)"
             + "    WHERE jk.jobID IN  (SELECT jobID FROM tblJobApplications WHERE jobApplicationStatus = 1)";
-    private  static final String DELETESKILL = "DELETE FROM tblJobSkills WHERE jobID = ? ";
+    private static final String DELETESKILL = "DELETE FROM tblJobSkills WHERE jobID = ? ";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
@@ -59,6 +59,7 @@ public class JobSkillsDAO {
         }
         return check;
     }
+
     public List<JobSkills> getSkillRequire(int jobID) throws SQLException {
         List<JobSkills> listJobSkills = new ArrayList<>();
         try {

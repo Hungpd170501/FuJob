@@ -261,10 +261,11 @@
                                 </td>
                                 <td class="text-right pl-0">
                                     <form method="POST" action="${pageContext.request.contextPath}/MainController">
-                                                    <input type="hidden" name="action" value="UpdateJobStatus">
-                                                    <input type="hidden" name="jobID" value="${pageScope.item.jobID}">
-                                                    <input type="hidden" name="status" value="0">
-                                                    <input type="submit" class="text-danger" style="border: 0; background: 0;" value="Deactivate">   
+                                        <input type="hidden" name="action" value="UpdateJobStatus">
+                                        <input type="hidden" name="jobID" value="${pageScope.item.jobID}">
+                                        <input type="hidden" name="status" value="0">
+                                        <input type="submit" class="text-danger" style="border: 0; background: 0;"
+                                               value="Deactivate">
                                     </form>
                                 </td>
                             </tr>
@@ -397,12 +398,13 @@
                                 <td>
                                     <p class="mb-0 text-success">In Progress</p>
                                 </td>
-                                                                <td class="text-right pl-0">
+                                <td class="text-right pl-0">
                                     <form method="POST" action="${pageContext.request.contextPath}/MainController">
-                                                    <input type="hidden" name="action" value="UpdateJobStatus">
-                                                    <input type="hidden" name="jobID" value="${pageScope.item.jobID}">
-                                                    <input type="hidden" name="status" value="0">
-                                                    <input type="submit" class="text-danger" style="border: 0; background: 0;" value="Deactivate">   
+                                        <input type="hidden" name="action" value="UpdateJobStatus">
+                                        <input type="hidden" name="jobID" value="${pageScope.item.jobID}">
+                                        <input type="hidden" name="status" value="0">
+                                        <input type="submit" class="text-danger" style="border: 0; background: 0;"
+                                               value="Deactivate">
                                     </form>
                                 </td>
                             </tr>

@@ -4,7 +4,7 @@
     Author     : HNGB
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +41,8 @@
             </div>
             <div class="float-right">
                 <ul class="topbar-list list-unstyled d-flex" style="margin: 11px 0px;">
-                    <li class="list-inline-item"><a href="javascript:void(0);"><i class="mdi mdi-account mr-2"></i>Benny Simpson</a></li>
+                    <li class="list-inline-item"><a href="javascript:void(0);"><i class="mdi mdi-account mr-2"></i>Benny
+                        Simpson</a></li>
                     <li class="list-inline-item">
                         <select id="select-lang" class="demo-default">
                             <option value="">Language</option>
@@ -63,8 +64,8 @@
         <!-- Logo container-->
         <div>
             <a href="index.html" class="logo">
-                <img src="images/logo-light.png" alt="" class="logo-light" height="18" />
-                <img src="images/logo-dark.png" alt="" class="logo-dark" height="18" />
+                <img src="images/logo-light.png" alt="" class="logo-light" height="18"/>
+                <img src="images/logo-dark.png" alt="" class="logo-dark" height="18"/>
             </a>
         </div>
         <div class="buy-button">
@@ -107,27 +108,31 @@
                         <li><a href="team.html">Team</a></li>
                         <li><a href="faq.html">Faqs</a></li>
                         <li><a href="pricing.html">Pricing plans</a></li>
-                        <li class="has-submenu"><a href="javascript:void(0)"> Candidates</a><span class="submenu-arrow"></span>
+                        <li class="has-submenu"><a href="javascript:void(0)"> Candidates</a><span
+                                class="submenu-arrow"></span>
                             <ul class="submenu">
                                 <li><a href="candidates-listing.html">Candidates Listing</a></li>
                                 <li><a href="candidates-profile.html">Candidates Profile</a></li>
                                 <li><a href="create-resume.html">Create Resume</a></li>
                             </ul>
                         </li>
-                        <li class="has-submenu"><a href="javascript:void(0)"> Blog</a><span class="submenu-arrow"></span>
+                        <li class="has-submenu"><a href="javascript:void(0)"> Blog</a><span
+                                class="submenu-arrow"></span>
                             <ul class="submenu">
                                 <li><a href="blog-grid.html">Blogs</a></li>
                                 <li><a href="blog-sidebar.html">Blog Sidebar</a></li>
                                 <li><a href="blog-details.html">Blog Details</a></li>
                             </ul>
                         </li>
-                        <li class="has-submenu"><a href="javascript:void(0)"> Employers</a><span class="submenu-arrow"></span>
+                        <li class="has-submenu"><a href="javascript:void(0)"> Employers</a><span
+                                class="submenu-arrow"></span>
                             <ul class="submenu">
                                 <li><a href="employers-list.html">Employers List</a></li>
                                 <li><a href="company-detail.html">Company Detail</a></li>
                             </ul>
                         </li>
-                        <li class="has-submenu"><a href="javascript:void(0)"> User Pages</a><span class="submenu-arrow"></span>
+                        <li class="has-submenu"><a href="javascript:void(0)"> User Pages</a><span
+                                class="submenu-arrow"></span>
                             <ul class="submenu">
                                 <li><a href="login.html">Login</a></li>
                                 <li><a href="signup.html">Signup</a></li>
@@ -174,7 +179,8 @@
         <div class="row">
             <div class="col-lg-12 p-0">
                 <div class="map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d6030.418742494061!2d-111.34563870463673!3d26.01036670629853!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1471908546569" style="border: 0" allowfullscreen></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d6030.418742494061!2d-111.34563870463673!3d26.01036670629853!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1471908546569"
+                            style="border: 0" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -249,13 +255,15 @@
                             <div class="col-lg-6">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Name</label>
-                                    <input name="name" id="name2" type="text" class="form-control resume" placeholder="Enter Name..">
+                                    <input name="name" id="name2" type="text" class="form-control resume"
+                                           placeholder="Enter Name..">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Email address</label>
-                                    <input name="email" id="email1" type="email" class="form-control resume" placeholder="Enter Email..">
+                                    <input name="email" id="email1" type="email" class="form-control resume"
+                                           placeholder="Enter Email..">
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -267,13 +275,15 @@
                             <div class="col-lg-12">
                                 <div class="form-group app-label">
                                     <label class="text-muted">Message</label>
-                                    <textarea name="comments" id="comments" rows="5" class="form-control resume" placeholder="Message.."></textarea>
+                                    <textarea name="comments" id="comments" rows="5" class="form-control resume"
+                                              placeholder="Message.."></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <input type="submit" id="submit" name="send" class="submitBnt btn btn-primary" value="Send Message">
+                                <input type="submit" id="submit" name="send" class="submitBnt btn btn-primary"
+                                       value="Send Message">
                                 <div id="simple-msg"></div>
                             </div>
                         </div>
@@ -320,9 +330,12 @@
                 <form>
                     <div class="form-group mb-0">
                         <div class="input-group mb-0">
-                            <input name="email" id="email" type="email" class="form-control" placeholder="Your email :" required="" aria-describedby="newssubscribebtn">
+                            <input name="email" id="email" type="email" class="form-control" placeholder="Your email :"
+                                   required="" aria-describedby="newssubscribebtn">
                             <div class="input-group-append">
-                                <button class="btn btn-primary submitBnt" type="submit" id="newssubscribebtn">Subscribe</button>
+                                <button class="btn btn-primary submitBnt" type="submit" id="newssubscribebtn">
+                                    Subscribe
+                                </button>
                             </div>
                         </div>
                     </div>

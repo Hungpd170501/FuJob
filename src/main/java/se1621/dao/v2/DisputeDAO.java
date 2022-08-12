@@ -8,5 +8,6 @@ public interface DisputeDAO {
     void save(DisputeEntity disputeEntity);
 
     List<DisputeEntity> getAll(String disputeEntityName);
+
     List<DisputeEntity> getAllUsingHQL(String hql);
 }

@@ -5,7 +5,6 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.DriverManager;
 
 /**
  * @author ACER
@@ -14,15 +13,6 @@ public class DBUtils {
     private static final HikariConfig config = new HikariConfig();
     private static HikariDataSource ds;
     private static DBUtils instance;
-    public Connection getConnection() throws SQLException {
-        return ds.getConnection();
-    }
-    public static DBUtils getInstance() {
-        if (instance == null) {
-            instance = new DBUtils();
-        }
-        return instance;
-    }
 
     private DBUtils() {
         config.setJdbcUrl("jdbc:sqlserver://fujob2.database.windows.net:1433;database=FuJobDB;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;");
@@ -35,10 +25,21 @@ public class DBUtils {
         ds = new HikariDataSource(config);
     }
 
+    public static DBUtils getInstance() {
+        if (instance == null) {
+            instance = new DBUtils();
+        }
+        return instance;
+    }
+
+    public Connection getConnection() throws SQLException {
+        return ds.getConnection();
+    }
+
 
 //    private final String dbName = "FuJobDB_1";
 //    private final String userID = "sa";
-//    private final String password = "Hngiabao2211";
+//    private final String password = "sa";
 //    private DBUtils() {
 //        config.setMaximumPoolSize(10);
 //        config.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

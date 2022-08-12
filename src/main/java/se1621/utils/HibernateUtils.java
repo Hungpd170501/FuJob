@@ -28,15 +28,17 @@ public class HibernateUtils {
         }
         return session;
     }
-    public static void closeSession(){
-        Session session =null;
-        if(threadLocal.get()!=null){
-            session=threadLocal.get();
+
+    public static void closeSession() {
+        Session session = null;
+        if (threadLocal.get() != null) {
+            session = threadLocal.get();
             session.close();
             threadLocal.remove();
         }
     }
-    public static void closeSessionFactory(){
+
+    public static void closeSessionFactory() {
         factory.close();
     }
 }

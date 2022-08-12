@@ -271,9 +271,6 @@
         </div>
 
 
-        
-
-
         <div class="page-separator mt-4">
             <div class="page-separator__text">RESOLVED DISPUTES</div>
         </div>

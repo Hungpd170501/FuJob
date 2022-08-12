@@ -5,7 +5,6 @@
 package se1621.constant;
 
 /**
- *
  * @author ACER
  */
 public class Constant {

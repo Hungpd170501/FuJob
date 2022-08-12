@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import se1621.dao.v2.UserDAO;
 import se1621.dao.v2.UserDAOImpl;
 import se1621.entity.RoleEntity;
 import se1621.entity.UserEntity;
@@ -29,8 +30,8 @@ public class UserController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            UserDAOImpl userDAOImpl = new UserDAOImpl();
-            List<UserEntity> listAllUser = userDAOImpl.getAll("UserEntity");
+            UserDAO userDAO = new UserDAOImpl();
+            List<UserEntity> listAllUser = userDAO.getAll("UserEntity");
             Map<RoleEntity, List<UserEntity>> listUserByRoles
                     = listAllUser.stream()
                     .filter(e -> e.getRole() != null)

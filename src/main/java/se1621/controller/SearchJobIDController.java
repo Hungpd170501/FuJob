@@ -4,34 +4,21 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.apache.commons.lang3.StringUtils;
+import se1621.dao.*;
+import se1621.dto.*;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.lang3.StringUtils;
-import se1621.dao.CategoryDAO;
-import se1621.dao.CompanyInfoDAO;
-import se1621.dao.JobApplicationDAO;
-import se1621.dao.JobDAO;
-import se1621.dao.JobSkillsDAO;
-import se1621.dao.ResumeDAO;
-import se1621.dao.ResumeSkillDAO;
-import se1621.dao.UserDAO;
-import se1621.dto.Category;
-import se1621.dto.CompanyInfo;
-import se1621.dto.Job;
-import se1621.dto.JobApplication;
-import se1621.dto.JobSkills;
-import se1621.dto.ResumeSkill;
-import se1621.dto.User;
 
 /**
- *
  * @author HNGB
  */
 @WebServlet(name = "SearchJobIDController", urlPatterns = {"/SearchJobIDController"})
@@ -57,21 +44,21 @@ public class SearchJobIDController extends HttpServlet {
             List<JobSkills> listJobSkills = jobSkillsDAO.getSkillRequire(jobIDSearch);
             HttpSession session = request.getSession();
             User loginUser = (User) session.getAttribute("LOGIN_USER");
-            
+
             List<JobApplication> listJobApplication = new ArrayList<>();
             listJobApplication = jobOrderDAO.getListApplicationOfJob(jobIDSearch);
             ResumeSkillDAO jsDAO = new ResumeSkillDAO();
             List<ResumeSkill> listJs = jsDAO.getResumeSkillForAllResume();
-            for (JobApplication jobApply : listJobApplication) { 
+            for (JobApplication jobApply : listJobApplication) {
                 List<ResumeSkill> ljk = new ArrayList<>();
                 for (ResumeSkill js : listJs) {
-                    if(jobApply.getResumeID() == js.getResumeID()){
-                                ljk.add(js);
+                    if (jobApply.getResumeID() == js.getResumeID()) {
+                        ljk.add(js);
                     }
                     jobApply.getResume().setListResumeSkills(ljk);
                 }
             }
-            
+
             if (loginUser != null && !StringUtils.equals(loginUser.getRole().getRoleID(), "HR")) {
                 boolean checkDuplicateUserOrderJob = jobOrderDAO.checkDuplicateJobOrderByOneUser(resumeDAO.getResumeID(loginUser.getUserID()), job.getJobID());
                 request.setAttribute("DUPLICATE_APPLIED", checkDuplicateUserOrderJob);
@@ -79,7 +66,7 @@ public class SearchJobIDController extends HttpServlet {
             if (!listJobApplication.isEmpty()) {
                 request.setAttribute("LIST_EVALUATION", listJobApplication);
                 request.setAttribute("MESSAGE_EVALUATION", listJobApplication.size() + " freelancers are bidding for this job");
-            } else{
+            } else {
                 request.setAttribute("MESSAGE_EVALUATION", "Currently this project does not have anyone bidding");
             }
             if (job != null) {
@@ -103,13 +90,14 @@ public class SearchJobIDController extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -120,10 +108,10 @@ public class SearchJobIDController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

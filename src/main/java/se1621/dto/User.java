@@ -15,6 +15,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @Builder
 public class User {
+    Role role;
     private int userID;
     private String password;
     private String fullName;
@@ -22,7 +23,6 @@ public class User {
     private Date createdDate;
     private Date lastModifiedDate;
     private int userStatus;
-    Role role;
     private int projectPosted;
     private int companyID;
 }

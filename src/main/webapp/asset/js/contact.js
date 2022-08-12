@@ -6,24 +6,24 @@ $('#contact-form').submit(function () {
         $('#message').hide();
 
         $('#submit')
-                .before('')
-                .attr('disabled', 'disabled');
+            .before('')
+            .attr('disabled', 'disabled');
 
         $.post(action, {
-            name: $('#name').val(),
-            email: $('#email').val(),
-            comments: $('#comments').val(),
-        },
-                function (data) {
-                    document.getElementById('message').innerHTML = data;
-                    $('#message').slideDown('slow');
-                    $('#cform img.contact-loader').fadeOut('slow', function () {
-                        $(this).remove()
-                    });
-                    $('#submit').removeAttr('disabled');
-                    if (data.match('success') != null)
-                        $('#cform').slideUp('slow');
-                }
+                name: $('#name').val(),
+                email: $('#email').val(),
+                comments: $('#comments').val(),
+            },
+            function (data) {
+                document.getElementById('message').innerHTML = data;
+                $('#message').slideDown('slow');
+                $('#cform img.contact-loader').fadeOut('slow', function () {
+                    $(this).remove()
+                });
+                $('#submit').removeAttr('disabled');
+                if (data.match('success') != null)
+                    $('#cform').slideUp('slow');
+            }
         );
 
     });

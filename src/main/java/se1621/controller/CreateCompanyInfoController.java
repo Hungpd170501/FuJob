@@ -4,28 +4,25 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import jakarta.servlet.http.*;
 import se1621.dao.CompanyInfoDAO;
 import se1621.dao.UserDAO;
 import se1621.dto.CompanyInfo;
 import se1621.dto.Error.CompanyInfoError;
 import se1621.dto.Role;
 import se1621.dto.User;
+import se1621.service.FirebaseStoreService;
 import se1621.service.FirebaseStoreServiceImpl;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- *
  * @author HNGB
  */
 @MultipartConfig(maxFileSize = 16177215)
@@ -52,8 +49,8 @@ public class CreateCompanyInfoController extends HttpServlet {
             String companyOverview = request.getParameter("companyoverview");
 //            String avatar = request.getParameter("avatar");
             Part filePart = request.getPart("avatar");
-            FirebaseStoreServiceImpl firebaseStoreServiceImpl = new FirebaseStoreServiceImpl();
-            String filename = firebaseStoreServiceImpl.uploadFile(filePart);
+            FirebaseStoreService firebaseStoreService = new FirebaseStoreServiceImpl();
+            String filename = firebaseStoreService.uploadFile(filePart);
             CompanyInfo company = CompanyInfo.builder()
                     .companyName(companyName)
                     .address(address)
@@ -131,13 +128,14 @@ public class CreateCompanyInfoController extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -152,10 +150,10 @@ public class CreateCompanyInfoController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

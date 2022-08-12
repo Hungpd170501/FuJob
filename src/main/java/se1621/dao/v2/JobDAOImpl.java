@@ -4,18 +4,18 @@
  */
 package se1621.dao.v2;
 
-import java.util.List;
-
 import org.hibernate.Session;
 import se1621.entity.JobEntity;
 import se1621.utils.HibernateUtils;
 
+import java.util.List;
+
 /**
- *
  * @author ACER
  */
-public class JobDAOImpl extends BaseDAOImpl implements  JobDAO{
-    private final Session session=HibernateUtils.getSession();
+public class JobDAOImpl extends BaseDAOImpl implements JobDAO {
+    private final Session session = HibernateUtils.getSession();
+
     @Override
     public void save(JobEntity jobEntity) {
         super.saveEntity(jobEntity);
@@ -23,7 +23,7 @@ public class JobDAOImpl extends BaseDAOImpl implements  JobDAO{
 
     @Override
     public List<JobEntity> getAll(String jobEntityName) {
-        return(super.getAllEntity(jobEntityName));
+        return (super.getAllEntity(jobEntityName));
     }
 
     @Override

@@ -26,10 +26,12 @@ File: main stylesheet
 .bg-primary {
     background-color: #2f55d4 !important;
 }
+
 .hide-if-empty:empty {
     grid-area: hide-if-empty;
     display: none;
 }
+
 .bg-secondary {
     background-color: #5a6d90 !important;
 }
@@ -94,7 +96,7 @@ File: main stylesheet
     color: #8492a6 !important;
 }
 
-.text-green{
+.text-green {
     color: green !important;
 }
 
@@ -173,6 +175,7 @@ File: main stylesheet
 .btn.btn-primary-outline:hover, .btn.btn-primary-outline:focus, .btn.btn-primary-outline:active, .btn.btn-primary-outline.active, .btn.btn-primary-outline.focus, .btn.btn-secondary-outline:hover, .btn.btn-secondary-outline:focus, .btn.btn-secondary-outline:active, .btn.btn-secondary-outline.active, .btn.btn-secondary-outline.focus, .btn.btn-success-outline:hover, .btn.btn-success-outline:focus, .btn.btn-success-outline:active, .btn.btn-success-outline.active, .btn.btn-success-outline.focus, .btn.btn-danger-outline:hover, .btn.btn-danger-outline:focus, .btn.btn-danger-outline:active, .btn.btn-danger-outline.active, .btn.btn-danger-outline.focus, .btn.btn-info-outline:hover, .btn.btn-info-outline:focus, .btn.btn-info-outline:active, .btn.btn-info-outline.active, .btn.btn-info-outline.focus, .btn.btn-warning-outline:hover, .btn.btn-warning-outline:focus, .btn.btn-warning-outline:active, .btn.btn-warning-outline.active, .btn.btn-warning-outline.focus, .btn.btn-dark-outline:hover, .btn.btn-dark-outline:focus, .btn.btn-dark-outline:active, .btn.btn-dark-outline.active, .btn.btn-dark-outline.focus {
     color: #ffffff !important;
 }
+
 .btn.btn-primary-outline-red:hover, .btn.btn-primary-outline-red:focus, .btn.btn-primary-outline-red:active, .btn.btn-primary-outline.active, .btn.btn-primary-outline-red.focus, .btn.btn-secondary-outline-red:hover, .btn.btn-secondary-outline-red:focus, .btn.btn-secondary-outline-red:active, .btn.btn-secondary-outline-red.active, .btn.btn-secondary-outline-red.focus, .btn.btn-success-outline-red:hover, .btn.btn-success-outline-red:focus, .btn.btn-success-outline-red:active, .btn.btn-success-outline-red.active, .btn.btn-success-outline-red.focus, .btn.btn-danger-outline-red:hover, .btn.btn-danger-outline-red:focus, .btn.btn-danger-outline-red:active, .btn.btn-danger-outline-red.active, .btn.btn-danger-outline-red.focus, .btn.btn-info-outline-red:hover, .btn.btn-info-outline-red:focus, .btn.btn-info-outline-red:active, .btn.btn-info-outline-red.active, .btn.btn-info-outline-red.focus, .btn.btn-warning-outline-red:hover, .btn.btn-warning-outline-red:focus, .btn.btn-warning-outline-red:active, .btn.btn-warning-outline-red.active, .btn.btn-warning-outline-red.focus, .btn.btn-dark-outline-red:hover, .btn.btn-dark-outline-red:focus, .btn.btn-dark-outline-red:active, .btn.btn-dark-outline-red.active, .btn.btn-dark-outline-red.focus {
     color: #ffffff !important;
 }
@@ -181,6 +184,7 @@ File: main stylesheet
     background: #2f55d4;
     border: 1px solid #2f55d4;
 }
+
 .btn.btn-primary-red {
     background: #c90c0c;
     border: 1px solid #c90c0c;
@@ -189,6 +193,7 @@ File: main stylesheet
 .btn.btn-primary:hover, .btn.btn-primary:focus, .btn.btn-primary:active, .btn.btn-primary.active, .btn.btn-primary.focus {
     background-color: #2443ac !important;
 }
+
 .btn.btn-primary-red:hover, .btn.btn-primary-red:focus, .btn.btn-primary-red:active, .btn.btn-primary-red.active, .btn.btn-primary-red.focus {
     background-color: #c90c0c !important;
 }
@@ -198,6 +203,7 @@ File: main stylesheet
     color: #2f55d4;
     background-color: transparent;
 }
+
 .btn.btn-primary-outline-red {
     border: 1px solid red;
     color: red;
@@ -209,6 +215,7 @@ File: main stylesheet
     background-color: #2f55d4;
     border-color: #2f55d4;
 }
+
 .btn.btn-primary-outline-red:hover, .btn.btn-primary-outline-red:focus, .btn.btn-primary-outline-red:active, .btn.btn-primary-outline-red.active, .btn.btn-primary-outline-red.focus {
     background-color: red;
     border-color: red;
@@ -751,12 +758,15 @@ button:not(:disabled) {
     .display-1 {
         font-size: 56px !important;
     }
+
     .display-2 {
         font-size: 50px !important;
     }
+
     .display-3 {
         font-size: 42px !important;
     }
+
     .display-4 {
         font-size: 36px !important;
     }
@@ -1036,12 +1046,15 @@ p {
     .section {
         padding: 60px 0;
     }
+
     .title-heading .heading {
         font-size: 35px !important;
     }
+
     .section-title .title {
         font-size: 24px;
     }
+
     .mt-60 {
         margin-top: 60px;
     }
@@ -1350,6 +1363,7 @@ p {
         -ms-flex-pack: center;
         justify-content: center;
     }
+
     #topnav .navigation-menu > .has-submenu > .submenu > .has-submenu > .submenu::before {
         top: 20px;
         margin-left: 11px;
@@ -1357,23 +1371,28 @@ p {
         box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.15);
         border-color: transparent #ffffff #ffffff transparent;
     }
+
     #topnav .navigation-menu > li .submenu > li .submenu {
         left: 106%;
         top: 0;
         margin-left: 10px;
         margin-top: -1px;
     }
+
     #topnav .navigation-menu > li > a {
         padding-top: 25px;
         padding-bottom: 25px;
         min-height: 62px;
     }
+
     #topnav .navigation-menu > li:hover > .menu-arrow {
         border-color: #ffffff;
     }
+
     #topnav .navigation-menu > li:hover > a, #topnav .navigation-menu > li.active > a {
         color: #ffffff;
     }
+
     #topnav .navigation-menu > li .submenu {
         position: absolute;
         top: 100%;
@@ -1392,6 +1411,7 @@ p {
         -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
     }
+
     #topnav .navigation-menu > li .submenu:before {
         content: "";
         position: absolute;
@@ -1408,9 +1428,11 @@ p {
         -webkit-box-shadow: -2px 2px 2px -1px rgba(0, 0, 0, 0.15);
         box-shadow: -2px 2px 2px -1px rgba(0, 0, 0, 0.15);
     }
+
     #topnav .navigation-menu > li .submenu li {
         position: relative;
     }
+
     #topnav .navigation-menu > li .submenu li a {
         display: block;
         padding: 10px 20px;
@@ -1424,53 +1446,65 @@ p {
         -webkit-transition: all 0.3s;
         transition: all 0.3s;
     }
+
     #topnav .navigation-menu > li .submenu li a:hover {
         color: #2f55d4;
     }
+
     #topnav .navigation-menu > li .submenu li ul {
         list-style: none;
         padding-left: 0;
         margin: 0;
     }
+
     #topnav .navigation-menu > li .submenu.megamenu {
         white-space: nowrap;
         width: auto;
     }
+
     #topnav .navigation-menu > li .submenu.megamenu > li {
         overflow: hidden;
         width: 180px;
         display: inline-block;
         vertical-align: top;
     }
+
     #topnav .navigation-menu > li .submenu.megamenu > li .submenu {
         left: 100%;
         top: 0;
         margin-left: 10px;
         margin-top: -1px;
     }
+
     #topnav .navigation-menu > li.last-elements .submenu {
         left: auto;
         right: 0;
     }
+
     #topnav .navigation-menu > li.last-elements .submenu > li.has-submenu .submenu {
         left: auto;
         right: 100%;
         margin-left: 0;
         margin-right: 10px;
     }
+
     #topnav .navbar-toggle {
         display: none;
     }
+
     #topnav #navigation {
         display: block !important;
     }
+
     #topnav.scroll {
         top: 0;
     }
+
     #topnav.scroll .navigation-menu > li > a {
         padding-top: 20px;
         padding-bottom: 20px;
     }
+
     #topnav.scroll-active .navigation-menu > li > a {
         padding-top: 25px;
         padding-bottom: 25px;
@@ -1484,37 +1518,47 @@ p {
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
         min-height: 74px;
     }
+
     #topnav .tagline {
         display: none;
     }
+
     #topnav .tagline-dark {
         display: none;
     }
+
     #topnav .container {
         width: auto;
     }
+
     #topnav .logo .logo-light {
         display: none;
     }
+
     #topnav .logo .logo-dark {
         display: inline-block;
     }
+
     #topnav .navigation-menu {
         float: none;
         max-height: 400px;
     }
+
     #topnav .navigation-menu > li {
         float: none;
     }
+
     #topnav .navigation-menu > li:hover > a, #topnav .navigation-menu > li.active > a {
         color: #2f55d4;
     }
+
     #topnav .navigation-menu > li .submenu {
         display: none;
         list-style: none;
         padding-left: 20px;
         margin: 0;
     }
+
     #topnav .navigation-menu > li .submenu li a {
         display: block;
         position: relative;
@@ -1527,20 +1571,25 @@ p {
         -webkit-transition: all 0.3s;
         transition: all 0.3s;
     }
+
     #topnav .navigation-menu > li .submenu.open {
         display: block;
     }
+
     #topnav .navigation-menu > li .submenu .submenu {
         display: none;
         list-style: none;
     }
+
     #topnav .navigation-menu > li .submenu .submenu.open {
         display: block;
     }
+
     #topnav .navigation-menu > li .submenu.megamenu > li > ul {
         list-style: none;
         padding-left: 0;
     }
+
     #topnav .navigation-menu > li .submenu.megamenu > li > ul > li > span {
         display: block;
         position: relative;
@@ -1550,25 +1599,31 @@ p {
         letter-spacing: 2px;
         color: #8492a6;
     }
+
     #topnav .navigation-menu > li > a {
         color: #3c4858;
         padding: 10px 20px;
     }
+
     #topnav .navigation-menu > li > a:after {
         position: absolute;
         right: 15px;
     }
+
     #topnav .navigation-menu > li > a:hover,
     #topnav .navigation-menu > li .submenu li a:hover,
     #topnav .navigation-menu > li.has-submenu.open > a {
         color: #2f55d4;
     }
+
     #topnav .menu-extras .menu-item {
         border-color: #8492a6;
     }
+
     #topnav .navbar-header {
         float: left;
     }
+
     #topnav .has-submenu .submenu .submenu-arrow {
         -webkit-transform: rotate(45deg);
         transform: rotate(45deg);
@@ -1576,9 +1631,11 @@ p {
         right: 20px;
         top: 12px;
     }
+
     #topnav .has-submenu.active a {
         color: #2f55d4;
     }
+
     #navigation {
         position: absolute;
         top: 74px;
@@ -1592,6 +1649,7 @@ p {
         border-bottom: 1px solid #f1f3f9;
         background-color: #ffffff;
     }
+
     #navigation.open {
         display: block;
         overflow-y: auto;
@@ -1604,6 +1662,7 @@ p {
         top: 16px;
         border-color: #3c4858;
     }
+
     #topnav .navigation-menu .has-submenu.active .menu-arrow {
         color: #2f55d4;
     }
@@ -1615,12 +1674,14 @@ p {
         opacity: 1;
         margin-top: 0;
     }
+
     #topnav .navigation-menu > li.has-submenu:hover > .submenu > li.has-submenu:hover > .submenu {
         visibility: visible;
         opacity: 1;
         margin-left: 0;
         margin-right: 0;
     }
+
     .navbar-toggle {
         display: block;
     }
@@ -1630,6 +1691,7 @@ p {
     #topnav .buy-button {
         display: none;
     }
+
     #topnav .navbar-toggle .lines {
         margin-right: 0 !important;
     }
@@ -1757,6 +1819,7 @@ p {
     .registration-form-box {
         margin-bottom: 10px;
     }
+
     .bg-home, .bg-half {
         padding: 190px 0px 120px;
     }
@@ -1766,13 +1829,16 @@ p {
     .mo-mb-2 {
         margin-bottom: .5rem !important;
     }
+
     #counter .counter-icon {
         float: none !important;
         margin: 0 !important;
     }
+
     #counter .home-counter {
         text-align: center;
     }
+
     .subscribe input {
         margin: 12px 0;
     }
@@ -1964,13 +2030,16 @@ a.job-list[data-toggle=collapse].collapsed:before {
     .company-logo-img {
         margin-bottom: 30px;
     }
+
     .mt-40 {
         margin-top: 40px !important;
     }
+
     .sort-button .list {
         right: 0;
         left: auto;
     }
+
     .job-list-btn-space {
         margin: 12px 0;
     }
@@ -1981,26 +2050,33 @@ a.job-list[data-toggle=collapse].collapsed:before {
         text-align: center !important;
         margin: 30px 0px 12px;
     }
+
     .job-list-desc {
         text-align: center;
     }
+
     .job-list-reg-form {
         bottom: 70px;
     }
+
     .show-results h5 {
         font-size: 16px;
         text-align: center;
         margin-bottom: 18px !important;
     }
+
     .show-results .float-left {
         float: none !important;
     }
+
     .job-detail-com-desc {
         text-align: center;
     }
+
     .job-single-meta li:after {
         display: none;
     }
+
     .job-single-logo-img img {
         margin-bottom: 20px;
     }
@@ -2620,7 +2696,8 @@ hr {
     border: 0;
     border-top: 1px solid #333744;
 }
-.rate{
+
+.rate {
 
     border-bottom-right-radius: 12px;
     border-bottom-left-radius: 12px;
@@ -2633,11 +2710,11 @@ hr {
     justify-content: left;
 }
 
-.rating>input {
+.rating > input {
     display: none
 }
 
-.rating>label {
+.rating > label {
     position: relative;
     width: 1em;
     font-size: 30px;
@@ -2646,39 +2723,40 @@ hr {
     cursor: pointer
 }
 
-.rating>label::before {
+.rating > label::before {
     content: "\2605";
     position: absolute;
     opacity: 0
 }
 
-.rating>label:hover:before,
-.rating>label:hover~label:before {
+.rating > label:hover:before,
+.rating > label:hover ~ label:before {
     opacity: 1 !important
 }
 
-.rating>input:checked~label:before {
+.rating > input:checked ~ label:before {
     opacity: 1
 }
 
-.rating:hover>input:checked~label:before {
+.rating:hover > input:checked ~ label:before {
     opacity: 0.4
 }
 
-.buttons{
+.buttons {
     top: 36px;
     position: relative;
 }
 
-.rating-submit{
+.rating-submit {
     border-radius: 15px;
     color: #fff;
     height: 49px;
 }
 
-.rating-submit:hover{
+.rating-submit:hover {
     color: #fff;
 }
+
 .rate {
     height: 50px;
     margin-left: -5px;
@@ -2687,14 +2765,16 @@ hr {
     position: relative;
     cursor: pointer;
 }
+
 .rate input[type="radio"] {
     opacity: 0;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,0%);
+    transform: translate(-50%, 0%);
     pointer-events: none;
 }
+
 .star-over::after {
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
@@ -2711,18 +2791,23 @@ hr {
 .face-5::after {
     content: "\f59a"; /* 😄 */
 }
+
 .face-4::after {
     content: "\f580"; /* 😊 */
 }
+
 .face-3::after {
     content: "\f118"; /* 🙂 */
 }
+
 .face-2::after {
     content: "\f11a"; /* 😐 */
 }
+
 .face-1::after {
     content: "\f119"; /* ☹ */
 }
+
 .face {
     opacity: 0;
     position: absolute;
@@ -2735,6 +2820,7 @@ hr {
     transition: 0.2s;
     pointer-events: none;
 }
+
 .face::before {
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
@@ -2746,6 +2832,7 @@ hr {
     left: 9px;
     bottom: -15px;
 }
+
 .face::after {
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
@@ -2760,6 +2847,7 @@ hr {
 .rate:hover .face {
     opacity: 1;
 }
+
 .wrap {
     width: 250px;
     height: 50px;
@@ -2767,7 +2855,8 @@ hr {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     border-radius: 10px;
 }
+
 /*# sourceMappingURL=style.css.map */

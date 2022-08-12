@@ -4,15 +4,15 @@
  */
 package se1621.dao;
 
+import se1621.dto.Evidences;
+import se1621.utils.DBUtils;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import se1621.dto.Evidences;
-import se1621.utils.DBUtils;
 
 /**
- *
  * @author HNGB
  */
 public class EvidenceDAO {
@@ -31,10 +31,10 @@ public class EvidenceDAO {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(CREATE_EVIDENCE);
-               preStm.setInt(1, evidence.getDisputes().getDisputeID());
-               preStm.setInt(2, evidence.getUser().getUserID());
-               preStm.setString(3, evidence.getMessage());
-               preStm.setString(4, evidence.getEvidenceFile());
+                preStm.setInt(1, evidence.getDisputes().getDisputeID());
+                preStm.setInt(2, evidence.getUser().getUserID());
+                preStm.setString(3, evidence.getMessage());
+                preStm.setString(4, evidence.getEvidenceFile());
                 check = preStm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {

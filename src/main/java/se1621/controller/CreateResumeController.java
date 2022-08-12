@@ -4,28 +4,25 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.servlet.http.*;
 import se1621.dao.ResumeDAO;
 import se1621.dao.ResumeSkillDAO;
 import se1621.dto.Resume;
-import se1621.dto.Skill;
 import se1621.dto.ResumeSkill;
+import se1621.dto.Skill;
 import se1621.dto.User;
+import se1621.service.FirebaseStoreService;
 import se1621.service.FirebaseStoreServiceImpl;
 
+import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author HNGB
  */
 @MultipartConfig(maxFileSize = 16177215)
@@ -41,8 +38,8 @@ public class CreateResumeController extends HttpServlet {
         String url = ERROR;
         try {
             Part filePart = request.getPart("avatar");
-            FirebaseStoreServiceImpl firebaseStoreServiceImpl = new FirebaseStoreServiceImpl();
-            String filename = firebaseStoreServiceImpl.uploadFile(filePart);
+            FirebaseStoreService firebaseStoreService = new FirebaseStoreServiceImpl();
+            String filename = firebaseStoreService.uploadFile(filePart);
             String fullName = request.getParameter("fullname");
             String gender = request.getParameter("gender");
             Date dateOfBirth = Date.valueOf(request.getParameter("dateofbirth"));
@@ -130,13 +127,14 @@ public class CreateResumeController extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -147,10 +145,10 @@ public class CreateResumeController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

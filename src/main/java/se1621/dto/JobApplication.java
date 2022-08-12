@@ -15,11 +15,12 @@ import java.sql.Date;
 @AllArgsConstructor
 @Builder
 public class JobApplication {
-    private int jobApplicationID;
-    private int resumeID;
     Job job;
     Resume resume;
     SubmitJob submitJob;
+    EvaluateCompletion evaluateCompletion;
+    private int jobApplicationID;
+    private int resumeID;
     private String cvFile;
     private String priceDeal;
     private String message;
@@ -28,5 +29,4 @@ public class JobApplication {
     private int jobApplicationStatus;
     private String reasonRejection;
     private String reasonRejectionSubmmit;
-    EvaluateCompletion evaluateCompletion;
 }

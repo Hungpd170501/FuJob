@@ -7,7 +7,6 @@ package se1621.utils;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
- *
  * @author ACER
  */
 public class Helper {

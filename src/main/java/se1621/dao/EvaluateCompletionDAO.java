@@ -1,6 +1,9 @@
 package se1621.dao;
 
 import se1621.dto.EvaluateCompletion;
+import se1621.dto.Job;
+import se1621.dto.Resume;
+import se1621.dto.User;
 import se1621.utils.DBUtils;
 
 import java.sql.Connection;
@@ -9,17 +12,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import se1621.dto.Job;
-import se1621.dto.Resume;
-import se1621.dto.User;
 
 public class EvaluateCompletionDAO {
 
+    private static final String SAVE = "INSERT INTO tblEvaluateCompletion(reviewerID, jobID, resumeID, ratingValue, content, evaluateCompletionStatus) VALUES(?,?,?,?,?,?)";
+    private static final String GETALL_EVALUATE = "SELECT * FROM tblEvaluateCompletion";
     private Connection conn;
     private PreparedStatement preStm;
     private ResultSet rs;
-    private static final String SAVE = "INSERT INTO tblEvaluateCompletion(reviewerID, jobID, resumeID, ratingValue, content, evaluateCompletionStatus) VALUES(?,?,?,?,?,?)";
-    private static final String GETALL_EVALUATE = "SELECT * FROM tblEvaluateCompletion";
 
     public boolean saveEvaluateCompletion(EvaluateCompletion evaluateCompletion) throws SQLException, ClassNotFoundException {
         boolean check = false;

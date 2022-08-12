@@ -2,30 +2,49 @@
 
 ![FuJob Logo](src/main/webapp/asset/images/Logo/Logo/Untitled-3.png)
 
-## [Live Demo]() - [Document Design]() - [Document SRS]()
+## [Live Demo](https://fujob2.azurewebsites.net/) - [Document Design](doc/SWP391_FuJob_Design.pdf) - [Document SRS](doc/SWP391_FuJob_SRS.pdf)
 
 ## Case Study
-...............
+
+Updating
 
 ## Feature by role
 
 - Common Role
     - Login and register account
     - Update user information
-    - Change password
-    - Write new post
-    - ..............
-- Student Role
-  - ..............
-- ...  Role
-  - ..............
+    - Reset password
+    - Search and view projects
+- FPT Student Role
+    - Manage resume
+    - Apply project
+    - Manage projects applied
+    - Submit work
+    - Manage disputes
+- Human Resources Manager Role
+    - Manage company info
+    - Manage human resources
+- Human Resources Role
+    - Post project
+    - View company info
+    - Manage project posted
+    - View candidate
+    - Manage disputes
+- Admin Role
+    - Updating
+## Requirements
+- Java - jdk11 or above
+- Maven - 3.x.x
+- Apache Tomcat - 10.x.x
+- SQL Server
+
 
 ## Technology
 
 - Frontend
     - JSP - Server Side Rendering
-    - Tailwind - Style
-    - Javascript
+    - Bootstrap
+    - Javascript, jQuery
 - Backend
     - Servlet - Server Core
     - SQL Server 2019 - Database
@@ -34,36 +53,34 @@
 
 ## Team Member
 
-- Phạm Đức Hưng 
+- Phạm Đức Hưng - Leader | Backend + Frontend
     - Gmail: hungpd170501@gmail.com
-    - Linkedin: 
     - Github: https://github.com/Hungpd170501
-- Huỳnh Ngô Gia  Bảo
-    - Gmail: 
-    - Linkedin: 
+- Huỳnh Ngô Gia Bảo | Backend + Frontend
+    - Gmail:
     - Github: https://github.com/HNGB
-- Lê Quốc Bình
-    - Gmail: 
-    - Linkedin: 
+- Lê Quốc Bình | Backend + Frontend
+    - Gmail:
     - Github: https://github.com/BinhJim
 - Lê Hà Duy | Backend + Frontend
-    - Gmail: 
-    - Linkedin: 
+    - Gmail: lehaduy20112001@gmail.com
     - Github: https://github.com/HuDery
 
 ## Project Picture
 
-### Home Page
+<div  align="center">
 
-[![Login Page]()](https://)
+<img  src="doc/img/p1.png"  alt="Login Page"  width="45%"></img> &nbsp;&nbsp; <img  src="doc/img/p2.png"  alt="Home Page"  width="45%"></img>
 
-### Manager Page
+<img  src="doc/img/p3.png"  alt="Projects List"  width="45%"></img> &nbsp;&nbsp; <img  src="doc/img/p4.png"  alt="Project Detail"  width="45%"></img>
 
-[![Manager Page]()](https://)
+<img  src="doc/img/p5.png"  alt="Open Projects (HR)"  width="45%"></img> &nbsp;&nbsp; <img  src="doc/img/p6.png"  alt="Work In Progress Projects(HR)"  width="45%"></img>
 
-### Login Page
+<img  src="doc/img/p7.png"  alt="Work In Progress Projects (Student)"  width="45%"></img> &nbsp;&nbsp; <img  src="doc/img/p8.png"  alt="Manage Account"  width="45%"></img>
 
-[![Login Page]()](https://)
+</div>
+
+
 
 ## Bug Report
 

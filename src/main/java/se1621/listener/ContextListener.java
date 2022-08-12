@@ -76,7 +76,7 @@ public class ContextListener implements ServletContextListener {
             }
         });
         try {
-            CompletableFuture.allOf(future1, future2,future3,future4,future5).get();
+            CompletableFuture.allOf(future1, future2, future3, future4, future5).get();
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }

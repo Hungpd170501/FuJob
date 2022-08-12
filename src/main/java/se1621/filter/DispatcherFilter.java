@@ -22,7 +22,7 @@ public class DispatcherFilter implements Filter {
     }
 
     public void doFilter(ServletRequest request, ServletResponse response,
-            FilterChain chain) {
+                         FilterChain chain) {
 
         HttpServletRequest req = (HttpServletRequest) request;
         String uri = req.getRequestURI();
@@ -32,7 +32,7 @@ public class DispatcherFilter implements Filter {
             Properties siteMapProperties = (Properties) context.getAttribute("SITE_MAP");
             int lastIndex = uri.lastIndexOf("/");
             String resource = uri.substring(lastIndex + 1);
-            url=resource.isBlank()?"MainController?action=IndexController":siteMapProperties.getProperty(resource);
+            url = resource.isBlank() ? "MainController?action=IndexController" : siteMapProperties.getProperty(resource);
             if (url != null) {
                 req.getRequestDispatcher(url).forward(request, response);
             } else {

@@ -4,15 +4,15 @@
  */
 package se1621.dao;
 
+import se1621.dto.SubmitJob;
+import se1621.utils.DBUtils;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import se1621.dto.SubmitJob;
-import se1621.utils.DBUtils;
 
 /**
- *
  * @author lehad
  */
 public class SubmitJobDAO {
@@ -22,6 +22,7 @@ public class SubmitJobDAO {
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;
+
     public boolean submitJob(SubmitJob submitJob) throws SQLException {
         boolean check = false;
         conn = null;
@@ -55,7 +56,7 @@ public class SubmitJobDAO {
         boolean check = false;
         conn = null;
         preStm = null;
-        try{
+        try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {
                 preStm = conn.prepareStatement(EDIT_SUBMISSION);

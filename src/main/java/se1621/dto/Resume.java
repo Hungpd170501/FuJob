@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Resume {
+    List<ResumeSkill> listResumeSkills;
     private int resumeID;
     private int userID;
     private String avatar;
@@ -30,5 +31,4 @@ public class Resume {
     private Date createdDate;
     private Date lastModifiedDate;
     private int resumeStatus;
-    List<ResumeSkill> listResumeSkills;
 }

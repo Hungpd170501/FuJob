@@ -5,7 +5,6 @@
 package se1621.dto.Error;
 
 /**
- *
  * @author HNGB
  */
 public class UserError {

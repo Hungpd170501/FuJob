@@ -4,19 +4,18 @@
  */
 package se1621.dao.v2;
 
-import java.util.List;
-
 import org.hibernate.Session;
-import se1621.entity.JobEntity;
 import se1621.entity.SkillEntity;
 import se1621.utils.HibernateUtils;
 
+import java.util.List;
+
 /**
- *
  * @author ACER
  */
 public class SkillDAOImpl extends BaseDAOImpl implements SkillDAO {
-    private final Session session=HibernateUtils.getSession();
+    private final Session session = HibernateUtils.getSession();
+
     @Override
     public void save(SkillEntity skillEntity) {
         super.saveEntity(skillEntity);

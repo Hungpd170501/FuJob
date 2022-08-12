@@ -4,7 +4,6 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,10 +15,12 @@ import se1621.dao.JobApplicationDAO;
 import se1621.dao.ResumeDAO;
 import se1621.dto.Job;
 import se1621.dto.JobApplication;
+import se1621.service.FirebaseStoreService;
 import se1621.service.FirebaseStoreServiceImpl;
 
+import java.io.IOException;
+
 /**
- *
  * @author HNGB
  */
 @MultipartConfig(maxFileSize = 16177215)
@@ -37,9 +38,9 @@ public class OrderJobController extends HttpServlet {
             int userID = Integer.parseInt(request.getParameter("userID"));
             int jobID = Integer.parseInt(request.getParameter("jobID"));
             Part filePart = request.getPart("file");
-            FirebaseStoreServiceImpl firebaseStoreServiceImpl = new FirebaseStoreServiceImpl();
-            String filename = firebaseStoreServiceImpl.uploadFile(filePart);
-            if(filePart.getSize()<= 0){
+            FirebaseStoreService firebaseStoreService = new FirebaseStoreServiceImpl();
+            String filename = firebaseStoreService.uploadFile(filePart);
+            if (filePart.getSize() <= 0) {
                 filename = null;
             }
             String salaryDeal = request.getParameter("salaryDeal");
@@ -82,13 +83,14 @@ public class OrderJobController extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -99,10 +101,10 @@ public class OrderJobController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

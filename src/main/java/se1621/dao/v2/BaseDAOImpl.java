@@ -4,11 +4,11 @@
  */
 package se1621.dao.v2;
 
+import org.hibernate.Session;
+import se1621.utils.HibernateUtils;
+
 import java.io.Serializable;
 import java.util.List;
-import org.hibernate.Session;
-
-import se1621.utils.HibernateUtils;
 
 public class BaseDAOImpl implements BaseDAO {
 

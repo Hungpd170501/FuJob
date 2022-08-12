@@ -8,15 +8,15 @@ import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Bucket;
 import jakarta.servlet.http.Part;
-import java.io.IOException;
-import java.util.UUID;
 import se1621.utils.FirebaseUtils;
 
+import java.io.IOException;
+import java.util.UUID;
+
 /**
- *
  * @author ACER
  */
-public class FirebaseStoreServiceImpl {
+public class FirebaseStoreServiceImpl implements FirebaseStoreService{
     public Bucket bucket;
 
     public FirebaseStoreServiceImpl() throws IOException {
@@ -28,6 +28,6 @@ public class FirebaseStoreServiceImpl {
         BlobId blobId = BlobId.of(bucket.getName(), fileName);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType(part.getContentType()).build();
         com.google.cloud.storage.Blob blob = bucket.getStorage().create(blobInfo, part.getInputStream().readAllBytes());
-        return  "https://firebasestorage.googleapis.com/v0/b/" + bucket.getName() + "/o/" + fileName + "?alt=media";
+        return "https://firebasestorage.googleapis.com/v0/b/" + bucket.getName() + "/o/" + fileName + "?alt=media";
     }
 }

@@ -7,7 +7,6 @@ package se1621.dto;
 import lombok.*;
 
 /**
- *
  * @author lehad
  */
 @Getter

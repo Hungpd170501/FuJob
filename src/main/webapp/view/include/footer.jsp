@@ -3,7 +3,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-12 mb-0 mb-md-4 pb-0 pb-md-2">
-                <a href="javascript:void(0)"><img src="${pageContext.request.contextPath}/asset/images/Logo/Logo/Untitled-1.png" height="50" alt=""></a>
+                <a href="javascript:void(0)"><img
+                        src="${pageContext.request.contextPath}/asset/images/Logo/Logo/Untitled-1.png" height="50"
+                        alt=""></a>
                 <p class="mt-4">Find the perfect freelance services for your business</p>
                 <ul class="social-icon social list-inline mb-0">
                     <li class="list-inline-item"><a href="#" class="rounded"><i class="mdi mdi-facebook"></i></a></li>
@@ -15,8 +17,10 @@
             <div class="col-lg-2 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
                 <p class="text-white mb-4 footer-list-title">About</p>
                 <ul class="list-unstyled footer-list">
-                    <li><a href="${pageContext.request.contextPath}/view/about.jsp"" class="text-foot"><i class="mdi mdi-chevron-right"></i> About Us</a></li>     
-                    <li><a href="${pageContext.request.contextPath}/view/disputeSolution.jsp"" class="text-foot"><i class="mdi mdi-chevron-right"></i> Dispute Resolution</a></li>
+                    <li><a href="${pageContext.request.contextPath}/view/about.jsp"" class="text-foot"><i
+                            class="mdi mdi-chevron-right"></i> About Us</a></li>
+                    <li><a href="${pageContext.request.contextPath}/view/disputeSolution.jsp"" class="text-foot"><i
+                            class="mdi mdi-chevron-right"></i> Dispute Resolution</a></li>
                 </ul>
             </div>
             <div class="col-lg-2 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
@@ -51,16 +55,17 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <div class="">
-                    <p class="mb-0">© 2022 FuJob Design with <i class="mdi mdi-heart text-danger"></i> by FuJobteam.</p>
+                    <p class="mb-0">ï¿½ 2022 FuJob Design with <i class="mdi mdi-heart text-danger"></i> by FuJobteam.</p>
                 </div>
             </div>
         </div>
     </div><!--end container-->
-</footer><!--end footer-->
+</footer>
+<!--end footer-->
 <!-- Footer End -->
 <!-- Back to top -->
-<a href="#" class="back-to-top rounded text-center" id="back-to-top"> 
-    <i class="mdi mdi-chevron-up d-block"> </i> 
+<a href="#" class="back-to-top rounded text-center" id="back-to-top">
+    <i class="mdi mdi-chevron-up d-block"> </i>
 </a>
 <!-- Back to top -->
 

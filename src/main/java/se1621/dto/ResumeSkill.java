@@ -7,7 +7,6 @@ package se1621.dto;
 import lombok.*;
 
 /**
- *
  * @author lehad
  */
 @Getter
@@ -17,7 +16,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class ResumeSkill {
+    Skill skill;
     private int resumeSkillID;
     private int resumeID;
-    Skill skill;
 }

@@ -301,7 +301,8 @@
                                             <input type="hidden" name="action" value="UpdateCompanyStatus">
                                             <input type="hidden" name="companyID" value="${pageScope.item.companyID}">
                                             <input type="hidden" name="status" value="0">
-                                            <input type="submit" class="text-danger" style="border: 0; background: 0;" value="Deactivate">   
+                                            <input type="submit" class="text-danger" style="border: 0; background: 0;"
+                                                   value="Deactivate">
                                         </form>
                                         <div class="btn-group">
                                             <button type="button" class="btn  dropdown-toggle"
@@ -309,36 +310,42 @@
                                                     data-boundary="viewport"
                                                     aria-expanded="false"></button>
                                             <div class="dropdown-menu">
-                                                <form method="POST" action="${pageContext.request.contextPath}/MainController">
+                                                <form method="POST"
+                                                      action="${pageContext.request.contextPath}/MainController">
                                                     <input type="hidden" name="action" value="UpdateCompanyStatus">
-                                                    <input type="hidden" name="companyID" value="${pageScope.item.companyID}">
+                                                    <input type="hidden" name="companyID"
+                                                           value="${pageScope.item.companyID}">
                                                     <input type="hidden" name="status" value="3">
-                                                    <input type="submit" class="" style="border: 0; background: 0;" value="Verify">   
+                                                    <input type="submit" class="" style="border: 0; background: 0;"
+                                                           value="Verify">
                                                 </form>
                                             </div>
                                         </div>
                                     </c:if>
                                     <c:if test="${pageScope.item.companyStatus == 2}">
                                         <form method="POST" action="${pageContext.request.contextPath}/MainController">
-                                                    <input type="hidden" name="action" value="UpdateCompanyStatus">
-                                                    <input type="hidden" name="companyID" value="${pageScope.item.companyID}">
-                                                    <input type="hidden" name="status" value="3">
-                                                    <input type="submit" class="text-success" style="border: 0; background: 0;" value="Verify">   
-                                         </form>
+                                            <input type="hidden" name="action" value="UpdateCompanyStatus">
+                                            <input type="hidden" name="companyID" value="${pageScope.item.companyID}">
+                                            <input type="hidden" name="status" value="3">
+                                            <input type="submit" class="text-success" style="border: 0; background: 0;"
+                                                   value="Verify">
+                                        </form>
                                         <form method="POST" action="${pageContext.request.contextPath}/MainController">
-                                                    <input type="hidden" name="action" value="UpdateCompanyStatus">
-                                                    <input type="hidden" name="companyID" value="${pageScope.item.companyID}">
-                                                    <input type="hidden" name="status" value="1">
-                                                    <input type="submit" class="text-danger" style="border: 0; background: 0;" value="Deny">   
-                                         </form>
+                                            <input type="hidden" name="action" value="UpdateCompanyStatus">
+                                            <input type="hidden" name="companyID" value="${pageScope.item.companyID}">
+                                            <input type="hidden" name="status" value="1">
+                                            <input type="submit" class="text-danger" style="border: 0; background: 0;"
+                                                   value="Deny">
+                                        </form>
                                     </c:if>
                                     <c:if test="${pageScope.item.companyStatus == 0}">
                                         <form method="POST" action="${pageContext.request.contextPath}/MainController">
-                                                    <input type="hidden" name="action" value="UpdateCompanyStatus">
-                                                    <input type="hidden" name="companyID" value="${pageScope.item.companyID}">
-                                                    <input type="hidden" name="status" value="3">
-                                                    <input type="submit" class="text-success" style="border: 0; background: 0;" value="Activate">   
-                                         </form>
+                                            <input type="hidden" name="action" value="UpdateCompanyStatus">
+                                            <input type="hidden" name="companyID" value="${pageScope.item.companyID}">
+                                            <input type="hidden" name="status" value="3">
+                                            <input type="submit" class="text-success" style="border: 0; background: 0;"
+                                                   value="Activate">
+                                        </form>
                                     </c:if>
                                 </td>
                             </tr>

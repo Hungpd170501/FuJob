@@ -4,18 +4,18 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 import se1621.dao.JobDAO;
 import se1621.dto.Job;
 
+import java.io.IOException;
+import java.util.List;
+
 /**
- *
  * @author lehad
  */
 @WebServlet(name = "ViewRecentJobController", urlPatterns = {"/ViewRecentJobController"})
@@ -30,8 +30,8 @@ public class ViewRecentJobPostedController extends HttpServlet {
         String url = ERROR;
         try {
             JobDAO jobRecentDAO = new JobDAO();
-            List<Job> listRecentJob= jobRecentDAO.getRecentJobPosted();
-            if(!listRecentJob.isEmpty()){
+            List<Job> listRecentJob = jobRecentDAO.getRecentJobPosted();
+            if (!listRecentJob.isEmpty()) {
                 request.setAttribute("LIST_RECENTJOB", listRecentJob);
                 url = SUCCESS;
             }
@@ -42,13 +42,14 @@ public class ViewRecentJobPostedController extends HttpServlet {
         }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -59,10 +60,10 @@ public class ViewRecentJobPostedController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

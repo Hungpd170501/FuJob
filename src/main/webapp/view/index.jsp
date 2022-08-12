@@ -1,5 +1,5 @@
-<%@page import="java.time.ZoneId"%>
-<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.ZoneId" %>
+<%@page import="java.time.format.DateTimeFormatter" %>
 <%@page import="java.util.Calendar" %>
 <%@ page import="se1621.entity.JobEntity" %>
 <%@ page import="java.time.Duration" %>
@@ -134,10 +134,12 @@
                                         <h6 class="mb-1"><a
                                                 href="${pageContext.request.contextPath}/MainController?action=SearchJobID&searchJobID=${jobItem.jobID}"
                                                 class="text-dark">${jobItem.jobTitle}</a></h6>
-                                        <p class="text-muted f-14 mb-1">Date posted: <%= DateTimeFormatter.ofPattern("dd-MM-yyyy")
-                                                                 .withZone(ZoneId.systemDefault()).format(job.getCreatedDate()) %><br></p>
+                                        <p class="text-muted f-14 mb-1">Date
+                                            posted: <%= DateTimeFormatter.ofPattern("dd-MM-yyyy")
+                                                    .withZone(ZoneId.systemDefault()).format(job.getCreatedDate()) %>
+                                            <br></p>
                                         <p class="text-muted f-14 mb-1">Address: ${jobItem.address}<br></p>
-                                        <p class="text-muted mb-1">Budget: ${jobItem.minBudget}$ - ${jobItem.maxBudget}         
+                                        <p class="text-muted mb-1">Budget: ${jobItem.minBudget}$ - ${jobItem.maxBudget}
                                             $<%=(job.getPaymentMethod().getPaymentMethodID() == 2) ? "/ hour" : ""%>
                                         </p>
                                         <p class="text-muted mb-1">Expiry

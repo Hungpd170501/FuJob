@@ -4,26 +4,14 @@
  */
 package se1621.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import se1621.dto.Category;
-import se1621.dto.CompanyInfo;
-import se1621.dto.EvaluateCompletion;
-import se1621.dto.Job;
-import se1621.dto.JobApplication;
-import se1621.dto.PayMentMethod;
-import se1621.dto.Resume;
-import se1621.dto.SubmitJob;
-import se1621.dto.User;
+import se1621.dto.*;
 import se1621.utils.DBUtils;
 
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author HNGB
  */
 public class JobApplicationDAO {
@@ -103,18 +91,6 @@ public class JobApplicationDAO {
             + "                                                                                            ORDER BY jo.lastModifiedDate DESC ";
 
     private static final String UPDATE_STATUS = "UPDATE tblJobApplications SET cvFile = ?, priceDeal = ?, message = ?, jobApplicationStatus = 1 WHERE jobApplicationID = ? and resumeID = ? and jobID = ?";
-    private final String SEARCHJOBORDER = "SELECT ja.jobApplicationID,ISNULL(jobAply.bids,0) AS bids, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, ja.jobApplicationStatus, "
-            + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.minBudget,j.maxBudget, j.paymentMethodID, pm.paymentMethodName, "
-            + "j.address, j.email, j.phone, j.description, j.lastModifiedDate "
-            + "FROM ((((tblJobApplications ja LEFT JOIN tblJobs j ON ja.jobID = j.jobID) "
-            + "LEFT JOIN tblCategories c ON j.jobCategoryID = c.categoryID) "
-            + "left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID) "
-            + "left join (select jobID, COUNT(jobID) AS bids  "
-            + "           FROM tblJobApplications  "
-            + "              WHERE jobApplicationStatus = 1 "
-            + "                GROUP BY jobID) AS jobAply "
-            + "        on jobAply.jobID = j.jobID )";
-
     private static final String GET_LIST_ST_PAST_WORK = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.userID, "
             + "						j.disputeStatus, j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
             + "								jo.createdDate, c.categoryName, c.img, com.companyName, "
@@ -128,7 +104,6 @@ public class JobApplicationDAO {
     private static final String GETALLNUMBEROFJOBORDER = "SELECT COUNT (jobApplicationID) AS totalJobOrder FROM tblJobApplications";
     private static final String UPDATE_FORM_APPLICATON_OF_RESUME = "UPDATE tblJobApplications SET priceDeal = ?, message = ?, cvFile = ? WHERE resumeID = ? and jobID = ?";
     private static final String UPDATE_STATUS_APPLICATION = "UPDATE tblJobApplications SET jobApplicationStatus = ? WHERE jobApplicationID = ?";
-
     private static final String GET_JOBAPPLICATION_DISPUTE = "SELECT jo.jobApplicationID,jo.jobApplicationStatus, j.jobID, j.userID, "
             + "								j.jobTitle, j.jobCategoryID, j.minBudget,j.maxBudget,j.paymentMethodID, pay.paymentMethodName, jo.cvFile, jo.priceDeal, jo.message,"
             + "								jo.createdDate, c.categoryName, c.img, com.companyName, "
@@ -149,10 +124,20 @@ public class JobApplicationDAO {
             + "								left join tblSubmitJob sb on sb.jobApplicationID = jo.jobApplicationID)"
             + "                                WHERE j.userID= ? and j.disputeStatus = 1"
             + "                                ORDER BY jo.lastModifiedDate DESC";
-
     private static final String GET_JA_BY_JAID = "SELECT r.userID"
             + " FROM tblJobApplications ja left join tblResumes r on ja.resumeID = r.resumeID"
             + " WHERE ja.jobApplicationID = ?";
+    private final String SEARCHJOBORDER = "SELECT ja.jobApplicationID,ISNULL(jobAply.bids,0) AS bids, ja.resumeID, ja.jobID, ja.cvFile, ja.createdDate, ja.message, ja.priceDeal, ja.jobApplicationStatus, "
+            + "j.jobTitle, j.userID, j.jobCategoryID, c.categoryName, c.img, j.expiriedDate, j.minBudget,j.maxBudget, j.paymentMethodID, pm.paymentMethodName, "
+            + "j.address, j.email, j.phone, j.description, j.lastModifiedDate "
+            + "FROM ((((tblJobApplications ja LEFT JOIN tblJobs j ON ja.jobID = j.jobID) "
+            + "LEFT JOIN tblCategories c ON j.jobCategoryID = c.categoryID) "
+            + "left join tblPaymentMethods pm on pm.paymentMethodID = j.paymentMethodID) "
+            + "left join (select jobID, COUNT(jobID) AS bids  "
+            + "           FROM tblJobApplications  "
+            + "              WHERE jobApplicationStatus = 1 "
+            + "                GROUP BY jobID) AS jobAply "
+            + "        on jobAply.jobID = j.jobID )";
     Connection conn;
     PreparedStatement preStm;
     private ResultSet rs;

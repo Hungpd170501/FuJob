@@ -1,17 +1,11 @@
 package se1621.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.BatchSize;
 
 import java.time.Instant;
-import java.util.LinkedHashSet;
 import java.util.Set;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.annotations.BatchSize;
 
 @Builder
 @AllArgsConstructor
@@ -21,7 +15,7 @@ import org.hibernate.annotations.BatchSize;
 @ToString(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "tblJobs")
-public class JobEntity{
+public class JobEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +37,7 @@ public class JobEntity{
 
     @Column(name = "minBudget")
     private Double minBudget;
-    
+
     @Column(name = "maxBudget")
     private Double maxBudget;
 
@@ -79,9 +73,9 @@ public class JobEntity{
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "tblJobSkills",
             joinColumns = {
-                @JoinColumn(name = "jobID")},
+                    @JoinColumn(name = "jobID")},
             inverseJoinColumns = {
-                @JoinColumn(name = "skillID")})
+                    @JoinColumn(name = "skillID")})
     private Set<SkillEntity> skills;
 
     @OneToMany(mappedBy = "job")

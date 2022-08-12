@@ -4,18 +4,14 @@
  */
 package se1621.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import se1621.dto.Category;
 import se1621.utils.DBUtils;
 
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author ACER
  */
 public class CategoryDAO {
@@ -60,8 +56,8 @@ public class CategoryDAO {
         }
         return null;
     }
-    
-     public List<Category> getListCategory_nonOrderBy() throws SQLException {
+
+    public List<Category> getListCategory_nonOrderBy() throws SQLException {
         try {
             conn = DBUtils.getInstance().getConnection();
             if (conn != null) {

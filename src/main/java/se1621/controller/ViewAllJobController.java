@@ -4,31 +4,19 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-
-import se1621.dao.JobApplicationDAO;
 import se1621.dao.JobDAO;
 import se1621.dao.JobSkillsDAO;
-import se1621.dao.UserDAO;
-import se1621.dao.v2.CategoryDAOImpl;
-import se1621.dao.v2.JobDAOImpl;
-import se1621.dao.v2.SkillDAOImpl;
 import se1621.dto.Job;
 import se1621.dto.JobSkills;
-import se1621.entity.CategoryEntity;
-import se1621.entity.JobEntity;
-import se1621.entity.SkillEntity;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @WebServlet(name = "ViewAllJobController", urlPatterns = {"/ViewAllJobController"})

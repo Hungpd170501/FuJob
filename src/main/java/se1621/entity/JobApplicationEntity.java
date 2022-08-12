@@ -1,19 +1,13 @@
 package se1621.entity;
 
 import jakarta.persistence.*;
-
-import java.time.Instant;
-import java.util.Set;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+
+import java.time.Instant;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -68,7 +62,7 @@ public class JobApplicationEntity {
     private String reasonRejectSubmit;
 
     @Fetch(FetchMode.SELECT)
-    @BatchSize(size=1)
+    @BatchSize(size = 1)
     @OneToMany(mappedBy = "jobApplication")
     private Set<SubmitJobEntity> submitJob;
 

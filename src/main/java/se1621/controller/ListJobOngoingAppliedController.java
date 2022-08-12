@@ -4,15 +4,11 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 import se1621.dao.EvaluateCompletionDAO;
 import se1621.dao.JobApplicationDAO;
 import se1621.dao.JobSkillsDAO;
@@ -21,8 +17,11 @@ import se1621.dto.EvaluateCompletion;
 import se1621.dto.JobApplication;
 import se1621.dto.JobSkills;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author quocb
  */
 @WebServlet(name = "ListJobOngoingAppliedController", urlPatterns = {"/ListJobOngoingAppliedController"})
@@ -68,7 +67,7 @@ public class ListJobOngoingAppliedController extends HttpServlet {
             listEc = ecDAO.getAllEvaluate();
             for (JobApplication jobApply : listJobOrder) {
                 for (EvaluateCompletion ec : listEc) {
-                    if(jobApply.getJob().getJobID() == ec.getJob().getJobID() && jobApply.getResumeID() == ec.getResume().getResumeID()){
+                    if (jobApply.getJob().getJobID() == ec.getJob().getJobID() && jobApply.getResumeID() == ec.getResume().getResumeID()) {
                         jobApply.setEvaluateCompletion(ec);
                     }
                 }
@@ -88,13 +87,14 @@ public class ListJobOngoingAppliedController extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -105,10 +105,10 @@ public class ListJobOngoingAppliedController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

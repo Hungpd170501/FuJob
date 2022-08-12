@@ -4,15 +4,16 @@
  */
 package se1621.dao.v2;
 
-import java.util.List;
 import se1621.entity.SkillEntity;
 
+import java.util.List;
+
 /**
- *
  * @author ACER
  */
 public interface SkillDAO {
 
     void save(SkillEntity skillEntity);
+
     List<SkillEntity> getAll(String skillEntityName);
 }

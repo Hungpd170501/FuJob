@@ -8,12 +8,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- *
  * @author ACER
  */
 public interface BaseDAO {
-        //save an entity object
-        <T> void saveEntity(T entity);
+    //save an entity object
+    <T> void saveEntity(T entity);
 
     // delete an entity object
 

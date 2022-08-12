@@ -33,18 +33,18 @@ public class AuthenticationFilter implements Filter {
         try {
             Properties authenticationProperties = (Properties) request.getServletContext().getAttribute("AUTHENTICATION_LIST");
             String resource = uri.substring(uri.lastIndexOf("/") + 1);
-            resource=(StringUtils.equals(resource,"MainController"))?httpServletRequest.getParameter("action"):resource;
+            resource = (StringUtils.equals(resource, "MainController")) ? httpServletRequest.getParameter("action") : resource;
             HttpSession session = httpServletRequest.getSession(false);
             String rule = authenticationProperties.getProperty(resource);
-            if (rule == null||rule.equals("allowed")) {
+            if (rule == null || rule.equals("allowed")) {
                 chain.doFilter(request, response);
             } else {
-                if(session==null||session.getAttribute("LOGIN_USER")==null){
+                if (session == null || session.getAttribute("LOGIN_USER") == null) {
                     ((HttpServletResponse) response).sendRedirect("loginPage");
-                }else{
-                    if(StringUtils.contains(rule,new StringBuilder().append("|").append(((User) session.getAttribute("LOGIN_USER")).getRole().getRoleID()).append("|").toString())){
+                } else {
+                    if (StringUtils.contains(rule, new StringBuilder().append("|").append(((User) session.getAttribute("LOGIN_USER")).getRole().getRoleID()).append("|").toString())) {
                         chain.doFilter(request, response);
-                    }else{
+                    } else {
                         request.setAttribute("LOGIN_MESSAGE", "Your role is not supported!");
                         httpServletRequest.getRequestDispatcher("/view/login.jsp").forward(request, response);
                     }

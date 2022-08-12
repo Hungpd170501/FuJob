@@ -1,18 +1,13 @@
 package se1621.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.BatchSize;
 
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.annotations.BatchSize;
 
 @Builder
 @AllArgsConstructor
@@ -85,9 +80,9 @@ public class ResumeEntity {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "tblResumeSkills",
             joinColumns = {
-                @JoinColumn(name = "resumeID")},
+                    @JoinColumn(name = "resumeID")},
             inverseJoinColumns = {
-                @JoinColumn(name = "skillID")})
+                    @JoinColumn(name = "skillID")})
     @Builder.Default
     private Set<SkillEntity> skills = new LinkedHashSet<>();
 

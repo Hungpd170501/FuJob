@@ -6,8 +6,9 @@ import se1621.utils.HibernateUtils;
 
 import java.util.List;
 
-public class DisputeDAOImpl extends BaseDAOImpl implements DisputeDAO{
-    private final Session session= HibernateUtils.getSession();
+public class DisputeDAOImpl extends BaseDAOImpl implements DisputeDAO {
+    private final Session session = HibernateUtils.getSession();
+
     @Override
     public void save(DisputeEntity disputeEntity) {
         super.saveEntity(disputeEntity);
@@ -15,7 +16,7 @@ public class DisputeDAOImpl extends BaseDAOImpl implements DisputeDAO{
 
     @Override
     public List<DisputeEntity> getAll(String disputeEntityName) {
-        return(super.getAllEntity(disputeEntityName));
+        return (super.getAllEntity(disputeEntityName));
     }
 
     @Override

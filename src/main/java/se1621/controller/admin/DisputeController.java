@@ -16,7 +16,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
@@ -25,7 +24,7 @@ import static java.util.stream.Collectors.toList;
 public class DisputeController extends HttpServlet {
     private static final String ERROR = "/view/error.jsp";
     private static final String SUCCESS = "/WEB-INF/viewAdmin/disputes-list.jsp";
-    private static final Map<Integer, String> disputeStatusMap  = new HashMap<Integer, String>() {{
+    private static final Map<Integer, String> disputeStatusMap = new HashMap<Integer, String>() {{
         put(0, "CLOSED");
         put(1, "OPEN");
         put(2, "RESOLVED");
@@ -45,12 +44,12 @@ public class DisputeController extends HttpServlet {
                     .getAllUsingHQL("select distinct d from DisputeEntity d left join fetch d.jobApplication left join fetch d.evidences");
             Map<Integer, List<DisputeEntity>> listDisputeByStatus
                     = listAllDispute.stream()
-                    .filter(e -> (e.getDisputeStatus() != null ) && e.getCreatedDate().isAfter(currentDayMinusThree))
+                    .filter(e -> (e.getDisputeStatus() != null) && e.getCreatedDate().isAfter(currentDayMinusThree))
                     .collect(groupingBy(DisputeEntity::getDisputeStatus, toList()));
-            listDisputeByStatus.forEach((key, value)->{
-                String statusString=disputeStatusMap.get(key);
-                request.setAttribute(statusString+"_DISPUTE_LIST", value);
-                request.setAttribute("COUNT_DISPUTE_"+statusString, value.size());
+            listDisputeByStatus.forEach((key, value) -> {
+                String statusString = disputeStatusMap.get(key);
+                request.setAttribute(statusString + "_DISPUTE_LIST", value);
+                request.setAttribute("COUNT_DISPUTE_" + statusString, value.size());
             });
             url = SUCCESS;
         } catch (Exception e) {

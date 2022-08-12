@@ -4,27 +4,22 @@
  */
 package se1621.controller;
 
-import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import se1621.dao.JobDAO;
+import se1621.dao.JobSkillsDAO;
+import se1621.dto.*;
+
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import se1621.dao.JobDAO;
-import se1621.dao.JobSkillsDAO;
-import se1621.dto.Category;
-import se1621.dto.Job;
-import se1621.dto.JobSkills;
-import se1621.dto.PayMentMethod;
-import se1621.dto.Skill;
-import se1621.dto.User;
 
 /**
- *
  * @author HNGB
  */
 @WebServlet(name = "PostJobController", urlPatterns = {"/PostJobController"})
@@ -83,7 +78,7 @@ public class PostJobController extends HttpServlet {
                 jsDAO.deleteJobSkills(jobID);
             }
             Job checkJob = jobdao.getJob(jobID);
-            if (checkJob.getJobID()>0) {
+            if (checkJob.getJobID() > 0) {
                 //neu job da ton tai thi tien hanh update
                 if (jobdao.updateJob(job)) {
                     //update thanh cong thi set skill
@@ -138,13 +133,14 @@ public class PostJobController extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -155,10 +151,10 @@ public class PostJobController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

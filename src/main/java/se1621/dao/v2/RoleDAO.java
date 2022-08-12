@@ -8,5 +8,6 @@ public interface RoleDAO {
     void save(RoleEntity roleEntity);
 
     List<RoleEntity> getAll(String roleEntityName);
+
     List<RoleEntity> getAllUsingHQL(String hql);
 }

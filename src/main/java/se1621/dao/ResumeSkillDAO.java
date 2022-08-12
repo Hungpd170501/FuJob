@@ -4,18 +4,18 @@
  */
 package se1621.dao;
 
+import se1621.dto.ResumeSkill;
+import se1621.dto.Skill;
+import se1621.utils.DBUtils;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import se1621.dto.Skill;
-import se1621.dto.ResumeSkill;
-import se1621.utils.DBUtils;
 
 /**
- *
  * @author HNGB
  */
 public class ResumeSkillDAO {
@@ -44,7 +44,7 @@ public class ResumeSkillDAO {
                 rs = preStm.executeQuery();
                 while (rs.next()) {
                     int resumeSkillID = rs.getInt("resumeSkillID");
-                    int resumeID= rs.getInt("resumeID");
+                    int resumeID = rs.getInt("resumeID");
                     int skillID = rs.getInt("skillID");
                     String skillName = rs.getString("skillName");
                     Skill skill = Skill.builder().skillID(skillID).skillName(skillName).build();
@@ -66,7 +66,7 @@ public class ResumeSkillDAO {
         }
         return listResumeSkills;
     }
-    
+
     public boolean createStudetnSkill(ResumeSkill resumeSkill) throws SQLException {
         boolean check = false;
         try {
