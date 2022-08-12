@@ -1,5 +1,3 @@
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/71cf608d2e3c49338c3551f7b7923581)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Hungpd170501/FuJob&amp;utm_campaign=Badge_Grade)
-
 ![FuJob Logo](src/main/webapp/asset/images/Logo/Logo/Untitled-3.png)
 
 ## [Live Demo](https://fujob2.azurewebsites.net/) - [Document Design](doc/SWP391_FuJob_Design.pdf) - [Document SRS](doc/SWP391_FuJob_SRS.pdf)
